@@ -1,0 +1,21 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scada_equipment_manager,scada.equipment Manager,model_scada_equipment,group_scada_manager,1,1,1,1
+access_scada_equipment_operator,scada.equipment Operator,model_scada_equipment,group_scada_operator,1,0,0,0
+access_scada_equipment_technician,scada.equipment Technician,model_scada_equipment,group_scada_technician,1,1,1,0
+access_scada_material_consumption_manager,scada.material.consumption Manager,model_scada_material_consumption,group_scada_manager,1,1,1,1
+access_scada_material_consumption_operator,scada.material.consumption Operator,model_scada_material_consumption,group_scada_operator,1,0,0,0
+access_scada_material_consumption_technician,scada.material.consumption Technician,model_scada_material_consumption,group_scada_technician,1,1,0,0
+access_scada_mo_data_manager,scada.mo.data Manager,model_scada_mo_data,group_scada_manager,1,1,1,1
+access_scada_mo_data_operator,scada.mo.data Operator,model_scada_mo_data,group_scada_operator,1,0,0,0
+access_scada_mo_data_technician,scada.mo.data Technician,model_scada_mo_data,group_scada_technician,1,1,0,0
+access_scada_sensor_reading_manager,scada.sensor.reading Manager,model_scada_sensor_reading,group_scada_manager,1,1,1,1
+access_scada_sensor_reading_operator,scada.sensor.reading Operator,model_scada_sensor_reading,group_scada_operator,1,1,1,0
+access_scada_sensor_reading_technician,scada.sensor.reading Technician,model_scada_sensor_reading,group_scada_technician,1,0,0,0
+access_scada_api_log_manager,scada.api.log Manager,model_scada_api_log,group_scada_manager,1,1,1,1
+access_scada_api_log_operator,scada.api.log Operator,model_scada_api_log,group_scada_operator,1,0,0,0
+access_scada_equipment_material_manager,scada.equipment.material Manager,model_scada_equipment_material,group_scada_manager,1,1,1,1
+access_scada_equipment_material_operator,scada.equipment.material Operator,model_scada_equipment_material,group_scada_operator,1,0,0,0
+access_scada_equipment_material_technician,scada.equipment.material Technician,model_scada_equipment_material,group_scada_technician,1,1,0,0
+access_scada_mo_weight_manager,scada.mo.weight Manager,model_scada_mo_weight,group_scada_manager,1,1,1,1
+access_scada_mo_weight_operator,scada.mo.weight Operator,model_scada_mo_weight,group_scada_operator,1,0,0,0
+access_scada_mo_weight_technician,scada.mo.weight Technician,model_scada_mo_weight,group_scada_technician,1,1,0,0

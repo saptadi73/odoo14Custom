@@ -1,0 +1,219 @@
+SCADA Middleware API Specification (Odoo 14)
+
+Base URL:
+- http(s)://<odoo-host>
+
+Auth:
+- Most endpoints require Bearer token (auth='bearer')
+- Add HTTP header: Authorization: Bearer <token>
+
+Response format (general):
+- success:
+  {
+    "status": "success",
+    "message": "...",
+    ...
+  }
+- error:
+  {
+    "status": "error",
+    "message": "...",
+    "errors": ["..."]   (optional)
+  }
+
+
+1) Health Check
+Endpoint:
+- GET /api/scada/health
+Auth:
+- public
+Request body:
+- none
+Response (example):
+{
+  "status": "ok",
+  "message": "SCADA Module is running",
+  "timestamp": "2025-02-06T10:30:00"
+}
+
+
+2) Module Version
+Endpoint:
+- GET /api/scada/version
+Auth:
+- public
+Request body:
+- none
+Response (example):
+{
+  "status": "success",
+  "version": "1.0.0",
+  "name": "SCADA for Odoo"
+}
+
+
+3) Create Material Consumption
+Endpoint:
+- POST /api/scada/material-consumption
+Auth:
+- bearer
+Request payload (JSON):
+{
+  "equipment_id": "PLC01",
+  "material_code": "MAT001",
+  "quantity": 10.5,
+  "timestamp": "2025-02-06T10:30:00",
+  "batch_number": "BATCH_001",
+  "api_request_id": "REQ_001",
+  "notes": "optional"
+}
+Required fields:
+- equipment_id, material_code, quantity, timestamp
+Response (example):
+{
+  "status": "success",
+  "message": "Material consumption recorded successfully",
+  "record_id": 123,
+  "external_id": "123"
+}
+
+
+4) Get Material Consumption by ID
+Endpoint:
+- GET /api/scada/material-consumption/<record_id>
+Auth:
+- bearer
+Request body:
+- none
+Response (example):
+{
+  "status": "success",
+  "data": {
+    "id": 123,
+    "equipment_id": "PLC01",
+    "material_code": "MAT001",
+    "quantity": 10.5,
+    "timestamp": "2025-02-06T10:30:00",
+    "status": "recorded",
+    "sync_status": "pending"
+  }
+}
+
+
+5) Validate Material Consumption Payload
+Endpoint:
+- POST /api/scada/material-consumption/validate
+Auth:
+- bearer
+Request payload (JSON):
+{
+  "equipment_id": "PLC01",
+  "material_code": "MAT001",
+  "quantity": 10.5,
+  "timestamp": "2025-02-06T10:30:00"
+}
+Response (example):
+{
+  "status": "success",
+  "message": "Validation passed",
+  "data": { ...same payload... }
+}
+
+
+6) Get MO List for Equipment
+Endpoint:
+- GET /api/scada/mo-list?equipment_id=PLC01&status=planned&limit=50&offset=0
+Auth:
+- bearer
+Query parameters:
+- equipment_id (required)
+- status (optional): planned | progress | done
+- limit (optional, default 50)
+- offset (optional, default 0)
+Response (example):
+{
+  "status": "success",
+  "message": "MO list retrieved successfully",
+  "count": 2,
+  "equipment_id": "PLC01",
+  "data": [
+    {
+      "mo_id": "MO/2025/001",
+      "product_id": "PROD001",
+      "product_name": "Product Name",
+      "quantity": 100.0,
+      "status": "1",
+      "status_text": "planned",
+      "date_start": "2025-02-06T08:00:00",
+      "date_end": "2025-02-06T16:00:00",
+      "equipment_id": "PLC01",
+      "created_at": "2025-02-06T07:50:00"
+    }
+  ]
+}
+
+
+7) Acknowledge MO Received
+Endpoint:
+- POST /api/scada/mo/<mo_id>/acknowledge
+Auth:
+- bearer
+Request payload (JSON):
+{
+  "equipment_id": "PLC01",
+  "status": "acknowledged",
+  "timestamp": "2025-02-06T08:00:00"
+}
+Response (example):
+{
+  "status": "success",
+  "message": "MO acknowledged successfully",
+  "mo_id": 123
+}
+
+
+8) Update MO Status (Progress/Start/End)
+Endpoint:
+- POST /api/scada/mo/<mo_id>/update-status
+Auth:
+- bearer
+Request payload (JSON):
+{
+  "equipment_id": "PLC01",
+  "status": "progress",
+  "date_start_actual": "2025-02-06T08:00:00",
+  "date_end_actual": "2025-02-06T16:00:00",
+  "message": "Production started"
+}
+Response (example):
+{
+  "status": "success",
+  "message": "MO status updated successfully",
+  "mo_id": 123
+}
+
+
+9) Mark MO Done (Finish)
+Endpoint:
+- POST /api/scada/mo/<mo_id>/mark-done
+Auth:
+- bearer
+Request payload (JSON):
+{
+  "equipment_id": "PLC01",
+  "date_end_actual": "2025-02-06T16:00:00",
+  "message": "Production completed"
+}
+Response (example):
+{
+  "status": "success",
+  "message": "Manufacturing order marked as done",
+  "mo_id": "MO/2025/001"
+}
+
+
+Notes:
+- Timestamp format: ISO 8601 (YYYY-MM-DDTHH:MM:SS)
+- equipment_id refers to equipment_code in Odoo (scada.equipment)
+- mo_id in URL is the SCADA MO Data record ID (scada.mo.data). If you want
+  to use MO number instead, ask to change the endpoint.

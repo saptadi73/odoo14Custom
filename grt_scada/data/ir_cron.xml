@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Scheduled Tasks (Cron) untuk SCADA -->
+    <data noupdate="1">
+        <!-- Retry failed syncs setiap 30 menit -->
+        <record id="ir_cron_retry_failed_syncs" model="ir.cron">
+            <field name="name">SCADA: Retry Failed Syncs</field>
+            <field name="model_id" ref="model_scada_material_consumption"/>
+            <field name="state">code</field>
+            <field name="code">
+env['scada.material.consumption'].retry_sync()
+            </field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="nextcall" eval="datetime.now()"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Sync equipment connection status setiap jam -->
+        <record id="ir_cron_sync_equipment_status" model="ir.cron">
+            <field name="name">SCADA: Sync Equipment Status</field>
+            <field name="model_id" ref="model_scada_equipment"/>
+            <field name="state">code</field>
+            <field name="code">
+env['scada.equipment'].search([('is_active', '=', True)]).write({
+    'connection_status': 'connected'  # Stub implementation
+})
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="nextcall" eval="datetime.now()"/>
+            <field name="active">True</field>
+        </record>
+
+        <!-- Cleanup old API logs setiap hari -->
+        <record id="ir_cron_cleanup_old_logs" model="ir.cron">
+            <field name="name">SCADA: Cleanup Old Logs</field>
+            <field name="model_id" ref="model_scada_api_log"/>
+            <field name="state">code</field>
+            <field name="code">
+env['scada.api.log'].cleanup_old_logs(days=30)
+            </field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="datetime.now()"/>
+            <field name="active">False</field>
+        </record>
+    </data>
+</odoo>

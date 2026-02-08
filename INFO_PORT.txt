@@ -1,0 +1,116 @@
+================================================================================
+KONFIGURASI PORT ODOO 14
+================================================================================
+Tanggal: 5 Februari 2026
+
+INFORMASI PORT:
+================================================================================
+
+Instance ini menggunakan:
+📍 PORT: 8070
+
+URL Akses:
+🌐 http://localhost:8070
+
+File Konfigurasi:
+📄 c:\addon14\odoo.conf
+   Setting: xmlrpc_port = 8070
+
+================================================================================
+KEUNTUNGAN MENGGUNAKAN PORT TERPISAH:
+================================================================================
+
+✓ Tidak konflik dengan Odoo instance lain di port 8069
+✓ Bisa menjalankan multiple instance Odoo sekaligus
+✓ Mudah identifikasi instance mana yang sedang jalan
+✓ Testing/development lebih fleksibel
+
+================================================================================
+CARA MENGUBAH PORT (Jika perlu):
+================================================================================
+
+1. Edit file: c:\addon14\odoo.conf
+
+2. Cari atau tambahkan baris:
+   xmlrpc_port = 8070
+
+3. Ganti dengan port lain (misal 8071, 8072, dll):
+   xmlrpc_port = 8071
+
+4. Save file
+
+5. Restart Odoo
+
+6. Akses via: http://localhost:8071
+
+================================================================================
+CEK PORT YANG SEDANG DIGUNAKAN:
+================================================================================
+
+Jalankan script ini untuk melihat Odoo yang sedang jalan:
+
+    python c:\addon14\cek_port_odoo.py
+
+ATAU manual di PowerShell:
+
+    netstat -ano | findstr :8070
+    netstat -ano | findstr :8069
+
+Lihat PID (angka terakhir), kemudian:
+
+    tasklist | findstr <PID>
+
+================================================================================
+TROUBLESHOOTING PORT:
+================================================================================
+
+Error: Address already in use
+--------------------------------------------------------------
+Port 8070 sudah dipakai oleh proses lain.
+
+Solusi 1: Kill proses yang pakai port 8070
+    1. netstat -ano | findstr :8070
+    2. Lihat PID (kolom terakhir)
+    3. taskkill /F /PID <nomor_PID>
+
+Solusi 2: Ganti ke port lain
+    1. Edit odoo.conf
+    2. xmlrpc_port = 8071
+    3. Restart
+
+Error: Cannot connect to http://localhost:8070
+--------------------------------------------------------------
+1. Pastikan Odoo sudah running
+2. Check log: c:\addon14\log\odoo.log
+3. Pastikan port di odoo.conf benar
+4. Cek firewall tidak block port 8070
+
+================================================================================
+INSTANCE ODOO UMUM DAN PORT-NYA:
+================================================================================
+
+Instance          Port    Database
+-----------------------------------------
+Odoo Production   8069    production_db
+Odoo Staging      8070    staging_db (INI ANDA!)
+Odoo Testing      8071    test_db
+Odoo Development  8072    dev_db
+
+================================================================================
+COMMAND QUICK START:
+================================================================================
+
+Start Odoo di port 8070:
+------------------------
+cd C:\odoo14c\server
+c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d manu14
+
+Atau tekan F5 di VS Code (sudah otomatis pakai config yang benar)
+
+Akses:
+------
+Browser: http://localhost:8070
+Username: admin
+Password: (password Anda)
+
+================================================================================

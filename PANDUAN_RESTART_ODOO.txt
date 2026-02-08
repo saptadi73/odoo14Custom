@@ -1,0 +1,161 @@
+================================================================================
+PANDUAN LENGKAP - CARA RESTART ODOO YANG BENAR
+================================================================================
+Tanggal: 5 Februari 2026
+
+MASALAH YANG TERJADI:
+================================================================================
+Error KeyError untuk model seperti:
+- 'accounting.report'
+- 'ins.trial.balance'
+- 'ins.partner.ledger'
+- dll
+
+PENYEBAB:
+Model sudah ada di database, tapi Odoo registry belum ter-refresh dengan benar.
+
+SOLUSI LENGKAP:
+================================================================================
+
+LANGKAH 1: PASTIKAN TIDAK ADA ODOO YANG BERJALAN
+--------------------------------------------------------------------------------
+Jalankan script ini untuk menghentikan semua proses Odoo:
+
+    python c:\addon14\restart_odoo.py
+
+ATAU manual dari Task Manager:
+1. Tekan Ctrl + Shift + Esc
+2. Cari proses "python.exe" yang menjalankan odoo-bin
+3. Klik kanan > End Task
+
+LANGKAH 2: UPDATE DATABASE (SUDAH DILAKUKAN)
+--------------------------------------------------------------------------------
+✓ Cache sudah dibersihkan
+✓ Module accounting_pdf_reports sudah di-reinstall
+✓ Module account_dynamic_reports sudah ready
+✓ Module om_account_asset sudah ready
+
+LANGKAH 3: START ODOO DENGAN CARA YANG BENAR
+================================================================================
+
+>>> CARA TERBAIK: PAKAI VS CODE DEBUG <<<
+
+1. Di VS Code, tekan F5
+   (atau klik icon Debug ▶️ di sidebar kiri)
+
+2. TUNGGU sampai muncul:
+   "Odoo is running"
+   "HTTP service (werkzeug) running"
+   
+3. Jangan buka browser dulu! Tunggu loading selesai (± 30-60 detik)
+
+4. Baru buka browser:
+   http://localhost:8070
+
+5. PENTING: Clear browser cache dulu!
+   - Chrome/Edge: Ctrl + Shift + Delete > Clear browsing data
+   - Pilih "Cached images and files"
+   - Clear
+
+6. Reload halaman (F5)
+
+7. Login
+
+================================================================================
+
+ALTERNATIF: START VIA TERMINAL (jika debug tidak bisa)
+================================================================================
+
+Buka PowerShell baru di VS Code dan jalankan:
+
+cd C:\odoo14c\server
+c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d manu14
+
+TUNGGU sampai muncul:
+"HTTP service (werkzeug) running on http://0.0.0.0:8070"
+
+Kemudian buka browser, clear cache, dan login.
+
+================================================================================
+
+JIKA MASIH ERROR SETELAH RESTART:
+================================================================================
+
+Opsi 1: Restart dengan Update Explicit
+-----------------------------------
+cd C:\odoo14c\server
+c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d manu14 -u accounting_pdf_reports,account_dynamic_reports
+
+Opsi 2: Restart dalam Developer Mode
+-----------------------------------
+Tambahkan --dev=all ke command:
+
+c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d manu14 --dev=all
+
+Opsi 3: Force Reload dengan --init
+-----------------------------------
+cd C:\odoo14c\server
+c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d manu14 --init=accounting_pdf_reports --stop-after-init
+
+Kemudian start normal lagi.
+
+================================================================================
+
+CHECKLIST VERIFIKASI SETELAH START:
+================================================================================
+
+□ Server sudah running (cek di terminal: "werkzeug running")
+□ Tidak ada error di startup log
+□ Browser cache sudah di-clear
+□ Bisa login ke Odoo
+□ Menu Accounting bisa dibuka
+□ Tidak ada error KeyError saat buka menu/report
+
+================================================================================
+
+TROUBLESHOOTING TAMBAHAN:
+================================================================================
+
+Jika TETAP ada KeyError:
+------------------------
+1. Buka menu: Settings > Technical > Models
+2. Cari model yang error (misal: accounting.report atau ins.trial.balance)
+3. Jika TIDAK ADA, berarti modul tidak ter-install
+   → Reinstall modul via: Apps > search module > Uninstall > Install
+
+4. Jika ADA tapi tetap error - ini masalah cache browser
+   → Hard refresh: Ctrl + Shift + R
+   → Atau buka dalam Incognito Mode
+
+Jika Port 8070 sudah dipakai:
+----------------------------
+1. Ganti port di odoo.conf:
+   xmlrpc_port = 8071
+   
+2. Restart dan akses: http://localhost:8071
+
+Jika Database Connection Error:
+-------------------------------
+Pastikan PostgreSQL running:
+1. Services > postgresql-x64-13 (atau versi Anda)
+2. Status harus "Running"
+3. Jika tidak, klik Start
+
+================================================================================
+RINGKASAN: LANGKAH PALING SIMPLE
+================================================================================
+
+1. python c:\addon14\restart_odoo.py  
+   (untuk stop semua proses Odoo)
+
+2. Tekan F5 di VS Code
+   (start Odoo via debug)
+
+3. Clear browser cache
+   (Ctrl + Shift + Delete)
+
+4. Reload dan login
+
+SELESAI! ✓
+
+================================================================================

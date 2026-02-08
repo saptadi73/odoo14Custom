@@ -1,0 +1,106 @@
+================================================================================
+PANDUAN LENGKAP: INSTALL ODOO 14 ACCOUNTING MODULE
+================================================================================
+
+MASALAH YANG TERJADI:
+✗ User klik "Cancel" saat muncul popup dependency confirmation
+✗ Instalasi dibatalkan sebelum selesai
+
+PENYEBAB:
+Ketika install modul yang punya dependency, Odoo akan menampilkan popup:
+"The following modules will be installed: [list of dependencies]"
+
+User perlu klik "CONFIRM" atau "INSTALL", BUKAN "CANCEL"
+
+================================================================================
+SOLUSI: INSTALL STEP BY STEP
+================================================================================
+
+CARA TERBAIK: Install dependency satu per satu (tidak akan ada popup)
+
+Buka Browser → Login ke Odoo → Apps → Hapus filter "Apps"
+
+STEP 1: Install "accounting_pdf_reports"
+─────────────────────────────────────────
+  Search: "Odoo 14 Accounting Financial Reports"
+  Klik: Install
+  Tunggu sampai selesai (muncul hijau/checkmark)
+  
+STEP 2: Install "om_account_asset"  
+─────────────────────────────────────────
+  Search: "Odoo 14 Asset Management"
+  Klik: Install
+  Tunggu sampai selesai
+  
+STEP 3: Install "om_account_budget"
+─────────────────────────────────────────
+  Search: "Odoo 14 Budget Management"
+  Klik: Install
+  Tunggu sampai selesai
+
+STEP 4: Install "om_account_bank_statement_import"
+─────────────────────────────────────────
+  Search: "Import Bank Statement"
+  Klik: Install
+  Tunggu sampai selesai
+
+STEP 5: Install "om_account_accountant" (FINAL)
+─────────────────────────────────────────
+  Search: "Odoo 14 Accounting"
+  Klik: Install
+  Tunggu sampai selesai
+  
+================================================================================
+ALTERNATIVE: Install langsung "om_account_accountant"
+================================================================================
+
+Jika mau install langsung tanpa step by step:
+
+1. Apps → Search "Odoo 14 Accounting"
+2. Klik Install
+3. **AKAN MUNCUL POPUP** dengan daftar modul yang akan diinstall:
+   
+   ┌─────────────────────────────────────────────────┐
+   │ The following modules will be installed:        │
+   │                                                  │
+   │ ☑ Odoo 14 Accounting Financial Reports         │
+   │ ☑ Odoo 14 Asset Management                     │
+   │ ☑ Odoo 14 Budget Management                    │
+   │ ☑ Import Bank Statement                        │
+   │                                                  │
+   │         [CANCEL]           [CONFIRM] ←── KLIK INI!│
+   └─────────────────────────────────────────────────┘
+
+4. **KLIK "CONFIRM"** - JANGAN klik "Cancel"!
+5. Tunggu proses instalasi selesai (bisa 2-5 menit)
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+❌ Jika muncul error saat install:
+   1. Aktifkan Developer Mode (Settings → Activate developer mode)
+   2. Coba install lagi
+   3. Copy paste error message yang muncul
+   4. Share error tersebut untuk troubleshooting
+
+❌ Jika stuck "Installing...":
+   1. Tunggu 5-10 menit
+   2. Refresh browser (F5)
+   3. Cek di Apps apakah sudah installed (ada checkmark hijau)
+
+❌ Jika masih gagal:
+   Run: python C:\addon14\check_stuck_modules.py
+   Jika ada stuck modules, run: python C:\addon14\fix_stuck_modules.py
+
+================================================================================
+CARA CEK APAKAH SUDAH BERHASIL
+================================================================================
+
+Setelah instalasi selesai, cek:
+
+1. Menu "Accounting" muncul di top menu
+2. Di Apps, search "Odoo 14 Accounting" → Status: "Installed" (hijau)
+3. Buka Accounting → Reporting → Lihat laporan baru yang tersedia
+
+================================================================================

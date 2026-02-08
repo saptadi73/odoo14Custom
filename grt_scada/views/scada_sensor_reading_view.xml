@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SCADA Sensor Reading Views -->
+
+    <!-- List view -->
+    <record id="view_scada_sensor_reading_list" model="ir.ui.view">
+        <field name="name">scada.sensor.reading.list</field>
+        <field name="model">scada.sensor.reading</field>
+        <field name="arch" type="xml">
+            <tree string="Sensor Readings" decoration-danger="status == 'critical'" decoration-warning="status == 'warning'">
+                <field name="timestamp"/>
+                <field name="equipment_id"/>
+                <field name="sensor_name"/>
+                <field name="sensor_type"/>
+                <field name="reading_value"/>
+                <field name="unit"/>
+                <field name="status" widget="badge" decoration-success="status == 'normal'" decoration-warning="status == 'warning'" decoration-danger="status == 'critical'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_scada_sensor_reading_form" model="ir.ui.view">
+        <field name="name">scada.sensor.reading.form</field>
+        <field name="model">scada.sensor.reading</field>
+        <field name="arch" type="xml">
+            <form string="Sensor Reading">
+                <sheet>
+                    <group>
+                        <group string="Equipment &amp; Sensor">
+                            <field name="equipment_id"/>
+                            <field name="sensor_name"/>
+                            <field name="sensor_type"/>
+                        </group>
+                        <group string="Reading Value">
+                            <field name="reading_value"/>
+                            <field name="unit"/>
+                            <field name="status" widget="badge"/>
+                        </group>
+                    </group>
+                    <group string="Thresholds">
+                        <field name="min_threshold"/>
+                        <field name="max_threshold"/>
+                    </group>
+                    <group string="Timestamp">
+                        <field name="timestamp"/>
+                    </group>
+                    <group string="Data Source">
+                        <field name="source_system"/>
+                        <field name="external_id"/>
+                    </group>
+                    <group string="Sync Status">
+                        <field name="sync_status"/>
+                        <field name="error_message"/>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_scada_sensor_reading_search" model="ir.ui.view">
+        <field name="name">scada.sensor.reading.search</field>
+        <field name="model">scada.sensor.reading</field>
+        <field name="arch" type="xml">
+            <search string="Search Sensor Readings">
+                <field name="equipment_id"/>
+                <field name="sensor_name"/>
+                <filter name="normal" string="Normal" domain="[('status', '=', 'normal')]"/>
+                <filter name="warning" string="Warning" domain="[('status', '=', 'warning')]"/>
+                <filter name="critical" string="Critical" domain="[('status', '=', 'critical')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Equipment" name="group_by_equipment" context="{'group_by': 'equipment_id'}"/>
+                    <filter string="Sensor Type" name="group_by_type" context="{'group_by': 'sensor_type'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_scada_sensor_reading" model="ir.actions.act_window">
+        <field name="name">Sensor Readings</field>
+        <field name="res_model">scada.sensor.reading</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

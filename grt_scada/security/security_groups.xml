@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- SCADA Manager Group - Full access -->
+        <record id="group_scada_manager" model="res.groups">
+            <field name="name">SCADA Manager</field>
+            <field name="comment">Full access to SCADA module - configure equipment and manage all data</field>
+            <field name="category_id" ref="base.module_category_manufacturing"/>
+        </record>
+
+        <!-- SCADA Operator Group - Read and acknowledge MO -->
+        <record id="group_scada_operator" model="res.groups">
+            <field name="name">SCADA Operator</field>
+            <field name="comment">Can read MO data and acknowledge requests from middleware</field>
+            <field name="category_id" ref="base.module_category_manufacturing"/>
+        </record>
+
+        <!-- SCADA Technician Group - Record material consumption -->
+        <record id="group_scada_technician" model="res.groups">
+            <field name="name">SCADA Technician</field>
+            <field name="comment">Can record material consumption and sensor readings</field>
+            <field name="category_id" ref="base.module_category_manufacturing"/>
+        </record>
+    </data>
+</odoo>

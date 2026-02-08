@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Demo Equipment Data -->
+        <record id="demo_equipment_plc01" model="scada.equipment">
+            <field name="name">Main PLC - Injection Machine 01</field>
+            <field name="equipment_code">PLC01</field>
+            <field name="equipment_type">plc</field>
+            <field name="manufacturer">OMRON</field>
+            <field name="model_number">CP2E-N20DT-D</field>
+            <field name="protocol">modbus</field>
+            <field name="ip_address">192.168.1.100</field>
+            <field name="port">502</field>
+            <field name="is_active">True</field>
+        </record>
+
+        <record id="demo_equipment_plc02" model="scada.equipment">
+            <field name="name">Secondary PLC - Injection Machine 02</field>
+            <field name="equipment_code">PLC02</field>
+            <field name="equipment_type">plc</field>
+            <field name="manufacturer">OMRON</field>
+            <field name="model_number">CP2E-N20DT-D</field>
+            <field name="protocol">tcp</field>
+            <field name="ip_address">192.168.1.101</field>
+            <field name="port">9600</field>
+            <field name="is_active">True</field>
+        </record>
+
+    </data>
+</odoo>

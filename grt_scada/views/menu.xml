@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Main Menu -->
+        <menuitem
+            id="menu_scada_root"
+            name="SCADA"
+            web_icon="grt_scada,static/description/icon.png"
+            sequence="50"/>
+
+        <!-- Equipment Menu -->
+        <menuitem
+            id="menu_scada_equipment"
+            parent="menu_scada_root"
+            name="Equipment"
+            sequence="10"/>
+
+        <menuitem
+            id="menu_scada_equipment_list"
+            parent="menu_scada_equipment"
+            action="action_scada_equipment"
+            name="Equipment List"
+            sequence="1"/>
+
+        <!-- Material Consumption Menu -->
+        <menuitem
+            id="menu_scada_material"
+            parent="menu_scada_root"
+            name="Material Consumption"
+            sequence="20"/>
+
+        <menuitem
+            id="menu_scada_material_consumption_list"
+            parent="menu_scada_material"
+            action="action_scada_material_consumption"
+            name="Consumption Records"
+            sequence="1"/>
+
+        <!-- Manufacturing Order Menu -->
+        <menuitem
+            id="menu_scada_mo"
+            parent="menu_scada_root"
+            name="Manufacturing Orders"
+            sequence="30"/>
+
+        <menuitem
+            id="menu_scada_mo_data_list"
+            parent="menu_scada_mo"
+            action="action_scada_mo_data"
+            name="MO Data"
+            sequence="1"/>
+
+        <!-- Sensor Data Menu -->
+        <menuitem
+            id="menu_scada_sensor"
+            parent="menu_scada_root"
+            name="Sensor Data"
+            sequence="40"/>
+
+        <menuitem
+            id="menu_scada_sensor_reading_list"
+            parent="menu_scada_sensor"
+            action="action_scada_sensor_reading"
+            name="Sensor Readings"
+            sequence="1"/>
+
+        <!-- API Logs Menu -->
+        <menuitem
+            id="menu_scada_logs"
+            parent="menu_scada_root"
+            name="Logs &amp; Monitoring"
+            sequence="50"/>
+
+        <menuitem
+            id="menu_scada_api_log_list"
+            parent="menu_scada_logs"
+            action="action_scada_api_log"
+            name="API Logs"
+            sequence="1"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SCADA Equipment Views -->
+
+    <!-- List view -->
+    <record id="view_scada_equipment_list" model="ir.ui.view">
+        <field name="name">scada.equipment.list</field>
+        <field name="model">scada.equipment</field>
+        <field name="arch" type="xml">
+            <tree string="SCADA Equipment">
+                <field name="equipment_code"/>
+                <field name="name"/>
+                <field name="equipment_type"/>
+                <field name="manufacturer"/>
+                <field name="connection_status" widget="badge" decoration-success="connection_status == 'connected'" decoration-danger="connection_status == 'disconnected'"/>
+                <field name="is_active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_scada_equipment_form" model="ir.ui.view">
+        <field name="name">scada.equipment.form</field>
+        <field name="model">scada.equipment</field>
+        <field name="arch" type="xml">
+            <form string="SCADA Equipment">
+                <header>
+                    <button name="test_connection" type="object" string="Test Connection" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Equipment Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Basic Information">
+                            <field name="equipment_code" widget="text" readonly="1"/>
+                            <field name="equipment_type"/>
+                            <field name="manufacturer"/>
+                            <field name="model_number"/>
+                            <field name="serial_number"/>
+                            <field name="is_active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Connection Settings">
+                            <field name="protocol"/>
+                            <field name="ip_address"/>
+                            <field name="port"/>
+                            <field name="connection_status" readonly="1"/>
+                            <field name="last_connected" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Odoo Integration">
+                        <field name="production_line_id"/>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_scada_equipment_search" model="ir.ui.view">
+        <field name="name">scada.equipment.search</field>
+        <field name="model">scada.equipment</field>
+        <field name="arch" type="xml">
+            <search string="Search Equipment">
+                <field name="name"/>
+                <field name="equipment_code"/>
+                <field name="manufacturer"/>
+                <filter name="active" string="Active" domain="[('is_active', '=', True)]"/>
+                <filter name="connected" string="Connected" domain="[('connection_status', '=', 'connected')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Equipment Type" name="group_by_type" context="{'group_by': 'equipment_type'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'connection_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_scada_equipment" model="ir.actions.act_window">
+        <field name="name">SCADA Equipment</field>
+        <field name="res_model">scada.equipment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

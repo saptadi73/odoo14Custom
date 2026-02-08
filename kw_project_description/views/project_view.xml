@@ -1,0 +1,29 @@
+<odoo>
+    <record id="kw_project_description_project_project_form" model="ir.ui.view">
+        <field name="name">project.project.form (kw_project_description)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page" position="before">
+                <page string="Description">
+                    <field name="kw_description"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="kw_project_description_project_project_kanban" model="ir.ui.view">
+        <field name="name">project.project.kanban (kw_project_description)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+             <xpath expr="//div[hasclass('o_project_kanban_boxes')]" position="inside">
+                <a name="kw_show_description" type="object" class="o_project_kanban_box">
+                    <div>
+                        <span class="o_label">Description</span>
+                    </div>
+                </a>
+            </xpath>
+        </field>
+    </record>
+</odoo>

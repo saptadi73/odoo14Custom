@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="om_account_asset assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/om_account_asset/static/src/scss/account_asset.scss" />
+        </xpath>
+    </template>
+</odoo>

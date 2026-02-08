@@ -1,0 +1,5 @@
+{
+  "python.defaultInterpreterPath": "C:/odoo14c/python/python.exe",
+  "python.debugpyPath": "C:/odoo14c/python/Lib/site-packages",
+  "debugpy.adapterPython": "C:/odoo14c/python/python.exe"
+}

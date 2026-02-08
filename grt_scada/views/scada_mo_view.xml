@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SCADA MO Data Views -->
+
+    <!-- List view -->
+    <record id="view_scada_mo_data_list" model="ir.ui.view">
+        <field name="name">scada.mo.data.list</field>
+        <field name="model">scada.mo.data</field>
+        <field name="arch" type="xml">
+            <tree string="MO Data" decoration-warning="sync_status == 'error'">
+                <field name="mo_name"/>
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="equipment_id"/>
+                <field name="mo_status" widget="badge"/>
+                <field name="status_code"/>
+                <field name="sync_status" widget="badge" decoration-success="sync_status == 'synced'"/>
+                <field name="last_sent_to_middleware"/>
+                <field name="send_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_scada_mo_data_form" model="ir.ui.view">
+        <field name="name">scada.mo.data.form</field>
+        <field name="model">scada.mo.data</field>
+        <field name="arch" type="xml">
+            <form string="Manufacturing Order Data">
+                <header>
+                    <field name="mo_status" widget="statusbar" clickable="0"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="mo_name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Manufacturing Order">
+                            <field name="manufacturing_order_id" readonly="1"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="product_qty" readonly="1"/>
+                        </group>
+                        <group string="Equipment &amp; Production">
+                            <field name="equipment_id"/>
+                            <field name="production_line_id"/>
+                        </group>
+                    </group>
+                    <group string="Planned Dates">
+                        <field name="date_start_planned" readonly="1"/>
+                        <field name="date_end_planned" readonly="1"/>
+                    </group>
+                    <group string="Actual Dates">
+                        <field name="date_start_actual"/>
+                        <field name="date_end_actual"/>
+                    </group>
+                    <group string="Middleware Sync">
+                        <field name="status_code" readonly="1"/>
+                        <field name="last_sent_to_middleware" readonly="1"/>
+                        <field name="send_count" readonly="1"/>
+                        <field name="sync_status"/>
+                        <field name="error_message" readonly="1"/>
+                    </group>
+                    <group string="Raw Data">
+                        <field name="raw_data_json" nolabel="1" widget="code" options="{'lineWraps': True}"/>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_scada_mo_data_search" model="ir.ui.view">
+        <field name="name">scada.mo.data.search</field>
+        <field name="model">scada.mo.data</field>
+        <field name="arch" type="xml">
+            <search string="Search MO Data">
+                <field name="mo_name"/>
+                <field name="product_id"/>
+                <field name="equipment_id"/>
+                <filter name="planned" string="Planned" domain="[('mo_status', '=', 'planned')]"/>
+                <filter name="progress" string="In Progress" domain="[('mo_status', '=', 'progress')]"/>
+                <filter name="done" string="Done" domain="[('mo_status', '=', 'done')]"/>
+                <filter name="synced" string="Synced" domain="[('sync_status', '=', 'synced')]"/>
+                <filter name="error" string="Sync Error" domain="[('sync_status', '=', 'error')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Equipment" name="group_by_equipment" context="{'group_by': 'equipment_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'mo_status'}"/>
+                    <filter string="Product" name="group_by_product" context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_scada_mo_data" model="ir.actions.act_window">
+        <field name="name">Manufacturing Order Data</field>
+        <field name="res_model">scada.mo.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

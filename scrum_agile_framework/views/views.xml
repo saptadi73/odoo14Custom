@@ -1,0 +1,699 @@
+<odoo>
+  <data>
+    <!-- REFERENCED VIEWS -->
+    <!-- Search panel for the tasks en assigned to their User stories -->
+    <record id="project_task_search_view_scrum" model="ir.ui.view">
+      <field name="name">project.task.search_scrum</field>
+      <field name="model">project.task</field>
+      <field name="arch" type="xml">
+        <search string="User Stories">
+          <searchpanel>
+            <field name="user_story_id" string="User Stories" icon="fa-users"/>
+          </searchpanel>
+        </search>
+      </field>
+    </record>
+
+    <!-- ACTIONS -->
+    <!-- Shows the Product Backlog -->
+    <record id='action_project_user_story' model='ir.actions.act_window'>
+      <field name="name">Product Backlog</field>
+      <field name="res_model">scrum_agile_framework.user_story</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('project_id', '=', active_id)]</field>
+      <field name="context">{'default_project_id': active_id}</field>
+    </record>
+
+    <!-- Shows all the Sprints assigned to a project-->
+    <record id='action_all_sprints' model='ir.actions.act_window'>
+      <field name="name">Sprint</field>
+      <field name="res_model">scrum_agile_framework.sprint</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'default_project_id': active_id}</field>
+      <field name="domain">[('project_id', '=', active_id)]</field>
+    </record>
+
+    <!-- VIEWS -->
+    <!-- PROJECT VIEWS -->
+    <!-- Edited View of the module project.project -->
+    <record id="view_project_kanban_scrum_inherited" model="ir.ui.view">
+      <field name="name">project.project.scrum_agile_framework.kanban.inherited</field>
+      <field name="model">project.project</field>
+      <field name="inherit_id" ref="project.view_project_kanban"/>
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="team_id" invisible="1" />
+        </field>
+        <t t-name="kanban-box"  position="attributes">
+          <attribute name="attrs">{'invisible':[('team_id','!=',False)]}</attribute>
+        </t>
+      </field>
+    </record>
+
+    <!-- Kanban View of this module-->
+    <record id="project_project_kanban_view_scrum" model="ir.ui.view">
+      <field name="name">project.project.view.kanban_scrum</field>
+      <field name="model">project.project</field>
+      <field name="inherit_id" ref="project.view_project_kanban"/>
+      <field name="mode">primary</field>
+      <field name="arch" type="xml">
+        <field name="name" position="after">
+          <field name="team_id" />
+          <field name="user_story_count"/>
+          <field name="sprint_count"/>
+        </field>
+        <t t-name="kanban-box"  position="attributes">
+          <attribute name="attrs">{'invisible':[('team_id','=',False)]}</attribute>
+        </t>
+        <xpath expr="//kanban" position="attributes">
+          <attribute name="on_create"/>
+        </xpath>
+        <xpath expr="//t[@t-name= 'kanban-box']/div/div/div/div/div/span[2]" position="replace">
+          <span><strong><t t-esc="record.team_id.value"/></strong></span>
+        </xpath>
+        <xpath expr=" //t[@t-name = 'kanban-box']/div/div[2]" position="replace">
+          <div class="o_project_kanban_boxes">
+            <div>
+              <span class="o_value" style="color: #7c7bae"><t t-esc="record.user_story_count.value"/></span>
+              <span class="o_label" style="color: #7c7bae">User Stories</span>
+            </div>
+            <div>
+              <span class="o_value" style="color: #7c7bae"><t t-esc="record.sprint_count.value"/></span>
+              <span class="o_label" style="color: #7c7bae">Sprints</span>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="project_project_form_view_scrum" model="ir.ui.view">
+      <field name="name">project.project.view.form_scrum</field>
+      <field name="model">project.project</field>
+      <field name="inherit_id" ref="project.edit_project"/>
+      <field name="mode">primary</field>
+      <field name="arch" type="xml">
+        <xpath expr="//sheet/div[@name = 'button_box']" position="replace">
+          <div class="oe_button_box" name="button_box" groups="base.group_user">
+            <button class="oe_stat_button"
+                    name="%(action_project_user_story)d"
+                    type="action" icon="fa-tasks"
+                    context="{'search_default_project_id': active_id}">
+              <field string="Backlog" name="user_story_count" widget="statinfo"/>
+            </button>
+            <button class="oe_stat_button" name="%(action_all_sprints)d" type="action" icon="fa-rotate-left"
+                    context="{'search_default_project_id': active_id}">
+              <field string="Sprints" name="sprint_count" widget="statinfo"/>
+            </button>
+            <button name="action_view_all_rating" type="object" attrs="{'invisible': ['|',
+            ('rating_active', '=', False), ('rating_percentage_satisfaction', '=', -1)]}"
+                    class="oe_stat_button oe_percent oe_read_only" icon="fa-smile-o"
+                    groups="project.group_project_rating">
+              <div class="o_field_widget o_stat_info">
+                <span class="o_stat_value">
+                  <field name="rating_percentage_satisfaction" nolabel="1"/>
+                  %
+                </span>
+                <span class="o_stat_text">
+                  Customer Satisfaction
+                </span>
+              </div>
+            </button>
+          </div>
+        </xpath>
+
+        <xpath expr="//sheet/div[2]" position="replace">
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="Project Name"/>
+            </h1>
+            <div>
+              <div>
+                <label for="team_id" class="oe_inline" string="Scrum Team : "/>
+                <field name="team_id" class="oe_inline oe_input_align" required="1"  options="{'no_quick_create': True}"/>
+              </div>
+              <div attrs="{'invisible': [('last_sprint_id', '=', False)]}">
+                <label for="last_sprint_id" class="oe_inline" string="Last Sprint : "/>
+                <field name="last_sprint_id" class="oe_inline oe_input_align"  />
+              </div>
+              <div>
+                <field name="sprint_ids" class="oe_inline oe_input_align" context="{'form_view_ref': 'sprint.reduce_form'}"
+                       readonly="1" style="pointer-events:none;">
+                  <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="speed"/>
+                    <field name="goal"/>
+                  </tree>
+                  <form>
+                    <sheet>
+                      <div class="oe_title">
+                        <h1>
+                          <field name="name"/>
+                        </h1>
+                      </div>
+                      <div>
+                        <label for="date_start" class="oe_inline" string="Start date : "/>
+                        <field name="date_start" class="oe_inline oe_input_align"/>
+                      </div>
+                      <div>
+                        <label for="date_end" class="oe_inline" string="End date : "/>
+                        <field name="date_end" class="oe_inline oe_input_align"/>
+                      </div>
+                      <div>
+                        <label for="speed" class="oe_inline" string="Speed : "/>
+                        <field name="speed" class="oe_inline oe_input_align"/>
+                      </div>
+                      <label for="goal" class="oe_inline" string="Goal : "/>
+                      <field name="goal" class="oe_inline oe_input_align"/>
+                      <div>
+                        <label for="conclusions" class="oe_inline" string="Conclusions : "/>
+                        <field name="conclusions" class="oe_inline oe_input_align"/>
+                      </div>
+                    </sheet>
+                  </form>
+                </field>
+              </div>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+
+    <!-- SPRINT VIEWS -->
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_all_sprints_tree">
+      <field name="name">scrum_agile_framework.sprint.view.tree</field>
+      <field name="model">scrum_agile_framework.sprint</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="date_start" string="Start date"/>
+          <field name="date_end" string="End date"/>
+          <field name="speed" string="Speed"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="view_all_sprints_form">
+      <field name="name">scrum_agile_framework.sprint.view.form</field>
+      <field name="model">scrum_agile_framework.sprint</field>
+      <field name="arch" type="xml">
+        <form string="Sprint">
+          <sheet string="Sprint">
+            <div class="oe_button_box" name="button_box">
+              <button class="oe_stat_button"
+                      name="action_view_tasks_scrum"
+                      type="object" icon="fa-tasks" string="Kanban Tasks">
+              </button>
+              <button class="oe_stat_button"
+                      name="action_view_burn_scrum"
+                      type="object" icon="fa-bar-chart-o" string="Burns">
+              </button>
+            </div>
+            <div class="oe_title">
+              <h1>
+                <field name="name" placeholder="Sprint name"  />
+              </h1>
+              <field name="project_id" invisible="1" />
+              <div>
+                <label for="user_story_ids" class="oe_inline" string="Assigned User Stories"/>
+                <field name="user_story_ids" class="oe_inline oe_input_align" widget="many2many"
+                       domain="[('project_id', '=', active_id)]"
+                       context="{'default_sprint_id': id, 'default_project_id': project_id}">
+                  <tree>
+                    <field name="name" string="User Story"/>
+                    <field name="planned_hours" string="Planned hours"/>
+                    <field name="notes" string="Notes"/>
+                  </tree>
+                  <form>
+                    <div class="oe_title">
+                      <field name="project_id" invisible="1"/>
+                      <field name="sprint_id"  invisible="1" class="oe_inline oe_input_align"/>
+                      <h1>
+                        <field name="name" placeholder="New User Story name"/>
+                      </h1>
+                      <div name="options_active">
+                        <div>
+                          <label for="priority" class="oe_inline" string="Priority : "/>
+                          <field name="priority" class="oe_inline oe_input_align"/>
+                        </div>
+                        <div>
+                          <label for="planned_hours" class="oe_inline" string="Planned hours : "/>
+                          <field name="planned_hours" class="oe_inline oe_input_align"/>
+                        </div>
+                        <!-- <div>
+                          <label for="effective_hours" class="oe_inline" string="Effective hours : "/>
+                          <field name="effective_hours" class="oe_inline oe_input_align"/>
+                        </div> -->
+                        <div>
+                          <label for="state" class="oe_inline" string="State : "/>
+                          <field name="state" class="oe_inline oe_input_align"/>
+                        </div>
+                        <div>
+                          <label for="notes" class="oe_inline" string="Notes : "/>
+                          <field name="notes" class="oe_inline oe_input_align"/>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </field>
+              </div>
+            </div>
+            <notebook>
+              <page name="general_page" string="General">
+                <div>
+                  <label for="total_estimated_hours" class="oe_inline" string="Total estimated hours :"/>
+                  <field name="total_estimated_hours" class="oe_inline oe_input_align"  />
+                </div>
+                <div>
+                  <label for="date_start" class="oe_inline" string="Start date :"/>
+                  <field name="date_start" class="oe_inline oe_input_align"  />
+                </div>
+                <div>
+                  <label for="date_end" class="oe_inline" string="End date : "/>
+                  <field name="date_end" class="oe_inline oe_input_align"  />
+                </div>
+                <div>
+                  <label for="speed" class="oe_inline" string="Speed :"/>
+                  <field name="speed" class="oe_inline oe_input_align"  />
+                </div>
+                <div>
+                  <label for="goal" class="oe_inline" string="Goal :"/>
+                  <field name="goal" type="html"  />
+                  <div class="d-none oe_clear"/>
+                </div>
+                <div>
+                  <label for="conclusions" class="oe_inline" string="Conclusions"/>
+                  <field name="conclusions" type="html"  />
+                  <div class="d-none oe_clear"/>
+                </div>
+              </page>
+              <page name="retrospective_page" string="Retrospective">
+                <div>
+                  <label for="retro_well" class="oe_inline" string="What went well ?"/>
+                  <field name="retro_well" type="html"  />
+                  <div class="d-none oe_clear"/>
+                </div>
+                <div>
+                  <label for="retro_improvement" class="oe_inline" string="What went wrong ?"/>
+                  <field name="retro_improvement" type="html"  />
+                  <div class="d-none oe_clear"/>
+                </div>
+                <div>
+                  <label for="retro_improvement_action" class="oe_inline"
+                         string="What should we do differently next time ?"/>
+                  <field name="retro_improvement_action" type="html"  />
+                  <div class="d-none oe_clear"/>
+                </div>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Burndown chart View  -->
+    <record id="sprint_analytic_graph_view" model="ir.ui.view" >
+      <field name="model">scrum_agile_framework.burn_down_chart</field>
+      <field name="arch" type="xml">
+        <graph type="line" >
+          <field name="date" type="row" interval="day"/>
+          <field name="name" type="col"/>
+          <field name="hours_day" type="measure"/>
+        </graph>
+      </field>
+    </record>
+
+
+    <!-- USER STORY VIEWS -->
+    <!-- List View -->
+    <record id="scrum_agile_framework.user_story_list_view" model="ir.ui.view">
+      <field name="name">scrum_agile_framework.user_story.view.tree</field>
+      <field name="model">scrum_agile_framework.user_story</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="priority"/>
+          <field name="planned_hours"/>
+          <field name="effective_hours"/>
+          <field name="state"/>
+          <field name="sprint_id"/>
+          <field name="notes"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="scrum_agile_framework.user_story_form_view">
+      <field name="name">scrum_agile_framework.user_story.view.form</field>
+      <field name="model">scrum_agile_framework.user_story</field>
+      <field name="arch" type="xml">
+        <form string="Task information">
+          <sheet>
+            <field name="project_id" invisible="1"/>
+            <field name="sprint_id" invisible="1"/>
+            <div class="oe_title">
+              <h1>
+                <field name="name" placeholder="User Story name"  attrs="{'readonly':[('editable','!=',True)]}"/>
+              </h1>
+              <div name="options_active">
+                <div attrs="{'invisible':[('editable','=',True)]}">
+                  <p>The User Story cannot be edited because it belongs to a finished Sprint</p>
+                </div>
+                <div>
+                  <label for="priority" class="oe_inline" string="Priority: "/>
+                  <field name="priority" class="oe_inline oe_input_align"
+                         attrs="{'readonly':[('editable','!=',True)]}"/>
+                </div>
+                <div>
+                  <label for="planned_hours" class="oe_inline" string="Estimated hours: "/>
+                  <field name="planned_hours" class="oe_inline oe_input_align"/>
+                </div>
+                <div attrs="{'invisible': 1}">
+                  <label for="editable" class="oe_inline" string="Editable: "/>
+                  <field name="editable" class="oe_inline oe_input_align"
+                         attrs="{'readonly':[('editable','!=',True)]}"/>
+                </div>
+                <div>
+                  <label for="effective_hours" class="oe_inline" string="Effective hours: "/>
+                  <field name="effective_hours" class="oe_inline oe_input_align"/>
+                </div>
+                <div>
+                  <label for="state" class="oe_inline" string="State : "/>
+                  <field name="state" class="oe_inline oe_input_align" attrs="{'readonly':[('editable','!=',True)]}"/>
+                </div>
+                <div>
+                  <label for="notes" class="oe_inline" string="Notes : "/>
+                  <field name="notes" class="oe_inline oe_input_align" attrs="{'readonly':[('editable','!=',True)]}"/>
+                </div>
+                <div>
+                  <label for="sprint_id" class="oe_inline" string="Sprint : "/>
+                  <field name="sprint_id" class="oe_inline oe_input_align"
+                         domain="[('project_id', '=', project_id)]"
+                         options="{'no_quick_create': True, 'no_create_edit' : True}"/>
+                </div>
+              </div>
+              <div name="options_active">
+                <field name="task_ids"  class="oe_inline oe_input_align"  attrs="{'readonly':[('editable','!=',True)]}"
+                       context="{'default_user_story_id': id, 'default_project_id': project_id}">
+                  <tree>
+                    <field name="name"/>
+                    <field name="planned_hours"/>
+                    <field name="sprint_id"/>
+                  </tree>
+                  <form>
+                    <div class="oe_title">
+                      <field name="project_id" class="oe_inline oe_input_align" invisible="1"/>
+                      <field name="company_id" class="oe_inline oe_input_align" invisible="1"/>
+                      <field name="sprint_id"  invisible="1" class="oe_inline oe_input_align"/>
+                      <h1>
+                        <field name="name" placeholder="New Task name"/>
+                      </h1>
+                      <div name="options_active">
+                        <div>
+                          <label for="planned_hours" class="oe_inline" string="Planned hours : "/>
+                          <field name="planned_hours" required="1" class="oe_inline oe_input_align"/>
+                        </div>
+                        <div>
+                          <label for="scrum_stage" class="oe_inline" string="Stage : "/>
+                          <field name="scrum_stage" required="1" class="oe_inline oe_input_align"/>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </field>
+              </div>
+            </div>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- TASK VIEWS -->
+
+    <!-- Quick create task-->
+    <record id="quick_create_task_form" model="ir.ui.view">
+      <field name="name">scrum_agile_framework.task.form.quick_create</field>
+      <field name="model">project.task</field>
+      <field name="priority">1000</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name" string = "Task Title"/>
+            <field name="planned_hours" required="1" string="Planned hours"/>
+            <field name="user_id" options="{'no_open': True,'no_create': True}"
+                   domain="[('share', '=', False)]"/>
+            <field name="project_id" required="1" invisible="1"/>
+            <field name="sprint_id" required="1" invisible="1"/>
+            <field name="user_story_id" required="1"  domain="[('sprint_id', '=', active_id)]"
+                   options="{'no_create': True,'no_create_edit': True, 'no_open': True}"/>
+            <field name="company_id" invisible="1"/>
+            <field name="parent_id" invisible="1"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="project_task_kanban_view_scrum" model="ir.ui.view">
+      <field name="name">project.task.view.kanban_scrum</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="project.view_task_kanban"/>
+      <field name="mode">primary</field>
+      <field name="arch" type="xml">
+        <field name="color" position="after">
+          <field name="sprint_id"/>
+        </field>
+        <xpath expr="//kanban" position="attributes">
+          <attribute name="quick_create_view">scrum_agile_framework.quick_create_task_form</attribute>
+          <attribute name="default_group_by">scrum_stage</attribute>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="project_task_form_view_scrum">
+      <field name="name">project.task.view.form_scrum</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+      <field name="mode">primary</field>
+      <field name="arch" type="xml">
+        <field name="project_id" position="after">
+          <field name="scrum_stage" class="ml-auto"/>
+        </field>
+        <field name="stage_id">
+          <attribute name="attrs">{'invisible': 1}</attribute>
+        </field>
+        <field name="timesheet_ids" position="attributes">
+          <attribute name="attrs">{'readonly': [('scrum_stage','!=', 'doing')]}</attribute>
+        </field>
+        <field name="kanban_state" position="attributes">
+          <attribute name="attrs">{'readonly': 1}</attribute>
+        </field>
+        <field name="timesheet_ids" position="before">
+          <div>
+            <p attrs="{'invisible': [('scrum_stage', '=', 'doing')]}">
+              To add records to the timesheet, change the status of the task to Doing</p>
+            <p attrs="{'invisible': ['|', ('scrum_stage','=', 'doing'), ('scrum_stage', '=', 'done')]}">
+              Records from this timesheet will not be used for the Burndown chart while the task
+              is in the To do state</p>
+          </div>
+        </field>
+        <field name="allow_subtasks" position="after">
+          <field name="sprint_id" invisible="1" />
+        </field>
+        <field name="unit_amount" position="attributes">
+          <attribute name="string">Effective hours</attribute>
+        </field>
+        <field name="unit_amount" position="after">
+          <field name="remaining_amount" string="Remaining hours" widget="timesheet_uom"
+                 decoration-danger="unit_amount &gt; 24"/>
+          <field name="sprint_id" />
+        </field>
+        <xpath expr="//form" position="attributes">
+          <attribute name="create">false</attribute>
+        </xpath>
+      </field>
+    </record>
+
+
+    <!-- SCRUM TEAM VIEWS -->
+    <!-- List View -->
+    <record id="scrum_agile_framework.team_list_view" model="ir.ui.view">
+      <field name="name">scrum_agile_framework.team.view.tree</field>
+      <field name="model">scrum_agile_framework.team</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="scrum_agile_framework.team_form_view">
+      <field name="name">scrum_agile_framework.team.view.form</field>
+      <field name="model">scrum_agile_framework.team</field>
+      <field name="arch" type="xml">
+        <form string="Team Information">
+          <sheet>
+            <separator string="Team Information"/>
+            <group>
+              <field name="name"/>
+            </group>
+            <group>
+              <field name="employee_ids"  class="oe_inline oe_input_align" widget="many2many" >
+                <tree editable="bottom">
+                  <field name="name" string="Name"/>
+                  <field name="role" string="Role" required="True" />
+                  <field name="responsibility" string = "Responsibility"/>
+                </tree>
+                <form>
+                  <h1>
+                    <field name="name" placeholder="Employee Name"/>
+                  </h1>
+                  <div name="options_active">
+                    <div>
+                      <label for="role" class="oe_inline" string="Role : "/>
+                      <field name="role" class="oe_inline oe_input_align" required="True"/>
+                    </div>
+                    <div>
+                      <label for="responsibility" class="oe_inline" string="Responsibility : "/>
+                      <field name="responsibility" class="oe_inline oe_input_align"/>
+                    </div>
+                    <div>
+                    </div>
+                  </div>
+                </form>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- MEETING VIEWS -->
+    <!-- List View -->
+    <record model="ir.ui.view" id="scrum_agile_framework.meeting_list_view">
+      <field name="name">scrum_agile_framework.meeting.view.tree</field>
+      <field name="model">scrum_agile_framework.meeting</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="date"/>
+          <field name="type"/>
+          <field name="duration"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="scrum_agile_framework.meeting_form_view">
+      <field name="name">scrum_agile_framework.meeting.view.form</field>
+      <field name="model">scrum_agile_framework.meeting</field>
+      <field name="arch" type="xml">
+        <form string="Meeting information">
+          <sheet>
+            <separator string="Meeting Information"/>
+            <group>
+              <group>
+                <field name="date" required="True"/>
+                <field name="type" required="True"/>
+              </group>
+              <group>
+                <field name="duration"/>
+              </group>
+            </group>
+            <group>
+              <field name="team_id"/>
+              <field name="project_id"  domain="[('team_id.id','!=',False)]"
+                     options="{'no_quick_create': True, 'no_create_edit' : True}" required="True"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record model="ir.ui.view" id="scrum_agile_framework.meeting_calendar_view">
+      <field name="name">scrum_agile_framework.meeting.view.calendar</field>
+      <field name="model">scrum_agile_framework.meeting</field>
+      <field name="arch" type="xml">
+        <calendar string="Meeting Calendar" date_start="date" color="type" mode="month">
+          <field name="type"/>
+          <field name="team_id"/>
+          <field name="project_id"/>
+        </calendar>
+      </field>
+    </record>
+
+
+    <!-- MENU DEFINITION -->
+
+    <!-- Project Model-->
+    <record model="ir.actions.act_window" id="project_project_action_window">
+      <field name="name">Project</field>
+      <field name="res_model">project.project</field>
+      <field name="view_mode">kanban,form</field>
+      <field name="view_ids" eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'kanban', 'view_id': ref('scrum_agile_framework.project_project_kanban_view_scrum')}),
+        (0, 0, {'view_mode': 'form', 'view_id': ref('scrum_agile_framework.project_project_form_view_scrum')})]"/>
+    </record>
+
+    <!-- Team Model -->
+    <record model="ir.actions.act_window" id="scrum_agile_framework.team_action_window">
+      <field name="name">Scrum Team</field>
+      <field name="res_model">scrum_agile_framework.team</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Meeting Model -->
+    <record model="ir.actions.act_window" id="scrum_agile_framework.meeting_action_window">
+      <field name="name">Meeting</field>
+      <field name="res_model">scrum_agile_framework.meeting</field>
+      <field name="view_mode">tree,form,calendar</field>
+      <field name="context">{'search_default_group_by_type':False}</field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="Scrum Projects" 
+    web_icon="scrum_agile_framework,static/description/icon.png"
+    id="scrum_agile_framework.menu_root"/>
+
+    <!-- Categories Menu -->
+    <menuitem name="Projects" id="project_project_menu" parent="scrum_agile_framework.menu_root" action="project_project_action_window"/>
+    <menuitem name="Scrum Team" id="scrum_agile_framework.team_menu" parent="scrum_agile_framework.menu_root" action="scrum_agile_framework.team_action_window"/>
+    <menuitem name="Meeting" id="scrum_agile_framework.meeting_menu" parent="scrum_agile_framework.menu_root" action="scrum_agile_framework.meeting_action_window"/>
+
+    <!-- Action to show the tasks of a sprint ordered by User Story -->
+    <record id='action_sprint_kanban_tasks' model='ir.actions.act_window'>
+      <field name="name">sprint.kanban.tasks</field>
+      <field name="res_model">project.task</field>
+      <field name="view_mode">kanban,form</field>
+      <field name="view_ids" eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'kanban', 'view_id': ref('scrum_agile_framework.project_task_kanban_view_scrum')}),
+        (0, 0, {'view_mode': 'form', 'view_id': ref('scrum_agile_framework.project_task_form_view_scrum')})]"/>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          No tasks found. Let's create one!
+        </p>
+      </field>
+      <field name="search_view_id" ref="project_task_search_view_scrum"/>
+      <field name="domain">[('sprint_id', '=', active_id)]</field>
+    </record>
+
+    <!-- Action to show the burndown chart of a sprint -->
+    <record id='action_sprint_burn' model='ir.actions.act_window'>
+      <field name="name">Burns</field>
+      <field name="res_model">scrum_agile_framework.burn_down_chart</field>
+      <field name="view_mode">graph</field>
+      <field name="view_id" ref="sprint_analytic_graph_view"/>
+      <field name="search_view_id" ref="project_task_search_view_scrum"/>
+      <field name="domain">[('sprint_id', '=', active_id)]</field>
+    </record>
+  </data>
+</odoo>

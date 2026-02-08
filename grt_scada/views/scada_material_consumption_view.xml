@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- SCADA Material Consumption Views -->
+
+    <!-- List view -->
+    <record id="view_scada_material_consumption_list" model="ir.ui.view">
+        <field name="name">scada.material.consumption.list</field>
+        <field name="model">scada.material.consumption</field>
+        <field name="arch" type="xml">
+            <tree string="Material Consumption" decoration-danger="sync_status == 'error'">
+                <field name="timestamp"/>
+                <field name="equipment_id"/>
+                <field name="material_id"/>
+                <field name="quantity"/>
+                <field name="unit_of_measure"/>
+                <field name="status" widget="badge"/>
+                <field name="sync_status" widget="badge" decoration-success="sync_status == 'synced'" decoration-danger="sync_status == 'error'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_scada_material_consumption_form" model="ir.ui.view">
+        <field name="name">scada.material.consumption.form</field>
+        <field name="model">scada.material.consumption</field>
+        <field name="arch" type="xml">
+            <form string="Material Consumption Record">
+                <header>
+                    <button name="action_validate" type="object" string="Validate" states="recorded" class="btn-primary"/>
+                    <button name="action_post_to_stock" type="object" string="Post to Stock" states="validated" class="btn-primary"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="recorded,validated"/>
+                    <button name="retry_sync" type="object" string="Retry Sync" states="error"/>
+                    <field name="status" widget="statusbar" clickable="0"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Equipment &amp; Material">
+                            <field name="equipment_id" readonly="1"/>
+                            <field name="material_id" readonly="1"/>
+                            <field name="quantity" readonly="1"/>
+                            <field name="unit_of_measure" readonly="1"/>
+                        </group>
+                        <group string="Dates">
+                            <field name="timestamp" readonly="1"/>
+                            <field name="date_received" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Production Info">
+                        <field name="manufacturing_order_id" readonly="1"/>
+                        <field name="production_line_id" readonly="1"/>
+                    </group>
+                    <group string="Data Source">
+                        <field name="api_request_id"/>
+                        <field name="batch_number"/>
+                        <field name="source_system"/>
+                    </group>
+                    <group string="Stock Status">
+                        <field name="is_stock_moved"/>
+                        <field name="move_id"/>
+                    </group>
+                    <group string="Sync Status">
+                        <field name="sync_status"/>
+                        <field name="error_message"/>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="view_scada_material_consumption_search" model="ir.ui.view">
+        <field name="name">scada.material.consumption.search</field>
+        <field name="model">scada.material.consumption</field>
+        <field name="arch" type="xml">
+            <search string="Search Material Consumption">
+                <field name="equipment_id"/>
+                <field name="material_id"/>
+                <field name="batch_number"/>
+                <filter name="today" string="Today" domain="[('date_received', '=', context_today())]"/>
+                <filter name="recorded" string="Recorded" domain="[('status', '=', 'recorded')]"/>
+                <filter name="synced" string="Synced" domain="[('sync_status', '=', 'synced')]"/>
+                <filter name="error" string="Error" domain="[('sync_status', '=', 'error')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Equipment" name="group_by_equipment" context="{'group_by': 'equipment_id'}"/>
+                    <filter string="Material" name="group_by_material" context="{'group_by': 'material_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date_received'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_scada_material_consumption" model="ir.actions.act_window">
+        <field name="name">Material Consumption</field>
+        <field name="res_model">scada.material.consumption</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
