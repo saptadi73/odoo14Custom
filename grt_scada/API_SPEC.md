@@ -180,7 +180,7 @@ curl -X POST http://localhost:8069/api/scada/authenticate \
 
 ### 4. Create Material Consumption (Protected)
 
-**Record Material Usage/Consumption**
+**Apply Material Consumption to MO**
 
 ```http
 POST /api/scada/material-consumption
@@ -188,7 +188,7 @@ Auth: Session cookie
 Content-Type: application/json
 ```
 
-**Request Body** (gunakan `product_tmpl_id` atau `material_id`):
+**Request Body** (gunakan `product_tmpl_id` atau `product_id`):
 
 ```json
 {
@@ -201,8 +201,9 @@ Content-Type: application/json
   "api_request_id": "REQ_12345"
 }
 
-Note: `mo_id` is required for actual material consumption.
+Note: `mo_id` is required to apply consumption to MO.
 Note: Successful requests update MO raw material moves (`quantity_done`) for the matching product (consumed updates immediately).
+Note: SCADA does not store material consumption records.
 ```
 
 **Response**:
@@ -210,9 +211,10 @@ Note: Successful requests update MO raw material moves (`quantity_done`) for the
 ```json
 {
   "status": "success",
-  "message": "Material consumption recorded successfully",
-  "record_id": 123,
-  "external_id": "123"
+  "message": "Material consumption applied to MO moves",
+  "mo_id": "MO/2025/001",
+  "applied_qty": 10.5,
+  "move_ids": [456, 457]
 }
 ```
 
@@ -242,7 +244,7 @@ curl -X POST http://localhost:8069/api/scada/material-consumption \
 
 ### 5. Get Material Consumption (Protected)
 
-**Retrieve Material Consumption Record**
+**Deprecated: Material Consumption Record**
 
 ```http
 GET /api/scada/material-consumption/{record_id}
@@ -256,16 +258,8 @@ Auth: Session cookie
 
 ```json
 {
-  "status": "success",
-  "data": {
-    "id": 123,
-    "equipment_id": "PLC01",
-    "product_id": 123,
-    "quantity": 10.5,
-    "timestamp": "2025-02-06T10:30:00",
-    "status": "recorded",
-    "sync_status": "pending"
-  }
+  "status": "error",
+  "message": "Material consumption records are not stored; use MO components consumption report instead."
 }
 ```
 
@@ -307,9 +301,10 @@ Content-Type: application/json
   "message": "Validation passed",
   "data": {
     "equipment_id": "PLC01",
-    "product_id": 123,
+    "product_tmpl_id": 123,
     "quantity": 10.5,
-    "timestamp": "2025-02-06T10:30:00"
+    "timestamp": "2025-02-06T10:30:00",
+    "mo_id": "MO/2025/001"
   }
 }
 ```
@@ -354,27 +349,24 @@ Auth: Session cookie
 - `limit` (optional): Max records (default: 50)
 - `offset` (optional): Pagination offset (default: 0)
 
+Note: List is based on `mrp.production` with `scada_equipment_id` matching the equipment code.
+
 **Response**:
 
 ```json
 {
   "status": "success",
-  "message": "MO list retrieved successfully",
   "count": 10,
-  "equipment_id": "PLC01",
   "data": [
     {
-      "id": 1,
       "mo_id": "MO/2025/001",
-      "product_id": "PROD001",
-      "product_name": "Product Name",
+      "product": "Product Name",
       "quantity": 100.0,
-      "status": "1",
-      "status_text": "planned",
-      "date_start": "2025-02-06T08:00:00",
-      "date_end": "2025-02-06T16:00:00",
-      "equipment_id": "PLC01",
-      "created_at": "2025-02-06T07:50:00"
+      "produced_qty": 80.0,
+      "consumed_qty": 60.0,
+      "status": "planned",
+      "schedule_start": "2025-02-06T08:00:00",
+      "schedule_end": "2025-02-06T16:00:00"
     }
   ]
 }
@@ -484,6 +476,7 @@ Content-Type: application/json
     "product_id": 32,
     "product_name": "Konsentrat Sapi Penggemukan",
     "quantity": 1000.0,
+    "produced_qty": 950.0,
     "uom": "kg",
     "bom_id": 2,
     "bom_code": null,
@@ -512,6 +505,8 @@ Content-Type: application/json
 ```
 
 Note: `components_consumption` values are based on MO raw material stock moves (`to_consume` = planned qty, `reserved` = reserved qty, `consumed` = done qty).
+Note: `produced_qty` is based on MO finished moves (`quantity_done`).
+Note: Each component may include `equipment_id`, `equipment_code`, and `equipment_name` if the component is linked to SCADA equipment; otherwise these fields are null.
 
 **JSON-RPC Example**:
 ```bash
@@ -630,7 +625,7 @@ Content-Type: application/json
 ```
 
 **Parameters**:
-- `mo_id` (path): Manufacturing Order Data record ID
+- `mo_id` (path): `mrp.production` ID
 
 **Request Body**:
 
@@ -648,7 +643,7 @@ Content-Type: application/json
 {
   "status": "success",
   "message": "MO acknowledged successfully",
-  "mo_id": 123
+  "mo_id": "MO/2025/001"
 }
 ```
 
@@ -677,7 +672,7 @@ Content-Type: application/json
 ```
 
 **Parameters**:
-- `mo_id` (path): Manufacturing Order Data record ID
+- `mo_id` (path): `mrp.production` ID
 
 **Request Body**:
 
@@ -697,7 +692,7 @@ Content-Type: application/json
 {
   "status": "success",
   "message": "MO status updated successfully",
-  "mo_id": 123
+  "mo_id": "MO/2025/001"
 }
 ```
 
@@ -739,8 +734,8 @@ Content-Type: application/json
 
 Note: `mo_id` and `finished_qty` are required to update finished goods quantity.
 Note: `finished_qty` must be > 0. The system sets `qty_producing` to `finished_qty` before marking done.
-Note: If SCADA MO data does not exist, it will be created automatically from `mrp.production`.
-Note: If `auto_consume` is enabled, `equipment_id` should be provided so material consumption can be created.
+Note: `mo_id` in payload refers to MO name (e.g. `MO/2025/001`).
+Note: If `auto_consume` is enabled, `equipment_id` should be provided so material consumption can be applied to MO moves.
 
 **Response**:
 

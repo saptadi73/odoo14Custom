@@ -11,14 +11,14 @@
         <!-- SCADA Operator Group - Read and acknowledge MO -->
         <record id="group_scada_operator" model="res.groups">
             <field name="name">SCADA Operator</field>
-            <field name="comment">Can read MO data and acknowledge requests from middleware</field>
+            <field name="comment">Can read MO information and acknowledge requests from middleware</field>
             <field name="category_id" ref="base.module_category_manufacturing"/>
         </record>
 
-        <!-- SCADA Technician Group - Record material consumption -->
+        <!-- SCADA Technician Group - Sensor readings & operations -->
         <record id="group_scada_technician" model="res.groups">
             <field name="name">SCADA Technician</field>
-            <field name="comment">Can record material consumption and sensor readings</field>
+            <field name="comment">Can record sensor readings and handle SCADA operations</field>
             <field name="category_id" ref="base.module_category_manufacturing"/>
         </record>
     </data>

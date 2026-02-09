@@ -10,7 +10,7 @@ This module provides a comprehensive SCADA solution that integrates Odoo Manufac
 
 ### Core Features
 - **Equipment/PLC Management** - Configure and monitor PLCs and industrial equipment
-- **Material Consumption Tracking** - Real-time tracking of material consumption from equipment
+- **Material Consumption via MO** - Middleware updates MO component consumption directly
 - **Manufacturing Order Sync** - Synchronize manufacturing orders between Odoo and equipment/middleware
 - **Sensor Data Collection** - Collect and monitor real-time sensor readings
 - **Middleware API** - REST API endpoints for middleware communication
@@ -31,13 +31,12 @@ grt_scada/
 ├── models/              # Data models
 │   ├── scada_base.py               # Abstract base model
 │   ├── scada_equipment.py          # Equipment/PLC configuration
-│   ├── scada_material_consumption.py  # Material consumption records
+│   ├── scada_material_consumption.py  # Legacy (no direct input)
 │   ├── scada_mo_data.py            # Manufacturing order data
 │   ├── scada_sensor_reading.py      # Sensor readings
 │   └── scada_api_log.py            # API call logs
 │
 ├── routes/              # API endpoints
-│   ├── material_consumption_route.py  # POST: Material consumption endpoint
 │   └── mo_data_route.py              # GET: Manufacturing order endpoint
 │
 ├── services/            # Business logic layer
@@ -48,7 +47,7 @@ grt_scada/
 ├── views/               # UI Views
 │   ├── menu.xml                 # Navigation menu
 │   ├── scada_equipment_view.xml # Equipment UI
-│   ├── scada_material_consumption_view.xml  # Material UI
+│   ├── scada_material_consumption_view.xml  # Legacy (not loaded)
 │   ├── scada_mo_view.xml        # Manufacturing Order UI
 │   ├── scada_sensor_reading_view.xml  # Sensor UI
 │   └── scada_api_log_view.xml   # API Log UI
@@ -71,11 +70,12 @@ grt_scada/
 ### Material Consumption API
 
 **POST /api/scada/material-consumption**
-- Record material consumption from equipment/middleware
+- Apply material consumption directly to MO raw moves (no SCADA consumption record stored)
 - Auth: Bearer token required
 - Parameters:
   - `equipment_id`: Equipment code (required)
-  - `material_code`: Material code or barcode (required)
+  - `product_id`: Product variant ID (required if `product_tmpl_id` not provided)
+  - `product_tmpl_id`: Product template ID (optional)
   - `quantity`: Consumption quantity (required)
   - `timestamp`: ISO format timestamp (required)
   - `batch_number`: Optional batch identifier
@@ -85,7 +85,7 @@ Example:
 ```json
 {
     "equipment_id": "PLC01",
-    "material_code": "MAT001",
+    "product_id": 123,
     "quantity": 10.5,
     "timestamp": "2025-02-06T10:30:00",
     "batch_number": "BATCH_001"
@@ -126,12 +126,13 @@ GET /api/scada/mo-list?equipment_id=PLC01&status=planned&limit=10
    - Equipment Code (unique ID)
    - Equipment Type (PLC, Sensor, etc.)
    - Connection settings (IP, Port, Protocol)
+  - Note: choose Protocol = Middleware if the device is handled by middleware; IP/Port are not required and status stays Disconnected
 4. Test connection using "Test Connection" button
 
 ### User Roles
 - **SCADA Manager**: Full access to all SCADA operations
 - **SCADA Operator**: Read-only access + can acknowledge MO data
-- **SCADA Technician**: Can record material consumption and sensor readings
+- **SCADA Technician**: Can record sensor readings and handle SCADA operations
 
 ## API Security
 
@@ -151,16 +152,12 @@ The module includes automated background tasks:
 ### SCADA Equipment
 Manages physical equipment connected to system
 - Connection status monitoring
-- Protocol configuration (Modbus, MQTT, HTTP, TCP/IP, OPC-UA)
+- Protocol configuration (Modbus, MQTT, HTTP, TCP/IP, OPC-UA, Middleware)
 - Production line association
 - Last connection tracking
 
-### SCADA Material Consumption
-Records material consumption from equipment
-- Source: Equipment/Middleware POST requests
-- Status workflow: Draft > Recorded > Validated > Posted
-- Automatic inventory sync capability
-- Batch tracking and audit trail
+### SCADA Material Consumption (Deprecated)
+Consumption is applied directly to MO raw moves; SCADA does not store consumption records.
 
 ### SCADA MO Data
 Manages manufacturing order synchronization
@@ -251,6 +248,6 @@ LGPL-3 (GNU Lesser General Public License v3)
 ### 1.0.0 (2025-02-06)
 - Initial release
 - Core SCADA functionality
-- Material consumption and MO sync
+- MO sync with consumption applied directly to MO moves
 - Middleware API integration
 - Role-based access control

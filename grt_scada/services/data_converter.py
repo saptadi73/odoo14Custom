@@ -140,11 +140,21 @@ class DataConverter:
             env: Odoo environment
             mo_record_id: MO Data record ID
         """
-        mo_record = env['scada.mo.data'].browse(mo_record_id)
-        if not mo_record.exists():
+        mo_record = env['mrp.production'].browse(mo_record_id)
+        if not mo_record or not mo_record.exists():
             return None
-            
-        return mo_record._prepare_data_for_middleware()
+
+        return {
+            'mo_id': mo_record.name,
+            'product_id': mo_record.product_id.default_code or mo_record.product_id.id,
+            'product_name': mo_record.product_id.name,
+            'quantity': mo_record.product_qty,
+            'status': mo_record.state,
+            'status_text': mo_record.state,
+            'date_start': mo_record.date_planned_start.isoformat() if mo_record.date_planned_start else None,
+            'date_end': mo_record.date_planned_finished.isoformat() if mo_record.date_planned_finished else None,
+            'created_at': mo_record.create_date.isoformat() if mo_record.create_date else None,
+        }
 
     @staticmethod
     def parse_middleware_error_response(response):

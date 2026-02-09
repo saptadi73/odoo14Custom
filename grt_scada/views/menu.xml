@@ -22,34 +22,6 @@
             name="Equipment List"
             sequence="1"/>
 
-        <!-- Material Consumption Menu -->
-        <menuitem
-            id="menu_scada_material"
-            parent="menu_scada_root"
-            name="Material Consumption"
-            sequence="20"/>
-
-        <menuitem
-            id="menu_scada_material_consumption_list"
-            parent="menu_scada_material"
-            action="action_scada_material_consumption"
-            name="Consumption Records"
-            sequence="1"/>
-
-        <!-- Manufacturing Order Menu -->
-        <menuitem
-            id="menu_scada_mo"
-            parent="menu_scada_root"
-            name="Manufacturing Orders"
-            sequence="30"/>
-
-        <menuitem
-            id="menu_scada_mo_data_list"
-            parent="menu_scada_mo"
-            action="action_scada_mo_data"
-            name="MO Data"
-            sequence="1"/>
-
         <!-- Sensor Data Menu -->
         <menuitem
             id="menu_scada_sensor"

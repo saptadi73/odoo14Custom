@@ -47,6 +47,20 @@ class ScadaMoData(models.Model):
         store=True,
         help='Quantity untuk diproduksi'
     )
+    qty_produced = fields.Float(
+        string='Produced Qty',
+        digits=(12, 3),
+        compute='_compute_mo_actuals',
+        readonly=True,
+        help='Jumlah produk selesai (diambil dari MO finished moves)'
+    )
+    qty_consumed = fields.Float(
+        string='Consumed Qty',
+        digits=(12, 3),
+        compute='_compute_mo_actuals',
+        readonly=True,
+        help='Jumlah material terpakai (diambil dari MO raw moves)'
+    )
 
     # Equipment & Production Info
     equipment_id = fields.Many2one(
@@ -145,6 +159,33 @@ class ScadaMoData(models.Model):
         for record in self:
             record.status_code = status_mapping.get(record.mo_status, '0')
 
+    @api.depends(
+        'manufacturing_order_id',
+        'manufacturing_order_id.move_finished_ids.quantity_done',
+        'manufacturing_order_id.move_finished_ids.state',
+        'manufacturing_order_id.move_raw_ids.quantity_done',
+        'manufacturing_order_id.move_raw_ids.state'
+    )
+    def _compute_mo_actuals(self):
+        for record in self:
+            mo = record.manufacturing_order_id
+            if not mo:
+                record.qty_produced = 0.0
+                record.qty_consumed = 0.0
+                continue
+
+            finished_qty = sum(
+                move.quantity_done for move in mo.move_finished_ids
+                if move.state != 'cancel'
+            )
+            consumed_qty = sum(
+                move.quantity_done for move in mo.move_raw_ids
+                if move.state != 'cancel'
+            )
+
+            record.qty_produced = finished_qty
+            record.qty_consumed = consumed_qty
+
     def _prepare_data_for_middleware(self):
         """Prepare data format untuk middleware"""
         self.ensure_one()
@@ -175,6 +216,182 @@ class ScadaMoData(models.Model):
             'last_sent_to_middleware': datetime.now(),
             'send_count': self.send_count + 1,
             'sync_status': 'synced',
+        })
+
+    @api.model
+    def apply_material_consumption(self, consumption_data):
+        """
+        Apply material consumption langsung ke MO raw moves.
+
+        Tidak membuat record scada.material.consumption.
+        """
+        try:
+            from ..services.validation_service import ValidationService
+
+            is_valid, error_msg = ValidationService.validate_material_consumption_data(
+                self.env, consumption_data
+            )
+            if not is_valid:
+                return {
+                    'status': 'error',
+                    'message': f'Validation failed: {error_msg}',
+                }
+
+            equipment = self.env['scada.equipment'].search([
+                ('equipment_code', '=', consumption_data.get('equipment_id'))
+            ], limit=1)
+            if not equipment:
+                return {
+                    'status': 'error',
+                    'message': f'Equipment not found: {consumption_data.get("equipment_id")}',
+                }
+
+            material = self._get_material_from_payload(consumption_data)
+            if not material:
+                return {
+                    'status': 'error',
+                    'message': 'Product not found or invalid product payload',
+                }
+
+            mo_record = self._get_mo_from_consumption_payload(consumption_data)
+            if not mo_record:
+                return {
+                    'status': 'error',
+                    'message': 'MO ID is required',
+                }
+
+            moves = self._find_raw_moves_for_material(mo_record, material)
+            if not moves:
+                return {
+                    'status': 'error',
+                    'message': 'No raw material move found for this product in MO',
+                }
+
+            quantity = float(consumption_data.get('quantity', 0))
+            applied_qty, move_ids = self._apply_consumption_to_moves(
+                moves, quantity, allow_overconsume=True
+            )
+
+            timestamp_value = consumption_data.get('timestamp') or datetime.now()
+            if isinstance(timestamp_value, str):
+                try:
+                    timestamp_value = fields.Datetime.from_string(timestamp_value)
+                except Exception:
+                    timestamp_value = datetime.now()
+
+            self._log_equipment_material_consumption(
+                equipment=equipment,
+                material=material,
+                mo_record=mo_record,
+                quantity=applied_qty,
+                timestamp=timestamp_value,
+            )
+
+            return {
+                'status': 'success',
+                'message': 'Material consumption applied to MO moves',
+                'mo_id': mo_record.name,
+                'applied_qty': applied_qty,
+                'move_ids': move_ids,
+            }
+
+        except Exception as e:
+            return {
+                'status': 'error',
+                'message': f'Error: {str(e)}',
+            }
+
+    def _get_material_from_payload(self, consumption_data):
+        material_id = consumption_data.get('material_id') or consumption_data.get('product_id')
+        product_tmpl_id = consumption_data.get('product_tmpl_id')
+
+        if material_id:
+            try:
+                material_id = int(material_id)
+            except (TypeError, ValueError):
+                return False
+            material = self.env['product.product'].browse(material_id)
+            return material if material.exists() else False
+
+        if product_tmpl_id:
+            try:
+                product_tmpl_id = int(product_tmpl_id)
+            except (TypeError, ValueError):
+                return False
+            template = self.env['product.template'].browse(product_tmpl_id)
+            if not template.exists() or not template.product_variant_id:
+                return False
+            return template.product_variant_id
+
+        return False
+
+    def _get_mo_from_consumption_payload(self, consumption_data):
+        mo_value = consumption_data.get('mo_id') or consumption_data.get('manufacturing_order_id')
+        if not mo_value:
+            return False
+
+        try:
+            if isinstance(mo_value, int) or str(mo_value).isdigit():
+                mo_record = self.env['mrp.production'].browse(int(mo_value))
+            else:
+                mo_record = self.env['mrp.production'].search([
+                    ('name', '=', str(mo_value))
+                ], limit=1)
+        except Exception:
+            return False
+
+        return mo_record if mo_record and mo_record.exists() else False
+
+    def _find_raw_moves_for_material(self, mo_record, material):
+        return mo_record.move_raw_ids.filtered(
+            lambda move: move.product_id.id == material.id and move.state not in ['done', 'cancel']
+        )
+
+    def _apply_consumption_to_moves(self, moves, quantity, allow_overconsume=True):
+        qty_remaining = quantity
+        move_ids = []
+
+        for move in moves:
+            if qty_remaining <= 0:
+                break
+            planned = move.product_uom_qty or 0.0
+            done = move.quantity_done or 0.0
+            remaining = max(planned - done, 0.0)
+            if remaining == 0.0 and not allow_overconsume:
+                add_qty = 0.0
+            else:
+                add_qty = qty_remaining if remaining == 0.0 else min(qty_remaining, remaining)
+            if add_qty <= 0.0:
+                continue
+            move.quantity_done = done + add_qty
+            qty_remaining -= add_qty
+            move_ids.append(move.id)
+
+        applied_qty = quantity - qty_remaining
+        return applied_qty, move_ids
+
+    def _log_equipment_material_consumption(self, equipment, material, mo_record, quantity, timestamp):
+        if not equipment:
+            return
+
+        consumption_bom = 0.0
+        if mo_record and mo_record.bom_id and mo_record.bom_id.product_qty:
+            bom_line = mo_record.bom_id.bom_line_ids.filtered(
+                lambda line: line.product_id.id == material.id
+            )[:1]
+            if bom_line:
+                consumption_bom = (
+                    bom_line.product_qty / mo_record.bom_id.product_qty
+                ) * mo_record.product_qty
+
+        self.env['scada.equipment.material'].create({
+            'equipment_id': equipment.id,
+            'product_id': material.id,
+            'manufacturing_order_id': mo_record.id if mo_record else False,
+            'consumption_actual': quantity,
+            'consumption_bom': consumption_bom,
+            'timestamp': timestamp,
+            'active': True,
         })
 
     @api.model
@@ -211,8 +428,42 @@ class ScadaMoData(models.Model):
                              'get_mo_list_for_equipment', ['PLC01'],
                              {'status': 'planned', 'limit': 50})
         """
-        from ..services.middleware_service import MiddlewareService
-        return MiddlewareService.get_mo_list(self.env, equipment_code, status, limit, offset)
+        equipment = self.env['scada.equipment'].search([
+            ('equipment_code', '=', equipment_code)
+        ], limit=1)
+
+        if not equipment:
+            return {
+                'status': 'error',
+                'message': f'Equipment "{equipment_code}" not found',
+                'count': 0,
+                'data': [],
+            }
+
+        domain = [('equipment_id', '=', equipment.id)]
+        if status:
+            domain.append(('mo_status', '=', status))
+
+        records = self.search(domain, limit=limit, offset=offset, order='date_start_planned asc, id asc')
+        data = []
+
+        for record in records:
+            data.append({
+                'mo_id': record.mo_name,
+                'product': record.product_id.display_name if record.product_id else None,
+                'quantity': record.product_qty,
+                'produced_qty': record.qty_produced,
+                'consumed_qty': record.qty_consumed,
+                'status': record.mo_status,
+                'schedule_start': record.date_start_planned.isoformat() if record.date_start_planned else None,
+                'schedule_end': record.date_end_planned.isoformat() if record.date_end_planned else None,
+            })
+
+        return {
+            'status': 'success',
+            'count': len(data),
+            'data': data,
+        }
 
     @api.model
     def acknowledge_mo(self, mo_record_id, payload_data):
@@ -441,35 +692,24 @@ class ScadaMoData(models.Model):
             # Calculate quantity based on MO quantity
             quantity = (line.product_qty / mo.bom_id.product_qty) * mo.product_qty
             
-            # Check if already recorded in SCADA consumption
-            existing = self.env['scada.material.consumption'].search([
-                ('manufacturing_order_id', '=', mo.id),
-                ('material_id', '=', line.product_id.id),
-            ], limit=1)
-            
-            if existing:
-                # Already recorded, skip
-                continue
-            
-            # Create SCADA material consumption record
             try:
-                with self.env.cr.savepoint():
-                    consumption = self.env['scada.material.consumption'].create({
-                        'equipment_id': equipment.id,
-                        'material_id': line.product_id.id,
-                        'quantity': quantity,
-                        'manufacturing_order_id': mo.id,
-                        'timestamp': datetime.now(),
-                        'status': 'recorded',
-                        'source': 'auto_bom',  # Mark as auto-generated
-                    })
-                
+                moves = self._find_raw_moves_for_material(mo, line.product_id)
+                applied_qty, move_ids = self._apply_consumption_to_moves(
+                    moves, quantity, allow_overconsume=False
+                )
+                self._log_equipment_material_consumption(
+                    equipment=equipment,
+                    material=line.product_id,
+                    mo_record=mo,
+                    quantity=applied_qty,
+                    timestamp=datetime.now(),
+                )
                 consumed_materials.append({
                     'material_code': line.product_id.default_code or line.product_id.name,
                     'material_name': line.product_id.name,
-                    'quantity': quantity,
+                    'quantity': applied_qty,
                     'uom': line.product_uom_id.name,
-                    'record_id': consumption.id,
+                    'move_ids': move_ids,
                 })
                 
             except Exception as e:

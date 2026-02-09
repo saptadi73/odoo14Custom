@@ -1,6 +1,6 @@
 {
     'name': 'SCADA for Odoo - Manufacturing Integration',
-    'version': '2.0.20',
+    'version': '3.0.23',
     'category': 'manufacturing',
     'license': 'LGPL-3',
     'author': 'PT. Gagak Rimang Teknologi',
@@ -27,8 +27,7 @@
         'security/ir.model.access.csv',
         'security/ir.rule.xml',
         'views/scada_equipment_view.xml',
-        'views/scada_material_consumption_view.xml',
-        'views/scada_mo_view.xml',
+        'views/scada_mrp_views.xml',
         'views/scada_sensor_reading_view.xml',
         'views/scada_api_log_view.xml',
         'views/menu.xml',

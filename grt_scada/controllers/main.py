@@ -118,7 +118,7 @@ class ScadaJsonRpcController(http.Controller):
     @http.route('/api/scada/material-consumption', type='json', auth='user', methods=['POST'])
     def create_material_consumption(self, **kwargs):
         """
-        Create material consumption record
+        Apply material consumption directly to MO
         
         POST /api/scada/material-consumption
         Auth: Session cookie
@@ -134,7 +134,9 @@ class ScadaJsonRpcController(http.Controller):
         """
         try:
             data = self._get_json_payload()
-            result = request.env['scada.material.consumption'].create_from_api(data)
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            result = service.apply_material_consumption(data)
             return result
         except Exception as e:
             _logger.error(f'Error creating material consumption: {str(e)}')
@@ -142,13 +144,12 @@ class ScadaJsonRpcController(http.Controller):
 
     @http.route('/api/scada/material-consumption/<int:record_id>', type='json', auth='user', methods=['GET'])
     def get_material_consumption(self, record_id, **kwargs):
-        """Get material consumption by ID"""
+        """Deprecated: material consumption records are not stored."""
         try:
-            result = request.env['scada.material.consumption'].get_by_id(
-                record_id,
-                fields=['id', 'equipment_id', 'product_id', 'quantity', 'timestamp', 'status']
-            )
-            return result
+            return {
+                'status': 'error',
+                'message': 'Material consumption records are not stored; use MO components consumption report instead.',
+            }
         except Exception as e:
             _logger.error(f'Error getting material consumption: {str(e)}')
             return {'status': 'error', 'message': str(e)}
@@ -158,8 +159,13 @@ class ScadaJsonRpcController(http.Controller):
         """Validate material consumption payload"""
         try:
             data = self._get_json_payload()
-            result = request.env['scada.material.consumption'].validate_payload(data)
-            return result
+            from ..services.validation_service import ValidationService
+            is_valid, error_msg = ValidationService.validate_material_consumption_data(
+                request.env, data
+            )
+            if is_valid:
+                return {'status': 'success', 'message': 'Validation passed', 'data': data}
+            return {'status': 'error', 'message': f'Validation failed: {error_msg}', 'data': data}
         except Exception as e:
             _logger.error(f'Error validating material consumption: {str(e)}')
             return {'status': 'error', 'message': str(e)}
@@ -175,7 +181,9 @@ class ScadaJsonRpcController(http.Controller):
             limit = int(request.httprequest.args.get('limit', 50))
             offset = int(request.httprequest.args.get('offset', 0))
 
-            result = request.env['scada.mo.data'].get_mo_list_for_equipment(
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            result = service.get_mo_list_for_equipment(
                 equipment_code, status=mo_status, limit=limit, offset=offset
             )
             return result
@@ -256,9 +264,11 @@ class ScadaJsonRpcController(http.Controller):
                     })
 
             consumption_map = {}
+            mo_equipment = getattr(mo, 'scada_equipment_id', False)
             for move in mo.move_raw_ids:
                 product = move.product_id
                 tmpl_id = product.product_tmpl_id.id if product else None
+                component_equipment = move.scada_equipment_id or mo_equipment
                 key = (tmpl_id, product.id if product else None)
                 if key not in consumption_map:
                     consumption_map[key] = {
@@ -269,12 +279,19 @@ class ScadaJsonRpcController(http.Controller):
                         'reserved': 0.0,
                         'consumed': 0.0,
                         'uom': move.product_uom.name if move.product_uom else None,
+                        'equipment_id': component_equipment.id if component_equipment else None,
+                        'equipment_code': component_equipment.equipment_code if component_equipment else None,
+                        'equipment_name': component_equipment.name if component_equipment else None,
                     }
                 consumption_map[key]['to_consume'] += move.product_uom_qty
                 consumption_map[key]['reserved'] += move.reserved_availability
                 consumption_map[key]['consumed'] += move.quantity_done
 
             components_consumption = list(consumption_map.values())
+            produced_qty = sum(
+                move.quantity_done for move in mo.move_finished_ids
+                if move.state != 'cancel'
+            )
 
             return {
                 'status': 'success',
@@ -288,6 +305,7 @@ class ScadaJsonRpcController(http.Controller):
                     'product_id': mo.product_id.id if mo.product_id else None,
                     'product_name': mo.product_id.display_name if mo.product_id else None,
                     'quantity': mo.product_qty,
+                    'produced_qty': produced_qty,
                     'uom': mo.product_uom_id.name if mo.product_uom_id else None,
                     'bom_id': mo.bom_id.id if mo.bom_id else None,
                     'bom_code': mo.bom_id.code if mo.bom_id else None,
@@ -304,8 +322,14 @@ class ScadaJsonRpcController(http.Controller):
         """Acknowledge MO"""
         try:
             data = self._get_json_payload()
-            result = request.env['scada.mo.data'].acknowledge_mo(mo_id, data)
-            return result
+            mo = request.env['mrp.production'].browse(mo_id)
+            if not mo or not mo.exists():
+                return {'status': 'error', 'message': f'MO not found: {mo_id}'}
+            return {
+                'status': 'success',
+                'message': 'MO acknowledged successfully',
+                'mo_id': mo.name,
+            }
         except Exception as e:
             _logger.error(f'Error acknowledging MO: {str(e)}')
             return {'status': 'error', 'message': str(e)}
@@ -315,8 +339,13 @@ class ScadaJsonRpcController(http.Controller):
         """Update MO status"""
         try:
             data = self._get_json_payload()
-            result = request.env['scada.mo.data'].update_mo_status(mo_id, data)
-            return result
+            mo = request.env['mrp.production'].browse(mo_id)
+            if not mo or not mo.exists():
+                return {'status': 'error', 'message': f'MO not found: {mo_id}'}
+
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            return service.update_mo_status(mo, data)
         except Exception as e:
             _logger.error(f'Error updating MO status: {str(e)}')
             return {'status': 'error', 'message': str(e)}
@@ -326,8 +355,13 @@ class ScadaJsonRpcController(http.Controller):
         """Mark MO as done"""
         try:
             data = self._get_json_payload()
-            result = request.env['scada.mo.data'].mark_mo_done(mo_id, data)
-            return result
+            mo = request.env['mrp.production'].browse(mo_id)
+            if not mo or not mo.exists():
+                return {'status': 'error', 'message': f'MO not found: {mo_id}'}
+
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            return service.mark_mo_done(mo, data)
         except Exception as e:
             _logger.error(f'Error marking MO done: {str(e)}')
             return {'status': 'error', 'message': str(e)}
@@ -341,21 +375,15 @@ class ScadaJsonRpcController(http.Controller):
             if not mo_name:
                 return {'status': 'error', 'message': 'mo_id is required'}
 
-            mo_data = request.env['scada.mo.data'].search([
-                ('manufacturing_order_id.name', '=', str(mo_name))
-            ], limit=1, order='created_at desc')
+            mo = request.env['mrp.production'].search([
+                ('name', '=', str(mo_name))
+            ], limit=1)
+            if not mo:
+                return {'status': 'error', 'message': f'MO not found: {mo_name}'}
 
-            if not mo_data:
-                mo = request.env['mrp.production'].search([
-                    ('name', '=', str(mo_name))
-                ], limit=1)
-                if not mo:
-                    return {'status': 'error', 'message': f'MO not found: {mo_name}'}
-                mo_data = request.env['scada.mo.data'].create_from_mo(mo.id)
-                if not mo_data:
-                    return {'status': 'error', 'message': f'Failed to create SCADA MO: {mo_name}'}
-
-            return request.env['scada.mo.data'].mark_mo_done(mo_data.id, data)
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            return service.mark_mo_done(mo, data)
         except Exception as e:
             _logger.error(f'Error marking MO done (payload): {str(e)}')
             return {'status': 'error', 'message': str(e)}

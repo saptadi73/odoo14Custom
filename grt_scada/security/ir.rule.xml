@@ -13,29 +13,5 @@
             <field name="domain_force">[('is_active', '=', True)]</field>
         </record>
 
-        <!-- Rule: Material Consumption - read only untuk Operator -->
-        <record id="scada_material_consumption_rule_operator" model="ir.rule">
-            <field name="name">SCADA Material Consumption - Operator Own</field>
-            <field name="model_id" ref="model_scada_material_consumption"/>
-            <field name="groups" eval="[(4, ref('group_scada_operator'))]"/>
-            <field name="perm_read">1</field>
-            <field name="perm_write">0</field>
-            <field name="perm_create">0</field>
-            <field name="perm_unlink">0</field>
-            <field name="domain_force">[('status', 'in', ['recorded', 'validated', 'posted'])]</field>
-        </record>
-
-        <!-- Rule: MO Data - read only untuk Operator -->
-        <record id="scada_mo_data_rule_operator" model="ir.rule">
-            <field name="name">SCADA MO Data - Operator</field>
-            <field name="model_id" ref="model_scada_mo_data"/>
-            <field name="groups" eval="[(4, ref('group_scada_operator'))]"/>
-            <field name="perm_read">1</field>
-            <field name="perm_write">0</field>
-            <field name="perm_create">0</field>
-            <field name="perm_unlink">0</field>
-            <field name="domain_force">[('mo_status', 'in', ['planned', 'progress', 'done'])]</field>
-        </record>
-
     </data>
 </odoo>

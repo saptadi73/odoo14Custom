@@ -187,7 +187,7 @@ class ValidationService:
 
         # Validate protocol if provided
         valid_protocols = [
-            'modbus', 'opcua', 'mqtt', 'http', 'tcp', 'other'
+            'modbus', 'opcua', 'mqtt', 'http', 'tcp', 'middleware', 'other'
         ]
         if equipment_dict.get('protocol') and equipment_dict['protocol'] not in valid_protocols:
             errors.append(

@@ -31,6 +31,7 @@ class ScadaEquipment(models.Model):
             ('controller', 'Controller'),
             ('injector', 'Injection Machine'),
             ('press', 'Press Machine'),
+            ('silo', 'Silo'),
             ('other', 'Other'),
         ],
         string='Equipment Type',
@@ -66,6 +67,7 @@ class ScadaEquipment(models.Model):
             ('mqtt', 'MQTT'),
             ('http', 'HTTP/REST'),
             ('tcp', 'TCP/IP'),
+            ('middleware', 'Middleware'),
             ('other', 'Other'),
         ],
         string='Protocol',
@@ -137,12 +139,6 @@ class ScadaEquipment(models.Model):
         string='Equipment Material Consumption',
         help='Mapping/consumption untuk OEE dan analitik'
     )
-    mo_data_ids = fields.One2many(
-        'scada.mo.data',
-        'equipment_id',
-        string='MO Data',
-        help='Manufacturing order data dari equipment ini'
-    )
     sensor_reading_ids = fields.One2many(
         'scada.sensor.reading',
         'equipment_id',
@@ -169,6 +165,14 @@ class ScadaEquipment(models.Model):
                     raise ValidationError(
                         f"Port harus diisi untuk protocol {record.protocol}"
                     )
+
+    @api.onchange('protocol')
+    def _onchange_protocol(self):
+        if self.protocol == 'middleware':
+            self.ip_address = False
+            self.port = False
+            self.connection_status = 'disconnected'
+            self.last_connected = False
 
     def update_connection_status(self, new_status, last_connected=None):
         """Update connection status"""
