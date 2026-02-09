@@ -216,30 +216,71 @@ class ScadaMaterialConsumption(models.Model):
 
             # Find material
             material_id = consumption_data.get('material_id') or consumption_data.get('product_id')
-            if not material_id:
+            product_tmpl_id = consumption_data.get('product_tmpl_id')
+            material = None
+
+            if material_id:
+                try:
+                    material_id = int(material_id)
+                except (TypeError, ValueError):
+                    return {
+                        'status': 'error',
+                        'message': 'Product ID must be a number',
+                        'record_id': None,
+                    }
+                material = self.env['product.product'].browse(material_id)
+                if not material.exists():
+                    return {
+                        'status': 'error',
+                        'message': f'Product not found: {material_id}',
+                        'record_id': None,
+                    }
+            elif product_tmpl_id:
+                try:
+                    product_tmpl_id = int(product_tmpl_id)
+                except (TypeError, ValueError):
+                    return {
+                        'status': 'error',
+                        'message': 'Product Template ID must be a number',
+                        'record_id': None,
+                    }
+                template = self.env['product.template'].browse(product_tmpl_id)
+                if not template.exists():
+                    return {
+                        'status': 'error',
+                        'message': f'Product Template not found: {product_tmpl_id}',
+                        'record_id': None,
+                    }
+                if not template.product_variant_id:
+                    return {
+                        'status': 'error',
+                        'message': f'Product Template has no variant: {product_tmpl_id}',
+                        'record_id': None,
+                    }
+                material = template.product_variant_id
+            else:
                 return {
                     'status': 'error',
-                    'message': 'Product ID is required',
-                    'record_id': None,
-                }
-            try:
-                material_id = int(material_id)
-            except (TypeError, ValueError):
-                return {
-                    'status': 'error',
-                    'message': 'Product ID must be a number',
-                    'record_id': None,
-                }
-            material = self.env['product.product'].browse(material_id)
-            if not material.exists():
-                return {
-                    'status': 'error',
-                    'message': f'Product not found: {material_id}',
+                    'message': 'Product ID or Product Template ID is required',
                     'record_id': None,
                 }
 
-            # Find manufacturing order (optional)
+            # Find manufacturing order (required)
             mo_record = self._get_mo_from_payload(consumption_data)
+            if not mo_record:
+                return {
+                    'status': 'error',
+                    'message': 'MO ID is required',
+                    'record_id': None,
+                }
+
+            moves = self._find_raw_moves_for_material(mo_record, material)
+            if not moves:
+                return {
+                    'status': 'error',
+                    'message': 'No raw material move found for this product in MO',
+                    'record_id': None,
+                }
 
             # Create record
             record = self.create({
@@ -253,6 +294,8 @@ class ScadaMaterialConsumption(models.Model):
                 'status': 'recorded',
                 'source': 'api',  # Mark as from API
             })
+
+            self._apply_consumption_to_moves(record, moves)
 
             # Store equipment-material consumption for OEE/analytics
             self._log_equipment_material_consumption(
@@ -323,6 +366,33 @@ class ScadaMaterialConsumption(models.Model):
             'consumption_bom': consumption_bom,
             'timestamp': timestamp,
             'active': True,
+        })
+
+    def _find_raw_moves_for_material(self, mo_record, material):
+        return mo_record.move_raw_ids.filtered(
+            lambda move: move.product_id.id == material.id and move.state not in ['done', 'cancel']
+        )
+
+    def _apply_consumption_to_moves(self, record, moves):
+        qty_remaining = record.quantity
+        move_id = False
+
+        for move in moves:
+            if qty_remaining <= 0:
+                break
+            planned = move.product_uom_qty or 0.0
+            done = move.quantity_done or 0.0
+            remaining = max(planned - done, 0.0)
+            add_qty = qty_remaining if remaining == 0.0 else min(qty_remaining, remaining)
+            move.quantity_done = done + add_qty
+            qty_remaining -= add_qty
+            if not move_id:
+                move_id = move.id
+
+        record.write({
+            'move_id': move_id,
+            'is_stock_moved': True,
+            'status': 'posted',
         })
 
     @api.model

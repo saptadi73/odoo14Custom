@@ -11,13 +11,8 @@
             "program": "C:/odoo14c/server/odoo-bin",
             "args": [
                 "--config=C:\\addon14\\odoo.conf",
-                "--database=manu14",
-                // "--database=konsolidasi",
-                // "--init=dynamic_accounts_report",
-                // "--database=mynilamku",
-                // "--init=mro_aircraft",
-                // "--upgrade=mro_aircraft"
-                // "--init=mynilamku"
+                "--database=manukanjabung",
+                "--without-demo=all"
             ],
             "cwd": "${workspaceFolder}",
             "env": {

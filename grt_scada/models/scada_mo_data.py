@@ -305,6 +305,8 @@ class ScadaMoData(models.Model):
             mo_record_id: MO Data record ID
             payload_data: Dict dengan done data
                 - equipment_id: Equipment code
+                - mo_id: Manufacturing Order name (required)
+                - finished_qty: Finished goods quantity (required)
                 - date_end_actual: Actual completion datetime
                 - auto_consume: True to auto-populate from BoM (default: True)
                 - message: Optional completion message
@@ -327,6 +329,60 @@ class ScadaMoData(models.Model):
                     'message': 'Manufacturing order is missing',
                 }
 
+            equipment = mo_data.equipment_id
+            payload_equipment = payload_data.get('equipment_id')
+            if not equipment and payload_equipment:
+                equipment = self.env['scada.equipment'].search([
+                    ('equipment_code', '=', payload_equipment)
+                ], limit=1)
+                if equipment:
+                    mo_data.write({'equipment_id': equipment.id})
+
+            mo_name = payload_data.get('mo_id')
+            if not mo_name:
+                return {
+                    'status': 'error',
+                    'message': 'mo_id is required',
+                }
+            if str(mo_name) != str(mo.name):
+                return {
+                    'status': 'error',
+                    'message': f'mo_id mismatch: {mo_name}',
+                }
+
+            finished_qty = payload_data.get('finished_qty')
+            if finished_qty is None:
+                return {
+                    'status': 'error',
+                    'message': 'finished_qty is required',
+                }
+            try:
+                finished_qty = float(finished_qty)
+            except (TypeError, ValueError):
+                return {
+                    'status': 'error',
+                    'message': 'finished_qty must be a number',
+                }
+            if finished_qty <= 0:
+                return {
+                    'status': 'error',
+                    'message': 'finished_qty must be > 0',
+                }
+
+            finished_moves = mo.move_finished_ids.filtered(
+                lambda move: move.product_id.id == mo.product_id.id and move.state not in ['done', 'cancel']
+            )
+            if not finished_moves:
+                return {
+                    'status': 'error',
+                    'message': 'No finished product move found for this MO',
+                }
+
+            if hasattr(mo, 'qty_producing'):
+                mo.qty_producing = finished_qty
+
+            finished_moves[0].quantity_done = finished_qty
+
             # Update actual end date if provided
             if payload_data.get('date_end_actual'):
                 mo_data.write({'date_end_actual': payload_data['date_end_actual']})
@@ -336,7 +392,7 @@ class ScadaMoData(models.Model):
             consumed_materials = []
             
             if auto_consume and mo.bom_id:
-                consumed_materials = self._auto_consume_from_bom(mo, mo_data.equipment_id)
+                consumed_materials = self._auto_consume_from_bom(mo, equipment)
 
             # Mark MO as done
             if mo.state not in ['done', 'cancel']:
@@ -368,6 +424,12 @@ class ScadaMoData(models.Model):
             List of created material consumption records
         """
         consumed_materials = []
+
+        if not equipment:
+            import logging
+            _logger = logging.getLogger(__name__)
+            _logger.warning('Auto-consume skipped: equipment is missing for MO %s', mo.name)
+            return consumed_materials
         
         if not mo.bom_id:
             return consumed_materials
@@ -391,15 +453,16 @@ class ScadaMoData(models.Model):
             
             # Create SCADA material consumption record
             try:
-                consumption = self.env['scada.material.consumption'].create({
-                    'equipment_id': equipment.id if equipment else False,
-                    'material_id': line.product_id.id,
-                    'quantity': quantity,
-                    'manufacturing_order_id': mo.id,
-                    'timestamp': datetime.now(),
-                    'status': 'recorded',
-                    'source': 'auto_bom',  # Mark as auto-generated
-                })
+                with self.env.cr.savepoint():
+                    consumption = self.env['scada.material.consumption'].create({
+                        'equipment_id': equipment.id,
+                        'material_id': line.product_id.id,
+                        'quantity': quantity,
+                        'manufacturing_order_id': mo.id,
+                        'timestamp': datetime.now(),
+                        'status': 'recorded',
+                        'source': 'auto_bom',  # Mark as auto-generated
+                    })
                 
                 consumed_materials.append({
                     'material_code': line.product_id.default_code or line.product_id.name,

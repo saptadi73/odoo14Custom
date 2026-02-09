@@ -41,8 +41,8 @@ class ValidationService:
             if field not in data or data[field] is None:
                 errors.append(f'{label} is required')
 
-        if not data.get('material_id') and not data.get('product_id'):
-            errors.append('Product ID is required')
+        if not data.get('material_id') and not data.get('product_id') and not data.get('product_tmpl_id'):
+            errors.append('Product ID or Product Template ID is required')
 
         # Validate equipment exists
         if data.get('equipment_id'):
@@ -54,6 +54,7 @@ class ValidationService:
 
         # Validate material exists
         material_id = data.get('material_id') or data.get('product_id')
+        product_tmpl_id = data.get('product_tmpl_id')
         if material_id:
             try:
                 material_id = int(material_id)
@@ -62,10 +63,22 @@ class ValidationService:
                     errors.append(f'Product ID "{material_id}" not found')
             except (TypeError, ValueError):
                 errors.append('Product ID must be a number')
+        elif product_tmpl_id:
+            try:
+                product_tmpl_id = int(product_tmpl_id)
+                template = env['product.template'].browse(product_tmpl_id)
+                if not template.exists():
+                    errors.append(f'Product Template ID "{product_tmpl_id}" not found')
+                elif not template.product_variant_id:
+                    errors.append(f'Product Template "{product_tmpl_id}" has no variant')
+            except (TypeError, ValueError):
+                errors.append('Product Template ID must be a number')
 
-        # Validate manufacturing order if provided
+        # Validate manufacturing order (required)
         mo_value = data.get('mo_id') or data.get('manufacturing_order_id')
-        if mo_value:
+        if not mo_value:
+            errors.append('MO ID is required')
+        else:
             try:
                 if isinstance(mo_value, int) or str(mo_value).isdigit():
                     mo_record = env['mrp.production'].browse(int(mo_value))

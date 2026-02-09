@@ -20,6 +20,14 @@ _logger = logging.getLogger(__name__)
 class ScadaJsonRpcController(http.Controller):
     """SCADA JSON-RPC Controller untuk Vue.js Frontend"""
 
+    def _get_json_payload(self):
+        payload = request.jsonrequest or {}
+        if isinstance(payload, dict):
+            params = payload.get('params')
+            if isinstance(params, dict):
+                return params
+        return payload
+
     def _parse_bool_param(self, value, default=None):
         if value is None:
             return default
@@ -72,7 +80,7 @@ class ScadaJsonRpcController(http.Controller):
         Authenticate session untuk middleware.
         """
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             login = data.get('login')
             password = data.get('password')
             dbname = data.get('db')
@@ -125,7 +133,7 @@ class ScadaJsonRpcController(http.Controller):
         }
         """
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             result = request.env['scada.material.consumption'].create_from_api(data)
             return result
         except Exception as e:
@@ -149,7 +157,7 @@ class ScadaJsonRpcController(http.Controller):
     def validate_material_consumption(self, **kwargs):
         """Validate material consumption payload"""
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             result = request.env['scada.material.consumption'].validate_payload(data)
             return result
         except Exception as e:
@@ -175,11 +183,127 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting MO list: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
+    @http.route('/api/scada/mo-list-confirmed', type='json', auth='user', methods=['POST'])
+    def get_mo_list_confirmed(self, **kwargs):
+        """Get confirmed MO list (minimal fields)."""
+        try:
+            payload = request.jsonrequest or {}
+            params = payload.get('params') if isinstance(payload, dict) else {}
+            if not isinstance(params, dict):
+                params = {}
+
+            limit = int(params.get('limit', 50))
+            offset = int(params.get('offset', 0))
+
+            mos = request.env['mrp.production'].search(
+                [('state', '=', 'confirmed')],
+                limit=limit,
+                offset=offset,
+                order='date_planned_start asc, id asc'
+            )
+
+            data = []
+            for mo in mos:
+                data.append({
+                    'mo_id': mo.name,
+                    'reference': mo.origin or None,
+                    'schedule': mo.date_planned_start.isoformat() if mo.date_planned_start else None,
+                    'product': mo.product_id.display_name if mo.product_id else None,
+                    'quantity': mo.product_qty,
+                })
+
+            return {
+                'status': 'success',
+                'count': len(data),
+                'data': data,
+            }
+        except Exception as e:
+            _logger.error(f'Error getting confirmed MO list: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/mo-detail', type='json', auth='user', methods=['POST'])
+    def get_mo_detail(self, **kwargs):
+        """Get MO detail with BoM and component consumption (JSON-RPC)."""
+        try:
+            payload = request.jsonrequest or {}
+            params = payload.get('params') if isinstance(payload, dict) else {}
+            if not isinstance(params, dict):
+                params = {}
+
+            mo_value = params.get('mo_id') or params.get('manufacturing_order_id')
+            if not mo_value:
+                return {'status': 'error', 'message': 'mo_id is required'}
+
+            if isinstance(mo_value, int) or str(mo_value).isdigit():
+                mo = request.env['mrp.production'].browse(int(mo_value))
+            else:
+                mo = request.env['mrp.production'].search([
+                    ('name', '=', str(mo_value))
+                ], limit=1)
+
+            if not mo or not mo.exists():
+                return {'status': 'error', 'message': f'MO not found: {mo_value}'}
+
+            bom_components = []
+            if mo.bom_id:
+                for line in mo.bom_id.bom_line_ids:
+                    bom_components.append({
+                        'product_tmpl_id': line.product_id.product_tmpl_id.id if line.product_id else None,
+                        'product_id': line.product_id.id if line.product_id else None,
+                        'product_name': line.product_id.display_name if line.product_id else None,
+                        'quantity': line.product_qty,
+                        'uom': line.product_uom_id.name if line.product_uom_id else None,
+                    })
+
+            consumption_map = {}
+            for move in mo.move_raw_ids:
+                product = move.product_id
+                tmpl_id = product.product_tmpl_id.id if product else None
+                key = (tmpl_id, product.id if product else None)
+                if key not in consumption_map:
+                    consumption_map[key] = {
+                        'product_tmpl_id': tmpl_id,
+                        'product_id': product.id if product else None,
+                        'product_name': product.display_name if product else None,
+                        'to_consume': 0.0,
+                        'reserved': 0.0,
+                        'consumed': 0.0,
+                        'uom': move.product_uom.name if move.product_uom else None,
+                    }
+                consumption_map[key]['to_consume'] += move.product_uom_qty
+                consumption_map[key]['reserved'] += move.reserved_availability
+                consumption_map[key]['consumed'] += move.quantity_done
+
+            components_consumption = list(consumption_map.values())
+
+            return {
+                'status': 'success',
+                'data': {
+                    'mo_id': mo.name,
+                    'reference': mo.origin or None,
+                    'state': mo.state,
+                    'schedule_start': mo.date_planned_start.isoformat() if mo.date_planned_start else None,
+                    'schedule_end': mo.date_planned_finished.isoformat() if mo.date_planned_finished else None,
+                    'product_tmpl_id': mo.product_id.product_tmpl_id.id if mo.product_id else None,
+                    'product_id': mo.product_id.id if mo.product_id else None,
+                    'product_name': mo.product_id.display_name if mo.product_id else None,
+                    'quantity': mo.product_qty,
+                    'uom': mo.product_uom_id.name if mo.product_uom_id else None,
+                    'bom_id': mo.bom_id.id if mo.bom_id else None,
+                    'bom_code': mo.bom_id.code if mo.bom_id else None,
+                    'bom_components': bom_components,
+                    'components_consumption': components_consumption,
+                }
+            }
+        except Exception as e:
+            _logger.error(f'Error getting MO detail: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
     @http.route('/api/scada/mo/<int:mo_id>/acknowledge', type='json', auth='user', methods=['POST'])
     def acknowledge_mo(self, mo_id, **kwargs):
         """Acknowledge MO"""
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             result = request.env['scada.mo.data'].acknowledge_mo(mo_id, data)
             return result
         except Exception as e:
@@ -190,7 +314,7 @@ class ScadaJsonRpcController(http.Controller):
     def update_mo_status(self, mo_id, **kwargs):
         """Update MO status"""
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             result = request.env['scada.mo.data'].update_mo_status(mo_id, data)
             return result
         except Exception as e:
@@ -201,11 +325,39 @@ class ScadaJsonRpcController(http.Controller):
     def mark_mo_done(self, mo_id, **kwargs):
         """Mark MO as done"""
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             result = request.env['scada.mo.data'].mark_mo_done(mo_id, data)
             return result
         except Exception as e:
             _logger.error(f'Error marking MO done: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/mo/mark-done', type='json', auth='user', methods=['POST'])
+    def mark_mo_done_by_payload(self, **kwargs):
+        """Mark MO as done using mo_id from payload."""
+        try:
+            data = self._get_json_payload()
+            mo_name = data.get('mo_id')
+            if not mo_name:
+                return {'status': 'error', 'message': 'mo_id is required'}
+
+            mo_data = request.env['scada.mo.data'].search([
+                ('manufacturing_order_id.name', '=', str(mo_name))
+            ], limit=1, order='created_at desc')
+
+            if not mo_data:
+                mo = request.env['mrp.production'].search([
+                    ('name', '=', str(mo_name))
+                ], limit=1)
+                if not mo:
+                    return {'status': 'error', 'message': f'MO not found: {mo_name}'}
+                mo_data = request.env['scada.mo.data'].create_from_mo(mo.id)
+                if not mo_data:
+                    return {'status': 'error', 'message': f'Failed to create SCADA MO: {mo_name}'}
+
+            return request.env['scada.mo.data'].mark_mo_done(mo_data.id, data)
+        except Exception as e:
+            _logger.error(f'Error marking MO done (payload): {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
     @http.route('/api/scada/mo-weight', type='json', auth='user', methods=['POST'])
@@ -222,7 +374,7 @@ class ScadaJsonRpcController(http.Controller):
         }
         """
         try:
-            data = request.get_json_data() or {}
+            data = self._get_json_payload()
             service = MoWeightService(request.env)
             return service.create_mo_weight(data)
         except Exception as e:

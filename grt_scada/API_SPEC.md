@@ -188,18 +188,21 @@ Auth: Session cookie
 Content-Type: application/json
 ```
 
-**Request Body** (gunakan `product_id` atau `material_id`):
+**Request Body** (gunakan `product_tmpl_id` atau `material_id`):
 
 ```json
 {
   "equipment_id": "PLC01",
-  "product_id": 123,
+  "product_tmpl_id": 123,
   "quantity": 10.5,
   "timestamp": "2025-02-06T10:30:00",
   "mo_id": "MO/2025/001",
   "batch_number": "BATCH_001",
   "api_request_id": "REQ_12345"
 }
+
+Note: `mo_id` is required for actual material consumption.
+Note: Successful requests update MO raw material moves (`quantity_done`) for the matching product (consumed updates immediately).
 ```
 
 **Response**:
@@ -229,9 +232,10 @@ curl -X POST http://localhost:8069/api/scada/material-consumption \
   -b cookies.txt \
   -d '{
     "equipment_id": "PLC01",
-    "product_id": 123,
+    "product_tmpl_id": 123,
     "quantity": 10.5,
-    "timestamp": "2025-02-06T10:30:00"
+    "timestamp": "2025-02-06T10:30:00",
+    "mo_id": "MO/2025/001"
   }'
 ```
 
@@ -288,7 +292,7 @@ Content-Type: application/json
 ```json
 {
   "equipment_id": "PLC01",
-  "product_id": 123,
+  "product_tmpl_id": 123,
   "quantity": 10.5,
   "timestamp": "2025-02-06T10:30:00",
   "mo_id": "MO/2025/001"
@@ -326,9 +330,10 @@ curl -X POST http://localhost:8069/api/scada/material-consumption/validate \
   -b cookies.txt \
   -d '{
     "equipment_id": "PLC01",
-    "product_id": 123,
+    "product_tmpl_id": 123,
     "quantity": 10.5,
-    "timestamp": "2025-02-06T10:30:00"
+    "timestamp": "2025-02-06T10:30:00",
+    "mo_id": "MO/2025/001"
   }'
 ```
 
@@ -383,7 +388,148 @@ curl -X GET "http://localhost:8069/api/scada/mo-list?equipment_id=PLC01&limit=50
 
 ---
 
-### 8. Create MO Weight (Protected)
+### 8. Get Confirmed MO List (Protected)
+
+**Retrieve confirmed Manufacturing Orders (minimal fields)**
+
+```http
+POST /api/scada/mo-list-confirmed
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Request Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "limit": 50,
+    "offset": 0
+  }
+}
+```
+
+Note: This endpoint is JSON-RPC only. Use the `params` object for inputs.
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "count": 2,
+  "data": [
+    {
+      "mo_id": "MO/2026/0001",
+      "reference": "SO001",
+      "schedule": "2026-02-08T08:00:00",
+      "product": "Konsentrat Sapi Penggemukan",
+      "quantity": 1000.0
+    }
+  ]
+}
+```
+
+**JSON-RPC Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/mo-list-confirmed \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "limit": 50
+    }
+  }'
+```
+
+---
+
+### 9. Get MO Detail (Protected)
+
+**Retrieve Manufacturing Order detail with BoM and components**
+
+```http
+POST /api/scada/mo-detail
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Request Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "mo_id": "MO/2026/0001"
+  }
+}
+```
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "data": {
+    "mo_id": "MO/2026/0001",
+    "reference": "SO001",
+    "state": "confirmed",
+    "schedule_start": "2026-02-08T08:00:00",
+    "schedule_end": "2026-02-08T16:00:00",
+    "product_tmpl_id": 14,
+    "product_id": 32,
+    "product_name": "Konsentrat Sapi Penggemukan",
+    "quantity": 1000.0,
+    "uom": "kg",
+    "bom_id": 2,
+    "bom_code": null,
+    "bom_components": [
+      {
+        "product_tmpl_id": 8,
+        "product_id": 8,
+        "product_name": "Bungkil Inti Sawit",
+        "quantity": 400.0,
+        "uom": "kg"
+      }
+    ],
+    "components_consumption": [
+      {
+        "product_tmpl_id": 8,
+        "product_id": 8,
+        "product_name": "Bungkil Inti Sawit",
+        "to_consume": 400.0,
+        "reserved": 0.0,
+        "consumed": 0.0,
+        "uom": "kg"
+      }
+    ]
+  }
+}
+```
+
+Note: `components_consumption` values are based on MO raw material stock moves (`to_consume` = planned qty, `reserved` = reserved qty, `consumed` = done qty).
+
+**JSON-RPC Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/mo-detail \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "mo_id": "MO/2026/0001"
+    }
+  }'
+```
+
+---
+
+### 10. Create MO Weight (Protected)
 
 **Record actual weight and auto-calc target weight from BoM**
 
@@ -431,7 +577,7 @@ curl -X POST http://localhost:8069/api/scada/mo-weight \
 
 ---
 
-### 9. Get MO Weight (Protected)
+### 11. Get MO Weight (Protected)
 
 **Retrieve MO weight records**
 
@@ -473,7 +619,7 @@ curl -X GET "http://localhost:8069/api/scada/mo-weight?mo_id=MO/2025/001" \
 
 ---
 
-### 10. Acknowledge Manufacturing Order (Protected)
+### 12. Acknowledge Manufacturing Order (Protected)
 
 **Confirm Equipment Received MO Data**
 
@@ -520,7 +666,7 @@ curl -X POST http://localhost:8069/api/scada/mo/123/acknowledge \
 
 ---
 
-### 11. Update Manufacturing Order Status (Protected)
+### 13. Update Manufacturing Order Status (Protected)
 
 **Update MO Production Status**
 
@@ -569,28 +715,32 @@ curl -X POST http://localhost:8069/api/scada/mo/123/update-status \
 
 ---
 
-### 12. Mark Manufacturing Order Done (Protected)
+### 14. Mark Manufacturing Order Done (Protected)
 
 **Complete Manufacturing Order**
 
 ```http
-POST /api/scada/mo/{mo_id}/mark-done
+POST /api/scada/mo/mark-done
 Auth: Session cookie
 Content-Type: application/json
 ```
-
-**Parameters**:
-- `mo_id` (path): Manufacturing Order Data record ID
 
 **Request Body**:
 
 ```json
 {
   "equipment_id": "PLC01",
+  "mo_id": "MO/2025/001",
+  "finished_qty": 1000.0,
   "date_end_actual": "2025-02-06T16:00:00",
   "message": "Production completed"
 }
 ```
+
+Note: `mo_id` and `finished_qty` are required to update finished goods quantity.
+Note: `finished_qty` must be > 0. The system sets `qty_producing` to `finished_qty` before marking done.
+Note: If SCADA MO data does not exist, it will be created automatically from `mrp.production`.
+Note: If `auto_consume` is enabled, `equipment_id` should be provided so material consumption can be created.
 
 **Response**:
 
@@ -604,18 +754,39 @@ Content-Type: application/json
 
 **cURL Example**:
 ```bash
-curl -X POST http://localhost:8069/api/scada/mo/123/mark-done \
+curl -X POST http://localhost:8069/api/scada/mo/mark-done \
   -H "Content-Type: application/json" \
   -b cookies.txt \
   -d '{
     "equipment_id": "PLC01",
+    "mo_id": "MO/2025/001",
+    "finished_qty": 1000.0,
+    "auto_consume": true,
     "date_end_actual": "2025-02-06T16:00:00"
+  }'
+```
+
+**JSON-RPC Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/mo/mark-done \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "equipment_id": "PLC01",
+      "mo_id": "MO/2025/001",
+      "finished_qty": 1000.0,
+      "auto_consume": true,
+      "date_end_actual": "2025-02-06T16:00:00"
+    }
   }'
 ```
 
 ---
 
-### 13. Get Equipment Status (Protected)
+### 15. Get Equipment Status (Protected)
 
 **Retrieve Equipment Connection & Status**
 
@@ -651,7 +822,7 @@ curl -X GET http://localhost:8069/api/scada/equipment/PLC01 \
 
 ---
 
-### 14. Get Product List (Protected)
+### 16. Get Product List (Protected)
 
 **Retrieve Product List**
 
@@ -736,7 +907,7 @@ curl -X POST http://localhost:8069/api/scada/products \
 
 ---
 
-### 15. Get Product List by Category (Protected)
+### 17. Get Product List by Category (Protected)
 
 **Retrieve Product List with Category Filter (JSON-RPC)**
 
@@ -785,7 +956,7 @@ curl -X POST http://localhost:8069/api/scada/products-by-category \
 
 ---
 
-### 16. Get BoM List (Protected)
+### 18. Get BoM List (Protected)
 
 **Retrieve BoM list with components**
 
@@ -942,9 +1113,10 @@ try {
   await login();
   const result = await createMaterialConsumption({
     equipment_id: 'PLC01',
-    product_id: 123,
+    product_tmpl_id: 123,
     quantity: 10.5,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    mo_id: 'MO/2025/001'
   });
   console.log('Record created:', result.record_id);
 } catch (error) {
@@ -977,9 +1149,10 @@ if auth_result.get('status') == 'error':
 # Create material consumption
 data = {
     'equipment_id': 'PLC01',
-  'product_id': 123,
+  'product_tmpl_id': 123,
     'quantity': 10.5,
-    'timestamp': datetime.now().isoformat()
+    'timestamp': datetime.now().isoformat(),
+    'mo_id': 'MO/2025/001'
 }
 
 response = session.post(f'{base_url}/material-consumption', json=data)
@@ -1013,9 +1186,10 @@ curl -X POST "${BASE_URL}/material-consumption" \
   -b cookies.txt \
   -d '{
     "equipment_id": "PLC01",
-    "product_id": 123,
+    "product_tmpl_id": 123,
     "quantity": 10.5,
-    "timestamp": "2025-02-06T10:30:00"
+    "timestamp": "2025-02-06T10:30:00",
+    "mo_id": "MO/2025/001"
   }'
 
 # Get MO list
@@ -1023,10 +1197,16 @@ curl -X GET "${BASE_URL}/mo-list?equipment_id=PLC01" \
   -b cookies.txt
 
 # Mark MO done
-curl -X POST "${BASE_URL}/mo/123/mark-done" \
+curl -X POST "${BASE_URL}/mo/mark-done" \
   -H "Content-Type: application/json" \
   -b cookies.txt \
-  -d '{"date_end_actual": "2025-02-06T16:00:00"}'
+  -d '{
+    "equipment_id": "PLC01",
+    "mo_id": "MO/2025/001",
+    "finished_qty": 1000.0,
+    "auto_consume": true,
+    "date_end_actual": "2025-02-06T16:00:00"
+  }'
 ```
 
 ---
