@@ -40,6 +40,27 @@ class ScadaJsonRpcController(http.Controller):
             return None
         return default
 
+    def _get_equipment_details(self, equipment):
+        """Helper: Extract full equipment details"""
+        if not equipment:
+            return None
+        return {
+            'id': equipment.id,
+            'code': equipment.equipment_code,
+            'name': equipment.name,
+            'equipment_type': equipment.equipment_type,
+            'manufacturer': equipment.manufacturer,
+            'model_number': equipment.model_number,
+            'serial_number': equipment.serial_number,
+            'ip_address': equipment.ip_address,
+            'port': equipment.port,
+            'protocol': equipment.protocol,
+            'is_active': equipment.is_active,
+            'connection_status': equipment.connection_status,
+            'sync_status': equipment.sync_status,
+            'last_connected': equipment.last_connected.isoformat() if equipment.last_connected else None,
+        }
+
     def _authenticate_session(self, login, password, dbname=None):
         db = dbname or request.session.db or request.env.cr.dbname
         uid = request.session.authenticate(db, login, password)
@@ -193,7 +214,7 @@ class ScadaJsonRpcController(http.Controller):
 
     @http.route('/api/scada/mo-list-confirmed', type='json', auth='user', methods=['POST'])
     def get_mo_list_confirmed(self, **kwargs):
-        """Get confirmed MO list (minimal fields)."""
+        """Get confirmed MO list with equipment info (JSON-RPC)."""
         try:
             payload = request.jsonrequest or {}
             params = payload.get('params') if isinstance(payload, dict) else {}
@@ -212,12 +233,16 @@ class ScadaJsonRpcController(http.Controller):
 
             data = []
             for mo in mos:
+                mo_equipment = getattr(mo, 'scada_equipment_id', False)
                 data.append({
                     'mo_id': mo.name,
                     'reference': mo.origin or None,
                     'schedule': mo.date_planned_start.isoformat() if mo.date_planned_start else None,
+                    'schedule_end': mo.date_planned_finished.isoformat() if mo.date_planned_finished else None,
                     'product': mo.product_id.display_name if mo.product_id else None,
                     'quantity': mo.product_qty,
+                    'state': mo.state,
+                    'equipment': self._get_equipment_details(mo_equipment),
                 })
 
             return {
@@ -279,9 +304,7 @@ class ScadaJsonRpcController(http.Controller):
                         'reserved': 0.0,
                         'consumed': 0.0,
                         'uom': move.product_uom.name if move.product_uom else None,
-                        'equipment_id': component_equipment.id if component_equipment else None,
-                        'equipment_code': component_equipment.equipment_code if component_equipment else None,
-                        'equipment_name': component_equipment.name if component_equipment else None,
+                        'equipment': self._get_equipment_details(component_equipment),
                     }
                 consumption_map[key]['to_consume'] += move.product_uom_qty
                 consumption_map[key]['reserved'] += move.reserved_availability
@@ -301,6 +324,7 @@ class ScadaJsonRpcController(http.Controller):
                     'state': mo.state,
                     'schedule_start': mo.date_planned_start.isoformat() if mo.date_planned_start else None,
                     'schedule_end': mo.date_planned_finished.isoformat() if mo.date_planned_finished else None,
+                    'equipment': self._get_equipment_details(mo_equipment),
                     'product_tmpl_id': mo.product_id.product_tmpl_id.id if mo.product_id else None,
                     'product_id': mo.product_id.id if mo.product_id else None,
                     'product_name': mo.product_id.display_name if mo.product_id else None,

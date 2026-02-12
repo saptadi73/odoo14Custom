@@ -472,6 +472,22 @@ Content-Type: application/json
     "state": "confirmed",
     "schedule_start": "2026-02-08T08:00:00",
     "schedule_end": "2026-02-08T16:00:00",
+    "equipment": {
+      "id": 3,
+      "code": "PLC01",
+      "name": "Main PLC - Injection Machine 01",
+      "equipment_type": "plc",
+      "manufacturer": "OMRON",
+      "model_number": "CP2E-N20DT-D",
+      "serial_number": "SN123456",
+      "ip_address": "192.168.1.100",
+      "port": 502,
+      "protocol": "modbus",
+      "is_active": true,
+      "connection_status": "connected",
+      "sync_status": "synced",
+      "last_connected": "2026-02-12T19:53:05.547924"
+    },
     "product_tmpl_id": 14,
     "product_id": 32,
     "product_name": "Konsentrat Sapi Penggemukan",
@@ -497,16 +513,35 @@ Content-Type: application/json
         "to_consume": 400.0,
         "reserved": 0.0,
         "consumed": 0.0,
-        "uom": "kg"
+        "uom": "kg",
+        "equipment": {
+          "id": 4,
+          "code": "SILO_A",
+          "name": "SILO A",
+          "equipment_type": "silo",
+          "manufacturer": null,
+          "model_number": null,
+          "serial_number": null,
+          "ip_address": null,
+          "port": 0,
+          "protocol": "middleware",
+          "is_active": true,
+          "connection_status": "connected",
+          "sync_status": "pending",
+          "last_connected": "2026-02-12T21:22:51.937211"
+        }
       }
     ]
   }
 }
 ```
 
-Note: `components_consumption` values are based on MO raw material stock moves (`to_consume` = planned qty, `reserved` = reserved qty, `consumed` = done qty).
-Note: `produced_qty` is based on MO finished moves (`quantity_done`).
-Note: Each component may include `equipment_id`, `equipment_code`, and `equipment_name` if the component is linked to SCADA equipment; otherwise these fields are null.
+**Notes:**
+- `components_consumption` values are based on MO raw material stock moves (`to_consume` = planned qty, `reserved` = reserved qty, `consumed` = done qty)
+- `produced_qty` is based on MO finished moves (`quantity_done`)
+- MO-level `equipment` object contains full SCADA equipment details linked via `scada_equipment_id` on the MO; null if not set
+- Each component includes full `equipment` object if linked to SCADA equipment via component move; null otherwise
+- Equipment fields include: id, code, name, equipment_type, manufacturer, model_number, serial_number, ip_address, port, protocol, is_active, connection_status, sync_status, last_connected
 
 **JSON-RPC Example**:
 ```bash
@@ -524,7 +559,279 @@ curl -X POST http://localhost:8069/api/scada/mo-detail \
 
 ---
 
-### 10. Create MO Weight (Protected)
+### 10. Get MO List Detailed (Protected)
+
+**Get detailed list of MOs with components, consumption, and equipment info**
+
+```http
+POST /api/scada/mo-list-detailed
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Request Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "limit": 10,
+    "offset": 0
+  }
+}
+```
+
+**Response**: Same structure as `mo-detail` but returns array of MOs with states 'confirmed', 'progress', 'to_close'
+
+```json
+{
+  "status": "success",
+  "count": 7,
+  "data": [
+    {
+      "mo_id": "WH/MO/00001",
+      "reference": null,
+      "state": "confirmed",
+      "schedule_start": "2026-02-12T13:20:48",
+      "schedule_end": "2026-02-12T14:20:48",
+      "equipment": {
+        "id": 1,
+        "code": "PLC01",
+        "name": "Main PLC - Injection Machine 01",
+        "equipment_type": "plc",
+        "manufacturer": "OMRON",
+        "model_number": "CP2E-N20DT-D",
+        "serial_number": "SN123456",
+        "ip_address": "192.168.1.100",
+        "port": 502,
+        "protocol": "modbus",
+        "is_active": true,
+        "connection_status": "connected",
+        "sync_status": "synced",
+        "last_connected": "2026-02-12T19:53:05.547924"
+      },
+      "product_tmpl_id": 3,
+      "product_id": 3,
+      "product_name": "JF Plus",
+      "quantity": 2500.0,
+      "produced_qty": 0.0,
+      "uom": "kg",
+      "bom_id": 1,
+      "bom_code": null,
+      "bom_components": [
+        {
+          "product_tmpl_id": 8,
+          "product_id": 8,
+          "product_name": "Bungkil Inti Sawit",
+          "quantity": 400.0,
+          "uom": "kg"
+        }
+      ],
+      "components_consumption": [
+        {
+          "product_tmpl_id": 8,
+          "product_id": 8,
+          "product_name": "Bungkil Inti Sawit",
+          "to_consume": 400.0,
+          "reserved": 0.0,
+          "consumed": 0.0,
+          "uom": "kg",
+          "equipment": {
+            "id": 4,
+            "code": "SILO_A",
+            "name": "SILO A",
+            "equipment_type": "silo",
+            "manufacturer": null,
+            "model_number": null,
+            "serial_number": null,
+            "ip_address": null,
+            "port": 0,
+            "protocol": "middleware",
+            "is_active": true,
+            "connection_status": "connected",
+            "sync_status": "pending",
+            "last_connected": "2026-02-12T21:22:51.937211"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Notes:**
+- Each MO in the list includes full `equipment` object (MO-level equipment), `bom_components` array, and `components_consumption` array
+- Each component in `components_consumption` includes full `equipment` object if linked to SCADA equipment via component move; null otherwise
+- Equipment fields include: id, code, name, equipment_type, manufacturer, model_number, serial_number, ip_address, port, protocol, is_active, connection_status, sync_status, last_connected
+- `to_consume`, `reserved`, and `consumed` quantities are based on raw material stock moves
+
+**JSON-RPC Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/mo-list-detailed \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "limit": 10,
+      "offset": 0
+    }
+  }'
+```
+
+---
+
+### 11. Get MO List Confirmed (Protected)
+
+**Get confirmed MO list with minimal fields and equipment info**
+
+```http
+POST /api/scada/mo-list-confirmed
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Request Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "limit": 50,
+    "offset": 0
+  }
+}
+```
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "count": 5,
+  "data": [
+    {
+      "mo_id": "MO/2026/0001",
+      "reference": null,
+      "schedule": "2026-02-12T08:00:00",
+      "schedule_end": "2026-02-12T09:00:00",
+      "product": "JF Plus",
+      "quantity": 2500.0,
+      "state": "confirmed",
+      "equipment": {
+        "id": 1,
+        "code": "PLC01",
+        "name": "Main PLC - Injection Machine 01",
+        "equipment_type": "plc",
+        "manufacturer": "OMRON",
+        "model_number": "CP2E-N20DT-D",
+        "serial_number": null,
+        "ip_address": "192.168.1.100",
+        "port": 502,
+        "protocol": "modbus",
+        "is_active": true,
+        "connection_status": "connected",
+        "sync_status": "pending",
+        "last_connected": "2026-02-09T19:53:05.547924"
+      }
+    }
+  ]
+}
+```
+
+**Notes:**
+- `equipment` field contains full SCADA equipment details linked via `scada_equipment_id` on the MO
+- Equipment fields include: id, code, name, equipment_type, manufacturer, model_number, serial_number, ip_address, port, protocol, is_active, connection_status, sync_status, last_connected
+- Returns only confirmed MOs (state = 'confirmed')
+
+**JSON-RPC Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/mo-list-confirmed \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "limit": 50,
+      "offset": 0
+    }
+  }'
+```
+
+---
+
+### 12. Get MO List for Equipment (Protected)
+
+**Get MO list for specific equipment with equipment details**
+
+```http
+GET /api/scada/mo-list?equipment_id=PLC01&limit=50&offset=0
+Auth: Session cookie
+```
+
+**Parameters:**
+- `equipment_id`: Equipment code to filter MOs (required)
+- `status`: MO status filter (optional: confirmed, progress, to_close, etc.)
+- `limit`: Number of records to return (default: 50)
+- `offset`: Number of records to skip (default: 0)
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "count": 3,
+  "data": [
+    {
+      "mo_id": "MO/2026/0001",
+      "product": "JF Plus",
+      "quantity": 2500.0,
+      "produced_qty": 0.0,
+      "consumed_qty": 0.0,
+      "status": "confirmed",
+      "schedule_start": "2026-02-12T08:00:00",
+      "schedule_end": "2026-02-12T09:00:00",
+      "equipment": {
+        "id": 1,
+        "code": "PLC01",
+        "name": "Main PLC - Injection Machine 01",
+        "equipment_type": "plc",
+        "manufacturer": "OMRON",
+        "model_number": "CP2E-N20DT-D",
+        "serial_number": null,
+        "ip_address": "192.168.1.100",
+        "port": 502,
+        "protocol": "modbus",
+        "is_active": true,
+        "connection_status": "connected",
+        "sync_status": "pending",
+        "last_connected": "2026-02-09T19:53:05.547924"
+      }
+    }
+  ]
+}
+```
+
+**Notes:**
+- Filters manufacturing orders by equipment_id; returns only MOs with scada_equipment_id matching the equipment
+- `equipment` field contains full SCADA equipment details with all 14 fields
+- Equipment fields include: id, code, name, equipment_type, manufacturer, model_number, serial_number, ip_address, port, protocol, is_active, connection_status, sync_status, last_connected
+- `produced_qty` = finished goods completed, `consumed_qty` = raw material consumed
+- Returns MOs in any status unless filtered
+
+**Example**:
+```bash
+curl -X GET "http://localhost:8069/api/scada/mo-list?equipment_id=PLC01&limit=50&offset=0" \
+  -b cookies.txt
+```
+
+---
+
+### 13. Create MO Weight (Protected)
 
 **Record actual weight and auto-calc target weight from BoM**
 
@@ -572,7 +879,7 @@ curl -X POST http://localhost:8069/api/scada/mo-weight \
 
 ---
 
-### 11. Get MO Weight (Protected)
+### 14. Get MO Weight (Protected)
 
 **Retrieve MO weight records**
 
@@ -614,7 +921,7 @@ curl -X GET "http://localhost:8069/api/scada/mo-weight?mo_id=MO/2025/001" \
 
 ---
 
-### 12. Acknowledge Manufacturing Order (Protected)
+### 15. Acknowledge Manufacturing Order (Protected)
 
 **Confirm Equipment Received MO Data**
 
@@ -661,7 +968,7 @@ curl -X POST http://localhost:8069/api/scada/mo/123/acknowledge \
 
 ---
 
-### 13. Update Manufacturing Order Status (Protected)
+### 16. Update Manufacturing Order Status (Protected)
 
 **Update MO Production Status**
 
@@ -710,7 +1017,7 @@ curl -X POST http://localhost:8069/api/scada/mo/123/update-status \
 
 ---
 
-### 14. Mark Manufacturing Order Done (Protected)
+### 17. Mark Manufacturing Order Done (Protected)
 
 **Complete Manufacturing Order**
 
@@ -781,7 +1088,7 @@ curl -X POST http://localhost:8069/api/scada/mo/mark-done \
 
 ---
 
-### 15. Get Equipment Status (Protected)
+### 18. Get Equipment Status (Protected)
 
 **Retrieve Equipment Connection & Status**
 
@@ -817,7 +1124,7 @@ curl -X GET http://localhost:8069/api/scada/equipment/PLC01 \
 
 ---
 
-### 16. Get Product List (Protected)
+### 19. Get Product List (Protected)
 
 **Retrieve Product List**
 
@@ -902,7 +1209,7 @@ curl -X POST http://localhost:8069/api/scada/products \
 
 ---
 
-### 17. Get Product List by Category (Protected)
+### 20. Get Product List by Category (Protected)
 
 **Retrieve Product List with Category Filter (JSON-RPC)**
 
@@ -951,7 +1258,7 @@ curl -X POST http://localhost:8069/api/scada/products-by-category \
 
 ---
 
-### 18. Get BoM List (Protected)
+### 21. Get BoM List (Protected)
 
 **Retrieve BoM list with components**
 

@@ -306,6 +306,27 @@ class MiddlewareService:
             'materials': consumed_materials,
         }
 
+    def _extract_equipment_details(self, equipment):
+        """Helper: Extract full equipment details object"""
+        if not equipment:
+            return None
+        return {
+            'id': equipment.id,
+            'code': equipment.equipment_code,
+            'name': equipment.name,
+            'equipment_type': equipment.equipment_type,
+            'manufacturer': equipment.manufacturer,
+            'model_number': equipment.model_number,
+            'serial_number': equipment.serial_number,
+            'ip_address': equipment.ip_address,
+            'port': equipment.port,
+            'protocol': equipment.protocol,
+            'is_active': equipment.is_active,
+            'connection_status': equipment.connection_status,
+            'sync_status': equipment.sync_status,
+            'last_connected': equipment.last_connected.isoformat() if equipment.last_connected else None,
+        }
+
     def _get_equipment(self, equipment_code):
         if not equipment_code:
             return False
@@ -337,6 +358,8 @@ class MiddlewareService:
                 move.quantity_done for move in mo.move_raw_ids
                 if move.state != 'cancel'
             )
+            mo_equipment = getattr(mo, 'scada_equipment_id', False)
+            equipment_data = self._extract_equipment_details(mo_equipment)
             data.append({
                 'mo_id': mo.name,
                 'product': mo.product_id.display_name if mo.product_id else None,
@@ -346,6 +369,7 @@ class MiddlewareService:
                 'status': mo.state,
                 'schedule_start': mo.date_planned_start.isoformat() if mo.date_planned_start else None,
                 'schedule_end': mo.date_planned_finished.isoformat() if mo.date_planned_finished else None,
+                'equipment': equipment_data,
             })
 
         return data
