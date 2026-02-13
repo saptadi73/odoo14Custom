@@ -638,12 +638,13 @@ class ScadaMoData(models.Model):
             if payload_data.get('date_end_actual'):
                 mo_data.write({'date_end_actual': payload_data['date_end_actual']})
 
-            # Auto-consume materials from BoM if enabled (default: True)
-            auto_consume = payload_data.get('auto_consume', True)
+            # Auto-consume materials from BoM if enabled (default: False)
+            # Only auto-consume if consumption not already present from middleware/manual
+            auto_consume = payload_data.get('auto_consume', False)
             consumed_materials = []
             
             if auto_consume and mo.bom_id:
-                consumed_materials = self._auto_consume_from_bom(mo, equipment)
+                consumed_materials = self._auto_consume_from_bom_smart(mo, equipment)
 
             # Mark MO as done
             if mo.state not in ['done', 'cancel']:
@@ -717,6 +718,91 @@ class ScadaMoData(models.Model):
                 import logging
                 _logger = logging.getLogger(__name__)
                 _logger.error(f'Error auto-consuming {line.product_id.name}: {str(e)}')
+                continue
+        
+        return consumed_materials
+
+    def _auto_consume_from_bom_smart(self, mo, equipment):
+        """
+        Smart auto-consume yang hanya consume jika consumption belum ada dari middleware/manual.
+        
+        Logic:
+        - Untuk setiap material di BoM:
+          - Check apakah move.quantity_done sudah > 0 (ada update dari middleware atau manual)
+          - Jika sudah > 0, skip (jangan override)
+          - Jika 0, auto-calculate dan apply
+        
+        Args:
+            mo: Manufacturing Order record
+            equipment: SCADA Equipment record
+            
+        Returns:
+            List of consumed materials dengan info source (skipped_existing atau auto_calculated)
+        """
+        import logging
+        _logger = logging.getLogger(__name__)
+        
+        consumed_materials = []
+        
+        if not equipment:
+            _logger.warning('Auto-consume skipped: equipment is missing for MO %s', mo.name)
+            return consumed_materials
+        
+        if not mo.bom_id:
+            return consumed_materials
+        
+        bom_lines = mo.bom_id.bom_line_ids
+        
+        for line in bom_lines:
+            quantity = (line.product_qty / mo.bom_id.product_qty) * mo.product_qty
+            
+            try:
+                moves = self._find_raw_moves_for_material(mo, line.product_id)
+                
+                # Smart check: apakah consumption sudah ada?
+                existing_consumption = sum(
+                    move.quantity_done for move in moves if move.state not in ['done', 'cancel']
+                )
+                
+                if existing_consumption > 0:
+                    # Consumption sudah ada dari middleware/manual, skip
+                    _logger.info(
+                        f'Skipping auto-consume for {line.product_id.name}: '
+                        f'Already has consumption {existing_consumption}'
+                    )
+                    consumed_materials.append({
+                        'material_code': line.product_id.default_code or line.product_id.name,
+                        'material_name': line.product_id.name,
+                        'quantity': existing_consumption,
+                        'uom': line.product_uom_id.name,
+                        'move_ids': [m.id for m in moves if m.quantity_done > 0],
+                        'source': 'skipped_existing',
+                    })
+                    continue
+                
+                # Consumption belum ada, auto-calculate dari BoM
+                applied_qty, move_ids = self._apply_consumption_to_moves(
+                    moves, quantity, allow_overconsume=False
+                )
+                
+                if applied_qty > 0:
+                    self._log_equipment_material_consumption(
+                        equipment=equipment,
+                        material=line.product_id,
+                        mo_record=mo,
+                        quantity=applied_qty,
+                        timestamp=datetime.now(),
+                    )
+                    consumed_materials.append({
+                        'material_code': line.product_id.default_code or line.product_id.name,
+                        'material_name': line.product_id.name,
+                        'quantity': applied_qty,
+                        'uom': line.product_uom_id.name,
+                        'move_ids': move_ids,
+                        'source': 'auto_calculated',
+                    })
+            except Exception as e:
+                _logger.error(f'Error smart auto-consuming {line.product_id.name}: {str(e)}')
                 continue
         
         return consumed_materials

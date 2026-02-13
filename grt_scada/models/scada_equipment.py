@@ -21,7 +21,6 @@ class ScadaEquipment(models.Model):
     equipment_code = fields.Char(
         string='Equipment Code',
         required=True,
-        unique=True,
         help='Kode unik equipment untuk identifikasi'
     )
     equipment_type = fields.Selection(
@@ -164,6 +163,26 @@ class ScadaEquipment(models.Model):
                 if not record.port:
                     raise ValidationError(
                         f"Port harus diisi untuk protocol {record.protocol}"
+                    )
+
+    @api.constrains('equipment_code')
+    def _check_unique_equipment_code(self):
+        """
+        Validasi equipment_code harus unik di antara semua equipment
+        Menggunakan custom constraint karena unique=True terlalu strict
+        """
+        for record in self:
+            if record.equipment_code:
+                # Cari equipment lain dengan equipment_code yang sama
+                existing = self.search([
+                    ('equipment_code', '=', record.equipment_code),
+                    ('id', '!=', record.id),
+                ], limit=1)
+                
+                if existing:
+                    raise ValidationError(
+                        f"Equipment Code '{record.equipment_code}' sudah digunakan oleh {existing.name}. "
+                        f"Equipment Code harus unik."
                     )
 
     @api.onchange('protocol')

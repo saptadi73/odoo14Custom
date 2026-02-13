@@ -103,6 +103,13 @@ class MiddlewareService:
         }
 
     def apply_material_consumption(self, consumption_data):
+        """
+        Apply material consumption to MO raw moves.
+        
+        Untuk MO yang belum di-mark done:
+        - update_mode='add': Menambahkan ke existing consumption (default)
+        - update_mode='replace': Mengganti existing consumption dengan nilai baru
+        """
         try:
             from ..services.validation_service import ValidationService
 
@@ -135,6 +142,13 @@ class MiddlewareService:
                     'status': 'error',
                     'message': 'MO ID is required',
                 }
+            
+            # Check MO state: hanya bisa update jika MO belum di-mark done
+            if mo_record.state in ['done', 'cancel']:
+                return {
+                    'status': 'error',
+                    'message': f'Cannot update consumption for MO in {mo_record.state} state',
+                }
 
             moves = self._find_raw_moves_for_material(mo_record, material)
             if not moves:
@@ -144,9 +158,19 @@ class MiddlewareService:
                 }
 
             quantity = float(consumption_data.get('quantity', 0))
-            applied_qty, move_ids = self._apply_consumption_to_moves(
-                moves, quantity, allow_overconsume=True
-            )
+            update_mode = consumption_data.get('update_mode', 'add').lower()
+            
+            # Apply consumption dengan mode yang dipilih
+            if update_mode == 'replace':
+                applied_qty, move_ids = self._apply_consumption_to_moves_replace(
+                    moves, quantity, allow_overconsume=True
+                )
+                action_desc = 'replaced'
+            else:
+                applied_qty, move_ids = self._apply_consumption_to_moves(
+                    moves, quantity, allow_overconsume=True
+                )
+                action_desc = 'added'
 
             timestamp_value = consumption_data.get('timestamp') or datetime.now()
             if isinstance(timestamp_value, str):
@@ -165,10 +189,13 @@ class MiddlewareService:
 
             return {
                 'status': 'success',
-                'message': 'Material consumption applied to MO moves',
+                'message': f'Material consumption {action_desc} to MO moves',
                 'mo_id': mo_record.name,
+                'mo_state': mo_record.state,
                 'applied_qty': applied_qty,
                 'move_ids': move_ids,
+                'update_mode': update_mode,
+                'can_update_again': mo_record.state not in ['done', 'cancel'],
             }
 
         except Exception as e:
@@ -290,10 +317,11 @@ class MiddlewareService:
         if payload_data.get('date_end_actual'):
             mo_record.write({'date_finished': payload_data['date_end_actual']})
 
-        auto_consume = payload_data.get('auto_consume', True)
+        auto_consume = payload_data.get('auto_consume', False)
         consumed_materials = []
         if auto_consume and mo_record.bom_id and equipment:
-            consumed_materials = self._auto_consume_from_bom(mo_record, equipment)
+            # Smart auto-consume: hanya jika consumption belum ada dari middleware atau manual input
+            consumed_materials = self._auto_consume_from_bom_smart(mo_record, equipment)
 
         if mo_record.state not in ['done', 'cancel']:
             mo_record.sudo().button_mark_done()
@@ -443,6 +471,41 @@ class MiddlewareService:
         applied_qty = quantity - qty_remaining
         return applied_qty, move_ids
 
+    def _apply_consumption_to_moves_replace(self, moves, quantity, allow_overconsume=True):
+        """
+        Apply consumption dengan REPLACE mode: set quantity_done ke value baru, bukan ADD
+        
+        Berguna untuk update multiple times dari middleware tanpa accumulating.
+        Contoh:
+        - First update: silo101 = 100 kg → quantity_done = 100
+        - Second update: silo101 = 120 kg → quantity_done = 120 (replace, bukan 100+120)
+        """
+        qty_remaining = quantity
+        move_ids = []
+
+        for move in moves:
+            if qty_remaining <= 0:
+                break
+            
+            planned = move.product_uom_qty or 0.0
+            
+            # REPLACE mode: jangan gunakan existing done, langsung set ke value baru
+            if planned == 0.0 and not allow_overconsume:
+                add_qty = 0.0
+            else:
+                add_qty = qty_remaining if planned == 0.0 else min(qty_remaining, planned)
+            
+            if add_qty <= 0.0:
+                continue
+            
+            # Set (replace) bukan add
+            move.quantity_done = add_qty
+            qty_remaining -= add_qty
+            move_ids.append(move.id)
+
+        applied_qty = quantity - qty_remaining
+        return applied_qty, move_ids
+
     def _log_equipment_material_consumption(self, equipment, material, mo_record, quantity, timestamp):
         if not equipment:
             return
@@ -498,4 +561,208 @@ class MiddlewareService:
                 continue
 
         return consumed_materials
+
+    def _auto_consume_from_bom_smart(self, mo_record, equipment):
+        """
+        Smart auto-consume yang hanya consume jika consumption belum ada dari middleware/manual.
+        
+        Logic:
+        - Untuk setiap material di BoM:
+          - Check apakah move.quantity_done sudah > 0 (ada update dari middleware atau manual)
+          - Jika sudah > 0, skip (jangan override)
+          - Jika 0, auto-calculate dan apply
+        """
+        consumed_materials = []
+        if not equipment or not mo_record.bom_id:
+            return consumed_materials
+
+        for line in mo_record.bom_id.bom_line_ids:
+            quantity = (line.product_qty / mo_record.bom_id.product_qty) * mo_record.product_qty
+            try:
+                moves = self._find_raw_moves_for_material(mo_record, line.product_id)
+                
+                # Smart check: apakah consumption sudah ada?
+                existing_consumption = sum(move.quantity_done for move in moves if move.state not in ['done', 'cancel'])
+                
+                if existing_consumption > 0:
+                    # Consumption sudah ada dari middleware/manual, skip
+                    _logger.info(
+                        f'Skipping auto-consume for {line.product_id.name}: '
+                        f'Already has consumption {existing_consumption}'
+                    )
+                    consumed_materials.append({
+                        'material_code': line.product_id.default_code or line.product_id.name,
+                        'material_name': line.product_id.name,
+                        'quantity': existing_consumption,
+                        'uom': line.product_uom_id.name,
+                        'move_ids': [m.id for m in moves if m.quantity_done > 0],
+                        'source': 'skipped_existing',
+                    })
+                    continue
+                
+                # Consumption belum ada, auto-calculate dari BoM
+                applied_qty, move_ids = self._apply_consumption_to_moves(
+                    moves, quantity, allow_overconsume=False
+                )
+                
+                if applied_qty > 0:
+                    self._log_equipment_material_consumption(
+                        equipment=equipment,
+                        material=line.product_id,
+                        mo_record=mo_record,
+                        quantity=applied_qty,
+                        timestamp=datetime.now(),
+                    )
+                    consumed_materials.append({
+                        'material_code': line.product_id.default_code or line.product_id.name,
+                        'material_name': line.product_id.name,
+                        'quantity': applied_qty,
+                        'uom': line.product_uom_id.name,
+                        'move_ids': move_ids,
+                        'source': 'auto_calculated',
+                    })
+            except Exception as e:
+                _logger.error(f'Error smart auto-consuming {line.product_id.name}: {str(e)}')
+                continue
+
+        return consumed_materials
+
+    def update_mo_with_consumptions(self, update_data):
+        """
+        Update MO dengan quantity dan consumption berdasarkan equipment code SCADA
+        
+        Args:
+            update_data: Dict dengan format:
+            {
+                'mo_id': 'WH/MO/00001',
+                'quantity': 2000,
+                'silo101': 825,
+                'silo102': 600,
+                ...
+            }
+        
+        Returns:
+            Dict dengan status dan detail hasil update
+        """
+        try:
+            # Validasi mo_id
+            mo_name = update_data.get('mo_id')
+            if not mo_name:
+                return {
+                    'status': 'error',
+                    'message': 'mo_id is required',
+                }
+            
+            # Cari MO
+            mo_record = self.env['mrp.production'].search([
+                ('name', '=', str(mo_name))
+            ], limit=1)
+            
+            if not mo_record:
+                return {
+                    'status': 'error',
+                    'message': f'Manufacturing Order "{mo_name}" not found',
+                }
+            
+            # Update quantity jika ada
+            quantity = update_data.get('quantity')
+            if quantity is not None:
+                try:
+                    quantity = float(quantity)
+                    if quantity > 0:
+                        mo_record.write({'product_qty': quantity})
+                        _logger.info(f'Updated MO {mo_name} quantity to {quantity}')
+                except (TypeError, ValueError) as e:
+                    return {
+                        'status': 'error',
+                        'message': f'Invalid quantity value: {quantity}',
+                    }
+            
+            # Process consumption per equipment code
+            consumed_items = []
+            errors = []
+            
+            for key, value in update_data.items():
+                # Skip non-equipment keys
+                if key in ['mo_id', 'quantity']:
+                    continue
+                
+                # Asumsikan key adalah equipment_code (misal: silo101, silo102)
+                equipment_code = key
+                
+                try:
+                    consumption_qty = float(value)
+                except (TypeError, ValueError):
+                    errors.append(f'{equipment_code}: Invalid quantity value "{value}"')
+                    continue
+                
+                if consumption_qty <= 0:
+                    continue
+                
+                # Cari equipment berdasarkan code
+                equipment = self.env['scada.equipment'].search([
+                    ('equipment_code', '=', equipment_code)
+                ], limit=1)
+                
+                if not equipment:
+                    errors.append(f'{equipment_code}: Equipment not found')
+                    continue
+                
+                # Cari raw material move yang berelasi dengan equipment ini
+                matching_moves = mo_record.move_raw_ids.filtered(
+                    lambda m: m.scada_equipment_id.id == equipment.id 
+                    and m.state not in ['done', 'cancel']
+                )
+                
+                if not matching_moves:
+                    errors.append(f'{equipment_code}: No raw material move found for this equipment')
+                    continue
+                
+                # Apply consumption
+                applied_qty, move_ids = self._apply_consumption_to_moves(
+                    matching_moves, consumption_qty, allow_overconsume=True
+                )
+                
+                # Log consumption untuk setiap material yang di-consume
+                for move in matching_moves:
+                    if move.id in move_ids:
+                        self._log_equipment_material_consumption(
+                            equipment=equipment,
+                            material=move.product_id,
+                            mo_record=mo_record,
+                            quantity=move.quantity_done,
+                            timestamp=datetime.now(),
+                        )
+                
+                consumed_items.append({
+                    'equipment_code': equipment_code,
+                    'equipment_name': equipment.name,
+                    'applied_qty': applied_qty,
+                    'move_ids': move_ids,
+                    'products': [move.product_id.display_name for move in matching_moves if move.id in move_ids],
+                })
+            
+            result = {
+                'status': 'success',
+                'message': 'MO updated successfully',
+                'mo_id': mo_record.name,
+                'mo_state': mo_record.state,
+                'consumed_items': consumed_items,
+            }
+            
+            if quantity is not None:
+                result['updated_quantity'] = quantity
+            
+            if errors:
+                result['errors'] = errors
+                result['message'] = 'MO updated with some errors'
+            
+            return result
+            
+        except Exception as e:
+            _logger.error(f'Error updating MO with consumptions: {str(e)}')
+            return {
+                'status': 'error',
+                'message': f'Error: {str(e)}',
+            }
 

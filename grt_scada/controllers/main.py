@@ -141,6 +141,8 @@ class ScadaJsonRpcController(http.Controller):
         """
         Apply material consumption directly to MO
         
+        Untuk MO yang belum di-mark done, consumption bisa di-update multiple times.
+        
         POST /api/scada/material-consumption
         Auth: Session cookie
         
@@ -149,9 +151,19 @@ class ScadaJsonRpcController(http.Controller):
             "equipment_id": "PLC01",
             "product_id": 123,
             "quantity": 10.5,
-            "timestamp": "2025-02-06T10:30:00",
-            "mo_id": "MO/2025/001"
+            "mo_id": "MO/2025/001",
+            "update_mode": "add",  // atau "replace" (optional, default: "add")
+            "timestamp": "2025-02-06T10:30:00"
         }
+        
+        update_mode:
+        - "add" (default): Menambahkan ke existing consumption (accumulating)
+          First update: 100 kg → quantity_done = 100
+          Second update: 50 kg → quantity_done = 150
+        
+        - "replace": Mengganti existing consumption dengan value baru
+          First update: 100 kg → quantity_done = 100
+          Second update: 120 kg → quantity_done = 120 (replace, bukan 220)
         """
         try:
             data = self._get_json_payload()
@@ -411,6 +423,65 @@ class ScadaJsonRpcController(http.Controller):
         except Exception as e:
             _logger.error(f'Error marking MO done (payload): {str(e)}')
             return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/mo/update-with-consumptions', type='json', auth='user', methods=['POST'])
+    def update_mo_with_consumptions(self, **kwargs):
+        """
+        Update MO dengan quantity dan consumption berdasarkan equipment code SCADA
+        
+        POST /api/scada/mo/update-with-consumptions
+        Auth: Session cookie
+        
+        Body:
+        {
+            "mo_id": "WH/MO/00001",
+            "quantity": 2000,
+            "silo101": 825,
+            "silo102": 600,
+            "silo103": 375,
+            ...
+        }
+        
+        Response:
+        {
+            "status": "success",
+            "message": "MO updated successfully",
+            "mo_id": "WH/MO/00001",
+            "mo_state": "confirmed",
+            "updated_quantity": 2000,
+            "consumed_items": [
+                {
+                    "equipment_code": "silo101",
+                    "equipment_name": "SILO A",
+                    "applied_qty": 825.0,
+                    "move_ids": [123],
+                    "products": ["Pollard Angsa"]
+                },
+                ...
+            ],
+            "errors": []
+        }
+        """
+        try:
+            data = self._get_json_payload()
+            
+            if not data.get('mo_id'):
+                return {
+                    'status': 'error',
+                    'message': 'mo_id is required',
+                }
+            
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            result = service.update_mo_with_consumptions(data)
+            return result
+            
+        except Exception as e:
+            _logger.error(f'Error updating MO with consumptions: {str(e)}')
+            return {
+                'status': 'error',
+                'message': str(e),
+            }
 
     @http.route('/api/scada/mo-weight', type='json', auth='user', methods=['POST'])
     def create_mo_weight(self, **kwargs):
