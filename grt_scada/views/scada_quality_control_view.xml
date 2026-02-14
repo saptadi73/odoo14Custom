@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QC Tree View -->
+        <record id="view_scada_quality_control_tree" model="ir.ui.view">
+            <field name="name">scada.quality.control.tree</field>
+            <field name="model">scada.quality.control</field>
+            <field name="arch" type="xml">
+                <tree string="Quality Control" default_order="tanggal_uji desc">
+                    <field name="tanggal_uji"/>
+                    <field name="qc_type"/>
+                    <field name="product_id"/>
+                    <field name="kode"/>
+                    <field name="quantity"/>
+                    <field name="uom_id"/>
+                    <field name="lot_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- QC Form View -->
+        <record id="view_scada_quality_control_form" model="ir.ui.view">
+            <field name="name">scada.quality.control.form</field>
+            <field name="model">scada.quality.control</field>
+            <field name="arch" type="xml">
+                <form string="Quality Control">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tanggal_uji"/>
+                                <field name="qc_type"/>
+                                <field name="product_id"/>
+                                <field name="product_name" readonly="1"/>
+                                <field name="kode"/>
+                            </group>
+                            <group>
+                                <field name="quantity"/>
+                                <field name="uom_id" readonly="1"/>
+                                <field name="lot_id"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Visual">
+                                <group>
+                                    <field name="warna"/>
+                                    <field name="aroma"/>
+                                    <field name="tekstur"/>
+                                    <field name="pest"/>
+                                    <field name="kemasan"/>
+                                    <field name="jahitan"/>
+                                    <field name="label"/>
+                                </group>
+                            </page>
+                            <page string="Kualitas">
+                                <group>
+                                    <group>
+                                        <field name="density"/>
+                                        <field name="ka_output"/>
+                                        <field name="ka_output_max"/>
+                                        <field name="ka_supply"/>
+                                        <field name="ka_supply_max"/>
+                                    </group>
+                                    <group>
+                                        <field name="kadar_air"/>
+                                        <field name="ka_process_max"/>
+                                        <field name="suhu_ruang"/>
+                                        <field name="suhu_produk"/>
+                                        <field name="umur_barang"/>
+                                        <field name="umur_simpan"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- QC Search View -->
+        <record id="view_scada_quality_control_search" model="ir.ui.view">
+            <field name="name">scada.quality.control.search</field>
+            <field name="model">scada.quality.control</field>
+            <field name="arch" type="xml">
+                <search string="Search QC">
+                    <field name="kode"/>
+                    <field name="product_id"/>
+                    <field name="qc_type"/>
+                    <field name="tanggal_uji"/>
+                    <filter string="Raw Material" name="qc_raw" domain="[('qc_type','=','raw')]"/>
+                    <filter string="Finished Goods" name="qc_finished" domain="[('qc_type','=','finished')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Product" name="group_product" context="{'group_by':'product_id'}"/>
+                        <filter string="QC Type" name="group_type" context="{'group_by':'qc_type'}"/>
+                        <filter string="Tanggal Uji" name="group_date" context="{'group_by':'tanggal_uji'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- QC Action -->
+        <record id="action_scada_quality_control" model="ir.actions.act_window">
+            <field name="name">Quality Control</field>
+            <field name="res_model">scada.quality.control</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_scada_quality_control_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first QC record
+                </p>
+                <p>
+                    QC record tracks quality attributes for raw materials and finished goods.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

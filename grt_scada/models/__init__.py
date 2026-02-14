@@ -3,10 +3,12 @@ from . import scada_equipment
 from . import scada_material_consumption
 from . import scada_mo_weight
 from . import scada_equipment_material
+from . import scada_equipment_oee
 from . import scada_sensor_reading
 from . import scada_api_log
 from . import scada_health
 from . import scada_module
+from . import scada_quality_control
 from . import mrp_bom
 from . import mrp_production
 from . import mrp_bom_line

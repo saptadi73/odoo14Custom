@@ -31,3 +31,20 @@ class MrpProduction(models.Model):
                 if bom and bom.scada_equipment_id:
                     vals['scada_equipment_id'] = bom.scada_equipment_id.id
         return super().create(vals_list)
+
+    def button_mark_done(self):
+        res = super().button_mark_done()
+        oee_model = self.env['scada.equipment.oee']
+
+        for mo in self:
+            if mo.state != 'done':
+                continue
+            equipment = mo.scada_equipment_id or (mo.bom_id.scada_equipment_id if mo.bom_id else False)
+            if not equipment:
+                continue
+            if oee_model.search([('manufacturing_order_id', '=', mo.id)], limit=1):
+                continue
+            vals = oee_model.prepare_from_mo(mo, equipment)
+            oee_model.create(vals)
+
+        return res

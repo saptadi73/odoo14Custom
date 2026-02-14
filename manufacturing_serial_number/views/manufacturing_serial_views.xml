@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Manufacturing Serial Tree View -->
+    <record id="view_manufacturing_serial_tree" model="ir.ui.view">
+        <field name="name">manufacturing.serial.tree</field>
+        <field name="model">manufacturing.serial</field>
+        <field name="arch" type="xml">
+            <tree string="Manufacturing Serial Numbers" decoration-success="state=='produced'" decoration-info="state=='draft'" decoration-muted="state=='cancelled'">
+                <field name="serial_number"/>
+                <field name="product_id"/>
+                <field name="mrp_production_id"/>
+                <field name="production_date"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Manufacturing Serial Form View -->
+    <record id="view_manufacturing_serial_form" model="ir.ui.view">
+        <field name="name">manufacturing.serial.form</field>
+        <field name="model">manufacturing.serial</field>
+        <field name="arch" type="xml">
+            <form string="Manufacturing Serial Number">
+                <header>
+                    <button name="action_set_produced" string="Set Produced" type="object" 
+                            states="draft" class="oe_highlight"/>
+                    <button name="action_set_delivered" string="Set Delivered" type="object" 
+                            states="produced" class="oe_highlight"/>
+                    <button name="action_cancel" string="Cancel" type="object" 
+                            states="draft,produced" confirm="Are you sure you want to cancel this serial?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,produced,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- Add smart buttons here if needed -->
+                    </div>
+                    <group>
+                        <group>
+                            <field name="serial_number" readonly="1"/>
+                            <field name="product_id"/>
+                            <field name="mrp_production_id"/>
+                        </group>
+                        <group>
+                            <field name="production_date"/>
+                            <field name="lot_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Additional notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Manufacturing Serial Search View -->
+    <record id="view_manufacturing_serial_search" model="ir.ui.view">
+        <field name="name">manufacturing.serial.search</field>
+        <field name="model">manufacturing.serial</field>
+        <field name="arch" type="xml">
+            <search string="Search Serial Numbers">
+                <field name="serial_number"/>
+                <field name="product_id"/>
+                <field name="mrp_production_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Produced" name="produced" domain="[('state','=','produced')]"/>
+                <filter string="Delivered" name="delivered" domain="[('state','=','delivered')]"/>
+                <separator/>
+                <filter string="This Month" name="this_month" 
+                        domain="[('production_date','&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d')), ('production_date','&lt;', (context_today() + relativedelta(months=1, day=1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Product" name="group_product" context="{'group_by':'product_id'}"/>
+                    <filter string="Manufacturing Order" name="group_mrp" context="{'group_by':'mrp_production_id'}"/>
+                    <filter string="State" name="group_state" context="{'group_by':'state'}"/>
+                    <filter string="Production Date" name="group_date" context="{'group_by':'production_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Manufacturing Serial Action -->
+    <record id="action_manufacturing_serial" model="ir.actions.act_window">
+        <field name="name">Manufacturing Serial Numbers</field>
+        <field name="res_model">manufacturing.serial</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_manufacturing_serial_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first manufacturing serial number
+            </p>
+            <p>
+                Serial numbers will be automatically generated when manufacturing orders are completed.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_manufacturing_serial_root"
+              name="Manufacturing Serials"
+              parent="mrp.menu_mrp_root"
+              sequence="50"/>
+
+    <menuitem id="menu_manufacturing_serial"
+              name="Serial Numbers"
+              parent="menu_manufacturing_serial_root"
+              action="action_manufacturing_serial"
+              sequence="10"/>
+
+    <!-- IR Sequence for Serial Numbers -->
+    <record id="seq_manufacturing_serial" model="ir.sequence">
+        <field name="name">Manufacturing Serial Number</field>
+        <field name="code">manufacturing.serial</field>
+        <field name="prefix">S</field>
+        <field name="padding">6</field>
+        <field name="number_increment">1</field>
+        <field name="implementation">standard</field>
+    </record>
+</odoo>

@@ -36,6 +36,34 @@
             name="Sensor Readings"
             sequence="1"/>
 
+        <!-- Quality Control Menu -->
+        <menuitem
+            id="menu_scada_quality_control"
+            parent="menu_scada_root"
+            name="Quality Control"
+            sequence="30"/>
+
+        <menuitem
+            id="menu_scada_quality_control_list"
+            parent="menu_scada_quality_control"
+            action="action_scada_quality_control"
+            name="QC Records"
+            sequence="1"/>
+
+        <!-- OEE Summary Menu -->
+        <menuitem
+            id="menu_scada_oee"
+            parent="menu_scada_root"
+            name="OEE Summary"
+            sequence="35"/>
+
+        <menuitem
+            id="menu_scada_oee_list"
+            parent="menu_scada_oee"
+            action="action_scada_equipment_oee"
+            name="OEE Results"
+            sequence="1"/>
+
         <!-- API Logs Menu -->
         <menuitem
             id="menu_scada_logs"

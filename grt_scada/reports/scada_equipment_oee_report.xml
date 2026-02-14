@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_scada_equipment_oee"
+            model="scada.equipment.oee"
+            string="OEE Summary"
+            report_type="qweb-pdf"
+            name="grt_scada.report_scada_equipment_oee"
+            file="grt_scada.report_scada_equipment_oee"
+            print_report_name="'OEE - %s' % (object.manufacturing_order_id.name or '')"
+        />
+
+        <template id="report_scada_equipment_oee_document">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2>Equipment OEE Summary</h2>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>Date Done</th>
+                                    <td><span t-esc="o.date_done"/></td>
+                                    <th>Equipment</th>
+                                    <td><span t-esc="o.equipment_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <th>MO</th>
+                                    <td><span t-esc="o.manufacturing_order_id.name"/></td>
+                                    <th>Product</th>
+                                    <td><span t-esc="o.product_id.display_name"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Finished Quantity</h3>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>Planned</th><td><span t-esc="o.qty_planned"/></td>
+                                    <th>Actual</th><td><span t-esc="o.qty_finished"/></td>
+                                    <th>Variance</th><td><span t-esc="o.variance_finished"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Yield %</th><td><span t-esc="o.yield_percent"/></td>
+                                    <th></th><td></td>
+                                    <th></th><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Consumption</h3>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>BoM Total</th><td><span t-esc="o.qty_bom_consumption"/></td>
+                                    <th>Actual Total</th><td><span t-esc="o.qty_actual_consumption"/></td>
+                                    <th>Variance</th><td><span t-esc="o.variance_consumption"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Ratio %</th><td><span t-esc="o.consumption_ratio"/></td>
+                                    <th></th><td></td>
+                                    <th></th><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

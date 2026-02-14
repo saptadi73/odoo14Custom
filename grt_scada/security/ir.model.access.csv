@@ -13,3 +13,9 @@ access_scada_equipment_material_technician,scada.equipment.material Technician,m
 access_scada_mo_weight_manager,scada.mo.weight Manager,model_scada_mo_weight,group_scada_manager,1,1,1,1
 access_scada_mo_weight_operator,scada.mo.weight Operator,model_scada_mo_weight,group_scada_operator,1,0,0,0
 access_scada_mo_weight_technician,scada.mo.weight Technician,model_scada_mo_weight,group_scada_technician,1,1,0,0
+access_scada_quality_control_manager,scada.quality.control Manager,model_scada_quality_control,group_scada_manager,1,1,1,1
+access_scada_quality_control_operator,scada.quality.control Operator,model_scada_quality_control,group_scada_operator,1,1,1,0
+access_scada_quality_control_technician,scada.quality.control Technician,model_scada_quality_control,group_scada_technician,1,1,1,0
+access_scada_equipment_oee_manager,scada.equipment.oee Manager,model_scada_equipment_oee,group_scada_manager,1,1,1,1
+access_scada_equipment_oee_operator,scada.equipment.oee Operator,model_scada_equipment_oee,group_scada_operator,1,1,1,0
+access_scada_equipment_oee_technician,scada.equipment.oee Technician,model_scada_equipment_oee,group_scada_technician,1,1,1,0

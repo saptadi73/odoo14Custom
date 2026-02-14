@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- OEE Tree View -->
+        <record id="view_scada_equipment_oee_tree" model="ir.ui.view">
+            <field name="name">scada.equipment.oee.tree</field>
+            <field name="model">scada.equipment.oee</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment OEE Summary" default_order="date_done desc">
+                    <field name="date_done"/>
+                    <field name="equipment_id"/>
+                    <field name="manufacturing_order_id"/>
+                    <field name="product_id"/>
+                    <field name="qty_planned"/>
+                    <field name="qty_finished"/>
+                    <field name="variance_finished"/>
+                    <field name="qty_bom_consumption"/>
+                    <field name="qty_actual_consumption"/>
+                    <field name="variance_consumption"/>
+                    <field name="yield_percent"/>
+                    <field name="consumption_ratio"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- OEE Form View -->
+        <record id="view_scada_equipment_oee_form" model="ir.ui.view">
+            <field name="name">scada.equipment.oee.form</field>
+            <field name="model">scada.equipment.oee</field>
+            <field name="arch" type="xml">
+                <form string="Equipment OEE Summary">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_done"/>
+                                <field name="equipment_id"/>
+                                <field name="manufacturing_order_id"/>
+                                <field name="product_id"/>
+                            </group>
+                            <group>
+                                <field name="qty_planned"/>
+                                <field name="qty_finished"/>
+                                <field name="variance_finished"/>
+                                <field name="yield_percent"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Consumption">
+                                <group>
+                                    <group>
+                                        <field name="qty_bom_consumption"/>
+                                        <field name="qty_actual_consumption"/>
+                                        <field name="variance_consumption"/>
+                                        <field name="consumption_ratio"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <field name="notes" placeholder="Notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- OEE Search View -->
+        <record id="view_scada_equipment_oee_search" model="ir.ui.view">
+            <field name="name">scada.equipment.oee.search</field>
+            <field name="model">scada.equipment.oee</field>
+            <field name="arch" type="xml">
+                <search string="Search OEE Summary">
+                    <field name="equipment_id"/>
+                    <field name="manufacturing_order_id"/>
+                    <field name="product_id"/>
+                    <field name="date_done"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Equipment" name="group_equipment" context="{'group_by':'equipment_id'}"/>
+                        <filter string="Product" name="group_product" context="{'group_by':'product_id'}"/>
+                        <filter string="Date" name="group_date" context="{'group_by':'date_done'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- OEE Action -->
+        <record id="action_scada_equipment_oee" model="ir.actions.act_window">
+            <field name="name">Equipment OEE Summary</field>
+            <field name="res_model">scada.equipment.oee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_scada_equipment_oee_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    OEE summary will be generated when MO is marked done.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

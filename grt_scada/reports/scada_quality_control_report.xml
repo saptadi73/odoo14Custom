@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_scada_quality_control"
+            model="scada.quality.control"
+            string="QC Report"
+            report_type="qweb-pdf"
+            name="grt_scada.report_scada_quality_control"
+            file="grt_scada.report_scada_quality_control"
+            print_report_name="'QC - %s' % (object.kode or '')"
+        />
+
+        <template id="report_scada_quality_control_document">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2>Quality Control Report</h2>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>Date</th>
+                                    <td><span t-esc="o.tanggal_uji"/></td>
+                                    <th>QC Type</th>
+                                    <td><span t-esc="o.qc_type"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Product</th>
+                                    <td><span t-esc="o.product_id.display_name"/></td>
+                                    <th>Code</th>
+                                    <td><span t-esc="o.kode"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Quantity</th>
+                                    <td><span t-esc="o.quantity"/> <span t-esc="o.uom_id.name"/></td>
+                                    <th>Lot/Serial</th>
+                                    <td><span t-esc="o.lot_id.name"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Visual</h3>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>Warna</th><td><span t-esc="'OK' if o.warna else 'NG'"/></td>
+                                    <th>Aroma</th><td><span t-esc="'OK' if o.aroma else 'NG'"/></td>
+                                    <th>Tekstur</th><td><span t-esc="'OK' if o.tekstur else 'NG'"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Pest</th><td><span t-esc="'OK' if o.pest else 'NG'"/></td>
+                                    <th>Kemasan</th><td><span t-esc="'OK' if o.kemasan else 'NG'"/></td>
+                                    <th>Jahitan</th><td><span t-esc="'OK' if o.jahitan else 'NG'"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Label</th><td><span t-esc="'OK' if o.label else 'NG'"/></td>
+                                    <th></th><td></td>
+                                    <th></th><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Kualitas</h3>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>Density</th><td><span t-esc="o.density"/></td>
+                                    <th>KA Output</th><td><span t-esc="o.ka_output"/></td>
+                                    <th>KA Output Max</th><td><span t-esc="o.ka_output_max"/></td>
+                                </tr>
+                                <tr>
+                                    <th>KA Supply</th><td><span t-esc="o.ka_supply"/></td>
+                                    <th>KA Supply Max</th><td><span t-esc="o.ka_supply_max"/></td>
+                                    <th>Kadar Air</th><td><span t-esc="o.kadar_air"/></td>
+                                </tr>
+                                <tr>
+                                    <th>KA Process Max</th><td><span t-esc="o.ka_process_max"/></td>
+                                    <th>Suhu Ruang</th><td><span t-esc="o.suhu_ruang"/></td>
+                                    <th>Suhu Produk</th><td><span t-esc="o.suhu_produk"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Umur Barang</th><td><span t-esc="o.umur_barang"/></td>
+                                    <th>Umur Simpan</th><td><span t-esc="o.umur_simpan"/></td>
+                                    <th></th><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
