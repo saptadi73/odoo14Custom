@@ -13,6 +13,7 @@ This module provides a comprehensive SCADA solution that integrates Odoo Manufac
 - **Material Consumption via MO** - Middleware updates MO component consumption directly
 - **Manufacturing Order Sync** - Synchronize manufacturing orders between Odoo and equipment/middleware
 - **Sensor Data Collection** - Collect and monitor real-time sensor readings
+- **Equipment Failure Report** - Pencatatan dan analisis failure per equipment (list, pivot, graph)
 - **Middleware API** - REST API endpoints for middleware communication
 - **API Logging** - Comprehensive logging of all API calls for audit trail
 
@@ -106,6 +107,24 @@ Example:
 Example:
 ```
 GET /api/scada/mo-list?equipment_id=PLC01&status=planned&limit=10
+```
+
+### Failure Report API (Extension Module)
+
+Jika module `grt_scada_failure_report` di-install, tersedia endpoint tambahan:
+
+- `POST /api/scada/failure-report`
+- `GET /scada/failure-report/input`
+- `POST /scada/failure-report/submit`
+
+Body minimal untuk endpoint API:
+
+```json
+{
+  "equipment_code": "PLC01",
+  "description": "Motor overload",
+  "date": "2026-02-15 08:30:00"
+}
 ```
 
 ## Installation

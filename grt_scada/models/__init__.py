@@ -9,6 +9,7 @@ from . import scada_api_log
 from . import scada_health
 from . import scada_module
 from . import scada_quality_control
+from . import scada_equipment_failure
 from . import mrp_bom
 from . import mrp_production
 from . import mrp_bom_line

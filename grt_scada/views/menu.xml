@@ -64,6 +64,20 @@
             name="OEE Results"
             sequence="1"/>
 
+        <!-- Reports Menu -->
+        <menuitem
+            id="menu_scada_reports"
+            parent="menu_scada_root"
+            name="Reports"
+            sequence="45"/>
+
+        <menuitem
+            id="menu_scada_equipment_failure_report"
+            parent="menu_scada_reports"
+            action="action_scada_equipment_failure"
+            name="Equipment Failure"
+            sequence="1"/>
+
         <!-- API Logs Menu -->
         <menuitem
             id="menu_scada_logs"

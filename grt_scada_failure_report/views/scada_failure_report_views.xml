@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_scada_failure_report_tree" model="ir.ui.view">
+        <field name="name">scada.failure.report.tree</field>
+        <field name="model">scada.failure.report</field>
+        <field name="arch" type="xml">
+            <tree string="Failure Reports">
+                <field name="equipment_code"/>
+                <field name="description"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_scada_failure_report_form" model="ir.ui.view">
+        <field name="name">scada.failure.report.form</field>
+        <field name="model">scada.failure.report</field>
+        <field name="arch" type="xml">
+            <form string="Failure Report">
+                <sheet>
+                    <group>
+                        <field name="equipment_code"/>
+                        <field name="date"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_scada_failure_report" model="ir.actions.act_window">
+        <field name="name">Failure Reports</field>
+        <field name="res_model">scada.failure.report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

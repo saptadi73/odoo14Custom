@@ -483,17 +483,27 @@ class MiddlewareService:
         qty_remaining = quantity
         move_ids = []
 
+        # Clear existing done qty so replace mode does not accumulate
         for move in moves:
+            move.quantity_done = 0.0
+
+        move_count = len(moves)
+        for idx, move in enumerate(moves):
             if qty_remaining <= 0:
                 break
             
             planned = move.product_uom_qty or 0.0
             
-            # REPLACE mode: jangan gunakan existing done, langsung set ke value baru
+            # REPLACE mode: jangan gunakan existing done, langsung set ke value baru.
+            # Jika overconsume diizinkan, move terakhir bisa menampung sisa qty
+            # agar input middleware tidak terpotong ke planned qty.
             if planned == 0.0 and not allow_overconsume:
                 add_qty = 0.0
             else:
-                add_qty = qty_remaining if planned == 0.0 else min(qty_remaining, planned)
+                if allow_overconsume and idx == (move_count - 1):
+                    add_qty = qty_remaining
+                else:
+                    add_qty = qty_remaining if planned == 0.0 else min(qty_remaining, planned)
             
             if add_qty <= 0.0:
                 continue
@@ -682,6 +692,8 @@ class MiddlewareService:
             consumed_items = []
             errors = []
             
+            _logger.info(f'Processing consumption for MO {mo_name}: {list(update_data.items())}')
+            
             for key, value in update_data.items():
                 # Skip non-equipment keys
                 if key in ['mo_id', 'quantity']:
@@ -697,7 +709,10 @@ class MiddlewareService:
                     continue
                 
                 if consumption_qty <= 0:
+                    _logger.debug(f'Skipping {equipment_code}: qty <= 0')
                     continue
+                
+                _logger.info(f'Processing {equipment_code}: {consumption_qty} kg')
                 
                 # Cari equipment berdasarkan code
                 equipment = self.env['scada.equipment'].search([
@@ -705,27 +720,43 @@ class MiddlewareService:
                 ], limit=1)
                 
                 if not equipment:
-                    errors.append(f'{equipment_code}: Equipment not found')
+                    msg = f'{equipment_code}: Equipment not found'
+                    _logger.warning(msg)
+                    errors.append(msg)
                     continue
+                
+                _logger.info(f'Found equipment: {equipment.name} (ID: {equipment.id})')
                 
                 # Cari raw material move yang berelasi dengan equipment ini
-                matching_moves = mo_record.move_raw_ids.filtered(
-                    lambda m: m.scada_equipment_id.id == equipment.id 
-                    and m.state not in ['done', 'cancel']
+                all_moves = mo_record.move_raw_ids
+                _logger.info(f'Total raw moves in MO: {len(all_moves)}')
+                
+                matching_moves = all_moves.filtered(
+                    lambda m: m.scada_equipment_id.id == equipment.id
+                    and m.state != 'cancel'
                 )
+                
+                _logger.info(f'Matching moves for {equipment_code}: {len(matching_moves)} (equipment_id={equipment.id})')
+                for m in matching_moves:
+                    _logger.info(f'  - Move {m.id}: {m.product_id.name} (qty_done={m.quantity_done}, state={m.state})')
                 
                 if not matching_moves:
-                    errors.append(f'{equipment_code}: No raw material move found for this equipment')
+                    msg = f'{equipment_code}: No raw material move found for this equipment'
+                    _logger.warning(msg)
+                    errors.append(msg)
                     continue
                 
-                # Apply consumption
-                applied_qty, move_ids = self._apply_consumption_to_moves(
+                # Apply consumption (REPLACE mode: setiap update mengganti nilai lama)
+                _logger.info(f'Applying consumption {consumption_qty} to {len(matching_moves)} moves')
+                applied_qty, move_ids = self._apply_consumption_to_moves_replace(
                     matching_moves, consumption_qty, allow_overconsume=True
                 )
+                _logger.info(f'Applied {applied_qty} to moves {move_ids}')
                 
                 # Log consumption untuk setiap material yang di-consume
                 for move in matching_moves:
                     if move.id in move_ids:
+                        _logger.info(f'Logging consumption for move {move.id}: {move.quantity_done}')
                         self._log_equipment_material_consumption(
                             equipment=equipment,
                             material=move.product_id,

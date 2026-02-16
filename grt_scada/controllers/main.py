@@ -537,6 +537,96 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting equipment status: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
+    @http.route('/api/scada/equipment-failure', type='json', auth='user', methods=['POST'])
+    def create_equipment_failure(self, **kwargs):
+        """Create equipment failure report."""
+        try:
+            data = self._get_json_payload()
+            equipment_code = data.get('equipment_code')
+            description = data.get('description')
+            date_value = data.get('date')
+
+            if not equipment_code:
+                return {'status': 'error', 'message': 'equipment_code is required'}
+            if not description:
+                return {'status': 'error', 'message': 'description is required'}
+
+            equipment = request.env['scada.equipment'].search([
+                ('equipment_code', '=', equipment_code),
+            ], limit=1)
+            if not equipment:
+                return {'status': 'error', 'message': f'Equipment "{equipment_code}" not found'}
+
+            failure_date = datetime.now()
+            if date_value:
+                try:
+                    cleaned = str(date_value).strip().replace('T', ' ')
+                    if len(cleaned) == 16:
+                        cleaned = f'{cleaned}:00'
+                    failure_date = datetime.fromisoformat(cleaned)
+                except Exception:
+                    return {
+                        'status': 'error',
+                        'message': 'Invalid date format. Use YYYY-MM-DD HH:MM:SS or YYYY-MM-DDTHH:MM',
+                    }
+
+            failure = request.env['scada.equipment.failure'].create({
+                'equipment_id': equipment.id,
+                'description': description,
+                'date': failure_date,
+            })
+            return {
+                'status': 'success',
+                'message': 'Equipment failure report created',
+                'data': {
+                    'id': failure.id,
+                    'equipment_id': equipment.id,
+                    'equipment_code': equipment.equipment_code,
+                    'equipment_name': equipment.name,
+                    'description': failure.description,
+                    'date': failure.date.isoformat() if failure.date else None,
+                },
+            }
+        except Exception as e:
+            _logger.error(f'Error creating equipment failure report: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/equipment-failure', type='json', auth='user', methods=['GET'])
+    def get_equipment_failures(self, **kwargs):
+        """Get equipment failure report list."""
+        try:
+            equipment_code = request.httprequest.args.get('equipment_code')
+            limit = int(request.httprequest.args.get('limit', 50))
+            offset = int(request.httprequest.args.get('offset', 0))
+
+            domain = []
+            if equipment_code:
+                domain.append(('equipment_code', '=', equipment_code))
+
+            failures = request.env['scada.equipment.failure'].search(
+                domain,
+                order='date desc, id desc',
+                limit=limit,
+                offset=offset,
+            )
+
+            data = []
+            for failure in failures:
+                data.append({
+                    'id': failure.id,
+                    'equipment_id': failure.equipment_id.id if failure.equipment_id else None,
+                    'equipment_code': failure.equipment_code,
+                    'equipment_name': failure.equipment_id.name if failure.equipment_id else None,
+                    'description': failure.description,
+                    'date': failure.date.isoformat() if failure.date else None,
+                    'reported_by': failure.reported_by.name if failure.reported_by else None,
+                })
+
+            return {'status': 'success', 'count': len(data), 'data': data}
+        except Exception as e:
+            _logger.error(f'Error getting equipment failure reports: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
     # ===== PRODUCTS =====
 
     @http.route('/api/scada/products', type='http', auth='user', methods=['GET'])

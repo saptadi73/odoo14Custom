@@ -138,6 +138,12 @@ class ScadaEquipment(models.Model):
         string='Equipment Material Consumption',
         help='Mapping/consumption untuk OEE dan analitik'
     )
+    failure_report_ids = fields.One2many(
+        'scada.equipment.failure',
+        'equipment_id',
+        string='Failure Reports',
+        help='Riwayat laporan failure untuk equipment ini'
+    )
     sensor_reading_ids = fields.One2many(
         'scada.sensor.reading',
         'equipment_id',

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_scada_failure_report"
+        parent="grt_scada.menu_scada_root"
+        name="Failure Reporting"
+        sequence="45"/>
+
+    <menuitem
+        id="menu_scada_failure_report_list"
+        parent="menu_scada_failure_report"
+        action="action_scada_failure_report"
+        name="Failure Reports"
+        sequence="1"/>
+</odoo>

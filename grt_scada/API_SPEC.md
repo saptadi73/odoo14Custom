@@ -1269,6 +1269,165 @@ curl -X GET http://localhost:8069/api/scada/equipment/PLC01 \
 
 ---
 
+### 19A. Create Equipment Failure Report (Protected)
+
+**Create failure report for SCADA equipment**
+
+```http
+POST /api/scada/equipment-failure
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Request Body (REST format)**:
+
+```json
+{
+  "equipment_code": "PLC01",
+  "description": "Motor overload saat proses mixing",
+  "date": "2026-02-15 08:30:00"
+}
+```
+
+**JSON-RPC Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "equipment_code": "PLC01",
+    "description": "Motor overload saat proses mixing",
+    "date": "2026-02-15 08:30:00"
+  }
+}
+```
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "message": "Equipment failure report created",
+  "data": {
+    "id": 1,
+    "equipment_id": 1,
+    "equipment_code": "PLC01",
+    "equipment_name": "Main PLC - Injection Machine 01",
+    "description": "Motor overload saat proses mixing",
+    "date": "2026-02-15T08:30:00"
+  }
+}
+```
+
+**cURL Example (REST)**:
+```bash
+curl -X POST http://localhost:8069/api/scada/equipment-failure \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "equipment_code": "PLC01",
+    "description": "Motor overload saat proses mixing",
+    "date": "2026-02-15 08:30:00"
+  }'
+```
+
+**cURL Example (JSON-RPC)**:
+```bash
+curl -X POST http://localhost:8069/api/scada/equipment-failure \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "equipment_code": "PLC01",
+      "description": "Motor overload saat proses mixing",
+      "date": "2026-02-15 08:30:00"
+    }
+  }'
+```
+
+### 19B. Get Equipment Failure Reports (Protected)
+
+**Get list of equipment failure reports**
+
+```http
+GET /api/scada/equipment-failure?equipment_code=PLC01&limit=50&offset=0
+Auth: Session cookie
+```
+
+**JSON-RPC (POST)**:
+
+```http
+POST /api/scada/equipment-failure
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**JSON-RPC Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "equipment_code": "PLC01",
+    "limit": 50,
+    "offset": 0
+  }
+}
+```
+
+**Query Parameters**:
+- `equipment_code` (optional): filter by SCADA equipment code
+- `limit` (optional): max records (default 50)
+- `offset` (optional): pagination offset (default 0)
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "count": 1,
+  "data": [
+    {
+      "id": 1,
+      "equipment_id": 1,
+      "equipment_code": "PLC01",
+      "equipment_name": "Main PLC - Injection Machine 01",
+      "description": "Motor overload saat proses mixing",
+      "date": "2026-02-15T08:30:00",
+      "reported_by": "Administrator"
+    }
+  ]
+}
+```
+
+**cURL Example (REST)**:
+```bash
+curl -X GET "http://localhost:8069/api/scada/equipment-failure?equipment_code=PLC01&limit=50" \
+  -b cookies.txt
+```
+
+**cURL Example (JSON-RPC)**:
+```bash
+curl -X POST http://localhost:8069/api/scada/equipment-failure \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "equipment_code": "PLC01",
+      "limit": 50,
+      "offset": 0
+    }
+  }'
+```
+
+---
+
 ### 20. Get Product List (Protected)
 
 **Retrieve Product List**
@@ -1482,6 +1641,75 @@ curl -X POST http://localhost:8069/api/scada/boms \
     }
   }'
 ```
+
+---
+
+### 23. Create Failure Report (Extension Module, Protected)
+
+**Create SCADA equipment failure report**
+
+Available only when module `grt_scada_failure_report` is installed.
+
+```http
+POST /api/scada/failure-report
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Request Body**:
+
+```json
+{
+  "equipment_code": "PLC01",
+  "description": "Motor overload saat proses mixing",
+  "date": "2026-02-15 08:30:00"
+}
+```
+
+**Field notes**:
+- `equipment_code` (required): nilai `equipment_code` pada model `scada.equipment`
+- `description` (required): deskripsi failure
+- `date` (optional): format `YYYY-MM-DD HH:MM:SS` atau `YYYY-MM-DDTHH:MM`; jika kosong akan pakai waktu server saat create
+
+**Response (Success)**:
+
+```json
+{
+  "status": "success",
+  "message": "Failure report created",
+  "data": {
+    "id": 1,
+    "equipment_code": "PLC01",
+    "description": "Motor overload saat proses mixing",
+    "date": "2026-02-15 08:30:00"
+  }
+}
+```
+
+**Response (Error)**:
+
+```json
+{
+  "status": "error",
+  "message": "Equipment with code \"PLC01\" not found"
+}
+```
+
+**cURL Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/failure-report \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "equipment_code": "PLC01",
+    "description": "Motor overload saat proses mixing",
+    "date": "2026-02-15 08:30:00"
+  }'
+```
+
+**Form Routes**:
+- `GET /scada/failure-report/input`
+- `POST /scada/failure-report/submit`
 
 ---
 

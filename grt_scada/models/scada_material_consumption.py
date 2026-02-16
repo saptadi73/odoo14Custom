@@ -156,6 +156,42 @@ class ScadaMaterialConsumption(models.Model):
                 )
             record.status = 'validated'
 
+    def update_consumed(self, new_quantity):
+        """
+        Update nilai consumed untuk record yang masih dalam status draft/recorded.
+        Method ini memungkinkan update quantity tanpa akumulasi sebelum di-mark done.
+        
+        Args:
+            new_quantity: Nilai kuantitas baru yang ingin di-set
+            
+        Returns:
+            Bool - True jika berhasil
+        """
+        for record in self:
+            # Hanya boleh update jika belum di-post ke stock atau di-cancel
+            if record.status not in ['draft', 'recorded', 'validated']:
+                raise ValidationError(
+                    f"Tidak bisa update consumed pada status '{record.status}'. "
+                    f"Hanya bisa di-update pada status draft/recorded/validated."
+                )
+            
+            if new_quantity <= 0:
+                raise ValidationError("Quantity harus lebih dari 0")
+            
+            # Update quantity value (not accumulate)
+            record.quantity = new_quantity
+            
+            # Re-apply consumption to moves dengan nilai baru
+            if record.move_id:
+                moves = self._find_raw_moves_for_material(
+                    record.manufacturing_order_id,
+                    record.material_id
+                )
+                if moves:
+                    self._apply_consumption_to_moves(record, moves)
+        
+        return True
+
     def action_post_to_stock(self):
         """Post consumption ke stock module"""
         # TODO: Create stock move untuk recording di inventory
@@ -374,18 +410,41 @@ class ScadaMaterialConsumption(models.Model):
         )
 
     def _apply_consumption_to_moves(self, record, moves):
-        qty_remaining = record.quantity
+        """
+        Apply consumption quantity to stock moves.
+        REPLACE the quantity_done value, tidak accumulate/tambah.
+        """
+        qty_to_consume = record.quantity
+        planned_total = 0.0
+        used_qty = 0.0
         move_id = False
 
         for move in moves:
+            if used_qty >= qty_to_consume:
+                break
+            
+            planned = move.product_uom_qty or 0.0
+            planned_total += planned
+        
+        # Distribute consumption across moves proportionally
+        qty_remaining = qty_to_consume
+        
+        for move in moves:
             if qty_remaining <= 0:
                 break
+            
             planned = move.product_uom_qty or 0.0
-            done = move.quantity_done or 0.0
-            remaining = max(planned - done, 0.0)
-            add_qty = qty_remaining if remaining == 0.0 else min(qty_remaining, remaining)
-            move.quantity_done = done + add_qty
-            qty_remaining -= add_qty
+            
+            # Calculate how much to allocate to this move
+            if planned_total > 0:
+                allocation = (planned / planned_total) * qty_to_consume
+            else:
+                allocation = qty_to_consume
+            
+            # SET quantity_done to the allocated amount (replace, not add)
+            move.quantity_done = allocation
+            qty_remaining -= allocation
+            
             if not move_id:
                 move_id = move.id
 
