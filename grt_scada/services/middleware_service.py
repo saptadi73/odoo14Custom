@@ -674,19 +674,51 @@ class MiddlewareService:
                     'message': f'Manufacturing Order "{mo_name}" not found',
                 }
             
-            # Update quantity jika ada
-            quantity = update_data.get('quantity')
+            # Update quantity jika ada.
+            # Support beberapa alias agar payload middleware yang berbeda format tetap terbaca.
+            quantity_keys = [
+                'quantity',
+                'product_qty',
+                'quantity_to_produce',
+                'qty_to_produce',
+                'target_produksi',
+                'target_production',
+                'qty_producing',
+            ]
+            quantity = None
+            quantity_key_used = None
+            for key in quantity_keys:
+                if update_data.get(key) is not None:
+                    quantity = update_data.get(key)
+                    quantity_key_used = key
+                    break
+
             if quantity is not None:
                 try:
                     quantity = float(quantity)
-                    if quantity > 0:
-                        mo_record.write({'product_qty': quantity})
-                        _logger.info(f'Updated MO {mo_name} quantity to {quantity}')
-                except (TypeError, ValueError) as e:
+                except (TypeError, ValueError):
                     return {
                         'status': 'error',
                         'message': f'Invalid quantity value: {quantity}',
                     }
+
+                if quantity <= 0:
+                    return {
+                        'status': 'error',
+                        'message': 'Quantity must be greater than 0',
+                    }
+
+                write_vals = {}
+                # Hanya update qty_producing agar target plan (product_qty) tetap terjaga
+                # untuk perbandingan target vs actual (OEE/quality).
+                if hasattr(mo_record, 'qty_producing'):
+                    write_vals['qty_producing'] = quantity
+                if write_vals:
+                    mo_record.write(write_vals)
+                _logger.info(
+                    f'Updated MO {mo_name} quantity from "{quantity_key_used}" to {quantity} '
+                    f'(qty_producing only)'
+                )
             
             # Process consumption per equipment code
             consumed_items = []
@@ -696,7 +728,7 @@ class MiddlewareService:
             
             for key, value in update_data.items():
                 # Skip non-equipment keys
-                if key in ['mo_id', 'quantity']:
+                if key == 'mo_id' or key in quantity_keys:
                     continue
                 
                 # Asumsikan key adalah equipment_code (misal: silo101, silo102)

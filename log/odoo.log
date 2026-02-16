@@ -15032,3 +15032,1698 @@ FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppDa
 2026-02-16 09:22:56,119 8232 INFO manukanjabung odoo.addons.grt_scada.services.middleware_service: Applied 42.0 to moves [35] 
 2026-02-16 09:22:56,119 8232 INFO manukanjabung odoo.addons.grt_scada.services.middleware_service: Logging consumption for move 35: 42.0 
 2026-02-16 09:22:56,295 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:22:56] "POST /api/scada/mo/update-with-consumptions HTTP/1.1" 200 - 164 0.225 1.062
+2026-02-16 09:23:21,048 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:21] "GET /web HTTP/1.1" 200 - 15 0.040 0.166
+2026-02-16 09:23:21,436 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:21] "GET /web/content/175-a6eea8b/web.assets_backend.css HTTP/1.1" 200 - 2 0.000 0.047
+2026-02-16 09:23:21,473 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:21] "GET /web/webclient/load_menus/9b2929a74c20d2e061b256bca19153849899f3ed51b963ada928f28b4d9ca2b2 HTTP/1.1" 200 - 1 0.000 0.041
+2026-02-16 09:23:21,473 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:21] "GET /web/content/176-a6eea8b/web.assets_backend.js HTTP/1.1" 304 - 2 0.013 0.044
+2026-02-16 09:23:21,759 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:21] "GET /web/webclient/qweb/e87a76dc11016c55c6d88406171258df14783f1198bf333a744aed74bc72a43d?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,garazd_product_label,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.107
+2026-02-16 09:23:21,892 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:21] "GET /web/webclient/translations/5227498d9df4b403b0244c75aac21e0c091e50ce?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgarazd_product_label%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=en_US HTTP/1.1" 200 - 3 0.003 0.014
+2026-02-16 09:23:22,285 8232 INFO ? werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "GET /web/static/src/xml/debug.xml?debug=1771208601965 HTTP/1.1" 200 - - - -
+2026-02-16 09:23:22,386 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 2 0.006 0.099
+2026-02-16 09:23:22,386 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "POST /mail/init_messaging HTTP/1.1" 200 - 49 0.097 0.180
+2026-02-16 09:23:22,459 8232 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\2f/2f7028932480cdcb927f83b0165d577669e620fa 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(4,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(4,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\2f/2f7028932480cdcb927f83b0165d577669e620fa'
+2026-02-16 09:23:22,459 8232 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\c5/c54d3d5e2b1320083bf5378b7c195b0985fa04c1 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.users(2,).image_128'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.partner(3,).image_128'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(13,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(13,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\c5/c54d3d5e2b1320083bf5378b7c195b0985fa04c1'
+2026-02-16 09:23:22,486 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "GET /web/image/res.company/1/favicon/ HTTP/1.1" 200 - 6 0.020 0.159
+2026-02-16 09:23:22,506 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 6 0.027 0.158
+2026-02-16 09:23:22,621 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.000 0.009
+2026-02-16 09:23:22,741 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.002 0.011
+2026-02-16 09:23:22,773 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 1 0.000 0.016
+2026-02-16 09:23:22,875 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.031 0.039
+2026-02-16 09:23:23,206 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:23] "POST /web/action/load HTTP/1.1" 200 - 16 0.020 0.078
+2026-02-16 09:23:23,939 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:23] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 56 0.042 0.358
+2026-02-16 09:23:24,385 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:24] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 7 0.034 0.056
+2026-02-16 09:23:24,427 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:24] "POST /web/dataset/call_kw/mail.activity/load_views HTTP/1.1" 200 - 7 0.027 0.105
+2026-02-16 09:23:24,490 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:24] "POST /web/dataset/call_kw/mrp.workorder/load_views HTTP/1.1" 200 - 7 0.036 0.110
+2026-02-16 09:23:24,493 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:24] "POST /web/dataset/call_kw/mail.followers/load_views HTTP/1.1" 200 - 7 0.092 0.081
+2026-02-16 09:23:25,208 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:25] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 48 0.081 0.315
+2026-02-16 09:23:25,587 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:25] "POST /web/dataset/call_kw/mail.followers/read HTTP/1.1" 200 - 3 0.015 0.028
+2026-02-16 09:23:25,656 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:25] "POST /web/dataset/call_kw/mail.message/read HTTP/1.1" 200 - 6 0.024 0.059
+2026-02-16 09:23:25,973 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:25] "POST /web/dataset/call_kw/stock.move/read HTTP/1.1" 200 - 30 0.173 0.259
+2026-02-16 09:23:26,552 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:26] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.023 0.045
+2026-02-16 09:23:26,669 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:26] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.024 0.089
+2026-02-16 09:23:26,669 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:26] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.055 0.118
+2026-02-16 09:23:26,669 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:26] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.065 0.077
+2026-02-16 09:23:26,714 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:26] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 27 0.150 0.096
+2026-02-16 09:23:26,912 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:26] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.001 0.034
+2026-02-16 09:23:27,102 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.012 0.059
+2026-02-16 09:23:27,128 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.049 0.091
+2026-02-16 09:23:27,136 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.009 0.057
+2026-02-16 09:23:27,136 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.028 0.093
+2026-02-16 09:23:27,286 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 6 0.022 0.029
+2026-02-16 09:23:27,451 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.000 0.014
+2026-02-16 09:23:27,536 8232 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\91/91cf91f4bb4e8ab1dda361b7ce81fd7a215616cb 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.partner(2,).image_128'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(43,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(43,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\91/91cf91f4bb4e8ab1dda361b7ce81fd7a215616cb'
+2026-02-16 09:23:27,536 8232 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\c5/c54d3d5e2b1320083bf5378b7c195b0985fa04c1 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.partner(3,).image_128'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(13,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(13,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\c5/c54d3d5e2b1320083bf5378b7c195b0985fa04c1'
+2026-02-16 09:23:27,570 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "GET /web/image/res.partner/2/image_128 HTTP/1.1" 200 - 5 0.034 0.072
+2026-02-16 09:23:27,570 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "GET /web/image/res.partner/3/image_128 HTTP/1.1" 200 - 5 0.020 0.093
+2026-02-16 09:23:27,897 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:23:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.048
+2026-02-16 09:24:12,428 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:24:12] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.021 50.151
+2026-02-16 09:24:13,789 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:24:13] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.030
+2026-02-16 09:25:02,790 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:25:02] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.026
+2026-02-16 09:25:08,073 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:25:08] "POST /web/webclient/version_info HTTP/1.1" 200 - 1 0.008 0.008
+2026-02-16 09:26:19,802 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:19] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.050
+2026-02-16 09:26:21,564 8232 WARNING manukanjabung odoo.http: The quantity to produce must be positive! 
+2026-02-16 09:26:21,569 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:21] "POST /web/dataset/call_button HTTP/1.1" 200 - 20 0.047 0.130
+2026-02-16 09:26:21,784 8232 INFO ? werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:21] "GET /web/static/src/xml/dialog.xml?debug=1771208781775 HTTP/1.1" 200 - - - -
+2026-02-16 09:26:22,129 8232 INFO ? werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "GET /web/static/src/xml/crash_manager.xml?debug=1771208781789 HTTP/1.1" 200 - - - -
+2026-02-16 09:26:22,175 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.012 0.047
+2026-02-16 09:26:22,300 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.054 0.118
+2026-02-16 09:26:22,304 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.037 0.081
+2026-02-16 09:26:22,304 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.075 0.081
+2026-02-16 09:26:22,486 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.009 0.013
+2026-02-16 09:26:22,529 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.004 0.023
+2026-02-16 09:26:22,729 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.040 0.040
+2026-02-16 09:26:22,729 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.045 0.067
+2026-02-16 09:26:22,749 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.026 0.096
+2026-02-16 09:26:22,810 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.000 0.010
+2026-02-16 09:26:22,861 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:26:22] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.000 0.008
+2026-02-16 09:27:00,542 8232 WARNING manukanjabung odoo.http: The quantity to produce must be positive! 
+2026-02-16 09:27:00,560 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:00] "POST /web/dataset/call_button HTTP/1.1" 200 - 20 0.028 0.142
+2026-02-16 09:27:01,170 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.013 0.062
+2026-02-16 09:27:01,281 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.041 0.102
+2026-02-16 09:27:01,281 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.046 0.125
+2026-02-16 09:27:01,297 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.006 0.055
+2026-02-16 09:27:01,297 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.030 0.078
+2026-02-16 09:27:01,545 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.012 0.034
+2026-02-16 09:27:01,775 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.053 0.108
+2026-02-16 09:27:01,775 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.008 0.067
+2026-02-16 09:27:01,778 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.031 0.116
+2026-02-16 09:27:01,778 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.055 0.079
+2026-02-16 09:27:01,882 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:01] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.000 0.016
+2026-02-16 09:27:11,507 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:27:11] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.032 50.071
+2026-02-16 09:28:01,897 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:01] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.010 50.056
+2026-02-16 09:28:31,975 8232 WARNING manukanjabung odoo.http: The quantity to produce must be positive! 
+2026-02-16 09:28:31,983 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:31] "POST /web/dataset/call_button HTTP/1.1" 200 - 20 0.045 0.184
+2026-02-16 09:28:32,562 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:32] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.022 0.068
+2026-02-16 09:28:32,701 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:32] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.063 0.159
+2026-02-16 09:28:32,709 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:32] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.068 0.145
+2026-02-16 09:28:32,718 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:32] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.046 0.126
+2026-02-16 09:28:32,726 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:32] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.009 0.080
+2026-02-16 09:28:32,948 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:32] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.008 0.023
+2026-02-16 09:28:33,211 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:33] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.043 0.089
+2026-02-16 09:28:33,214 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:33] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.047 0.117
+2026-02-16 09:28:33,214 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:33] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.061 0.118
+2026-02-16 09:28:33,228 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:33] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.000 0.099
+2026-02-16 09:28:33,293 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:33] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.000 0.017
+2026-02-16 09:28:51,958 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:28:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.048
+2026-02-16 09:29:42,313 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:29:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.035
+2026-02-16 09:30:32,387 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:30:32] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.051
+2026-02-16 09:31:22,768 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:31:22] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.014 50.039
+2026-02-16 09:32:12,825 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:32:12] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.041
+2026-02-16 09:33:03,200 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:33:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.046
+2026-02-16 09:33:53,272 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:33:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.059
+2026-02-16 09:34:43,661 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:34:43] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.064
+2026-02-16 09:35:33,719 8232 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:35:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.012 50.036
+2026-02-16 09:36:11,995 32708 INFO ? odoo: Odoo version 14.0-20231205 
+2026-02-16 09:36:12,002 32708 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-02-16 09:36:12,003 32708 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-02-16 09:36:12,003 32708 INFO ? odoo: database: openpg@localhost:5432 
+2026-02-16 09:36:12,713 32708 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-02-16 09:36:13,106 32708 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-02-16 09:36:13,158 32708 INFO manukanjabung odoo.modules.loading: loading 1 modules... 
+2026-02-16 09:36:13,198 32708 INFO manukanjabung odoo.modules.loading: 1 modules loaded in 0.04s, 0 queries (+0 extra) 
+2026-02-16 09:36:13,354 32708 INFO manukanjabung odoo.modules.loading: loading 77 modules... 
+2026-02-16 09:36:13,655 32708 WARNING manukanjabung py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model ins.general.ledger has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model ins.partner.ledger has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model ins.trial.balance has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model ins.partner.ageing has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-02-16 09:36:14,658 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-02-16 09:36:15,794 32708 INFO manukanjabung odoo.modules.loading: 77 modules loaded in 2.44s, 0 queries (+0 extra) 
+2026-02-16 09:36:17,740 32708 INFO manukanjabung odoo.modules.loading: Modules loaded. 
+2026-02-16 09:36:18,789 32708 INFO ? odoo.http: HTTP Configuring static files 
+2026-02-16 09:36:18,819 32708 INFO manukanjabung odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-02-16 09:36:21,410 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:21] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 213 0.223 2.369
+2026-02-16 09:36:21,808 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:21] "POST /web/dataset/search_read HTTP/1.1" 200 - 36 0.176 0.188
+2026-02-16 09:36:22,151 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:22] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.000 0.016
+2026-02-16 09:36:22,510 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:22] "POST /web/action/load HTTP/1.1" 200 - 29 0.017 0.091
+2026-02-16 09:36:22,964 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:22] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 80 0.108 0.196
+2026-02-16 09:36:23,091 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:23] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 46 0.026 0.078
+2026-02-16 09:36:23,458 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:23] "POST /web/dataset/search_read HTTP/1.1" 200 - 4 0.006 0.030
+2026-02-16 09:36:23,683 32708 INFO ? werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:23] "GET /garazd_product_label/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-02-16 09:36:24,720 32708 INFO ? werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:24] "GET /web_tour/static/src/xml/tip.xml?debug=1771209384712 HTTP/1.1" 200 - - - -
+2026-02-16 09:36:27,439 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:27] "POST /web/dataset/search_read HTTP/1.1" 200 - 5 0.045 0.066
+2026-02-16 09:36:27,439 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:27] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 42 0.040 0.089
+2026-02-16 09:36:30,743 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:30] "POST /web/dataset/call_kw/ir.module.module/read HTTP/1.1" 200 - 16 0.022 0.428
+2026-02-16 09:36:31,119 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:31] "POST /web/dataset/call_kw/ir.module.module.dependency/read HTTP/1.1" 200 - 4 0.013 0.019
+2026-02-16 09:36:31,372 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:31] "POST /web/dataset/call_kw/ir.module.category/name_search HTTP/1.1" 200 - 3 0.009 0.028
+2026-02-16 09:36:31,509 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\fd/fdffc45cba0e31dd34423b54f06fd48e9824192c 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('res.lang', <function Lang.get_available at 0x000002A4A9A8DEE8>)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 799, in get
+    return field_cache[record._ids[0]]
+KeyError: 1
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.lang(1,).flag_image_url'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.lang(1,).flag_image'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(1,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(1,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\fd/fdffc45cba0e31dd34423b54f06fd48e9824192c'
+2026-02-16 09:36:31,566 32708 INFO manukanjabung odoo.http: <function odoo.addons.web_editor.controllers.main.public_render_template> called ignoring args <kwargs={'context': {'lang': 'en_US', 'tz': 'Asia/Jakarta', 'uid': 2, 'allowed_company_ids': [1]}}> 
+2026-02-16 09:36:31,830 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:31] "GET /web/image?model=ir.module.module&id=518&field=icon_image&unique=02162026061446 HTTP/1.1" 200 - 3 0.023 0.055
+2026-02-16 09:36:31,951 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:31] "POST /web_editor/public_render_template HTTP/1.1" 200 - 82 0.108 0.393
+2026-02-16 09:36:33,297 32708 INFO manukanjabung odoo.addons.base.models.ir_module: ALLOW access to module.button_immediate_upgrade on ['SCADA for Odoo - Manufacturing Integration'] to user admin #2 via 127.0.0.1 
+2026-02-16 09:36:33,301 32708 INFO manukanjabung odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['SCADA for Odoo - Manufacturing Integration'] to user admin #2 via 127.0.0.1 
+2026-02-16 09:36:33,301 32708 INFO manukanjabung odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['SCADA for Odoo - Manufacturing Integration'] to user admin #2 via 127.0.0.1 
+2026-02-16 09:36:36,532 32708 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-02-16 09:36:36,799 32708 INFO manukanjabung odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user admin #2 via 127.0.0.1 
+2026-02-16 09:36:36,917 32708 INFO manukanjabung odoo.modules.loading: loading 1 modules... 
+2026-02-16 09:36:36,950 32708 INFO manukanjabung odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-02-16 09:36:37,203 32708 INFO manukanjabung odoo.modules.loading: updating modules list 
+2026-02-16 09:36:37,203 32708 INFO manukanjabung odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via 127.0.0.1 
+2026-02-16 09:36:41,037 32708 INFO manukanjabung odoo.modules.loading: loading 77 modules... 
+2026-02-16 09:36:41,267 32708 WARNING manukanjabung odoo.models: The model ins.general.ledger has no _description 
+2026-02-16 09:36:41,267 32708 WARNING manukanjabung odoo.models: The model ins.partner.ledger has no _description 
+2026-02-16 09:36:41,267 32708 WARNING manukanjabung odoo.models: The model ins.trial.balance has no _description 
+2026-02-16 09:36:41,267 32708 WARNING manukanjabung odoo.models: The model ins.partner.ageing has no _description 
+2026-02-16 09:36:41,274 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-02-16 09:36:41,274 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-02-16 09:36:41,274 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-02-16 09:36:41,274 32708 WARNING manukanjabung odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-02-16 09:36:41,343 32708 INFO manukanjabung odoo.modules.loading: Loading module grt_scada (61/77) 
+2026-02-16 09:36:42,285 32708 INFO manukanjabung odoo.modules.registry: module grt_scada: creating or updating database tables 
+2026-02-16 09:36:42,547 32708 INFO manukanjabung odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-02-16 09:36:42,547 32708 INFO manukanjabung odoo.modules.registry: Recreate table of model scada.health. 
+2026-02-16 09:36:42,547 32708 INFO manukanjabung odoo.modules.registry: Recreate table of model scada.module. 
+2026-02-16 09:36:42,551 32708 ERROR manukanjabung odoo.modules.registry: Model scada.health has no table. 
+2026-02-16 09:36:42,551 32708 ERROR manukanjabung odoo.modules.registry: Model scada.module has no table. 
+2026-02-16 09:36:43,334 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/security/security_groups.xml 
+2026-02-16 09:36:43,343 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/security/ir.model.access.csv 
+2026-02-16 09:36:43,541 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/security/ir.rule.xml 
+2026-02-16 09:36:43,543 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_equipment_view.xml 
+2026-02-16 09:36:43,611 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_mrp_views.xml 
+2026-02-16 09:36:43,797 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_sensor_reading_view.xml 
+2026-02-16 09:36:43,853 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_api_log_view.xml 
+2026-02-16 09:36:43,909 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_quality_control_view.xml 
+2026-02-16 09:36:43,970 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_equipment_oee_view.xml 
+2026-02-16 09:36:44,033 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/scada_equipment_failure_view.xml 
+2026-02-16 09:36:44,130 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/views/menu.xml 
+2026-02-16 09:36:44,259 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/data/demo_data.xml 
+2026-02-16 09:36:44,276 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/data/ir_cron.xml 
+2026-02-16 09:36:44,284 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/reports/scada_quality_control_report.xml 
+2026-02-16 09:36:44,284 32708 WARNING manukanjabung py.warnings: C:\odoo14c\server\odoo\tools\convert.py:296: DeprecationWarning: The <report> tag is deprecated, use a <record> tag for 'report_scada_quality_control'.
+  warnings.warn(f"The <report> tag is deprecated, use a <record> tag for {xml_id!r}.", DeprecationWarning)
+ 
+2026-02-16 09:36:44,302 32708 INFO manukanjabung odoo.modules.loading: loading grt_scada/reports/scada_equipment_oee_report.xml 
+2026-02-16 09:36:44,302 32708 WARNING manukanjabung py.warnings: C:\odoo14c\server\odoo\tools\convert.py:296: DeprecationWarning: The <report> tag is deprecated, use a <record> tag for 'report_scada_equipment_oee'.
+  warnings.warn(f"The <report> tag is deprecated, use a <record> tag for {xml_id!r}.", DeprecationWarning)
+ 
+2026-02-16 09:36:44,464 32708 INFO manukanjabung odoo.modules.loading: Module grt_scada loaded in 3.12s, 788 queries 
+2026-02-16 09:36:44,563 32708 INFO manukanjabung odoo.modules.loading: 77 modules loaded in 3.53s, 788 queries (+0 extra) 
+2026-02-16 09:36:44,824 32708 WARNING manukanjabung odoo.modules.loading: The model scada.material.consumption has no access rules, consider adding one. E.g. access_scada_material_consumption,access_scada_material_consumption,model_scada_material_consumption,base.group_user,1,0,0,0 
+2026-02-16 09:36:44,824 32708 WARNING manukanjabung odoo.modules.loading: The model scada.health has no access rules, consider adding one. E.g. access_scada_health,access_scada_health,model_scada_health,base.group_user,1,0,0,0 
+2026-02-16 09:36:44,824 32708 WARNING manukanjabung odoo.modules.loading: The model scada.module has no access rules, consider adding one. E.g. access_scada_module,access_scada_module,model_scada_module,base.group_user,1,0,0,0 
+2026-02-16 09:36:44,824 32708 WARNING manukanjabung odoo.modules.loading: The model scada.mo.data has no access rules, consider adding one. E.g. access_scada_mo_data,access_scada_mo_data,model_scada_mo_data,base.group_user,1,0,0,0 
+2026-02-16 09:36:45,097 32708 INFO manukanjabung odoo.modules.registry: verifying fields for every extended model 
+2026-02-16 09:36:45,169 32708 INFO manukanjabung odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-02-16 09:36:45,169 32708 INFO manukanjabung odoo.modules.registry: Recreate table of model scada.health. 
+2026-02-16 09:36:45,169 32708 INFO manukanjabung odoo.modules.registry: Recreate table of model scada.module. 
+2026-02-16 09:36:45,169 32708 ERROR manukanjabung odoo.modules.registry: Model scada.health has no table. 
+2026-02-16 09:36:45,169 32708 ERROR manukanjabung odoo.modules.registry: Model scada.module has no table. 
+2026-02-16 09:36:45,694 32708 INFO manukanjabung odoo.modules.loading: Modules loaded. 
+2026-02-16 09:36:45,726 32708 INFO manukanjabung odoo.addons.base.models.ir_module: getting next ir.actions.todo() 
+2026-02-16 09:36:45,741 32708 INFO manukanjabung odoo.modules.registry: Registry changed, signaling through the database 
+2026-02-16 09:36:45,742 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:45] "POST /web/dataset/call_button HTTP/1.1" 200 - 3823 2.574 9.889
+2026-02-16 09:36:46,102 32708 INFO manukanjabung odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-02-16 09:36:47,317 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\f4/f400fdbb27cb11d52d30aca6ccc06a8ba8f68a08 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\f4/f400fdbb27cb11d52d30aca6ccc06a8ba8f68a08'
+2026-02-16 09:36:47,317 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\04/045f4233ef4662cae540158e38d28c3dcdd796af 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\04/045f4233ef4662cae540158e38d28c3dcdd796af'
+2026-02-16 09:36:47,317 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\92/928e2c65ab38a197326fa13b76961b65b806ea95 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\92/928e2c65ab38a197326fa13b76961b65b806ea95'
+2026-02-16 09:36:47,317 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\a4/a49bf5c02694638dade99d545f6528fdee0ba86d 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\a4/a49bf5c02694638dade99d545f6528fdee0ba86d'
+2026-02-16 09:36:47,317 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\a2/a2ee5fa7a35e9980a52d288e53b0b5b1af1fa85e 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\a2/a2ee5fa7a35e9980a52d288e53b0b5b1af1fa85e'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\6e/6e6d05b415a00adaf3c0d887a8b9a7fc4ee5b9d9 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\6e/6e6d05b415a00adaf3c0d887a8b9a7fc4ee5b9d9'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\54/54c7fa764b11f5281aa0f24c1e4531ad7a63e540 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\54/54c7fa764b11f5281aa0f24c1e4531ad7a63e540'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\fe/fe8a6154f63f480313cf539b751c4fb30f502ab0 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\fe/fe8a6154f63f480313cf539b751c4fb30f502ab0'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\b9/b99861918b65de424768af740c9e7009a144c5d7 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\b9/b99861918b65de424768af740c9e7009a144c5d7'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\be/bec854152c45b91ceef552335382f9d614106cf4 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\be/bec854152c45b91ceef552335382f9d614106cf4'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\a3/a330920abcef2433621d6bb985bc24828d77f77b 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\a3/a330920abcef2433621d6bb985bc24828d77f77b'
+2026-02-16 09:36:47,325 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\b8/b8f9001425cfd0ef0315797909281b912817643a 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '1', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\b8/b8f9001425cfd0ef0315797909281b912817643a'
+2026-02-16 09:36:48,846 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:48] "GET /web HTTP/1.1" 200 - 600 0.384 2.365
+2026-02-16 09:36:49,239 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:49] "GET /web/content/175-a6eea8b/web.assets_backend.css HTTP/1.1" 200 - 2 0.003 0.050
+2026-02-16 09:36:49,245 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:49] "GET /web/webclient/load_menus/9b2929a74c20d2e061b256bca19153849899f3ed51b963ada928f28b4d9ca2b2 HTTP/1.1" 200 - 1 0.009 0.038
+2026-02-16 09:36:49,256 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:49] "GET /web/content/176-a6eea8b/web.assets_backend.js HTTP/1.1" 304 - 2 0.002 0.063
+2026-02-16 09:36:49,508 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:49] "GET /web/webclient/qweb/e87a76dc11016c55c6d88406171258df14783f1198bf333a744aed74bc72a43d?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,garazd_product_label,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.065
+2026-02-16 09:36:49,662 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:49] "GET /web/webclient/translations/5227498d9df4b403b0244c75aac21e0c091e50ce?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgarazd_product_label%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=en_US HTTP/1.1" 200 - 3 0.012 0.016
+2026-02-16 09:36:50,060 32708 INFO ? werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:50] "GET /web/static/src/xml/debug.xml?debug=1771209409722 HTTP/1.1" 200 - - - -
+2026-02-16 09:36:50,620 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:50] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 2 0.049 0.511
+2026-02-16 09:36:50,703 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:50] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.020 0.494
+2026-02-16 09:36:50,813 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\c5/c54d3d5e2b1320083bf5378b7c195b0985fa04c1 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.users(2,).image_128'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'res.partner(3,).image_128'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(13,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(13,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\c5/c54d3d5e2b1320083bf5378b7c195b0985fa04c1'
+2026-02-16 09:36:50,932 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:50] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.044 0.387
+2026-02-16 09:36:51,407 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:51] "POST /mail/init_messaging HTTP/1.1" 200 - 78 1.206 0.352
+2026-02-16 09:36:51,659 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:51] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 9 0.320 1.257
+2026-02-16 09:36:51,662 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:51] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.108 0.254
+2026-02-16 09:36:51,822 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:51] "POST /longpolling/im_status HTTP/1.1" 200 - 5 0.023 0.016
+2026-02-16 09:36:51,994 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:51] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.001 0.008
+2026-02-16 09:36:52,511 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:52] "POST /web/action/load HTTP/1.1" 200 - 9 0.034 0.157
+2026-02-16 09:36:52,946 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:52] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 27 0.085 0.033
+2026-02-16 09:36:53,316 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:36:53] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 9 0.006 0.007
+2026-02-16 09:37:26,543 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:37:26] "POST /longpolling/poll HTTP/1.1" 200 - 19 0.066 50.089
+2026-02-16 09:37:41,677 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:37:41] "POST /longpolling/poll HTTP/1.1" 200 - 12 0.060 51.621
+2026-02-16 09:37:42,760 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:37:42] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-02-16 09:38:24,922 32708 INFO manukanjabung odoo.addons.base.models.res_users: Login successful for db:manukanjabung login:admin from 127.0.0.1 
+2026-02-16 09:38:24,944 32708 INFO manukanjabung odoo.addons.base.models.res_users: Login successful for db:manukanjabung login:admin from 127.0.0.1 
+2026-02-16 09:38:24,954 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:38:24] "POST /api/scada/authenticate HTTP/1.1" 200 - 21 0.043 0.064
+2026-02-16 09:38:25,663 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\f4/f400fdbb27cb11d52d30aca6ccc06a8ba8f68a08 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\f4/f400fdbb27cb11d52d30aca6ccc06a8ba8f68a08'
+2026-02-16 09:38:25,663 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\04/045f4233ef4662cae540158e38d28c3dcdd796af 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\04/045f4233ef4662cae540158e38d28c3dcdd796af'
+2026-02-16 09:38:25,672 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\92/928e2c65ab38a197326fa13b76961b65b806ea95 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\92/928e2c65ab38a197326fa13b76961b65b806ea95'
+2026-02-16 09:38:25,672 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\a4/a49bf5c02694638dade99d545f6528fdee0ba86d 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\a4/a49bf5c02694638dade99d545f6528fdee0ba86d'
+2026-02-16 09:38:25,672 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\a2/a2ee5fa7a35e9980a52d288e53b0b5b1af1fa85e 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\a2/a2ee5fa7a35e9980a52d288e53b0b5b1af1fa85e'
+2026-02-16 09:38:25,672 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\6e/6e6d05b415a00adaf3c0d887a8b9a7fc4ee5b9d9 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\6e/6e6d05b415a00adaf3c0d887a8b9a7fc4ee5b9d9'
+2026-02-16 09:38:25,672 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\fe/fe8a6154f63f480313cf539b751c4fb30f502ab0 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\fe/fe8a6154f63f480313cf539b751c4fb30f502ab0'
+2026-02-16 09:38:25,679 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\b9/b99861918b65de424768af740c9e7009a144c5d7 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\b9/b99861918b65de424768af740c9e7009a144c5d7'
+2026-02-16 09:38:25,679 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\be/bec854152c45b91ceef552335382f9d614106cf4 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\be/bec854152c45b91ceef552335382f9d614106cf4'
+2026-02-16 09:38:25,686 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\a3/a330920abcef2433621d6bb985bc24828d77f77b 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\a3/a330920abcef2433621d6bb985bc24828d77f77b'
+2026-02-16 09:38:25,688 32708 INFO manukanjabung odoo.addons.base.models.ir_attachment: _read_file reading C:\Users\sapta\AppData\Local\OpenERP S.A\Odoo\filestore\manukanjabung\b8/b8f9001425cfd0ef0315797909281b912817643a 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\cache.py", line 85, in lookup
+    r = d[key]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: ('ir.ui.menu', <function IrUiMenu.load_menus at 0x000002A4A81DD048>, 2, '', ('en_US',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None, None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).datas'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\api.py", line 798, in get
+    field_cache = field_cache[record.env.cache_key(field)]
+KeyError: (None,)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\fields.py", line 993, in __get__
+    value = env.cache.get(record, self)
+  File "C:\odoo14c\server\odoo\api.py", line 802, in get
+    raise CacheMiss(record, field)
+odoo.exceptions.CacheMiss: 'ir.attachment(140,).raw'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_attachment.py", line 105, in _file_read
+    with open(full_path, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sapta\\AppData\\Local\\OpenERP S.A\\Odoo\\filestore\\manukanjabung\\b8/b8f9001425cfd0ef0315797909281b912817643a'
+2026-02-16 09:38:25,802 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:38:25] "POST /api/scada/equipment-failure HTTP/1.1" 200 - 15 0.109 0.030
+2026-02-16 09:38:25,887 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:38:25] "POST /web/session/authenticate HTTP/1.1" 200 - 262 0.252 0.788
+2026-02-16 09:38:26,591 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:38:26] "POST /api/scada/mo-list-detailed HTTP/1.1" 200 - 78 0.128 0.316
+2026-02-16 09:38:32,050 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:38:32] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.013 50.032
+2026-02-16 09:38:33,751 32708 INFO manukanjabung werkzeug: 127.0.0.1 - - [16/Feb/2026 09:38:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016

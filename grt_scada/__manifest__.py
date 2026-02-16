@@ -1,6 +1,6 @@
 {
     'name': 'SCADA for Odoo - Manufacturing Integration',
-    'version': '4.0.38',
+    'version': '4.0.39',
     'category': 'manufacturing',
     'license': 'LGPL-3',
     'author': 'PT. Gagak Rimang Teknologi',
