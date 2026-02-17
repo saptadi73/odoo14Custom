@@ -16,6 +16,14 @@ class PrintProductLabel(models.TransientModel):
     _description = 'Wizard to print Product Labels'
 
     @api.model
+    def _get_latest_lot(self, product):
+        return self.env['stock.production.lot'].search(
+            [('product_id', '=', product.id)],
+            order='create_date desc, id desc',
+            limit=1,
+        )
+
+    @api.model
     def _complete_label_fields(self, label_ids: List[int]) -> List[int]:
         """Set additional fields for product labels. Method to override."""
         # Increase a label sequence
@@ -31,15 +39,19 @@ class PrintProductLabel(models.TransientModel):
         if self._context.get('active_model') == 'product.template':
             products = self.env[self._context.get('active_model')].browse(self._context.get('default_product_ids'))
             for product in products:
+                lot = self._get_latest_lot(product.product_variant_id)
                 label = self.env['print.product.label.line'].create({
                     'product_id': product.product_variant_id.id,
+                    'lot_id': lot.id,
                 })
                 res.append(label.id)
         elif self._context.get('active_model') == 'product.product':
             products = self.env[self._context.get('active_model')].browse(self._context.get('default_product_ids'))
             for product in products:
+                lot = self._get_latest_lot(product)
                 label = self.env['print.product.label.line'].create({
                     'product_id': product.id,
+                    'lot_id': lot.id,
                 })
                 res.append(label.id)
         elif self._context.get('active_model') == 'stock.production.lot':
