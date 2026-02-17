@@ -64,6 +64,33 @@
                                 </tr>
                             </tbody>
                         </table>
+
+                        <h3>Consumption Detail Per Silo</h3>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Silo Code</th>
+                                    <th>Silo Name</th>
+                                    <th class="text-right">To Consume</th>
+                                    <th class="text-right">Actual Consumed</th>
+                                    <th class="text-right">Variance</th>
+                                    <th class="text-right">Ratio %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-if="not o.line_ids">
+                                    <td colspan="6">No silo consumption detail.</td>
+                                </tr>
+                                <tr t-foreach="o.line_ids" t-as="line">
+                                    <td><span t-esc="line.equipment_code"/></td>
+                                    <td><span t-esc="line.equipment_name"/></td>
+                                    <td class="text-right"><span t-esc="line.qty_to_consume"/></td>
+                                    <td class="text-right"><span t-esc="line.qty_consumed"/></td>
+                                    <td class="text-right"><span t-esc="line.variance_qty"/></td>
+                                    <td class="text-right"><span t-esc="line.consumption_ratio"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </t>
             </t>

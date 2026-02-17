@@ -271,6 +271,36 @@ class MiddlewareService:
             'mo_id': mo_record.name,
         }
 
+    def cancel_mo(self, mo_record, payload_data):
+        mo_name = payload_data.get('mo_id')
+        if mo_name and str(mo_name) != str(mo_record.name):
+            return {
+                'status': 'error',
+                'message': f'mo_id mismatch: {mo_name}',
+            }
+
+        if mo_record.state == 'cancel':
+            return {
+                'status': 'success',
+                'message': 'Manufacturing order already cancelled',
+                'mo_id': mo_record.name,
+                'mo_state': mo_record.state,
+            }
+
+        if mo_record.state == 'done':
+            return {
+                'status': 'error',
+                'message': f'Cannot cancel MO "{mo_record.name}" in state "done"',
+            }
+
+        mo_record.sudo().action_cancel()
+        return {
+            'status': 'success',
+            'message': 'Manufacturing order cancelled successfully',
+            'mo_id': mo_record.name,
+            'mo_state': mo_record.state,
+        }
+
     def mark_mo_done(self, mo_record, payload_data):
         equipment = self._get_equipment(payload_data.get('equipment_id'))
 
@@ -366,6 +396,8 @@ class MiddlewareService:
         domain = []
         if equipment:
             domain.append(('scada_equipment_id', '=', equipment.id))
+        # Middleware list should never include cancelled MO.
+        domain.append(('state', '!=', 'cancel'))
         if status:
             domain.append(('state', '=', status))
 
@@ -673,6 +705,12 @@ class MiddlewareService:
                     'status': 'error',
                     'message': f'Manufacturing Order "{mo_name}" not found',
                 }
+
+            if mo_record.state in ['done', 'cancel']:
+                return {
+                    'status': 'error',
+                    'message': f'Cannot update MO "{mo_name}" in state "{mo_record.state}"',
+                }
             
             # Update quantity jika ada.
             # Support beberapa alias agar payload middleware yang berbeda format tetap terbaca.
@@ -708,16 +746,24 @@ class MiddlewareService:
                         'message': 'Quantity must be greater than 0',
                     }
 
-                write_vals = {}
-                # Hanya update qty_producing agar target plan (product_qty) tetap terjaga
-                # untuk perbandingan target vs actual (OEE/quality).
+                # Gunakan wizard standar Odoo agar:
+                # - product_qty berubah
+                # - raw/finished moves ikut re-scale konsisten
+                # - workorder expectation ikut ter-update
+                if abs((mo_record.product_qty or 0.0) - quantity) > 1e-9:
+                    change_wizard = self.env['change.production.qty'].create({
+                        'mo_id': mo_record.id,
+                        'product_qty': quantity,
+                    })
+                    change_wizard.change_prod_qty()
+
+                # Selaraskan qty_producing dengan target terbaru untuk menghindari mismatch.
                 if hasattr(mo_record, 'qty_producing'):
-                    write_vals['qty_producing'] = quantity
-                if write_vals:
-                    mo_record.write(write_vals)
+                    mo_record.qty_producing = quantity
+
                 _logger.info(
                     f'Updated MO {mo_name} quantity from "{quantity_key_used}" to {quantity} '
-                    f'(qty_producing only)'
+                    f'(rescaled with change.production.qty)'
                 )
             
             # Process consumption per equipment code

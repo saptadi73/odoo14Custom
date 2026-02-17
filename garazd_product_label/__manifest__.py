@@ -14,6 +14,8 @@
     'images': ['static/description/banner.png', 'static/description/icon.png'],
     'depends': [
         'product',
+        'stock',
+        'mrp',
     ],
     'data': [
         'security/ir.model.access.csv',

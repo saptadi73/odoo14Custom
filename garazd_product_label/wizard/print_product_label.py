@@ -42,6 +42,51 @@ class PrintProductLabel(models.TransientModel):
                     'product_id': product.id,
                 })
                 res.append(label.id)
+        elif self._context.get('active_model') == 'stock.production.lot':
+            lots = self.env[self._context.get('active_model')].browse(
+                self._context.get('default_lot_ids') or self._context.get('active_ids') or []
+            )
+            for lot in lots:
+                if not lot.product_id:
+                    continue
+                label = self.env['print.product.label.line'].create({
+                    'product_id': lot.product_id.id,
+                    'lot_id': lot.id,
+                    'qty_initial': 1,
+                    'qty': 1,
+                })
+                res.append(label.id)
+        elif self._context.get('active_model') == 'mrp.production':
+            productions = self.env[self._context.get('active_model')].browse(
+                self._context.get('default_mo_ids') or self._context.get('active_ids') or []
+            )
+            for production in productions:
+                finished_move_lines = production.move_finished_ids.filtered(
+                    lambda m: m.product_id.id == production.product_id.id and m.state != 'cancel'
+                ).mapped('move_line_ids').filtered(lambda ml: ml.qty_done > 0)
+
+                if finished_move_lines:
+                    for move_line in finished_move_lines:
+                        qty = int(move_line.qty_done) if move_line.qty_done and move_line.qty_done > 1 else 1
+                        label = self.env['print.product.label.line'].create({
+                            'product_id': move_line.product_id.id,
+                            'lot_id': move_line.lot_id.id,
+                            'qty_initial': qty,
+                            'qty': qty,
+                        })
+                        res.append(label.id)
+                    continue
+
+                # Fallback: jika belum ada move line lot, tetap siapkan label produk batch ini.
+                if production.product_id:
+                    qty = int(production.qty_producing or production.product_qty or 1)
+                    qty = qty if qty > 0 else 1
+                    label = self.env['print.product.label.line'].create({
+                        'product_id': production.product_id.id,
+                        'qty_initial': qty,
+                        'qty': qty,
+                    })
+                    res.append(label.id)
         res = self._complete_label_fields(res)
         return res
 

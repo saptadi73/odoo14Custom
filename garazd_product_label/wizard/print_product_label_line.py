@@ -15,6 +15,10 @@ class PrintProductLabelLine(models.TransientModel):
     selected = fields.Boolean(string='Print', default=True)
     wizard_id = fields.Many2one(comodel_name='print.product.label')  # Not make required
     product_id = fields.Many2one(comodel_name='product.product', required=True)
+    lot_id = fields.Many2one(
+        comodel_name='stock.production.lot',
+        string='Lot/Serial Number',
+    )
     barcode = fields.Char(compute='_compute_barcode')
     qty_initial = fields.Integer(string='Initial Qty', default=1)
     qty = fields.Integer(string='Label Qty', default=1)
@@ -30,10 +34,10 @@ class PrintProductLabelLine(models.TransientModel):
                 label.wizard_id.company_id and label.wizard_id.company_id.id \
                 or self.env.user.company_id.id
 
-    @api.depends('product_id')
+    @api.depends('product_id', 'lot_id')
     def _compute_barcode(self):
         for label in self:
-            label.barcode = label.product_id.barcode
+            label.barcode = label.lot_id.name or label.product_id.barcode
 
     def action_plus_qty(self):
         self.ensure_one()

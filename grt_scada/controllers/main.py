@@ -9,7 +9,7 @@ from odoo import http
 from odoo.http import request
 import logging
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from ..services.product_service import ProductService
 from ..services.mo_weight_service import MoWeightService
 from ..services.bom_service import BomService
@@ -424,6 +424,28 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error marking MO done (payload): {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
+    @http.route('/api/scada/mo/cancel', type='json', auth='user', methods=['POST'])
+    def cancel_mo_by_payload(self, **kwargs):
+        """Cancel MO using mo_id from payload."""
+        try:
+            data = self._get_json_payload()
+            mo_name = data.get('mo_id')
+            if not mo_name:
+                return {'status': 'error', 'message': 'mo_id is required'}
+
+            mo = request.env['mrp.production'].search([
+                ('name', '=', str(mo_name))
+            ], limit=1)
+            if not mo:
+                return {'status': 'error', 'message': f'MO not found: {mo_name}'}
+
+            from ..services.middleware_service import MiddlewareService
+            service = MiddlewareService(request.env)
+            return service.cancel_mo(mo, data)
+        except Exception as e:
+            _logger.error(f'Error cancelling MO (payload): {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
     @http.route('/api/scada/mo/update-with-consumptions', type='json', auth='user', methods=['POST'])
     def update_mo_with_consumptions(self, **kwargs):
         """
@@ -523,6 +545,263 @@ class ScadaJsonRpcController(http.Controller):
             return service.get_mo_weights(mo_value=mo_id, limit=limit, offset=offset)
         except Exception as e:
             _logger.error(f'Error getting MO weights: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    # ===== OEE =====
+
+    @http.route('/api/scada/oee-detail', type='json', auth='user', methods=['POST'])
+    def get_oee_detail(self, **kwargs):
+        """
+        Get OEE detail data for frontend.
+
+        Params (JSON-RPC params):
+            - oee_id (optional): specific OEE record id
+            - mo_id (optional): MO name or ID
+            - equipment_code (optional): filter by equipment code
+            - date_from (optional): YYYY-MM-DD
+            - date_to (optional): YYYY-MM-DD
+            - limit (optional): default 50
+            - offset (optional): default 0
+        """
+        try:
+            data = self._get_json_payload()
+            limit = int(data.get('limit', 50))
+            offset = int(data.get('offset', 0))
+
+            oee_model = request.env['scada.equipment.oee']
+            domain = []
+
+            oee_id = data.get('oee_id')
+            if oee_id:
+                domain.append(('id', '=', int(oee_id)))
+
+            mo_value = data.get('mo_id')
+            if mo_value:
+                mo_id = None
+                if isinstance(mo_value, int) or str(mo_value).isdigit():
+                    mo_id = int(mo_value)
+                else:
+                    mo = request.env['mrp.production'].search([
+                        ('name', '=', str(mo_value))
+                    ], limit=1)
+                    if mo:
+                        mo_id = mo.id
+                if mo_id:
+                    domain.append(('manufacturing_order_id', '=', mo_id))
+                else:
+                    return {
+                        'status': 'error',
+                        'message': f'MO not found: {mo_value}',
+                    }
+
+            equipment_code = data.get('equipment_code')
+            if equipment_code:
+                equipment = request.env['scada.equipment'].search([
+                    ('equipment_code', '=', str(equipment_code))
+                ], limit=1)
+                if not equipment:
+                    return {
+                        'status': 'error',
+                        'message': f'Equipment not found: {equipment_code}',
+                    }
+                domain.append(('equipment_id', '=', equipment.id))
+
+            date_from = data.get('date_from')
+            if date_from:
+                domain.append(('date_done', '>=', f'{date_from} 00:00:00'))
+            date_to = data.get('date_to')
+            if date_to:
+                domain.append(('date_done', '<=', f'{date_to} 23:59:59'))
+
+            records = oee_model.search(
+                domain,
+                order='date_done desc, id desc',
+                limit=limit,
+                offset=offset
+            )
+
+            result_data = []
+            for rec in records:
+                lines = []
+                for line in rec.line_ids:
+                    lines.append({
+                        'equipment_id': line.equipment_id.id if line.equipment_id else None,
+                        'equipment_code': line.equipment_code,
+                        'equipment_name': line.equipment_name,
+                        'to_consume': line.qty_to_consume,
+                        'actual_consumed': line.qty_consumed,
+                        'variance': line.variance_qty,
+                        'consumption_ratio': line.consumption_ratio,
+                        'material_count': line.material_count,
+                    })
+
+                result_data.append({
+                    'oee_id': rec.id,
+                    'date_done': rec.date_done.isoformat() if rec.date_done else None,
+                    'mo_id': rec.manufacturing_order_id.name if rec.manufacturing_order_id else None,
+                    'mo_record_id': rec.manufacturing_order_id.id if rec.manufacturing_order_id else None,
+                    'equipment': self._get_equipment_details(rec.equipment_id),
+                    'product_id': rec.product_id.id if rec.product_id else None,
+                    'product_name': rec.product_id.display_name if rec.product_id else None,
+                    'qty_planned': rec.qty_planned,
+                    'qty_finished': rec.qty_finished,
+                    'variance_finished': rec.variance_finished,
+                    'yield_percent': rec.yield_percent,
+                    'qty_bom_consumption': rec.qty_bom_consumption,
+                    'qty_actual_consumption': rec.qty_actual_consumption,
+                    'variance_consumption': rec.variance_consumption,
+                    'consumption_ratio': rec.consumption_ratio,
+                    'lines': lines,
+                })
+
+            return {
+                'status': 'success',
+                'count': len(result_data),
+                'data': result_data,
+            }
+        except Exception as e:
+            _logger.error(f'Error getting OEE detail: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/oee-equipment-avg', type='json', auth='user', methods=['POST'])
+    def get_oee_equipment_avg(self, **kwargs):
+        """
+        Get average OEE report by SCADA equipment list.
+
+        Params (JSON-RPC params):
+            - equipment_code (optional)
+            - equipment_type (optional)
+            - is_active (optional): true/false
+            - date_from (optional): YYYY-MM-DD
+            - date_to (optional): YYYY-MM-DD
+            - limit (optional): default 100
+            - offset (optional): default 0
+        """
+        try:
+            data = self._get_json_payload()
+            limit = int(data.get('limit', 100))
+            offset = int(data.get('offset', 0))
+
+            equipment_domain = []
+            if data.get('equipment_code'):
+                equipment_domain.append(('equipment_code', '=', str(data.get('equipment_code'))))
+            if data.get('equipment_type'):
+                equipment_domain.append(('equipment_type', '=', str(data.get('equipment_type'))))
+            is_active = data.get('is_active')
+            if is_active is not None:
+                if isinstance(is_active, bool):
+                    equipment_domain.append(('is_active', '=', is_active))
+                elif isinstance(is_active, str):
+                    parsed_active = self._parse_bool_param(is_active, default=None)
+                    if parsed_active is not None:
+                        equipment_domain.append(('is_active', '=', parsed_active))
+
+            equipment_model = request.env['scada.equipment']
+            equipments = equipment_model.search(
+                equipment_domain,
+                order='name asc, id asc',
+                limit=limit,
+                offset=offset
+            )
+
+            if not equipments:
+                return {
+                    'status': 'success',
+                    'count': 0,
+                    'data': [],
+                }
+
+            equipment_ids = equipments.ids
+
+            oee_domain = [('equipment_id', 'in', equipment_ids)]
+            line_domain = [('equipment_id', 'in', equipment_ids)]
+
+            date_from = data.get('date_from')
+            if date_from:
+                oee_domain.append(('date_done', '>=', f'{date_from} 00:00:00'))
+                line_domain.append(('oee_id.date_done', '>=', f'{date_from} 00:00:00'))
+
+            date_to = data.get('date_to')
+            if date_to:
+                oee_domain.append(('date_done', '<=', f'{date_to} 23:59:59'))
+                line_domain.append(('oee_id.date_done', '<=', f'{date_to} 23:59:59'))
+
+            oee_groups = request.env['scada.equipment.oee'].read_group(
+                oee_domain,
+                [
+                    'equipment_id',
+                    'qty_planned:avg',
+                    'qty_finished:avg',
+                    'variance_finished:avg',
+                    'yield_percent:avg',
+                    'qty_bom_consumption:avg',
+                    'qty_actual_consumption:avg',
+                    'variance_consumption:avg',
+                    'consumption_ratio:avg',
+                    'date_done:max',
+                ],
+                ['equipment_id'],
+                lazy=False
+            )
+
+            line_groups = request.env['scada.equipment.oee.line'].read_group(
+                line_domain,
+                [
+                    'equipment_id',
+                    'qty_to_consume:avg',
+                    'qty_consumed:avg',
+                    'variance_qty:avg',
+                    'consumption_ratio:avg',
+                    'material_count:avg',
+                ],
+                ['equipment_id'],
+                lazy=False
+            )
+
+            oee_map = {
+                group['equipment_id'][0]: group
+                for group in oee_groups if group.get('equipment_id')
+            }
+            line_map = {
+                group['equipment_id'][0]: group
+                for group in line_groups if group.get('equipment_id')
+            }
+
+            result_data = []
+            for equipment in equipments:
+                oee_stat = oee_map.get(equipment.id, {})
+                line_stat = line_map.get(equipment.id, {})
+
+                result_data.append({
+                    'equipment': self._get_equipment_details(equipment),
+                    'oee_records_count': oee_stat.get('__count', 0),
+                    'avg_summary': {
+                        'qty_planned': oee_stat.get('qty_planned_avg', 0.0),
+                        'qty_finished': oee_stat.get('qty_finished_avg', 0.0),
+                        'variance_finished': oee_stat.get('variance_finished_avg', 0.0),
+                        'yield_percent': oee_stat.get('yield_percent_avg', 0.0),
+                        'qty_bom_consumption': oee_stat.get('qty_bom_consumption_avg', 0.0),
+                        'qty_actual_consumption': oee_stat.get('qty_actual_consumption_avg', 0.0),
+                        'variance_consumption': oee_stat.get('variance_consumption_avg', 0.0),
+                        'consumption_ratio': oee_stat.get('consumption_ratio_avg', 0.0),
+                    },
+                    'avg_consumption_detail': {
+                        'to_consume': line_stat.get('qty_to_consume_avg', 0.0),
+                        'actual_consumed': line_stat.get('qty_consumed_avg', 0.0),
+                        'variance': line_stat.get('variance_qty_avg', 0.0),
+                        'consumption_ratio': line_stat.get('consumption_ratio_avg', 0.0),
+                        'material_count': line_stat.get('material_count_avg', 0.0),
+                    },
+                    'last_oee_date': oee_stat.get('date_done_max'),
+                })
+
+            return {
+                'status': 'success',
+                'count': len(result_data),
+                'data': result_data,
+            }
+        except Exception as e:
+            _logger.error(f'Error getting OEE equipment average: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
     # ===== EQUIPMENT =====
@@ -625,6 +904,139 @@ class ScadaJsonRpcController(http.Controller):
             return {'status': 'success', 'count': len(data), 'data': data}
         except Exception as e:
             _logger.error(f'Error getting equipment failure reports: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/equipment-failure-report', type='json', auth='user', methods=['POST'])
+    def get_equipment_failure_report(self, **kwargs):
+        """Get frontend-ready equipment failure report (detail + summary)."""
+        try:
+            data = self._get_json_payload()
+
+            equipment_code = data.get('equipment_code')
+            date_from = data.get('date_from')
+            date_to = data.get('date_to')
+            period = (data.get('period') or '').strip().lower()
+            limit = int(data.get('limit', 100))
+            offset = int(data.get('offset', 0))
+
+            domain = []
+            if equipment_code:
+                domain.append(('equipment_code', '=', str(equipment_code)))
+
+            # Predefined period filter. date_from/date_to tetap bisa override jika dikirim.
+            if period:
+                now = datetime.now()
+                start_dt = None
+                end_dt = None
+
+                if period == 'today':
+                    start_dt = now.replace(hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+                elif period == 'yesterday':
+                    y = now - timedelta(days=1)
+                    start_dt = y.replace(hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = y.replace(hour=23, minute=59, second=59, microsecond=0)
+                elif period == 'this_week':
+                    week_start = now - timedelta(days=now.weekday())
+                    start_dt = week_start.replace(hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+                elif period == 'last_7_days':
+                    start_dt = (now - timedelta(days=6)).replace(hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+                elif period == 'this_month':
+                    start_dt = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+                elif period == 'last_month':
+                    first_this_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+                    last_prev_month = first_this_month - timedelta(seconds=1)
+                    start_dt = last_prev_month.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = last_prev_month.replace(hour=23, minute=59, second=59, microsecond=0)
+                elif period == 'this_year':
+                    start_dt = now.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+                    end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+                else:
+                    return {
+                        'status': 'error',
+                        'message': (
+                            'Invalid period value. '
+                            'Supported: today, yesterday, this_week, last_7_days, '
+                            'this_month, last_month, this_year'
+                        ),
+                    }
+
+                if not date_from:
+                    date_from = start_dt.strftime('%Y-%m-%d %H:%M:%S')
+                if not date_to:
+                    date_to = end_dt.strftime('%Y-%m-%d %H:%M:%S')
+
+            if date_from:
+                cleaned_from = str(date_from).strip().replace('T', ' ')
+                if len(cleaned_from) == 10:
+                    cleaned_from = f'{cleaned_from} 00:00:00'
+                elif len(cleaned_from) == 16:
+                    cleaned_from = f'{cleaned_from}:00'
+                domain.append(('date', '>=', cleaned_from))
+
+            if date_to:
+                cleaned_to = str(date_to).strip().replace('T', ' ')
+                if len(cleaned_to) == 10:
+                    cleaned_to = f'{cleaned_to} 23:59:59'
+                elif len(cleaned_to) == 16:
+                    cleaned_to = f'{cleaned_to}:59'
+                domain.append(('date', '<=', cleaned_to))
+
+            failures = request.env['scada.equipment.failure'].search(
+                domain,
+                order='date desc, id desc',
+                limit=limit,
+                offset=offset,
+            )
+
+            data_rows = []
+            for failure in failures:
+                data_rows.append({
+                    'id': failure.id,
+                    'equipment_id': failure.equipment_id.id if failure.equipment_id else None,
+                    'equipment_code': failure.equipment_code,
+                    'equipment_name': failure.equipment_id.name if failure.equipment_id else None,
+                    'description': failure.description,
+                    'date': failure.date.isoformat() if failure.date else None,
+                    'reported_by': failure.reported_by.name if failure.reported_by else None,
+                })
+
+            grouped = request.env['scada.equipment.failure'].read_group(
+                domain,
+                ['equipment_id', 'id:count', 'date:max'],
+                ['equipment_id'],
+                lazy=False,
+            )
+            by_equipment = []
+            for row in grouped:
+                equipment = row.get('equipment_id')
+                if not equipment:
+                    continue
+                by_equipment.append({
+                    'equipment_id': equipment[0],
+                    'equipment_name': equipment[1],
+                    'failure_count': row.get('id_count', 0),
+                    'last_failure_date': row.get('date_max'),
+                })
+
+            total_failures = request.env['scada.equipment.failure'].search_count(domain)
+            summary = {
+                'total_failures': total_failures,
+                'equipment_count': len(by_equipment),
+                'by_equipment': by_equipment,
+            }
+
+            return {
+                'status': 'success',
+                'count': len(data_rows),
+                'data': data_rows,
+                'summary': summary,
+            }
+        except Exception as e:
+            _logger.error(f'Error getting equipment failure report: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
     # ===== PRODUCTS =====

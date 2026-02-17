@@ -19,6 +19,9 @@ access_scada_quality_control_technician,scada.quality.control Technician,model_s
 access_scada_equipment_oee_manager,scada.equipment.oee Manager,model_scada_equipment_oee,group_scada_manager,1,1,1,1
 access_scada_equipment_oee_operator,scada.equipment.oee Operator,model_scada_equipment_oee,group_scada_operator,1,1,1,0
 access_scada_equipment_oee_technician,scada.equipment.oee Technician,model_scada_equipment_oee,group_scada_technician,1,1,1,0
+access_scada_equipment_oee_line_manager,scada.equipment.oee.line Manager,model_scada_equipment_oee_line,group_scada_manager,1,1,1,1
+access_scada_equipment_oee_line_operator,scada.equipment.oee.line Operator,model_scada_equipment_oee_line,group_scada_operator,1,1,1,0
+access_scada_equipment_oee_line_technician,scada.equipment.oee.line Technician,model_scada_equipment_oee_line,group_scada_technician,1,1,1,0
 access_scada_equipment_failure_manager,scada.equipment.failure Manager,model_scada_equipment_failure,group_scada_manager,1,1,1,1
 access_scada_equipment_failure_operator,scada.equipment.failure Operator,model_scada_equipment_failure,group_scada_operator,1,1,1,0
 access_scada_equipment_failure_technician,scada.equipment.failure Technician,model_scada_equipment_failure,group_scada_technician,1,1,1,0

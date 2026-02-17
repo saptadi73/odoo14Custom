@@ -19,6 +19,9 @@
                     <field name="variance_consumption"/>
                     <field name="yield_percent"/>
                     <field name="consumption_ratio"/>
+                    <field name="avg_silo_oee_percent"/>
+                    <field name="max_abs_deviation_percent"/>
+                    <field name="deviation_alert_count"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                 </tree>
             </field>
@@ -30,6 +33,14 @@
             <field name="model">scada.equipment.oee</field>
             <field name="arch" type="xml">
                 <form string="Equipment OEE Summary">
+                    <header>
+                        <button
+                            name="action_rebuild_consumption_lines"
+                            string="Rebuild Detail Per Silo"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -55,7 +66,30 @@
                                         <field name="variance_consumption"/>
                                         <field name="consumption_ratio"/>
                                     </group>
+                                    <group string="Deviation KPI">
+                                        <field name="avg_silo_oee_percent" readonly="1"/>
+                                        <field name="max_abs_deviation_percent" readonly="1"/>
+                                        <field name="deviation_alert_count" readonly="1"/>
+                                    </group>
                                 </group>
+                                <separator string="Detail Per Silo"/>
+                                <field name="line_ids" nolabel="1" readonly="1">
+                                    <tree string="Consumption Detail Per Silo"
+                                          decoration-success="deviation_level == 'normal'"
+                                          decoration-warning="deviation_level == 'warning'"
+                                          decoration-danger="deviation_level == 'critical'">
+                                        <field name="equipment_code"/>
+                                        <field name="equipment_name"/>
+                                        <field name="qty_to_consume"/>
+                                        <field name="qty_consumed"/>
+                                        <field name="variance_qty"/>
+                                        <field name="deviation_percent"/>
+                                        <field name="oee_silo_percent"/>
+                                        <field name="consumption_ratio"/>
+                                        <field name="deviation_level" widget="badge"/>
+                                        <field name="material_count"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Notes">
                                 <field name="notes" placeholder="Notes..."/>

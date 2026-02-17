@@ -217,3 +217,112 @@ Notes:
 - equipment_id refers to equipment_code in Odoo (scada.equipment)
 - mo_id in URL is the SCADA MO Data record ID (scada.mo.data). If you want
   to use MO number instead, ask to change the endpoint.
+
+
+10) Get OEE Detail (Frontend Ready)
+Endpoint:
+- POST /api/scada/oee-detail
+Auth:
+- user session (JSON-RPC)
+Request payload (JSON):
+{
+  "oee_id": 10,                  // optional
+  "mo_id": "WH/MO/00001",        // optional, MO name or ID
+  "equipment_code": "silo101",   // optional
+  "date_from": "2026-02-01",     // optional (YYYY-MM-DD)
+  "date_to": "2026-02-29",       // optional (YYYY-MM-DD)
+  "limit": 50,                   // optional
+  "offset": 0                    // optional
+}
+Response (example):
+{
+  "status": "success",
+  "count": 1,
+  "data": [
+    {
+      "oee_id": 10,
+      "date_done": "2026-02-16T09:40:00",
+      "mo_id": "WH/MO/00001",
+      "mo_record_id": 351,
+      "equipment": {
+        "id": 4,
+        "code": "PLC01",
+        "name": "Main PLC - Injection Machine 01"
+      },
+      "product_id": 112,
+      "product_name": "JF Plus",
+      "qty_planned": 2500.0,
+      "qty_finished": 2495.0,
+      "variance_finished": -5.0,
+      "yield_percent": 99.8,
+      "qty_bom_consumption": 2500.0,
+      "qty_actual_consumption": 2496.4,
+      "variance_consumption": -3.6,
+      "consumption_ratio": 99.856,
+      "lines": [
+        {
+          "equipment_id": 11,
+          "equipment_code": "silo101",
+          "equipment_name": "SILO A",
+          "to_consume": 825.0,
+          "actual_consumed": 825.25,
+          "variance": 0.25,
+          "consumption_ratio": 100.03,
+          "material_count": 1
+        }
+      ]
+    }
+  ]
+}
+
+
+11) Get OEE Average by Equipment List
+Endpoint:
+- POST /api/scada/oee-equipment-avg
+Auth:
+- user session (JSON-RPC)
+Request payload (JSON):
+{
+  "equipment_code": "silo101",   // optional
+  "equipment_type": "silo",      // optional
+  "is_active": true,             // optional
+  "date_from": "2026-02-01",     // optional (YYYY-MM-DD)
+  "date_to": "2026-02-29",       // optional (YYYY-MM-DD)
+  "limit": 100,                  // optional
+  "offset": 0                    // optional
+}
+Response (example):
+{
+  "status": "success",
+  "count": 2,
+  "data": [
+    {
+      "equipment": {
+        "id": 11,
+        "code": "silo101",
+        "name": "SILO A",
+        "equipment_type": "silo",
+        "is_active": true
+      },
+      "oee_records_count": 12,
+      "avg_summary": {
+        "qty_planned": 2500.0,
+        "qty_finished": 2492.1,
+        "variance_finished": -7.9,
+        "yield_percent": 99.68,
+        "qty_bom_consumption": 2500.0,
+        "qty_actual_consumption": 2497.4,
+        "variance_consumption": -2.6,
+        "consumption_ratio": 99.90
+      },
+      "avg_consumption_detail": {
+        "to_consume": 825.0,
+        "actual_consumed": 825.2,
+        "variance": 0.2,
+        "consumption_ratio": 100.02,
+        "material_count": 1.0
+      },
+      "last_oee_date": "2026-02-16 09:40:00"
+    }
+  ]
+}
