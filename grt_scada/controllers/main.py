@@ -10,6 +10,7 @@ from odoo.http import request
 import logging
 import json
 from datetime import datetime, timedelta
+from collections import defaultdict
 from ..services.product_service import ProductService
 from ..services.mo_weight_service import MoWeightService
 from ..services.bom_service import BomService
@@ -39,6 +40,91 @@ class ScadaJsonRpcController(http.Controller):
         if value_lower == 'all':
             return None
         return default
+
+    def _normalize_datetime_input(self, value, is_end=False):
+        if not value:
+            return None
+        cleaned = str(value).strip().replace('T', ' ')
+        if len(cleaned) == 10:
+            return f"{cleaned} {'23:59:59' if is_end else '00:00:00'}"
+        if len(cleaned) == 16:
+            return f"{cleaned}{':59' if is_end else ':00'}"
+        return cleaned
+
+    def _get_period_datetime_range(self, period):
+        period = (period or '').strip().lower()
+        if not period:
+            return (None, None)
+
+        now = datetime.now()
+        start_dt = None
+        end_dt = None
+
+        if period == 'today':
+            start_dt = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+        elif period == 'yesterday':
+            y = now - timedelta(days=1)
+            start_dt = y.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_dt = y.replace(hour=23, minute=59, second=59, microsecond=0)
+        elif period == 'this_week':
+            week_start = now - timedelta(days=now.weekday())
+            start_dt = week_start.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+        elif period == 'last_7_days':
+            start_dt = (now - timedelta(days=6)).replace(hour=0, minute=0, second=0, microsecond=0)
+            end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+        elif period == 'this_month':
+            start_dt = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+        elif period == 'last_month':
+            first_this_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            last_prev_month = first_this_month - timedelta(seconds=1)
+            start_dt = last_prev_month.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            end_dt = last_prev_month.replace(hour=23, minute=59, second=59, microsecond=0)
+        elif period == 'this_year':
+            start_dt = now.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+            end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+        else:
+            return (False, False)
+
+        return (
+            start_dt.strftime('%Y-%m-%d %H:%M:%S'),
+            end_dt.strftime('%Y-%m-%d %H:%M:%S'),
+        )
+
+    def _get_day_range(self, day_value=None):
+        if day_value:
+            normalized = self._normalize_datetime_input(day_value, is_end=False)
+            day_str = str(normalized)[:10]
+            day_date = datetime.strptime(day_str, '%Y-%m-%d')
+            start_dt = day_date.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_dt = day_date.replace(hour=23, minute=59, second=59, microsecond=0)
+        else:
+            now = datetime.now()
+            start_dt = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_dt = now.replace(hour=23, minute=59, second=59, microsecond=0)
+        return (
+            start_dt.strftime('%Y-%m-%d %H:%M:%S'),
+            end_dt.strftime('%Y-%m-%d %H:%M:%S'),
+            start_dt.strftime('%Y-%m-%d'),
+        )
+
+    def _get_report_datetime_range(self, payload, default_period='this_month'):
+        date_from = payload.get('date_from')
+        date_to = payload.get('date_to')
+        period = payload.get('period') or default_period
+
+        period_from = None
+        period_to = None
+        if period:
+            period_from, period_to = self._get_period_datetime_range(period)
+            if period_from is False:
+                return (False, False, False)
+
+        normalized_from = self._normalize_datetime_input(date_from, is_end=False) or period_from
+        normalized_to = self._normalize_datetime_input(date_to, is_end=True) or period_to
+        return (normalized_from, normalized_to, period)
 
     def _get_equipment_details(self, equipment):
         """Helper: Extract full equipment details"""
@@ -802,6 +888,717 @@ class ScadaJsonRpcController(http.Controller):
             }
         except Exception as e:
             _logger.error(f'Error getting OEE equipment average: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/kpi-product-report', type='json', auth='user', methods=['POST'])
+    def get_kpi_product_report(self, **kwargs):
+        """
+        Get KPI report per product from OEE records.
+
+        Params (JSON-RPC params):
+            - product_id (optional): product.product id
+            - product_tmpl_id (optional): product.template id
+            - date_from (optional): YYYY-MM-DD or YYYY-MM-DD HH:MM:SS
+            - date_to (optional): YYYY-MM-DD or YYYY-MM-DD HH:MM:SS
+            - period (optional): today, yesterday, this_week, last_7_days, this_month, last_month, this_year
+            - limit (optional): default 100
+            - offset (optional): default 0
+        """
+        try:
+            data = self._get_json_payload()
+            limit = int(data.get('limit', 100))
+            offset = int(data.get('offset', 0))
+
+            domain = []
+
+            product_id = data.get('product_id')
+            if product_id:
+                domain.append(('product_id', '=', int(product_id)))
+
+            product_tmpl_id = data.get('product_tmpl_id')
+            if product_tmpl_id:
+                product_variants = request.env['product.product'].search([
+                    ('product_tmpl_id', '=', int(product_tmpl_id))
+                ])
+                if not product_variants:
+                    return {
+                        'status': 'success',
+                        'count': 0,
+                        'data': [],
+                        'summary': {
+                            'total_products': 0,
+                            'total_oee_records': 0,
+                        },
+                    }
+                domain.append(('product_id', 'in', product_variants.ids))
+
+            date_from = data.get('date_from')
+            date_to = data.get('date_to')
+            period = data.get('period')
+
+            period_from, period_to = self._get_period_datetime_range(period)
+            if period_from is False:
+                return {
+                    'status': 'error',
+                    'message': (
+                        'Invalid period value. '
+                        'Supported: today, yesterday, this_week, last_7_days, '
+                        'this_month, last_month, this_year'
+                    ),
+                }
+
+            normalized_from = self._normalize_datetime_input(date_from, is_end=False) or period_from
+            normalized_to = self._normalize_datetime_input(date_to, is_end=True) or period_to
+
+            if normalized_from:
+                domain.append(('date_done', '>=', normalized_from))
+            if normalized_to:
+                domain.append(('date_done', '<=', normalized_to))
+
+            grouped_all = request.env['scada.equipment.oee'].read_group(
+                domain,
+                ['product_id'],
+                ['product_id'],
+                lazy=False,
+            )
+            total_products = len([row for row in grouped_all if row.get('product_id')])
+
+            grouped = request.env['scada.equipment.oee'].read_group(
+                domain,
+                [
+                    'product_id',
+                    'qty_planned:avg',
+                    'qty_finished:avg',
+                    'variance_finished:avg',
+                    'yield_percent:avg',
+                    'qty_bom_consumption:avg',
+                    'qty_actual_consumption:avg',
+                    'variance_consumption:avg',
+                    'consumption_ratio:avg',
+                    'date_done:max',
+                    'id:count',
+                ],
+                ['product_id'],
+                orderby='product_id',
+                offset=offset,
+                limit=limit,
+                lazy=False,
+            )
+
+            result_data = []
+            for row in grouped:
+                product = row.get('product_id')
+                if not product:
+                    continue
+                result_data.append({
+                    'product_id': product[0],
+                    'product_name': product[1],
+                    'oee_records_count': row.get('id_count', 0),
+                    'avg_kpi': {
+                        'qty_planned': row.get('qty_planned_avg', 0.0),
+                        'qty_finished': row.get('qty_finished_avg', 0.0),
+                        'variance_finished': row.get('variance_finished_avg', 0.0),
+                        'yield_percent': row.get('yield_percent_avg', 0.0),
+                        'qty_bom_consumption': row.get('qty_bom_consumption_avg', 0.0),
+                        'qty_actual_consumption': row.get('qty_actual_consumption_avg', 0.0),
+                        'variance_consumption': row.get('variance_consumption_avg', 0.0),
+                        'consumption_ratio': row.get('consumption_ratio_avg', 0.0),
+                    },
+                    'last_oee_date': row.get('date_done_max'),
+                })
+
+            return {
+                'status': 'success',
+                'count': len(result_data),
+                'data': result_data,
+                'summary': {
+                    'total_products': total_products,
+                    'total_oee_records': request.env['scada.equipment.oee'].search_count(domain),
+                    'date_from': normalized_from,
+                    'date_to': normalized_to,
+                },
+            }
+        except Exception as e:
+            _logger.error(f'Error getting KPI product report: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/today-reports', type='json', auth='user', methods=['POST'])
+    def get_today_reports(self, **kwargs):
+        """
+        Get daily SCADA reports in one payload:
+        1) Batch selesai vs belum selesai
+        2) Produksi total harian
+        3) Kualitas OEE rata-rata per equipment
+        4) Grafik deviasi batch-ke-batch
+
+        Params (JSON-RPC params):
+            - date (optional): YYYY-MM-DD (default: today)
+            - limit (optional): max batch points for deviation chart (default: 200)
+        """
+        try:
+            data = self._get_json_payload()
+            chart_limit = int(data.get('limit', 200))
+            date_filter = data.get('date')
+
+            date_from, date_to, report_date = self._get_day_range(date_filter)
+
+            mo_model = request.env['mrp.production']
+            oee_model = request.env['scada.equipment.oee']
+
+            # 1) Batch selesai dan belum selesai (berdasarkan jadwal mulai hari itu)
+            scheduled_domain = [
+                ('date_planned_start', '>=', date_from),
+                ('date_planned_start', '<=', date_to),
+                ('state', '!=', 'cancel'),
+            ]
+            scheduled_total = mo_model.search_count(scheduled_domain)
+            completed_scheduled = mo_model.search_count(scheduled_domain + [('state', '=', 'done')])
+            unfinished_scheduled = max(scheduled_total - completed_scheduled, 0)
+
+            # 2) Produksi total hari ini (berdasarkan OEE done date)
+            oee_domain = [
+                ('date_done', '>=', date_from),
+                ('date_done', '<=', date_to),
+            ]
+            production_stats = oee_model.read_group(
+                oee_domain,
+                ['qty_finished:sum', 'id:count'],
+                [],
+                lazy=False,
+            )
+            production_row = production_stats[0] if production_stats else {}
+            total_production_qty = production_row.get('qty_finished_sum', 0.0)
+            completed_batch_count = production_row.get('id_count', 0)
+
+            # 3) Kualitas OEE rata-rata hari ini per equipment
+            equipment_avg_rows = oee_model.read_group(
+                oee_domain,
+                [
+                    'equipment_id',
+                    'yield_percent:avg',
+                    'consumption_ratio:avg',
+                    'avg_silo_oee_percent:avg',
+                    'max_abs_deviation_percent:avg',
+                    'deviation_alert_count:sum',
+                    'id:count',
+                ],
+                ['equipment_id'],
+                lazy=False,
+            )
+            equipment_avg = []
+            for row in equipment_avg_rows:
+                equipment = row.get('equipment_id')
+                if not equipment:
+                    continue
+                equipment_avg.append({
+                    'equipment_id': equipment[0],
+                    'equipment_name': equipment[1],
+                    'oee_records_count': row.get('id_count', 0),
+                    'avg_yield_percent': row.get('yield_percent_avg', 0.0),
+                    'avg_consumption_ratio': row.get('consumption_ratio_avg', 0.0),
+                    'avg_oee_silo_percent': row.get('avg_silo_oee_percent_avg', 0.0),
+                    'avg_max_abs_deviation_percent': row.get('max_abs_deviation_percent_avg', 0.0),
+                    'total_deviation_alerts': row.get('deviation_alert_count_sum', 0),
+                })
+
+            oee_quality_rows = oee_model.read_group(
+                oee_domain,
+                [
+                    'yield_percent:avg',
+                    'consumption_ratio:avg',
+                    'avg_silo_oee_percent:avg',
+                    'max_abs_deviation_percent:avg',
+                    'deviation_alert_count:sum',
+                    'id:count',
+                ],
+                [],
+                lazy=False,
+            )
+            oee_quality = oee_quality_rows[0] if oee_quality_rows else {}
+
+            # 4) Grafik deviasi batch-ke-batch
+            deviation_records = oee_model.search(
+                oee_domain,
+                order='date_done asc, id asc',
+                limit=chart_limit,
+            )
+            deviation_chart = []
+            for rec in deviation_records:
+                deviation_chart.append({
+                    'oee_id': rec.id,
+                    'mo_id': rec.mo_name,
+                    'equipment_id': rec.equipment_id.id if rec.equipment_id else None,
+                    'equipment_name': rec.equipment_id.name if rec.equipment_id else None,
+                    'date_done': rec.date_done.isoformat() if rec.date_done else None,
+                    'variance_finished': rec.variance_finished,
+                    'variance_consumption': rec.variance_consumption,
+                    'max_abs_deviation_percent': rec.max_abs_deviation_percent,
+                    'avg_silo_oee_percent': rec.avg_silo_oee_percent,
+                })
+
+            return {
+                'status': 'success',
+                'report_date': report_date,
+                'date_from': date_from,
+                'date_to': date_to,
+                'batch_status': {
+                    'scheduled_total': scheduled_total,
+                    'completed': completed_scheduled,
+                    'unfinished': unfinished_scheduled,
+                },
+                'total_production_today': {
+                    'qty_finished': total_production_qty,
+                    'completed_batch_count': completed_batch_count,
+                },
+                'oee_quality_today': {
+                    'oee_records_count': oee_quality.get('id_count', 0),
+                    'avg_yield_percent': oee_quality.get('yield_percent_avg', 0.0),
+                    'avg_consumption_ratio': oee_quality.get('consumption_ratio_avg', 0.0),
+                    'avg_oee_silo_percent': oee_quality.get('avg_silo_oee_percent_avg', 0.0),
+                    'avg_max_abs_deviation_percent': oee_quality.get('max_abs_deviation_percent_avg', 0.0),
+                    'total_deviation_alerts': oee_quality.get('deviation_alert_count_sum', 0),
+                    'by_equipment': equipment_avg,
+                },
+                'batch_to_batch_deviation_chart': {
+                    'count': len(deviation_chart),
+                    'data': deviation_chart,
+                },
+            }
+        except Exception as e:
+            _logger.error(f'Error getting today reports: {str(e)}')
+            return {'status': 'error', 'message': str(e)}
+
+    @http.route('/api/scada/periodic-report', type='json', auth='user', methods=['POST'])
+    def get_periodic_report(self, **kwargs):
+        """
+        Get periodic report package:
+        1) Metrik Total Produksi
+        2) Metrik Total MO
+        3) Metrik Rata-rata OEE/Kualitas
+        4) Grafik produksi harian target vs actual
+        5) Grafik konsumsi raw material
+        6) Tabel konsumsi per silo + estimasi stock awal/akhir periode
+        7) Tabel produksi harian per finished goods
+        """
+        try:
+            data = self._get_json_payload()
+            date_from, date_to, period = self._get_report_datetime_range(data, default_period='this_month')
+            if date_from is False:
+                return {
+                    'status': 'error',
+                    'message': (
+                        'Invalid period value. '
+                        'Supported: today, yesterday, this_week, last_7_days, '
+                        'this_month, last_month, this_year'
+                    ),
+                }
+            if not date_from or not date_to:
+                return {
+                    'status': 'error',
+                    'message': 'date_from/date_to or period is required',
+                }
+
+            chart_limit = int(data.get('limit', 1000))
+
+            # Optional filters: finished product
+            finished_product_ids = []
+            if data.get('product_id'):
+                finished_product_ids = [int(data.get('product_id'))]
+            elif data.get('product_tmpl_id'):
+                finished_product_ids = request.env['product.product'].search([
+                    ('product_tmpl_id', '=', int(data.get('product_tmpl_id')))
+                ]).ids
+
+            # Optional filters: raw material
+            raw_material_ids = []
+            if data.get('raw_material_id'):
+                raw_material_ids = [int(data.get('raw_material_id'))]
+            elif data.get('raw_material_tmpl_id'):
+                raw_material_ids = request.env['product.product'].search([
+                    ('product_tmpl_id', '=', int(data.get('raw_material_tmpl_id')))
+                ]).ids
+
+            # Optional filter: equipment
+            equipment_ids = []
+            if data.get('equipment_id'):
+                equipment_ids = [int(data.get('equipment_id'))]
+            elif data.get('equipment_code'):
+                equipment = request.env['scada.equipment'].search([
+                    ('equipment_code', '=', str(data.get('equipment_code')))
+                ], limit=1)
+                if not equipment:
+                    return {
+                        'status': 'error',
+                        'message': f'Equipment not found: {data.get("equipment_code")}',
+                    }
+                equipment_ids = [equipment.id]
+
+            mo_domain_period = [
+                ('date_planned_start', '>=', date_from),
+                ('date_planned_start', '<=', date_to),
+                ('state', '!=', 'cancel'),
+            ]
+            if finished_product_ids:
+                mo_domain_period.append(('product_id', 'in', finished_product_ids))
+            if equipment_ids:
+                mo_domain_period.append(('scada_equipment_id', 'in', equipment_ids))
+
+            oee_domain = [
+                ('date_done', '>=', date_from),
+                ('date_done', '<=', date_to),
+            ]
+            if finished_product_ids:
+                oee_domain.append(('product_id', 'in', finished_product_ids))
+            if equipment_ids:
+                oee_domain.append(('equipment_id', 'in', equipment_ids))
+
+            # 1) Metrik Total Produksi
+            mo_target_group = request.env['mrp.production'].read_group(
+                mo_domain_period,
+                ['product_qty:sum'],
+                [],
+                lazy=False,
+            )
+            target_total_qty = (mo_target_group[0] if mo_target_group else {}).get('product_qty_sum', 0.0)
+
+            oee_total_group = request.env['scada.equipment.oee'].read_group(
+                oee_domain,
+                ['qty_finished:sum', 'qty_planned:sum', 'id:count'],
+                [],
+                lazy=False,
+            )
+            oee_total_row = oee_total_group[0] if oee_total_group else {}
+            actual_total_qty = oee_total_row.get('qty_finished_sum', 0.0)
+            actual_total_target_done = oee_total_row.get('qty_planned_sum', 0.0)
+
+            # 2) Metrik Total MO
+            mo_done_domain = [('date_finished', '>=', date_from), ('date_finished', '<=', date_to)]
+            if finished_product_ids:
+                mo_done_domain.append(('product_id', 'in', finished_product_ids))
+            if equipment_ids:
+                mo_done_domain.append(('scada_equipment_id', 'in', equipment_ids))
+
+            total_mo_planned = request.env['mrp.production'].search_count(mo_domain_period)
+            total_mo_done = request.env['mrp.production'].search_count(mo_done_domain + [('state', '=', 'done')])
+            total_mo_unfinished = max(total_mo_planned - total_mo_done, 0)
+            total_mo_in_progress = request.env['mrp.production'].search_count(
+                mo_domain_period + [('state', 'in', ['confirmed', 'progress', 'to_close'])]
+            )
+
+            # 3) Metrik rata-rata OEE / Kualitas
+            oee_quality_group = request.env['scada.equipment.oee'].read_group(
+                oee_domain,
+                [
+                    'yield_percent:avg',
+                    'consumption_ratio:avg',
+                    'avg_silo_oee_percent:avg',
+                    'max_abs_deviation_percent:avg',
+                    'deviation_alert_count:sum',
+                    'id:count',
+                ],
+                [],
+                lazy=False,
+            )
+            oee_quality_row = oee_quality_group[0] if oee_quality_group else {}
+
+            oee_quality_by_equipment_group = request.env['scada.equipment.oee'].read_group(
+                oee_domain,
+                [
+                    'equipment_id',
+                    'yield_percent:avg',
+                    'consumption_ratio:avg',
+                    'avg_silo_oee_percent:avg',
+                    'max_abs_deviation_percent:avg',
+                    'deviation_alert_count:sum',
+                    'id:count',
+                ],
+                ['equipment_id'],
+                lazy=False,
+            )
+            oee_quality_by_equipment = []
+            for row in oee_quality_by_equipment_group:
+                equipment = row.get('equipment_id')
+                if not equipment:
+                    continue
+                oee_quality_by_equipment.append({
+                    'equipment_id': equipment[0],
+                    'equipment_name': equipment[1],
+                    'oee_records_count': row.get('id_count', 0),
+                    'avg_yield_percent': row.get('yield_percent_avg', 0.0),
+                    'avg_consumption_ratio': row.get('consumption_ratio_avg', 0.0),
+                    'avg_oee_silo_percent': row.get('avg_silo_oee_percent_avg', 0.0),
+                    'avg_max_abs_deviation_percent': row.get('max_abs_deviation_percent_avg', 0.0),
+                    'total_deviation_alerts': row.get('deviation_alert_count_sum', 0),
+                })
+
+            # 4) Grafik produksi harian dua bar: target vs actual
+            mo_daily_target = request.env['mrp.production'].search(
+                mo_domain_period,
+                order='date_planned_start asc, id asc',
+                limit=chart_limit,
+            )
+            oee_daily_actual = request.env['scada.equipment.oee'].search(
+                oee_domain,
+                order='date_done asc, id asc',
+                limit=chart_limit,
+            )
+            target_by_day = defaultdict(float)
+            actual_by_day = defaultdict(float)
+            for mo in mo_daily_target:
+                if mo.date_planned_start:
+                    day_key = mo.date_planned_start.date().isoformat()
+                    target_by_day[day_key] += mo.product_qty or 0.0
+            for rec in oee_daily_actual:
+                if rec.date_done:
+                    day_key = rec.date_done.date().isoformat()
+                    actual_by_day[day_key] += rec.qty_finished or 0.0
+
+            all_days = sorted(set(target_by_day.keys()) | set(actual_by_day.keys()))
+            daily_target_actual_chart = [
+                {
+                    'date': day,
+                    'target_qty': target_by_day.get(day, 0.0),
+                    'actual_qty': actual_by_day.get(day, 0.0),
+                }
+                for day in all_days
+            ]
+
+            # 5) Grafik konsumsi raw material
+            material_domain = [
+                ('timestamp', '>=', date_from),
+                ('timestamp', '<=', date_to),
+                ('active', '=', True),
+            ]
+            if raw_material_ids:
+                material_domain.append(('product_id', 'in', raw_material_ids))
+            material_equipment_ids = equipment_ids
+            if material_equipment_ids:
+                material_domain.append(('equipment_id', 'in', material_equipment_ids))
+
+            raw_material_group = request.env['scada.equipment.material'].read_group(
+                material_domain,
+                ['product_id', 'consumption_actual:sum', 'consumption_bom:sum', 'id:count'],
+                ['product_id'],
+                lazy=False,
+            )
+            raw_material_chart = []
+            for row in raw_material_group:
+                product = row.get('product_id')
+                if not product:
+                    continue
+                actual_cons = row.get('consumption_actual_sum', 0.0)
+                bom_cons = row.get('consumption_bom_sum', 0.0)
+                raw_material_chart.append({
+                    'raw_material_id': product[0],
+                    'raw_material_name': product[1],
+                    'consumption_actual': actual_cons,
+                    'consumption_bom': bom_cons,
+                    'variance_consumption': actual_cons - bom_cons,
+                    'records_count': row.get('id_count', 0),
+                })
+
+            # 6) Table konsumsi per silo + stock awal/akhir periode
+            silo_domain = [('equipment_type', '=', 'silo')]
+            if equipment_ids:
+                silo_domain.append(('id', 'in', equipment_ids))
+            silo_equipments = request.env['scada.equipment'].search(silo_domain, order='name asc')
+
+            # Pre-calc consumption per equipment-product in period
+            silo_material_group = request.env['scada.equipment.material'].read_group(
+                material_domain + [('equipment_id', 'in', silo_equipments.ids or [0])],
+                ['equipment_id', 'product_id', 'consumption_actual:sum', 'id:count'],
+                ['equipment_id', 'product_id'],
+                lazy=False,
+            )
+            consumption_map = {}
+            for row in silo_material_group:
+                eq = row.get('equipment_id')
+                prod = row.get('product_id')
+                if not eq or not prod:
+                    continue
+                consumption_map[(eq[0], prod[0])] = {
+                    'consumed_qty': row.get('consumption_actual_sum', 0.0),
+                    'records_count': row.get('id_count', 0),
+                    'product_name': prod[1],
+                }
+
+            # Helpers to reverse stock at period start from current quant + period net movement.
+            stock_quant_model = request.env['stock.quant']
+            move_line_model = request.env['stock.move.line']
+            stock_location_model = request.env['stock.location']
+
+            silo_rows = []
+            for silo in silo_equipments:
+                location = stock_location_model.search([
+                    ('usage', '=', 'internal'),
+                    '|', '|',
+                    ('name', 'ilike', silo.equipment_code or ''),
+                    ('complete_name', 'ilike', silo.equipment_code or ''),
+                    ('name', 'ilike', silo.name or ''),
+                ], limit=1)
+
+                product_ids_set = {
+                    key[1] for key in consumption_map.keys() if key[0] == silo.id
+                }
+                if location:
+                    quant_products = stock_quant_model.search([
+                        ('location_id', 'child_of', location.id),
+                        ('quantity', '!=', 0),
+                    ]).mapped('product_id').ids
+                    product_ids_set.update(quant_products)
+                if raw_material_ids:
+                    product_ids_set = set(raw_material_ids).intersection(product_ids_set)
+
+                material_rows = []
+                total_consumed = 0.0
+                total_stock_start = 0.0
+                total_stock_end = 0.0
+
+                for product_id in sorted(product_ids_set):
+                    product = request.env['product.product'].browse(product_id)
+                    consumed_stat = consumption_map.get((silo.id, product_id), {})
+                    consumed_qty = consumed_stat.get('consumed_qty', 0.0)
+
+                    stock_end = 0.0
+                    stock_start = 0.0
+                    if location:
+                        stock_end = sum(stock_quant_model.search([
+                            ('location_id', 'child_of', location.id),
+                            ('product_id', '=', product_id),
+                        ]).mapped('quantity'))
+
+                        incoming_qty = sum(move_line_model.search([
+                            ('state', '=', 'done'),
+                            ('date', '>=', date_from),
+                            ('date', '<=', date_to),
+                            ('product_id', '=', product_id),
+                            ('location_dest_id', 'child_of', location.id),
+                            '!',
+                            ('location_id', 'child_of', location.id),
+                        ]).mapped('qty_done'))
+                        outgoing_qty = sum(move_line_model.search([
+                            ('state', '=', 'done'),
+                            ('date', '>=', date_from),
+                            ('date', '<=', date_to),
+                            ('product_id', '=', product_id),
+                            ('location_id', 'child_of', location.id),
+                            '!',
+                            ('location_dest_id', 'child_of', location.id),
+                        ]).mapped('qty_done'))
+                        stock_start = stock_end - (incoming_qty - outgoing_qty)
+
+                    total_consumed += consumed_qty
+                    total_stock_start += stock_start
+                    total_stock_end += stock_end
+
+                    material_rows.append({
+                        'product_id': product.id,
+                        'product_name': product.display_name,
+                        'uom_name': product.uom_id.name if product.uom_id else None,
+                        'stock_start': stock_start,
+                        'stock_end': stock_end,
+                        'consumed_qty': consumed_qty,
+                    })
+
+                silo_rows.append({
+                    'equipment_id': silo.id,
+                    'equipment_code': silo.equipment_code,
+                    'equipment_name': silo.name,
+                    'location_id': location.id if location else None,
+                    'location_name': location.complete_name if location else None,
+                    'stock_start_total': total_stock_start,
+                    'stock_end_total': total_stock_end,
+                    'consumed_total': total_consumed,
+                    'materials': material_rows,
+                })
+
+            # 7) Table produksi harian per finished goods
+            oee_finished_rows = request.env['scada.equipment.oee'].search(
+                oee_domain,
+                order='date_done asc, id asc',
+                limit=chart_limit,
+            )
+            fg_daily_map = {}
+            for rec in oee_finished_rows:
+                if not rec.date_done or not rec.product_id:
+                    continue
+                day_key = rec.date_done.date().isoformat()
+                key = (day_key, rec.product_id.id)
+                if key not in fg_daily_map:
+                    fg_daily_map[key] = {
+                        'date': day_key,
+                        'product_id': rec.product_id.id,
+                        'product_name': rec.product_id.display_name,
+                        'qty_target': 0.0,
+                        'qty_actual': 0.0,
+                        'batch_count': 0,
+                    }
+                fg_daily_map[key]['qty_target'] += rec.qty_planned or 0.0
+                fg_daily_map[key]['qty_actual'] += rec.qty_finished or 0.0
+                fg_daily_map[key]['batch_count'] += 1
+
+            finished_goods_daily_table = sorted(
+                fg_daily_map.values(),
+                key=lambda x: (x['date'], x['product_name'])
+            )
+
+            return {
+                'status': 'success',
+                'filters': {
+                    'period': period,
+                    'date_from': date_from,
+                    'date_to': date_to,
+                    'product_id': data.get('product_id'),
+                    'product_tmpl_id': data.get('product_tmpl_id'),
+                    'raw_material_id': data.get('raw_material_id'),
+                    'raw_material_tmpl_id': data.get('raw_material_tmpl_id'),
+                    'equipment_id': data.get('equipment_id'),
+                    'equipment_code': data.get('equipment_code'),
+                },
+                'metrics_total_production': {
+                    'target_qty_total': target_total_qty,
+                    'actual_qty_total': actual_total_qty,
+                    'actual_target_qty_total_from_done_batches': actual_total_target_done,
+                    'achievement_percent': (actual_total_qty / target_total_qty * 100.0) if target_total_qty else 0.0,
+                },
+                'metrics_total_mo': {
+                    'total_mo_planned': total_mo_planned,
+                    'total_mo_done': total_mo_done,
+                    'total_mo_unfinished': total_mo_unfinished,
+                    'total_mo_in_progress': total_mo_in_progress,
+                },
+                'metrics_avg_oee_quality': {
+                    'oee_records_count': oee_quality_row.get('id_count', 0),
+                    'avg_yield_percent': oee_quality_row.get('yield_percent_avg', 0.0),
+                    'avg_consumption_ratio': oee_quality_row.get('consumption_ratio_avg', 0.0),
+                    'avg_oee_silo_percent': oee_quality_row.get('avg_silo_oee_percent_avg', 0.0),
+                    'avg_max_abs_deviation_percent': oee_quality_row.get('max_abs_deviation_percent_avg', 0.0),
+                    'total_deviation_alerts': oee_quality_row.get('deviation_alert_count_sum', 0),
+                    'by_equipment': oee_quality_by_equipment,
+                },
+                'chart_daily_target_vs_actual': {
+                    'count': len(daily_target_actual_chart),
+                    'data': daily_target_actual_chart,
+                },
+                'chart_raw_material_consumption': {
+                    'count': len(raw_material_chart),
+                    'data': raw_material_chart,
+                },
+                'table_silo_consumption_stock': {
+                    'count': len(silo_rows),
+                    'data': silo_rows,
+                    'notes': [
+                        'stock_start/stock_end dihitung dari stock.location internal yang namanya match equipment silo.',
+                        'Jika silo belum punya lokasi internal terpetakan, stock_start/stock_end akan 0.',
+                    ],
+                },
+                'table_daily_finished_goods': {
+                    'count': len(finished_goods_daily_table),
+                    'data': finished_goods_daily_table,
+                },
+            }
+        except Exception as e:
+            _logger.error(f'Error getting periodic report: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
     # ===== EQUIPMENT =====

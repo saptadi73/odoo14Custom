@@ -1722,6 +1722,270 @@ curl -X POST http://localhost:8069/api/scada/equipment-failure-report \
 
 ---
 
+### 20. KPI Product Report (Protected)
+
+**Get KPI SCADA per Product (range tanggal tertentu)**
+
+```http
+POST /api/scada/kpi-product-report
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**JSON-RPC Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "product_id": 112,
+    "product_tmpl_id": 45,
+    "date_from": "2026-02-01",
+    "date_to": "2026-02-29",
+    "period": "this_month",
+    "limit": 100,
+    "offset": 0
+  }
+}
+```
+
+**Parameters**:
+- `product_id` (optional): filter by `product.product` ID
+- `product_tmpl_id` (optional): filter by `product.template` ID (akan dicari semua variannya)
+- `date_from` (optional): `YYYY-MM-DD` atau `YYYY-MM-DD HH:MM:SS`
+- `date_to` (optional): `YYYY-MM-DD` atau `YYYY-MM-DD HH:MM:SS`
+- `period` (optional): `today`, `yesterday`, `this_week`, `last_7_days`, `this_month`, `last_month`, `this_year`
+- `limit` (optional): jumlah grup produk (default `100`)
+- `offset` (optional): offset grup produk (default `0`)
+
+Note:
+- Jika `period` dikirim, sistem akan otomatis mengisi rentang tanggal.
+- Jika `date_from` / `date_to` juga dikirim, nilai manual diprioritaskan.
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "count": 2,
+  "data": [
+    {
+      "product_id": 112,
+      "product_name": "JF Plus",
+      "oee_records_count": 8,
+      "avg_kpi": {
+        "qty_planned": 2000.0,
+        "qty_finished": 1987.5,
+        "variance_finished": -12.5,
+        "yield_percent": 99.375,
+        "qty_bom_consumption": 1875.0,
+        "qty_actual_consumption": 1894.2,
+        "variance_consumption": 19.2,
+        "consumption_ratio": 101.024
+      },
+      "last_oee_date": "2026-02-16 09:40:00"
+    }
+  ],
+  "summary": {
+    "total_products": 2,
+    "total_oee_records": 13,
+    "date_from": "2026-02-01 00:00:00",
+    "date_to": "2026-02-29 23:59:59"
+  }
+}
+```
+
+**cURL Example (JSON-RPC)**:
+```bash
+curl -X POST http://localhost:8069/api/scada/kpi-product-report \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "period": "this_month",
+      "limit": 100,
+      "offset": 0
+    }
+  }'
+```
+
+---
+
+### 20B. Today Reports Dashboard (Protected)
+
+**Get 4 laporan harian SCADA dalam 1 endpoint**
+
+```http
+POST /api/scada/today-reports
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**JSON-RPC Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "date": "2026-02-17",
+    "limit": 200
+  }
+}
+```
+
+**Parameters**:
+- `date` (optional): tanggal report `YYYY-MM-DD` (default: hari ini server)
+- `limit` (optional): jumlah data titik grafik deviasi batch (default `200`)
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "report_date": "2026-02-17",
+  "date_from": "2026-02-17 00:00:00",
+  "date_to": "2026-02-17 23:59:59",
+  "batch_status": {
+    "scheduled_total": 12,
+    "completed": 7,
+    "unfinished": 5
+  },
+  "total_production_today": {
+    "qty_finished": 13840.5,
+    "completed_batch_count": 7
+  },
+  "oee_quality_today": {
+    "oee_records_count": 7,
+    "avg_yield_percent": 98.34,
+    "avg_consumption_ratio": 101.12,
+    "avg_oee_silo_percent": 96.8,
+    "avg_max_abs_deviation_percent": 3.7,
+    "total_deviation_alerts": 4,
+    "by_equipment": [
+      {
+        "equipment_id": 1,
+        "equipment_name": "Main PLC - Injection Machine 01",
+        "oee_records_count": 4,
+        "avg_yield_percent": 99.1,
+        "avg_consumption_ratio": 100.4,
+        "avg_oee_silo_percent": 97.5,
+        "avg_max_abs_deviation_percent": 2.9,
+        "total_deviation_alerts": 2
+      }
+    ]
+  },
+  "batch_to_batch_deviation_chart": {
+    "count": 7,
+    "data": [
+      {
+        "oee_id": 321,
+        "mo_id": "MO/2026/0021",
+        "equipment_id": 1,
+        "equipment_name": "Main PLC - Injection Machine 01",
+        "date_done": "2026-02-17T08:25:00",
+        "variance_finished": -12.5,
+        "variance_consumption": 18.0,
+        "max_abs_deviation_percent": 4.2,
+        "avg_silo_oee_percent": 95.8
+      }
+    ]
+  }
+}
+```
+
+Keterangan 4 laporan:
+1. `batch_status`: batch selesai vs belum selesai (berdasarkan batch terjadwal start di tanggal report)
+2. `total_production_today`: total `qty_finished` dari OEE pada tanggal report
+3. `oee_quality_today`: kualitas OEE rata-rata harian total + per SCADA equipment
+4. `batch_to_batch_deviation_chart`: data deret batch untuk grafik deviasi antar batch
+
+**cURL Example (JSON-RPC)**:
+```bash
+curl -X POST http://localhost:8069/api/scada/today-reports \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "date": "2026-02-17",
+      "limit": 200
+    }
+  }'
+```
+
+---
+
+### 20C. Periodic Report Dashboard (Protected)
+
+**Get laporan periodik sesuai pilihan waktu (7 report dalam 1 endpoint)**
+
+```http
+POST /api/scada/periodic-report
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**JSON-RPC Body**:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "period": "this_month",
+    "date_from": "2026-02-01",
+    "date_to": "2026-02-29",
+    "product_id": 112,
+    "product_tmpl_id": null,
+    "raw_material_id": null,
+    "raw_material_tmpl_id": null,
+    "equipment_id": null,
+    "equipment_code": null,
+    "limit": 1000
+  }
+}
+```
+
+**Parameters**:
+- `period` (optional): `today`, `yesterday`, `this_week`, `last_7_days`, `this_month`, `last_month`, `this_year`
+- `date_from` / `date_to` (optional): override rentang periode (`YYYY-MM-DD` atau datetime)
+- `product_id` / `product_tmpl_id` (optional): filter finished goods
+- `raw_material_id` / `raw_material_tmpl_id` (optional): filter raw material
+- `equipment_id` / `equipment_code` (optional): filter equipment
+- `limit` (optional): batas data chart/table berbasis record (default `1000`)
+
+**Response blocks**:
+1. `metrics_total_production`
+2. `metrics_total_mo`
+3. `metrics_avg_oee_quality`
+4. `chart_daily_target_vs_actual` (2 bar: target vs actual)
+5. `chart_raw_material_consumption`
+6. `table_silo_consumption_stock` (consumption + stock awal/akhir)
+7. `table_daily_finished_goods`
+
+**cURL Example (JSON-RPC)**:
+```bash
+curl -X POST http://localhost:8069/api/scada/periodic-report \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "call",
+    "params": {
+      "period": "this_month",
+      "raw_material_id": 45,
+      "product_id": 112
+    }
+  }'
+```
+
+---
+
 ### 21. Get Product List (Protected)
 
 **Retrieve Product List**
