@@ -1,6 +1,6 @@
 # Fix: Installation Error in Production Server - grt_scada Module
 
-## Masalah
+## Masalah 1: Models Not Found
 Saat menginstall modul `grt_scada` di server production, terjadi error:
 ```
 Exception: Pemasangan modul grt_scada gagal: berkas grt_scada/security/ir.model.access.csv tidak dapat diproses:
@@ -11,32 +11,49 @@ No matching record found for id eksternal 'model_scada_equipment_failure' in fie
 Kurang value yang dibutuhkan untuk field 'Model' (model_id)
 ```
 
+## Masalah 2: Field Type Cannot Be Modified
+Setelah fix pertama, muncul error baru:
+```
+UserError: Field "Type" tidak dapat dimodifikasi pada model.
+ParseError: while parsing /opt/odoo14/custom-addons/grt_scada/security/ir_model.xml:6
+```
+
 ## Penyebab
+
+### Masalah 1
 Error terjadi karena **urutan loading file data di `__manifest__.py`** tidak tepat:
 
 1. File `security/ir.model.access.csv` di-load **SEBELUM** models yang direferensikannya terdaftar di tabel `ir.model`
 2. Meskipun models sudah didefinisikan di Python (`models/*.py`), Odoo belum mendaftarkan mereka ke database hingga proses instalasi selesai
 3. Ini menciptakan masalah "chicken-and-egg": access rules membutuhkan model yang belum terdaftar
 
+### Masalah 2
+Di production server, models **sudah terdaftar** dari instalasi/upgrade sebelumnya. File `ir_model.xml` mencoba meng-update field `state` yang **tidak dapat dimodifikasi** di Odoo.
+
 ## Solusi
 
-### 1. Tambah File `security/ir_model.xml`
-Membuat file baru yang mendefinisikan models secara eksplisit di database:
+### Fix 1: Tambah File `security/ir_model.xml` (v6.0.52)
+Membuat file baru yang mendefinisikan models secara eksplisit di database.
+
+### Fix 2: Remove `state` Field & Set `noupdate="1"` (v6.0.53)
+Menghapus field `state` yang tidak bisa dimodifikasi dan menggunakan `noupdate="1"` agar hanya create (tidak update).
+
+**File Final `security/ir_model.xml`:**
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
+        <!-- noupdate="1" ensures these records are only created, not updated -->
         <record id="model_scada_equipment" model="ir.model">
             <field name="name">SCADA Equipment</field>
             <field name="model">scada.equipment</field>
-            <field name="state">manual</field>
+            <!-- ✅ state field REMOVED - cannot be modified -->
         </record>
         
         <record id="model_scada_sensor_reading" model="ir.model">
             <field name="name">SCADA Sensor Reading</field>
             <field name="model">scada.sensor.reading</field>
-            <field name="state">manual</field>
         </record>
         
         <!-- ... dan model-model lainnya -->
@@ -44,7 +61,11 @@ Membuat file baru yang mendefinisikan models secara eksplisit di database:
 </odoo>
 ```
 
-### 2. Update Urutan Loading di `__manifest__.py`
+**Perubahan:**
+- ❌ `<data noupdate="0">` → ✅ `<data noupdate="1">`
+- ❌ `<field name="state">manual</field>` → ✅ Field dihapus
+
+### Update Urutan Loading di `__manifest__.py`
 Mengubah urutan file data agar models terdaftar SEBELUM access rules di-load:
 
 **SEBELUM:**
@@ -79,8 +100,9 @@ Mengubah urutan file data agar models terdaftar SEBELUM access rules di-load:
 ],
 ```
 
-### 3. Update Version
-Version dinaikkan dari `6.0.51` ke `6.0.52`
+### Version History
+- `6.0.51` → `6.0.52`: Initial fix dengan `ir_model.xml` dan reorder
+- `6.0.52` → `6.0.53`: Remove `state` field dan set `noupdate="1"`
 
 ## Models yang Didefinisikan
 
@@ -125,7 +147,8 @@ File `security/ir_model.xml` mendefinisikan models berikut:
 ## Catatan Penting
 
 - ✅ Perbaikan ini **backward compatible** - tidak akan merusak instalasi yang sudah ada
-- ✅ File `ir_model.xml` menggunakan `noupdate="0"` agar bisa di-update
+- ✅ File `ir_model.xml` menggunakan `noupdate="1"` - hanya create record baru, tidak update yang sudah ada
+- ✅ Field `state` dihapus - mencegah error "Type cannot be modified"
 - ✅ Urutan loading yang benar memastikan semua dependencies terpenuhi
 - ⚠️ Jika modul sudah ter-install sebelumnya, **upgrade** modul untuk menerapkan perubahan:
   ```bash
@@ -137,6 +160,7 @@ File `security/ir_model.xml` mendefinisikan models berikut:
 Setelah perbaikan, modul dapat di-install tanpa error di:
 - ✅ Local development environment
 - ✅ Production server dengan Odoo 14
+- ✅ Fresh install maupun upgrade dari versi sebelumnya
 
 ## Files Modified
 
