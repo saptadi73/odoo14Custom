@@ -369,7 +369,22 @@ Note: MO with status `cancel` is always excluded from this endpoint.
       "schedule_start": "2025-02-06T08:00:00",
       "schedule_end": "2025-02-06T16:00:00"
     }
-  ]
+  ],
+  "chart_oee_by_equipment": {
+    "x_axis": ["SILO A", "SILO B"],
+    "y_axis": {
+      "qty_finished": [2495.0, 1800.0],
+      "yield_percent": [99.8, 98.6],
+      "consumption_ratio": [99.856, 100.4]
+    }
+  },
+  "chart_oee_trend": {
+    "x_axis": ["2026-02-14", "2026-02-15", "2026-02-16"],
+    "y_axis": {
+      "yield_percent": [99.2, 99.6, 99.8],
+      "consumption_ratio": [100.1, 99.9, 99.856]
+    }
+  }
 }
 ```
 
@@ -420,7 +435,14 @@ Note: This endpoint is JSON-RPC only. Use the `params` object for inputs.
       "product": "Konsentrat Sapi Penggemukan",
       "quantity": 1000.0
     }
-  ]
+  ],
+  "chart_oee_avg_by_equipment": {
+    "x_axis": ["SILO A", "SILO B"],
+    "y_axis": {
+      "yield_percent": [99.68, 98.9],
+      "consumption_ratio": [99.90, 100.2]
+    }
+  }
 }
 ```
 
@@ -1403,13 +1425,23 @@ Content-Type: application/json
         }
       ]
     }
-  ]
+  ],
+  "chart_oee_by_equipment": {
+    "x_axis": ["SILO A", "SILO B"],
+    "y_axis": {
+      "qty_finished": [2495.0, 1800.0],
+      "yield_percent": [99.8, 98.6],
+      "consumption_ratio": [99.856, 100.4]
+    }
+  },
+  "chart_oee_trend": {
+    "x_axis": ["2026-02-14", "2026-02-15", "2026-02-16"],
+    "y_axis": {
+      "yield_percent": [99.2, 99.6, 99.8],
+      "consumption_ratio": [100.1, 99.9, 99.856]
+    }
+  }
 }
-```
-
----
-
-### 19D. Get OEE Average by Equipment List (Protected)
 
 **Get average OEE report by SCADA equipment list**
 
@@ -1468,7 +1500,14 @@ Content-Type: application/json
       },
       "last_oee_date": "2026-02-16 09:40:00"
     }
-  ]
+  ],
+  "chart_oee_avg_by_equipment": {
+    "x_axis": ["SILO A", "SILO B"],
+    "y_axis": {
+      "yield_percent": [99.68, 98.9],
+      "consumption_ratio": [99.90, 100.2]
+    }
+  }
 }
 ```
 
@@ -1792,6 +1831,22 @@ Note:
     "total_oee_records": 13,
     "date_from": "2026-02-01 00:00:00",
     "date_to": "2026-02-29 23:59:59"
+  },
+  "chart_kpi_by_product": {
+    "x_axis": ["JF Plus", "Product B"],
+    "y_axis": {
+      "qty_planned": [2000.0, 1500.0],
+      "qty_finished": [1987.5, 1488.0],
+      "yield_percent": [99.375, 99.2],
+      "consumption_ratio": [101.024, 100.3]
+    }
+  },
+  "chart_kpi_trend": {
+    "x_axis": ["2026-02-01", "2026-02-02", "2026-02-03"],
+    "y_axis": {
+      "yield_percent": [98.9, 99.1, 99.4],
+      "consumption_ratio": [100.8, 101.0, 100.6]
+    }
   }
 }
 ```
