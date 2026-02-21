@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Explicitly define models to ensure they exist before ir.model.access.csv is loaded -->
+        
+        <record id="model_scada_equipment" model="ir.model">
+            <field name="name">SCADA Equipment</field>
+            <field name="model">scada.equipment</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_sensor_reading" model="ir.model">
+            <field name="name">SCADA Sensor Reading</field>
+            <field name="model">scada.sensor.reading</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_api_log" model="ir.model">
+            <field name="name">SCADA API Log</field>
+            <field name="model">scada.api.log</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_equipment_material" model="ir.model">
+            <field name="name">SCADA Equipment Material</field>
+            <field name="model">scada.equipment.material</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_mo_weight" model="ir.model">
+            <field name="name">SCADA MO Weight</field>
+            <field name="model">scada.mo.weight</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_quality_control" model="ir.model">
+            <field name="name">SCADA Quality Control</field>
+            <field name="model">scada.quality.control</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_equipment_oee" model="ir.model">
+            <field name="name">SCADA Equipment OEE Summary</field>
+            <field name="model">scada.equipment.oee</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_equipment_oee_line" model="ir.model">
+            <field name="name">SCADA Equipment OEE Line</field>
+            <field name="model">scada.equipment.oee.line</field>
+            <field name="state">manual</field>
+        </record>
+        
+        <record id="model_scada_equipment_failure" model="ir.model">
+            <field name="name">SCADA Equipment Failure</field>
+            <field name="model">scada.equipment.failure</field>
+            <field name="state">manual</field>
+        </record>
+        
+    </data>
+</odoo>
