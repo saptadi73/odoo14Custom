@@ -1111,6 +1111,58 @@ curl -X POST http://localhost:8069/api/scada/mo/mark-done \
 
 ---
 
+### 17A. Mark Manufacturing Order Done by Path ID (Protected)
+
+**Complete Manufacturing Order using `mrp.production` ID in URL path**
+
+```http
+POST /api/scada/mo/{mo_id}/mark-done
+Auth: Session cookie
+Content-Type: application/json
+```
+
+**Parameters**:
+- `mo_id` (path): `mrp.production` ID
+
+**Request Body**:
+
+```json
+{
+  "equipment_id": "PLC01",
+  "finished_qty": 1000.0,
+  "date_end_actual": "2025-02-06T16:00:00",
+  "message": "Production completed"
+}
+```
+
+Note: Endpoint ini memakai MO ID dari path, jadi `mo_id` di body tidak wajib.
+Note: Behavior mark done sama dengan endpoint payload-based (`/api/scada/mo/mark-done`).
+
+**Response**:
+
+```json
+{
+  "status": "success",
+  "message": "Manufacturing order marked as done",
+  "mo_id": "MO/2025/001"
+}
+```
+
+**cURL Example**:
+```bash
+curl -X POST http://localhost:8069/api/scada/mo/123/mark-done \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "equipment_id": "PLC01",
+    "finished_qty": 1000.0,
+    "auto_consume": true,
+    "date_end_actual": "2025-02-06T16:00:00"
+  }'
+```
+
+---
+
 ### 18. Update MO with Consumptions by Equipment Code (Protected)
 
 **Update Manufacturing Order quantity dan material consumption berdasarkan Equipment Code SCADA**

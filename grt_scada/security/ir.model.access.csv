@@ -25,3 +25,7 @@ access_scada_equipment_oee_line_technician,scada.equipment.oee.line Technician,m
 access_scada_equipment_failure_manager,scada.equipment.failure Manager,model_scada_equipment_failure,group_scada_manager,1,1,1,1
 access_scada_equipment_failure_operator,scada.equipment.failure Operator,model_scada_equipment_failure,group_scada_operator,1,1,1,0
 access_scada_equipment_failure_technician,scada.equipment.failure Technician,model_scada_equipment_failure,group_scada_technician,1,1,1,0
+access_scada_mo_bulk_wizard_manager,scada.mo.bulk.wizard Manager,model_scada_mo_bulk_wizard,group_scada_manager,1,1,1,1
+access_scada_mo_bulk_wizard_operator,scada.mo.bulk.wizard Operator,model_scada_mo_bulk_wizard,group_scada_operator,1,1,1,0
+access_scada_mo_bulk_wizard_mrp_user,scada.mo.bulk.wizard MRP User,model_scada_mo_bulk_wizard,mrp.group_mrp_user,1,1,1,0
+access_scada_mo_bulk_wizard_mrp_manager,scada.mo.bulk.wizard MRP Manager,model_scada_mo_bulk_wizard,mrp.group_mrp_manager,1,1,1,1

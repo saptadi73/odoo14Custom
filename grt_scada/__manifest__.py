@@ -1,6 +1,6 @@
 {
     'name': 'SCADA for Odoo - Manufacturing Integration',
-    'version': '6.0.55',
+    'version': '7.0.57',
     'category': 'manufacturing',
     'license': 'LGPL-3',
     'author': 'PT. Gagak Rimang Teknologi',
@@ -23,15 +23,20 @@
         ],
     },
     'data': [
+        # Security - FIRST
         'security/security_groups.xml',
-        # Views and menus
-        'views/scada_equipment_view.xml',
+        # External views inheritance - EARLY
         'views/scada_mrp_views.xml',
+        'views/scada_product_views.xml',
+        # Core SCADA views
+        'views/scada_equipment_view.xml',
         'views/scada_sensor_reading_view.xml',
         'views/scada_api_log_view.xml',
         'views/scada_quality_control_view.xml',
         'views/scada_equipment_oee_view.xml',
         'views/scada_equipment_failure_view.xml',
+        'views/scada_mo_bulk_wizard_view.xml',
+        # Menus - AFTER all views (references actions from views)
         'views/menu.xml',
         # Data files
         'data/demo_data.xml',
@@ -39,7 +44,7 @@
         # Reports
         'reports/scada_quality_control_report.xml',
         'reports/scada_equipment_oee_report.xml',
-        # Security access rules LAST
+        # Security access control - LAST
         'security/ir.model.access.csv',
         'security/ir.rule.xml',
     ],
