@@ -235,27 +235,57 @@ class ScadaEquipmentOee(models.Model):
         def _is_silo_equipment(equipment):
             return bool(equipment and equipment.equipment_type == 'silo')
 
-        # 1) Target per silo from BoM (so deviation compares against formula target, not split moves).
-        if mo.bom_id and mo.bom_id.product_qty:
-            for bom_line in mo.bom_id.bom_line_ids:
-                equipment = bom_line.scada_equipment_id
-                if not _is_silo_equipment(equipment):
+        def _collect_lines(use_only_silo=True):
+            local_map = {}
+
+            def _local_bucket(equipment):
+                key = equipment.id if equipment else 0
+                if key not in local_map:
+                    local_map[key] = {
+                        'equipment_id': equipment.id if equipment else False,
+                        'equipment_code': equipment.equipment_code if equipment else 'UNMAPPED',
+                        'equipment_name': equipment.name if equipment else 'Unmapped',
+                        'qty_to_consume': 0.0,
+                        'qty_consumed': 0.0,
+                        'material_count': 0,
+                    }
+                return local_map[key]
+
+            def _is_allowed(equipment):
+                if not equipment:
+                    return False
+                if use_only_silo:
+                    return _is_silo_equipment(equipment)
+                return True
+
+            # 1) Target from BoM.
+            if mo.bom_id and mo.bom_id.product_qty:
+                for bom_line in mo.bom_id.bom_line_ids:
+                    equipment = bom_line.scada_equipment_id
+                    if not _is_allowed(equipment):
+                        continue
+                    bucket = _local_bucket(equipment)
+                    planned_qty = (
+                        (bom_line.product_qty / mo.bom_id.product_qty) * (mo.product_qty or 0.0)
+                    )
+                    bucket['qty_to_consume'] += planned_qty
+                    bucket['material_count'] += 1
+
+            # 2) Actual from raw move done qty.
+            for move in mo.move_raw_ids.filtered(lambda m: m.state != 'cancel'):
+                equipment = move.scada_equipment_id
+                if not _is_allowed(equipment):
                     continue
-                bucket = _ensure_equipment_bucket(equipment)
-                planned_qty = (
-                    (bom_line.product_qty / mo.bom_id.product_qty) * (mo.product_qty or 0.0)
-                )
-                bucket['qty_to_consume'] += planned_qty
-                bucket['material_count'] += 1
+                bucket = _local_bucket(equipment)
+                bucket['qty_consumed'] += move.quantity_done or 0.0
 
-        # 2) Actual per silo from stock move done qty (includes overconsumption/additional lines).
-        for move in mo.move_raw_ids.filtered(lambda m: m.state != 'cancel'):
-            equipment = move.scada_equipment_id
-            if not _is_silo_equipment(equipment):
-                continue
-            bucket = _ensure_equipment_bucket(equipment)
-            bucket['qty_consumed'] += move.quantity_done or 0.0
+            return local_map
 
+        # Prefer silo-only details.
+        line_map = _collect_lines(use_only_silo=True)
+        # If none found, fallback to all mapped equipment.
+        if not line_map:
+            line_map = _collect_lines(use_only_silo=False)
         line_commands = []
         for data in line_map.values():
             qty_to_consume = data['qty_to_consume']

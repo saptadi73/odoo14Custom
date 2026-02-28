@@ -1063,9 +1063,9 @@ Content-Type: application/json
 ```
 
 Note: `mo_id` and `finished_qty` are required to update finished goods quantity.
-Note: `finished_qty` must be > 0. The system sets `qty_producing` to `finished_qty` before marking done.
+Note: `finished_qty` must be > 0. The system updates finished move `quantity_done` directly and does not force `qty_producing`.
 Note: `mo_id` in payload refers to MO name (e.g. `MO/2025/001`).
-Note: If `auto_consume` is enabled, `equipment_id` should be provided so material consumption can be applied to MO moves.
+Note: `auto_consume` parameter is ignored to preserve manual/middleware actual consumption values.
 
 **Response**:
 
@@ -1197,7 +1197,7 @@ Content-Type: application/json
 2. Jika quantity (atau alias quantity) diberikan, system akan:
    - re-scale MO menggunakan wizard standar Odoo `change.production.qty`
    - update `product_qty` dan raw/finished moves agar konsisten
-   - sinkronkan `qty_producing` ke target terbaru
+   - tidak menyetel `qty_producing` secara paksa (untuk menghindari re-hitungan konsumsi ke nilai BoM)
 3. Untuk setiap equipment code yang dikirim (kecuali `mo_id` dan key quantity):
    - System mencari equipment berdasarkan code (e.g., "silo101")
    - Mencari raw material moves yang berelasi dengan equipment tersebut
@@ -1581,7 +1581,8 @@ Content-Type: application/json
 {
   "equipment_code": "PLC01",
   "description": "Motor overload saat proses mixing",
-  "date": "2026-02-15 08:30:00"
+  "date": "2026-02-15 08:30:00",
+  "duration": "02:30"
 }
 ```
 
@@ -1594,10 +1595,17 @@ Content-Type: application/json
   "params": {
     "equipment_code": "PLC01",
     "description": "Motor overload saat proses mixing",
-    "date": "2026-02-15 08:30:00"
+    "date": "2026-02-15 08:30:00",
+    "duration": "02:30"
   }
 }
 ```
+
+**Field Descriptions**:
+- `equipment_code` (required): Equipment code di SCADA module
+- `description` (required): Deskripsi failure
+- `date` (optional): Format `YYYY-MM-DD HH:MM:SS` atau `YYYY-MM-DDTHH:MM` (default: waktu server saat create)
+- `duration` (optional): Durasi failure dalam format hh:mm (e.g., `02:30` untuk 2 jam 30 menit)
 
 **Response**:
 
@@ -1611,7 +1619,9 @@ Content-Type: application/json
     "equipment_code": "PLC01",
     "equipment_name": "Main PLC - Injection Machine 01",
     "description": "Motor overload saat proses mixing",
-    "date": "2026-02-15T08:30:00"
+    "date": "2026-02-15T08:30:00",
+    "duration": "02:30",
+    "duration_minutes": 150
   }
 }
 ```
@@ -1624,7 +1634,8 @@ curl -X POST http://localhost:8069/api/scada/equipment-failure \
   -d '{
     "equipment_code": "PLC01",
     "description": "Motor overload saat proses mixing",
-    "date": "2026-02-15 08:30:00"
+    "date": "2026-02-15 08:30:00",
+    "duration": "02:30"
   }'
 ```
 
@@ -1639,7 +1650,8 @@ curl -X POST http://localhost:8069/api/scada/equipment-failure \
     "params": {
       "equipment_code": "PLC01",
       "description": "Motor overload saat proses mixing",
-      "date": "2026-02-15 08:30:00"
+      "date": "2026-02-15 08:30:00",
+      "duration": "02:30"
     }
   }'
 ```
@@ -1675,6 +1687,8 @@ Untuk report frontend berbasis JSON-RPC gunakan endpoint baru `POST /api/scada/e
       "equipment_name": "Main PLC - Injection Machine 01",
       "description": "Motor overload saat proses mixing",
       "date": "2026-02-15T08:30:00",
+      "duration": "02:30",
+      "duration_minutes": 150,
       "reported_by": "Administrator"
     }
   ]
@@ -1761,6 +1775,8 @@ Catatan:
       "equipment_name": "Main PLC - Injection Machine 01",
       "description": "Motor overload",
       "date": "2026-02-15T08:30:00",
+      "duration": "02:30",
+      "duration_minutes": 150,
       "reported_by": "Administrator"
     },
     {
@@ -1770,6 +1786,8 @@ Catatan:
       "equipment_name": "Main PLC - Injection Machine 01",
       "description": "Trip breaker",
       "date": "2026-02-12T11:12:00",
+      "duration": "01:15",
+      "duration_minutes": 75,
       "reported_by": "Administrator"
     }
   ],
@@ -2327,7 +2345,8 @@ Content-Type: application/json
 {
   "equipment_code": "PLC01",
   "description": "Motor overload saat proses mixing",
-  "date": "2026-02-15 08:30:00"
+  "date": "2026-02-15 08:30:00",
+  "duration": "02:30"
 }
 ```
 
@@ -2335,6 +2354,7 @@ Content-Type: application/json
 - `equipment_code` (required): nilai `equipment_code` pada model `scada.equipment`
 - `description` (required): deskripsi failure
 - `date` (optional): format `YYYY-MM-DD HH:MM:SS` atau `YYYY-MM-DDTHH:MM`; jika kosong akan pakai waktu server saat create
+- `duration` (optional): durasi failure dalam format hh:mm (e.g., `02:30` untuk 2 jam 30 menit)
 
 **Response (Success)**:
 
@@ -2346,7 +2366,9 @@ Content-Type: application/json
     "id": 1,
     "equipment_code": "PLC01",
     "description": "Motor overload saat proses mixing",
-    "date": "2026-02-15 08:30:00"
+    "date": "2026-02-15 08:30:00",
+    "duration": "02:30",
+    "duration_minutes": 150
   }
 }
 ```
@@ -2368,7 +2390,8 @@ curl -X POST http://localhost:8069/api/scada/failure-report \
   -d '{
     "equipment_code": "PLC01",
     "description": "Motor overload saat proses mixing",
-    "date": "2026-02-15 08:30:00"
+    "date": "2026-02-15 08:30:00",
+    "duration": "02:30"
   }'
 ```
 

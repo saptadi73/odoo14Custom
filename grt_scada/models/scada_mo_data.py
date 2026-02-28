@@ -629,9 +629,6 @@ class ScadaMoData(models.Model):
                     'message': 'No finished product move found for this MO',
                 }
 
-            if hasattr(mo, 'qty_producing'):
-                mo.qty_producing = finished_qty
-
             finished_moves[0].quantity_done = finished_qty
 
             # Update actual end date if provided
@@ -639,12 +636,14 @@ class ScadaMoData(models.Model):
                 mo_data.write({'date_end_actual': payload_data['date_end_actual']})
 
             # Auto-consume materials from BoM if enabled (default: False)
-            # Only auto-consume if consumption not already present from middleware/manual
-            auto_consume = payload_data.get('auto_consume', False)
             consumed_materials = []
-            
-            if auto_consume and mo.bom_id:
-                consumed_materials = self._auto_consume_from_bom_smart(mo, equipment)
+            if payload_data.get('auto_consume'):
+                import logging
+                _logger = logging.getLogger(__name__)
+                _logger.info(
+                    'Ignoring auto_consume for MO %s to preserve manual/middleware actual consumption.',
+                    mo.name
+                )
 
             # Mark MO as done
             if mo.state not in ['done', 'cancel']:

@@ -1621,6 +1621,7 @@ class ScadaJsonRpcController(http.Controller):
             equipment_code = data.get('equipment_code')
             description = data.get('description')
             date_value = data.get('date')
+            duration = data.get('duration')  # hh:mm format
 
             if not equipment_code:
                 return {'status': 'error', 'message': 'equipment_code is required'}
@@ -1650,6 +1651,7 @@ class ScadaJsonRpcController(http.Controller):
                 'equipment_id': equipment.id,
                 'description': description,
                 'date': failure_date,
+                'duration': duration,
             })
             return {
                 'status': 'success',
@@ -1661,6 +1663,8 @@ class ScadaJsonRpcController(http.Controller):
                     'equipment_name': equipment.name,
                     'description': failure.description,
                     'date': failure.date.isoformat() if failure.date else None,
+                    'duration': failure.duration,
+                    'duration_minutes': failure.duration_minutes,
                 },
             }
         except Exception as e:
@@ -1695,6 +1699,8 @@ class ScadaJsonRpcController(http.Controller):
                     'equipment_name': failure.equipment_id.name if failure.equipment_id else None,
                     'description': failure.description,
                     'date': failure.date.isoformat() if failure.date else None,
+                    'duration': failure.duration,
+                    'duration_minutes': failure.duration_minutes,
                     'reported_by': failure.reported_by.name if failure.reported_by else None,
                 })
 
@@ -1798,6 +1804,8 @@ class ScadaJsonRpcController(http.Controller):
                     'equipment_name': failure.equipment_id.name if failure.equipment_id else None,
                     'description': failure.description,
                     'date': failure.date.isoformat() if failure.date else None,
+                    'duration': failure.duration,
+                    'duration_minutes': failure.duration_minutes,
                     'reported_by': failure.reported_by.name if failure.reported_by else None,
                 })
 

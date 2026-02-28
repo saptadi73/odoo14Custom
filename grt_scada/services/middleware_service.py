@@ -339,19 +339,17 @@ class MiddlewareService:
                 'message': 'No finished product move found for this MO',
             }
 
-        if hasattr(mo_record, 'qty_producing'):
-            mo_record.qty_producing = finished_qty
-
         finished_moves[0].quantity_done = finished_qty
 
         if payload_data.get('date_end_actual'):
             mo_record.write({'date_finished': payload_data['date_end_actual']})
 
-        auto_consume = payload_data.get('auto_consume', False)
         consumed_materials = []
-        if auto_consume and mo_record.bom_id and equipment:
-            # Smart auto-consume: hanya jika consumption belum ada dari middleware atau manual input
-            consumed_materials = self._auto_consume_from_bom_smart(mo_record, equipment)
+        if payload_data.get('auto_consume'):
+            _logger.info(
+                'Ignoring auto_consume for MO %s to preserve manual/middleware actual consumption.',
+                mo_record.name
+            )
 
         if mo_record.state not in ['done', 'cancel']:
             mo_record.sudo().button_mark_done()
@@ -756,10 +754,6 @@ class MiddlewareService:
                         'product_qty': quantity,
                     })
                     change_wizard.change_prod_qty()
-
-                # Selaraskan qty_producing dengan target terbaru untuk menghindari mismatch.
-                if hasattr(mo_record, 'qty_producing'):
-                    mo_record.qty_producing = quantity
 
                 _logger.info(
                     f'Updated MO {mo_name} quantity from "{quantity_key_used}" to {quantity} '

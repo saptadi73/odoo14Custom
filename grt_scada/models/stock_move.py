@@ -3,6 +3,7 @@ Stock move extensions for optional SCADA equipment mapping.
 """
 
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class StockMove(models.Model):
@@ -31,3 +32,31 @@ class StockMove(models.Model):
                 if bom_line and bom_line.scada_equipment_id:
                     vals['scada_equipment_id'] = bom_line.scada_equipment_id.id
         return super().create(vals_list)
+
+    @api.constrains('raw_material_production_id', 'product_id', 'scada_equipment_id', 'state')
+    def _check_unique_silo_equipment_per_mo(self):
+        """
+        In one MO raw moves, one equipment must map to only one material/product.
+        """
+        for move in self:
+            mo = move.raw_material_production_id
+            equipment = move.scada_equipment_id
+            if not mo or not move.product_id or not equipment:
+                continue
+            if move.state == 'cancel':
+                continue
+
+            conflict = mo.move_raw_ids.filtered(
+                lambda other: (
+                    other.id != move.id
+                    and other.state != 'cancel'
+                    and other.scada_equipment_id.id == equipment.id
+                    and other.product_id.id != move.product_id.id
+                )
+            )[:1]
+            if conflict:
+                raise ValidationError(
+                    "Equipment '%s' pada MO '%s' sudah dipakai oleh material '%s'. "
+                    "Satu equipment hanya boleh untuk satu bahan."
+                    % (equipment.display_name, mo.name, conflict.product_id.display_name)
+                )
