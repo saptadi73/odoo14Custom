@@ -1,6 +1,6 @@
 {
     'name': 'SCADA for Odoo - Manufacturing Integration',
-    'version': '7.0.75',
+    'version': '7.0.79',
     'category': 'manufacturing',
     'license': 'LGPL-3',
     'author': 'PT. Gagak Rimang Teknologi',
@@ -26,7 +26,8 @@
         # Security - FIRST
         'security/security_groups.xml',
         # External views inheritance - EARLY
-        'views/scada_mrp_views.xml',
+        # Temporary: disabled due view validation issue on current runtime (safe_eval opcode check)
+        # 'views/scada_mrp_views.xml',
         'views/scada_product_views.xml',
         # Core SCADA views
         'views/scada_equipment_view.xml',

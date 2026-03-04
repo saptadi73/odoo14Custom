@@ -388,27 +388,68 @@ class ScadaJsonRpcController(http.Controller):
 
             consumption_map = {}
             mo_equipment = getattr(mo, 'scada_equipment_id', False)
+            
+            # IMPROVED: Use BoM lines as baseline for "to_consume"
+            # This ensures API returns BoM quantities (350 kg), not stock move sums (352 kg)
+            if mo.bom_id:
+                for bom_line in mo.bom_id.bom_line_ids:
+                    product = bom_line.product_id
+                    tmpl_id = product.product_tmpl_id.id if product else None
+                    component_equipment = bom_line.scada_equipment_id or mo_equipment
+                    equipment_id = component_equipment.id if component_equipment else None
+                    
+                    key = (tmpl_id, product.id if product else None, equipment_id)
+                    if key in consumption_map:
+                        consumption_map[key]['to_consume'] += bom_line.product_qty
+                        consumption_map[key]['_bom_qty'] += bom_line.product_qty
+                    else:
+                        consumption_map[key] = {
+                            'product_tmpl_id': tmpl_id,
+                            'product_id': product.id if product else None,
+                            'product_name': product.display_name if product else None,
+                            'to_consume': bom_line.product_qty,
+                            'reserved': 0.0,
+                            'consumed': 0.0,
+                            'uom': bom_line.product_uom_id.name if bom_line.product_uom_id else None,
+                            'equipment': self._get_equipment_details(component_equipment),
+                            '_bom_qty': bom_line.product_qty,
+                        }
+            
+            # Now overlay stock move data for reserved and consumed (actual status)
+            # IMPORTANT: Sum all moves with same key to get actual status
             for move in mo.move_raw_ids:
                 product = move.product_id
                 tmpl_id = product.product_tmpl_id.id if product else None
                 component_equipment = move.scada_equipment_id or mo_equipment
-                # Group by product AND equipment to match UI display
                 equipment_id = component_equipment.id if component_equipment else None
+                
                 key = (tmpl_id, product.id if product else None, equipment_id)
+                
+                # If not in consumption_map yet (product not in BoM), create entry from stock move
                 if key not in consumption_map:
                     consumption_map[key] = {
                         'product_tmpl_id': tmpl_id,
                         'product_id': product.id if product else None,
                         'product_name': product.display_name if product else None,
-                        'to_consume': 0.0,
+                        'to_consume': move.product_uom_qty,
                         'reserved': 0.0,
                         'consumed': 0.0,
                         'uom': move.product_uom.name if move.product_uom else None,
                         'equipment': self._get_equipment_details(component_equipment),
+                        '_bom_qty': False,
                     }
-                consumption_map[key]['to_consume'] += move.product_uom_qty
+                
+                # Sum reserved and consumed from all moves (Important for multiple moves!)
                 consumption_map[key]['reserved'] += move.reserved_availability
                 consumption_map[key]['consumed'] += move.quantity_done
+
+            # Keep API aligned to BoM quantities for BoM-based components.
+            for item in consumption_map.values():
+                bom_qty = item.get('_bom_qty')
+                if bom_qty is not False:
+                    item['reserved'] = min(item['reserved'], bom_qty)
+                    item['consumed'] = min(item['consumed'], bom_qty)
+                item.pop('_bom_qty', None)
 
             components_consumption = list(consumption_map.values())
             produced_qty = sum(
