@@ -26,11 +26,29 @@ class StockMove(models.Model):
         for vals in vals_list:
             if vals.get('scada_equipment_id'):
                 continue
+            
             bom_line_id = vals.get('bom_line_id')
             if bom_line_id:
+                # Direct bom_line_id provided
                 bom_line = self.env['mrp.bom.line'].browse(bom_line_id)
                 if bom_line and bom_line.scada_equipment_id:
                     vals['scada_equipment_id'] = bom_line.scada_equipment_id.id
+            elif vals.get('raw_material_production_id'):
+                # Try to find bom_line through production order and product_id
+                mo_id = vals.get('raw_material_production_id')
+                product_id = vals.get('product_id')
+                if mo_id and product_id:
+                    mo = self.env['mrp.production'].browse(mo_id)
+                    if mo and mo.bom_id:
+                        # Find matching BoM line
+                        matching_bom_lines = mo.bom_id.bom_line_ids.filtered(
+                            lambda bl: bl.product_id.id == product_id
+                        )
+                        if matching_bom_lines:
+                            bom_line = matching_bom_lines[0]
+                            if bom_line.scada_equipment_id:
+                                vals['scada_equipment_id'] = bom_line.scada_equipment_id.id
+        
         return super().create(vals_list)
 
     @api.constrains('raw_material_production_id', 'product_id', 'scada_equipment_id', 'state')

@@ -35,7 +35,44 @@ class MrpProduction(models.Model):
                 bom = self.env['mrp.bom'].browse(bom_id)
                 if bom and bom.scada_equipment_id:
                     vals['scada_equipment_id'] = bom.scada_equipment_id.id
-        return super().create(vals_list)
+        records = super().create(vals_list)
+        # Sync SCADA equipment from BoM lines to stock moves after creation
+        records._sync_scada_equipment_to_moves()
+        return records
+
+    def _sync_scada_equipment_to_moves(self):
+        """Sync SCADA equipment from BoM lines to corresponding raw material moves"""
+        for mo in self:
+            if not mo.bom_id:
+                continue
+            
+            # Build a mapping of bom_line product/qty to scada_equipment
+            equipment_map = {}
+            for bom_line in mo.bom_id.bom_line_ids:
+                if not bom_line.scada_equipment_id:
+                    continue
+                key = (bom_line.product_id.id, bom_line.product_qty)
+                equipment_map[key] = bom_line.scada_equipment_id
+            
+            if not equipment_map:
+                continue
+            
+            # Update raw material moves that don't have scada_equipment_id yet
+            for move in mo.move_raw_ids:
+                if move.scada_equipment_id or not move.bom_line_id:
+                    # If already has equipment or no bom_line reference, skip
+                    continue
+                
+                # Try to find equipment from BoM line
+                if move.bom_line_id and move.bom_line_id.scada_equipment_id:
+                    move.scada_equipment_id = move.bom_line_id.scada_equipment_id
+
+    def action_confirm(self):
+        """Override confirm to ensure SCADA equipment is synced to moves"""
+        res = super().action_confirm()
+        # After confirmation, ensure all moves have SCADA equipment from BoM
+        self._sync_scada_equipment_to_moves()
+        return res
 
     def button_mark_done(self):
         self._scada_normalize_main_finished_moves()

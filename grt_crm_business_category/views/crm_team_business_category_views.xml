@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_crm_team_business_category_tree" model="ir.ui.view">
+        <field name="name">crm.team.business.category.tree</field>
+        <field name="model">crm.team</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="business_category_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_crm_team_business_category_form" model="ir.ui.view">
+        <field name="name">crm.team.business.category.form</field>
+        <field name="model">crm.team</field>
+        <field name="arch" type="xml">
+            <form string="Sales Team">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="business_category_id"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_crm_team_business_category" model="ir.actions.act_window">
+        <field name="name">Pipelines by Business Category</field>
+        <field name="res_model">crm.team</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_crm_team_business_category"
+              name="Pipelines by Category"
+              parent="crm.crm_menu_config"
+              action="action_crm_team_business_category"
+              sequence="34"
+              groups="sales_team.group_sale_manager"/>
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_users_business_category_tree" model="ir.ui.view">
+        <field name="name">res.users.business.category.tree</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="login"/>
+                <field name="active"/>
+                <field name="default_business_category_id"/>
+                <field name="active_business_category_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_users_business_category_form" model="ir.ui.view">
+        <field name="name">res.users.business.category.form</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form string="User Business Category Access">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="login"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Business Category Access">
+                        <field name="allowed_business_category_ids" widget="many2many_tags"/>
+                        <field name="default_business_category_id"/>
+                        <field name="active_business_category_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_users_business_category_access" model="ir.actions.act_window">
+        <field name="name">User Business Category Access</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('share', '=', False)]</field>
+    </record>
+
+    <menuitem id="menu_res_users_business_category_access"
+              name="User Category Access"
+              parent="crm.crm_menu_config"
+              action="action_res_users_business_category_access"
+              sequence="36"
+              groups="base.group_system"/>
+</odoo>

@@ -104,48 +104,19 @@ class ScadaMoBulkWizard(models.TransientModel):
 
         mo_records = self.env['mrp.production'].create(vals_list)
 
-        # Trigger BoM explosion to populate components (move_raw_ids)
-        # The batch create() doesn't automatically explode BoMs, so we force it
+        # Populate raw material and finished product moves using Odoo's standard methods
         for mo in mo_records:
-            if not mo.move_raw_ids and mo.bom_id:
-                # Explode the BoM to get component lines
-                bom_lines, _ = mo.bom_id.explode(mo.product_id, mo.product_qty)
-                
-                # Create raw material moves from BoM lines
-                raw_moves_vals = []
-                for bom_line, line_data in bom_lines:
-                    raw_moves_vals.append({
-                        'name': mo.name,
-                        'product_id': bom_line.product_id.id,
-                        'product_uom': bom_line.product_uom_id.id,
-                        'product_uom_qty': line_data['qty'],
-                        'location_id': mo.location_src_id.id,
-                        'location_dest_id': mo.product_id.property_stock_production.id,
-                        'raw_material_production_id': mo.id,
-                        'company_id': mo.company_id.id,
-                        'origin': mo.name,
-                        'group_id': mo.procurement_group_id.id,
-                        'bom_line_id': bom_line.id,
-                    })
-                
-                if raw_moves_vals:
-                    self.env['stock.move'].create(raw_moves_vals)
+            # Get values for raw material moves from BoM
+            raw_moves_values = mo._get_moves_raw_values()
+            self.env['stock.move'].create(raw_moves_values)
             
-            # Ensure finished product move exists
-            if not mo.move_finished_ids.filtered(lambda m: m.product_id == mo.product_id):
-                finished_move_vals = {
-                    'name': mo.name,
-                    'product_id': mo.product_id.id,
-                    'product_uom': mo.product_uom_id.id,
-                    'product_uom_qty': mo.product_qty,
-                    'location_id': mo.product_id.property_stock_production.id,
-                    'location_dest_id': mo.location_dest_id.id,
-                    'production_id': mo.id,
-                    'company_id': mo.company_id.id,
-                    'origin': mo.name,
-                    'group_id': mo.procurement_group_id.id,
-                }
-                self.env['stock.move'].create(finished_move_vals)
+            # Get values for finished product moves
+            finished_moves_values = mo._get_moves_finished_values()
+            self.env['stock.move'].create(finished_moves_values)
+            
+            # Now confirm the MO
+            if mo.state == 'draft':
+                mo.action_confirm()
 
         return {
             'type': 'ir.actions.act_window',

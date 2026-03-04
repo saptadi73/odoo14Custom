@@ -6,9 +6,8 @@
         <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="business_category_id" options="{'no_create_edit': True}"/>
+                <field name="business_category_id"/>
             </xpath>
         </field>
     </record>
 </odoo>
-

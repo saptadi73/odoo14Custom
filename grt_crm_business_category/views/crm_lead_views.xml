@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='team_id']" position="before">
-                <field name="business_category_id" required="1"/>
+                <field name="business_category_id"/>
             </xpath>
             <xpath expr="//field[@name='team_id']" position="attributes">
                 <attribute name="domain">[('business_category_id', '=', business_category_id)]</attribute>
@@ -25,6 +25,17 @@
             <xpath expr="//filter[@name='salesperson']" position="after">
                 <filter string="Business Category" name="group_by_business_category"
                         context="{'group_by': 'business_category_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_quick_create_opportunity_form_business_category" model="ir.ui.view">
+        <field name="name">crm.lead.quick.create.form.business.category</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="business_category_id"/>
             </xpath>
         </field>
     </record>
