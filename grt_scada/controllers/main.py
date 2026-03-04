@@ -392,7 +392,9 @@ class ScadaJsonRpcController(http.Controller):
                 product = move.product_id
                 tmpl_id = product.product_tmpl_id.id if product else None
                 component_equipment = move.scada_equipment_id or mo_equipment
-                key = (tmpl_id, product.id if product else None)
+                # Group by product AND equipment to match UI display
+                equipment_id = component_equipment.id if component_equipment else None
+                key = (tmpl_id, product.id if product else None, equipment_id)
                 if key not in consumption_map:
                     consumption_map[key] = {
                         'product_tmpl_id': tmpl_id,
