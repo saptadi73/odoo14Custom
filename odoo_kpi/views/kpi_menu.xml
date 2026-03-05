@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_kpi_root" name="KPI" parent="crm.crm_menu_root" sequence="80" groups="odoo_kpi.group_kpi_employee,odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
+
+    <menuitem id="menu_kpi_master" name="Master" parent="menu_kpi_root" sequence="10" groups="odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
+    <menuitem id="menu_kpi_operations" name="Operations" parent="menu_kpi_root" sequence="20" groups="odoo_kpi.group_kpi_employee,odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
+    <menuitem id="menu_kpi_reports" name="Reports" parent="menu_kpi_root" sequence="30" groups="odoo_kpi.group_kpi_employee,odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
+
+    <menuitem id="menu_kpi_department" name="Departments" parent="menu_kpi_master" action="action_kpi_department" sequence="11"/>
+    <menuitem id="menu_kpi_definition" name="Definitions" parent="menu_kpi_master" action="action_kpi_definition" sequence="12"/>
+    <menuitem id="menu_kpi_target" name="Targets" parent="menu_kpi_master" action="action_kpi_target" sequence="13"/>
+    <menuitem id="menu_kpi_period" name="Periods" parent="menu_kpi_master" action="action_kpi_period" sequence="14"/>
+    <menuitem id="menu_kpi_team" name="Teams" parent="menu_kpi_master" action="action_kpi_team" sequence="15"/>
+
+    <menuitem id="menu_kpi_assignment" name="Assignments" parent="menu_kpi_operations" action="action_kpi_assignment" sequence="21"/>
+    <menuitem id="menu_kpi_value" name="Values" parent="menu_kpi_operations" action="action_kpi_value" sequence="22"/>
+    <menuitem id="menu_kpi_evidence" name="Evidence" parent="menu_kpi_operations" action="action_kpi_evidence" sequence="23"/>
+
+    <menuitem id="menu_kpi_score" name="Employee Score" parent="menu_kpi_reports" action="action_kpi_score" sequence="31"/>
+    <menuitem id="menu_kpi_team_score" name="Team Score" parent="menu_kpi_reports" action="action_kpi_team_score" sequence="32"/>
+</odoo>

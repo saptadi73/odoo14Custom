@@ -102,3 +102,17 @@ class CrmLead(models.Model):
                 continue
             if lead.type in ("lead", "opportunity") and not lead.business_category_id:
                 raise ValidationError(_("Business Category is required for both Leads and Opportunities."))
+
+    @api.constrains("stage_id", "business_category_id")
+    def _check_stage_business_category(self):
+        for lead in self:
+            if not lead.stage_id or not lead.business_category_id:
+                continue
+            if lead.stage_id.business_category_id and lead.stage_id.business_category_id != lead.business_category_id:
+                raise ValidationError(
+                    _(
+                        "Stage '%s' belongs to business category '%s'. "
+                        "Please select a stage from business category '%s'."
+                    )
+                    % (lead.stage_id.name, lead.stage_id.business_category_id.name, lead.business_category_id.name)
+                )

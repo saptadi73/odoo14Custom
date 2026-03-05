@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_kpi_evidence_tree" model="ir.ui.view">
+        <field name="name">kpi.evidence.tree</field>
+        <field name="model">kpi.evidence</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="kpi_value_id"/>
+                <field name="attachment"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kpi_evidence_form" model="ir.ui.view">
+        <field name="name">kpi.evidence.form</field>
+        <field name="model">kpi.evidence</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="kpi_value_id"/>
+                        <field name="attachment"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kpi_evidence" model="ir.actions.act_window">
+        <field name="name">KPI Evidence</field>
+        <field name="res_model">kpi.evidence</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+

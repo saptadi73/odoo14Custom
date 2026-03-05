@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_kpi_score_tree" model="ir.ui.view">
+        <field name="name">kpi.score.tree</field>
+        <field name="model">kpi.score</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="period_id"/>
+                <field name="employee_id"/>
+                <field name="total_score"/>
+                <field name="grade"/>
+                <field name="calculated_at"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kpi_score_form" model="ir.ui.view">
+        <field name="name">kpi.score.form</field>
+        <field name="model">kpi.score</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="period_id"/>
+                        <field name="employee_id"/>
+                        <field name="total_score"/>
+                        <field name="grade"/>
+                        <field name="calculated_at"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_kpi_score_pivot" model="ir.ui.view">
+        <field name="name">kpi.score.pivot</field>
+        <field name="model">kpi.score</field>
+        <field name="arch" type="xml">
+            <pivot string="KPI Score">
+                <field name="period_id" type="row"/>
+                <field name="employee_id" type="row"/>
+                <field name="total_score" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_kpi_score" model="ir.actions.act_window">
+        <field name="name">KPI Scores</field>
+        <field name="res_model">kpi.score</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+
+    <record id="view_kpi_team_score_tree" model="ir.ui.view">
+        <field name="name">kpi.team.score.tree</field>
+        <field name="model">kpi.team.score</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="period_id"/>
+                <field name="team_id"/>
+                <field name="score"/>
+                <field name="calculated_at"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kpi_team_score_form" model="ir.ui.view">
+        <field name="name">kpi.team.score.form</field>
+        <field name="model">kpi.team.score</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="period_id"/>
+                        <field name="team_id"/>
+                        <field name="score"/>
+                        <field name="calculated_at"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kpi_team_score" model="ir.actions.act_window">
+        <field name="name">KPI Team Scores</field>
+        <field name="res_model">kpi.team.score</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+

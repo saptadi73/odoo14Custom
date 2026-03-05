@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_kpi_assignment_tree" model="ir.ui.view">
+        <field name="name">kpi.assignment.tree</field>
+        <field name="model">kpi.assignment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="kpi_definition_id"/>
+                <field name="period_id"/>
+                <field name="target_override"/>
+                <field name="weight_override"/>
+                <field name="effective_target"/>
+                <field name="effective_weight"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kpi_assignment_form" model="ir.ui.view">
+        <field name="name">kpi.assignment.form</field>
+        <field name="model">kpi.assignment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="kpi_definition_id"/>
+                        <field name="period_id"/>
+                    </group>
+                    <group>
+                        <field name="target_override"/>
+                        <field name="weight_override"/>
+                        <field name="effective_target" readonly="1"/>
+                        <field name="effective_weight" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kpi_assignment" model="ir.actions.act_window">
+        <field name="name">KPI Assignments</field>
+        <field name="res_model">kpi.assignment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+

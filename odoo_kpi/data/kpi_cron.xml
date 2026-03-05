@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_calculate_kpi_score_daily" model="ir.cron">
+        <field name="name">KPI: Calculate Employee and Team Score</field>
+        <field name="model_id" ref="model_kpi_score"/>
+        <field name="state">code</field>
+        <field name="code">model.calculate_kpi_score()</field>
+        <field name="active" eval="True"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+    <record id="ir_cron_calculate_kpi_score_monthly" model="ir.cron">
+        <field name="name">KPI: Monthly Recalculate Score</field>
+        <field name="model_id" ref="model_kpi_score"/>
+        <field name="state">code</field>
+        <field name="code">model.calculate_kpi_score()</field>
+        <field name="active" eval="True"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

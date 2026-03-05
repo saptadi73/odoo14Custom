@@ -11,6 +11,9 @@
             <xpath expr="//field[@name='team_id']" position="attributes">
                 <attribute name="domain">[('business_category_id', '=', business_category_id)]</attribute>
             </xpath>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="domain">[('business_category_id', '=', business_category_id), '|', ('team_id', '=', False), ('team_id', '=', team_id)]</attribute>
+            </xpath>
         </field>
     </record>
 
