@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template
+        id="grt_crm_business_category_assets_backend"
+        name="GRT CRM Business Category Assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/grt_crm_business_category/static/src/js/activity_gps.js"
+            />
+        </xpath>
+    </template>
+</odoo>

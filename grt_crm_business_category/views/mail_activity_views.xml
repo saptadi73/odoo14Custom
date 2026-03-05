@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_activity_view_form_popup_gps" model="ir.ui.view">
+        <field name="name">mail.activity.form.popup.gps</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_deadline']" position="after">
+                <group string="GPS Location" name="gps_group" col="2" colspan="2">
+                    <field name="gps_captured" invisible="1" />
+                    <field name="gps_latitude" colspan="2" nolabel="1" style="width: 98% !important; min-width: 300px !important;" />
+                    <field name="gps_longitude" colspan="2" nolabel="1" style="width: 98% !important; min-width: 300px !important;" />
+                    <button name="gps_capture_btn" string="🗺️ Capture GPS" class="btn btn-primary btn-lg grt_capture_gps_btn o_activity_gps_btn" colspan="2" style="width: 98% !important; min-width: 300px !important; margin: 5px 0; padding: 8px;" />
+                    <field name="gps_openstreetmap_url" widget="url" colspan="2" nolabel="1" style="width: 98% !important; min-width: 300px !important;" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_tree_gps" model="ir.ui.view">
+        <field name="name">mail.activity.tree.gps</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_deadline']" position="after">
+                <field name="gps_latitude" readonly="1" />
+                <field name="gps_longitude" readonly="1" />
+                <field name="gps_openstreetmap_url" widget="url" string="OpenStreetMap" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

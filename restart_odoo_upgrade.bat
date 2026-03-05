@@ -5,7 +5,7 @@ echo ================================================================
 echo.
 echo Langkah yang akan dilakukan:
 echo 1. Kill semua proses Odoo yang berjalan
-echo 2. Start Odoo dengan upgrade module grt_scada
+echo 2. Start Odoo dengan upgrade module grt_crm_business_category
 echo.
 pause
 
@@ -19,11 +19,11 @@ echo.
 echo [2/2] Starting Odoo with module upgrade...
 echo.
 cd C:\odoo14c\server
-start "Odoo Server" c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d manukanjabung -u grt_scada --without-demo=all
+start "Odoo Server" c:\odoo14c\python\python.exe odoo-bin -c C:\addon14\odoo.conf -d kanjabung_MRP -u grt_crm_business_category --without-demo=all
 
 echo.
 echo ================================================================
-echo Odoo sedang starting dengan upgrade module grt_scada...
+echo Odoo sedang starting dengan upgrade module grt_crm_business_category...
 echo Tunggu sekitar 30-60 detik hingga Odoo fully loaded
 echo ================================================================
 echo.

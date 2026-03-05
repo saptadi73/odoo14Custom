@@ -48,7 +48,19 @@ class ScadaMODetailedController(http.Controller):
             except (ValueError, TypeError):
                 offset = 0
 
-            domain = [('state', 'in', ['confirmed', 'progress', 'to_close'])]
+            # Default behavior: only return new MO queue for middleware pickup.
+            # Optional override:
+            # - states: ['confirmed', 'progress'] or "confirmed,progress"
+            states = params.get('states')
+            if states:
+                if isinstance(states, str):
+                    states = [s.strip() for s in states.split(',') if s.strip()]
+                elif not isinstance(states, (list, tuple)):
+                    states = ['confirmed']
+            else:
+                states = ['confirmed']
+
+            domain = [('state', 'in', states)]
             mos = request.env['mrp.production'].search(
                 domain,
                 limit=limit,

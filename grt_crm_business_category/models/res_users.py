@@ -5,6 +5,12 @@ from odoo.exceptions import ValidationError
 class ResUsers(models.Model):
     _inherit = "res.users"
 
+    last_gps_latitude = fields.Float(string="Last GPS Latitude", digits=(9, 6), readonly=True)
+    last_gps_longitude = fields.Float(string="Last GPS Longitude", digits=(9, 6), readonly=True)
+    last_gps_client_time = fields.Char(string="Last GPS Client Time", readonly=True)
+    last_gps_client_tz = fields.Char(string="Last GPS Client TZ", readonly=True)
+    last_gps_recorded_at = fields.Datetime(string="Last GPS Recorded At", readonly=True)
+
     allowed_business_category_ids = fields.Many2many(
         "crm.business.category",
         "res_users_crm_business_category_rel",
@@ -13,31 +19,72 @@ class ResUsers(models.Model):
         string="Allowed Business Categories",
         help="Users can only access CRM data in these business categories.",
     )
+    team_business_category_ids = fields.Many2many(
+        "crm.business.category",
+        string="Team Business Categories",
+        compute="_compute_effective_business_category_ids",
+        readonly=True,
+        help="Business categories inherited automatically from Sales Team membership.",
+    )
+    effective_business_category_ids = fields.Many2many(
+        "crm.business.category",
+        string="Effective Business Categories",
+        compute="_compute_effective_business_category_ids",
+        readonly=True,
+        help="Union of manual access and Sales Team-based access.",
+    )
 
     default_business_category_id = fields.Many2one(
         "crm.business.category",
         string="Default Business Category",
-        domain="[('id', 'in', allowed_business_category_ids)]",
+        domain="[('id', 'in', effective_business_category_ids)]",
         help="Default category for new records.",
     )
 
     active_business_category_id = fields.Many2one(
         "crm.business.category",
         string="Active Business Category",
-        domain="[('id', 'in', allowed_business_category_ids)]",
+        domain="[('id', 'in', effective_business_category_ids)]",
         help="Current user context category, similar to active company.",
     )
+
+    def _get_team_business_categories(self):
+        self.ensure_one()
+        team_model = self.env["crm.team"].sudo()
+        domain_parts = []
+        if "user_id" in team_model._fields:
+            domain_parts.append(("user_id", "=", self.id))
+        if "member_ids" in team_model._fields:
+            domain_parts.append(("member_ids", "in", self.id))
+
+        if not domain_parts:
+            return self.env["crm.business.category"]
+        if len(domain_parts) == 1:
+            domain = domain_parts
+        else:
+            domain = ["|"] + domain_parts
+
+        teams = team_model.search(domain)
+        return teams.mapped("business_category_id")
+
+    @api.depends("allowed_business_category_ids")
+    def _compute_effective_business_category_ids(self):
+        for user in self:
+            team_categories = user._get_team_business_categories()
+            user.team_business_category_ids = team_categories
+            user.effective_business_category_ids = user.allowed_business_category_ids | team_categories
 
     @api.onchange("allowed_business_category_ids")
     def _onchange_allowed_business_category_ids(self):
         for user in self:
-            if user.default_business_category_id not in user.allowed_business_category_ids:
+            effective_categories = user.allowed_business_category_ids | user._get_team_business_categories()
+            if user.default_business_category_id not in effective_categories:
                 user.default_business_category_id = False
-            if user.active_business_category_id not in user.allowed_business_category_ids:
+            if user.active_business_category_id not in effective_categories:
                 user.active_business_category_id = False
-            if user.allowed_business_category_ids and not user.default_business_category_id:
-                user.default_business_category_id = user.allowed_business_category_ids[0]
-            if user.allowed_business_category_ids and not user.active_business_category_id:
+            if effective_categories and not user.default_business_category_id:
+                user.default_business_category_id = effective_categories[0]
+            if effective_categories and not user.active_business_category_id:
                 user.active_business_category_id = user.default_business_category_id
 
     @api.constrains(
@@ -47,11 +94,33 @@ class ResUsers(models.Model):
     )
     def _check_business_category_consistency(self):
         for user in self:
-            if user.default_business_category_id and user.default_business_category_id not in user.allowed_business_category_ids:
+            effective_categories = user.allowed_business_category_ids | user._get_team_business_categories()
+            if user.default_business_category_id and user.default_business_category_id not in effective_categories:
                 raise ValidationError(
-                    _("Default Business Category must be included in Allowed Business Categories.")
+                    _("Default Business Category must be included in Effective Business Categories.")
                 )
-            if user.active_business_category_id and user.active_business_category_id not in user.allowed_business_category_ids:
+            if user.active_business_category_id and user.active_business_category_id not in effective_categories:
                 raise ValidationError(
-                    _("Active Business Category must be included in Allowed Business Categories.")
+                    _("Active Business Category must be included in Effective Business Categories.")
                 )
+
+    def action_sync_team_business_category_access(self):
+        for user in self:
+            effective_categories = user.allowed_business_category_ids | user._get_team_business_categories()
+            first_category = effective_categories[:1]
+            vals = {}
+
+            if user.default_business_category_id not in effective_categories:
+                vals["default_business_category_id"] = first_category.id if first_category else False
+            elif not user.default_business_category_id and first_category:
+                vals["default_business_category_id"] = first_category.id
+
+            default_id = vals.get("default_business_category_id") or user.default_business_category_id.id
+            if user.active_business_category_id not in effective_categories:
+                vals["active_business_category_id"] = default_id or (first_category.id if first_category else False)
+            elif not user.active_business_category_id:
+                vals["active_business_category_id"] = default_id or (first_category.id if first_category else False)
+
+            if vals:
+                user.write(vals)
+        return {"type": "ir.actions.client", "tag": "reload"}

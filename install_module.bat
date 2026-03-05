@@ -12,11 +12,11 @@ echo.
 
 if "%1"=="" (
     echo CARA PAKAI:
-    echo   install_module.bat nama_modul
+    echo   install_module.bat nama_modul [nama_database]
     echo.
     echo CONTOH:
-    echo   install_module.bat account_dynamic_reports
-    echo   install_module.bat project_task_timer
+    echo   install_module.bat account_dynamic_reports kanjabung_MRP
+    echo   install_module.bat project_task_timer manukanjabung
     echo.
     echo Module yang tersedia di C:\addon14:
     echo   - account_dynamic_reports
@@ -31,7 +31,12 @@ set MODULE_NAME=%1
 set ODOO_BIN=C:\odoo14c\server\odoo-bin
 set PYTHON=c:\odoo14c\python\python.exe
 set CONFIG=C:\addon14\odoo.conf
-set DATABASE=manu14
+
+if "%2"=="" (
+    set DATABASE=kanjabung_MRP
+) else (
+    set DATABASE=%2
+)
 
 echo Installing module: %MODULE_NAME%
 echo Database: %DATABASE%
@@ -48,7 +53,7 @@ echo.
 echo Installing...
 echo.
 
-%PYTHON% %ODOO_BIN% --config=%CONFIG% -d %DATABASE% -i %MODULE_NAME% --stop-after-init
+%PYTHON% %ODOO_BIN% --config=%CONFIG% -d %DATABASE% -u %MODULE_NAME% --stop-after-init
 
 echo.
 echo ============================================================================

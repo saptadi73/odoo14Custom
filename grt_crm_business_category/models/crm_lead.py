@@ -54,6 +54,25 @@ class CrmLead(models.Model):
             if lead.team_id and lead.team_id.business_category_id:
                 lead.business_category_id = lead.team_id.business_category_id
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        team_model = self.env["crm.team"]
+        for vals in vals_list:
+            team_id = vals.get("team_id")
+            if team_id and not vals.get("business_category_id"):
+                team = team_model.browse(team_id)
+                if team.business_category_id:
+                    vals["business_category_id"] = team.business_category_id.id
+        return super().create(vals_list)
+
+    def write(self, vals):
+        team_model = self.env["crm.team"]
+        if vals.get("team_id") and not vals.get("business_category_id"):
+            team = team_model.browse(vals["team_id"])
+            if team.business_category_id:
+                vals["business_category_id"] = team.business_category_id.id
+        return super().write(vals)
+
     @api.constrains("business_category_id", "team_id")
     def _check_business_category_team(self):
         for lead in self:
@@ -75,5 +94,11 @@ class CrmLead(models.Model):
     @api.constrains("type", "business_category_id")
     def _check_business_category_required(self):
         for lead in self:
+            if lead.type not in ("lead", "opportunity"):
+                continue
+            if lead.business_category_id:
+                continue
+            if lead.team_id and lead.team_id.business_category_id:
+                continue
             if lead.type in ("lead", "opportunity") and not lead.business_category_id:
                 raise ValidationError(_("Business Category is required for both Leads and Opportunities."))

@@ -11,7 +11,7 @@
             "program": "C:/odoo14c/server/odoo-bin",
             "args": [
                 "--config=C:\\addon14\\odoo.conf",
-                // "--database=manukanjabung",
+                "--database=kanjabung_MRP",
                 "--without-demo=all"
             ],
             "cwd": "${workspaceFolder}",

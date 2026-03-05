@@ -600,12 +600,17 @@ Content-Type: application/json
   "method": "call",
   "params": {
     "limit": 10,
-    "offset": 0
+    "offset": 0,
+    "states": ["confirmed"]
   }
 }
 ```
 
-**Response**: Same structure as `mo-detail` but returns array of MOs with states 'confirmed', 'progress', 'to_close'
+`states` is optional:
+- If omitted, default is `["confirmed"]` (recommended for middleware pickup queue).
+- Can be string CSV: `"confirmed,progress"` or array: `["confirmed","progress"]`.
+
+**Response**: Same structure as `mo-detail` but returns array of MOs filtered by `states`.
 
 ```json
 {
@@ -687,7 +692,9 @@ Content-Type: application/json
 - Each MO in the list includes full `equipment` object (MO-level equipment), `bom_components` array, and `components_consumption` array
 - Each component in `components_consumption` includes full `equipment` object if linked to SCADA equipment via component move; null otherwise
 - Equipment fields include: id, code, name, equipment_type, manufacturer, model_number, serial_number, ip_address, port, protocol, is_active, connection_status, sync_status, last_connected
-- `to_consume`, `reserved`, and `consumed` quantities are based on raw material stock moves
+- `to_consume` is based on BoM quantity for BoM-based components.
+- `reserved` and `consumed` are aggregated from raw moves, then capped to BoM quantity for BoM-based components (to avoid over-reporting from split/extra moves).
+- Non-BoM-only components (if any) use raw move quantities.
 
 **JSON-RPC Example**:
 ```bash
@@ -699,7 +706,8 @@ curl -X POST http://localhost:8069/api/scada/mo-list-detailed \
     "method": "call",
     "params": {
       "limit": 10,
-      "offset": 0
+      "offset": 0,
+      "states": "confirmed,progress"
     }
   }'
 ```
