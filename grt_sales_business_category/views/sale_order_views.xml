@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_business_category_approval" model="ir.ui.view">
+        <field name="name">sale.order.form.business.category.approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_submit_for_approval"
+                        type="object"
+                        string="Submit Approval"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|', ('state', 'not in', ('draft', 'sent')), ('approval_state', '!=', 'draft')]}"/>
+                <button name="action_sales_leader_approve"
+                        type="object"
+                        string="Approve Sales Leader"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|', ('approval_state', '!=', 'waiting_sales_leader'), ('can_approve_sales_leader', '=', False)]}"/>
+                <button name="action_accounting_approve"
+                        type="object"
+                        string="Approve Accounting"
+                        class="oe_highlight"
+                        attrs="{'invisible': ['|', ('approval_state', '!=', 'waiting_accounting'), ('can_approve_accounting', '=', False)]}"/>
+                <button name="action_reject_approval"
+                        type="object"
+                        string="Reject Approval"
+                        attrs="{'invisible': [('approval_state', 'not in', ('waiting_sales_leader', 'waiting_accounting'))]}"/>
+                <button name="action_reset_approval"
+                        type="object"
+                        string="Reset Approval"
+                        attrs="{'invisible': ['|', ('state', 'not in', ('draft', 'sent')), ('approval_state', '=', 'draft')]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="business_category_id"/>
+            </xpath>
+
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <attribute name="string">Team Sales</attribute>
+                <attribute name="domain">[('business_category_id', '=', business_category_id)]</attribute>
+            </xpath>
+
+            <xpath expr="(//sheet//group)[1]" position="inside">
+                <group string="Approval">
+                    <field name="approval_state" readonly="1"/>
+                    <field name="sales_team_leader_id" readonly="1"/>
+                    <field name="sales_leader_approved_by_id" readonly="1"/>
+                    <field name="sales_leader_approved_date" readonly="1"/>
+                    <field name="accounting_approved_by_id" readonly="1"/>
+                    <field name="accounting_approved_date" readonly="1"/>
+                    <field name="can_approve_sales_leader" invisible="1"/>
+                    <field name="can_approve_accounting" invisible="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_business_category" model="ir.ui.view">
+        <field name="name">sale.order.search.business.category</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="business_category_id"/>
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Business Category" name="group_by_business_category" context="{'group_by': 'business_category_id'}"/>
+                <filter string="Team Sales" name="group_by_sales_team" context="{'group_by': 'team_id'}"/>
+                <filter string="Waiting Sales Leader" name="waiting_sales_leader" domain="[('approval_state', '=', 'waiting_sales_leader')]"/>
+                <filter string="Waiting Accounting" name="waiting_accounting" domain="[('approval_state', '=', 'waiting_accounting')]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

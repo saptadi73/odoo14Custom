@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_sales_team_from_sales" model="ir.actions.act_window">
+        <field name="name">Team Sales</field>
+        <field name="res_model">crm.team</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_sale_team_from_sales"
+              name="Team Sales"
+              parent="sale.sale_order_menu"
+              sequence="35"
+              action="action_sales_team_from_sales"
+              groups="sales_team.group_sale_manager"/>
+</odoo>

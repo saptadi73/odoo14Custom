@@ -1,0 +1,9 @@
+id,name,model_id:id,domain_force,groups:id,perm_read,perm_write,perm_create,perm_unlink
+sale_order_business_category_rule_user_read_create,Sale Order read/create by effective business category,sale.model_sale_order,"[('business_category_id','in',user.effective_business_category_ids.ids)]",sales_team.group_sale_salesman,1,0,1,0
+sale_order_business_category_rule_user_write_own,Sale Order write own by effective business category,sale.model_sale_order,"[('business_category_id','in',user.effective_business_category_ids.ids),'|',('user_id','=',user.id),('create_uid','=',user.id)]",sales_team.group_sale_salesman,0,1,0,1
+sale_order_business_category_rule_manager,Sale Order full access for sales manager,sale.model_sale_order,"[(1,'=',1)]",sales_team.group_sale_manager,1,1,1,1
+sale_order_business_category_rule_sysadmin,Sale Order full access for system admin,sale.model_sale_order,"[(1,'=',1)]",base.group_system,1,1,1,1
+crm_team_business_category_rule_sales_user,CRM Team read by effective business category for sales user,sales_team.model_crm_team,"[('business_category_id','in',user.effective_business_category_ids.ids)]",sales_team.group_sale_salesman,1,0,0,0
+crm_team_business_category_rule_sales_manager,CRM Team full access for sales manager,sales_team.model_crm_team,"[(1,'=',1)]",sales_team.group_sale_manager,1,1,1,1
+crm_business_category_rule_sales_user,Business Category by user effective list for sales user,grt_crm_business_category.model_crm_business_category,"[('id','in',user.effective_business_category_ids.ids)]",sales_team.group_sale_salesman,1,0,0,0
+crm_business_category_rule_sales_manager,Business Category full access for sales manager,grt_crm_business_category.model_crm_business_category,"[(1,'=',1)]",sales_team.group_sale_manager,1,1,1,1
