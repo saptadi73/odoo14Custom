@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customer_behavior_recompute_wizard_form" model="ir.ui.view">
+        <field name="name">customer.behavior.recompute.wizard.form</field>
+        <field name="model">customer.behavior.recompute.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Recompute Customer Behavior">
+                <sheet>
+                    <group>
+                        <field name="mode"/>
+                        <field name="config_id"/>
+                    </group>
+                    <group>
+                        <field name="partner_ids" attrs="{'required': [('mode', '=', 'selected')], 'invisible': [('mode', '=', 'all')]}"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_recompute" type="object" string="Recompute" class="btn-primary"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_behavior_recompute_wizard" model="ir.actions.act_window">
+        <field name="name">Recompute Customer Behavior</field>
+        <field name="res_model">customer.behavior.recompute.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

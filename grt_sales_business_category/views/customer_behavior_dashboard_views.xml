@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customer_behavior_dashboard_form" model="ir.ui.view">
+        <field name="name">customer.behavior.dashboard.form</field>
+        <field name="model">customer.behavior.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Customer Behavior Dashboard">
+                <sheet>
+                    <group>
+                        <field name="analysis_date"/>
+                        <field name="total_revenue"/>
+                        <field name="total_customers"/>
+                    </group>
+                    <group string="KPI Rates">
+                        <field name="retention_rate"/>
+                        <field name="churn_rate"/>
+                        <field name="at_risk_rate"/>
+                    </group>
+                    <group string="Segments">
+                        <button name="action_open_retained" type="object" class="oe_stat_button" icon="fa-refresh">
+                            <field name="repeat_customers" string="Repeat" widget="statinfo"/>
+                        </button>
+                        <button name="action_open_retained" type="object" class="oe_stat_button" icon="fa-history">
+                            <field name="reactivated_customers" string="Reactivated" widget="statinfo"/>
+                        </button>
+                        <button name="action_open_at_risk" type="object" class="oe_stat_button" icon="fa-exclamation-triangle">
+                            <field name="at_risk_customers" string="At Risk" widget="statinfo"/>
+                        </button>
+                        <button name="action_open_at_risk" type="object" class="oe_stat_button" icon="fa-pause">
+                            <field name="inactive_customers" string="Inactive" widget="statinfo"/>
+                        </button>
+                        <button name="action_open_at_risk" type="object" class="oe_stat_button" icon="fa-moon-o">
+                            <field name="dormant_customers" string="Dormant" widget="statinfo"/>
+                        </button>
+                        <button name="action_open_churn" type="object" class="oe_stat_button" icon="fa-times-circle">
+                            <field name="lost_customers" string="Lost" widget="statinfo"/>
+                        </button>
+                    </group>
+                    <footer>
+                        <button name="action_open_all_analysis" type="object" string="Open Analysis" class="btn-primary"/>
+                        <button special="cancel" string="Close"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_behavior_dashboard" model="ir.actions.act_window">
+        <field name="name">Customer Behavior Dashboard</field>
+        <field name="res_model">customer.behavior.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+</odoo>

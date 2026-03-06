@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customer_behavior_config_tree" model="ir.ui.view">
+        <field name="name">customer.behavior.config.tree</field>
+        <field name="model">customer.behavior.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="repeat_days"/>
+                <field name="at_risk_days"/>
+                <field name="inactive_days"/>
+                <field name="dormant_days"/>
+                <field name="lost_days"/>
+                <field name="min_transaction"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_customer_behavior_config_form" model="ir.ui.view">
+        <field name="name">customer.behavior.config.form</field>
+        <field name="model">customer.behavior.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_run_analysis" type="object" string="Run Analysis" class="oe_highlight"/>
+                    <button name="action_open_recompute_wizard" type="object" string="Recompute Wizard"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Threshold Days">
+                        <field name="repeat_days"/>
+                        <field name="at_risk_days"/>
+                        <field name="inactive_days"/>
+                        <field name="dormant_days"/>
+                        <field name="lost_days"/>
+                    </group>
+                    <group string="Transaction">
+                        <field name="min_transaction"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_behavior_config" model="ir.actions.act_window">
+        <field name="name">Customer Behavior Config</field>
+        <field name="res_model">customer.behavior.config</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

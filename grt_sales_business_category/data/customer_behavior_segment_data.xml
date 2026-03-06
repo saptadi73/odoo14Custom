@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="customer_behavior_segment_repeat" model="customer.behavior.segment">
+        <field name="name">Repeat Customer</field>
+        <field name="code">repeat</field>
+        <field name="description">Customers who continue purchasing regularly.</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="customer_behavior_segment_at_risk" model="customer.behavior.segment">
+        <field name="name">At Risk Customer</field>
+        <field name="code">at_risk</field>
+        <field name="description">Customers whose purchase frequency is starting to decrease.</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="customer_behavior_segment_inactive" model="customer.behavior.segment">
+        <field name="name">Inactive Customer</field>
+        <field name="code">inactive</field>
+        <field name="description">Customers who have stopped purchasing for a while.</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="customer_behavior_segment_dormant" model="customer.behavior.segment">
+        <field name="name">Dormant Customer</field>
+        <field name="code">dormant</field>
+        <field name="description">Customers inactive for a long period.</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="customer_behavior_segment_lost" model="customer.behavior.segment">
+        <field name="name">Lost Customer</field>
+        <field name="code">lost</field>
+        <field name="description">Customers considered churned.</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="customer_behavior_segment_reactivated" model="customer.behavior.segment">
+        <field name="name">Reactivated Customer</field>
+        <field name="code">reactivated</field>
+        <field name="description">Previously inactive customers who returned to purchase again.</field>
+        <field name="sequence">60</field>
+    </record>
+</odoo>

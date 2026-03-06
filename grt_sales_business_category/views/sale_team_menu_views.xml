@@ -12,4 +12,32 @@
               sequence="35"
               action="action_sales_team_from_sales"
               groups="sales_team.group_sale_manager"/>
+
+    <menuitem id="menu_customer_behavior_analysis"
+              name="Customer Behavior"
+              parent="sale.sale_order_menu"
+              sequence="36"
+              action="action_customer_behavior_analysis"
+              groups="sales_team.group_sale_salesman"/>
+
+    <menuitem id="menu_customer_behavior_dashboard"
+              name="Behavior Dashboard"
+              parent="menu_customer_behavior_analysis"
+              sequence="1"
+              action="action_customer_behavior_dashboard"
+              groups="sales_team.group_sale_salesman"/>
+
+    <menuitem id="menu_customer_behavior_segment"
+              name="Customer Segments"
+              parent="menu_customer_behavior_analysis"
+              sequence="2"
+              action="action_customer_behavior_segment"
+              groups="sales_team.group_sale_manager"/>
+
+    <menuitem id="menu_customer_behavior_config"
+              name="Customer Behavior Config"
+              parent="menu_customer_behavior_analysis"
+              sequence="3"
+              action="action_customer_behavior_config"
+              groups="sales_team.group_sale_manager"/>
 </odoo>

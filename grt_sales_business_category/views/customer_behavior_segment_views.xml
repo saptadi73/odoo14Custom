@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customer_behavior_segment_tree" model="ir.ui.view">
+        <field name="name">customer.behavior.segment.tree</field>
+        <field name="model">customer.behavior.segment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_customer_behavior_segment_form" model="ir.ui.view">
+        <field name="name">customer.behavior.segment.form</field>
+        <field name="model">customer.behavior.segment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_behavior_segment" model="ir.actions.act_window">
+        <field name="name">Customer Segments</field>
+        <field name="res_model">customer.behavior.segment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

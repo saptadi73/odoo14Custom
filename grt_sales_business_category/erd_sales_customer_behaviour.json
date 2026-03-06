@@ -1,0 +1,93 @@
+{
+  "module": "sales_customer_behavior",
+  "entities": [
+    {
+      "name": "customer_behavior_config",
+      "description": "Configuration of customer behavior segmentation rules",
+      "fields": [
+        {"name": "id", "type": "integer", "pk": true},
+        {"name": "name", "type": "char"},
+        {"name": "repeat_days", "type": "integer"},
+        {"name": "at_risk_days", "type": "integer"},
+        {"name": "inactive_days", "type": "integer"},
+        {"name": "dormant_days", "type": "integer"},
+        {"name": "lost_days", "type": "integer"},
+        {"name": "min_transaction", "type": "float"},
+        {"name": "active", "type": "boolean"}
+      ]
+    },
+    {
+      "name": "customer_behavior_segment",
+      "description": "Customer behavior classification",
+      "fields": [
+        {"name": "id", "type": "integer", "pk": true},
+        {"name": "name", "type": "char"},
+        {"name": "code", "type": "selection"},
+        {"name": "description", "type": "text"},
+        {"name": "sequence", "type": "integer"},
+        {"name": "active", "type": "boolean"}
+      ]
+    },
+    {
+      "name": "customer_behavior_analysis",
+      "description": "Stores computed behavior metrics per customer",
+      "fields": [
+        {"name": "id", "type": "integer", "pk": true},
+        {"name": "partner_id", "type": "many2one", "relation": "res_partner"},
+        {"name": "segment_id", "type": "many2one", "relation": "customer_behavior_segment"},
+        {"name": "last_purchase_date", "type": "date"},
+        {"name": "days_since_last_purchase", "type": "integer"},
+        {"name": "total_orders", "type": "integer"},
+        {"name": "total_amount", "type": "monetary"},
+        {"name": "avg_order_value", "type": "monetary"},
+        {"name": "analysis_date", "type": "date"}
+      ]
+    },
+    {
+      "name": "res_partner",
+      "description": "Customer master data",
+      "fields": [
+        {"name": "id", "type": "integer", "pk": true},
+        {"name": "name", "type": "char"},
+        {"name": "customer_segment_id", "type": "many2one", "relation": "customer_behavior_segment"},
+        {"name": "last_sale_date", "type": "date"},
+        {"name": "total_sales_amount", "type": "monetary"},
+        {"name": "sales_frequency", "type": "integer"},
+        {"name": "days_since_last_order", "type": "integer"}
+      ]
+    },
+    {
+      "name": "sale_order",
+      "description": "Sales order transaction",
+      "fields": [
+        {"name": "id", "type": "integer", "pk": true},
+        {"name": "partner_id", "type": "many2one", "relation": "res_partner"},
+        {"name": "date_order", "type": "datetime"},
+        {"name": "amount_total", "type": "monetary"},
+        {"name": "state", "type": "selection"}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "sale_order.partner_id",
+      "to": "res_partner.id",
+      "type": "many_to_one"
+    },
+    {
+      "from": "customer_behavior_analysis.partner_id",
+      "to": "res_partner.id",
+      "type": "many_to_one"
+    },
+    {
+      "from": "customer_behavior_analysis.segment_id",
+      "to": "customer_behavior_segment.id",
+      "type": "many_to_one"
+    },
+    {
+      "from": "res_partner.customer_segment_id",
+      "to": "customer_behavior_segment.id",
+      "type": "many_to_one"
+    }
+  ]
+}

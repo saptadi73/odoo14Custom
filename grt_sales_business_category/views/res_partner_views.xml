@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_customer_behavior" model="ir.ui.view">
+        <field name="name">res.partner.form.customer.behavior</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Customer Behavior">
+                    <group>
+                        <field name="customer_segment_id"/>
+                        <field name="behavior_business_category_id"/>
+                        <field name="last_sale_date"/>
+                        <field name="total_sales_amount"/>
+                        <field name="sales_frequency"/>
+                        <field name="days_since_last_order"/>
+                    </group>
+                    <field name="customer_behavior_analysis_ids">
+                        <tree>
+                            <field name="analysis_date"/>
+                            <field name="business_category_id"/>
+                            <field name="segment_id"/>
+                            <field name="last_purchase_date"/>
+                            <field name="days_since_last_purchase"/>
+                            <field name="total_orders"/>
+                            <field name="total_amount"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_customer_behavior_analysis_tree" model="ir.ui.view">
+        <field name="name">customer.behavior.analysis.tree</field>
+        <field name="model">customer.behavior.analysis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="analysis_date"/>
+                <field name="partner_id"/>
+                <field name="business_category_id"/>
+                <field name="segment_id"/>
+                <field name="last_purchase_date"/>
+                <field name="days_since_last_purchase"/>
+                <field name="total_orders"/>
+                <field name="total_amount"/>
+                <field name="avg_order_value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_customer_behavior_analysis_form" model="ir.ui.view">
+        <field name="name">customer.behavior.analysis.form</field>
+        <field name="model">customer.behavior.analysis</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="analysis_date"/>
+                        <field name="partner_id"/>
+                        <field name="business_category_id"/>
+                        <field name="segment_id"/>
+                    </group>
+                    <group>
+                        <field name="last_purchase_date"/>
+                        <field name="previous_purchase_date"/>
+                        <field name="days_since_last_purchase"/>
+                    </group>
+                    <group>
+                        <field name="total_orders"/>
+                        <field name="total_amount"/>
+                        <field name="avg_order_value"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_customer_behavior_analysis_pivot" model="ir.ui.view">
+        <field name="name">customer.behavior.analysis.pivot</field>
+        <field name="model">customer.behavior.analysis</field>
+        <field name="arch" type="xml">
+            <pivot string="Customer Behavior Analysis">
+                <field name="segment_id" type="row"/>
+                <field name="business_category_id" type="row"/>
+                <field name="analysis_date" type="col"/>
+                <field name="total_orders" type="measure"/>
+                <field name="total_amount" type="measure"/>
+                <field name="avg_order_value" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_customer_behavior_analysis_graph" model="ir.ui.view">
+        <field name="name">customer.behavior.analysis.graph</field>
+        <field name="model">customer.behavior.analysis</field>
+        <field name="arch" type="xml">
+            <graph string="Customer Behavior Analysis" type="bar">
+                <field name="segment_id"/>
+                <field name="total_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_customer_behavior_analysis_search" model="ir.ui.view">
+        <field name="name">customer.behavior.analysis.search</field>
+        <field name="model">customer.behavior.analysis</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <field name="segment_id"/>
+                <field name="business_category_id"/>
+                <field name="analysis_date"/>
+                <filter string="Today" name="today" domain="[('analysis_date', '=', context_today())]"/>
+                <filter string="Group by Segment" name="group_segment" context="{'group_by': 'segment_id'}"/>
+                <filter string="Group by Category" name="group_category" context="{'group_by': 'business_category_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_customer_behavior_analysis" model="ir.actions.act_window">
+        <field name="name">Customer Behavior Analysis</field>
+        <field name="res_model">customer.behavior.analysis</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="search_view_id" ref="view_customer_behavior_analysis_search"/>
+    </record>
+</odoo>
