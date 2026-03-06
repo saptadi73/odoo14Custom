@@ -1,5 +1,5 @@
 SCADA Failure Reporting
-======================
+========================
 
 Custom module untuk pencatatan laporan failure equipment SCADA.
 
@@ -31,32 +31,13 @@ HTTP Routes
 
 POST /api/scada/failure-report
 
-Auth: user session (auth='user')
+Auth: user session
 
 Dokumentasi frontend yang lebih detail tersedia di:
 
 - grt_scada_failure_report/FRONTEND_API_DOCUMENTATION.md
 
-Body example::
-
-    {
-      "equipment_code": "PLC01",
-      "description": "Motor overload saat proses mixing",
-      "date": "2026-02-15 08:30:00"
-    }
-
-Response success example::
-
-    {
-      "status": "success",
-      "message": "Failure report created",
-      "data": {
-        "id": 1,
-        "equipment_code": "PLC01",
-        "description": "Motor overload saat proses mixing",
-        "date": "2026-02-15 08:30:00"
-      }
-    }
+Contoh request dan response tersedia di file dokumentasi frontend.
 
 2. Form Input
 ~~~~~~~~~~~~~

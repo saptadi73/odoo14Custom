@@ -1,6 +1,6 @@
 {
     'name': 'SCADA Failure Reporting',
-    'version': '14.0.1.0.1',
+    'version': '14.0.1.0.2',
     'category': 'manufacturing',
     'license': 'LGPL-3',
     'author': 'Custom',
