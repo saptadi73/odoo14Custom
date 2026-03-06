@@ -83,6 +83,344 @@ curl -X POST http://localhost:8069/api/scada/material-consumption \
 
 ## Endpoints Reference
 
+## Frontend Dashboard Quick Reference (Vue.js + ApexCharts)
+
+Bagian ini sudah dipisah per kelompok bab agar implementasi frontend lebih mudah. Setiap bab berisi: endpoint sumber data, field yang ditampilkan, dan rekomendasi visual.
+
+### BAB FE-1. Ringkasan Harian (Today Dashboard)
+
+**Tujuan UI**: KPI harian + progress batch + kualitas OEE hari ini.
+
+**Endpoint utama**: `POST /api/scada/today-reports`
+
+**Widget yang bisa ditampilkan**:
+1. KPI card `Scheduled Batch` dari `batch_status.scheduled_total`
+2. KPI card `Completed Batch` dari `batch_status.completed`
+3. KPI card `Unfinished Batch` dari `batch_status.unfinished`
+4. KPI card `Total Production Today` dari `total_production_today.qty_finished`
+5. KPI card `Completed Batch Count` dari `total_production_today.completed_batch_count`
+6. KPI card `Avg Yield` dari `oee_quality_today.avg_yield_percent`
+7. KPI card `Avg Consumption Ratio` dari `oee_quality_today.avg_consumption_ratio`
+8. KPI card `Deviation Alerts` dari `oee_quality_today.total_deviation_alerts`
+9. Chart line/scatter `Batch Deviation Trend` dari `batch_to_batch_deviation_chart.data`
+10. Chart bar `OEE by Equipment (Today)` dari `oee_quality_today.by_equipment`
+
+### BAB FE-2. Ringkasan Periodik (Weekly/Monthly Dashboard)
+
+**Tujuan UI**: overview performa produksi untuk periode tertentu.
+
+**Endpoint utama**: `POST /api/scada/periodic-report`
+
+**Widget yang bisa ditampilkan**:
+1. KPI card `Target Qty Total` dari `metrics_total_production.target_qty_total`
+2. KPI card `Actual Qty Total` dari `metrics_total_production.actual_qty_total`
+3. KPI card `Achievement %` dari `metrics_total_production.achievement_percent`
+4. KPI card `MO Planned` dari `metrics_total_mo.total_mo_planned`
+5. KPI card `MO Done` dari `metrics_total_mo.total_mo_done`
+6. KPI card `MO In Progress` dari `metrics_total_mo.total_mo_in_progress`
+7. KPI card `Avg Yield` dari `metrics_avg_oee_quality.avg_yield_percent`
+8. KPI card `Avg Consumption Ratio` dari `metrics_avg_oee_quality.avg_consumption_ratio`
+9. Chart grouped bar `Daily Target vs Actual` dari `chart_daily_target_vs_actual.data`
+10. Chart bar `Raw Material Consumption` dari `chart_raw_material_consumption.data`
+11. Table `Silo Consumption and Stock` dari `table_silo_consumption_stock.data`
+12. Table `Daily Finished Goods` dari `table_daily_finished_goods.data`
+
+### BAB FE-3. Analitik OEE Per Equipment
+
+**Tujuan UI**: melihat kualitas proses per mesin/silo dan drill-down OEE.
+
+**Endpoint sumber data**:
+1. `POST /api/scada/oee-equipment-avg`
+2. `POST /api/scada/oee-detail`
+
+**Widget yang bisa ditampilkan**:
+1. Chart bar `Avg Yield per Equipment` dari `oee-equipment-avg.data[].avg_summary.yield_percent`
+2. Chart bar `Avg Consumption Ratio per Equipment` dari `oee-equipment-avg.data[].avg_summary.consumption_ratio`
+3. Chart bar `Avg Planned vs Finished` dari `oee-equipment-avg.data[].avg_summary.qty_planned` dan `qty_finished`
+4. Table `OEE Equipment Summary` dari `oee-equipment-avg.data[]`
+5. Table `OEE Batch Detail` dari `oee-detail.data[]`
+6. Chart detail per batch dari `oee-detail.data[].lines` (consume vs actual per equipment line)
+
+### BAB FE-4. KPI Per Produk
+
+**Tujuan UI**: ranking performa per finished product.
+
+**Endpoint utama**: `POST /api/scada/kpi-product-report`
+
+**Widget yang bisa ditampilkan**:
+1. Chart bar `Yield per Product` dari `data[].avg_kpi.yield_percent`
+2. Chart bar `Consumption Ratio per Product` dari `data[].avg_kpi.consumption_ratio`
+3. Chart bar `Planned vs Finished per Product` dari `data[].avg_kpi.qty_planned` dan `qty_finished`
+4. Table `Product KPI Summary` dari `data[]`
+5. KPI card `Total Products` dari `summary.total_products`
+6. KPI card `Total OEE Records` dari `summary.total_oee_records`
+
+### BAB FE-5. Failure and Downtime Monitoring
+
+**Tujuan UI**: monitoring kejadian failure per equipment.
+
+**Endpoint utama**: `POST /api/scada/equipment-failure-report`
+
+**Widget yang bisa ditampilkan**:
+1. KPI card `Total Failures` dari `summary.total_failures`
+2. KPI card `Equipment Impacted` dari `summary.equipment_count`
+3. Chart bar `Failure Count by Equipment` dari `summary.by_equipment`
+4. Chart bar/pie `Downtime Minutes` dari agregasi `data[].duration_minutes`
+5. Table `Failure Logs` dari `data[]`
+
+### BAB FE-6. Data Pendukung Filter Dashboard
+
+**Tujuan UI**: menyediakan option filter untuk semua dashboard.
+
+**Endpoint sumber data**:
+1. `GET/POST /api/scada/products`
+2. `POST /api/scada/products-by-category`
+3. `GET/POST /api/scada/boms`
+4. `GET /api/scada/mo-list`
+5. `POST /api/scada/mo-list-confirmed`
+6. `POST /api/scada/mo-list-detailed`
+
+**Pemakaian di frontend**:
+1. Dropdown product dari endpoint `products`
+2. Dropdown raw material dari `products-by-category`
+3. Detail komposisi dari `boms`
+4. Dropdown MO aktif dari `mo-list` / `mo-list-confirmed`
+5. Detail komponen MO dari `mo-list-detailed` untuk halaman detail batch
+
+### BAB FE-7. Standar Integrasi Frontend
+
+1. Semua endpoint `type='json'` dipanggil dengan body JSON-RPC: `jsonrpc`, `method`, `params`.
+2. Browser call wajib `credentials: 'include'` agar session cookie terbawa.
+3. Field chart bawaan backend hanya tersedia di endpoint:
+   - `today-reports`
+   - `periodic-report`
+4. Endpoint lain mengembalikan data mentah (`status`, `count`, `data`) dan perlu mapping series di frontend.
+5. Untuk konsistensi ApexCharts:
+   - gunakan `categories` dari field nama/tanggal
+   - gunakan `series` dari field numerik
+   - format persen di frontend untuk field `*_percent`/`*_ratio`
+
+### BAB FE-8. Template Implementasi Frontend (Pinia + ApexCharts)
+
+Bab ini berisi template siap pakai untuk mempercepat implementasi dashboard SCADA.
+
+**Struktur folder yang disarankan**:
+
+```text
+src/
+  api/
+    scadaApi.js
+  stores/
+    scadaDashboard.store.js
+  mappers/
+    scadaChart.mapper.js
+  views/
+    ScadaDashboardView.vue
+```
+
+**1) API Client (JSON-RPC + cookie session)**:
+
+```javascript
+// src/api/scadaApi.js
+const SCADA_BASE_URL = '/api/scada';
+
+async function jsonRpcPost(endpoint, params = {}) {
+  const res = await fetch(`${SCADA_BASE_URL}/${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'call',
+      params,
+    }),
+  });
+
+  const data = await res.json();
+  if (!res.ok || data?.status === 'error' || data?.error) {
+    throw new Error(data?.message || data?.error?.message || 'API request failed');
+  }
+  return data;
+}
+
+export const scadaApi = {
+  getTodayReports(params) {
+    return jsonRpcPost('today-reports', params);
+  },
+  getPeriodicReport(params) {
+    return jsonRpcPost('periodic-report', params);
+  },
+  getOeeEquipmentAvg(params) {
+    return jsonRpcPost('oee-equipment-avg', params);
+  },
+  getKpiProductReport(params) {
+    return jsonRpcPost('kpi-product-report', params);
+  },
+  getEquipmentFailureReport(params) {
+    return jsonRpcPost('equipment-failure-report', params);
+  },
+};
+```
+
+**2) Mapper data ke format ApexCharts**:
+
+```javascript
+// src/mappers/scadaChart.mapper.js
+export function mapDailyTargetVsActual(chartData = []) {
+  const categories = chartData.map((x) => x.date);
+  return {
+    categories,
+    series: [
+      { name: 'Target', data: chartData.map((x) => Number(x.target_qty || 0)) },
+      { name: 'Actual', data: chartData.map((x) => Number(x.actual_qty || 0)) },
+    ],
+  };
+}
+
+export function mapRawMaterialConsumption(chartData = []) {
+  const categories = chartData.map((x) => x.raw_material_name || 'Unknown');
+  return {
+    categories,
+    series: [
+      { name: 'Actual', data: chartData.map((x) => Number(x.consumption_actual || 0)) },
+      { name: 'BoM', data: chartData.map((x) => Number(x.consumption_bom || 0)) },
+    ],
+  };
+}
+
+export function mapBatchDeviation(chartData = []) {
+  return {
+    categories: chartData.map((x) => x.date_done || x.mo_id),
+    series: [
+      {
+        name: 'Max Abs Deviation %',
+        data: chartData.map((x) => Number(x.max_abs_deviation_percent || 0)),
+      },
+    ],
+  };
+}
+
+export function mapEquipmentYield(equipmentRows = []) {
+  return {
+    categories: equipmentRows.map((x) => x.equipment_name || '-'),
+    series: [
+      {
+        name: 'Avg Yield %',
+        data: equipmentRows.map((x) => Number(x.avg_yield_percent || 0)),
+      },
+      {
+        name: 'Avg Consumption Ratio %',
+        data: equipmentRows.map((x) => Number(x.avg_consumption_ratio || 0)),
+      },
+    ],
+  };
+}
+```
+
+**3) Store dashboard (Pinia)**:
+
+```javascript
+// src/stores/scadaDashboard.store.js
+import { defineStore } from 'pinia';
+import { scadaApi } from '@/api/scadaApi';
+import {
+  mapBatchDeviation,
+  mapDailyTargetVsActual,
+  mapRawMaterialConsumption,
+  mapEquipmentYield,
+} from '@/mappers/scadaChart.mapper';
+
+export const useScadaDashboardStore = defineStore('scadaDashboard', {
+  state: () => ({
+    loading: false,
+    error: null,
+    today: null,
+    periodic: null,
+    filters: {
+      period: 'this_month',
+      date: null,
+      product_id: null,
+      raw_material_id: null,
+      equipment_code: null,
+    },
+  }),
+
+  getters: {
+    todayCards: (s) => ({
+      scheduled: s.today?.batch_status?.scheduled_total || 0,
+      completed: s.today?.batch_status?.completed || 0,
+      unfinished: s.today?.batch_status?.unfinished || 0,
+      qtyFinished: s.today?.total_production_today?.qty_finished || 0,
+      avgYield: s.today?.oee_quality_today?.avg_yield_percent || 0,
+      alerts: s.today?.oee_quality_today?.total_deviation_alerts || 0,
+    }),
+
+    chartBatchDeviation: (s) =>
+      mapBatchDeviation(s.today?.batch_to_batch_deviation_chart?.data || []),
+
+    chartTodayEquipment: (s) =>
+      mapEquipmentYield(s.today?.oee_quality_today?.by_equipment || []),
+
+    chartPeriodicTargetActual: (s) =>
+      mapDailyTargetVsActual(s.periodic?.chart_daily_target_vs_actual?.data || []),
+
+    chartPeriodicRawMaterial: (s) =>
+      mapRawMaterialConsumption(s.periodic?.chart_raw_material_consumption?.data || []),
+  },
+
+  actions: {
+    async loadTodayReports() {
+      this.loading = true;
+      this.error = null;
+      try {
+        this.today = await scadaApi.getTodayReports({
+          date: this.filters.date,
+          limit: 200,
+        });
+      } catch (e) {
+        this.error = e.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async loadPeriodicReports() {
+      this.loading = true;
+      this.error = null;
+      try {
+        this.periodic = await scadaApi.getPeriodicReport({
+          period: this.filters.period,
+          product_id: this.filters.product_id,
+          raw_material_id: this.filters.raw_material_id,
+          equipment_code: this.filters.equipment_code,
+          limit: 1000,
+        });
+      } catch (e) {
+        this.error = e.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async initDashboard() {
+      await Promise.all([this.loadTodayReports(), this.loadPeriodicReports()]);
+    },
+  },
+});
+```
+
+**4) Mapping endpoint -> komponen dashboard (ringkas)**:
+
+1. Header KPI harian: `today-reports`
+2. Grafik deviasi batch: `today-reports.batch_to_batch_deviation_chart.data`
+3. Grafik target vs actual periodik: `periodic-report.chart_daily_target_vs_actual.data`
+4. Grafik konsumsi raw material: `periodic-report.chart_raw_material_consumption.data`
+5. Tabel silo dan stock: `periodic-report.table_silo_consumption_stock.data`
+6. Tabel produksi harian FG: `periodic-report.table_daily_finished_goods.data`
+7. Halaman analitik equipment: `oee-equipment-avg` + `oee-detail`
+8. Halaman KPI produk: `kpi-product-report`
+9. Halaman failure: `equipment-failure-report`
+
 ### 1. Health Check (Public)
 
 **Check SCADA Module Status**
@@ -369,24 +707,11 @@ Note: MO with status `cancel` is always excluded from this endpoint.
       "schedule_start": "2025-02-06T08:00:00",
       "schedule_end": "2025-02-06T16:00:00"
     }
-  ],
-  "chart_oee_by_equipment": {
-    "x_axis": ["SILO A", "SILO B"],
-    "y_axis": {
-      "qty_finished": [2495.0, 1800.0],
-      "yield_percent": [99.8, 98.6],
-      "consumption_ratio": [99.856, 100.4]
-    }
-  },
-  "chart_oee_trend": {
-    "x_axis": ["2026-02-14", "2026-02-15", "2026-02-16"],
-    "y_axis": {
-      "yield_percent": [99.2, 99.6, 99.8],
-      "consumption_ratio": [100.1, 99.9, 99.856]
-    }
-  }
+  ]
 }
 ```
+
+Note: Endpoint ini tidak mengembalikan `chart_oee_*`.
 
 **cURL Example**:
 ```bash
@@ -435,16 +760,11 @@ Note: This endpoint is JSON-RPC only. Use the `params` object for inputs.
       "product": "Konsentrat Sapi Penggemukan",
       "quantity": 1000.0
     }
-  ],
-  "chart_oee_avg_by_equipment": {
-    "x_axis": ["SILO A", "SILO B"],
-    "y_axis": {
-      "yield_percent": [99.68, 98.9],
-      "consumption_ratio": [99.90, 100.2]
-    }
-  }
+  ]
 }
 ```
+
+Note: Endpoint ini tidak mengembalikan `chart_oee_avg_by_equipment`.
 
 **JSON-RPC Example**:
 ```bash
@@ -1421,7 +1741,7 @@ curl -X GET http://localhost:8069/api/scada/equipment/PLC01 \
 
 ---
 
-### 19C. Get OEE Detail (Protected)
+### 20C. Get OEE Detail (Protected)
 
 **Get OEE detail data for frontend (summary + breakdown per silo/perangkat)**
 
@@ -1485,23 +1805,15 @@ Content-Type: application/json
         }
       ]
     }
-  ],
-  "chart_oee_by_equipment": {
-    "x_axis": ["SILO A", "SILO B"],
-    "y_axis": {
-      "qty_finished": [2495.0, 1800.0],
-      "yield_percent": [99.8, 98.6],
-      "consumption_ratio": [99.856, 100.4]
-    }
-  },
-  "chart_oee_trend": {
-    "x_axis": ["2026-02-14", "2026-02-15", "2026-02-16"],
-    "y_axis": {
-      "yield_percent": [99.2, 99.6, 99.8],
-      "consumption_ratio": [100.1, 99.9, 99.856]
-    }
-  }
+  ]
 }
+```
+
+Note: Endpoint ini fokus ke detail OEE record dan tidak mengembalikan `chart_oee_by_equipment` / `chart_oee_trend`.
+
+---
+
+### 20D. Get OEE Equipment Average (Protected)
 
 **Get average OEE report by SCADA equipment list**
 
@@ -1560,20 +1872,15 @@ Content-Type: application/json
       },
       "last_oee_date": "2026-02-16 09:40:00"
     }
-  ],
-  "chart_oee_avg_by_equipment": {
-    "x_axis": ["SILO A", "SILO B"],
-    "y_axis": {
-      "yield_percent": [99.68, 98.9],
-      "consumption_ratio": [99.90, 100.2]
-    }
-  }
+  ]
 }
 ```
 
+Note: Endpoint ini tidak mengembalikan `chart_oee_avg_by_equipment`. Chart dibuat di frontend dari `data`.
+
 ---
 
-### 19A. Create Equipment Failure Report (Protected)
+### 20A. Create Equipment Failure Report (Protected)
 
 **Create failure report for SCADA equipment**
 
@@ -1664,7 +1971,7 @@ curl -X POST http://localhost:8069/api/scada/equipment-failure \
   }'
 ```
 
-### 19B. Get Equipment Failure Reports (Protected)
+### 20B. Get Equipment Failure Reports (Protected)
 
 **Get list of equipment failure reports**
 
@@ -1674,7 +1981,7 @@ Auth: Session cookie
 ```
 
 Note: Endpoint ini menggunakan method `GET`.
-Untuk report frontend berbasis JSON-RPC gunakan endpoint baru `POST /api/scada/equipment-failure-report` (lihat section 19E).
+Untuk report frontend berbasis JSON-RPC gunakan endpoint baru `POST /api/scada/equipment-failure-report` (lihat section 20E).
 
 **Query Parameters**:
 - `equipment_code` (optional): filter by SCADA equipment code
@@ -1727,7 +2034,7 @@ curl -X POST http://localhost:8069/api/scada/equipment-failure-report \
 
 ---
 
-### 19E. Get Equipment Failure Report (Frontend, Protected)
+### 20E. Get Equipment Failure Report (Frontend, Protected)
 
 **Get frontend-ready equipment failure report (detail + summary)**
 
@@ -1839,7 +2146,7 @@ curl -X POST http://localhost:8069/api/scada/equipment-failure-report \
 
 ---
 
-### 20. KPI Product Report (Protected)
+### 21. KPI Product Report (Protected)
 
 **Get KPI SCADA per Product (range tanggal tertentu)**
 
@@ -1909,25 +2216,11 @@ Note:
     "total_oee_records": 13,
     "date_from": "2026-02-01 00:00:00",
     "date_to": "2026-02-29 23:59:59"
-  },
-  "chart_kpi_by_product": {
-    "x_axis": ["JF Plus", "Product B"],
-    "y_axis": {
-      "qty_planned": [2000.0, 1500.0],
-      "qty_finished": [1987.5, 1488.0],
-      "yield_percent": [99.375, 99.2],
-      "consumption_ratio": [101.024, 100.3]
-    }
-  },
-  "chart_kpi_trend": {
-    "x_axis": ["2026-02-01", "2026-02-02", "2026-02-03"],
-    "y_axis": {
-      "yield_percent": [98.9, 99.1, 99.4],
-      "consumption_ratio": [100.8, 101.0, 100.6]
-    }
   }
 }
 ```
+
+Note: Endpoint ini tidak mengembalikan `chart_kpi_by_product` / `chart_kpi_trend`. Chart dibuat di frontend dari `data[].avg_kpi`.
 
 **cURL Example (JSON-RPC)**:
 ```bash
@@ -1947,7 +2240,7 @@ curl -X POST http://localhost:8069/api/scada/kpi-product-report \
 
 ---
 
-### 20B. Today Reports Dashboard (Protected)
+### 21A. Today Reports Dashboard (Protected)
 
 **Get 4 laporan harian SCADA dalam 1 endpoint**
 
@@ -2053,7 +2346,7 @@ curl -X POST http://localhost:8069/api/scada/today-reports \
 
 ---
 
-### 20C. Periodic Report Dashboard (Protected)
+### 21B. Periodic Report Dashboard (Protected)
 
 **Get laporan periodik sesuai pilihan waktu (7 report dalam 1 endpoint)**
 
@@ -2119,7 +2412,7 @@ curl -X POST http://localhost:8069/api/scada/periodic-report \
 
 ---
 
-### 21. Get Product List (Protected)
+### 22. Get Product List (Protected)
 
 **Retrieve Product List**
 
@@ -2204,7 +2497,7 @@ curl -X POST http://localhost:8069/api/scada/products \
 
 ---
 
-### 22. Get Product List by Category (Protected)
+### 23. Get Product List by Category (Protected)
 
 **Retrieve Product List with Category Filter (JSON-RPC)**
 
@@ -2253,7 +2546,7 @@ curl -X POST http://localhost:8069/api/scada/products-by-category \
 
 ---
 
-### 23. Get BoM List (Protected)
+### 24. Get BoM List (Protected)
 
 **Retrieve BoM list with components**
 
@@ -2335,7 +2628,7 @@ curl -X POST http://localhost:8069/api/scada/boms \
 
 ---
 
-### 24. Create Failure Report (Extension Module, Protected)
+### 25. Create Failure Report (Extension Module, Protected)
 
 **Create SCADA equipment failure report**
 
