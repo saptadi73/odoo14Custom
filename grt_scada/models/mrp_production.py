@@ -45,27 +45,30 @@ class MrpProduction(models.Model):
         for mo in self:
             if not mo.bom_id:
                 continue
-            
-            # Build a mapping of bom_line product/qty to scada_equipment
-            equipment_map = {}
-            for bom_line in mo.bom_id.bom_line_ids:
-                if not bom_line.scada_equipment_id:
-                    continue
-                key = (bom_line.product_id.id, bom_line.product_qty)
-                equipment_map[key] = bom_line.scada_equipment_id
-            
-            if not equipment_map:
+
+            bom_lines_by_product = {}
+            for bom_line in mo.bom_id.bom_line_ids.filtered('scada_equipment_id'):
+                bom_lines_by_product.setdefault(bom_line.product_id.id, self.env['mrp.bom.line'])
+                bom_lines_by_product[bom_line.product_id.id] |= bom_line
+
+            if not bom_lines_by_product:
                 continue
-            
+
             # Update raw material moves that don't have scada_equipment_id yet
             for move in mo.move_raw_ids:
-                if move.scada_equipment_id or not move.bom_line_id:
-                    # If already has equipment or no bom_line reference, skip
+                if move.scada_equipment_id:
                     continue
-                
-                # Try to find equipment from BoM line
+
+                equipment = False
                 if move.bom_line_id and move.bom_line_id.scada_equipment_id:
-                    move.scada_equipment_id = move.bom_line_id.scada_equipment_id
+                    equipment = move.bom_line_id.scada_equipment_id
+                else:
+                    matching_bom_lines = bom_lines_by_product.get(move.product_id.id, self.env['mrp.bom.line'])
+                    if len(matching_bom_lines) == 1:
+                        equipment = matching_bom_lines.scada_equipment_id
+
+                if equipment:
+                    move.scada_equipment_id = equipment
 
     def action_confirm(self):
         """Override confirm to ensure SCADA equipment is synced to moves"""

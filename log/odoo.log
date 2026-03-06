@@ -373,3 +373,1211 @@
 2026-03-06 09:58:26,552 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 09:58:26] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.032
 2026-03-06 09:58:32,998 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 09:58:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.010
 2026-03-06 09:59:12,424 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 09:59:12] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.017
+2026-03-06 09:59:16,873 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 09:59:16] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.024
+2026-03-06 09:59:29,437 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 09:59:29] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.014
+2026-03-06 10:00:02,761 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:00:02] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.028
+2026-03-06 10:00:07,532 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:00:07] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.020
+2026-03-06 10:00:31,524 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:00:31] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.009
+2026-03-06 10:00:53,104 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:00:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.027
+2026-03-06 10:00:58,545 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:00:58] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.016
+2026-03-06 10:01:07,554 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:07] "POST /web/action/load HTTP/1.1" 200 - 63 0.036 0.086
+2026-03-06 10:01:08,359 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:08] "POST /web/dataset/call_kw/sale.order/load_views HTTP/1.1" 200 - 239 0.150 0.347
+2026-03-06 10:01:08,726 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:08] "POST /web/dataset/search_read HTTP/1.1" 200 - 11 0.016 0.017
+2026-03-06 10:01:09,061 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 10:01:09,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "GET /web/image/res.users/5/image_128 HTTP/1.1" 200 - 6 0.042 0.085
+2026-03-06 10:01:09,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "GET /web/image/res.users/3/image_128 HTTP/1.1" 200 - 6 0.016 0.091
+2026-03-06 10:01:09,597 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "GET /web/image/res.users/2/image_128 HTTP/1.1" 200 - 6 0.016 0.095
+2026-03-06 10:01:09,597 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "GET /web/image/res.users/1/image_128 HTTP/1.1" 200 - 6 0.052 0.092
+2026-03-06 10:01:09,709 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "POST /sales/sale_quotation_onboarding_panel HTTP/1.1" 200 - 66 0.076 0.226
+2026-03-06 10:01:09,907 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:09] "GET /web/image/res.users/4/image_128 HTTP/1.1" 200 - 5 0.013 0.030
+2026-03-06 10:01:10,027 5396 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:10] "GET /sale/static/src/img/sale_quotation_onboarding_bg.jpg HTTP/1.1" 200 - - - -
+2026-03-06 10:01:10,027 5396 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:10] "GET /web/static/src/img/smiling_face.svg HTTP/1.1" 200 - - - -
+2026-03-06 10:01:18,261 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:18] "POST /web/action/load HTTP/1.1" 200 - 32 0.018 0.048
+2026-03-06 10:01:18,675 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:18] "POST /web/dataset/call_kw/mail.activity.type/load_views HTTP/1.1" 200 - 30 0.018 0.082
+2026-03-06 10:01:19,017 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:19] "POST /web/dataset/search_read HTTP/1.1" 200 - 5 0.000 0.016
+2026-03-06 10:01:29,913 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:29] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.016 0.000
+2026-03-06 10:01:43,447 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:43] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.020
+2026-03-06 10:01:48,568 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:48] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.014 0.000
+2026-03-06 10:01:52,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:52] "POST /web/action/load HTTP/1.1" 200 - 28 0.015 0.060
+2026-03-06 10:01:52,937 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:52] "POST /web/dataset/call_kw/crm.team/load_views HTTP/1.1" 200 - 28 0.050 0.032
+2026-03-06 10:01:53,312 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:01:53] "POST /web/dataset/search_read HTTP/1.1" 200 - 15 0.016 0.032
+2026-03-06 10:02:30,997 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:02:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.016 0.000
+2026-03-06 10:02:33,798 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:02:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.015
+2026-03-06 10:02:39,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:02:39] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 10:03:24,126 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:03:24] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.016
+2026-03-06 10:03:30,538 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:03:30] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:04:14,467 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:04:14] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.014
+2026-03-06 10:04:15,515 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:04:15] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.006
+2026-03-06 10:04:21,857 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:04:21] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-06 10:04:46,721 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:04:46] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 10:05:04,805 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:05:04] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.017 50.008
+2026-03-06 10:05:12,525 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:05:12] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:05:31,691 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:05:31] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.014
+2026-03-06 10:05:55,162 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:05:55] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.009 50.026
+2026-03-06 10:06:03,528 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:06:03] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.015
+2026-03-06 10:06:45,501 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:06:45] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.021
+2026-03-06 10:06:54,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:06:54] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-06 10:07:13,301 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:07:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.015
+2026-03-06 10:07:35,851 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:07:35] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.031
+2026-03-06 10:07:45,542 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:07:45] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.014
+2026-03-06 10:08:12,788 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:08:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.009
+2026-03-06 10:08:26,200 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:08:26] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.013 50.021
+2026-03-06 10:08:36,555 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:08:36] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.026
+2026-03-06 10:09:12,802 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:09:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.001
+2026-03-06 10:09:16,549 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:09:16] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.035
+2026-03-06 10:09:27,533 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:09:27] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-06 10:10:06,900 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:10:06] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.015 50.019
+2026-03-06 10:10:12,359 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:10:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.015
+2026-03-06 10:10:18,835 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:10:18] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:10:57,248 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:10:57] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.015
+2026-03-06 10:11:09,542 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:11:09] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.020
+2026-03-06 10:11:12,817 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:11:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.010
+2026-03-06 10:11:47,604 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:11:47] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.027
+2026-03-06 10:12:00,546 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:12:00] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.021
+2026-03-06 10:12:13,359 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:12:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.012
+2026-03-06 10:12:37,947 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:12:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.026
+2026-03-06 10:12:51,543 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:12:51] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.018
+2026-03-06 10:13:12,854 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:13:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.009
+2026-03-06 10:13:28,299 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:13:28] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.030
+2026-03-06 10:13:42,549 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:13:42] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.019
+2026-03-06 10:14:12,841 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:14:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.013
+2026-03-06 10:14:18,652 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:14:18] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.034
+2026-03-06 10:14:33,543 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:14:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.032
+2026-03-06 10:15:08,997 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:15:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.036
+2026-03-06 10:15:12,567 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:15:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.012
+2026-03-06 10:15:24,855 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:15:24] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-06 10:15:59,347 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:15:59] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.034
+2026-03-06 10:16:12,563 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:16:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-06 10:16:15,854 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:16:15] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-06 10:16:49,688 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:16:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.013
+2026-03-06 10:17:06,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:17:06] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:17:15,768 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:17:15] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.015
+2026-03-06 10:17:40,033 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:17:40] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.027
+2026-03-06 10:17:57,532 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:17:57] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.004
+2026-03-06 10:18:13,477 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:18:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 10:18:30,365 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:18:30] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.006
+2026-03-06 10:18:48,535 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:18:48] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.014
+2026-03-06 10:19:15,953 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:19:15] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 10:19:20,720 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:19:20] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.034
+2026-03-06 10:19:39,531 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:19:39] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:20:11,070 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:20:11] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.021
+2026-03-06 10:20:12,585 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:20:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.009
+2026-03-06 10:20:30,844 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:20:30] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:21:01,411 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:21:01] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.019
+2026-03-06 10:21:13,206 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:21:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 10:21:21,834 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:21:21] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:21:51,753 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:21:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.018
+2026-03-06 10:22:12,532 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:22:12] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:22:13,226 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:22:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.007
+2026-03-06 10:22:42,100 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:22:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.020
+2026-03-06 10:23:03,546 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:23:03] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-06 10:23:16,592 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:23:16] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 10:23:32,444 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:23:32] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.018
+2026-03-06 10:23:54,529 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:23:54] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:24:12,945 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:24:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.018
+2026-03-06 10:24:22,801 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:24:22] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.018
+2026-03-06 10:24:45,534 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:24:45] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:25:13,147 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:25:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.020
+2026-03-06 10:25:14,211 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:25:14] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 10:25:36,832 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:25:36] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:26:03,490 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:26:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.018
+2026-03-06 10:26:12,634 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:26:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.014
+2026-03-06 10:26:27,837 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:26:27] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:26:53,835 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:26:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.022
+2026-03-06 10:27:12,951 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:27:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-06 10:27:18,851 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:27:18] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.026
+2026-03-06 10:27:44,177 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:27:44] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.019
+2026-03-06 10:28:09,541 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:28:09] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.012
+2026-03-06 10:28:13,015 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:28:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.018
+2026-03-06 10:28:34,520 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:28:34] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.020
+2026-03-06 10:29:00,527 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:29:00] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:29:15,831 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:29:15] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.009
+2026-03-06 10:29:24,862 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:29:24] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.004
+2026-03-06 10:29:51,538 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:29:51] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:30:13,194 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:30:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.009
+2026-03-06 10:30:15,208 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:30:15] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.019
+2026-03-06 10:30:42,541 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:30:42] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.014
+2026-03-06 10:31:05,558 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:31:05] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.031
+2026-03-06 10:31:12,674 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:31:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.003
+2026-03-06 10:31:33,836 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:31:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.013
+2026-03-06 10:31:55,908 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:31:55] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.006
+2026-03-06 10:32:12,983 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:32:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 10:32:24,842 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:32:24] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 10:32:46,249 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:32:46] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.019
+2026-03-06 10:33:12,680 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:33:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 10:33:15,830 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:33:15] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 10:33:36,608 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:33:36] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.019
+2026-03-06 10:34:58,273 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:34:58] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.021 0.025
+2026-03-06 10:34:59,561 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:34:59] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.016
+2026-03-06 10:35:31,229 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:35:31] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 114.282
+2026-03-06 10:35:48,297 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:35:48] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.047
+2026-03-06 10:35:48,699 5396 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 10:35:48] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.031
+2026-03-06 13:34:32,450 19100 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-06 13:34:32,450 19100 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-06 13:34:32,450 19100 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-06 13:34:32,450 19100 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-06 13:34:34,883 19100 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-06 13:34:35,352 19100 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-06 13:34:35,437 19100 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-06 13:34:35,470 19100 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-06 13:34:36,801 19100 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-06 13:34:37,206 19100 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-06 13:34:38,772 19100 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-06 13:34:38,773 19100 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-06 13:34:38,774 19100 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-06 13:34:38,774 19100 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-06 13:34:38,774 19100 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-06 13:34:38,774 19100 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-06 13:34:38,774 19100 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-06 13:34:38,774 19100 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-06 13:34:40,686 19100 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 3.89s, 0 queries (+0 extra) 
+2026-03-06 13:34:42,669 19100 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-06 13:34:58,711 19100 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-06 13:34:58,771 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-06 13:34:59,520 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:34:59] "GET / HTTP/1.1" 303 - 3 0.020 0.766
+2026-03-06 13:35:05,993 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:05] "GET /web HTTP/1.1" 200 - 686 0.810 5.659
+2026-03-06 13:35:06,065 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:06] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.003 0.037
+2026-03-06 13:35:06,459 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:06] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.002 0.113
+2026-03-06 13:35:06,477 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:06] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.008 0.101
+2026-03-06 13:35:06,866 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:06] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 200 - 2 0.006 0.051
+2026-03-06 13:35:07,093 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:07] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 200 - 2 0.009 0.690
+2026-03-06 13:35:08,480 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:08] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 200 - 2 0.011 2.126
+2026-03-06 13:35:09,080 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:09] "GET /web/static/src/img/favicon.ico HTTP/1.1" 304 - - - -
+2026-03-06 13:35:09,149 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:09] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.188
+2026-03-06 13:35:09,474 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:09] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.026 0.235
+2026-03-06 13:35:09,573 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:09] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.050
+2026-03-06 13:35:09,826 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:09] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-06 13:35:10,058 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:10] "GET /web/static/src/xml/debug.xml?debug=1772778909691 HTTP/1.1" 200 - - - -
+2026-03-06 13:35:10,707 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:10] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.378 0.299
+2026-03-06 13:35:10,740 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:10] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.010 0.147
+2026-03-06 13:35:10,991 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:10] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.042 0.225
+2026-03-06 13:35:11,057 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:11] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 17 0.602 0.409
+2026-03-06 13:35:11,465 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:11] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.016 0.243
+2026-03-06 13:35:11,701 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:11] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 13:35:11,909 19100 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-06 13:35:11,960 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:11] "POST /mail/init_messaging HTTP/1.1" 200 - 76 1.802 0.201
+2026-03-06 13:35:11,960 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:11] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.008 0.059
+2026-03-06 13:35:12,390 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:12] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.012 0.085
+2026-03-06 13:35:12,454 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:12] "POST /calendar/notify HTTP/1.1" 200 - 3 0.050 0.045
+2026-03-06 13:35:12,457 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:12] "POST /web/action/load HTTP/1.1" 200 - 9 0.037 0.104
+2026-03-06 13:35:12,999 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:12] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 27 0.039 0.178
+2026-03-06 13:35:13,666 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.017 0.032
+2026-03-06 13:35:37,210 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:37] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 9 0.057 0.043
+2026-03-06 13:35:38,346 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:38] "GET /web_tour/static/src/xml/tip.xml?debug=1772778938002 HTTP/1.1" 200 - - - -
+2026-03-06 13:35:40,919 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:40] "POST /web/action/load HTTP/1.1" 200 - 14 0.052 0.097
+2026-03-06 13:35:41,691 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:41] "POST /web/action/run HTTP/1.1" 200 - 78 0.208 0.235
+2026-03-06 13:35:43,253 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:43] "POST /web/dataset/call_kw/crm.lead/load_views HTTP/1.1" 200 - 207 0.223 1.025
+2026-03-06 13:35:43,672 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:43] "POST /web/dataset/call_kw/crm.lead/read_progress_bar HTTP/1.1" 200 - 3 0.021 0.049
+2026-03-06 13:35:43,692 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:43] "POST /web/dataset/call_kw/crm.lead/web_read_group HTTP/1.1" 200 - 7 0.047 0.053
+2026-03-06 13:35:43,713 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Post process payment transactions`. 
+2026-03-06 13:35:43,752 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Calendar: Event Reminder`. 
+2026-03-06 13:35:43,803 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Post process payment transactions` done. 
+2026-03-06 13:35:43,863 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-03-06 13:35:43,909 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Calendar: Event Reminder` done. 
+2026-03-06 13:35:43,961 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Mail: Email Queue Manager` done. 
+2026-03-06 13:35:44,253 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:44] "POST /web/dataset/search_read HTTP/1.1" 200 - 19 0.102 0.129
+2026-03-06 13:35:44,635 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:44] "POST /web/dataset/call_kw/crm.stage/read HTTP/1.1" 200 - 3 0.024 0.042
+2026-03-06 13:35:44,990 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:44] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.012 0.009
+2026-03-06 13:35:45,438 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:45] "GET /web/image/res.users/2/image_128 HTTP/1.1" 200 - 6 0.005 0.057
+2026-03-06 13:35:50,901 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:50] "POST /web/action/load HTTP/1.1" 200 - 52 0.088 0.186
+2026-03-06 13:35:52,212 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:52] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 168 0.286 0.704
+2026-03-06 13:35:53,191 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:53] "POST /web/dataset/search_read HTTP/1.1" 200 - 40 0.359 0.288
+2026-03-06 13:35:53,542 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:35:53] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.008 0.013
+2026-03-06 13:36:00,830 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:00] "POST /web/action/load HTTP/1.1" 200 - 14 0.040 0.074
+2026-03-06 13:36:01,207 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:01] "POST /web/dataset/call_kw/scada.mo.bulk.wizard/load_views HTTP/1.1" 200 - 10 0.004 0.050
+2026-03-06 13:36:01,566 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:01] "POST /web/dataset/call_kw/scada.mo.bulk.wizard/onchange HTTP/1.1" 200 - 3 0.004 0.025
+2026-03-06 13:36:01,922 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:01] "POST /longpolling/poll HTTP/1.1" 200 - 19 0.119 51.823
+2026-03-06 13:36:01,958 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:01] "GET /web/static/src/xml/dialog.xml?debug=1772778961616 HTTP/1.1" 200 - - - -
+2026-03-06 13:36:02,320 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:02] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.002 0.016
+2026-03-06 13:36:02,336 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:02] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.000 0.022
+2026-03-06 13:36:02,349 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:02] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 1 0.000 0.020
+2026-03-06 13:36:02,761 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:02] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.007 0.033
+2026-03-06 13:36:05,167 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:05] "POST /web/dataset/call_kw/product.product/name_search HTTP/1.1" 200 - 18 0.103 0.077
+2026-03-06 13:36:08,338 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:08] "POST /web/dataset/call_kw/mrp.bom/name_search HTTP/1.1" 200 - 10 0.013 0.036
+2026-03-06 13:36:10,806 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.018
+2026-03-06 13:36:11,219 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:11] "POST /web/dataset/call_kw/scada.mo.bulk.wizard/onchange HTTP/1.1" 200 - 12 0.088 0.098
+2026-03-06 13:36:12,912 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:12] "POST /web/dataset/call_kw/scada.equipment/name_search HTTP/1.1" 200 - 9 0.031 0.032
+2026-03-06 13:36:18,864 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:18] "POST /web/dataset/call_kw/scada.mo.bulk.wizard/onchange HTTP/1.1" 200 - 1 0.000 0.016
+2026-03-06 13:36:20,587 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:20] "POST /web/dataset/call_kw/scada.mo.bulk.wizard/create HTTP/1.1" 200 - 5 0.040 0.034
+2026-03-06 13:36:21,034 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:21] "POST /web/dataset/call_kw/scada.mo.bulk.wizard/read HTTP/1.1" 200 - 9 0.058 0.040
+2026-03-06 13:36:24,149 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:24] "POST /web/dataset/call_button HTTP/1.1" 200 - 451 1.010 1.785
+2026-03-06 13:36:24,379 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:24] "GET /web/static/src/img/spin.png HTTP/1.1" 304 - - - -
+2026-03-06 13:36:24,852 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:24] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 29 0.046 0.329
+2026-03-06 13:36:25,415 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:25] "POST /web/dataset/search_read HTTP/1.1" 200 - 18 0.082 0.133
+2026-03-06 13:36:29,903 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:29] "POST /web/dataset/call_kw/mail.followers/load_views HTTP/1.1" 200 - 16 0.131 0.143
+2026-03-06 13:36:29,937 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:29] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 8 0.087 0.169
+2026-03-06 13:36:30,032 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:30] "POST /web/dataset/call_kw/mrp.workorder/load_views HTTP/1.1" 200 - 31 0.229 0.184
+2026-03-06 13:36:30,057 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:30] "POST /web/dataset/call_kw/mail.activity/load_views HTTP/1.1" 200 - 29 0.201 0.194
+2026-03-06 13:36:30,973 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:30] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 65 0.284 0.303
+2026-03-06 13:36:31,382 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:31] "POST /web/dataset/call_kw/mail.followers/read HTTP/1.1" 200 - 3 0.014 0.057
+2026-03-06 13:36:31,441 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:31] "POST /web/dataset/call_kw/mail.message/read HTTP/1.1" 200 - 5 0.035 0.074
+2026-03-06 13:36:32,363 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:32] "POST /web/dataset/call_kw/stock.move/read HTTP/1.1" 200 - 44 0.202 0.862
+2026-03-06 13:36:32,936 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:32] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.018 0.076
+2026-03-06 13:36:33,174 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /mail/thread/data HTTP/1.1" 200 - 5 0.065 0.133
+2026-03-06 13:36:33,179 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 12 0.150 0.125
+2026-03-06 13:36:33,188 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /mail/read_followers HTTP/1.1" 200 - 16 0.211 0.112
+2026-03-06 13:36:33,216 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 27 0.222 0.163
+2026-03-06 13:36:33,309 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /web/dataset/call_kw/mrp.production/read HTTP/1.1" 200 - 3 0.015 0.016
+2026-03-06 13:36:33,531 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-06 13:36:33,679 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.066 0.101
+2026-03-06 13:36:33,715 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.031 0.121
+2026-03-06 13:36:33,723 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 7 0.040 0.161
+2026-03-06 13:36:33,737 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.003 0.056
+2026-03-06 13:36:33,909 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:33] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 5 0.005 0.041
+2026-03-06 13:36:34,081 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:34] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 1 0.002 0.036
+2026-03-06 13:36:34,134 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:34] "GET /web/image/res.partner/3/image_128 HTTP/1.1" 200 - 5 0.004 0.071
+2026-03-06 13:36:52,310 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:52] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.014 50.045
+2026-03-06 13:36:53,456 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:36:53] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.037
+2026-03-06 13:37:11,060 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:37:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.023 0.019
+2026-03-06 13:37:42,700 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:37:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.013 50.051
+2026-03-06 13:37:44,472 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:37:44] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.046
+2026-03-06 13:38:11,404 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:38:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.020
+2026-03-06 13:38:33,078 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:38:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.046
+2026-03-06 13:38:35,447 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:38:35] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.009 0.022
+2026-03-06 13:39:10,959 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:39:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.035
+2026-03-06 13:39:23,452 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:39:23] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.047
+2026-03-06 13:39:26,447 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:39:26] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.030
+2026-03-06 13:40:10,982 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:40:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.036
+2026-03-06 13:40:13,835 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:40:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.009 50.042
+2026-03-06 13:40:17,486 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:40:17] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.050
+2026-03-06 13:41:04,232 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:41:04] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.058
+2026-03-06 13:41:08,466 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:41:08] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.052
+2026-03-06 13:41:11,037 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:41:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.011 0.029
+2026-03-06 13:41:54,621 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:41:54] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.063
+2026-03-06 13:41:59,435 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:41:59] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:42:11,108 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:42:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.007 0.000
+2026-03-06 13:42:44,968 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:42:44] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.020
+2026-03-06 13:42:50,450 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:42:50] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.023
+2026-03-06 13:43:10,767 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:43:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.012
+2026-03-06 13:43:35,327 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:43:35] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.010 50.030
+2026-03-06 13:43:41,503 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:43:41] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.080
+2026-03-06 13:44:10,895 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:44:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.005
+2026-03-06 13:44:25,670 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:44:25] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.020
+2026-03-06 13:44:32,430 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:44:32] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:45:10,765 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:45:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 13:45:16,011 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:45:16] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.024
+2026-03-06 13:45:23,433 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:45:23] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-06 13:46:06,357 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:46:06] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.018 50.014
+2026-03-06 13:46:10,479 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:46:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-06 13:46:14,756 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:46:14] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.014
+2026-03-06 13:46:56,715 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:46:56] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.036
+2026-03-06 13:47:05,439 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:47:05] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.021
+2026-03-06 13:47:11,155 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:47:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.006 0.011
+2026-03-06 13:47:47,080 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:47:47] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.030
+2026-03-06 13:47:56,448 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:47:56] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.018
+2026-03-06 13:48:10,931 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:48:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.007
+2026-03-06 13:48:37,420 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:48:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.001
+2026-03-06 13:48:47,432 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:48:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.011
+2026-03-06 13:49:10,797 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:49:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 13:49:27,750 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:49:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.020
+2026-03-06 13:49:38,429 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:49:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 13:50:10,939 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:50:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.006
+2026-03-06 13:50:18,106 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:50:18] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.016
+2026-03-06 13:50:29,426 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:50:29] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:51:08,440 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:51:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.022
+2026-03-06 13:51:12,416 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:51:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.025
+2026-03-06 13:51:20,742 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:51:20] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:51:58,786 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:51:58] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.026
+2026-03-06 13:52:10,901 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:52:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.012 0.000
+2026-03-06 13:52:11,769 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:52:11] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.026
+2026-03-06 13:52:49,131 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:52:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.014 50.006
+2026-03-06 13:53:02,439 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:53:02] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.014
+2026-03-06 13:53:10,764 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:53:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 13:53:39,479 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:53:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.019
+2026-03-06 13:53:53,441 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:53:53] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:54:10,783 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:54:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 13:54:29,821 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:54:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.015
+2026-03-06 13:54:44,427 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:54:44] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.015
+2026-03-06 13:55:10,632 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:55:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 13:55:20,168 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:55:20] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.028
+2026-03-06 13:55:35,430 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:55:35] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:56:10,497 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:56:10] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.017
+2026-03-06 13:56:12,202 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:56:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 13:56:26,735 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:56:26] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:57:00,847 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:57:00] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.011
+2026-03-06 13:57:13,521 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:57:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.014
+2026-03-06 13:57:17,735 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:57:17] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:57:51,197 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:57:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.019
+2026-03-06 13:58:08,445 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:58:08] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.020
+2026-03-06 13:58:10,810 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:58:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.011 0.005
+2026-03-06 13:58:41,529 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:58:41] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.012
+2026-03-06 13:58:59,429 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:58:59] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 13:59:12,783 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:59:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 13:59:31,862 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:59:31] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.017
+2026-03-06 13:59:50,436 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 13:59:50] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.018
+2026-03-06 14:00:10,812 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:00:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 14:00:22,191 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:00:22] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.012
+2026-03-06 14:00:41,451 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:00:41] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.026
+2026-03-06 14:01:12,245 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:01:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.014
+2026-03-06 14:01:12,551 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:01:12] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.031
+2026-03-06 14:01:32,426 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:01:32] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.014
+2026-03-06 14:02:02,876 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:02:02] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.002
+2026-03-06 14:02:10,766 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:02:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.006
+2026-03-06 14:02:23,740 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:02:23] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 14:02:53,224 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:02:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.034
+2026-03-06 14:03:10,802 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:03:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.015
+2026-03-06 14:03:14,771 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:03:14] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.027
+2026-03-06 14:03:43,580 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:03:43] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.017 50.009
+2026-03-06 14:04:05,454 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:05] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.023
+2026-03-06 14:04:10,878 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-06 14:04:12,206 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete : Sync with remote DB`. 
+2026-03-06 14:04:12,237 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Partner Autocomplete : Sync with remote DB` done. 
+2026-03-06 14:04:12,238 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-03-06 14:04:12,273 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `SMS: SMS Queue Manager` done. 
+2026-03-06 14:04:12,275 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-03-06 14:04:12,313 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Snailmail: process letters queue` done. 
+2026-03-06 14:04:33,927 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.028
+2026-03-06 14:04:46,290 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:46] "GET /web/session/logout HTTP/1.1" 303 - 1 0.002 0.011
+2026-03-06 14:04:46,642 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:46] "GET /web HTTP/1.1" 303 - 1 0.000 0.042
+2026-03-06 14:04:47,635 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:47] "GET /web/login HTTP/1.1" 200 - 128 0.108 0.567
+2026-03-06 14:04:48,016 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-06 14:04:48,027 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/binary/company_logo HTTP/1.1" 304 - 2 0.005 0.020
+2026-03-06 14:04:48,032 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 5 0.014 0.036
+2026-03-06 14:04:48,045 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/content/168-afcc0d6/web.assets_frontend.css HTTP/1.1" 200 - 4 0.012 0.047
+2026-03-06 14:04:48,311 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/content/169-77f2957/web.assets_common_minimal_js.js HTTP/1.1" 200 - 3 0.007 0.073
+2026-03-06 14:04:48,401 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/content/170-f140d84/web.assets_frontend_minimal_js.js HTTP/1.1" 200 - 3 0.004 0.041
+2026-03-06 14:04:48,748 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:48] "GET /web/content/171-9a24d3e/web.assets_common_lazy.js HTTP/1.1" 200 - 3 0.002 0.329
+2026-03-06 14:04:49,185 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:49] "GET /web/content/172-d06ff01/web.assets_frontend_lazy.js HTTP/1.1" 200 - 3 0.003 0.049
+2026-03-06 14:04:49,565 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:49] "GET /website/translations/aecdc2fd7c8579887ffa12eb85ef185150ab4e5a?mods=&lang= HTTP/1.1" 200 - 15 0.025 0.142
+2026-03-06 14:04:49,588 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:04:49] "GET /web/webclient/locale/en_US HTTP/1.1" 200 - 1 0.001 0.018
+2026-03-06 14:05:24,299 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 14:05:24] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.038
+2026-03-06 17:05:06,016 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `HR Contract: update state`. 
+2026-03-06 17:05:06,079 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Notification: Delete Notifications older than 6 Month`. 
+2026-03-06 17:05:06,122 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `HR Contract: update state` done. 
+2026-03-06 17:05:06,134 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Notification: Delete Notifications older than 6 Month` done. 
+2026-03-06 17:05:06,137 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Users: Notify About Unregistered Users`. 
+2026-03-06 17:05:06,163 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Base: Auto-vacuum internal data`. 
+2026-03-06 17:05:06,221 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Users: Notify About Unregistered Users` done. 
+2026-03-06 17:05:06,253 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Procurement: run scheduler`. 
+2026-03-06 17:05:06,559 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_attachment: filestore gc 19 checked, 10 removed 
+2026-03-06 17:05:06,842 19100 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted res.config.settings records with IDs: [9] 
+2026-03-06 17:05:06,882 19100 INFO kanjabung_MRP odoo.addons.base.models.res_users: GC'd 9 user log entries 
+2026-03-06 17:05:06,984 19100 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted base.module.update records with IDs: [2, 3, 4] 
+2026-03-06 17:05:07,159 19100 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted bus.bus records with IDs: [103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132] 
+2026-03-06 17:05:07,398 19100 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted mail.compose.message records with IDs: [16] 
+2026-03-06 17:05:09,044 19100 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted scada.mo.bulk.wizard records with IDs: [1] 
+2026-03-06 17:05:09,167 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Base: Auto-vacuum internal data` done. 
+2026-03-06 17:05:09,208 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Purchase reminder`. 
+2026-03-06 17:05:09,397 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Purchase reminder` done. 
+2026-03-06 17:05:09,406 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Maintenance: generate preventive maintenance requests`. 
+2026-03-06 17:05:09,469 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Maintenance: generate preventive maintenance requests` done. 
+2026-03-06 17:05:09,478 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Mail: Notify channel moderators`. 
+2026-03-06 17:05:09,478 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Procurement: run scheduler` done. 
+2026-03-06 17:05:09,519 19100 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Mail: Notify channel moderators` done. 
+2026-03-06 17:13:32,532 19100 INFO kanjabung_MRP odoo.addons.base.models.res_users: Login successful for db:kanjabung_MRP login:admin from 127.0.0.1 
+2026-03-06 17:13:32,613 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:32] "POST /web/login HTTP/1.1" 303 - 39 0.128 0.132
+2026-03-06 17:13:33,734 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:33] "GET /web HTTP/1.1" 200 - 15 0.047 1.062
+2026-03-06 17:13:33,812 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:33] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.009 0.018
+2026-03-06 17:13:34,143 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:34] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.000 0.024
+2026-03-06 17:13:34,162 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:34] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.000 0.067
+2026-03-06 17:13:34,516 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:34] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 200 - 2 0.000 0.021
+2026-03-06 17:13:34,850 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:34] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 200 - 2 0.000 0.691
+2026-03-06 17:13:36,284 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:36] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 200 - 2 0.010 2.174
+2026-03-06 17:13:36,893 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:36] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.146
+2026-03-06 17:13:37,285 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:37] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.035 0.231
+2026-03-06 17:13:37,327 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:37] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.026
+2026-03-06 17:13:37,730 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:37] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-06 17:13:37,868 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:37] "GET /web/static/src/xml/debug.xml?debug=1772792017489 HTTP/1.1" 200 - - - -
+2026-03-06 17:13:38,025 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 7 0.095 0.073
+2026-03-06 17:13:38,037 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 6 0.028 0.142
+2026-03-06 17:13:38,078 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /mail/init_messaging HTTP/1.1" 200 - 50 0.150 0.189
+2026-03-06 17:13:38,223 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.013 0.011
+2026-03-06 17:13:38,232 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.004 0.030
+2026-03-06 17:13:38,365 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 1 0.000 0.014
+2026-03-06 17:13:38,415 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.030
+2026-03-06 17:13:38,439 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.000 0.027
+2026-03-06 17:13:38,764 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /web/action/load HTTP/1.1" 200 - 9 0.030 0.022
+2026-03-06 17:13:38,796 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 17:13:38,812 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:38] "POST /calendar/notify HTTP/1.1" 200 - 3 0.000 0.032
+2026-03-06 17:13:39,139 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:39] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 8 0.004 0.038
+2026-03-06 17:13:39,604 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:39] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.012 0.029
+2026-03-06 17:13:40,102 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:40] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.016 0.017
+2026-03-06 17:13:41,601 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:41] "GET /web_tour/static/src/xml/tip.xml?debug=1772792021269 HTTP/1.1" 200 - - - -
+2026-03-06 17:13:43,053 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:43] "POST /web/action/load HTTP/1.1" 200 - 16 0.037 0.085
+2026-03-06 17:13:43,923 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:43] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 56 0.081 0.459
+2026-03-06 17:13:44,597 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:44] "POST /web/dataset/search_read HTTP/1.1" 200 - 24 0.099 0.235
+2026-03-06 17:13:44,944 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:44] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 1 0.000 0.013
+2026-03-06 17:13:47,030 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:47] "POST /web/dataset/call_kw/mrp.workorder/load_views HTTP/1.1" 200 - 7 0.034 0.114
+2026-03-06 17:13:47,062 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:47] "POST /web/dataset/call_kw/mail.followers/load_views HTTP/1.1" 200 - 7 0.055 0.100
+2026-03-06 17:13:47,079 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:47] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 7 0.033 0.101
+2026-03-06 17:13:47,089 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:47] "POST /web/dataset/call_kw/mail.activity/load_views HTTP/1.1" 200 - 11 0.105 0.072
+2026-03-06 17:13:47,859 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:47] "POST /web/dataset/call_kw/mrp.production/onchange HTTP/1.1" 200 - 26 0.073 0.373
+2026-03-06 17:13:48,430 19100 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:48] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-06 17:13:48,439 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:13:48] "GET /web/image/res.partner/3/image_128 HTTP/1.1" 200 - 5 0.018 0.075
+2026-03-06 17:14:27,949 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:14:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.057 50.080
+2026-03-06 17:14:29,315 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:14:29] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.048
+2026-03-06 17:14:38,906 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:14:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.034
+2026-03-06 17:15:18,333 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:15:18] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.050
+2026-03-06 17:15:20,305 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:15:20] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.051
+2026-03-06 17:15:39,057 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:15:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.021
+2026-03-06 17:16:08,731 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:16:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.054
+2026-03-06 17:16:11,294 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:16:11] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.019
+2026-03-06 17:16:38,810 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:16:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.019
+2026-03-06 17:16:59,098 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:16:59] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.055
+2026-03-06 17:17:02,299 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:17:02] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.041
+2026-03-06 17:17:39,075 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:17:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.032
+2026-03-06 17:17:49,477 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:17:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.037
+2026-03-06 17:17:53,299 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:17:53] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.047
+2026-03-06 17:18:38,848 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:18:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.029
+2026-03-06 17:18:39,862 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:18:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.009 50.059
+2026-03-06 17:18:44,308 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:18:44] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.049
+2026-03-06 17:19:30,255 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:19:30] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.050
+2026-03-06 17:19:35,309 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:19:35] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.049
+2026-03-06 17:19:40,787 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:19:40] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.024
+2026-03-06 17:20:20,635 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:20:20] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.038
+2026-03-06 17:20:26,297 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:20:26] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.040
+2026-03-06 17:21:10,801 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:21:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.031
+2026-03-06 17:21:11,017 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:21:11] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.048
+2026-03-06 17:21:17,312 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:21:17] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.057
+2026-03-06 17:22:01,392 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:22:01] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.037
+2026-03-06 17:22:08,309 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:22:08] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.055
+2026-03-06 17:22:12,779 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:22:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.016
+2026-03-06 17:22:51,782 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:22:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.054
+2026-03-06 17:22:59,298 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:22:59] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.038
+2026-03-06 17:23:13,668 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:23:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.009 0.025
+2026-03-06 17:23:42,201 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:23:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.092
+2026-03-06 17:23:50,305 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:23:50] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.048
+2026-03-06 17:24:10,833 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:24:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.034
+2026-03-06 17:24:32,585 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:24:32] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.052
+2026-03-06 17:24:41,302 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 17:24:41] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.046
+2026-03-06 18:00:47,313 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:00:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.049
+2026-03-06 18:00:52,141 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:00:52] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.018 0.026
+2026-03-06 18:01:13,228 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:01:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 2200.309
+2026-03-06 18:01:37,329 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:01:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.034 50.042
+2026-03-06 18:01:38,102 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:01:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.013
+2026-03-06 18:02:11,119 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:02:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:02:27,662 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:02:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.018
+2026-03-06 18:02:29,108 19100 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:02:29] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.017 0.006
+2026-03-06 18:02:37,269 6704 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-06 18:02:37,269 6704 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-06 18:02:37,269 6704 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-06 18:02:37,269 6704 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-06 18:02:38,744 6704 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-06 18:02:39,033 6704 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-06 18:02:39,081 6704 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-06 18:02:39,096 6704 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-06 18:02:39,597 6704 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-06 18:02:39,831 6704 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-06 18:02:40,572 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-06 18:02:41,415 6704 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 1.82s, 0 queries (+0 extra) 
+2026-03-06 18:02:42,609 6704 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-06 18:02:53,777 6704 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-06 18:02:53,792 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-06 18:02:55,036 6704 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-06 18:03:01,205 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:01] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 6 0.005 0.023
+2026-03-06 18:03:03,866 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:03] "POST /web/dataset/search_read HTTP/1.1" 200 - 61 0.053 0.266
+2026-03-06 18:03:11,330 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:11] "POST /web/action/load HTTP/1.1" 200 - 29 0.037 0.055
+2026-03-06 18:03:11,847 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:11] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 79 0.078 0.117
+2026-03-06 18:03:12,257 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:12] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 46 0.032 0.045
+2026-03-06 18:03:12,602 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:12] "POST /web/dataset/search_read HTTP/1.1" 200 - 4 0.000 0.017
+2026-03-06 18:03:12,981 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:12] "GET /base/static/img/icons/account_accountant.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:12,997 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:12] "GET /hr/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,003 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /website_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,003 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /mrp/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,003 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /base/static/img/icons/web_studio.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,320 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /mass_mailing/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,328 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /project/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,332 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /base/static/img/icons/timesheet_grid.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,334 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /foss_project_tags/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,335 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /purchase/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,628 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /account_dynamic_reports/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,642 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,642 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /point_of_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,652 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /hr_expense/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,652 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /hr_holidays/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,951 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /website/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,971 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /base/static/img/icons/mrp_workorder.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,972 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /abs_project_task_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,973 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /abs_meeting_from_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:13,979 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:13] "GET /base_territory/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,283 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /stock/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,289 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /bi_project_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,295 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /sale_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,295 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /fl_quick_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,301 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /odoo_traccar_tracking/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,602 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /account/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,614 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /om_account_accountant/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,616 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /garazd_product_label/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,620 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /bt_asset_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,620 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /fieldservice/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,920 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /base/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,934 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /maintenance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,934 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /knowledge/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,934 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /odoo_web_login/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:14,934 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:14] "GET /scrum_agile_framework/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,249 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /support_package/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,257 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/sign.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,262 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/helpdesk.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,264 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /task_pomodoro/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,265 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/sale_subscription.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,572 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/quality_control.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,577 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /website_slides/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,581 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/planning.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,584 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /mail/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,587 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /website_event/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,891 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /contacts/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,897 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/mrp_plm.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,900 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /calendar/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,902 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /base/static/img/icons/hr_appraisal.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:15,902 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:15] "GET /fleet/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,200 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /base/static/img/icons/marketing_automation.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,214 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /website_blog/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,217 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /im_livechat/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,217 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /base/static/img/icons/website_calendar.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,217 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /survey/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,517 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /base/static/img/icons/web_mobile.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,533 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /board/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,533 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /repair/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,533 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /hr_attendance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,543 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /mass_mailing_sms/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,862 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /base/static/img/icons/stock_barcode.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,870 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /note/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,870 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "GET /website_forum/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:16,914 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "POST /web/dataset/search_read HTTP/1.1" 200 - 5 0.011 0.057
+2026-03-06 18:03:16,950 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:16] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 42 0.034 0.069
+2026-03-06 18:03:17,185 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /hr_skills/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,185 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /base/static/img/icons/voip.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,185 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /lunch/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,218 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /website_hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,269 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /base/static/img/icons/sale_ebay.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,510 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_alipay/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,510 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_adyen/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,518 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_authorize/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,535 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_buckaroo/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,584 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_ingenico/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,827 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_paypal/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:17,829 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:17] "GET /payment_payumoney/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:19,489 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:19] "POST /longpolling/im_status HTTP/1.1" 200 - 16 0.010 0.049
+2026-03-06 18:03:20,495 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:20] "POST /web/dataset/call_kw/ir.module.module/read HTTP/1.1" 200 - 16 0.034 0.176
+2026-03-06 18:03:20,834 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:20] "POST /web/dataset/call_kw/ir.module.module.dependency/read HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:03:21,167 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:21] "POST /web/dataset/call_kw/ir.module.category/name_search HTTP/1.1" 200 - 3 0.002 0.013
+2026-03-06 18:03:21,518 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:21] "GET /web/image?model=ir.module.module&id=371&field=icon_image&unique=06032026095218 HTTP/1.1" 200 - 3 0.000 0.024
+2026-03-06 18:03:21,562 6704 INFO kanjabung_MRP odoo.http: <function odoo.addons.web_editor.controllers.main.public_render_template> called ignoring args <kwargs={'context': {'lang': 'id_ID', 'tz': 'Asia/Jakarta', 'uid': 2, 'allowed_company_ids': [1]}}> 
+2026-03-06 18:03:21,762 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:21] "POST /web_editor/public_render_template HTTP/1.1" 200 - 82 0.083 0.185
+2026-03-06 18:03:22,133 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:22] "GET /web/content/258-de6a5e2/web_editor.assets_summernote.css HTTP/1.1" 200 - 2 0.000 0.049
+2026-03-06 18:03:22,151 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:22] "GET /web/content/260-ec403c9/web_editor.assets_wysiwyg.css HTTP/1.1" 200 - 2 0.000 0.066
+2026-03-06 18:03:22,203 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:22] "GET /web/content/259-de6a5e2/web_editor.assets_summernote.js HTTP/1.1" 200 - 2 0.000 0.103
+2026-03-06 18:03:22,826 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:22] "GET /web/content/261-ec403c9/web_editor.assets_wysiwyg.js HTTP/1.1" 200 - 2 0.000 0.302
+2026-03-06 18:03:23,196 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:23] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-06 18:03:24,783 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_immediate_upgrade on ['SCADA for Odoo - Manufacturing Integration'] to user admin #2 via 127.0.0.1 
+2026-03-06 18:03:24,798 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['SCADA for Odoo - Manufacturing Integration'] to user admin #2 via 127.0.0.1 
+2026-03-06 18:03:24,798 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['SCADA for Odoo - Manufacturing Integration'] to user admin #2 via 127.0.0.1 
+2026-03-06 18:03:28,395 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:28] "GET /web/static/src/img/spin.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:28,730 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user admin #2 via 127.0.0.1 
+2026-03-06 18:03:28,823 6704 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-06 18:03:28,831 6704 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-06 18:03:28,975 6704 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-06 18:03:28,975 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via 127.0.0.1 
+2026-03-06 18:03:31,000 6704 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-06 18:03:31,129 6704 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-06 18:03:31,129 6704 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-06 18:03:31,129 6704 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-06 18:03:31,129 6704 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-06 18:03:31,145 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-06 18:03:31,145 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-06 18:03:31,145 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-06 18:03:31,145 6704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-06 18:03:31,177 6704 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_scada (70/89) 
+2026-03-06 18:03:31,955 6704 INFO kanjabung_MRP odoo.modules.registry: module grt_scada: creating or updating database tables 
+2026-03-06 18:03:32,377 6704 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-06 18:03:32,377 6704 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-06 18:03:32,377 6704 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-06 18:03:32,377 6704 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-06 18:03:32,377 6704 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-06 18:03:33,080 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/security/security_groups.xml 
+2026-03-06 18:03:33,096 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_product_views.xml 
+2026-03-06 18:03:33,222 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_equipment_view.xml 
+2026-03-06 18:03:33,315 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_sensor_reading_view.xml 
+2026-03-06 18:03:33,390 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_api_log_view.xml 
+2026-03-06 18:03:33,450 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_quality_control_view.xml 
+2026-03-06 18:03:33,532 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_equipment_oee_view.xml 
+2026-03-06 18:03:33,619 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_equipment_failure_view.xml 
+2026-03-06 18:03:33,745 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/scada_mo_bulk_wizard_view.xml 
+2026-03-06 18:03:33,797 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/views/menu.xml 
+2026-03-06 18:03:33,929 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/data/demo_data.xml 
+2026-03-06 18:03:33,953 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/data/ir_cron.xml 
+2026-03-06 18:03:33,960 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/reports/scada_quality_control_report.xml 
+2026-03-06 18:03:33,963 6704 WARNING kanjabung_MRP py.warnings: C:\odoo14c\server\odoo\tools\convert.py:296: DeprecationWarning: The <report> tag is deprecated, use a <record> tag for 'report_scada_quality_control'.
+  warnings.warn(f"The <report> tag is deprecated, use a <record> tag for {xml_id!r}.", DeprecationWarning)
+ 
+2026-03-06 18:03:33,995 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/reports/scada_equipment_oee_report.xml 
+2026-03-06 18:03:33,995 6704 WARNING kanjabung_MRP py.warnings: C:\odoo14c\server\odoo\tools\convert.py:296: DeprecationWarning: The <report> tag is deprecated, use a <record> tag for 'report_scada_equipment_oee'.
+  warnings.warn(f"The <report> tag is deprecated, use a <record> tag for {xml_id!r}.", DeprecationWarning)
+ 
+2026-03-06 18:03:34,027 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/security/ir.model.access.csv 
+2026-03-06 18:03:34,282 6704 INFO kanjabung_MRP odoo.modules.loading: loading grt_scada/security/ir.rule.xml 
+2026-03-06 18:03:34,311 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_translation: module grt_scada: no translation for language id 
+2026-03-06 18:03:34,347 6704 INFO kanjabung_MRP odoo.modules.loading: Module grt_scada loaded in 3.17s, 858 queries 
+2026-03-06 18:03:34,379 6704 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 3.38s, 858 queries (+0 extra) 
+2026-03-06 18:03:34,698 6704 WARNING kanjabung_MRP odoo.modules.loading: The model scada.health has no access rules, consider adding one. E.g. access_scada_health,access_scada_health,model_scada_health,base.group_user,1,0,0,0 
+2026-03-06 18:03:34,698 6704 WARNING kanjabung_MRP odoo.modules.loading: The model scada.module has no access rules, consider adding one. E.g. access_scada_module,access_scada_module,model_scada_module,base.group_user,1,0,0,0 
+2026-03-06 18:03:34,698 6704 WARNING kanjabung_MRP odoo.modules.loading: The model scada.mo.data has no access rules, consider adding one. E.g. access_scada_mo_data,access_scada_mo_data,model_scada_mo_data,base.group_user,1,0,0,0 
+2026-03-06 18:03:34,698 6704 WARNING kanjabung_MRP odoo.modules.loading: The model scada.material.consumption has no access rules, consider adding one. E.g. access_scada_material_consumption,access_scada_material_consumption,model_scada_material_consumption,base.group_user,1,0,0,0 
+2026-03-06 18:03:35,023 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_model: Deleting 1366@ir.ui.view (grt_scada.view_mrp_production_form_scada_equipment) 
+2026-03-06 18:03:36,106 6704 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted ir.model.data records with IDs: [22662] 
+2026-03-06 18:03:36,106 6704 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted ir.ui.view records with IDs: [1366] 
+2026-03-06 18:03:36,106 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_model: Deleting 1365@ir.ui.view (grt_scada.view_mrp_bom_form_scada_equipment) 
+2026-03-06 18:03:36,119 6704 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted ir.model.data records with IDs: [22661] 
+2026-03-06 18:03:36,119 6704 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted ir.ui.view records with IDs: [1365] 
+2026-03-06 18:03:36,119 6704 INFO kanjabung_MRP odoo.modules.registry: verifying fields for every extended model 
+2026-03-06 18:03:36,215 6704 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-06 18:03:36,215 6704 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-06 18:03:36,215 6704 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-06 18:03:36,218 6704 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-06 18:03:36,218 6704 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-06 18:03:36,935 6704 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-06 18:03:36,952 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_module: getting next ir.actions.todo() 
+2026-03-06 18:03:36,962 6704 INFO kanjabung_MRP odoo.modules.registry: Registry changed, signaling through the database 
+2026-03-06 18:03:36,966 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:36] "POST /web/dataset/call_button HTTP/1.1" 200 - 4034 2.460 9.740
+2026-03-06 18:03:37,314 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-06 18:03:39,282 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.012 0.018
+2026-03-06 18:03:40,612 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:40] "GET /web HTTP/1.1" 200 - 688 0.497 2.809
+2026-03-06 18:03:40,963 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:40] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.003 0.008
+2026-03-06 18:03:41,006 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.007 0.037
+2026-03-06 18:03:41,007 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.017 0.035
+2026-03-06 18:03:41,008 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 304 - 2 0.000 0.045
+2026-03-06 18:03:41,216 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 304 - 2 0.000 0.020
+2026-03-06 18:03:41,316 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 304 - 2 0.000 0.015
+2026-03-06 18:03:41,397 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.075
+2026-03-06 18:03:41,742 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.035 0.093
+2026-03-06 18:03:41,758 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:41] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.000
+2026-03-06 18:03:42,122 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-06 18:03:42,160 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "GET /web/static/src/xml/debug.xml?debug=1772795021827 HTTP/1.1" 200 - - - -
+2026-03-06 18:03:42,326 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 9 0.063 0.077
+2026-03-06 18:03:42,331 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.091 0.081
+2026-03-06 18:03:42,405 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /mail/init_messaging HTTP/1.1" 200 - 80 0.150 0.142
+2026-03-06 18:03:42,498 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.002 0.010
+2026-03-06 18:03:42,502 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.001 0.010
+2026-03-06 18:03:42,670 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.004 0.016
+2026-03-06 18:03:42,680 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.023
+2026-03-06 18:03:42,739 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:42] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.000 0.009
+2026-03-06 18:03:43,021 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:43] "POST /web/action/load HTTP/1.1" 200 - 9 0.031 0.000
+2026-03-06 18:03:43,069 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:43] "POST /calendar/notify HTTP/1.1" 200 - 3 0.005 0.011
+2026-03-06 18:03:43,136 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:43] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 27 0.041 0.030
+2026-03-06 18:03:43,346 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:43] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:03:43,644 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Digest Emails`. 
+2026-03-06 18:03:44,325 6704 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Digest Emails` done. 
+2026-03-06 18:03:44,500 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:44] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:03:45,057 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:03:45] "POST /longpolling/poll HTTP/1.1" 200 - 21 0.079 51.185
+2026-03-06 18:04:32,237 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:04:32] "POST /longpolling/poll HTTP/1.1" 200 - 12 0.057 50.037
+2026-03-06 18:04:33,106 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:04:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.008 0.019
+2026-03-06 18:04:46,079 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:04:46] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.005 0.013
+2026-03-06 18:05:22,584 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:05:22] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.021
+2026-03-06 18:05:24,101 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:05:24] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.015
+2026-03-06 18:05:45,732 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:05:45] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:06:12,918 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:06:12] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.012 50.005
+2026-03-06 18:06:15,111 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:06:15] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.023
+2026-03-06 18:06:43,511 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:06:43] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.007 0.011
+2026-03-06 18:07:03,264 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.026
+2026-03-06 18:07:06,124 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:06] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.033
+2026-03-06 18:07:42,775 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:42] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 7 0.037 0.005
+2026-03-06 18:07:43,500 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:43] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.011 0.002
+2026-03-06 18:07:44,981 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:44] "GET /web_tour/static/src/xml/tip.xml?debug=1772795264679 HTTP/1.1" 200 - - - -
+2026-03-06 18:07:53,616 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.031
+2026-03-06 18:07:56,147 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:07:56] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.011
+2026-03-06 18:08:43,959 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:08:43] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.028
+2026-03-06 18:08:46,207 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:08:46] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.009
+2026-03-06 18:08:47,429 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:08:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.018 0.004
+2026-03-06 18:09:16,206 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:16] "POST /web/action/load HTTP/1.1" 200 - 53 0.038 0.077
+2026-03-06 18:09:16,937 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:16] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 167 0.070 0.345
+2026-03-06 18:09:17,470 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:17] "POST /web/dataset/search_read HTTP/1.1" 200 - 42 0.079 0.120
+2026-03-06 18:09:17,789 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:17] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:09:19,898 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:19] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 8 0.022 0.057
+2026-03-06 18:09:19,908 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:19] "POST /web/dataset/call_kw/mail.followers/load_views HTTP/1.1" 200 - 16 0.076 0.024
+2026-03-06 18:09:19,941 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:19] "POST /web/dataset/call_kw/mrp.workorder/load_views HTTP/1.1" 200 - 31 0.061 0.077
+2026-03-06 18:09:19,963 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:19] "POST /web/dataset/call_kw/mail.activity/load_views HTTP/1.1" 200 - 29 0.055 0.091
+2026-03-06 18:09:20,495 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:20] "POST /web/dataset/call_kw/mrp.production/onchange HTTP/1.1" 200 - 41 0.052 0.156
+2026-03-06 18:09:20,886 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:20] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-06 18:09:20,923 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:20] "GET /web/image/res.partner/3/image_128 HTTP/1.1" 200 - 5 0.003 0.034
+2026-03-06 18:09:24,660 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:24] "POST /web/dataset/call_kw/mrp.bom/name_search HTTP/1.1" 200 - 14 0.013 0.023
+2026-03-06 18:09:30,147 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:30] "POST /web/dataset/call_kw/mrp.production/onchange HTTP/1.1" 200 - 231 0.357 0.975
+2026-03-06 18:09:34,301 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:34] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.028
+2026-03-06 18:09:37,454 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.006
+2026-03-06 18:09:37,848 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:37] "GET /web/static/src/xml/dialog.xml?debug=1772795377530 HTTP/1.1" 200 - - - -
+2026-03-06 18:09:41,829 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:41] "POST /web/dataset/search_read HTTP/1.1" 200 - 24 0.036 0.093
+2026-03-06 18:09:45,291 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:45] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:09:56,152 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:56] "POST /web/action/load HTTP/1.1" 200 - 27 0.019 0.048
+2026-03-06 18:09:56,606 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:56] "POST /web/dataset/call_kw/mrp.bom/load_views HTTP/1.1" 200 - 48 0.085 0.054
+2026-03-06 18:09:56,958 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:09:56] "POST /web/dataset/search_read HTTP/1.1" 200 - 6 0.002 0.029
+2026-03-06 18:10:01,071 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:01] "POST /web/dataset/call_kw/mail.followers/load_views HTTP/1.1" 200 - 7 0.009 0.023
+2026-03-06 18:10:01,086 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:01] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 7 0.007 0.031
+2026-03-06 18:10:01,464 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:01] "POST /web/dataset/call_kw/mrp.bom/read HTTP/1.1" 200 - 19 0.046 0.020
+2026-03-06 18:10:01,838 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:01] "POST /web/dataset/call_kw/mail.followers/read HTTP/1.1" 200 - 3 0.016 0.031
+2026-03-06 18:10:01,856 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:01] "POST /web/dataset/call_kw/mail.message/read HTTP/1.1" 200 - 6 0.020 0.029
+2026-03-06 18:10:01,967 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:01] "POST /web/dataset/call_kw/mrp.bom.line/read HTTP/1.1" 200 - 41 0.051 0.125
+2026-03-06 18:10:02,312 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:02] "GET /web/static/src/xml/ribbon.xml?debug=1772795401987 HTTP/1.1" 200 - - - -
+2026-03-06 18:10:02,732 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:02] "POST /mail/read_followers HTTP/1.1" 200 - 12 0.047 0.055
+2026-03-06 18:10:02,735 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:02] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 8 0.041 0.049
+2026-03-06 18:10:02,746 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:02] "POST /mail/thread/data HTTP/1.1" 200 - 11 0.058 0.037
+2026-03-06 18:10:02,765 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:02] "POST /mail/read_followers HTTP/1.1" 200 - 6 0.018 0.070
+2026-03-06 18:10:02,765 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:02] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 25 0.102 0.033
+2026-03-06 18:10:03,057 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:03] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.011 0.004
+2026-03-06 18:10:03,067 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:03] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.000 0.009
+2026-03-06 18:10:03,136 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:03] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 6 0.018 0.030
+2026-03-06 18:10:03,136 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:03] "GET /web/image/res.partner/10949/image_128 HTTP/1.1" 200 - 5 0.000 0.047
+2026-03-06 18:10:08,973 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:08] "POST /mail/read_followers HTTP/1.1" 200 - 6 0.010 0.030
+2026-03-06 18:10:08,979 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:08] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.005 0.038
+2026-03-06 18:10:08,991 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:08] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.015 0.030
+2026-03-06 18:10:08,992 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:08] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.005 0.024
+2026-03-06 18:10:09,017 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:09] "POST /mail/read_followers HTTP/1.1" 200 - 6 0.008 0.026
+2026-03-06 18:10:09,313 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:09] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.003 0.009
+2026-03-06 18:10:09,321 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:09] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.006 0.010
+2026-03-06 18:10:22,562 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:22] "POST /web/action/load HTTP/1.1" 200 - 32 0.024 0.041
+2026-03-06 18:10:22,929 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:22] "POST /web/dataset/call_kw/scada.equipment/load_views HTTP/1.1" 200 - 26 0.002 0.047
+2026-03-06 18:10:23,271 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:23] "POST /web/dataset/search_read HTTP/1.1" 200 - 8 0.014 0.000
+2026-03-06 18:10:24,637 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:24] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.007
+2026-03-06 18:10:27,483 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:27] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.016
+2026-03-06 18:10:36,954 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:36] "POST /web/dataset/search_read HTTP/1.1" 200 - 24 0.045 0.109
+2026-03-06 18:10:37,055 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:37] "POST /web/dataset/search_read HTTP/1.1" 200 - 24 0.152 0.106
+2026-03-06 18:10:39,091 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:39] "POST /web/dataset/call_kw/mrp.production/onchange HTTP/1.1" 200 - 23 0.037 0.078
+2026-03-06 18:10:42,723 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:42] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.013
+2026-03-06 18:10:47,258 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:47] "POST /web/dataset/call_kw/stock.move/onchange HTTP/1.1" 200 - 12 0.038 0.038
+2026-03-06 18:10:53,963 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:10:53] "POST /web/dataset/search_read HTTP/1.1" 200 - 24 0.000 0.126
+2026-03-06 18:11:03,069 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:03] "GET /web/session/logout HTTP/1.1" 303 - 1 0.000 0.009
+2026-03-06 18:11:03,406 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:03] "GET /web HTTP/1.1" 303 - 1 0.000 0.018
+2026-03-06 18:11:04,407 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:04] "GET /web/login HTTP/1.1" 200 - 128 0.124 0.561
+2026-03-06 18:11:04,796 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:04] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-06 18:11:04,797 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:04] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 5 0.017 0.026
+2026-03-06 18:11:04,806 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:04] "GET /web/content/168-afcc0d6/web.assets_frontend.css HTTP/1.1" 200 - 3 0.032 0.019
+2026-03-06 18:11:04,810 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:04] "GET /web/binary/company_logo HTTP/1.1" 304 - 2 0.002 0.034
+2026-03-06 18:11:05,040 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:05] "GET /web/content/169-77f2957/web.assets_common_minimal_js.js HTTP/1.1" 200 - 3 0.000 0.017
+2026-03-06 18:11:05,141 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:05] "GET /web/content/170-f140d84/web.assets_frontend_minimal_js.js HTTP/1.1" 200 - 3 0.002 0.012
+2026-03-06 18:11:05,170 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:05] "GET /web/content/171-9a24d3e/web.assets_common_lazy.js HTTP/1.1" 200 - 3 0.001 0.018
+2026-03-06 18:11:05,552 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:05] "GET /web/content/172-d06ff01/web.assets_frontend_lazy.js HTTP/1.1" 200 - 3 0.003 0.008
+2026-03-06 18:11:05,900 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:05] "GET /website/translations/aecdc2fd7c8579887ffa12eb85ef185150ab4e5a?mods=&lang= HTTP/1.1" 200 - 15 0.013 0.091
+2026-03-06 18:11:05,906 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:05] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.007
+2026-03-06 18:11:14,982 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:14] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.021
+2026-03-06 18:11:35,619 6704 INFO kanjabung_MRP odoo.addons.base.models.res_users: Login successful for db:kanjabung_MRP login:admin from 127.0.0.1 
+2026-03-06 18:11:35,648 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:35] "POST /web/login HTTP/1.1" 303 - 39 0.049 0.042
+2026-03-06 18:11:35,985 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:35] "GET /web HTTP/1.1" 200 - 15 0.015 0.097
+2026-03-06 18:11:36,367 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.002 0.046
+2026-03-06 18:11:36,367 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.003 0.045
+2026-03-06 18:11:36,409 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 200 - 2 0.004 0.066
+2026-03-06 18:11:36,416 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 200 - 2 0.000 0.065
+2026-03-06 18:11:36,426 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.002 0.038
+2026-03-06 18:11:36,430 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 200 - 2 0.029 0.033
+2026-03-06 18:11:36,879 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:36] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.060
+2026-03-06 18:11:37,200 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.014 0.113
+2026-03-06 18:11:37,214 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.014
+2026-03-06 18:11:37,553 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-06 18:11:37,603 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "GET /web/static/src/xml/debug.xml?debug=1772795497270 HTTP/1.1" 200 - - - -
+2026-03-06 18:11:37,698 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 7 0.048 0.047
+2026-03-06 18:11:37,721 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 6 0.009 0.085
+2026-03-06 18:11:37,735 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "POST /mail/init_messaging HTTP/1.1" 200 - 50 0.105 0.069
+2026-03-06 18:11:37,942 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.003 0.011
+2026-03-06 18:11:37,946 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:37] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.002 0.011
+2026-03-06 18:11:38,022 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 1 0.000 0.009
+2026-03-06 18:11:38,039 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.008
+2026-03-06 18:11:38,096 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.002 0.006
+2026-03-06 18:11:38,369 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /web/action/load HTTP/1.1" 200 - 9 0.014 0.002
+2026-03-06 18:11:38,419 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /calendar/notify HTTP/1.1" 200 - 3 0.016 0.000
+2026-03-06 18:11:38,442 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 8 0.016 0.024
+2026-03-06 18:11:38,718 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.003 0.011
+2026-03-06 18:11:38,801 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:38] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:11:39,869 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.005 0.009
+2026-03-06 18:11:41,368 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:41] "GET /web_tour/static/src/xml/tip.xml?debug=1772795501051 HTTP/1.1" 200 - - - -
+2026-03-06 18:11:41,595 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:41] "POST /web/action/load HTTP/1.1" 200 - 16 0.014 0.042
+2026-03-06 18:11:42,117 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:42] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 56 0.050 0.163
+2026-03-06 18:11:42,584 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:42] "POST /web/dataset/search_read HTTP/1.1" 200 - 24 0.003 0.131
+2026-03-06 18:11:42,904 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:42] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 1 0.000 0.000
+2026-03-06 18:11:56,748 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:56] "POST /web/action/load HTTP/1.1" 200 - 15 0.009 0.035
+2026-03-06 18:11:57,134 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:57] "POST /web/dataset/call_kw/mrp.bom/load_views HTTP/1.1" 200 - 26 0.032 0.035
+2026-03-06 18:11:57,492 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:11:57] "POST /web/dataset/search_read HTTP/1.1" 200 - 6 0.000 0.032
+2026-03-06 18:12:01,860 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:01] "POST /web/dataset/call_kw/mail.followers/load_views HTTP/1.1" 200 - 7 0.004 0.025
+2026-03-06 18:12:01,874 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:01] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 7 0.013 0.029
+2026-03-06 18:12:02,216 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:02] "POST /web/dataset/call_kw/mrp.bom/onchange HTTP/1.1" 200 - 6 0.016 0.017
+2026-03-06 18:12:02,527 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:02] "GET /web/static/src/xml/ribbon.xml?debug=1772795522224 HTTP/1.1" 200 - - - -
+2026-03-06 18:12:02,863 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:02] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-06 18:12:02,896 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:02] "GET /web/image/res.partner/3/image_128 HTTP/1.1" 200 - 5 0.004 0.028
+2026-03-06 18:12:12,160 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:12] "POST /web/dataset/call_kw/product.template/name_search HTTP/1.1" 200 - 3 0.004 0.012
+2026-03-06 18:12:16,467 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:16] "POST /web/dataset/call_kw/product.template/name_search HTTP/1.1" 200 - 3 0.000 0.000
+2026-03-06 18:12:20,197 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:20] "POST /web/dataset/call_kw/product.template/name_search HTTP/1.1" 200 - 8 0.004 0.019
+2026-03-06 18:12:20,531 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:20] "POST /web/dataset/call_kw/product.template/name_search HTTP/1.1" 200 - 8 0.017 0.017
+2026-03-06 18:12:21,078 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:21] "POST /web/dataset/call_kw/product.template/name_search HTTP/1.1" 200 - 8 0.016 0.016
+2026-03-06 18:12:21,563 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:21] "POST /web/dataset/call_kw/product.template/name_search HTTP/1.1" 200 - 13 0.006 0.025
+2026-03-06 18:12:25,354 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:25] "POST /web/dataset/call_kw/mrp.bom/onchange HTTP/1.1" 200 - 7 0.006 0.025
+2026-03-06 18:12:27,681 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.036 50.059
+2026-03-06 18:12:28,284 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.022
+2026-03-06 18:12:38,611 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:38] "POST /web/dataset/call_kw/mrp.bom/onchange HTTP/1.1" 200 - 1 0.000 0.007
+2026-03-06 18:12:39,104 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:39] "POST /web/dataset/call_kw/mrp.bom/create HTTP/1.1" 200 - 28 0.046 0.062
+2026-03-06 18:12:39,471 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:39] "POST /web/dataset/call_kw/mrp.bom/read HTTP/1.1" 200 - 16 0.027 0.030
+2026-03-06 18:12:39,709 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:12:39,828 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:39] "POST /web/dataset/call_kw/mail.followers/read HTTP/1.1" 200 - 3 0.004 0.026
+2026-03-06 18:12:39,834 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:39] "POST /web/dataset/call_kw/mail.message/read HTTP/1.1" 200 - 5 0.006 0.025
+2026-03-06 18:12:40,227 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.017 0.034
+2026-03-06 18:12:40,243 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.016 0.034
+2026-03-06 18:12:40,277 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/read_followers HTTP/1.1" 200 - 10 0.049 0.068
+2026-03-06 18:12:40,277 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 20 0.066 0.051
+2026-03-06 18:12:40,277 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.017 0.033
+2026-03-06 18:12:40,556 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-06 18:12:40,571 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.000 0.008
+2026-03-06 18:12:40,625 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.004 0.023
+2026-03-06 18:12:40,639 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.018 0.028
+2026-03-06 18:12:40,639 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.004 0.028
+2026-03-06 18:12:40,893 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.007 0.022
+2026-03-06 18:12:40,901 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.003 0.010
+2026-03-06 18:12:40,963 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.003 0.015
+2026-03-06 18:12:40,969 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:40] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 5 0.007 0.012
+2026-03-06 18:12:41,931 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:41] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.008 0.029
+2026-03-06 18:12:41,953 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:41] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.032 0.031
+2026-03-06 18:12:41,960 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:41] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.008 0.048
+2026-03-06 18:12:41,963 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:41] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.007 0.031
+2026-03-06 18:12:41,987 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:41] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.011 0.031
+2026-03-06 18:12:42,257 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:42] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.002 0.006
+2026-03-06 18:12:42,271 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:42] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.001 0.007
+2026-03-06 18:12:42,979 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:42] "POST /web/dataset/call_kw/mrp.bom.line/onchange HTTP/1.1" 200 - 10 0.000 0.048
+2026-03-06 18:12:47,293 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:47] "POST /web/dataset/call_kw/product.product/name_search HTTP/1.1" 200 - 11 0.012 0.030
+2026-03-06 18:12:48,875 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:48] "POST /web/dataset/call_kw/mrp.bom.line/onchange HTTP/1.1" 200 - 8 0.010 0.020
+2026-03-06 18:12:49,242 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:49] "POST /web/dataset/call_kw/mrp.bom/onchange HTTP/1.1" 200 - 13 0.012 0.032
+2026-03-06 18:12:53,161 6704 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:53] "GET /web/static/src/xml/dialog.xml?debug=1772795572841 HTTP/1.1" 200 - - - -
+2026-03-06 18:12:54,721 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:54] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.047
+2026-03-06 18:12:54,740 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:54] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.016 0.050
+2026-03-06 18:12:54,740 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:54] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.019 0.047
+2026-03-06 18:12:54,740 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:54] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.000 0.035
+2026-03-06 18:12:54,781 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:54] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.010 0.050
+2026-03-06 18:12:55,036 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:55] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:12:55,059 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:55] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.000 0.007
+2026-03-06 18:12:56,347 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:56] "POST /web/dataset/search_read HTTP/1.1" 200 - 6 0.000 0.032
+2026-03-06 18:12:59,796 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:12:59] "POST /web/dataset/call_kw/mrp.bom/read HTTP/1.1" 200 - 16 0.000 0.048
+2026-03-06 18:13:00,127 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:00] "POST /web/dataset/call_kw/mail.followers/read HTTP/1.1" 200 - 3 0.000 0.018
+2026-03-06 18:13:00,142 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:00] "POST /web/dataset/call_kw/mail.message/read HTTP/1.1" 200 - 5 0.003 0.030
+2026-03-06 18:13:00,537 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:00] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.016 0.016
+2026-03-06 18:13:00,553 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:00] "POST /mail/read_followers HTTP/1.1" 200 - 9 0.032 0.016
+2026-03-06 18:13:00,553 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:00] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.000 0.032
+2026-03-06 18:13:00,573 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:00] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.018 0.018
+2026-03-06 18:13:18,009 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:18] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.017
+2026-03-06 18:13:18,590 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:18] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.018
+2026-03-06 18:13:38,112 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:13:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-06 18:14:08,364 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:14:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.032
+2026-03-06 18:14:08,932 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:14:08] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 18:14:39,320 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:14:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-06 18:14:58,704 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:14:58] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.027
+2026-03-06 18:14:59,275 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:14:59] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 18:15:37,538 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:15:37] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.006
+2026-03-06 18:15:49,042 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:15:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.023
+2026-03-06 18:15:49,617 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:15:49] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:16:39,404 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:16:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.014 50.027
+2026-03-06 18:16:39,754 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:16:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:16:39,980 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:16:39] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.033
+2026-03-06 18:17:29,453 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:17:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.039
+2026-03-06 18:17:30,053 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:17:30] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.032
+2026-03-06 18:17:39,347 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:17:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.004 0.009
+2026-03-06 18:18:19,790 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:18:19] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.024
+2026-03-06 18:18:20,384 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:18:20] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.018
+2026-03-06 18:18:38,151 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:18:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-06 18:19:10,128 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:19:10] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.002
+2026-03-06 18:19:10,708 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:19:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 18:19:39,362 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:19:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.011
+2026-03-06 18:20:00,481 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:20:00] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.029
+2026-03-06 18:20:01,056 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:20:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.016
+2026-03-06 18:20:37,575 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:20:37] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-06 18:20:50,822 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:20:50] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.015
+2026-03-06 18:20:51,395 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:20:51] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.015
+2026-03-06 18:21:39,626 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:21:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.011
+2026-03-06 18:21:41,181 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:21:41] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.026
+2026-03-06 18:21:41,744 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:21:41] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.016
+2026-03-06 18:22:31,518 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:22:31] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.017
+2026-03-06 18:22:32,082 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:22:32] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:22:39,703 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:22:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:23:21,536 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:23:21] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.018
+2026-03-06 18:23:22,126 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:23:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.019
+2026-03-06 18:23:38,214 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:23:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:24:11,882 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:24:11] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.023
+2026-03-06 18:24:12,476 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:24:12] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.024
+2026-03-06 18:24:39,409 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:24:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.004 0.009
+2026-03-06 18:25:02,219 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:25:02] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.022
+2026-03-06 18:25:02,816 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:25:02] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.019
+2026-03-06 18:25:39,411 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:25:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.010 0.000
+2026-03-06 18:25:52,565 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:25:52] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.023
+2026-03-06 18:25:53,156 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:25:53] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:26:39,417 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:26:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.007
+2026-03-06 18:26:42,910 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:26:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.009
+2026-03-06 18:26:43,501 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:26:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.013
+2026-03-06 18:27:33,255 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:27:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.027
+2026-03-06 18:27:33,860 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:27:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.019
+2026-03-06 18:27:37,946 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:27:37] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.011 0.005
+2026-03-06 18:28:23,272 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:28:23] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.017
+2026-03-06 18:28:23,886 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:28:23] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.000
+2026-03-06 18:28:38,257 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:28:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:29:13,607 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:29:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.025
+2026-03-06 18:29:14,202 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:29:14] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.019
+2026-03-06 18:29:39,961 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:29:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:30:03,946 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:30:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.031
+2026-03-06 18:30:05,105 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:30:05] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:30:38,221 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:30:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.014
+2026-03-06 18:30:54,277 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:30:54] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.008
+2026-03-06 18:30:56,103 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:30:56] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 18:31:44,614 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:31:44] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.018
+2026-03-06 18:31:47,097 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:31:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.016
+2026-03-06 18:32:10,527 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:32:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:32:34,952 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:32:34] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.014 50.008
+2026-03-06 18:32:38,111 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:32:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.021
+2026-03-06 18:32:40,219 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:32:40] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.010
+2026-03-06 18:33:25,283 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:33:25] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.019
+2026-03-06 18:33:29,110 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:33:29] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-06 18:34:10,861 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:34:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:34:15,629 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:34:15] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.030
+2026-03-06 18:34:20,099 6704 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:34:20] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-06 18:34:25,683 22280 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-06 18:34:25,683 22280 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-06 18:34:25,683 22280 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-06 18:34:25,683 22280 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-06 18:34:26,115 22280 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-06 18:34:26,339 22280 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-06 18:34:26,372 22280 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-06 18:34:26,403 22280 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-06 18:34:26,498 22280 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-06 18:34:26,679 22280 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-06 18:34:27,341 22280 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-06 18:34:28,053 22280 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 1.56s, 0 queries (+0 extra) 
+2026-03-06 18:34:29,235 22280 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-06 18:34:36,561 22280 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-06 18:34:36,577 22280 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-06 18:34:37,768 22280 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-06 18:35:10,273 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:35:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 6 0.000 0.032
+2026-03-06 18:35:11,468 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:35:11] "POST /longpolling/im_status HTTP/1.1" 200 - 17 0.048 0.037
+2026-03-06 18:35:27,780 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:35:27] "POST /longpolling/poll HTTP/1.1" 200 - 21 0.052 51.151
+2026-03-06 18:36:02,109 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:36:02] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.026 0.000
+2026-03-06 18:36:10,370 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:36:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:36:18,131 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:36:18] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.032
+2026-03-06 18:36:53,094 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:36:53] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:37:08,482 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:37:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.027
+2026-03-06 18:37:10,058 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:37:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:37:44,418 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:37:44] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.021
+2026-03-06 18:37:58,829 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:37:58] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.030
+2026-03-06 18:38:10,055 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:38:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:38:35,432 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:38:35] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.025
+2026-03-06 18:38:49,174 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:38:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.026
+2026-03-06 18:39:10,587 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:39:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.006 0.000
+2026-03-06 18:39:26,426 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:39:26] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.024
+2026-03-06 18:39:39,522 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:39:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.029
+2026-03-06 18:39:52,325 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:39:52] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.012
+2026-03-06 18:40:17,411 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:40:17] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.014
+2026-03-06 18:40:29,876 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:40:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.031
+2026-03-06 18:40:39,950 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:40:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.009
+2026-03-06 18:41:08,419 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:41:08] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-06 18:41:20,215 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:41:20] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.020
+2026-03-06 18:41:59,100 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:41:59] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.020
+2026-03-06 18:42:10,415 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:42:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-06 18:42:10,567 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:42:10] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.028
+2026-03-06 18:42:50,104 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:42:50] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.016
+2026-03-06 18:43:00,911 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:43:00] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.021
+2026-03-06 18:43:10,134 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:43:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.011
+2026-03-06 18:43:41,417 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:43:41] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.019
+2026-03-06 18:43:51,250 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:43:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.029
+2026-03-06 18:44:10,458 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:44:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:44:32,421 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:44:32] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.022
+2026-03-06 18:44:41,614 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:44:41] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.035
+2026-03-06 18:44:53,961 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:44:53] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.017
+2026-03-06 18:44:59,648 22280 INFO kanjabung_MRP odoo.models.unlink: User #2 deleted mail.message records with IDs: [424] 
+2026-03-06 18:44:59,699 22280 INFO kanjabung_MRP odoo.models.unlink: User #2 deleted mrp.bom records with IDs: [71] 
+2026-03-06 18:44:59,712 22280 INFO kanjabung_MRP odoo.models.unlink: User #2 deleted mail.followers records with IDs: [307] 
+2026-03-06 18:44:59,728 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:44:59] "POST /web/dataset/call_kw/mrp.bom/unlink HTTP/1.1" 200 - 47 0.145 0.044
+2026-03-06 18:45:00,143 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:00] "POST /web/dataset/call_kw/mrp.bom/read HTTP/1.1" 200 - 39 0.064 0.036
+2026-03-06 18:45:00,624 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:00] "POST /web/dataset/call_kw/mrp.bom.line/read HTTP/1.1" 200 - 45 0.046 0.123
+2026-03-06 18:45:01,025 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 6 0.032 0.034
+2026-03-06 18:45:01,041 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/read_followers HTTP/1.1" 200 - 10 0.032 0.050
+2026-03-06 18:45:01,061 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.086
+2026-03-06 18:45:01,062 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/read_followers HTTP/1.1" 200 - 3 0.017 0.054
+2026-03-06 18:45:01,067 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/thread/data HTTP/1.1" 200 - 5 0.022 0.057
+2026-03-06 18:45:01,375 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.020
+2026-03-06 18:45:01,387 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.016 0.016
+2026-03-06 18:45:01,403 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/read_followers HTTP/1.1" 200 - 3 0.028 0.000
+2026-03-06 18:45:01,403 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:45:01,403 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.016 0.000
+2026-03-06 18:45:01,689 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/read_followers HTTP/1.1" 200 - 3 0.000 0.005
+2026-03-06 18:45:01,700 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:45:01,732 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.016 0.000
+2026-03-06 18:45:01,732 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:01] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 3 0.000 0.016
+2026-03-06 18:45:05,763 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:05] "POST /web/dataset/search_read HTTP/1.1" 200 - 6 0.020 0.011
+2026-03-06 18:45:08,377 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:08] "POST /web/dataset/call_kw/mrp.bom/read HTTP/1.1" 200 - 19 0.030 0.033
+2026-03-06 18:45:08,742 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:08] "POST /web/dataset/call_kw/mail.followers/read HTTP/1.1" 200 - 3 0.016 0.017
+2026-03-06 18:45:08,792 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:08] "POST /web/dataset/call_kw/mail.message/read HTTP/1.1" 200 - 6 0.022 0.046
+2026-03-06 18:45:08,888 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:08] "POST /web/dataset/call_kw/mrp.bom.line/read HTTP/1.1" 200 - 37 0.107 0.072
+2026-03-06 18:45:09,292 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.053
+2026-03-06 18:45:09,309 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.010 0.044
+2026-03-06 18:45:09,309 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /mail/read_followers HTTP/1.1" 200 - 6 0.026 0.059
+2026-03-06 18:45:09,335 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /mail/read_followers HTTP/1.1" 200 - 6 0.011 0.053
+2026-03-06 18:45:09,363 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 34 0.068 0.071
+2026-03-06 18:45:09,609 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.008
+2026-03-06 18:45:09,618 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.000 0.000
+2026-03-06 18:45:09,728 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 6 0.038 0.008
+2026-03-06 18:45:09,730 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:09] "GET /web/image/res.partner/10949/image_128 HTTP/1.1" 200 - 5 0.023 0.025
+2026-03-06 18:45:11,065 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:11] "POST /web/dataset/search_read HTTP/1.1" 200 - 6 0.023 0.009
+2026-03-06 18:45:12,296 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:12] "POST /web/dataset/call_kw/mrp.bom/read HTTP/1.1" 200 - 13 0.016 0.032
+2026-03-06 18:45:12,756 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:12] "POST /web/dataset/call_kw/mrp.bom.line/read HTTP/1.1" 200 - 29 0.044 0.104
+2026-03-06 18:45:13,105 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:45:13,130 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /mail/read_followers HTTP/1.1" 200 - 3 0.016 0.026
+2026-03-06 18:45:13,140 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.035
+2026-03-06 18:45:13,153 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.002 0.030
+2026-03-06 18:45:13,156 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /mail/read_followers HTTP/1.1" 200 - 3 0.005 0.021
+2026-03-06 18:45:13,440 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /mail/get_suggested_recipients HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:45:13,467 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /mail/thread/data HTTP/1.1" 200 - 3 0.016 0.000
+2026-03-06 18:45:13,467 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:13] "POST /web/dataset/call_kw/mail.message/mark_all_as_read HTTP/1.1" 200 - 3 0.000 0.016
+2026-03-06 18:45:22,010 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:22] "POST /web/action/load HTTP/1.1" 200 - 29 0.036 0.048
+2026-03-06 18:45:22,537 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:22] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 79 0.089 0.123
+2026-03-06 18:45:22,772 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.018
+2026-03-06 18:45:22,922 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:22] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 46 0.022 0.028
+2026-03-06 18:45:23,263 22280 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "POST /web/dataset/search_read HTTP/1.1" 200 - 4 0.000 0.022
+2026-03-06 18:45:23,621 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /base/static/img/icons/timesheet_grid.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,621 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /abs_meeting_from_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,641 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,642 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /hr/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,642 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /point_of_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,938 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /base/static/img/icons/account_accountant.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,938 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /hr_holidays/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,957 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /purchase/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,957 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /stock/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:23,957 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:23] "GET /project/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,252 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /mrp/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,252 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /base/static/img/icons/mrp_workorder.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,271 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /foss_project_tags/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,275 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /website/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,279 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /hr_expense/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,575 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /website_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,575 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /mass_mailing/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,582 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /base/static/img/icons/web_studio.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,591 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /base_territory/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,591 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /abs_project_task_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,883 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /bi_project_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,883 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /account_dynamic_reports/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,898 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /fl_quick_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,906 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /odoo_traccar_tracking/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:24,908 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:24] "GET /om_account_accountant/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,202 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /sale_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,202 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /account/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,223 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /bt_asset_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,223 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /fieldservice/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,223 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /garazd_product_label/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,521 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /base/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,538 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /knowledge/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,539 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /odoo_web_login/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,539 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /maintenance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,539 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /scrum_agile_framework/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,834 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /support_package/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,852 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /task_pomodoro/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,858 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /base/static/img/icons/sign.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,858 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /base/static/img/icons/helpdesk.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:25,858 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:25] "GET /base/static/img/icons/sale_subscription.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,152 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /base/static/img/icons/quality_control.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,161 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /website_slides/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,173 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /base/static/img/icons/planning.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,182 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /website_event/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,188 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /mail/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,465 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /contacts/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,478 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /base/static/img/icons/mrp_plm.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,489 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /calendar/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,489 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /base/static/img/icons/hr_appraisal.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,504 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /fleet/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,791 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /base/static/img/icons/marketing_automation.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,791 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /website_blog/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,806 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /im_livechat/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,806 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /base/static/img/icons/website_calendar.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:26,821 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:26] "GET /survey/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,106 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /base/static/img/icons/web_mobile.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,106 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /board/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,123 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /repair/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,123 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /hr_attendance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,123 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /mass_mailing_sms/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,416 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /base/static/img/icons/stock_barcode.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,416 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /note/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,439 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /website_forum/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,439 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /hr_skills/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,454 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /base/static/img/icons/voip.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,736 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /lunch/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,750 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /website_hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,755 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /base/static/img/icons/sale_ebay.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,755 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /payment_adyen/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:27,766 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:27] "GET /payment_alipay/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:28,051 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:28] "GET /payment_authorize/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:28,061 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:28] "GET /payment_buckaroo/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:28,072 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:28] "GET /payment_ingenico/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:28,072 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:28] "GET /payment_paypal/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:28,072 22280 INFO ? werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:28] "GET /payment_payumoney/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-06 18:45:32,823 8832 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-06 18:45:32,823 8832 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-06 18:45:32,823 8832 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-06 18:45:32,830 8832 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-06 18:45:33,296 8832 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-06 18:45:33,537 8832 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-06 18:45:33,590 8832 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-06 18:45:33,605 8832 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-06 18:45:33,705 8832 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-06 18:45:33,921 8832 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-06 18:45:34,643 8832 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-06 18:45:35,521 8832 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 1.82s, 0 queries (+0 extra) 
+2026-03-06 18:45:36,809 8832 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-06 18:45:38,662 8832 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-06 18:45:38,694 8832 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-06 18:45:39,896 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:45:39] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 7 0.028 1.191
+2026-03-06 18:45:45,160 8832 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-06 18:46:13,468 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:46:13] "POST /longpolling/im_status HTTP/1.1" 200 - 17 0.037 0.038
+2026-03-06 18:46:35,168 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:46:35] "POST /longpolling/poll HTTP/1.1" 200 - 20 0.056 50.029
+2026-03-06 18:47:04,114 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:47:04] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.024
+2026-03-06 18:47:10,458 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:47:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.005 0.008
+2026-03-06 18:47:25,509 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:47:25] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.015 50.013
+2026-03-06 18:47:55,106 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:47:55] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 18:48:10,471 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:48:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:48:15,845 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:48:15] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.010
+2026-03-06 18:48:46,099 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:48:46] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.018
+2026-03-06 18:49:06,197 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:49:06] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.021
+2026-03-06 18:49:13,059 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:49:13] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:49:37,408 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:49:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:49:56,554 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:49:56] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.033
+2026-03-06 18:50:10,207 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:50:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.019
+2026-03-06 18:50:28,415 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:50:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.011
+2026-03-06 18:50:46,890 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:50:46] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.023
+2026-03-06 18:51:10,175 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:51:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.004
+2026-03-06 18:51:19,406 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:51:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:51:37,231 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:51:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.027
+2026-03-06 18:52:10,093 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:52:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:52:10,503 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:52:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:52:27,588 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:52:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.029
+2026-03-06 18:53:01,103 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:53:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:53:12,308 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:53:12] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-06 18:53:17,932 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:53:17] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.015
+2026-03-06 18:53:52,096 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:53:52] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:54:08,279 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:54:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.035
+2026-03-06 18:54:10,508 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:54:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:54:43,413 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:54:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-06 18:54:58,603 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:54:58] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.016
+2026-03-06 18:55:11,833 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:55:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.000
+2026-03-06 18:55:34,406 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:55:34] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:55:48,947 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:55:48] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.026
+2026-03-06 18:56:10,220 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:56:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.010
+2026-03-06 18:56:25,399 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:56:25] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.011
+2026-03-06 18:56:39,289 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:56:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.018
+2026-03-06 18:57:10,219 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:57:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.004
+2026-03-06 18:57:16,402 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:57:16] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-06 18:57:29,628 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:57:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.026
+2026-03-06 19:18:37,270 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 19:18:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.014 0.040
+2026-03-06 19:18:38,120 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 19:18:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.026

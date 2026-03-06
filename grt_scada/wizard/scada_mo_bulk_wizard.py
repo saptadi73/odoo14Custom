@@ -114,6 +114,9 @@ class ScadaMoBulkWizard(models.TransientModel):
             finished_moves_values = mo._get_moves_finished_values()
             self.env['stock.move'].create(finished_moves_values)
             
+            # Sync SCADA equipment from BoM lines to moves before confirming
+            mo._sync_scada_equipment_to_moves()
+            
             # Now confirm the MO
             if mo.state == 'draft':
                 mo.action_confirm()
