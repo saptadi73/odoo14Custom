@@ -9,6 +9,7 @@
                 <field name="name"/>
                 <field name="login"/>
                 <field name="active"/>
+                <field name="company_id"/>
                 <field name="team_business_category_ids" widget="many2many_tags"/>
                 <field name="allowed_business_category_ids" widget="many2many_tags"/>
                 <field name="effective_business_category_ids" widget="many2many_tags"/>
@@ -36,13 +37,15 @@
                         <field name="name"/>
                         <field name="login"/>
                         <field name="active"/>
+                        <field name="company_id"/>
+                        <field name="company_ids" widget="many2many_tags"/>
                     </group>
                     <group string="Business Category Access">
                         <field name="team_business_category_ids" widget="many2many_tags" readonly="1"/>
-                        <field name="allowed_business_category_ids" widget="many2many_tags"/>
+                        <field name="allowed_business_category_ids" widget="many2many_tags" domain="[('company_id', 'in', company_ids)]"/>
                         <field name="effective_business_category_ids" widget="many2many_tags" readonly="1"/>
-                        <field name="default_business_category_id"/>
-                        <field name="active_business_category_id"/>
+                        <field name="default_business_category_id" domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]"/>
+                        <field name="active_business_category_id" domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]"/>
                     </group>
                 </sheet>
             </form>

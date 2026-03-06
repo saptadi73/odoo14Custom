@@ -32,12 +32,14 @@
             </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="company_id" invisible="1"/>
                 <field name="business_category_id"/>
+                <field name="analytic_account_id" readonly="1"/>
             </xpath>
 
             <xpath expr="//field[@name='team_id']" position="attributes">
                 <attribute name="string">Team Sales</attribute>
-                <attribute name="domain">[('business_category_id', '=', business_category_id)]</attribute>
+                <attribute name="domain">[('company_id', '=', company_id), ('business_category_id', '=', business_category_id)]</attribute>
             </xpath>
 
             <xpath expr="(//sheet//group)[1]" position="inside">

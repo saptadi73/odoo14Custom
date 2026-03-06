@@ -28,9 +28,9 @@ class CrmLead(models.Model):
             return False
 
         user = self.env.user
-        if has_active and user.active_business_category_id:
+        if has_active and user.active_business_category_id.company_id == self.env.company:
             return user.active_business_category_id.id
-        if has_default and user.default_business_category_id:
+        if has_default and user.default_business_category_id.company_id == self.env.company:
             return user.default_business_category_id.id
         return False
 
@@ -39,11 +39,14 @@ class CrmLead(models.Model):
         string="Business Category",
         default=_default_business_category_id,
         ondelete="restrict",
+        domain="[('company_id', '=', company_id)]",
     )
 
     @api.onchange("business_category_id")
     def _onchange_business_category_id(self):
         for lead in self:
+            if lead.business_category_id and lead.business_category_id.company_id:
+                lead.company_id = lead.business_category_id.company_id
             if lead.team_id and lead.team_id.business_category_id != lead.business_category_id:
                 lead.team_id = False
             lead.stage_id = False
@@ -51,14 +54,36 @@ class CrmLead(models.Model):
     @api.onchange("team_id")
     def _onchange_team_id_business_category(self):
         for lead in self:
+            if lead.team_id and lead.team_id.company_id:
+                lead.company_id = lead.team_id.company_id
             if lead.team_id and lead.team_id.business_category_id:
                 lead.business_category_id = lead.team_id.business_category_id
+
+    @api.onchange("company_id")
+    def _onchange_company_id_relations(self):
+        for lead in self:
+            if lead.team_id and lead.team_id.company_id != lead.company_id:
+                lead.team_id = False
+            if lead.business_category_id and lead.business_category_id.company_id != lead.company_id:
+                lead.business_category_id = False
+            if lead.stage_id and getattr(lead.stage_id, "company_id", False) != lead.company_id:
+                lead.stage_id = False
 
     @api.model_create_multi
     def create(self, vals_list):
         team_model = self.env["crm.team"]
+        category_model = self.env["crm.business.category"]
         for vals in vals_list:
             team_id = vals.get("team_id")
+            category_id = vals.get("business_category_id")
+            if team_id and not vals.get("company_id"):
+                team = team_model.browse(team_id)
+                if team.company_id:
+                    vals["company_id"] = team.company_id.id
+            if category_id and not vals.get("company_id"):
+                category = category_model.browse(category_id)
+                if category.company_id:
+                    vals["company_id"] = category.company_id.id
             if team_id and not vals.get("business_category_id"):
                 team = team_model.browse(team_id)
                 if team.business_category_id:
@@ -76,8 +101,19 @@ class CrmLead(models.Model):
     @api.constrains("business_category_id", "team_id")
     def _check_business_category_team(self):
         for lead in self:
+            if lead.business_category_id and lead.company_id and lead.business_category_id.company_id != lead.company_id:
+                raise ValidationError(
+                    _(
+                        "Lead/Opportunity '%s' must use a Business Category from company '%s'."
+                    )
+                    % (lead.name, lead.company_id.name)
+                )
             if not lead.team_id:
                 continue
+            if lead.team_id.company_id and lead.company_id and lead.team_id.company_id != lead.company_id:
+                raise ValidationError(
+                    _("Pipeline '%s' belongs to another company.") % lead.team_id.name
+                )
             if not lead.team_id.business_category_id:
                 raise ValidationError(
                     _("Pipeline '%s' must have a Business Category before it can be used.") % lead.team_id.name
@@ -108,6 +144,10 @@ class CrmLead(models.Model):
         for lead in self:
             if not lead.stage_id or not lead.business_category_id:
                 continue
+            if getattr(lead.stage_id, "company_id", False) and lead.company_id and lead.stage_id.company_id != lead.company_id:
+                raise ValidationError(
+                    _("Stage '%s' belongs to another company.") % lead.stage_id.name
+                )
             if lead.stage_id.business_category_id and lead.stage_id.business_category_id != lead.business_category_id:
                 raise ValidationError(
                     _(

@@ -29,9 +29,9 @@ class BusinessCategoryMixin(models.AbstractModel):
             return False
 
         user = self.env.user
-        if has_active and user.active_business_category_id:
+        if has_active and user.active_business_category_id.company_id == self.env.company:
             return user.active_business_category_id.id
-        if has_default and user.default_business_category_id:
+        if has_default and user.default_business_category_id.company_id == self.env.company:
             return user.default_business_category_id.id
         return False
 
@@ -42,4 +42,5 @@ class BusinessCategoryMixin(models.AbstractModel):
         required=True,
         ondelete="restrict",
         index=True,
+        domain="[('company_id', '=', company_id)]",
     )

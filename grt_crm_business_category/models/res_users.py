@@ -17,6 +17,7 @@ class ResUsers(models.Model):
         "user_id",
         "business_category_id",
         string="Allowed Business Categories",
+        domain="[('company_id', 'in', company_ids)]",
         help="Users can only access CRM data in these business categories.",
     )
     team_business_category_ids = fields.Many2many(
@@ -37,14 +38,14 @@ class ResUsers(models.Model):
     default_business_category_id = fields.Many2one(
         "crm.business.category",
         string="Default Business Category",
-        domain="[('id', 'in', effective_business_category_ids)]",
+        domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]",
         help="Default category for new records.",
     )
 
     active_business_category_id = fields.Many2one(
         "crm.business.category",
         string="Active Business Category",
-        domain="[('id', 'in', effective_business_category_ids)]",
+        domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]",
         help="Current user context category, similar to active company.",
     )
 
@@ -64,20 +65,27 @@ class ResUsers(models.Model):
         else:
             domain = ["|"] + domain_parts
 
-        teams = team_model.search(domain)
+        teams = team_model.search(domain + [("company_id", "in", self.company_ids.ids)])
         return teams.mapped("business_category_id")
 
-    @api.depends("allowed_business_category_ids")
+    def _filter_business_categories_by_company(self, categories):
+        self.ensure_one()
+        return categories.filtered(lambda category: category.company_id in self.company_ids)
+
+    @api.depends("allowed_business_category_ids", "company_ids")
     def _compute_effective_business_category_ids(self):
         for user in self:
             team_categories = user._get_team_business_categories()
+            allowed_categories = user._filter_business_categories_by_company(user.allowed_business_category_ids)
             user.team_business_category_ids = team_categories
-            user.effective_business_category_ids = user.allowed_business_category_ids | team_categories
+            user.effective_business_category_ids = allowed_categories | team_categories
 
-    @api.onchange("allowed_business_category_ids")
+    @api.onchange("allowed_business_category_ids", "company_ids")
     def _onchange_allowed_business_category_ids(self):
         for user in self:
-            effective_categories = user.allowed_business_category_ids | user._get_team_business_categories()
+            effective_categories = user._filter_business_categories_by_company(
+                user.allowed_business_category_ids
+            ) | user._get_team_business_categories()
             if user.default_business_category_id not in effective_categories:
                 user.default_business_category_id = False
             if user.active_business_category_id not in effective_categories:
@@ -94,19 +102,31 @@ class ResUsers(models.Model):
     )
     def _check_business_category_consistency(self):
         for user in self:
-            effective_categories = user.allowed_business_category_ids | user._get_team_business_categories()
+            effective_categories = user._filter_business_categories_by_company(
+                user.allowed_business_category_ids
+            ) | user._get_team_business_categories()
             if user.default_business_category_id and user.default_business_category_id not in effective_categories:
                 raise ValidationError(
                     _("Default Business Category must be included in Effective Business Categories.")
+                )
+            if user.default_business_category_id and user.default_business_category_id.company_id not in user.company_ids:
+                raise ValidationError(
+                    _("Default Business Category must belong to one of the user's allowed companies.")
                 )
             if user.active_business_category_id and user.active_business_category_id not in effective_categories:
                 raise ValidationError(
                     _("Active Business Category must be included in Effective Business Categories.")
                 )
+            if user.active_business_category_id and user.active_business_category_id.company_id not in user.company_ids:
+                raise ValidationError(
+                    _("Active Business Category must belong to one of the user's allowed companies.")
+                )
 
     def action_sync_team_business_category_access(self):
         for user in self:
-            effective_categories = user.allowed_business_category_ids | user._get_team_business_categories()
+            effective_categories = user._filter_business_categories_by_company(
+                user.allowed_business_category_ids
+            ) | user._get_team_business_categories()
             first_category = effective_categories[:1]
             vals = {}
 

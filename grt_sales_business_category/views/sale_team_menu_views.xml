@@ -13,10 +13,17 @@
               action="action_sales_team_from_sales"
               groups="sales_team.group_sale_manager"/>
 
+    <menuitem id="menu_business_category_from_sales"
+              name="Business Categories"
+              parent="sale.sale_order_menu"
+              sequence="36"
+              action="grt_crm_business_category.action_crm_business_category"
+              groups="sales_team.group_sale_manager"/>
+
     <menuitem id="menu_customer_behavior_analysis"
               name="Customer Behavior"
               parent="sale.sale_order_menu"
-              sequence="36"
+              sequence="37"
               action="action_customer_behavior_analysis"
               groups="sales_team.group_sale_salesman"/>
 

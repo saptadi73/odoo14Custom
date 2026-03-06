@@ -1581,3 +1581,1299 @@
 2026-03-06 18:57:29,628 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 18:57:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.026
 2026-03-06 19:18:37,270 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 19:18:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.014 0.040
 2026-03-06 19:18:38,120 8832 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [06/Mar/2026 19:18:38] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.026
+2026-03-07 00:26:48,036 9708 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-07 00:26:48,036 9708 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-07 00:26:48,036 9708 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-07 00:26:48,036 9708 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-07 00:26:50,473 9708 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-07 00:26:50,981 9708 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-07 00:26:51,077 9708 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:26:51,110 9708 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:26:52,517 9708 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:26:52,860 9708 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-07 00:26:54,030 9708 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:26:54,031 9708 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:26:55,443 9708 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 2.93s, 0 queries (+0 extra) 
+2026-03-07 00:26:57,107 9708 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:26:59,110 9708 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-07 00:26:59,159 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:26:59,607 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:26:59] "GET / HTTP/1.1" 303 - 3 0.010 0.466
+2026-03-07 00:27:04,256 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:04] "GET /web HTTP/1.1" 200 - 686 0.533 4.116
+2026-03-07 00:27:04,312 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:04] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.004 0.028
+2026-03-07 00:27:04,656 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:04] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.000 0.056
+2026-03-07 00:27:04,663 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:04] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.000 0.049
+2026-03-07 00:27:05,030 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:05] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 200 - 2 0.006 0.041
+2026-03-07 00:27:05,120 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:05] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 200 - 2 0.000 0.496
+2026-03-07 00:27:06,150 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:06] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 200 - 2 0.012 1.525
+2026-03-07 00:27:06,687 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:06] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.098
+2026-03-07 00:27:06,748 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:06] "GET /web/static/src/img/favicon.ico HTTP/1.1" 304 - - - -
+2026-03-07 00:27:07,001 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:07] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.025 0.130
+2026-03-07 00:27:07,110 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:07] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.034
+2026-03-07 00:27:07,341 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:07] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-07 00:27:07,572 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:07] "GET /web/static/src/xml/debug.xml?debug=1772818027215 HTTP/1.1" 200 - - - -
+2026-03-07 00:27:08,346 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.033 0.239
+2026-03-07 00:27:08,389 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 9 0.342 0.483
+2026-03-07 00:27:08,472 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.723 0.199
+2026-03-07 00:27:08,512 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.016 0.338
+2026-03-07 00:27:08,906 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:27:08,906 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.000 0.033
+2026-03-07 00:27:08,906 9708 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-07 00:27:08,947 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:08] "POST /mail/init_messaging HTTP/1.1" 200 - 81 1.299 0.169
+2026-03-07 00:27:09,255 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:09] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.004 0.010
+2026-03-07 00:27:09,297 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:09] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.016
+2026-03-07 00:27:09,648 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:09] "POST /calendar/notify HTTP/1.1" 200 - 3 0.020 0.035
+2026-03-07 00:27:09,714 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:09] "POST /web/action/load HTTP/1.1" 200 - 9 0.074 0.065
+2026-03-07 00:27:10,222 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:10] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 27 0.049 0.127
+2026-03-07 00:27:11,327 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.036 0.024
+2026-03-07 00:27:58,151 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Post process payment transactions`. 
+2026-03-07 00:27:58,199 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Calendar: Event Reminder`. 
+2026-03-07 00:27:58,330 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Post process payment transactions` done. 
+2026-03-07 00:27:58,332 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Calendar: Event Reminder` done. 
+2026-03-07 00:27:58,338 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-03-07 00:27:58,362 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete : Sync with remote DB`. 
+2026-03-07 00:27:58,436 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Partner Autocomplete : Sync with remote DB` done. 
+2026-03-07 00:27:58,439 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-03-07 00:27:58,522 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `SMS: SMS Queue Manager` done. 
+2026-03-07 00:27:58,522 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-03-07 00:27:58,584 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Snailmail: process letters queue` done. 
+2026-03-07 00:27:58,921 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:27:58] "POST /longpolling/poll HTTP/1.1" 200 - 18 0.090 51.342
+2026-03-07 00:28:00,233 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:00] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.043
+2026-03-07 00:28:02,483 9708 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Mail: Email Queue Manager` done. 
+2026-03-07 00:28:10,071 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:10] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 9 0.012 0.050
+2026-03-07 00:28:10,516 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.026
+2026-03-07 00:28:12,073 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:12] "GET /web_tour/static/src/xml/tip.xml?debug=1772818091740 HTTP/1.1" 200 - - - -
+2026-03-07 00:28:15,053 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:15] "POST /web/action/load HTTP/1.1" 200 - 14 0.054 0.046
+2026-03-07 00:28:15,767 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:15] "POST /web/action/run HTTP/1.1" 200 - 78 0.157 0.228
+2026-03-07 00:28:17,330 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:17] "POST /web/dataset/call_kw/crm.lead/load_views HTTP/1.1" 200 - 207 0.349 0.884
+2026-03-07 00:28:17,780 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:17] "POST /web/dataset/call_kw/crm.lead/read_progress_bar HTTP/1.1" 200 - 3 0.048 0.042
+2026-03-07 00:28:17,780 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:17] "POST /web/dataset/call_kw/crm.lead/web_read_group HTTP/1.1" 200 - 7 0.063 0.035
+2026-03-07 00:28:18,314 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:18] "POST /web/dataset/search_read HTTP/1.1" 200 - 19 0.084 0.116
+2026-03-07 00:28:18,697 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:18] "POST /web/dataset/call_kw/crm.stage/read HTTP/1.1" 200 - 3 0.028 0.038
+2026-03-07 00:28:19,047 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:19] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.000 0.018
+2026-03-07 00:28:19,521 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:19] "GET /web/image/res.users/2/image_128 HTTP/1.1" 200 - 6 0.000 0.089
+2026-03-07 00:28:23,455 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:23] "POST /web/dataset/call_kw/mail.activity/activity_format HTTP/1.1" 200 - 20 0.089 0.087
+2026-03-07 00:28:25,820 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:25] "POST /web/dataset/call_kw/mail.activity/load_views HTTP/1.1" 200 - 24 0.065 0.134
+2026-03-07 00:28:26,245 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:26] "POST /web/dataset/call_kw/mail.activity/read HTTP/1.1" 200 - 6 0.012 0.071
+2026-03-07 00:28:26,607 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:26] "POST /web/dataset/call_kw/mail.activity.type/search_read HTTP/1.1" 200 - 2 0.005 0.023
+2026-03-07 00:28:26,965 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:26] "POST /web/dataset/call_kw/mail.activity.type/name_get HTTP/1.1" 200 - 2 0.016 0.014
+2026-03-07 00:28:27,459 9708 INFO kanjabung_MRP odoo.http: <function odoo.addons.web_editor.controllers.main.public_render_template> called ignoring args <kwargs={'context': {'lang': 'id_ID', 'tz': 'Asia/Jakarta', 'uid': 2, 'allowed_company_ids': [1]}}> 
+2026-03-07 00:28:27,685 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:27] "POST /web_editor/public_render_template HTTP/1.1" 200 - 43 0.062 0.270
+2026-03-07 00:28:28,117 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:28] "GET /web/content/258-de6a5e2/web_editor.assets_summernote.css HTTP/1.1" 200 - 2 0.012 0.083
+2026-03-07 00:28:28,149 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:28] "GET /web/content/260-ec403c9/web_editor.assets_wysiwyg.css HTTP/1.1" 200 - 2 0.011 0.110
+2026-03-07 00:28:28,219 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:28] "GET /web/content/259-de6a5e2/web_editor.assets_summernote.js HTTP/1.1" 200 - 2 0.010 0.157
+2026-03-07 00:28:29,152 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:29] "GET /web/content/261-ec403c9/web_editor.assets_wysiwyg.js HTTP/1.1" 200 - 2 0.000 0.590
+2026-03-07 00:28:29,572 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:29] "GET /web/static/src/xml/dialog.xml?debug=1772818109236 HTTP/1.1" 200 - - - -
+2026-03-07 00:28:29,946 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:29] "GET /web/static/src/fonts/google/Roboto/Roboto-Regular.ttf HTTP/1.1" 200 - - - -
+2026-03-07 00:28:30,018 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:30] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.000 0.017
+2026-03-07 00:28:30,076 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:30] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.000 0.041
+2026-03-07 00:28:30,088 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:30] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 1 0.000 0.044
+2026-03-07 00:28:30,095 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:30] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-07 00:28:35,061 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:35] "POST /web/dataset/call_kw/mail.activity/onchange HTTP/1.1" 200 - 1 0.000 0.033
+2026-03-07 00:28:49,345 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.051
+2026-03-07 00:28:50,317 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:28:50] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.054
+2026-03-07 00:29:02,360 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:02] "POST /web/dataset/call_kw/crm.lead/read HTTP/1.1" 200 - 13 0.054 0.128
+2026-03-07 00:29:02,744 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:02] "POST /web/dataset/call_kw/crm.lead/web_read_group HTTP/1.1" 200 - 6 0.020 0.037
+2026-03-07 00:29:02,806 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:02] "POST /web/dataset/call_kw/crm.lead/read_progress_bar HTTP/1.1" 200 - 3 0.090 0.013
+2026-03-07 00:29:03,084 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:03] "POST /web/dataset/call_kw/crm.stage/read HTTP/1.1" 200 - 2 0.000 0.023
+2026-03-07 00:29:06,931 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:06] "POST /web/action/load HTTP/1.1" 200 - 13 0.029 0.093
+2026-03-07 00:29:07,435 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:07] "POST /web/dataset/call_kw/kpi.crm.trigger.rule/load_views HTTP/1.1" 200 - 30 0.042 0.128
+2026-03-07 00:29:07,783 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:07] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.033
+2026-03-07 00:29:07,794 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:07] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.020 0.008
+2026-03-07 00:29:08,143 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:08] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.001 0.018
+2026-03-07 00:29:10,741 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:10] "POST /web/dataset/call_kw/kpi.crm.trigger.rule/onchange HTTP/1.1" 200 - 3 0.008 0.025
+2026-03-07 00:29:13,457 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:13] "POST /web/dataset/call_kw/kpi.crm.trigger.rule.line/onchange HTTP/1.1" 200 - 3 0.011 0.031
+2026-03-07 00:29:15,804 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:15] "POST /web/dataset/call_kw/crm.stage/name_search HTTP/1.1" 200 - 3 0.000 0.027
+2026-03-07 00:29:29,314 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:29] "POST /web/action/run HTTP/1.1" 200 - 27 0.057 0.165
+2026-03-07 00:29:29,733 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:29] "POST /web/dataset/call_kw/crm.lead/read_progress_bar HTTP/1.1" 200 - 3 0.019 0.041
+2026-03-07 00:29:29,733 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:29] "POST /web/dataset/call_kw/crm.lead/web_read_group HTTP/1.1" 200 - 6 0.029 0.044
+2026-03-07 00:29:30,260 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:30] "POST /web/dataset/search_read HTTP/1.1" 200 - 14 0.040 0.153
+2026-03-07 00:29:30,620 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:30] "POST /web/dataset/call_kw/crm.stage/read HTTP/1.1" 200 - 2 0.002 0.026
+2026-03-07 00:29:34,437 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:34] "POST /web/dataset/search_read HTTP/1.1" 200 - 2 0.008 0.013
+2026-03-07 00:29:37,061 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:37] "POST /web/action/run HTTP/1.1" 200 - 27 0.040 0.144
+2026-03-07 00:29:37,478 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:37] "POST /web/dataset/call_kw/crm.lead/web_read_group HTTP/1.1" 200 - 6 0.027 0.041
+2026-03-07 00:29:37,479 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:37] "POST /web/dataset/call_kw/crm.lead/read_progress_bar HTTP/1.1" 200 - 3 0.021 0.039
+2026-03-07 00:29:37,961 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:37] "POST /web/dataset/search_read HTTP/1.1" 200 - 14 0.013 0.139
+2026-03-07 00:29:38,311 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:38] "POST /web/dataset/call_kw/crm.stage/read HTTP/1.1" 200 - 2 0.008 0.007
+2026-03-07 00:29:39,727 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.015 50.045
+2026-03-07 00:29:40,383 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:40] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.013 0.033
+2026-03-07 00:29:46,893 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:46] "POST /web/action/load HTTP/1.1" 200 - 20 0.079 0.106
+2026-03-07 00:29:47,352 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:47] "POST /web/dataset/call_kw/crm.stage/load_views HTTP/1.1" 200 - 21 0.046 0.083
+2026-03-07 00:29:47,710 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:47] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.009 0.007
+2026-03-07 00:29:58,054 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:29:58] "POST /web/dataset/call_kw/crm.stage/onchange HTTP/1.1" 200 - 4 0.020 0.013
+2026-03-07 00:30:06,935 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:30:06] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.008 0.011
+2026-03-07 00:30:07,877 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:30:07] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.023
+2026-03-07 00:30:17,581 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:30:17] "POST /web/dataset/call_kw/crm.stage/onchange HTTP/1.1" 200 - 3 0.002 0.026
+2026-03-07 00:30:30,114 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:30:30] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.018 50.041
+2026-03-07 00:30:31,221 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:30:31] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.038
+2026-03-07 00:31:11,654 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:31:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.029
+2026-03-07 00:31:20,496 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:31:20] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.012 50.040
+2026-03-07 00:31:22,240 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:31:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.053
+2026-03-07 00:32:09,022 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:32:09] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.006 0.040
+2026-03-07 00:32:10,876 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:32:10] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.015 50.038
+2026-03-07 00:32:13,224 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:32:13] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.039
+2026-03-07 00:33:01,227 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:33:01] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.030
+2026-03-07 00:33:04,228 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:33:04] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.035
+2026-03-07 00:33:10,148 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:33:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.012 0.023
+2026-03-07 00:33:51,607 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:33:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.013 50.035
+2026-03-07 00:33:55,220 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:33:55] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.032
+2026-03-07 00:34:41,977 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:34:41] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.010 50.036
+2026-03-07 00:34:46,222 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:34:46] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.033
+2026-03-07 00:35:05,645 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:35:05] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.026
+2026-03-07 00:35:32,369 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:35:32] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.062
+2026-03-07 00:35:37,239 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:35:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.046
+2026-03-07 00:36:22,765 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:36:22] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.045
+2026-03-07 00:36:28,222 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:36:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.030
+2026-03-07 00:37:06,119 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:37:06] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.011 0.013
+2026-03-07 00:37:13,132 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:37:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.047
+2026-03-07 00:37:19,220 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:37:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.033
+2026-03-07 00:38:03,513 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:38:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.039
+2026-03-07 00:38:10,223 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:38:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.032
+2026-03-07 00:38:53,893 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:38:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.010 50.026
+2026-03-07 00:39:01,243 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:39:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.051
+2026-03-07 00:39:08,507 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:39:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.004 0.016
+2026-03-07 00:39:44,286 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:39:44] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.058
+2026-03-07 00:39:52,210 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:39:52] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.012 0.025
+2026-03-07 00:40:19,352 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:19] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.010 0.012
+2026-03-07 00:40:22,005 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:22] "POST /web/action/load HTTP/1.1" 200 - 54 0.078 0.106
+2026-03-07 00:40:23,133 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:23] "POST /web/dataset/call_kw/sale.order/load_views HTTP/1.1" 200 - 226 0.209 0.587
+2026-03-07 00:40:23,519 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:23] "POST /web/dataset/search_read HTTP/1.1" 200 - 11 0.043 0.013
+2026-03-07 00:40:24,072 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:24] "GET /web/image/res.users/5/image_128 HTTP/1.1" 200 - 6 0.048 0.112
+2026-03-07 00:40:24,087 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:24] "GET /web/image/res.users/1/image_128 HTTP/1.1" 200 - 6 0.022 0.125
+2026-03-07 00:40:24,087 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:24] "GET /web/image/res.users/4/image_128 HTTP/1.1" 200 - 5 0.039 0.152
+2026-03-07 00:40:24,403 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:24] "POST /sales/sale_quotation_onboarding_panel HTTP/1.1" 200 - 62 0.188 0.326
+2026-03-07 00:40:24,733 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:24] "GET /sale/static/src/img/sale_quotation_onboarding_bg.jpg HTTP/1.1" 304 - - - -
+2026-03-07 00:40:24,744 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:24] "GET /web/static/src/img/smiling_face.svg HTTP/1.1" 304 - - - -
+2026-03-07 00:40:34,654 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:34] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.010 50.033
+2026-03-07 00:40:43,221 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:40:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.031
+2026-03-07 00:41:08,733 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:41:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.005 0.023
+2026-03-07 00:41:25,012 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:41:25] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.035
+2026-03-07 00:41:27,579 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:41:27] "POST /web/action/load HTTP/1.1" 200 - 13 0.010 0.056
+2026-03-07 00:41:27,948 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:41:27] "POST /web/dataset/call_kw/customer.behavior.dashboard/load_views HTTP/1.1" 200 - 15 0.017 0.033
+2026-03-07 00:41:28,365 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:41:28] "POST /web/dataset/call_kw/customer.behavior.dashboard/onchange HTTP/1.1" 200 - 13 0.025 0.074
+2026-03-07 00:41:33,567 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:41:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.012
+2026-03-07 00:42:07,883 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:42:07] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.017
+2026-03-07 00:42:15,360 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:42:15] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.035
+2026-03-07 00:42:23,627 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:42:23] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.008 0.031
+2026-03-07 00:43:05,735 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:43:05] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.047
+2026-03-07 00:43:08,429 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:43:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.009 0.000
+2026-03-07 00:43:14,554 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:43:14] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.042
+2026-03-07 00:43:56,100 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:43:56] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.037
+2026-03-07 00:44:05,194 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:44:05] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.009 0.008
+2026-03-07 00:44:46,451 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:44:46] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.036
+2026-03-07 00:44:56,225 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:44:56] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.047
+2026-03-07 00:45:06,182 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:45:06] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.024
+2026-03-07 00:45:36,828 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:45:36] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.047
+2026-03-07 00:45:47,226 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:45:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.047
+2026-03-07 00:46:27,213 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:46:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.009 50.052
+2026-03-07 00:46:38,228 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:46:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.042
+2026-03-07 00:47:05,957 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:05] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.010 0.013
+2026-03-07 00:47:17,603 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:17] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.055
+2026-03-07 00:47:25,269 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:25] "POST /web/action/load HTTP/1.1" 200 - 29 0.014 0.115
+2026-03-07 00:47:25,910 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:25] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 71 0.117 0.175
+2026-03-07 00:47:26,432 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:26] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 46 0.101 0.091
+2026-03-07 00:47:26,828 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:26] "POST /web/dataset/search_read HTTP/1.1" 200 - 4 0.011 0.052
+2026-03-07 00:47:27,317 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /stock/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,332 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /base/static/img/icons/web_studio.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,340 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /website_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,347 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,351 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /base/static/img/icons/mrp_workorder.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,637 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /mrp/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,665 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /project/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,681 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /foss_project_tags/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,689 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /website/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,691 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /hr/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,947 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /mass_mailing/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:27,989 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:27] "GET /base/static/img/icons/timesheet_grid.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,014 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /hr_holidays/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,021 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /hr_expense/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,021 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /account_dynamic_reports/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,277 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /base/static/img/icons/account_accountant.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,320 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /point_of_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,332 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /purchase/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,353 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /abs_project_task_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,363 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /abs_meeting_from_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,597 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /base_territory/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,640 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /bi_project_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,704 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.011 0.041
+2026-03-07 00:47:28,704 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /fl_quick_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,718 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /odoo_traccar_tracking/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,915 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /om_account_accountant/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:28,968 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:28] "GET /sale_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,032 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /account/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,045 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /bt_asset_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,045 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /fieldservice/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,242 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /garazd_product_label/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,290 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /base/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,354 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /knowledge/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,372 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /maintenance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,376 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /odoo_web_login/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,566 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /scrum_agile_framework/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,606 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /support_package/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,674 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /task_pomodoro/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,697 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /base/static/img/icons/sign.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,704 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /base/static/img/icons/helpdesk.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,888 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /base/static/img/icons/sale_subscription.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,938 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /base/static/img/icons/quality_control.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:29,999 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:29] "GET /website_slides/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,039 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /base/static/img/icons/planning.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,039 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /website_event/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,230 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /mail/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,251 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /contacts/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,342 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /base/static/img/icons/mrp_plm.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,368 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /calendar/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,374 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /base/static/img/icons/hr_appraisal.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,560 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /fleet/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,582 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /base/static/img/icons/marketing_automation.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,667 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /website_blog/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,690 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /im_livechat/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,697 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /base/static/img/icons/website_calendar.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,889 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /survey/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:30,901 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:30] "GET /base/static/img/icons/web_mobile.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,023 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /board/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,031 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /repair/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,040 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /hr_attendance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,208 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /mass_mailing_sms/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,221 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /base/static/img/icons/stock_barcode.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,345 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /note/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,363 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /website_forum/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,363 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /hr_skills/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,539 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /base/static/img/icons/voip.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,543 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /lunch/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,671 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /website_hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,684 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /base/static/img/icons/sale_ebay.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,691 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /payment_adyen/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,860 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /payment_alipay/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:31,864 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:31] "GET /payment_authorize/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:32,000 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:32] "GET /payment_buckaroo/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:32,011 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:32] "GET /payment_ingenico/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:32,019 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:32] "GET /payment_paypal/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:47:32,186 9708 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:47:32] "GET /payment_payumoney/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:48:07,992 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:48:07] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.027 50.024
+2026-03-07 00:48:08,629 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:48:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.018
+2026-03-07 00:48:19,241 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:48:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.012 0.041
+2026-03-07 00:48:58,386 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:48:58] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.040
+2026-03-07 00:49:10,204 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:49:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.016
+2026-03-07 00:49:40,114 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:49:40] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.008
+2026-03-07 00:49:48,743 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:49:48] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.012 50.024
+2026-03-07 00:50:01,210 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:50:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.015 0.016
+2026-03-07 00:50:08,618 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:50:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.013
+2026-03-07 00:50:39,139 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:50:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.038
+2026-03-07 00:50:51,786 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:50:51] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.033
+2026-03-07 00:51:15,729 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:51:15] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.036
+2026-03-07 00:51:29,516 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:51:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.050
+2026-03-07 00:51:42,208 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:51:42] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.009 0.019
+2026-03-07 00:52:08,599 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:52:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.011 0.007
+2026-03-07 00:52:19,858 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:52:19] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.031
+2026-03-07 00:52:33,217 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:52:33] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.040
+2026-03-07 00:53:10,244 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:53:10] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.059
+2026-03-07 00:53:24,210 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:53:24] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.030
+2026-03-07 00:53:50,788 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:53:50] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.014
+2026-03-07 00:54:00,597 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:00] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.034
+2026-03-07 00:54:08,331 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:08] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.004 0.010
+2026-03-07 00:54:15,511 9708 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:15] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.018
+2026-03-07 00:54:39,408 30620 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-07 00:54:39,408 30620 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-07 00:54:39,408 30620 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-07 00:54:39,408 30620 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-07 00:54:40,134 30620 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-07 00:54:40,496 30620 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-07 00:54:40,563 30620 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:54:40,595 30620 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:54:40,742 30620 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:54:41,057 30620 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:54:42,288 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:54:43,817 30620 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 3.08s, 0 queries (+0 extra) 
+2026-03-07 00:54:46,278 30620 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:54:46,683 30620 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-07 00:54:46,730 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:54:49,977 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:49] "GET /web HTTP/1.1" 200 - 688 0.538 2.716
+2026-03-07 00:54:50,023 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.001 0.021
+2026-03-07 00:54:50,023 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.010 0.014
+2026-03-07 00:54:50,374 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 304 - 2 0.006 0.058
+2026-03-07 00:54:50,376 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.010 0.050
+2026-03-07 00:54:50,406 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 304 - 2 0.005 0.018
+2026-03-07 00:54:50,417 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 304 - 2 0.008 0.011
+2026-03-07 00:54:50,971 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:50] "GET /web/static/src/img/favicon.ico HTTP/1.1" 304 - - - -
+2026-03-07 00:54:51,038 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:51] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.002 0.134
+2026-03-07 00:54:51,345 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:51] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.024 0.173
+2026-03-07 00:54:51,391 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:51] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.010
+2026-03-07 00:54:51,675 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:51] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-07 00:54:51,842 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:51] "GET /web/static/src/xml/debug.xml?debug=1772819691506 HTTP/1.1" 200 - - - -
+2026-03-07 00:54:52,534 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:52] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.033 0.329
+2026-03-07 00:54:52,561 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:52] "GET /web/image/res.company/1/favicon/ HTTP/1.1" 200 - 11 0.311 0.404
+2026-03-07 00:54:52,688 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:52] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.027 0.299
+2026-03-07 00:54:52,849 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:52] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.634 0.380
+2026-03-07 00:54:53,288 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:53] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.053 0.245
+2026-03-07 00:54:53,446 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:53] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:53,468 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:53] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 6 0.120 0.315
+2026-03-07 00:54:53,492 30620 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-07 00:54:53,538 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:53] "POST /mail/init_messaging HTTP/1.1" 200 - 84 1.469 0.319
+2026-03-07 00:54:53,894 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:53] "POST /web/action/load HTTP/1.1" 200 - 29 0.072 0.163
+2026-03-07 00:54:53,926 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:53] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.032 0.014
+2026-03-07 00:54:54,607 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:54] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 77 0.152 0.216
+2026-03-07 00:54:54,780 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:54] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.016 0.028
+2026-03-07 00:54:55,046 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 46 0.047 0.065
+2026-03-07 00:54:55,430 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "POST /web/dataset/search_read HTTP/1.1" 200 - 4 0.032 0.022
+2026-03-07 00:54:55,893 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "GET /base/static/img/icons/mrp_workorder.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:55,895 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "GET /mass_mailing/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:55,915 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "GET /base/static/img/icons/timesheet_grid.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:55,929 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "GET /foss_project_tags/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:55,934 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:55] "GET /account_dynamic_reports/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,213 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /website/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,213 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /hr_holidays/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,226 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /stock/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,249 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /project/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,252 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /website_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,565 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /point_of_sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,569 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /base/static/img/icons/web_studio.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,582 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /mrp/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,599 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,606 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /base/static/img/icons/account_accountant.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,891 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /purchase/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,898 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /hr_expense/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,907 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /base_territory/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,913 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /abs_project_task_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:56,913 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:56] "GET /abs_meeting_from_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,212 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /bi_project_template/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,212 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /hr/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,239 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /fl_quick_task/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,246 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /odoo_traccar_tracking/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,256 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "POST /calendar/notify HTTP/1.1" 200 - 3 0.011 0.021
+2026-03-07 00:54:57,534 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /om_account_accountant/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,534 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /sale_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,565 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /account/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,578 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /bt_asset_management/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,588 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /fieldservice/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,847 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /garazd_product_label/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,862 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /base/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,889 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /knowledge/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,894 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /maintenance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:57,894 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:57] "GET /odoo_web_login/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,161 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /scrum_agile_framework/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,173 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /support_package/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,209 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /task_pomodoro/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,209 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/sign.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,216 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/helpdesk.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,486 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/sale_subscription.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,490 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/quality_control.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,530 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /website_slides/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,536 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/planning.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,539 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /website_event/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,810 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /mail/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,813 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /contacts/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,852 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/mrp_plm.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,857 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /calendar/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:58,865 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:58] "GET /base/static/img/icons/hr_appraisal.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,129 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /fleet/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,132 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /base/static/img/icons/marketing_automation.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,170 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /website_blog/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,175 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /im_livechat/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,179 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /base/static/img/icons/website_calendar.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,451 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /survey/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,451 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /base/static/img/icons/web_mobile.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,477 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /board/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,484 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /repair/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,492 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /hr_attendance/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,786 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /mass_mailing_sms/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,793 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /base/static/img/icons/stock_barcode.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,793 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /note/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,803 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /website_forum/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:54:59,803 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:54:59] "GET /hr_skills/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,109 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /base/static/img/icons/voip.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,113 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /lunch/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,116 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /website_hr_recruitment/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,126 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /base/static/img/icons/sale_ebay.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,134 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_adyen/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,422 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_alipay/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,422 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_authorize/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,444 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_buckaroo/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,444 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_ingenico/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,454 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_paypal/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:00,745 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:00] "GET /payment_payumoney/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:13,841 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:13] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 42 0.068 0.115
+2026-03-07 00:55:14,193 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:14] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.004 0.017
+2026-03-07 00:55:16,434 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:16] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 42 0.048 0.101
+2026-03-07 00:55:16,788 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:16] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.008 0.023
+2026-03-07 00:55:17,142 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:17] "GET /sale/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:22,908 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:22] "POST /web/dataset/call_kw/ir.module.module/read HTTP/1.1" 200 - 15 0.089 0.377
+2026-03-07 00:55:23,296 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:23] "POST /web/dataset/call_kw/ir.module.module.dependency/read HTTP/1.1" 200 - 4 0.015 0.039
+2026-03-07 00:55:23,679 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:23] "POST /web/dataset/call_kw/ir.module.category/name_search HTTP/1.1" 200 - 3 0.008 0.047
+2026-03-07 00:55:24,146 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:24] "GET /web/image?model=ir.module.module&id=525&field=icon_image&unique=06032026095223 HTTP/1.1" 200 - 3 0.020 0.048
+2026-03-07 00:55:24,198 30620 INFO kanjabung_MRP odoo.http: <function odoo.addons.web_editor.controllers.main.public_render_template> called ignoring args <kwargs={'context': {'lang': 'id_ID', 'tz': 'Asia/Jakarta', 'uid': 2, 'allowed_company_ids': [1]}}> 
+2026-03-07 00:55:24,487 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:24] "POST /web_editor/public_render_template HTTP/1.1" 200 - 43 0.107 0.314
+2026-03-07 00:55:24,871 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:24] "GET /web/content/258-de6a5e2/web_editor.assets_summernote.css HTTP/1.1" 200 - 2 0.003 0.061
+2026-03-07 00:55:24,885 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:24] "GET /web/content/260-ec403c9/web_editor.assets_wysiwyg.css HTTP/1.1" 200 - 2 0.013 0.045
+2026-03-07 00:55:24,888 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:24] "GET /web/content/259-de6a5e2/web_editor.assets_summernote.js HTTP/1.1" 200 - 2 0.000 0.036
+2026-03-07 00:55:25,270 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:25] "GET /web/content/261-ec403c9/web_editor.assets_wysiwyg.js HTTP/1.1" 200 - 2 0.006 0.028
+2026-03-07 00:55:25,738 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:25] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:25,764 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:25] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-07 00:55:29,859 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:29] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-07 00:55:43,504 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:43] "POST /longpolling/poll HTTP/1.1" 200 - 18 0.124 51.615
+2026-03-07 00:55:44,146 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:44] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.010 0.031
+2026-03-07 00:55:45,730 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_immediate_upgrade on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:55:45,736 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:55:45,736 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:55:49,039 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:55:49] "GET /web/static/src/img/spin.png HTTP/1.1" 304 - - - -
+2026-03-07 00:55:51,990 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user admin #2 via 127.0.0.1 
+2026-03-07 00:55:52,109 30620 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:55:52,136 30620 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:55:52,373 30620 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-07 00:55:52,373 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via 127.0.0.1 
+2026-03-07 00:55:55,807 30620 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:55:56,100 30620 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:55:56,100 30620 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:55:56,100 30620 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:55:56,100 30620 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:55:56,100 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:55:56,103 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:55:56,103 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:55:56,103 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:55:56,288 30620 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_sales_business_category (89/89) 
+2026-03-07 00:55:57,438 30620 INFO kanjabung_MRP odoo.modules.registry: module grt_sales_business_category: creating or updating database tables 
+2026-03-07 00:55:58,827 30620 INFO kanjabung_MRP odoo.schema: Table 'crm_team': unable to set NOT NULL on column 'business_category_id' 
+2026-03-07 00:56:00,336 30620 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-07 00:56:00,339 30620 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-07 00:56:00,339 30620 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-07 00:56:00,346 30620 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-07 00:56:00,346 30620 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-07 00:56:00,381 30620 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/security.xml 
+2026-03-07 00:56:00,414 30620 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/ir.model.access.csv 
+2026-03-07 00:56:00,559 30620 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/ir.rule.csv 
+2026-03-07 00:56:00,972 30620 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/data/customer_behavior_segment_data.xml 
+2026-03-07 00:56:00,995 30620 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/crm_business_category_views.xml 
+2026-03-07 00:56:01,081 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_ui_view: Field company_id used in domain of <field name="analytic_account_id">  ([('company_id', '=', company_id)]) must be present in view but is missing.
+
+View name: crm.business.category.form.analytic
+Error context:
+ view: ir.ui.view(1700,)
+ xmlid: view_crm_business_category_form_analytic
+ view.model: crm.business.category
+ view.parent: ir.ui.view(1607,)
+ file: c:\addon14\grt_sales_business_category\views\crm_business_category_views.xml
+ 
+2026-03-07 00:56:01,089 30620 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-07 00:56:01,089 30620 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 677, in _tag_root
+    f(rec)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 580, in _tag_record
+    record = model._load_records([data], self.mode == 'update')
+  File "C:\odoo14c\server\odoo\models.py", line 4258, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "C:\odoo14c\server\odoo\models.py", line 4163, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-44>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 489, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-66>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_fields.py", line 534, in create
+    recs = super().create(vals_list)
+  File "<decorator-gen-15>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\models.py", line 3925, in create
+    fields[0].determine_inverse(batch_recs)
+  File "C:\odoo14c\server\odoo\fields.py", line 1207, in determine_inverse
+    determine(self.inverse, records)
+  File "C:\odoo14c\server\odoo\fields.py", line 82, in determine
+    return needle(*args)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 307, in _inverse_arch
+    view.write(data)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 507, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "C:\odoo14c\server\odoo\models.py", line 3709, in write
+    real_recs._validate_fields(vals, inverse_fields)
+  File "C:\odoo14c\server\odoo\models.py", line 1270, in _validate_fields
+    check(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 418, in _check_xml
+    )).with_traceback(e.__traceback__) from None
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 398, in _check_xml
+    view.postprocess_and_fields(view_doc, validate=True)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 857, in postprocess_and_fields
+    arch, name_manager = self._postprocess_view(node, model, validate=validate)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 871, in _postprocess_view
+    name_manager.check_view_fields(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 2025, in check_view_fields
+    view.handle_view_error(msg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 680, in handle_view_error
+    raise ValueError(formatted_message).with_traceback(from_traceback) from from_exception
+odoo.exceptions.ValidationError: Error while validating view:
+
+Field company_id used in domain of <field name="analytic_account_id">  ([('company_id', '=', company_id)]) must be present in view but is missing.
+
+View name: crm.business.category.form.analytic
+Error context:
+ view: ir.ui.view(1700,)
+ xmlid: view_crm_business_category_form_analytic
+ view.model: crm.business.category
+ view.parent: ir.ui.view(1607,)
+ file: c:\addon14\grt_sales_business_category\views\crm_business_category_views.xml
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 457, in load_modules
+    force, status, report, loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 69, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 733, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 799, in convert_xml_import
+    obj.parse(doc.getroot())
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 719, in parse
+    self._tag_root(de)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 685, in _tag_root
+    )) from e
+odoo.tools.convert.ParseError: while parsing file:/c:/addon14/grt_sales_business_category/views/crm_business_category_views.xml:3, near
+<record id="view_crm_business_category_form_analytic" model="ir.ui.view">
+        <field name="name">crm.business.category.form.analytic</field>
+        <field name="model">crm.business.category</field>
+        <field name="inherit_id" ref="grt_crm_business_category.view_crm_business_category_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']/.." position="before">
+                <group string="Accounting">
+                    <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+2026-03-07 00:56:01,330 30620 ERROR kanjabung_MRP odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 677, in _tag_root
+    f(rec)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 580, in _tag_record
+    record = model._load_records([data], self.mode == 'update')
+  File "C:\odoo14c\server\odoo\models.py", line 4258, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "C:\odoo14c\server\odoo\models.py", line 4163, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-44>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 489, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-66>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_fields.py", line 534, in create
+    recs = super().create(vals_list)
+  File "<decorator-gen-15>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\models.py", line 3925, in create
+    fields[0].determine_inverse(batch_recs)
+  File "C:\odoo14c\server\odoo\fields.py", line 1207, in determine_inverse
+    determine(self.inverse, records)
+  File "C:\odoo14c\server\odoo\fields.py", line 82, in determine
+    return needle(*args)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 307, in _inverse_arch
+    view.write(data)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 507, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "C:\odoo14c\server\odoo\models.py", line 3709, in write
+    real_recs._validate_fields(vals, inverse_fields)
+  File "C:\odoo14c\server\odoo\models.py", line 1270, in _validate_fields
+    check(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 418, in _check_xml
+    )).with_traceback(e.__traceback__) from None
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 398, in _check_xml
+    view.postprocess_and_fields(view_doc, validate=True)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 857, in postprocess_and_fields
+    arch, name_manager = self._postprocess_view(node, model, validate=validate)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 871, in _postprocess_view
+    name_manager.check_view_fields(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 2025, in check_view_fields
+    view.handle_view_error(msg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 680, in handle_view_error
+    raise ValueError(formatted_message).with_traceback(from_traceback) from from_exception
+odoo.exceptions.ValidationError: Error while validating view:
+
+Field company_id used in domain of <field name="analytic_account_id">  ([('company_id', '=', company_id)]) must be present in view but is missing.
+
+View name: crm.business.category.form.analytic
+Error context:
+ view: ir.ui.view(1700,)
+ xmlid: view_crm_business_category_form_analytic
+ view.model: crm.business.category
+ view.parent: ir.ui.view(1607,)
+ file: c:\addon14\grt_sales_business_category\views\crm_business_category_views.xml
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_http.py", line 237, in _dispatch
+    result = request.dispatch()
+  File "C:\odoo14c\server\odoo\http.py", line 696, in dispatch
+    result = self._call_function(**self.params)
+  File "C:\odoo14c\server\odoo\http.py", line 370, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\service\model.py", line 94, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\http.py", line 358, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "C:\odoo14c\server\odoo\http.py", line 919, in __call__
+    return self.method(*args, **kw)
+  File "C:\odoo14c\server\odoo\http.py", line 544, in response_wrap
+    response = f(*args, **kw)
+  File "C:\odoo14c\server\odoo\addons\web\controllers\main.py", line 1374, in call_button
+    action = self._call_kw(model, method, args, kwargs)
+  File "C:\odoo14c\server\odoo\addons\web\controllers\main.py", line 1362, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "C:\odoo14c\server\odoo\api.py", line 404, in call_kw
+    result = _call_kw_multi(method, model, args, kwargs)
+  File "C:\odoo14c\server\odoo\api.py", line 391, in _call_kw_multi
+    result = method(recs, *args, **kwargs)
+  File "<decorator-gen-79>", line 2, in button_immediate_upgrade
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_module.py", line 72, in check_and_log
+    return method(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_module.py", line 634, in button_immediate_upgrade
+    return self._button_immediate_function(type(self).button_upgrade)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_module.py", line 572, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 457, in load_modules
+    force, status, report, loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 69, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 733, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 799, in convert_xml_import
+    obj.parse(doc.getroot())
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 719, in parse
+    self._tag_root(de)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 685, in _tag_root
+    )) from e
+Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\http.py", line 652, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "C:\odoo14c\server\odoo\http.py", line 317, in _handle_exception
+    raise exception.with_traceback(None) from new_cause
+odoo.tools.convert.ParseError: while parsing file:/c:/addon14/grt_sales_business_category/views/crm_business_category_views.xml:3, near
+<record id="view_crm_business_category_form_analytic" model="ir.ui.view">
+        <field name="name">crm.business.category.form.analytic</field>
+        <field name="model">crm.business.category</field>
+        <field name="inherit_id" ref="grt_crm_business_category.view_crm_business_category_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']/.." position="before">
+                <group string="Accounting">
+                    <field name="analytic_account_id" domain="[('company_id', '=', company_id)]"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+2026-03-07 00:56:01,342 30620 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:56:01,497 30620 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:56:01,747 30620 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:56:01,966 30620 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:56:01,966 30620 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:56:01,968 30620 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:56:01,968 30620 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:56:01,970 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:56:01,970 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:56:01,971 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:56:01,971 30620 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:56:02,082 30620 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 0.33s, 0 queries (+0 extra) 
+2026-03-07 00:56:02,468 30620 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:56:02,480 30620 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:56:02,494 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:02] "POST /web/dataset/call_button HTTP/1.1" 200 - 2436 2.693 14.097
+2026-03-07 00:56:03,164 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:03] "GET /web/static/src/xml/dialog.xml?debug=1772819762537 HTTP/1.1" 200 - - - -
+2026-03-07 00:56:03,665 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:03] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-07 00:56:03,672 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:03] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 23 0.032 4.514
+2026-03-07 00:56:03,806 30620 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:03] "GET /web/static/src/xml/crash_manager.xml?debug=1772819763198 HTTP/1.1" 200 - - - -
+2026-03-07 00:56:33,892 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.042
+2026-03-07 00:56:34,640 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:34] "POST /longpolling/im_status HTTP/1.1" 200 - 17 0.040 0.123
+2026-03-07 00:56:52,365 30620 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:56:52] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-07 00:56:56,224 17948 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-07 00:56:56,224 17948 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-07 00:56:56,224 17948 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-07 00:56:56,224 17948 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-07 00:56:56,717 17948 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-07 00:56:56,991 17948 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-07 00:56:57,045 17948 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:56:57,074 17948 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:56:57,243 17948 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:56:57,525 17948 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:56:58,282 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:56:59,071 17948 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 1.83s, 0 queries (+0 extra) 
+2026-03-07 00:57:00,588 17948 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:57:00,891 17948 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-07 00:57:00,912 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:57:04,341 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web HTTP/1.1" 200 - 688 0.549 2.885
+2026-03-07 00:57:04,394 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.002 0.022
+2026-03-07 00:57:04,410 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.003 0.041
+2026-03-07 00:57:04,716 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 304 - 2 0.002 0.029
+2026-03-07 00:57:04,722 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.000 0.027
+2026-03-07 00:57:04,764 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 304 - 2 0.002 0.031
+2026-03-07 00:57:04,778 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:04] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 304 - 2 0.004 0.039
+2026-03-07 00:57:05,170 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:05] "GET /web/static/src/img/favicon.ico HTTP/1.1" 304 - - - -
+2026-03-07 00:57:05,285 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:05] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.146
+2026-03-07 00:57:05,592 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:05] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.032 0.171
+2026-03-07 00:57:05,636 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:05] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.010
+2026-03-07 00:57:05,911 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:05] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-07 00:57:06,047 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:06] "GET /web/static/src/xml/debug.xml?debug=1772819825696 HTTP/1.1" 200 - - - -
+2026-03-07 00:57:06,762 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:06] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.016 0.304
+2026-03-07 00:57:06,912 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:06] "GET /web/image/res.company/1/favicon/ HTTP/1.1" 200 - 11 0.306 0.559
+2026-03-07 00:57:06,987 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:06] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.021 0.385
+2026-03-07 00:57:07,231 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:07] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.732 0.468
+2026-03-07 00:57:07,448 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:07] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.008 0.259
+2026-03-07 00:57:07,776 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:07] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 6 0.140 0.265
+2026-03-07 00:57:07,797 17948 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-07 00:57:07,840 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:07] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:57:07,861 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:07] "POST /mail/init_messaging HTTP/1.1" 200 - 79 1.653 0.214
+2026-03-07 00:57:07,951 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:07] "POST /web/action/load HTTP/1.1" 200 - 29 0.063 0.122
+2026-03-07 00:57:08,300 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:08] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.021 0.064
+2026-03-07 00:57:08,722 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:08] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 77 0.199 0.229
+2026-03-07 00:57:09,459 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:09] "POST /web/dataset/call_kw/ir.module.module/read HTTP/1.1" 200 - 16 0.089 0.324
+2026-03-07 00:57:09,820 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:09] "POST /web/dataset/call_kw/ir.module.module.dependency/read HTTP/1.1" 200 - 4 0.019 0.017
+2026-03-07 00:57:10,191 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:10] "POST /web/dataset/call_kw/ir.module.category/name_search HTTP/1.1" 200 - 5 0.012 0.029
+2026-03-07 00:57:10,615 17948 INFO kanjabung_MRP odoo.http: <function odoo.addons.web_editor.controllers.main.public_render_template> called ignoring args <kwargs={'context': {'lang': 'id_ID', 'tz': 'Asia/Jakarta', 'uid': 2, 'allowed_company_ids': [1]}}> 
+2026-03-07 00:57:10,620 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:10] "GET /web/image?model=ir.module.module&id=525&field=icon_image&unique=07032026005545 HTTP/1.1" 200 - 3 0.013 0.037
+2026-03-07 00:57:10,861 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:10] "POST /web_editor/public_render_template HTTP/1.1" 200 - 43 0.080 0.239
+2026-03-07 00:57:11,264 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:11] "GET /web/content/258-de6a5e2/web_editor.assets_summernote.css HTTP/1.1" 200 - 2 0.010 0.065
+2026-03-07 00:57:11,296 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:11] "GET /web/content/260-ec403c9/web_editor.assets_wysiwyg.css HTTP/1.1" 200 - 2 0.011 0.083
+2026-03-07 00:57:11,320 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:11] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.047 0.052
+2026-03-07 00:57:11,320 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:11] "GET /web/content/259-de6a5e2/web_editor.assets_summernote.js HTTP/1.1" 200 - 2 0.000 0.041
+2026-03-07 00:57:11,703 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:11] "GET /web/content/261-ec403c9/web_editor.assets_wysiwyg.js HTTP/1.1" 200 - 2 0.003 0.030
+2026-03-07 00:57:33,462 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:33] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-07 00:57:33,477 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:33] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-07 00:57:33,494 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:33] "POST /calendar/notify HTTP/1.1" 200 - 3 0.009 0.031
+2026-03-07 00:57:35,723 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_immediate_upgrade on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:57:35,732 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:57:35,734 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:57:38,721 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:38] "GET /web/static/src/img/spin.png HTTP/1.1" 304 - - - -
+2026-03-07 00:57:39,102 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user admin #2 via 127.0.0.1 
+2026-03-07 00:57:39,193 17948 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:57:39,232 17948 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:57:39,578 17948 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-07 00:57:39,581 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via 127.0.0.1 
+2026-03-07 00:57:42,791 17948 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:57:43,048 17948 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:57:43,048 17948 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:57:43,048 17948 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:57:43,048 17948 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:57:43,048 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:57:43,048 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:57:43,051 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:57:43,051 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:57:43,168 17948 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_sales_business_category (89/89) 
+2026-03-07 00:57:44,299 17948 INFO kanjabung_MRP odoo.modules.registry: module grt_sales_business_category: creating or updating database tables 
+2026-03-07 00:57:45,003 17948 INFO kanjabung_MRP odoo.schema: Table 'crm_team': unable to set NOT NULL on column 'business_category_id' 
+2026-03-07 00:57:46,328 17948 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-07 00:57:46,328 17948 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-07 00:57:46,328 17948 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-07 00:57:46,334 17948 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-07 00:57:46,334 17948 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-07 00:57:46,361 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/security.xml 
+2026-03-07 00:57:46,380 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/ir.model.access.csv 
+2026-03-07 00:57:46,515 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/ir.rule.csv 
+2026-03-07 00:57:46,750 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/data/customer_behavior_segment_data.xml 
+2026-03-07 00:57:46,764 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/crm_business_category_views.xml 
+2026-03-07 00:57:46,817 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_dashboard_views.xml 
+2026-03-07 00:57:46,860 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_recompute_wizard_views.xml 
+2026-03-07 00:57:46,900 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_segment_views.xml 
+2026-03-07 00:57:47,005 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_config_views.xml 
+2026-03-07 00:57:47,062 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_analysis_views.xml 
+2026-03-07 00:57:47,244 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/account_move_views.xml 
+2026-03-07 00:57:47,606 17948 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/account_payment_views.xml 
+2026-03-07 00:57:47,649 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_ui_view: Element '<xpath expr="//field[@name='payment_reference']">' tidak dapat ditemukan di tampilan induk
+
+View name: account.payment.form.business.category.analytic
+Error context:
+ view: ir.ui.view(1703,)
+ xmlid: view_account_payment_form_business_category_analytic
+ view.model: account.payment
+ view.parent: ir.ui.view(585,)
+ file: c:\addon14\grt_sales_business_category\views\account_payment_views.xml
+ 
+2026-03-07 00:57:47,660 17948 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-07 00:57:47,660 17948 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 677, in _tag_root
+    f(rec)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 580, in _tag_record
+    record = model._load_records([data], self.mode == 'update')
+  File "C:\odoo14c\server\odoo\models.py", line 4258, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "C:\odoo14c\server\odoo\models.py", line 4163, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-45>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 489, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-67>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_fields.py", line 534, in create
+    recs = super().create(vals_list)
+  File "<decorator-gen-15>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\models.py", line 3925, in create
+    fields[0].determine_inverse(batch_recs)
+  File "C:\odoo14c\server\odoo\fields.py", line 1207, in determine_inverse
+    determine(self.inverse, records)
+  File "C:\odoo14c\server\odoo\fields.py", line 82, in determine
+    return needle(*args)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 307, in _inverse_arch
+    view.write(data)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 507, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "C:\odoo14c\server\odoo\models.py", line 3709, in write
+    real_recs._validate_fields(vals, inverse_fields)
+  File "C:\odoo14c\server\odoo\models.py", line 1270, in _validate_fields
+    check(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 418, in _check_xml
+    )).with_traceback(e.__traceback__) from None
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 392, in _check_xml
+    view_def = view.read_combined(['arch'])
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 816, in read_combined
+    arch = root.apply_view_inheritance(arch_tree, self.model)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 757, in apply_view_inheritance
+    return self._apply_view_inheritance(source, inherit_tree)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 765, in _apply_view_inheritance
+    source = view.apply_inheritance_specs(source, arch_tree)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 742, in apply_inheritance_specs
+    self.handle_view_error(str(e))
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 680, in handle_view_error
+    raise ValueError(formatted_message).with_traceback(from_traceback) from from_exception
+odoo.exceptions.ValidationError: Error while validating view:
+
+Element '<xpath expr="//field[@name='payment_reference']">' tidak dapat ditemukan di tampilan induk
+
+View name: account.payment.form.business.category.analytic
+Error context:
+ view: ir.ui.view(1703,)
+ xmlid: view_account_payment_form_business_category_analytic
+ view.model: account.payment
+ view.parent: ir.ui.view(585,)
+ file: c:\addon14\grt_sales_business_category\views\account_payment_views.xml
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 457, in load_modules
+    force, status, report, loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 69, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 733, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 799, in convert_xml_import
+    obj.parse(doc.getroot())
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 719, in parse
+    self._tag_root(de)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 685, in _tag_root
+    )) from e
+odoo.tools.convert.ParseError: while parsing file:/c:/addon14/grt_sales_business_category/views/account_payment_views.xml:3, near
+<record id="view_account_payment_form_business_category_analytic" model="ir.ui.view">
+        <field name="name">account.payment.form.business.category.analytic</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="business_category_id"/>
+                <field name="analytic_account_id"/>
+            </xpath>
+        </field>
+    </record>
+2026-03-07 00:57:47,693 17948 ERROR kanjabung_MRP odoo.http: Exception during JSON request handling. 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 677, in _tag_root
+    f(rec)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 580, in _tag_record
+    record = model._load_records([data], self.mode == 'update')
+  File "C:\odoo14c\server\odoo\models.py", line 4258, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "C:\odoo14c\server\odoo\models.py", line 4163, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-45>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 489, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-67>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_fields.py", line 534, in create
+    recs = super().create(vals_list)
+  File "<decorator-gen-15>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\models.py", line 3925, in create
+    fields[0].determine_inverse(batch_recs)
+  File "C:\odoo14c\server\odoo\fields.py", line 1207, in determine_inverse
+    determine(self.inverse, records)
+  File "C:\odoo14c\server\odoo\fields.py", line 82, in determine
+    return needle(*args)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 307, in _inverse_arch
+    view.write(data)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 507, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "C:\odoo14c\server\odoo\models.py", line 3709, in write
+    real_recs._validate_fields(vals, inverse_fields)
+  File "C:\odoo14c\server\odoo\models.py", line 1270, in _validate_fields
+    check(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 418, in _check_xml
+    )).with_traceback(e.__traceback__) from None
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 392, in _check_xml
+    view_def = view.read_combined(['arch'])
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 816, in read_combined
+    arch = root.apply_view_inheritance(arch_tree, self.model)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 757, in apply_view_inheritance
+    return self._apply_view_inheritance(source, inherit_tree)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 765, in _apply_view_inheritance
+    source = view.apply_inheritance_specs(source, arch_tree)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 742, in apply_inheritance_specs
+    self.handle_view_error(str(e))
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 680, in handle_view_error
+    raise ValueError(formatted_message).with_traceback(from_traceback) from from_exception
+odoo.exceptions.ValidationError: Error while validating view:
+
+Element '<xpath expr="//field[@name='payment_reference']">' tidak dapat ditemukan di tampilan induk
+
+View name: account.payment.form.business.category.analytic
+Error context:
+ view: ir.ui.view(1703,)
+ xmlid: view_account_payment_form_business_category_analytic
+ view.model: account.payment
+ view.parent: ir.ui.view(585,)
+ file: c:\addon14\grt_sales_business_category\views\account_payment_views.xml
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_http.py", line 237, in _dispatch
+    result = request.dispatch()
+  File "C:\odoo14c\server\odoo\http.py", line 696, in dispatch
+    result = self._call_function(**self.params)
+  File "C:\odoo14c\server\odoo\http.py", line 370, in _call_function
+    return checked_call(self.db, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\service\model.py", line 94, in wrapper
+    return f(dbname, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\http.py", line 358, in checked_call
+    result = self.endpoint(*a, **kw)
+  File "C:\odoo14c\server\odoo\http.py", line 919, in __call__
+    return self.method(*args, **kw)
+  File "C:\odoo14c\server\odoo\http.py", line 544, in response_wrap
+    response = f(*args, **kw)
+  File "C:\odoo14c\server\odoo\addons\web\controllers\main.py", line 1374, in call_button
+    action = self._call_kw(model, method, args, kwargs)
+  File "C:\odoo14c\server\odoo\addons\web\controllers\main.py", line 1362, in _call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+  File "C:\odoo14c\server\odoo\api.py", line 404, in call_kw
+    result = _call_kw_multi(method, model, args, kwargs)
+  File "C:\odoo14c\server\odoo\api.py", line 391, in _call_kw_multi
+    result = method(recs, *args, **kwargs)
+  File "<decorator-gen-80>", line 2, in button_immediate_upgrade
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_module.py", line 72, in check_and_log
+    return method(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_module.py", line 634, in button_immediate_upgrade
+    return self._button_immediate_function(type(self).button_upgrade)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_module.py", line 572, in _button_immediate_function
+    modules.registry.Registry.new(self._cr.dbname, update_module=True)
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 457, in load_modules
+    force, status, report, loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 69, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 733, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 799, in convert_xml_import
+    obj.parse(doc.getroot())
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 719, in parse
+    self._tag_root(de)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 685, in _tag_root
+    )) from e
+Exception
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\http.py", line 652, in _handle_exception
+    return super(JsonRequest, self)._handle_exception(exception)
+  File "C:\odoo14c\server\odoo\http.py", line 317, in _handle_exception
+    raise exception.with_traceback(None) from new_cause
+odoo.tools.convert.ParseError: while parsing file:/c:/addon14/grt_sales_business_category/views/account_payment_views.xml:3, near
+<record id="view_account_payment_form_business_category_analytic" model="ir.ui.view">
+        <field name="name">account.payment.form.business.category.analytic</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="business_category_id"/>
+                <field name="analytic_account_id"/>
+            </xpath>
+        </field>
+    </record>
+2026-03-07 00:57:47,712 17948 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:57:47,745 17948 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:57:47,898 17948 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:57:48,244 17948 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:57:48,246 17948 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:57:48,246 17948 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:57:48,246 17948 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:57:48,246 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:57:48,246 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:57:48,248 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:57:48,248 17948 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:57:48,385 17948 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 0.49s, 0 queries (+0 extra) 
+2026-03-07 00:57:48,941 17948 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:57:48,950 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:48] "POST /web/dataset/call_button HTTP/1.1" 200 - 2672 2.294 10.965
+2026-03-07 00:57:49,335 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:49] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-07 00:57:49,345 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:49] "GET /web/static/src/xml/dialog.xml?debug=1772819869022 HTTP/1.1" 200 - - - -
+2026-03-07 00:57:49,665 17948 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:49] "GET /web/static/src/xml/crash_manager.xml?debug=1772819869356 HTTP/1.1" 200 - - - -
+2026-03-07 00:57:57,821 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:57] "POST /longpolling/poll HTTP/1.1" 200 - 19 0.046 51.777
+2026-03-07 00:57:58,151 17948 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:57:59,724 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:57:59] "POST /longpolling/im_status HTTP/1.1" 200 - 17 0.255 0.278
+2026-03-07 00:58:06,844 17948 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:58:06] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 6 0.011 0.036
+2026-03-07 00:58:44,766 972 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-07 00:58:44,768 972 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-07 00:58:44,768 972 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-07 00:58:44,770 972 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-07 00:58:45,469 972 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-07 00:58:45,849 972 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-07 00:58:45,906 972 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:58:45,940 972 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.03s, 0 queries (+0 extra) 
+2026-03-07 00:58:46,130 972 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:58:46,453 972 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:58:47,597 972 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:58:48,899 972 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 2.77s, 0 queries (+0 extra) 
+2026-03-07 00:58:50,926 972 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:58:51,161 972 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-07 00:58:51,181 972 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:58:51,853 972 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:58:51] "POST /longpolling/im_status HTTP/1.1" 200 - 19 0.044 0.634
+2026-03-07 00:58:55,630 972 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-07 00:59:02,200 8484 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-07 00:59:02,204 8484 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-07 00:59:02,204 8484 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-07 00:59:02,204 8484 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-07 00:59:03,103 8484 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-07 00:59:03,448 8484 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-07 00:59:03,507 8484 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:59:03,545 8484 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.04s, 0 queries (+0 extra) 
+2026-03-07 00:59:03,775 8484 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:59:04,179 8484 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-07 00:59:05,513 8484 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:59:05,513 8484 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:59:05,513 8484 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:59:05,516 8484 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:59:05,516 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:59:05,516 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:59:05,516 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:59:05,516 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:59:06,929 8484 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 3.15s, 0 queries (+0 extra) 
+2026-03-07 00:59:09,262 8484 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:59:09,448 8484 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-07 00:59:09,506 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 00:59:10,930 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:10] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 7 0.018 1.415
+2026-03-07 00:59:14,702 8484 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-07 00:59:21,916 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:21] "GET /web HTTP/1.1" 200 - 685 0.826 3.100
+2026-03-07 00:59:22,310 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.009 0.046
+2026-03-07 00:59:22,372 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.016 0.093
+2026-03-07 00:59:22,372 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 304 - 2 0.002 0.084
+2026-03-07 00:59:22,393 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/webclient/load_menus/be9153e42e6e4a59aaf0617b390656ade01f0cd97c3066c4da7a4a864334bde1 HTTP/1.1" 200 - 1 0.000 0.093
+2026-03-07 00:59:22,538 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 304 - 2 0.007 0.038
+2026-03-07 00:59:22,654 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 304 - 2 0.000 0.024
+2026-03-07 00:59:22,842 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.149
+2026-03-07 00:59:22,929 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:22] "GET /web/static/src/img/favicon.ico HTTP/1.1" 304 - - - -
+2026-03-07 00:59:23,317 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:23] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.033 0.300
+2026-03-07 00:59:23,349 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:23] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.017
+2026-03-07 00:59:23,708 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:23] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-07 00:59:23,823 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:23] "GET /web/static/src/xml/debug.xml?debug=1772819963462 HTTP/1.1" 200 - - - -
+2026-03-07 00:59:24,029 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.118 0.099
+2026-03-07 00:59:24,054 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "GET /web/image/res.company/1/favicon/ HTTP/1.1" 200 - 11 0.074 0.143
+2026-03-07 00:59:24,075 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.006 0.031
+2026-03-07 00:59:24,176 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.000 0.022
+2026-03-07 00:59:24,324 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /mail/init_messaging HTTP/1.1" 200 - 79 0.310 0.297
+2026-03-07 00:59:24,382 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.007 0.011
+2026-03-07 00:59:24,476 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.015 0.074
+2026-03-07 00:59:24,527 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 6 0.029 0.102
+2026-03-07 00:59:24,744 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 00:59:24,825 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:24] "POST /web/action/load HTTP/1.1" 200 - 29 0.059 0.111
+2026-03-07 00:59:25,241 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:25] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 77 0.078 0.326
+2026-03-07 00:59:25,938 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:25] "POST /web/dataset/call_kw/ir.module.module/read HTTP/1.1" 200 - 16 0.036 0.335
+2026-03-07 00:59:26,310 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:26] "POST /web/dataset/call_kw/ir.module.module.dependency/read HTTP/1.1" 200 - 4 0.009 0.036
+2026-03-07 00:59:26,684 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:26] "POST /web/dataset/call_kw/ir.module.category/name_search HTTP/1.1" 200 - 5 0.013 0.032
+2026-03-07 00:59:27,172 8484 INFO kanjabung_MRP odoo.http: <function odoo.addons.web_editor.controllers.main.public_render_template> called ignoring args <kwargs={'context': {'lang': 'id_ID', 'tz': 'Asia/Jakarta', 'uid': 2, 'allowed_company_ids': [1]}}> 
+2026-03-07 00:59:27,187 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:27] "GET /web/image?model=ir.module.module&id=525&field=icon_image&unique=07032026005735 HTTP/1.1" 200 - 3 0.009 0.033
+2026-03-07 00:59:27,407 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:27] "POST /web_editor/public_render_template HTTP/1.1" 200 - 43 0.067 0.250
+2026-03-07 00:59:27,780 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:27] "GET /web/content/258-de6a5e2/web_editor.assets_summernote.css HTTP/1.1" 200 - 2 0.008 0.051
+2026-03-07 00:59:27,785 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:27] "GET /web/content/260-ec403c9/web_editor.assets_wysiwyg.css HTTP/1.1" 200 - 2 0.003 0.055
+2026-03-07 00:59:27,797 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:27] "GET /web/content/259-de6a5e2/web_editor.assets_summernote.js HTTP/1.1" 200 - 2 0.000 0.049
+2026-03-07 00:59:28,175 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:28] "GET /web/content/261-ec403c9/web_editor.assets_wysiwyg.js HTTP/1.1" 200 - 2 0.000 0.031
+2026-03-07 00:59:29,967 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:29] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.008 0.022
+2026-03-07 00:59:40,165 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:40] "GET /base/static/src/css/description.css HTTP/1.1" 304 - - - -
+2026-03-07 00:59:40,182 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:40] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -
+2026-03-07 00:59:40,190 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:40] "POST /calendar/notify HTTP/1.1" 200 - 3 0.015 0.018
+2026-03-07 00:59:41,681 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_immediate_upgrade on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:59:41,692 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:59:41,694 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['GRT Sales Business Category'] to user admin #2 via 127.0.0.1 
+2026-03-07 00:59:44,634 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:44] "GET /web/static/src/img/spin.png HTTP/1.1" 304 - - - -
+2026-03-07 00:59:45,066 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user admin #2 via 127.0.0.1 
+2026-03-07 00:59:45,157 8484 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-07 00:59:45,194 8484 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.04s, 0 queries (+0 extra) 
+2026-03-07 00:59:45,464 8484 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-07 00:59:45,468 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via 127.0.0.1 
+2026-03-07 00:59:48,645 8484 INFO kanjabung_MRP odoo.modules.loading: loading 89 modules... 
+2026-03-07 00:59:48,933 8484 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-07 00:59:48,935 8484 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-07 00:59:48,935 8484 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-07 00:59:48,935 8484 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-07 00:59:48,935 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-07 00:59:48,937 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-07 00:59:48,937 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-07 00:59:48,937 8484 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-07 00:59:49,105 8484 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_sales_business_category (89/89) 
+2026-03-07 00:59:50,227 8484 INFO kanjabung_MRP odoo.modules.registry: module grt_sales_business_category: creating or updating database tables 
+2026-03-07 00:59:50,970 8484 INFO kanjabung_MRP odoo.schema: Table 'crm_team': unable to set NOT NULL on column 'business_category_id' 
+2026-03-07 00:59:52,421 8484 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-07 00:59:52,421 8484 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-07 00:59:52,421 8484 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-07 00:59:52,434 8484 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-07 00:59:52,435 8484 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-07 00:59:52,467 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/security.xml 
+2026-03-07 00:59:52,485 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/ir.model.access.csv 
+2026-03-07 00:59:52,661 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/security/ir.rule.csv 
+2026-03-07 00:59:52,884 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/data/customer_behavior_segment_data.xml 
+2026-03-07 00:59:52,897 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/crm_business_category_views.xml 
+2026-03-07 00:59:52,954 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_dashboard_views.xml 
+2026-03-07 00:59:52,997 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_recompute_wizard_views.xml 
+2026-03-07 00:59:53,034 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_segment_views.xml 
+2026-03-07 00:59:53,101 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_config_views.xml 
+2026-03-07 00:59:53,157 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/customer_behavior_analysis_views.xml 
+2026-03-07 00:59:53,286 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/account_move_views.xml 
+2026-03-07 00:59:53,648 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/account_payment_views.xml 
+2026-03-07 00:59:53,773 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/res_partner_views.xml 
+2026-03-07 00:59:53,991 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/crm_team_views.xml 
+2026-03-07 00:59:54,245 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/sale_order_views.xml 
+2026-03-07 00:59:54,650 8484 INFO kanjabung_MRP odoo.modules.loading: loading grt_sales_business_category/views/sale_team_menu_views.xml 
+2026-03-07 00:59:55,013 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_translation: module grt_sales_business_category: no translation for language id 
+2026-03-07 00:59:55,087 8484 INFO kanjabung_MRP odoo.modules.loading: Module grt_sales_business_category loaded in 5.98s, 979 queries 
+2026-03-07 00:59:55,087 8484 INFO kanjabung_MRP odoo.modules.loading: 89 modules loaded in 6.44s, 979 queries (+0 extra) 
+2026-03-07 00:59:55,546 8484 WARNING kanjabung_MRP odoo.schema: Table 'crm_team': unable to set NOT NULL on column 'business_category_id' 
+2026-03-07 00:59:55,550 8484 WARNING kanjabung_MRP odoo.modules.loading: The model scada.health has no access rules, consider adding one. E.g. access_scada_health,access_scada_health,model_scada_health,base.group_user,1,0,0,0 
+2026-03-07 00:59:55,550 8484 WARNING kanjabung_MRP odoo.modules.loading: The model scada.module has no access rules, consider adding one. E.g. access_scada_module,access_scada_module,model_scada_module,base.group_user,1,0,0,0 
+2026-03-07 00:59:55,550 8484 WARNING kanjabung_MRP odoo.modules.loading: The model scada.mo.data has no access rules, consider adding one. E.g. access_scada_mo_data,access_scada_mo_data,model_scada_mo_data,base.group_user,1,0,0,0 
+2026-03-07 00:59:55,550 8484 WARNING kanjabung_MRP odoo.modules.loading: The model scada.material.consumption has no access rules, consider adding one. E.g. access_scada_material_consumption,access_scada_material_consumption,model_scada_material_consumption,base.group_user,1,0,0,0 
+2026-03-07 00:59:57,091 8484 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-07 00:59:57,114 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_module: getting next ir.actions.todo() 
+2026-03-07 00:59:57,125 8484 INFO kanjabung_MRP odoo.modules.registry: Registry changed, signaling through the database 
+2026-03-07 00:59:57,128 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 00:59:57] "POST /web/dataset/call_button HTTP/1.1" 200 - 4082 3.858 11.630
+2026-03-07 00:59:57,477 8484 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-07 01:00:01,328 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web HTTP/1.1" 200 - 688 0.553 3.299
+2026-03-07 01:00:01,723 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web/content/253-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.006 0.045
+2026-03-07 01:00:01,840 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web/content/254-240b7d8/web.assets_backend.css HTTP/1.1" 200 - 2 0.008 0.115
+2026-03-07 01:00:01,840 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web/content/255-40402f3/web.assets_common.js HTTP/1.1" 304 - 2 0.005 0.106
+2026-03-07 01:00:01,850 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web/content/256-240b7d8/web.assets_backend.js HTTP/1.1" 304 - 2 0.009 0.100
+2026-03-07 01:00:01,876 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web/webclient/load_menus/dda3550d76f21d49558dcf7734927bcc9d1cc1bfbddf64d6078e70789304fc9b HTTP/1.1" 200 - 1 0.000 0.108
+2026-03-07 01:00:01,876 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:01] "GET /web/content/257-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 304 - 2 0.016 0.105
+2026-03-07 01:00:02,411 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:02] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,grt_scada,maintenance,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.000 0.138
+2026-03-07 01:00:02,891 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:02] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgrt_scada%2Cmaintenance%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.058 0.300
+2026-03-07 01:00:02,917 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:02] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.000 0.016
+2026-03-07 01:00:03,280 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:03] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-07 01:00:03,360 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:03] "GET /web/static/src/xml/debug.xml?debug=1772820003001 HTTP/1.1" 200 - - - -
+2026-03-07 01:00:04,012 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.004 0.130
+2026-03-07 01:00:04,102 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 21 0.501 0.240
+2026-03-07 01:00:04,136 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.005 0.146
+2026-03-07 01:00:04,238 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 304 - 17 0.633 0.229
+2026-03-07 01:00:04,878 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.076 0.207
+2026-03-07 01:00:04,878 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-07 01:00:04,909 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:04] "POST /longpolling/poll HTTP/1.1" 200 - 20 0.104 50.281
+2026-03-07 01:00:05,383 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:05] "POST /mail/init_messaging HTTP/1.1" 200 - 75 1.775 0.315
+2026-03-07 01:00:05,383 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:05] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-07 01:00:05,653 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:05] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.005 0.042
+2026-03-07 01:00:05,819 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:05] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.019 0.088
+2026-03-07 01:00:05,856 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:05] "POST /calendar/notify HTTP/1.1" 200 - 3 0.028 0.079
+2026-03-07 01:00:05,861 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:05] "POST /web/action/load HTTP/1.1" 200 - 9 0.056 0.080
+2026-03-07 01:00:06,363 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:06] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 27 0.081 0.088
+2026-03-07 01:00:06,876 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:06] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 9 0.041 0.042
+2026-03-07 01:00:07,984 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:07] "GET /web_tour/static/src/xml/tip.xml?debug=1772820007659 HTTP/1.1" 200 - - - -
+2026-03-07 01:00:10,382 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:10] "POST /web/action/load HTTP/1.1" 200 - 63 0.093 0.153
+2026-03-07 01:00:11,666 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:11] "POST /web/dataset/call_kw/sale.order/load_views HTTP/1.1" 200 - 239 0.355 0.610
+2026-03-07 01:00:12,099 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:12] "POST /web/dataset/search_read HTTP/1.1" 200 - 9 0.033 0.051
+2026-03-07 01:00:12,475 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:12] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.000 0.011
+2026-03-07 01:00:13,246 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "GET /web/image/res.users/3/image_128 HTTP/1.1" 200 - 6 0.111 0.262
+2026-03-07 01:00:13,264 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "GET /web/image/res.users/1/image_128 HTTP/1.1" 200 - 6 0.062 0.298
+2026-03-07 01:00:13,300 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "GET /web/image/res.users/5/image_128 HTTP/1.1" 200 - 6 0.049 0.200
+2026-03-07 01:00:13,339 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "GET /web/image/res.users/4/image_128 HTTP/1.1" 200 - 5 0.109 0.243
+2026-03-07 01:00:13,744 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "POST /sales/sale_quotation_onboarding_panel HTTP/1.1" 200 - 66 0.389 0.486
+2026-03-07 01:00:13,755 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "GET /web/image/res.users/2/image_128 HTTP/1.1" 200 - 6 0.021 0.126
+2026-03-07 01:00:13,898 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.051 50.065
+2026-03-07 01:00:14,096 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:14] "GET /sale/static/src/img/sale_quotation_onboarding_bg.jpg HTTP/1.1" 304 - - - -
+2026-03-07 01:00:14,103 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:14] "GET /web/static/src/img/smiling_face.svg HTTP/1.1" 304 - - - -
+2026-03-07 01:00:31,924 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:31] "POST /web/action/load HTTP/1.1" 200 - 14 0.021 0.094
+2026-03-07 01:00:32,359 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:32] "POST /web/dataset/call_kw/crm.business.category/load_views HTTP/1.1" 200 - 23 0.029 0.079
+2026-03-07 01:00:32,753 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:32] "POST /web/dataset/search_read HTTP/1.1" 200 - 10 0.036 0.027
+2026-03-07 01:00:36,372 8484 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:36] "POST /web/dataset/call_kw/crm.business.category/onchange HTTP/1.1" 200 - 4 0.011 0.032
+2026-03-07 01:00:36,737 8484 INFO ? werkzeug: 127.0.0.1 - - [07/Mar/2026 01:00:36] "GET /web/static/src/img/form_sheetbg.png HTTP/1.1" 304 - - - -

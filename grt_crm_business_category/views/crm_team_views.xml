@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="business_category_id"/>
+                <field name="business_category_id" domain="[('company_id', '=', company_id)]"/>
             </xpath>
         </field>
     </record>

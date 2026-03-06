@@ -3,25 +3,31 @@
     <record id="crm_business_category_01" model="crm.business.category">
         <field name="name">Business Category 1</field>
         <field name="code">BC01</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
     <record id="crm_business_category_02" model="crm.business.category">
         <field name="name">Business Category 2</field>
         <field name="code">BC02</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
     <record id="crm_business_category_03" model="crm.business.category">
         <field name="name">Business Category 3</field>
         <field name="code">BC03</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
     <record id="crm_business_category_04" model="crm.business.category">
         <field name="name">Business Category 4</field>
         <field name="code">BC04</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
     <record id="crm_business_category_05" model="crm.business.category">
         <field name="name">Business Category 5</field>
         <field name="code">BC05</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
     <record id="crm_business_category_06" model="crm.business.category">
         <field name="name">Business Category 6</field>
         <field name="code">BC06</field>
+        <field name="company_id" ref="base.main_company"/>
     </record>
 </odoo>

@@ -12,13 +12,21 @@ class SaleOrder(models.Model):
     business_category_id = fields.Many2one(
         "crm.business.category",
         string="Business Category",
+        domain="[('company_id', '=', company_id)]",
         ondelete="restrict",
         tracking=True,
+    )
+    analytic_account_id = fields.Many2one(
+        "account.analytic.account",
+        string="Analytic Account",
+        related="business_category_id.analytic_account_id",
+        store=True,
+        readonly=True,
     )
     team_id = fields.Many2one(
         "crm.team",
         string="Team Sales",
-        domain="[('business_category_id', '=', business_category_id)]",
+        domain="[('company_id', '=', company_id), ('business_category_id', '=', business_category_id)]",
         tracking=True,
     )
     sales_team_leader_id = fields.Many2one(
@@ -122,9 +130,23 @@ class SaleOrder(models.Model):
                 vals["team_id"] = opportunity.team_id.id
         return vals
 
-    @api.constrains("business_category_id", "team_id")
+    def _prepare_invoice(self):
+        vals = super()._prepare_invoice()
+        vals["business_category_id"] = self.business_category_id.id
+        vals["analytic_account_id"] = self.analytic_account_id.id
+        return vals
+
+    @api.constrains("business_category_id", "team_id", "company_id", "analytic_account_id")
     def _check_business_category_team(self):
         for order in self:
+            if order.business_category_id and order.business_category_id.company_id != order.company_id:
+                raise ValidationError(
+                    _("Sales Order '%s' uses a Business Category from another company.") % order.name
+                )
+            if order.analytic_account_id and order.analytic_account_id.company_id != order.company_id:
+                raise ValidationError(
+                    _("Sales Order '%s' uses an Analytic Account from another company.") % order.name
+                )
             if not order.team_id:
                 continue
             if not order.team_id.business_category_id:
@@ -268,3 +290,14 @@ class SaleOrder(models.Model):
                     % order.name
                 )
         return super().action_confirm()
+
+
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    def _prepare_invoice_line(self, **optional_values):
+        vals = super()._prepare_invoice_line(**optional_values)
+        analytic = self.order_id.analytic_account_id
+        if analytic:
+            vals["analytic_account_id"] = analytic.id
+        return vals
