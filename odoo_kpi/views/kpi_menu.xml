@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_kpi_root" name="KPI" parent="crm.crm_menu_root" sequence="80" groups="odoo_kpi.group_kpi_employee,odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
+    <menuitem id="menu_kpi_root" name="KPI" sequence="80" groups="odoo_kpi.group_kpi_employee,odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
 
     <menuitem id="menu_kpi_master" name="Master" parent="menu_kpi_root" sequence="10" groups="odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>
     <menuitem id="menu_kpi_operations" name="Operations" parent="menu_kpi_root" sequence="20" groups="odoo_kpi.group_kpi_employee,odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,base.group_system"/>

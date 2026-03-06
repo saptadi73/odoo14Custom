@@ -14,7 +14,7 @@
         "id":"pk",
         "code":"string",
         "name":"string",
-        "department_id":"fk",
+        "department_id":"fk -> kpi_department.id",
         "kpi_type":"string",
         "description":"text",
         "calculation_method":"string",
@@ -26,7 +26,7 @@
       "name":"kpi_target",
       "columns":{
         "id":"pk",
-        "kpi_definition_id":"fk",
+        "kpi_definition_id":"fk -> kpi_definition.id",
         "target_value":"float",
         "weight":"float"
       }
@@ -35,7 +35,7 @@
       "name":"kpi_target_history",
       "columns":{
         "id":"pk",
-        "kpi_target_id":"fk",
+        "kpi_target_id":"fk -> kpi_target.id",
         "year":"integer",
         "target_value":"float"
       }
@@ -55,9 +55,9 @@
       "name":"kpi_assignment",
       "columns":{
         "id":"pk",
-        "employee_id":"fk",
-        "kpi_definition_id":"fk",
-        "period_id":"fk",
+        "employee_id":"fk -> hr_employee.id",
+        "kpi_definition_id":"fk -> kpi_definition.id",
+        "period_id":"fk -> kpi_period.id",
         "target_override":"float",
         "weight_override":"float"
       }
@@ -66,11 +66,11 @@
       "name":"kpi_value",
       "columns":{
         "id":"pk",
-        "employee_id":"fk",
-        "kpi_definition_id":"fk",
-        "period_id":"fk",
+        "assignment_id":"fk -> kpi_assignment.id",
         "value":"float",
         "source_module":"string",
+        "reference_model":"string",
+        "reference_id":"integer",
         "created_at":"datetime"
       }
     },
@@ -78,10 +78,11 @@
       "name":"kpi_score",
       "columns":{
         "id":"pk",
-        "employee_id":"fk",
-        "period_id":"fk",
+        "employee_id":"fk -> hr_employee.id",
+        "period_id":"fk -> kpi_period.id",
         "total_score":"float",
-        "grade":"string"
+        "grade":"string",
+        "calculated_at":"datetime"
       }
     },
     {
@@ -89,23 +90,23 @@
       "columns":{
         "id":"pk",
         "name":"string",
-        "department_id":"fk"
+        "department_id":"fk -> kpi_department.id"
       }
     },
     {
       "name":"kpi_team_member",
       "columns":{
         "id":"pk",
-        "team_id":"fk",
-        "employee_id":"fk"
+        "team_id":"fk -> kpi_team.id",
+        "employee_id":"fk -> hr_employee.id"
       }
     },
     {
       "name":"kpi_team_score",
       "columns":{
         "id":"pk",
-        "team_id":"fk",
-        "period_id":"fk",
+        "team_id":"fk -> kpi_team.id",
+        "period_id":"fk -> kpi_period.id",
         "score":"float"
       }
     },
@@ -113,7 +114,7 @@
       "name":"kpi_evidence",
       "columns":{
         "id":"pk",
-        "kpi_value_id":"fk",
+        "kpi_value_id":"fk -> kpi_value.id",
         "attachment":"string",
         "note":"text"
       }

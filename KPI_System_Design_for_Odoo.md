@@ -2,27 +2,27 @@
 
 ## Overview
 
-Dokumen ini menjelaskan desain sistem KPI yang dapat diimplementasikan sebagai custom module pada Odoo.
+Dokumen ini menjelaskan desain sistem KPI yang dapat digunakan sebagai modul custom pada Odoo.
 
-Tujuan sistem KPI:
+Sistem KPI digunakan untuk:
 
-* Mengukur performa karyawan
-* Mengukur performa departemen
-* Mengukur performa perusahaan
-* Mengintegrasikan data performa dari modul ERP
+* mengukur performa karyawan
+* mengukur performa departemen
+* mengukur performa perusahaan
+* mengambil data KPI dari modul ERP
 
-Sistem KPI harus bersifat:
+Sistem harus bersifat:
 
 * dinamis
-* scalable
 * modular
-* terintegrasi dengan modul ERP
+* scalable
+* terintegrasi dengan ERP
 
 ---
 
 # KPI Architecture
 
-Struktur KPI mengikuti hierarki berikut:
+Hierarchy KPI:
 
 Company KPI
 ↓
@@ -36,27 +36,18 @@ KPI Score
 
 ---
 
-# KPI Entities
+# Entities
 
 ## KPI Department
 
-Menyimpan daftar departemen perusahaan.
+Menyimpan daftar departemen.
 
 Contoh:
 
-* Sales
-* Finance
-* IT
-* Inventory
-* Production
-
-Field:
-
-| Field       | Description     |
-| ----------- | --------------- |
-| id          | primary key     |
-| name        | nama departemen |
-| description | deskripsi       |
+Sales
+Finance
+Inventory
+IT
 
 ---
 
@@ -66,23 +57,17 @@ Master definisi KPI.
 
 Contoh:
 
-| KPI            | Department |
-| -------------- | ---------- |
-| Revenue        | Sales      |
-| Repeat Order   | Sales      |
-| Stock Accuracy | Inventory  |
-| System Uptime  | IT         |
+Revenue
+Repeat Order
+Inventory Accuracy
+System Uptime
 
-Field:
+Field utama:
 
-| Field              | Description |
-| ------------------ | ----------- |
-| code               | kode KPI    |
-| name               | nama KPI    |
-| department_id      | departemen  |
-| kpi_type           | tipe KPI    |
-| calculation_method | auto/manual |
-| source_module      | modul ERP   |
+* code
+* name
+* department_id
+* source_module
 
 ---
 
@@ -92,10 +77,8 @@ Target KPI dan bobot KPI.
 
 Contoh:
 
-| KPI          | Target    | Weight |
-| ------------ | --------- | ------ |
-| Revenue      | 100000000 | 40     |
-| Repeat Order | 20        | 20     |
+Revenue target = 100000000
+Weight = 40%
 
 ---
 
@@ -107,20 +90,18 @@ Digunakan untuk menyimpan perubahan target setiap tahun.
 
 ## KPI Period
 
-Menentukan periode evaluasi KPI.
+Periode evaluasi KPI.
 
 Contoh:
 
-| Year | Month |
-| ---- | ----- |
-| 2025 | 01    |
-| 2025 | 02    |
+2025-01
+2025-02
 
 Status:
 
-* draft
-* open
-* closed
+draft
+open
+closed
 
 ---
 
@@ -130,10 +111,14 @@ Mapping KPI ke employee.
 
 Contoh:
 
-| Employee | KPI          |
-| -------- | ------------ |
-| Sales A  | Revenue      |
-| Sales A  | Repeat Order |
+Sales A → Revenue
+Sales A → Repeat Order
+
+Assignment menentukan:
+
+* KPI apa yang dimiliki employee
+* target KPI
+* weight KPI
 
 ---
 
@@ -141,19 +126,27 @@ Contoh:
 
 Nilai KPI aktual.
 
-Nilai KPI dapat berasal dari:
+KPI value selalu terhubung ke assignment.
 
-* modul Sales
-* modul CRM
-* modul Inventory
-* modul Manufacturing
-* input manual
+Field utama:
+
+assignment_id
+value
+source_module
+reference_model
+reference_id
+
+Contoh:
+
+assignment_id = 10
+value = 15000000
+reference_model = sale.order
 
 ---
 
 ## KPI Score
 
-Skor KPI yang dihitung dari nilai KPI.
+Hasil agregasi KPI.
 
 Formula dasar:
 
@@ -163,19 +156,18 @@ score = (actual_value / target_value) × weight
 
 ## KPI Team
 
-Menyimpan tim kerja.
+Digunakan untuk mengelompokkan employee.
 
 Contoh:
 
-* Sales Team A
-* Warehouse Team
-* Production Team
+Sales Team A
+Warehouse Team
 
 ---
 
 ## KPI Team Score
 
-Skor KPI untuk tim.
+Score KPI pada level tim.
 
 ---
 
@@ -185,39 +177,75 @@ Bukti pencapaian KPI.
 
 Contoh:
 
-* laporan
-* dokumen
-* foto
+laporan
+dokumen
+foto
 
 ---
 
-# KPI Calculation Flow
+# KPI Data Flow
 
-1. Modul ERP menghasilkan event
+ERP Event
 
-contoh:
+↓
+
+Insert KPI Value
+
+↓
+
+Aggregate KPI Score
+
+↓
+
+Update KPI Score Table
+
+---
+
+# Example ERP Integration
+
+Sales Module
+
+Event:
 
 Sales Order Confirmed
 
-2. Sistem menyimpan nilai KPI
+↓
 
-insert ke table kpi_value
+Insert KPI Value (Revenue KPI)
 
-3. Cron job menghitung score
+---
 
-calculate_kpi_score()
+Inventory Module
 
-4. Score disimpan ke table kpi_score
+Event:
+
+Stock Move Completed
+
+↓
+
+Insert KPI Value (Stock Accuracy KPI)
+
+---
+
+Manufacturing Module
+
+Event:
+
+Production Finished
+
+↓
+
+Insert KPI Value (Production Output KPI)
 
 ---
 
 # Odoo Module Structure
 
-Disarankan membuat module:
+Custom module:
 
 odoo_kpi
 
-Struktur:
+Structure:
 
 odoo_kpi
 │
@@ -226,10 +254,11 @@ odoo_kpi
 │   ├── kpi_assignment.py
 │   ├── kpi_value.py
 │   ├── kpi_score.py
-│   └── kpi_team.py
+│   ├── kpi_team.py
 │
 ├── views
 │   ├── kpi_definition_view.xml
+│   ├── kpi_assignment_view.xml
 │   ├── kpi_dashboard.xml
 │
 ├── security
@@ -240,41 +269,18 @@ odoo_kpi
 
 ---
 
-# Cron Job
+# KPI Calculation
 
-Cron digunakan untuk menghitung KPI.
+Cron job menghitung KPI score.
 
-Schedule:
+schedule:
 
-* daily
-* monthly
+daily
+monthly
 
 Function:
 
 calculate_kpi_score()
-
----
-
-# KPI Dashboard
-
-Dashboard menampilkan:
-
-Employee KPI
-
-* KPI achievement
-* score
-* grade
-
-Department KPI
-
-* average score
-* top performer
-* bottom performer
-
-Company KPI
-
-* department ranking
-* total score
 
 ---
 
@@ -288,11 +294,10 @@ Employee
 
 ---
 
-# Future Extension
+# Advantages
 
-Sistem KPI dapat dikembangkan menjadi:
-
-* Balanced Scorecard
-* AI KPI prediction
-* KPI gamification
-* KPI forecasting
+Dynamic KPI configuration
+ERP integrated
+Scalable architecture
+Audit trail support
+Supports employee and team KPI

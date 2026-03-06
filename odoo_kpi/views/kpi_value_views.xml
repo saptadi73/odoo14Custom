@@ -6,11 +6,14 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="created_at"/>
+                <field name="assignment_id"/>
                 <field name="employee_id"/>
                 <field name="kpi_definition_id"/>
                 <field name="period_id"/>
                 <field name="value"/>
                 <field name="source_module"/>
+                <field name="reference_model"/>
+                <field name="reference_id"/>
             </tree>
         </field>
     </record>
@@ -22,13 +25,16 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="employee_id"/>
-                        <field name="kpi_definition_id"/>
-                        <field name="period_id"/>
+                        <field name="assignment_id"/>
+                        <field name="employee_id" readonly="1"/>
+                        <field name="kpi_definition_id" readonly="1"/>
+                        <field name="period_id" readonly="1"/>
                     </group>
                     <group>
                         <field name="value"/>
                         <field name="source_module"/>
+                        <field name="reference_model"/>
+                        <field name="reference_id"/>
                         <field name="created_at" readonly="1"/>
                     </group>
                 </sheet>
@@ -42,4 +48,3 @@
         <field name="view_mode">tree,form</field>
     </record>
 </odoo>
-

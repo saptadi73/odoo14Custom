@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kpi_crm_trigger_rule_kpi_manager,kpi.crm.trigger.rule.kpi.manager,model_kpi_crm_trigger_rule,odoo_kpi.group_kpi_manager,1,1,1,1
+access_kpi_crm_trigger_rule_kpi_admin,kpi.crm.trigger.rule.kpi.admin,model_kpi_crm_trigger_rule,odoo_kpi.group_kpi_admin,1,1,1,1
+access_kpi_crm_trigger_rule_sale_manager,kpi.crm.trigger.rule.sale.manager,model_kpi_crm_trigger_rule,sales_team.group_sale_manager,1,1,1,1
+access_kpi_crm_trigger_rule_line_kpi_manager,kpi.crm.trigger.rule.line.kpi.manager,model_kpi_crm_trigger_rule_line,odoo_kpi.group_kpi_manager,1,1,1,1
+access_kpi_crm_trigger_rule_line_kpi_admin,kpi.crm.trigger.rule.line.kpi.admin,model_kpi_crm_trigger_rule_line,odoo_kpi.group_kpi_admin,1,1,1,1
+access_kpi_crm_trigger_rule_line_sale_manager,kpi.crm.trigger.rule.line.sale.manager,model_kpi_crm_trigger_rule_line,sales_team.group_sale_manager,1,1,1,1

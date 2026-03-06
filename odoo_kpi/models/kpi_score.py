@@ -48,9 +48,7 @@ class KpiScore(models.Model):
                         continue
                     values = value_model.search(
                         [
-                            ("employee_id", "=", employee.id),
-                            ("period_id", "=", period.id),
-                            ("kpi_definition_id", "=", assignment.kpi_definition_id.id),
+                            ("assignment_id", "=", assignment.id),
                         ]
                     )
                     actual = sum(values.mapped("value"))
@@ -121,4 +119,3 @@ class KpiTeamScore(models.Model):
                 else:
                     self.create(vals)
         return True
-

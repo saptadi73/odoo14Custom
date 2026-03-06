@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_kpi_crm_trigger_rule_tree" model="ir.ui.view">
+        <field name="name">kpi.crm.trigger.rule.tree</field>
+        <field name="model">kpi.crm.trigger.rule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="business_category_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_kpi_crm_trigger_rule_form" model="ir.ui.view">
+        <field name="name">kpi.crm.trigger.rule.form</field>
+        <field name="model">kpi.crm.trigger.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="business_category_id"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Trigger Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence"/>
+                                    <field name="active"/>
+                                    <field name="stage_id"/>
+                                    <field name="activity_type_id"/>
+                                    <field name="employee_id"/>
+                                    <field name="assignment_id"/>
+                                    <field name="value"/>
+                                    <field name="source_module"/>
+                                    <field name="note"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="active"/>
+                                        <field name="stage_id"/>
+                                        <field name="activity_type_id"/>
+                                        <field name="employee_id"/>
+                                        <field name="assignment_id" domain="[('employee_id', '=', employee_id)]"/>
+                                    </group>
+                                    <group>
+                                        <field name="value"/>
+                                        <field name="source_module"/>
+                                        <field name="note"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_kpi_crm_trigger_rule" model="ir.actions.act_window">
+        <field name="name">KPI CRM Triggers</field>
+        <field name="res_model">kpi.crm.trigger.rule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_kpi_crm_trigger_rule"
+              name="KPI Triggers"
+              parent="crm.crm_menu_config"
+              action="action_kpi_crm_trigger_rule"
+              sequence="95"
+              groups="odoo_kpi.group_kpi_manager,odoo_kpi.group_kpi_admin,sales_team.group_sale_manager"/>
+</odoo>

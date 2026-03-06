@@ -13,6 +13,7 @@ class KpiAssignment(models.Model):
     weight_override = fields.Float()
     effective_target = fields.Float(compute="_compute_effective_values", store=True)
     effective_weight = fields.Float(compute="_compute_effective_values", store=True)
+    value_ids = fields.One2many("kpi.value", "assignment_id", string="KPI Values")
 
     _sql_constraints = [
         (
@@ -35,4 +36,3 @@ class KpiAssignment(models.Model):
             target = rec.kpi_definition_id.target_ids[:1]
             rec.effective_target = rec.target_override if rec.target_override else (target.target_value or 0.0)
             rec.effective_weight = rec.weight_override if rec.weight_override else (target.weight or 0.0)
-

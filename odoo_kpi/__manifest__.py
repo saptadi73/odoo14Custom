@@ -2,10 +2,10 @@
 {
     "name": "Odoo KPI System",
     "summary": "Dynamic KPI management for employee, department, and team",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.2",
     "category": "Human Resources",
     "author": "Custom",
-    "depends": ["base", "mail", "hr", "crm"],
+    "depends": ["base", "mail", "hr"],
     "data": [
         "security/kpi_security.xml",
         "security/ir.model.access.csv",
@@ -25,4 +25,3 @@
     "application": True,
     "license": "LGPL-3",
 }
-
