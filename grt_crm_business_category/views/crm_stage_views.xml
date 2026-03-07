@@ -3,7 +3,7 @@
     <record id="crm_stage_view_form_business_category" model="ir.ui.view">
         <field name="name">crm.stage.form.business.category</field>
         <field name="model">crm.stage</field>
-        <field name="inherit_id" ref="crm.crm_stage_view_form"/>
+        <field name="inherit_id" ref="crm.crm_stage_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='team_id']" position="before">
                 <field name="company_id" invisible="1"/>
@@ -18,7 +18,7 @@
     <record id="crm_stage_view_tree_business_category" model="ir.ui.view">
         <field name="name">crm.stage.tree.business.category</field>
         <field name="model">crm.stage</field>
-        <field name="inherit_id" ref="crm.crm_stage_view_tree"/>
+        <field name="inherit_id" ref="crm.crm_stage_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="company_id" optional="show"/>

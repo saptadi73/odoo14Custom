@@ -52,11 +52,14 @@ class ResUsers(models.Model):
     def _get_team_business_categories(self):
         self.ensure_one()
         team_model = self.env["crm.team"].sudo()
+        user_id = self._origin.id or self.id
+        if not isinstance(user_id, int):
+            return self.env["crm.business.category"]
         domain_parts = []
         if "user_id" in team_model._fields:
-            domain_parts.append(("user_id", "=", self.id))
+            domain_parts.append(("user_id", "=", user_id))
         if "member_ids" in team_model._fields:
-            domain_parts.append(("member_ids", "in", self.id))
+            domain_parts.append(("member_ids", "in", user_id))
 
         if not domain_parts:
             return self.env["crm.business.category"]
