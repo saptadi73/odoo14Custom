@@ -1506,7 +1506,7 @@ Content-Type: application/json
 ```json
 {
   "mo_id": "WH/MO/00001",
-  "quantity": 2000,
+  "quantity": 1985.5,
   "silo101": 825,
   "silo102": 600,
   "silo103": 375,
@@ -1516,17 +1516,23 @@ Content-Type: application/json
 
 **Field Descriptions**:
 - `mo_id` (required): Manufacturing Order name/number (e.g., "WH/MO/00001")
-- `quantity` (optional): Update target quantity MO
-- Alias quantity yang juga didukung: `product_qty`, `quantity_to_produce`, `qty_to_produce`, `target_produksi`, `target_production`, `qty_producing`
+- `quantity` (optional): Actual finished goods dari middleware, update finished move tanpa mark done
+- Alias finished goods yang juga didukung: `weight_finished_goods`, `finished_qty`, `qty_finished`, `qty_producing`, `actual_weight_finished_goods`, `actual_weight_finished`, `actual_finished_qty`, `finished_goods_qty`
+- Alias target quantity yang eksplisit untuk rescale MO: `product_qty`, `quantity_to_produce`, `qty_to_produce`, `target_produksi`, `target_production`
 - `{equipment_code}` (optional): Equipment code SCADA (e.g., "silo101", "silo102") dengan nilai consumption quantity
 
 **How it works**:
 1. System akan mencari Manufacturing Order berdasarkan `mo_id`
-2. Jika quantity (atau alias quantity) diberikan, system akan:
+2. Jika `quantity` atau alias finished goods diberikan, system akan:
+   - update `quantity_done` pada finished move produk utama
+  - update `qty_producing` pada MO agar proses `Done` tetap bisa lanjut tanpa rescale
+   - tidak melakukan `mark done`
+   - tidak melakukan rescale MO
+3. Jika alias target quantity yang eksplisit diberikan, system akan:
    - re-scale MO menggunakan wizard standar Odoo `change.production.qty`
    - update `product_qty` dan raw/finished moves agar konsisten
-   - tidak menyetel `qty_producing` secara paksa (untuk menghindari re-hitungan konsumsi ke nilai BoM)
-3. Untuk setiap equipment code yang dikirim (kecuali `mo_id` dan key quantity):
+  - tidak menyetel `qty_producing` dari nilai target (agar tidak tercampur dengan actual output middleware)
+4. Untuk setiap equipment code yang dikirim (kecuali `mo_id`, key target quantity, dan key finished goods):
    - System mencari equipment berdasarkan code (e.g., "silo101")
    - Mencari raw material moves yang berelasi dengan equipment tersebut
    - Apply consumption quantity ke moves tersebut
@@ -1535,6 +1541,7 @@ Content-Type: application/json
 **Validation Rules**:
 - Endpoint hanya bisa update MO yang belum `done/cancel`.
 - Jika MO sudah `done` atau `cancel`, request akan ditolak.
+- Rescale hanya terjadi jika alias target quantity yang eksplisit ikut dikirim.
 
 **Response**:
 
@@ -1544,7 +1551,7 @@ Content-Type: application/json
   "message": "MO updated successfully",
   "mo_id": "WH/MO/00001",
   "mo_state": "confirmed",
-  "updated_quantity": 2000,
+  "updated_finished_qty": 1985.5,
   "consumed_items": [
     {
       "equipment_code": "silo101",

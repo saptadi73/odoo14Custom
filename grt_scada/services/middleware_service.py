@@ -710,54 +710,104 @@ class MiddlewareService:
                     'message': f'Cannot update MO "{mo_name}" in state "{mo_record.state}"',
                 }
             
-            # Update quantity jika ada.
-            # Support beberapa alias agar payload middleware yang berbeda format tetap terbaca.
-            quantity_keys = [
-                'quantity',
+            # Field target quantity dipisahkan dari payload actual middleware.
+            # `quantity` dari PLC diperlakukan sebagai actual finished goods, bukan rescale target MO.
+            target_quantity_keys = [
                 'product_qty',
                 'quantity_to_produce',
                 'qty_to_produce',
                 'target_produksi',
                 'target_production',
-                'qty_producing',
             ]
-            quantity = None
-            quantity_key_used = None
-            for key in quantity_keys:
+            finished_qty_keys = [
+                'quantity',
+                'finished_qty',
+                'qty_finished',
+                'qty_producing',
+                'weight_finished_goods',
+                'actual_weight_finished_goods',
+                'actual_weight_finished',
+                'actual_finished_qty',
+                'finished_goods_qty',
+            ]
+            target_quantity = None
+            target_quantity_key_used = None
+            for key in target_quantity_keys:
                 if update_data.get(key) is not None:
-                    quantity = update_data.get(key)
-                    quantity_key_used = key
+                    target_quantity = update_data.get(key)
+                    target_quantity_key_used = key
                     break
 
-            if quantity is not None:
+            if target_quantity is not None:
                 try:
-                    quantity = float(quantity)
+                    target_quantity = float(target_quantity)
                 except (TypeError, ValueError):
                     return {
                         'status': 'error',
-                        'message': f'Invalid quantity value: {quantity}',
+                        'message': f'Invalid target quantity value: {target_quantity}',
                     }
 
-                if quantity <= 0:
+                if target_quantity <= 0:
                     return {
                         'status': 'error',
-                        'message': 'Quantity must be greater than 0',
+                        'message': 'Target quantity must be greater than 0',
                     }
 
                 # Gunakan wizard standar Odoo agar:
                 # - product_qty berubah
                 # - raw/finished moves ikut re-scale konsisten
                 # - workorder expectation ikut ter-update
-                if abs((mo_record.product_qty or 0.0) - quantity) > 1e-9:
+                if abs((mo_record.product_qty or 0.0) - target_quantity) > 1e-9:
                     change_wizard = self.env['change.production.qty'].create({
                         'mo_id': mo_record.id,
-                        'product_qty': quantity,
+                        'product_qty': target_quantity,
                     })
                     change_wizard.change_prod_qty()
 
                 _logger.info(
-                    f'Updated MO {mo_name} quantity from "{quantity_key_used}" to {quantity} '
+                    f'Updated MO {mo_name} target quantity from "{target_quantity_key_used}" to {target_quantity} '
                     f'(rescaled with change.production.qty)'
+                )
+
+            finished_qty = None
+            finished_qty_key_used = None
+            for key in finished_qty_keys:
+                if update_data.get(key) is not None:
+                    finished_qty = update_data.get(key)
+                    finished_qty_key_used = key
+                    break
+
+            if finished_qty is not None:
+                try:
+                    finished_qty = float(finished_qty)
+                except (TypeError, ValueError):
+                    return {
+                        'status': 'error',
+                        'message': f'Invalid finished quantity value: {finished_qty}',
+                    }
+
+                if finished_qty <= 0:
+                    return {
+                        'status': 'error',
+                        'message': 'Finished quantity must be greater than 0',
+                    }
+
+                finished_moves = mo_record.move_finished_ids.filtered(
+                    lambda move: move.product_id.id == mo_record.product_id.id and move.state not in ['done', 'cancel']
+                )
+                if not finished_moves:
+                    return {
+                        'status': 'error',
+                        'message': 'No finished product move found for this MO',
+                    }
+
+                finished_moves[0].quantity_done = finished_qty
+                # Keep in-progress MO consistent with middleware actual output
+                # without rescaling product_qty and BoM expectations.
+                mo_record.qty_producing = finished_qty
+                _logger.info(
+                    f'Updated MO {mo_name} finished quantity from "{finished_qty_key_used}" '
+                    f'to {finished_qty}'
                 )
             
             # Process consumption per equipment code
@@ -768,7 +818,7 @@ class MiddlewareService:
             
             for key, value in update_data.items():
                 # Skip non-equipment keys
-                if key == 'mo_id' or key in quantity_keys:
+                if key == 'mo_id' or key in target_quantity_keys or key in finished_qty_keys:
                     continue
                 
                 # Asumsikan key adalah equipment_code (misal: silo101, silo102)
@@ -853,8 +903,11 @@ class MiddlewareService:
                 'consumed_items': consumed_items,
             }
             
-            if quantity is not None:
-                result['updated_quantity'] = quantity
+            if target_quantity is not None:
+                result['updated_quantity'] = target_quantity
+
+            if finished_qty is not None:
+                result['updated_finished_qty'] = finished_qty
             
             if errors:
                 result['errors'] = errors

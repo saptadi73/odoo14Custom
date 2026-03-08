@@ -4331,3 +4331,25 @@ Treating it as ordinary text because it's so short.</paragraph></system_message>
 2026-03-07 06:08:39,937 15532 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 06:08:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.027
 2026-03-07 06:08:42,686 15532 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 06:08:42] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.011
 2026-03-07 06:09:30,282 15532 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [07/Mar/2026 06:09:30] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.029
+2026-03-08 11:21:46,899 29876 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-08 11:21:46,900 29876 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-08 11:21:46,900 29876 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-08 11:21:46,900 29876 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-08 11:21:49,047 29876 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-08 11:21:49,353 29876 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-08 11:21:49,487 29876 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-08 11:21:49,507 29876 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-08 11:21:50,663 29876 INFO kanjabung_MRP odoo.modules.loading: loading 92 modules... 
+2026-03-08 11:21:50,967 29876 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-08 11:21:52,003 29876 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-08 11:21:52,003 29876 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-08 11:21:52,003 29876 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-08 11:21:52,004 29876 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-08 11:21:52,004 29876 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-08 11:21:52,004 29876 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-08 11:21:52,004 29876 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-08 11:21:52,004 29876 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-08 11:21:53,191 29876 INFO kanjabung_MRP odoo.modules.loading: 92 modules loaded in 2.53s, 0 queries (+0 extra) 
+2026-03-08 11:21:54,524 29876 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 

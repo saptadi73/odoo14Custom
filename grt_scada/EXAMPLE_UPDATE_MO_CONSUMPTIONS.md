@@ -27,7 +27,7 @@ Berdasarkan screenshot yang diberikan, MO dengan ID `WH/MO/00001` memiliki kompo
 ```javascript
 const payload = {
   mo_id: "WH/MO/00001",
-  quantity: 2000,       // Optional: Update jumlah produksi
+  quantity: 1985.5,     // Optional: Actual finished goods dari middleware, tanpa mark done
   silo101: 825,         // SILO A - Pollard Angsa
   silo102: 600,         // SILO B - Kopra mesh (misal ada perubahan dari 375 ke 600)
   silo103: 375,         // SILO C - PKE Pellet (misal equipment code SILO C adalah silo103)
@@ -41,6 +41,8 @@ const payload = {
 - Key harus menggunakan `equipment_code` yang terdaftar di master SCADA Equipment
 - Contoh: Jika SILO A memiliki `equipment_code = "SILO A"`, maka gunakan key `"SILO A"` 
 - Jika equipment code adalah "silo101", maka gunakan "silo101"
+- `quantity` pada flow middleware ini diperlakukan sebagai actual finished goods, bukan target quantity MO
+- Jika butuh rescale target MO, kirim field target yang eksplisit seperti `product_qty` atau `target_production`
 - Value adalah consumption quantity dalam unit yang sesuai
 
 ## Contoh Implementasi
