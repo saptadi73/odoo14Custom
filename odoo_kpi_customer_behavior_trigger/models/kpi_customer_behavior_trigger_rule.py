@@ -1,5 +1,4 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
 
 
 class KpiCustomerBehaviorTriggerRule(models.Model):
@@ -119,15 +118,28 @@ class KpiCustomerBehaviorTriggerRuleLine(models.Model):
     rule_id = fields.Many2one("kpi.customer.behavior.trigger.rule", required=True, ondelete="cascade", index=True)
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
+    business_category_id = fields.Many2one(
+        "crm.business.category",
+        related="rule_id.business_category_id",
+        store=True,
+        readonly=True,
+        index=True,
+    )
     segment_id = fields.Many2one("customer.behavior.segment", required=True, ondelete="restrict", index=True)
-    employee_id = fields.Many2one("hr.employee", required=True, ondelete="cascade", index=True)
+    employee_id = fields.Many2one(
+        "hr.employee",
+        related="assignment_id.employee_id",
+        store=True,
+        readonly=True,
+        index=True,
+    )
     assignment_id = fields.Many2one("kpi.assignment", required=True, ondelete="cascade", index=True)
     score_value = fields.Float(required=True, default=0.0)
     source_module = fields.Char(default="sale.customer_behavior", required=True)
     note = fields.Char()
 
-    @api.constrains("employee_id", "assignment_id")
-    def _check_assignment_employee(self):
+    @api.constrains("business_category_id", "segment_id")
+    def _check_segment_business_category(self):
         for rec in self:
-            if rec.assignment_id.employee_id != rec.employee_id:
-                raise ValidationError(_("Employee must match KPI Assignment employee."))
+            if rec.segment_id and rec.segment_id.business_category_id != rec.business_category_id:
+                raise ValidationError(_("Segment business category must match rule business category."))

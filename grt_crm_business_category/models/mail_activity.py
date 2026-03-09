@@ -5,6 +5,7 @@ from datetime import timedelta
 class MailActivity(models.Model):
     _inherit = "mail.activity"
 
+    kilometer = fields.Float(string="Kilometer (KM)", digits=(16, 2))
     gps_captured = fields.Boolean(string="GPS Captured")
     gps_latitude = fields.Float(string="GPS Latitude", digits=(9, 6))
     gps_longitude = fields.Float(string="GPS Longitude", digits=(9, 6))
@@ -98,7 +99,13 @@ class MailActivity(models.Model):
             vals["gps_openstreetmap_url"] = self._build_osm_url(vals.get("gps_latitude"), vals.get("gps_longitude"))
         elif "gps_latitude" in vals or "gps_longitude" in vals:
             vals["gps_openstreetmap_url"] = False
-        return super().write(vals)
+        result = super().write(vals)
+
+        if "kilometer" in vals:
+            histories = self.env["crm.activity.history"].sudo().search([("activity_id", "in", self.ids)])
+            if histories:
+                histories.write({"kilometer": vals.get("kilometer") or 0.0})
+        return result
 
     def action_feedback(self, feedback=False, attachment_ids=None):
         crm_activities = self.filtered(lambda a: a.res_model == "crm.lead")
@@ -161,6 +168,7 @@ class MailActivity(models.Model):
                     "created_by_id": self.env.user.id,
                     "summary": activity.summary,
                     "note": activity.note,
+                    "kilometer": activity.kilometer,
                     "date_deadline": activity.date_deadline,
                     "scheduled_at": fields.Datetime.now(),
                     "state": "scheduled",
@@ -215,6 +223,7 @@ class MailActivity(models.Model):
                         "created_by_id": self.env.user.id,
                         "summary": activity.summary,
                         "note": activity.note,
+                        "kilometer": activity.kilometer,
                         "date_deadline": activity.date_deadline,
                         "scheduled_at": fields.Datetime.now(),
                     }

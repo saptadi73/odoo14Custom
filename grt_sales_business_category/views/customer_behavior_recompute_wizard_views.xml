@@ -9,6 +9,7 @@
                     <group>
                         <field name="mode"/>
                         <field name="config_id"/>
+                        <field name="business_category_id"/>
                     </group>
                     <group>
                         <field name="partner_ids" attrs="{'required': [('mode', '=', 'selected')], 'invisible': [('mode', '=', 'all')]}"/>

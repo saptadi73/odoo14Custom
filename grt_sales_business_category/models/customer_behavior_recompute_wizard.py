@@ -13,11 +13,18 @@ class CustomerBehaviorRecomputeWizard(models.TransientModel):
         default="selected",
         required=True,
     )
+    business_category_id = fields.Many2one(
+        "crm.business.category",
+        string="Business Category",
+        related="config_id.business_category_id",
+        readonly=True,
+    )
     partner_ids = fields.Many2many("res.partner", string="Customers")
     config_id = fields.Many2one(
         "customer.behavior.config",
         string="Configuration",
         default=lambda self: self.env["customer.behavior.config"].sudo().get_active_config().id,
+        domain=[("active", "=", True)],
         required=True,
     )
 

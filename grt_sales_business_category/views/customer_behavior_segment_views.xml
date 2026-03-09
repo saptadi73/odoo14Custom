@@ -7,6 +7,8 @@
             <tree>
                 <field name="sequence"/>
                 <field name="name"/>
+                <field name="config_id"/>
+                <field name="business_category_id"/>
                 <field name="code"/>
                 <field name="active"/>
             </tree>
@@ -21,6 +23,8 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="config_id"/>
+                        <field name="business_category_id" readonly="1"/>
                         <field name="code"/>
                         <field name="sequence"/>
                         <field name="active"/>

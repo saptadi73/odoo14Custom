@@ -36,3 +36,28 @@ class KpiAssignment(models.Model):
             target = rec.kpi_definition_id.target_ids[:1]
             rec.effective_target = rec.target_override if rec.target_override else (target.target_value or 0.0)
             rec.effective_weight = rec.weight_override if rec.weight_override else (target.weight or 0.0)
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            employee_name = rec.employee_id.name or "-"
+            kpi_name = rec.kpi_definition_id.name or "-"
+            period_name = rec.period_id.name or "-"
+            result.append((rec.id, "%s - %s - %s" % (employee_name, kpi_name, period_name)))
+        return result
+
+    @api.model
+    def name_search(self, name="", args=None, operator="ilike", limit=100):
+        args = list(args or [])
+        if name:
+            domain = [
+                "|",
+                "|",
+                ("employee_id.name", operator, name),
+                ("kpi_definition_id.name", operator, name),
+                ("period_id.name", operator, name),
+            ]
+            records = self.search(domain + args, limit=limit)
+            if records:
+                return records.name_get()
+        return super().name_search(name=name, args=args, operator=operator, limit=limit)

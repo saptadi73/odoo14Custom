@@ -142,7 +142,13 @@ class KpiCrmTriggerRuleLine(models.Model):
     active = fields.Boolean(default=True)
     stage_id = fields.Many2one("crm.stage", string="Stage")
     activity_type_id = fields.Many2one("mail.activity.type", string="Activity Type")
-    employee_id = fields.Many2one("hr.employee", required=True, ondelete="cascade", index=True)
+    employee_id = fields.Many2one(
+        "hr.employee",
+        related="assignment_id.employee_id",
+        store=True,
+        readonly=True,
+        index=True,
+    )
     assignment_id = fields.Many2one("kpi.assignment", required=True, ondelete="cascade", index=True)
     value = fields.Float(required=True, default=1.0)
     source_module = fields.Char(default="crm", required=True)
@@ -154,12 +160,6 @@ class KpiCrmTriggerRuleLine(models.Model):
             if rec.stage_id or rec.activity_type_id:
                 continue
             raise ValidationError(_("Either Stage or Activity Type must be set."))
-
-    @api.constrains("employee_id", "assignment_id")
-    def _check_assignment_employee(self):
-        for rec in self:
-            if rec.assignment_id.employee_id != rec.employee_id:
-                raise ValidationError(_("Employee must match KPI Assignment employee."))
 
     @api.constrains("rule_id", "stage_id")
     def _check_stage_business_category(self):

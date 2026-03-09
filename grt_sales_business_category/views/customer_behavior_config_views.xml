@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="business_category_id"/>
                 <field name="repeat_days"/>
                 <field name="at_risk_days"/>
                 <field name="inactive_days"/>
@@ -29,6 +30,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="business_category_id"/>
                         <field name="active"/>
                     </group>
                     <group string="Threshold Days">

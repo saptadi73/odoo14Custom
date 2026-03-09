@@ -24,23 +24,11 @@
                         <strong>LOT:</strong> <span t-field="label.lot_id.name"/>
                     </div>
                     <div t-if="label.barcode" class="text-center align-middle" style="width: 100%; height: 13px; padding: 0 8px;">
-                        <t t-if="label.wizard_id.humanreadable" t-set="show_code" t-value="1"/>
-                        <t t-else="" t-set="show_code" t-value="0" />
-                        <img alt="Barcode" t-if="label.lot_id"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.barcode, 600, 100, show_code)"
-                             style="overflow: hidden; width: 100%; height: 1.4rem;"
-                        />
-                        <img alt="Barcode" t-elif="len(label.barcode) == 13"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN13', label.barcode, 600, 100, show_code)"
-                             style="overflow: hidden; width: 100%; height: 1.4rem;"
-                        />
-                        <img alt="Barcode" t-elif="len(label.barcode) == 8"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN8', label.barcode, 600, 100, show_code)"
+                        <img alt="Barcode"
+                             t-att-src="label.get_barcode_url(600, 100)"
+                             t-att-data-alt-src="label.get_barcode_url_alt(600, 100)"
+                             onerror="if (this.dataset.altSrc &amp;&amp; this.src !== this.dataset.altSrc) { this.src = this.dataset.altSrc; }"
                              style="overflow: hidden; width: 100%; height: 1.4rem;"/>
-                        <img alt="Barcode" t-else=""
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.barcode, 600, 100, show_code)"
-                             style="overflow: hidden; width: 100%; height: 1.4rem;"
-                        />
                     </div>
                 </td>
             </tr>
@@ -65,6 +53,69 @@
                                 <t t-call="garazd_product_label.label_57x35"/>
                             </div>
                             <t t-set="count" t-value="count+1" />
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="label_a4_90x50">
+        <table class="table" style="margin: 0; padding: 0; width: 100%; height: 100%;">
+            <tr style="border: 0; margin: 0; padding: 0; height: 100%;">
+                <td class="text-center" style="border: 0; margin: 0; padding: 4px 6px; vertical-align: top;">
+                    <div style="overflow: hidden; height: 38px; font-size: 13px; font-weight: bold; line-height: 1.2; margin-bottom: 2px;">
+                        <span t-field="label.product_id.name"/>
+                        <span t-if="label.product_id.product_template_attribute_value_ids"
+                              t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids))"
+                              style="font-size: 10px; display: block; font-weight: normal;"/>
+                    </div>
+                    <div style="width: 100%; font-size: 18px; font-weight: bold; line-height: 1.0; margin: 0 0 2px 0;">
+                        <span t-if="label.product_id.currency_id.position == 'before'" t-field="label.product_id.currency_id.symbol"/>
+                        <span t-field="label.product_id.lst_price"/>
+                        <span t-if="label.product_id.currency_id.position == 'after'" t-field="label.product_id.currency_id.symbol"/>
+                    </div>
+                    <div style="width: 100%; font-size: 10px; line-height: 1.1; margin-bottom: 2px;">
+                        <span t-if="label.product_id.default_code">
+                            <strong>Code:</strong> <span t-field="label.product_id.default_code"/>
+                        </span>
+                    </div>
+                    <div t-if="label.lot_id" style="width: 100%; font-size: 10px; line-height: 1.1; margin-bottom: 2px;">
+                        <strong>LOT:</strong> <span t-field="label.lot_id.name"/>
+                    </div>
+                    <div t-elif="label.wizard_id.batch" style="width: 100%; font-size: 10px; line-height: 1.1; margin-bottom: 2px;">
+                        <strong>BATCH:</strong> <span t-field="label.wizard_id.batch"/>
+                    </div>
+                    <div t-if="label.barcode" class="text-center align-middle" style="width: 100%; height: 32px; padding: 0 2px; margin-top: 2px;">
+                        <img alt="Barcode"
+                             t-att-src="label.get_barcode_url(650, 130)"
+                             t-att-data-alt-src="label.get_barcode_url_alt(650, 130)"
+                             onerror="if (this.dataset.altSrc &amp;&amp; this.src !== this.dataset.altSrc) { this.src = this.dataset.altSrc; }"
+                             style="overflow: hidden; width: 100%; height: 2.1rem;"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </template>
+
+    <template id="report_product_label_a4_90x50_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <t t-set="count" t-value="0"/>
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <t t-foreach="docs" t-as="label">
+                        <t t-set="qty" t-value="1"/>
+                        <t t-if="label.qty">
+                            <t t-set="qty" t-value="label.qty"/>
+                        </t>
+                        <t t-foreach="list(range(qty))" t-as="index_qty">
+                            <div t-if="count and count % 8 == 0" style="page-break-after: always;"/>
+                            <div t-if="count % 2 == 0" style="clear: both;"/>
+                            <div t-att-style="'width: 346px; float: left; height: 188px; margin: 0 10px 10px; border: {};'.format('%dpx solid #777;' % label.wizard_id.border_width if label.wizard_id.border_width else '0')">
+                                <t t-call="garazd_product_label.label_a4_90x50"/>
+                            </div>
+                            <t t-set="count" t-value="count + 1"/>
                         </t>
                     </t>
                 </div>
@@ -104,19 +155,10 @@
                                                 <strong>LOT:</strong> <span t-field="label.lot_id.name"/>
                                             </div>
                                             <div t-if="label.barcode" class="text-center align-middle" style="margin: 2px; height: 32px; clear: both;">
-                                                <t t-if="label.wizard_id.humanreadable" t-set="show_code" t-value="1"/>
-                                                <t t-else="" t-set="show_code" t-value="0" />
-                                                <img alt="Barcode" t-if="label.lot_id"
-                                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.barcode, 600, 100, show_code)"
-                                                     style="overflow: hidden; width: 100%; height: 2rem;"/>
-                                                <img alt="Barcode" t-elif="len(label.barcode) == 13"
-                                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN13', label.barcode, 600, 100, show_code)"
-                                                     style="overflow: hidden; width: 100%; height: 2rem;"/>
-                                                <img alt="Barcode" t-elif="len(label.barcode) == 8"
-                                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN8', label.barcode, 600, 100, show_code)"
-                                                     style="overflow: hidden; width: 100%; height: 2rem;"/>
-                                                <img alt="Barcode" t-else=""
-                                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.barcode, 600, 100, show_code)"
+                                                <img alt="Barcode"
+                                                     t-att-src="label.get_barcode_url(600, 100)"
+                                                     t-att-data-alt-src="label.get_barcode_url_alt(600, 100)"
+                                                     onerror="if (this.dataset.altSrc &amp;&amp; this.src !== this.dataset.altSrc) { this.src = this.dataset.altSrc; }"
                                                      style="overflow: hidden; width: 100%; height: 2rem;"/>
                                             </div>
                                         </td>
@@ -166,19 +208,10 @@
 
                     <!-- Barcode -->
                     <div t-if="label.barcode" class="text-center align-middle" style="width: 100%; height: 30px; padding: 2px 0; margin: 2px 0;">
-                        <t t-if="label.wizard_id.humanreadable" t-set="show_code" t-value="1"/>
-                        <t t-else="" t-set="show_code" t-value="0" />
-                        <img alt="Barcode" t-if="label.lot_id"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.barcode, 500, 80, show_code)"
-                             style="overflow: hidden; width: 95%; height: 1.8rem;"/>
-                        <img alt="Barcode" t-elif="len(label.barcode) == 13"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN13', label.barcode, 500, 80, show_code)"
-                             style="overflow: hidden; width: 95%; height: 1.8rem;"/>
-                        <img alt="Barcode" t-elif="len(label.barcode) == 8"
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('EAN8', label.barcode, 500, 80, show_code)"
-                             style="overflow: hidden; width: 95%; height: 1.8rem;"/>
-                        <img alt="Barcode" t-else=""
-                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=%s' % ('Code128', label.barcode, 500, 80, show_code)"
+                        <img alt="Barcode"
+                             t-att-src="label.get_barcode_url(500, 80)"
+                             t-att-data-alt-src="label.get_barcode_url_alt(500, 80)"
+                             onerror="if (this.dataset.altSrc &amp;&amp; this.src !== this.dataset.altSrc) { this.src = this.dataset.altSrc; }"
                              style="overflow: hidden; width: 95%; height: 1.8rem;"/>
                     </div>
 

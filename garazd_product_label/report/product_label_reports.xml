@@ -43,6 +43,16 @@
         <field name="print_report_name">'Product Labels 57x35mm'</field>
     </record>
 
+    <record id="action_report_product_label_A4_90x50" model="ir.actions.report">
+        <field name="name">Product Labels 90x50mm (A4, 8 pcs)</field>
+        <field name="model">print.product.label.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="paperformat_id" ref="paperformat_label_a4_blank"/>
+        <field name="report_name">garazd_product_label.report_product_label_a4_90x50_template</field>
+        <field name="report_file">garazd_product_label.report_product_label_a4_90x50_template</field>
+        <field name="print_report_name">'Product Labels 90x50mm'</field>
+    </record>
+
     <record id="action_report_product_label_50x38" model="ir.actions.report">
         <field name="name">Product Labels 50x38mm</field>
         <field name="model">print.product.label.line</field>
@@ -66,8 +76,8 @@
     <record id="paperformat_label_thermal_4x6" model="report.paperformat">
         <field name="name">Thermal Printer 4x6 inch (Xprinter)</field>
         <field name="format">custom</field>
-        <field name="page_height">152.4</field>
-        <field name="page_width">101.6</field>
+        <field name="page_height">152</field>
+        <field name="page_width">102</field>
         <field name="orientation">Portrait</field>
         <field name="margin_top">0</field>
         <field name="margin_bottom">0</field>

@@ -21,7 +21,6 @@ plus a two-step approval flow: Sales Team Leader then Accounting Manager.
         "security/security.xml",
         "security/ir.model.access.csv",
         "security/ir.rule.csv",
-        "data/customer_behavior_segment_data.xml",
         "views/crm_business_category_views.xml",
         "views/customer_behavior_dashboard_views.xml",
         "views/customer_behavior_recompute_wizard_views.xml",

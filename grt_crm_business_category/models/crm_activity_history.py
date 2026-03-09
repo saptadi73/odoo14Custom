@@ -35,6 +35,7 @@ class CrmActivityHistory(models.Model):
     created_by_id = fields.Many2one("res.users", string="Created By", readonly=True)
     summary = fields.Char(string="Summary", readonly=True)
     note = fields.Html(string="Scheduled Note", readonly=True)
+    kilometer = fields.Float(string="Kilometer (KM)", digits=(16, 2), readonly=True)
     date_deadline = fields.Date(string="Deadline", readonly=True)
     scheduled_at = fields.Datetime(string="Scheduled At", readonly=True)
 

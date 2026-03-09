@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class CustomerBehaviorSegment(models.Model):
@@ -7,6 +7,20 @@ class CustomerBehaviorSegment(models.Model):
     _order = "sequence, id"
 
     name = fields.Char(required=True)
+    config_id = fields.Many2one(
+        "customer.behavior.config",
+        string="Behavior Config",
+        required=True,
+        ondelete="cascade",
+        index=True,
+    )
+    business_category_id = fields.Many2one(
+        "crm.business.category",
+        related="config_id.business_category_id",
+        store=True,
+        readonly=True,
+        index=True,
+    )
     code = fields.Selection(
         [
             ("repeat", "Repeat"),
@@ -23,5 +37,26 @@ class CustomerBehaviorSegment(models.Model):
     active = fields.Boolean(default=True)
 
     _sql_constraints = [
-        ("customer_behavior_segment_code_uniq", "unique(code)", "Segment code must be unique."),
+        (
+            "customer_behavior_segment_code_config_uniq",
+            "unique(code, config_id)",
+            "Segment code must be unique per customer behavior config.",
+        ),
     ]
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            category_name = rec.business_category_id.name or "-"
+            result.append((rec.id, "%s - %s" % (category_name, rec.name)))
+        return result
+
+    @api.model
+    def name_search(self, name="", args=None, operator="ilike", limit=100):
+        args = list(args or [])
+        if name:
+            domain = ["|", ("name", operator, name), ("business_category_id.name", operator, name)]
+            records = self.search(domain + args, limit=limit)
+            if records:
+                return records.name_get()
+        return super().name_search(name=name, args=args, operator=operator, limit=limit)

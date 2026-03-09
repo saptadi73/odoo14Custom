@@ -3,7 +3,10 @@
 # @author: Iryna Razumovska (<support@garazd.biz>)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0.html).
 
+from urllib.parse import quote
+
 from odoo import api, fields, models
+from reportlab.graphics.barcode import createBarcodeDrawing
 
 
 class PrintProductLabelLine(models.TransientModel):
@@ -38,6 +41,49 @@ class PrintProductLabelLine(models.TransientModel):
     def _compute_barcode(self):
         for label in self:
             label.barcode = label.lot_id.name or label.product_id.barcode
+
+    def _get_barcode_type(self):
+        self.ensure_one()
+        barcode = (self.barcode or '').strip()
+        if self.lot_id:
+            return 'Code128'
+        if barcode.isdigit() and len(barcode) == 13:
+            return 'EAN13'
+        if barcode.isdigit() and len(barcode) == 8:
+            return 'EAN8'
+        return 'Code128'
+
+    def get_barcode_url(self, width=600, height=100):
+        self.ensure_one()
+        if not self.barcode:
+            return False
+        barcode_value = quote(self.barcode, safe='')
+        humanreadable = 1 if self.wizard_id.humanreadable else 0
+        # Default Odoo barcode route with trailing slash is broadly compatible.
+        return '/report/barcode/?type=%s&value=%s&width=%s&height=%s&humanreadable=%s' % (
+            self._get_barcode_type(),
+            barcode_value,
+            width,
+            height,
+            humanreadable,
+        )
+
+    def get_barcode_url_alt(self, width=600, height=100):
+        self.ensure_one()
+        if not self.barcode:
+            return False
+        barcode_value = quote(self.barcode, safe='')
+        humanreadable = 1 if self.wizard_id.humanreadable else 0
+        # Fallback variant without trailing slash for strict proxies.
+        return '/report/barcode?type=%s&value=%s&width=%s&height=%s&humanreadable=%s' % (
+            self._get_barcode_type(),
+            barcode_value,
+            width,
+            height,
+            humanreadable,
+        )
+
+
 
     def action_plus_qty(self):
         self.ensure_one()

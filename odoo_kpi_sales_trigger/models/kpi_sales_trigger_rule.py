@@ -106,7 +106,13 @@ class KpiSalesTriggerRuleLine(models.Model):
     rule_id = fields.Many2one("kpi.sales.trigger.rule", required=True, ondelete="cascade", index=True)
     sequence = fields.Integer(default=10)
     active = fields.Boolean(default=True)
-    employee_id = fields.Many2one("hr.employee", required=True, ondelete="cascade", index=True)
+    employee_id = fields.Many2one(
+        "hr.employee",
+        related="assignment_id.employee_id",
+        store=True,
+        readonly=True,
+        index=True,
+    )
     assignment_id = fields.Many2one("kpi.assignment", required=True, ondelete="cascade", index=True)
     on_time_score = fields.Float(required=True, default=1.0)
     late_penalty_per_day = fields.Float(default=0.0)
@@ -115,12 +121,6 @@ class KpiSalesTriggerRuleLine(models.Model):
     transaction_bonus_score = fields.Float(default=0.0)
     source_module = fields.Char(default="sale", required=True)
     note = fields.Char()
-
-    @api.constrains("employee_id", "assignment_id")
-    def _check_assignment_employee(self):
-        for rec in self:
-            if rec.assignment_id.employee_id != rec.employee_id:
-                raise ValidationError(_("Employee must match KPI Assignment employee."))
 
     @api.constrains("on_time_score", "late_penalty_per_day", "minimum_score", "transaction_amount_threshold", "transaction_bonus_score")
     def _check_score_values(self):

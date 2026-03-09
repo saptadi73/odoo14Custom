@@ -31,8 +31,8 @@
                                 <tree editable="bottom">
                                     <field name="sequence"/>
                                     <field name="active"/>
-                                    <field name="employee_id"/>
                                     <field name="assignment_id"/>
+                                    <field name="employee_id" readonly="1"/>
                                     <field name="on_time_score"/>
                                     <field name="late_penalty_per_day"/>
                                     <field name="minimum_score"/>
@@ -45,8 +45,8 @@
                                     <group>
                                         <field name="sequence"/>
                                         <field name="active"/>
-                                        <field name="employee_id"/>
-                                        <field name="assignment_id" domain="[('employee_id', '=', employee_id)]"/>
+                                        <field name="assignment_id"/>
+                                        <field name="employee_id" readonly="1"/>
                                         <field name="source_module"/>
                                     </group>
                                     <group string="Scoring">

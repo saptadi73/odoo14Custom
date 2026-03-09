@@ -28,15 +28,20 @@ class CustomerBehaviorAnalysis(models.Model):
 
     _sql_constraints = [
         (
-            "customer_behavior_analysis_partner_date_uniq",
-            "unique(partner_id, analysis_date)",
-            "Only one analysis per customer per date is allowed.",
+            "customer_behavior_analysis_partner_date_category_uniq",
+            "unique(partner_id, analysis_date, business_category_id)",
+            "Only one analysis per customer, business category, and date is allowed.",
         ),
     ]
 
     @api.model
-    def _get_segment_by_code(self, code):
-        return self.env["customer.behavior.segment"].search([("code", "=", code)], limit=1)
+    def _get_segment_by_code(self, code, config):
+        if not config:
+            return self.env["customer.behavior.segment"]
+        return self.env["customer.behavior.segment"].search(
+            [("code", "=", code), ("config_id", "=", config.id)],
+            limit=1,
+        )
 
     @api.model
     def _determine_segment_code(self, days_since_last_purchase, previous_gap_days, total_orders, config):
@@ -55,30 +60,23 @@ class CustomerBehaviorAnalysis(models.Model):
         return "repeat"
 
     @api.model
-    def _reset_partner_behavior(self, partners, analysis_date):
+    def _reset_partner_behavior(self, partners, analysis_date, business_category=None):
         partners = partners.commercial_partner_id
         if not partners:
             return
-        self.sudo().search(
-            [
-                ("partner_id", "in", partners.ids),
-                ("analysis_date", "=", analysis_date),
-            ]
-        ).unlink()
-        partners.write(
-            {
-                "customer_segment_id": False,
-                "behavior_business_category_id": False,
-                "last_sale_date": False,
-                "total_sales_amount": 0.0,
-                "sales_frequency": 0,
-                "days_since_last_order": 0,
-            }
-        )
+        domain = [
+            ("partner_id", "in", partners.ids),
+            ("analysis_date", "=", analysis_date),
+        ]
+        if business_category:
+            domain.append(("business_category_id", "=", business_category.id))
+        self.sudo().search(domain).unlink()
 
     @api.model
-    def compute_customer_behavior(self, config=None, partners=None):
-        config = config or self.env["customer.behavior.config"].sudo().get_active_config()
+    def _compute_customer_behavior_for_config(self, config, partners=None):
+        if not config or not config.business_category_id:
+            return True
+
         today = fields.Date.context_today(self)
         partner_filter_ids = partners.commercial_partner_id.ids if partners else []
 
@@ -86,6 +84,7 @@ class CustomerBehaviorAnalysis(models.Model):
             ("state", "=", "sale"),
             ("partner_id", "!=", False),
             ("amount_total", ">=", config.min_transaction),
+            ("business_category_id", "=", config.business_category_id.id),
         ]
         if partner_filter_ids:
             domain.append(("partner_id", "child_of", partner_filter_ids))
@@ -98,13 +97,13 @@ class CustomerBehaviorAnalysis(models.Model):
 
         if partners:
             commercial_partners = partners.commercial_partner_id
-            self._reset_partner_behavior(commercial_partners, today)
-            partners = commercial_partners.filtered(lambda p: p.id in orders_by_partner)
+            self._reset_partner_behavior(commercial_partners, today, business_category=config.business_category_id)
+            partners_to_process = commercial_partners.filtered(lambda p: p.id in orders_by_partner)
         else:
-            partners = self.env["res.partner"].sudo().browse(list(orders_by_partner.keys()))
+            partners_to_process = self.env["res.partner"].sudo().browse(list(orders_by_partner.keys()))
         analysis_model = self.sudo()
 
-        for partner in partners:
+        for partner in partners_to_process:
             partner_orders = orders_by_partner.get(partner.id, [])
             if not partner_orders:
                 continue
@@ -127,17 +126,21 @@ class CustomerBehaviorAnalysis(models.Model):
                 total_orders=total_orders,
                 config=config,
             )
-            segment = self._get_segment_by_code(segment_code) if segment_code else False
-            business_category = last_order.business_category_id
+            segment = self._get_segment_by_code(segment_code, config) if segment_code else False
+            business_category = config.business_category_id
 
             existing = analysis_model.search(
-                [("partner_id", "=", partner.id), ("analysis_date", "=", today)],
+                [
+                    ("partner_id", "=", partner.id),
+                    ("analysis_date", "=", today),
+                    ("business_category_id", "=", business_category.id),
+                ],
                 limit=1,
             )
             vals = {
                 "partner_id": partner.id,
                 "segment_id": segment.id if segment else False,
-                "business_category_id": business_category.id if business_category else False,
+                "business_category_id": business_category.id,
                 "last_purchase_date": last_purchase_date,
                 "previous_purchase_date": previous_purchase_date,
                 "days_since_last_purchase": days_since_last_purchase,
@@ -151,15 +154,18 @@ class CustomerBehaviorAnalysis(models.Model):
             else:
                 analysis_model.create(vals)
 
-            partner.write(
-                {
-                    "customer_segment_id": segment.id if segment else False,
-                    "behavior_business_category_id": business_category.id if business_category else False,
-                    "last_sale_date": last_purchase_date,
-                    "total_sales_amount": total_amount,
-                    "sales_frequency": total_orders,
-                    "days_since_last_order": days_since_last_purchase,
-                }
-            )
+            if not partner.behavior_business_category_id:
+                partner.behavior_business_category_id = business_category.id
+        return True
 
+    @api.model
+    def compute_customer_behavior(self, config=None, partners=None):
+        if config:
+            return self._compute_customer_behavior_for_config(config=config, partners=partners)
+
+        configs = self.env["customer.behavior.config"].sudo().search(
+            [("active", "=", True), ("business_category_id", "!=", False)]
+        )
+        for rec in configs:
+            self._compute_customer_behavior_for_config(config=rec, partners=partners)
         return True

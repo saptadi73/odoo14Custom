@@ -8,6 +8,7 @@
                 <sheet>
                     <group>
                         <field name="analysis_date"/>
+                        <field name="business_category_id"/>
                         <field name="total_revenue"/>
                         <field name="total_customers"/>
                     </group>
