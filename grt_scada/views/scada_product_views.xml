@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Inherit existing product views to show product_tmpl_id -->
     <record id="view_product_template_tree_scada_product_tmpl_id" model="ir.ui.view">
         <field name="name">product.template.tree.scada.product.tmpl.id</field>
         <field name="model">product.template</field>
@@ -23,4 +24,86 @@
             </xpath>
         </field>
     </record>
+
+    <!-- New dedicated tree view for SCADA Product ID Reference -->
+    <record id="view_product_product_tree_scada_reference" model="ir.ui.view">
+        <field name="name">product.product.tree.scada.reference</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <tree string="Product ID Reference for SCADA" create="false" edit="false" delete="false">
+                <field name="id" string="product_id"/>
+                <field name="product_tmpl_id" string="product_tmpl_id"/>
+                <field name="default_code" optional="show"/>
+                <field name="name" string="Product Name"/>
+                <field name="categ_id" string="Category"/>
+                <field name="type" optional="show"/>
+                <field name="uom_id" string="UoM" optional="show"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search view for SCADA Product Reference -->
+    <record id="view_product_product_search_scada_reference" model="ir.ui.view">
+        <field name="name">product.product.search.scada.reference</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <search string="Search Products">
+                <field name="id" string="product_id"/>
+                <field name="product_tmpl_id" string="product_tmpl_id"/>
+                <field name="name" string="Product Name"/>
+                <field name="default_code"/>
+                <field name="categ_id"/>
+                <separator/>
+                <filter string="Stockable" name="stockable" domain="[('type', '=', 'product')]"/>
+                <filter string="Consumable" name="consumable" domain="[('type', '=', 'consu')]"/>
+                <filter string="Service" name="service" domain="[('type', '=', 'service')]"/>
+                <separator/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="categ_id" context="{'group_by':'categ_id'}"/>
+                    <filter string="Product Type" name="type" context="{'group_by':'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for SCADA Product ID Reference -->
+    <record id="action_product_scada_reference" model="ir.actions.act_window">
+        <field name="name">Product ID Reference (SCADA)</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_product_product_tree_scada_reference"/>
+        <field name="search_view_id" ref="view_product_product_search_scada_reference"/>
+        <field name="context">{'search_default_active': 1, 'search_default_stockable': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No products found
+            </p>
+            <p>
+                This view shows product_id and product_tmpl_id for SCADA manual weighing reference.
+                <br/>
+                Use this to find the correct IDs when creating manual consumption records.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu item under Inventory > Configuration > Products -->
+    <menuitem
+        id="menu_product_scada_reference"
+        name="Product ID Reference (SCADA)"
+        parent="stock.menu_product_in_config_stock"
+        action="action_product_scada_reference"
+        sequence="1"/>
+
+    <!-- Alternative: Add menu under SCADA root menu -->
+    <menuitem
+        id="menu_product_scada_reference_alt"
+        name="Product ID Reference"
+        parent="menu_scada_root"
+        action="action_product_scada_reference"
+        sequence="5"/>
+
 </odoo>
