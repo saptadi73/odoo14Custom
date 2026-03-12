@@ -83,6 +83,216 @@ curl -X POST http://localhost:8069/api/scada/material-consumption \
 
 ## Endpoints Reference
 
+## API Report Khusus Dashboard SCADA Vue.js
+
+Bagian ini merangkum endpoint yang difokuskan untuk kebutuhan **reporting dashboard** di frontend Vue.js.
+
+Dokumen ringkas terpisah (1 halaman): [API_REPORT_DASHBOARD_VUEJS.md](API_REPORT_DASHBOARD_VUEJS.md)
+
+### Endpoint Inti Report Dashboard
+
+| No | Endpoint | Method | Kegunaan Dashboard | Output Utama |
+|---|---|---|---|---|
+| 1 | `/api/scada/today-reports` | `POST` (JSON-RPC) | Ringkasan harian (KPI, batch, quality) | `batch_status`, `total_production_today`, `oee_quality_today`, `batch_to_batch_deviation_chart` |
+| 2 | `/api/scada/periodic-report` | `POST` (JSON-RPC) | Ringkasan periodik mingguan/bulanan/tahunan | `metrics_*`, `chart_daily_target_vs_actual`, `chart_raw_material_consumption`, `table_*` |
+| 3 | `/api/scada/oee-equipment-avg` | `POST` (JSON-RPC) | Analitik rata-rata OEE per equipment | `data[].avg_summary`, `data[].avg_consumption_detail` |
+| 4 | `/api/scada/oee-detail` | `POST` (JSON-RPC) | Drill-down OEE per batch/MO/equipment | `data[]`, `data[].lines` |
+| 5 | `/api/scada/kpi-product-report` | `POST` (JSON-RPC) | KPI performa per produk | `data[].avg_kpi`, `summary` |
+| 6 | `/api/scada/equipment-failure-report` | `POST` (JSON-RPC) | Report failure & downtime equipment | `data[]`, `summary.total_failures`, `summary.by_equipment` |
+
+### Endpoint Pendukung Filter Dashboard Report
+
+| Endpoint | Method | Fungsi Filter |
+|---|---|---|
+| `/api/scada/products` | `GET` / `POST` (JSON-RPC) | Sumber dropdown produk |
+| `/api/scada/products-by-category` | `POST` (JSON-RPC) | Sumber dropdown bahan baku per kategori |
+| `/api/scada/boms` | `GET` / `POST` (JSON-RPC) | Detail komposisi BoM untuk analitik konsumsi |
+| `/api/scada/mo-list` | `GET` | Daftar MO per equipment/status |
+| `/api/scada/mo-list-confirmed` | `POST` (JSON-RPC) | Queue MO confirmed untuk picker/frontend |
+| `/api/scada/mo-list-detailed` | `POST` (JSON-RPC) | Detail MO + komponen + consumption |
+
+### Contract Request untuk Vue.js
+
+Semua endpoint report dengan method `POST` pada tabel di atas menggunakan body JSON-RPC:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {
+    "period": "this_month",
+    "limit": 100,
+    "offset": 0
+  }
+}
+```
+
+Catatan frontend:
+1. Gunakan `credentials: 'include'` agar session cookie Odoo ikut terkirim.
+2. Cek `status` response sebelum membaca `data`/`summary`.
+3. Untuk report chart, prioritaskan endpoint `today-reports` dan `periodic-report` karena sudah menyediakan blok chart siap map ke ApexCharts.
+
+### Cheatsheet Copy-Paste Frontend (Vue.js)
+
+Gunakan section ini sebagai referensi cepat implementasi dashboard/report di frontend.
+
+#### 1) `POST /api/scada/today-reports`
+
+**Params minimum (JSON-RPC):**
+
+```json
+{
+  "date": "2026-02-17",
+  "limit": 200
+}
+```
+
+**Field utama untuk UI:**
+- KPI: `batch_status.scheduled_total`, `batch_status.completed`, `batch_status.unfinished`
+- KPI: `total_production_today.qty_finished`, `total_production_today.completed_batch_count`
+- KPI: `oee_quality_today.avg_yield_percent`, `oee_quality_today.avg_consumption_ratio`, `oee_quality_today.total_deviation_alerts`
+- Chart: `batch_to_batch_deviation_chart.data[]`
+- Chart per equipment: `oee_quality_today.by_equipment[]`
+
+#### 2) `POST /api/scada/periodic-report`
+
+**Params minimum (JSON-RPC):**
+
+```json
+{
+  "period": "this_month",
+  "limit": 1000
+}
+```
+
+**Field utama untuk UI:**
+- KPI produksi: `metrics_total_production.target_qty_total`, `actual_qty_total`, `achievement_percent`
+- KPI MO: `metrics_total_mo.total_mo_planned`, `total_mo_done`, `total_mo_in_progress`
+- KPI kualitas: `metrics_avg_oee_quality.avg_yield_percent`, `avg_consumption_ratio`
+- Chart: `chart_daily_target_vs_actual.data[]`
+- Chart: `chart_raw_material_consumption.data[]`
+- Table: `table_silo_consumption_stock.data[]`, `table_daily_finished_goods.data[]`
+
+#### 3) `POST /api/scada/oee-equipment-avg`
+
+**Params minimum (JSON-RPC):**
+
+```json
+{
+  "period": "this_month",
+  "limit": 100,
+  "offset": 0
+}
+```
+
+**Field utama untuk UI:**
+- List summary: `data[]`
+- Nilai utama: `data[].avg_summary.yield_percent`, `consumption_ratio`, `qty_planned`, `qty_finished`
+- Detail konsumsi: `data[].avg_consumption_detail.to_consume`, `actual_consumed`, `consumption_ratio`
+
+#### 4) `POST /api/scada/oee-detail`
+
+**Params minimum (JSON-RPC):**
+
+```json
+{
+  "mo_id": "WH/MO/00001",
+  "limit": 50,
+  "offset": 0
+}
+```
+
+**Field utama untuk UI:**
+- Header detail: `data[].mo_id`, `product_name`, `equipment.name`, `date_done`
+- KPI batch: `data[].yield_percent`, `consumption_ratio`, `variance_finished`, `variance_consumption`
+- Tabel/Chart line: `data[].lines[]` (`to_consume`, `actual_consumed`, `variance`, `consumption_ratio`)
+
+#### 5) `POST /api/scada/kpi-product-report`
+
+**Params minimum (JSON-RPC):**
+
+```json
+{
+  "period": "this_month",
+  "limit": 100,
+  "offset": 0
+}
+```
+
+**Field utama untuk UI:**
+- KPI global: `summary.total_products`, `summary.total_oee_records`
+- Ranking produk: `data[]`
+- Nilai KPI produk: `data[].avg_kpi.yield_percent`, `consumption_ratio`, `qty_planned`, `qty_finished`
+
+#### 6) `POST /api/scada/equipment-failure-report`
+
+**Params minimum (JSON-RPC):**
+
+```json
+{
+  "period": "this_month",
+  "limit": 100,
+  "offset": 0
+}
+```
+
+**Field utama untuk UI:**
+- KPI: `summary.total_failures`, `summary.equipment_count`
+- Chart: `summary.by_equipment[]` (`failure_count`)
+- Tabel log: `data[]` (`equipment_name`, `description`, `date`, `duration_minutes`)
+
+#### Template pemanggilan umum (fetch)
+
+```javascript
+async function callScadaReport(endpoint, params = {}) {
+  const res = await fetch(`/api/scada/${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'call',
+      params,
+    }),
+  });
+
+  const payload = await res.json();
+  if (!res.ok || payload?.status === 'error' || payload?.error) {
+    throw new Error(payload?.message || payload?.error?.message || 'Request failed');
+  }
+  return payload;
+}
+```
+
+### One-Page Ringkas (Endpoint + Params + Output Wajib)
+
+Gunakan bagian ini untuk handoff cepat ke tim frontend.
+
+| Endpoint | Params Minimum (`params`) | Output Wajib untuk Dashboard |
+|---|---|---|
+| `POST /api/scada/today-reports` | `{ "date": "YYYY-MM-DD", "limit": 200 }` | `batch_status`, `total_production_today`, `oee_quality_today`, `batch_to_batch_deviation_chart.data[]` |
+| `POST /api/scada/periodic-report` | `{ "period": "this_month", "limit": 1000 }` | `metrics_total_production`, `metrics_total_mo`, `metrics_avg_oee_quality`, `chart_daily_target_vs_actual.data[]`, `chart_raw_material_consumption.data[]`, `table_silo_consumption_stock.data[]`, `table_daily_finished_goods.data[]` |
+| `POST /api/scada/oee-equipment-avg` | `{ "period": "this_month", "limit": 100, "offset": 0 }` | `data[].equipment`, `data[].avg_summary`, `data[].avg_consumption_detail`, `data[].oee_records_count` |
+| `POST /api/scada/oee-detail` | `{ "mo_id": "WH/MO/00001", "limit": 50, "offset": 0 }` | `data[].mo_id`, `data[].product_name`, `data[].yield_percent`, `data[].consumption_ratio`, `data[].lines[]` |
+| `POST /api/scada/kpi-product-report` | `{ "period": "this_month", "limit": 100, "offset": 0 }` | `summary.total_products`, `summary.total_oee_records`, `data[].product_name`, `data[].avg_kpi` |
+| `POST /api/scada/equipment-failure-report` | `{ "period": "this_month", "limit": 100, "offset": 0 }` | `summary.total_failures`, `summary.equipment_count`, `summary.by_equipment[]`, `data[]` |
+
+**Kontrak request (wajib untuk endpoint `POST` report):**
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "call",
+  "params": {}
+}
+```
+
+**Checklist implementasi frontend (minimum):**
+1. Selalu kirim `credentials: 'include'`.
+2. Selalu validasi `status !== 'error'` sebelum render.
+3. Untuk chart utama dashboard, prioritaskan `today-reports` dan `periodic-report`.
+4. Endpoint lain dianggap data mentah dan perlu mapping di frontend.
+
 ## Frontend Dashboard Quick Reference (Vue.js + ApexCharts)
 
 Bagian ini sudah dipisah per kelompok bab agar implementasi frontend lebih mudah. Setiap bab berisi: endpoint sumber data, field yang ditampilkan, dan rekomendasi visual.

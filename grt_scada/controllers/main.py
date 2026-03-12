@@ -45,10 +45,33 @@ class ScadaJsonRpcController(http.Controller):
         if not value:
             return None
         cleaned = str(value).strip().replace('T', ' ')
-        if len(cleaned) == 10:
-            return f"{cleaned} {'23:59:59' if is_end else '00:00:00'}"
-        if len(cleaned) == 16:
-            return f"{cleaned}{':59' if is_end else ':00'}"
+        if not cleaned:
+            return None
+
+        parse_formats = [
+            '%Y-%m-%d %H:%M:%S',
+            '%Y-%m-%d %H:%M',
+            '%Y-%m-%d',
+            '%d/%m/%Y %H:%M:%S',
+            '%d/%m/%Y %H:%M',
+            '%d/%m/%Y',
+        ]
+        for datetime_format in parse_formats:
+            try:
+                parsed = datetime.strptime(cleaned, datetime_format)
+                if datetime_format in ('%Y-%m-%d', '%d/%m/%Y'):
+                    if is_end:
+                        parsed = parsed.replace(hour=23, minute=59, second=59, microsecond=0)
+                    else:
+                        parsed = parsed.replace(hour=0, minute=0, second=0, microsecond=0)
+                elif datetime_format in ('%Y-%m-%d %H:%M', '%d/%m/%Y %H:%M'):
+                    parsed = parsed.replace(second=59 if is_end else 0, microsecond=0)
+                else:
+                    parsed = parsed.replace(microsecond=0)
+                return parsed.strftime('%Y-%m-%d %H:%M:%S')
+            except Exception:
+                continue
+
         return cleaned
 
     def _get_period_datetime_range(self, period):
@@ -146,6 +169,32 @@ class ScadaJsonRpcController(http.Controller):
             'sync_status': equipment.sync_status,
             'last_connected': equipment.last_connected.isoformat() if equipment.last_connected else None,
         }
+
+    def _read_group_metric(self, row, field_name, aggregate, default=None):
+        """Helper: Safely read aggregated value from read_group result.
+
+        Odoo read_group keys can vary by version/context:
+        - field_sum / field_avg / field_max / field_count
+        - field (some cases)
+        - __count (for grouped row count)
+        """
+        if not isinstance(row, dict):
+            return default
+
+        candidates = []
+        if aggregate == 'count':
+            candidates.extend([f'{field_name}_count', '__count', field_name])
+        else:
+            candidates.extend([
+                f'{field_name}_{aggregate}',
+                f'{field_name}:{aggregate}',
+                field_name,
+            ])
+
+        for key in candidates:
+            if key in row and row.get(key) is not None:
+                return row.get(key)
+        return default
 
     def _authenticate_session(self, login, password, dbname=None):
         db = dbname or request.session.db or request.env.cr.dbname
@@ -687,8 +736,9 @@ class ScadaJsonRpcController(http.Controller):
             - oee_id (optional): specific OEE record id
             - mo_id (optional): MO name or ID
             - equipment_code (optional): filter by equipment code
-            - date_from (optional): YYYY-MM-DD
-            - date_to (optional): YYYY-MM-DD
+            - date_from (optional): YYYY-MM-DD atau DD/MM/YYYY (boleh datetime)
+            - date_to (optional): YYYY-MM-DD atau DD/MM/YYYY (boleh datetime)
+            - period (optional): today, yesterday, this_week, last_7_days, this_month, last_month, this_year
             - limit (optional): default 50
             - offset (optional): default 0
         """
@@ -736,11 +786,27 @@ class ScadaJsonRpcController(http.Controller):
                 domain.append(('equipment_id', '=', equipment.id))
 
             date_from = data.get('date_from')
-            if date_from:
-                domain.append(('date_done', '>=', f'{date_from} 00:00:00'))
             date_to = data.get('date_to')
-            if date_to:
-                domain.append(('date_done', '<=', f'{date_to} 23:59:59'))
+            period = data.get('period')
+
+            period_from, period_to = self._get_period_datetime_range(period)
+            if period_from is False:
+                return {
+                    'status': 'error',
+                    'message': (
+                        'Invalid period value. '
+                        'Supported: today, yesterday, this_week, last_7_days, '
+                        'this_month, last_month, this_year'
+                    ),
+                }
+
+            normalized_from = self._normalize_datetime_input(date_from, is_end=False) or period_from
+            normalized_to = self._normalize_datetime_input(date_to, is_end=True) or period_to
+
+            if normalized_from:
+                domain.append(('date_done', '>=', normalized_from))
+            if normalized_to:
+                domain.append(('date_done', '<=', normalized_to))
 
             records = oee_model.search(
                 domain,
@@ -801,8 +867,9 @@ class ScadaJsonRpcController(http.Controller):
             - equipment_code (optional)
             - equipment_type (optional)
             - is_active (optional): true/false
-            - date_from (optional): YYYY-MM-DD
-            - date_to (optional): YYYY-MM-DD
+            - date_from (optional): YYYY-MM-DD atau DD/MM/YYYY (boleh datetime)
+            - date_to (optional): YYYY-MM-DD atau DD/MM/YYYY (boleh datetime)
+            - period (optional): today, yesterday, this_week, last_7_days, this_month, last_month, this_year
             - limit (optional): default 100
             - offset (optional): default 0
         """
@@ -846,14 +913,30 @@ class ScadaJsonRpcController(http.Controller):
             line_domain = [('equipment_id', 'in', equipment_ids)]
 
             date_from = data.get('date_from')
-            if date_from:
-                oee_domain.append(('date_done', '>=', f'{date_from} 00:00:00'))
-                line_domain.append(('oee_id.date_done', '>=', f'{date_from} 00:00:00'))
-
             date_to = data.get('date_to')
-            if date_to:
-                oee_domain.append(('date_done', '<=', f'{date_to} 23:59:59'))
-                line_domain.append(('oee_id.date_done', '<=', f'{date_to} 23:59:59'))
+            period = data.get('period')
+
+            period_from, period_to = self._get_period_datetime_range(period)
+            if period_from is False:
+                return {
+                    'status': 'error',
+                    'message': (
+                        'Invalid period value. '
+                        'Supported: today, yesterday, this_week, last_7_days, '
+                        'this_month, last_month, this_year'
+                    ),
+                }
+
+            normalized_from = self._normalize_datetime_input(date_from, is_end=False) or period_from
+            normalized_to = self._normalize_datetime_input(date_to, is_end=True) or period_to
+
+            if normalized_from:
+                oee_domain.append(('date_done', '>=', normalized_from))
+                line_domain.append(('oee_id.date_done', '>=', normalized_from))
+
+            if normalized_to:
+                oee_domain.append(('date_done', '<=', normalized_to))
+                line_domain.append(('oee_id.date_done', '<=', normalized_to))
 
             oee_groups = request.env['scada.equipment.oee'].read_group(
                 oee_domain,
@@ -880,8 +963,10 @@ class ScadaJsonRpcController(http.Controller):
                     'qty_to_consume:avg',
                     'qty_consumed:avg',
                     'variance_qty:avg',
+                    'oee_silo_percent:avg',
                     'consumption_ratio:avg',
                     'material_count:avg',
+                    'oee_id.date_done:max',
                 ],
                 ['equipment_id'],
                 lazy=False
@@ -901,27 +986,55 @@ class ScadaJsonRpcController(http.Controller):
                 oee_stat = oee_map.get(equipment.id, {})
                 line_stat = line_map.get(equipment.id, {})
 
+                # For SILO equipment: if no header OEE but has line OEE, count line records
+                # For Main PLC: use header count
+                oee_records_count = self._read_group_metric(oee_stat, 'id', 'count', 0)
+                if oee_records_count == 0 and line_stat:
+                    # SILO case: count number of OEE line records for this equipment
+                    oee_records_count = self._read_group_metric(line_stat, 'id', 'count', 0)
+
+                has_header_stats = bool(oee_stat)
+
+                if has_header_stats:
+                    yield_percent = self._read_group_metric(oee_stat, 'yield_percent', 'avg', 0.0)
+                    consumption_ratio = self._read_group_metric(oee_stat, 'consumption_ratio', 'avg', 0.0)
+                else:
+                    # SILO/LQ level stats are stored in line model
+                    yield_percent = self._read_group_metric(line_stat, 'oee_silo_percent', 'avg', 0.0)
+                    consumption_ratio = self._read_group_metric(line_stat, 'consumption_ratio', 'avg', 0.0)
+
+                last_oee_date = self._read_group_metric(oee_stat, 'date_done', 'max', None)
+                if not last_oee_date:
+                    last_oee_date = self._read_group_metric(line_stat, 'oee_id.date_done', 'max', None)
+
+                # Return FLAT structure matching frontend mapper expectations (same format as today-reports by_equipment)
                 result_data.append({
+                    'equipment_id': equipment.id,
+                    'equipment_name': equipment.name,
+                    'oee_records_count': oee_records_count,
+                    'avg_yield_percent': yield_percent,
+                    'avg_consumption_ratio': consumption_ratio,
+                    'avg_oee_silo_percent': yield_percent,  # For compatibility
+                    'last_oee_date': last_oee_date,
+                    # Keep nested structure for backward compatibility with API docs
                     'equipment': self._get_equipment_details(equipment),
-                    'oee_records_count': oee_stat.get('__count', 0),
                     'avg_summary': {
-                        'qty_planned': oee_stat.get('qty_planned_avg', 0.0),
-                        'qty_finished': oee_stat.get('qty_finished_avg', 0.0),
-                        'variance_finished': oee_stat.get('variance_finished_avg', 0.0),
-                        'yield_percent': oee_stat.get('yield_percent_avg', 0.0),
-                        'qty_bom_consumption': oee_stat.get('qty_bom_consumption_avg', 0.0),
-                        'qty_actual_consumption': oee_stat.get('qty_actual_consumption_avg', 0.0),
-                        'variance_consumption': oee_stat.get('variance_consumption_avg', 0.0),
-                        'consumption_ratio': oee_stat.get('consumption_ratio_avg', 0.0),
+                        'qty_planned': self._read_group_metric(oee_stat, 'qty_planned', 'avg', 0.0) or self._read_group_metric(line_stat, 'qty_to_consume', 'avg', 0.0),
+                        'qty_finished': self._read_group_metric(oee_stat, 'qty_finished', 'avg', 0.0) or self._read_group_metric(line_stat, 'qty_consumed', 'avg', 0.0),
+                        'variance_finished': self._read_group_metric(oee_stat, 'variance_finished', 'avg', 0.0) or self._read_group_metric(line_stat, 'variance_qty', 'avg', 0.0),
+                        'yield_percent': yield_percent,
+                        'qty_bom_consumption': self._read_group_metric(oee_stat, 'qty_bom_consumption', 'avg', 0.0) or self._read_group_metric(line_stat, 'qty_to_consume', 'avg', 0.0),
+                        'qty_actual_consumption': self._read_group_metric(oee_stat, 'qty_actual_consumption', 'avg', 0.0) or self._read_group_metric(line_stat, 'qty_consumed', 'avg', 0.0),
+                        'variance_consumption': self._read_group_metric(oee_stat, 'variance_consumption', 'avg', 0.0) or self._read_group_metric(line_stat, 'variance_qty', 'avg', 0.0),
+                        'consumption_ratio': consumption_ratio,
                     },
                     'avg_consumption_detail': {
-                        'to_consume': line_stat.get('qty_to_consume_avg', 0.0),
-                        'actual_consumed': line_stat.get('qty_consumed_avg', 0.0),
-                        'variance': line_stat.get('variance_qty_avg', 0.0),
-                        'consumption_ratio': line_stat.get('consumption_ratio_avg', 0.0),
-                        'material_count': line_stat.get('material_count_avg', 0.0),
+                        'to_consume': self._read_group_metric(line_stat, 'qty_to_consume', 'avg', 0.0),
+                        'actual_consumed': self._read_group_metric(line_stat, 'qty_consumed', 'avg', 0.0),
+                        'variance': self._read_group_metric(line_stat, 'variance_qty', 'avg', 0.0),
+                        'consumption_ratio': self._read_group_metric(line_stat, 'consumption_ratio', 'avg', 0.0),
+                        'material_count': self._read_group_metric(line_stat, 'material_count', 'avg', 0.0),
                     },
-                    'last_oee_date': oee_stat.get('date_done_max'),
                 })
 
             return {
@@ -1036,18 +1149,18 @@ class ScadaJsonRpcController(http.Controller):
                 result_data.append({
                     'product_id': product[0],
                     'product_name': product[1],
-                    'oee_records_count': row.get('id_count', 0),
+                    'oee_records_count': self._read_group_metric(row, 'id', 'count', 0),
                     'avg_kpi': {
-                        'qty_planned': row.get('qty_planned_avg', 0.0),
-                        'qty_finished': row.get('qty_finished_avg', 0.0),
-                        'variance_finished': row.get('variance_finished_avg', 0.0),
-                        'yield_percent': row.get('yield_percent_avg', 0.0),
-                        'qty_bom_consumption': row.get('qty_bom_consumption_avg', 0.0),
-                        'qty_actual_consumption': row.get('qty_actual_consumption_avg', 0.0),
-                        'variance_consumption': row.get('variance_consumption_avg', 0.0),
-                        'consumption_ratio': row.get('consumption_ratio_avg', 0.0),
+                        'qty_planned': self._read_group_metric(row, 'qty_planned', 'avg', 0.0),
+                        'qty_finished': self._read_group_metric(row, 'qty_finished', 'avg', 0.0),
+                        'variance_finished': self._read_group_metric(row, 'variance_finished', 'avg', 0.0),
+                        'yield_percent': self._read_group_metric(row, 'yield_percent', 'avg', 0.0),
+                        'qty_bom_consumption': self._read_group_metric(row, 'qty_bom_consumption', 'avg', 0.0),
+                        'qty_actual_consumption': self._read_group_metric(row, 'qty_actual_consumption', 'avg', 0.0),
+                        'variance_consumption': self._read_group_metric(row, 'variance_consumption', 'avg', 0.0),
+                        'consumption_ratio': self._read_group_metric(row, 'consumption_ratio', 'avg', 0.0),
                     },
-                    'last_oee_date': row.get('date_done_max'),
+                    'last_oee_date': self._read_group_metric(row, 'date_done', 'max', None),
                 })
 
             return {
@@ -1110,8 +1223,8 @@ class ScadaJsonRpcController(http.Controller):
                 lazy=False,
             )
             production_row = production_stats[0] if production_stats else {}
-            total_production_qty = production_row.get('qty_finished_sum', 0.0)
-            completed_batch_count = production_row.get('id_count', 0)
+            total_production_qty = self._read_group_metric(production_row, 'qty_finished', 'sum', 0.0)
+            completed_batch_count = self._read_group_metric(production_row, 'id', 'count', 0)
 
             # 3) Kualitas OEE rata-rata hari ini per equipment
             equipment_avg_rows = oee_model.read_group(
@@ -1128,21 +1241,88 @@ class ScadaJsonRpcController(http.Controller):
                 ['equipment_id'],
                 lazy=False,
             )
+            line_equipment_domain = [
+                ('oee_id.date_done', '>=', date_from),
+                ('oee_id.date_done', '<=', date_to),
+            ]
+            line_equipment_avg_rows = request.env['scada.equipment.oee.line'].read_group(
+                line_equipment_domain,
+                [
+                    'equipment_id',
+                    'oee_silo_percent:avg',
+                    'consumption_ratio:avg',
+                    'id:count',
+                ],
+                ['equipment_id'],
+                lazy=False,
+            )
+            line_records = request.env['scada.equipment.oee.line'].search(line_equipment_domain)
+            line_kpi_map = defaultdict(lambda: {
+                'abs_deviation_sum': 0.0,
+                'line_count': 0,
+                'deviation_alert_count': 0,
+            })
+            for line in line_records:
+                if not line.equipment_id:
+                    continue
+                equipment_kpis = line_kpi_map[line.equipment_id.id]
+                deviation_abs = abs(line.deviation_percent or 0.0)
+                equipment_kpis['abs_deviation_sum'] += deviation_abs
+                equipment_kpis['line_count'] += 1
+                if deviation_abs > 2.0:
+                    equipment_kpis['deviation_alert_count'] += 1
+
+            equipment_avg_map = {
+                row['equipment_id'][0]: row
+                for row in equipment_avg_rows if row.get('equipment_id')
+            }
+            line_equipment_avg_map = {
+                row['equipment_id'][0]: row
+                for row in line_equipment_avg_rows if row.get('equipment_id')
+            }
+            combined_equipment_ids = sorted(set(equipment_avg_map.keys()) | set(line_equipment_avg_map.keys()))
             equipment_avg = []
-            for row in equipment_avg_rows:
-                equipment = row.get('equipment_id')
+            for equipment_id in combined_equipment_ids:
+                row = equipment_avg_map.get(equipment_id, {})
+                line_row = line_equipment_avg_map.get(equipment_id, {})
+                equipment = row.get('equipment_id') or line_row.get('equipment_id')
                 if not equipment:
                     continue
+                line_kpis = line_kpi_map.get(equipment_id, {})
+                line_count = line_kpis.get('line_count', 0)
+                avg_abs_deviation = (
+                    (line_kpis.get('abs_deviation_sum', 0.0) / line_count)
+                    if line_count else 0.0
+                )
                 equipment_avg.append({
                     'equipment_id': equipment[0],
                     'equipment_name': equipment[1],
-                    'oee_records_count': row.get('id_count', 0),
-                    'avg_yield_percent': row.get('yield_percent_avg', 0.0),
-                    'avg_consumption_ratio': row.get('consumption_ratio_avg', 0.0),
-                    'avg_oee_silo_percent': row.get('avg_silo_oee_percent_avg', 0.0),
-                    'avg_max_abs_deviation_percent': row.get('max_abs_deviation_percent_avg', 0.0),
-                    'total_deviation_alerts': row.get('deviation_alert_count_sum', 0),
+                    'oee_records_count': (
+                        self._read_group_metric(row, 'id', 'count', 0)
+                        or self._read_group_metric(line_row, 'id', 'count', 0)
+                    ),
+                    'avg_yield_percent': (
+                        self._read_group_metric(row, 'yield_percent', 'avg', 0.0)
+                        or self._read_group_metric(line_row, 'oee_silo_percent', 'avg', 0.0)
+                    ),
+                    'avg_consumption_ratio': (
+                        self._read_group_metric(row, 'consumption_ratio', 'avg', 0.0)
+                        or self._read_group_metric(line_row, 'consumption_ratio', 'avg', 0.0)
+                    ),
+                    'avg_oee_silo_percent': (
+                        self._read_group_metric(row, 'avg_silo_oee_percent', 'avg', 0.0)
+                        or self._read_group_metric(line_row, 'oee_silo_percent', 'avg', 0.0)
+                    ),
+                    'avg_max_abs_deviation_percent': (
+                        self._read_group_metric(row, 'max_abs_deviation_percent', 'avg', 0.0)
+                        or avg_abs_deviation
+                    ),
+                    'total_deviation_alerts': (
+                        self._read_group_metric(row, 'deviation_alert_count', 'sum', 0)
+                        or line_kpis.get('deviation_alert_count', 0)
+                    ),
                 })
+            equipment_avg.sort(key=lambda item: ((item.get('equipment_name') or '').lower(), item.get('equipment_id') or 0))
 
             oee_quality_rows = oee_model.read_group(
                 oee_domain,
@@ -1167,6 +1347,18 @@ class ScadaJsonRpcController(http.Controller):
             )
             deviation_chart = []
             for rec in deviation_records:
+                line_records = rec.line_ids
+                line_max_abs_deviation = 0.0
+                line_avg_silo_oee = 0.0
+                if line_records:
+                    deviations = [abs(line.deviation_percent or 0.0) for line in line_records]
+                    oee_scores = [line.oee_silo_percent or 0.0 for line in line_records]
+                    line_max_abs_deviation = max(deviations) if deviations else 0.0
+                    line_avg_silo_oee = (sum(oee_scores) / len(oee_scores)) if oee_scores else 0.0
+
+                max_abs_deviation_percent = rec.max_abs_deviation_percent or line_max_abs_deviation
+                avg_silo_oee_percent = rec.avg_silo_oee_percent or line_avg_silo_oee
+
                 deviation_chart.append({
                     'oee_id': rec.id,
                     'mo_id': rec.mo_name,
@@ -1175,8 +1367,8 @@ class ScadaJsonRpcController(http.Controller):
                     'date_done': rec.date_done.isoformat() if rec.date_done else None,
                     'variance_finished': rec.variance_finished,
                     'variance_consumption': rec.variance_consumption,
-                    'max_abs_deviation_percent': rec.max_abs_deviation_percent,
-                    'avg_silo_oee_percent': rec.avg_silo_oee_percent,
+                    'max_abs_deviation_percent': max_abs_deviation_percent,
+                    'avg_silo_oee_percent': avg_silo_oee_percent,
                 })
 
             return {
@@ -1194,12 +1386,12 @@ class ScadaJsonRpcController(http.Controller):
                     'completed_batch_count': completed_batch_count,
                 },
                 'oee_quality_today': {
-                    'oee_records_count': oee_quality.get('id_count', 0),
-                    'avg_yield_percent': oee_quality.get('yield_percent_avg', 0.0),
-                    'avg_consumption_ratio': oee_quality.get('consumption_ratio_avg', 0.0),
-                    'avg_oee_silo_percent': oee_quality.get('avg_silo_oee_percent_avg', 0.0),
-                    'avg_max_abs_deviation_percent': oee_quality.get('max_abs_deviation_percent_avg', 0.0),
-                    'total_deviation_alerts': oee_quality.get('deviation_alert_count_sum', 0),
+                    'oee_records_count': self._read_group_metric(oee_quality, 'id', 'count', 0),
+                    'avg_yield_percent': self._read_group_metric(oee_quality, 'yield_percent', 'avg', 0.0),
+                    'avg_consumption_ratio': self._read_group_metric(oee_quality, 'consumption_ratio', 'avg', 0.0),
+                    'avg_oee_silo_percent': self._read_group_metric(oee_quality, 'avg_silo_oee_percent', 'avg', 0.0),
+                    'avg_max_abs_deviation_percent': self._read_group_metric(oee_quality, 'max_abs_deviation_percent', 'avg', 0.0),
+                    'total_deviation_alerts': self._read_group_metric(oee_quality, 'deviation_alert_count', 'sum', 0),
                     'by_equipment': equipment_avg,
                 },
                 'batch_to_batch_deviation_chart': {
@@ -1302,7 +1494,8 @@ class ScadaJsonRpcController(http.Controller):
                 [],
                 lazy=False,
             )
-            target_total_qty = (mo_target_group[0] if mo_target_group else {}).get('product_qty_sum', 0.0)
+            mo_target_row = mo_target_group[0] if mo_target_group else {}
+            target_total_qty = self._read_group_metric(mo_target_row, 'product_qty', 'sum', 0.0)
 
             oee_total_group = request.env['scada.equipment.oee'].read_group(
                 oee_domain,
@@ -1311,8 +1504,8 @@ class ScadaJsonRpcController(http.Controller):
                 lazy=False,
             )
             oee_total_row = oee_total_group[0] if oee_total_group else {}
-            actual_total_qty = oee_total_row.get('qty_finished_sum', 0.0)
-            actual_total_target_done = oee_total_row.get('qty_planned_sum', 0.0)
+            actual_total_qty = self._read_group_metric(oee_total_row, 'qty_finished', 'sum', 0.0)
+            actual_total_target_done = self._read_group_metric(oee_total_row, 'qty_planned', 'sum', 0.0)
 
             # 2) Metrik Total MO
             mo_done_domain = [('date_finished', '>=', date_from), ('date_finished', '<=', date_to)]
@@ -1366,12 +1559,12 @@ class ScadaJsonRpcController(http.Controller):
                 oee_quality_by_equipment.append({
                     'equipment_id': equipment[0],
                     'equipment_name': equipment[1],
-                    'oee_records_count': row.get('id_count', 0),
-                    'avg_yield_percent': row.get('yield_percent_avg', 0.0),
-                    'avg_consumption_ratio': row.get('consumption_ratio_avg', 0.0),
-                    'avg_oee_silo_percent': row.get('avg_silo_oee_percent_avg', 0.0),
-                    'avg_max_abs_deviation_percent': row.get('max_abs_deviation_percent_avg', 0.0),
-                    'total_deviation_alerts': row.get('deviation_alert_count_sum', 0),
+                    'oee_records_count': self._read_group_metric(row, 'id', 'count', 0),
+                    'avg_yield_percent': self._read_group_metric(row, 'yield_percent', 'avg', 0.0),
+                    'avg_consumption_ratio': self._read_group_metric(row, 'consumption_ratio', 'avg', 0.0),
+                    'avg_oee_silo_percent': self._read_group_metric(row, 'avg_silo_oee_percent', 'avg', 0.0),
+                    'avg_max_abs_deviation_percent': self._read_group_metric(row, 'max_abs_deviation_percent', 'avg', 0.0),
+                    'total_deviation_alerts': self._read_group_metric(row, 'deviation_alert_count', 'sum', 0),
                 })
 
             # 4) Grafik produksi harian dua bar: target vs actual
@@ -1380,20 +1573,31 @@ class ScadaJsonRpcController(http.Controller):
                 order='date_planned_start asc, id asc',
                 limit=chart_limit,
             )
-            oee_daily_actual = request.env['scada.equipment.oee'].search(
-                oee_domain,
-                order='date_done asc, id asc',
-                limit=chart_limit,
-            )
             target_by_day = defaultdict(float)
             actual_by_day = defaultdict(float)
+            mo_day_map = {}
             for mo in mo_daily_target:
                 if mo.date_planned_start:
                     day_key = mo.date_planned_start.date().isoformat()
                     target_by_day[day_key] += mo.product_qty or 0.0
+                    mo_day_map[mo.id] = day_key
+
+            # Align actual to the same planned day axis as target (per MO)
+            oee_chart_domain = [('manufacturing_order_id', 'in', list(mo_day_map.keys()) or [0])]
+            if finished_product_ids:
+                oee_chart_domain.append(('product_id', 'in', finished_product_ids))
+            if equipment_ids:
+                oee_chart_domain.append(('equipment_id', 'in', equipment_ids))
+
+            oee_daily_actual = request.env['scada.equipment.oee'].search(
+                oee_chart_domain,
+                order='date_done asc, id asc',
+                limit=chart_limit,
+            )
             for rec in oee_daily_actual:
-                if rec.date_done:
-                    day_key = rec.date_done.date().isoformat()
+                mo_id = rec.manufacturing_order_id.id if rec.manufacturing_order_id else False
+                day_key = mo_day_map.get(mo_id)
+                if day_key:
                     actual_by_day[day_key] += rec.qty_finished or 0.0
 
             all_days = sorted(set(target_by_day.keys()) | set(actual_by_day.keys()))
@@ -1407,37 +1611,65 @@ class ScadaJsonRpcController(http.Controller):
             ]
 
             # 5) Grafik konsumsi raw material
-            material_domain = [
-                ('timestamp', '>=', date_from),
-                ('timestamp', '<=', date_to),
-                ('active', '=', True),
+            raw_move_domain = [
+                ('state', '=', 'done'),
+                ('raw_material_production_id', '!=', False),
+                ('date', '>=', date_from),
+                ('date', '<=', date_to),
             ]
             if raw_material_ids:
-                material_domain.append(('product_id', 'in', raw_material_ids))
-            material_equipment_ids = equipment_ids
-            if material_equipment_ids:
-                material_domain.append(('equipment_id', 'in', material_equipment_ids))
+                raw_move_domain.append(('product_id', 'in', raw_material_ids))
+            if equipment_ids:
+                raw_move_domain.append(('scada_equipment_id', 'in', equipment_ids))
+            if finished_product_ids:
+                raw_move_domain.append(('raw_material_production_id.product_id', 'in', finished_product_ids))
 
-            raw_material_group = request.env['scada.equipment.material'].read_group(
-                material_domain,
-                ['product_id', 'consumption_actual:sum', 'consumption_bom:sum', 'id:count'],
+            raw_move_records = request.env['stock.move'].search(raw_move_domain)
+            raw_move_line_domain = [
+                ('state', '=', 'done'),
+                ('move_id', 'in', raw_move_records.ids or [0]),
+            ]
+
+            raw_material_actual_group = request.env['stock.move.line'].read_group(
+                raw_move_line_domain,
+                ['product_id', 'qty_done:sum', 'id:count'],
                 ['product_id'],
                 lazy=False,
             )
+            raw_material_bom_group = request.env['stock.move'].read_group(
+                raw_move_domain,
+                ['product_id', 'product_uom_qty:sum'],
+                ['product_id'],
+                lazy=False,
+            )
+
+            actual_map = {
+                row['product_id'][0]: row
+                for row in raw_material_actual_group if row.get('product_id')
+            }
+            bom_map = {
+                row['product_id'][0]: row
+                for row in raw_material_bom_group if row.get('product_id')
+            }
+
             raw_material_chart = []
-            for row in raw_material_group:
-                product = row.get('product_id')
+            material_product_ids = sorted(set(actual_map.keys()) | set(bom_map.keys()))
+            for product_id in material_product_ids:
+                actual_row = actual_map.get(product_id, {})
+                bom_row = bom_map.get(product_id, {})
+                product = actual_row.get('product_id') or bom_row.get('product_id')
                 if not product:
                     continue
-                actual_cons = row.get('consumption_actual_sum', 0.0)
-                bom_cons = row.get('consumption_bom_sum', 0.0)
+
+                actual_cons = self._read_group_metric(actual_row, 'qty_done', 'sum', 0.0)
+                bom_cons = self._read_group_metric(bom_row, 'product_uom_qty', 'sum', 0.0)
                 raw_material_chart.append({
                     'raw_material_id': product[0],
                     'raw_material_name': product[1],
                     'consumption_actual': actual_cons,
                     'consumption_bom': bom_cons,
                     'variance_consumption': actual_cons - bom_cons,
-                    'records_count': row.get('id_count', 0),
+                    'records_count': self._read_group_metric(actual_row, 'id', 'count', 0),
                 })
 
             # 6) Table konsumsi per silo + stock awal/akhir periode
@@ -1447,23 +1679,45 @@ class ScadaJsonRpcController(http.Controller):
             silo_equipments = request.env['scada.equipment'].search(silo_domain, order='name asc')
 
             # Pre-calc consumption per equipment-product in period
-            silo_material_group = request.env['scada.equipment.material'].read_group(
-                material_domain + [('equipment_id', 'in', silo_equipments.ids or [0])],
-                ['equipment_id', 'product_id', 'consumption_actual:sum', 'id:count'],
-                ['equipment_id', 'product_id'],
+            silo_raw_move_domain = list(raw_move_domain)
+            silo_raw_move_domain.append(('scada_equipment_id', 'in', silo_equipments.ids or [0]))
+            silo_move_records = request.env['stock.move'].search(silo_raw_move_domain)
+            silo_raw_move_line_domain = [
+                ('state', '=', 'done'),
+                ('move_id', 'in', silo_move_records.ids or [0]),
+            ]
+
+            silo_material_group = request.env['stock.move.line'].read_group(
+                silo_raw_move_line_domain,
+                ['move_id', 'product_id', 'qty_done:sum', 'id:count'],
+                ['move_id', 'product_id'],
                 lazy=False,
             )
+
+            move_equipment_map = {
+                move.id: move.scada_equipment_id.id
+                for move in silo_move_records if move.scada_equipment_id
+            }
+
             consumption_map = {}
             for row in silo_material_group:
-                eq = row.get('equipment_id')
+                move_value = row.get('move_id')
                 prod = row.get('product_id')
-                if not eq or not prod:
+                if not move_value or not prod:
                     continue
-                consumption_map[(eq[0], prod[0])] = {
-                    'consumed_qty': row.get('consumption_actual_sum', 0.0),
-                    'records_count': row.get('id_count', 0),
-                    'product_name': prod[1],
-                }
+                eq_id = move_equipment_map.get(move_value[0])
+                if not eq_id:
+                    continue
+
+                key = (eq_id, prod[0])
+                if key not in consumption_map:
+                    consumption_map[key] = {
+                        'consumed_qty': 0.0,
+                        'records_count': 0,
+                        'product_name': prod[1],
+                    }
+                consumption_map[key]['consumed_qty'] += self._read_group_metric(row, 'qty_done', 'sum', 0.0)
+                consumption_map[key]['records_count'] += self._read_group_metric(row, 'id', 'count', 0)
 
             # Helpers to reverse stock at period start from current quant + period net movement.
             stock_quant_model = request.env['stock.quant']
@@ -1611,12 +1865,12 @@ class ScadaJsonRpcController(http.Controller):
                     'total_mo_in_progress': total_mo_in_progress,
                 },
                 'metrics_avg_oee_quality': {
-                    'oee_records_count': oee_quality_row.get('id_count', 0),
-                    'avg_yield_percent': oee_quality_row.get('yield_percent_avg', 0.0),
-                    'avg_consumption_ratio': oee_quality_row.get('consumption_ratio_avg', 0.0),
-                    'avg_oee_silo_percent': oee_quality_row.get('avg_silo_oee_percent_avg', 0.0),
-                    'avg_max_abs_deviation_percent': oee_quality_row.get('max_abs_deviation_percent_avg', 0.0),
-                    'total_deviation_alerts': oee_quality_row.get('deviation_alert_count_sum', 0),
+                    'oee_records_count': self._read_group_metric(oee_quality_row, 'id', 'count', 0),
+                    'avg_yield_percent': self._read_group_metric(oee_quality_row, 'yield_percent', 'avg', 0.0),
+                    'avg_consumption_ratio': self._read_group_metric(oee_quality_row, 'consumption_ratio', 'avg', 0.0),
+                    'avg_oee_silo_percent': self._read_group_metric(oee_quality_row, 'avg_silo_oee_percent', 'avg', 0.0),
+                    'avg_max_abs_deviation_percent': self._read_group_metric(oee_quality_row, 'max_abs_deviation_percent', 'avg', 0.0),
+                    'total_deviation_alerts': self._read_group_metric(oee_quality_row, 'deviation_alert_count', 'sum', 0),
                     'by_equipment': oee_quality_by_equipment,
                 },
                 'chart_daily_target_vs_actual': {

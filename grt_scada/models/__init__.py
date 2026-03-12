@@ -1,5 +1,6 @@
 from . import scada_base
 from . import scada_equipment
+from . import scada_maintenance_bridge
 from . import scada_material_consumption
 from . import scada_mo_weight
 from . import scada_equipment_material
@@ -15,3 +16,5 @@ from . import mrp_production
 from . import mrp_bom_line
 from . import stock_move
 from . import scada_mo_data_deprecated
+from . import maintenance_equipment
+from . import maintenance_request

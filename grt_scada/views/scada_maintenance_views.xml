@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_scada_equipment_form_maintenance" model="ir.ui.view">
+        <field name="name">scada.equipment.form.maintenance</field>
+        <field name="model">scada.equipment</field>
+        <field name="inherit_id" ref="grt_scada.view_scada_equipment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        name="action_view_maintenance_equipment"
+                        type="object"
+                        string="Maintenance Equipment"
+                        class="oe_stat_button"
+                        icon="fa-cogs">
+                        <field name="maintenance_equipment_count" widget="statinfo"/>
+                    </button>
+                    <button
+                        name="action_view_maintenance_requests"
+                        type="object"
+                        string="Maintenance Requests"
+                        class="oe_stat_button"
+                        icon="fa-wrench">
+                        <field name="maintenance_request_count" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_equipment_tree_scada" model="ir.ui.view">
+        <field name="name">maintenance.equipment.tree.scada</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="scada_equipment_code"/>
+                <field name="scada_equipment_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_equipment_form_scada" model="ir.ui.view">
+        <field name="name">maintenance.equipment.form.scada</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="scada_equipment_id" options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='serial_no']" position="after">
+                <field name="scada_equipment_code" readonly="1"/>
+                <field name="scada_equipment_type" readonly="1"/>
+                <field name="scada_connection_status" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_equipment_search_scada" model="ir.ui.view">
+        <field name="name">maintenance.equipment.search.scada</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="scada_equipment_code"/>
+                <field name="scada_equipment_id"/>
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <filter
+                    name="filter_scada_equipment"
+                    string="SCADA Equipment"
+                    domain="[('scada_equipment_id', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_request_tree_scada" model="ir.ui.view">
+        <field name="name">maintenance.request.tree.scada</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="scada_equipment_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_request_form_scada" model="ir.ui.view">
+        <field name="name">maintenance.request.form.scada</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='equipment_id']" position="after">
+                <field name="scada_equipment_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_maintenance_request_search_scada" model="ir.ui.view">
+        <field name="name">maintenance.request.search.scada</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="scada_equipment_id"/>
+                <filter
+                    name="filter_scada_request"
+                    string="SCADA Equipment"
+                    domain="[('scada_equipment_id', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_scada_maintenance_equipment" model="ir.actions.act_window">
+        <field name="name">Maintenance Equipment</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph</field>
+        <field name="domain">[('scada_equipment_id', '!=', False)]</field>
+        <field name="context">{'search_default_filter_scada_equipment': 1}</field>
+    </record>
+
+    <record id="action_scada_maintenance_request" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph</field>
+        <field name="domain">[('scada_equipment_id', '!=', False)]</field>
+        <field name="context">{'search_default_filter_scada_request': 1}</field>
+    </record>
+
+    <menuitem
+        id="menu_scada_maintenance"
+        parent="grt_scada.menu_scada_root"
+        name="Maintenance"
+        sequence="46"/>
+
+    <menuitem
+        id="menu_scada_maintenance_equipment"
+        parent="menu_scada_maintenance"
+        action="action_scada_maintenance_equipment"
+        name="Equipment"
+        sequence="1"/>
+
+    <menuitem
+        id="menu_scada_maintenance_request"
+        parent="menu_scada_maintenance"
+        action="action_scada_maintenance_request"
+        name="Requests"
+        sequence="2"/>
+</odoo>

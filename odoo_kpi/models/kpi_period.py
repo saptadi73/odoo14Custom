@@ -8,7 +8,9 @@ class KpiPeriod(models.Model):
     _name = "kpi.period"
     _description = "KPI Period"
     _order = "year desc, month desc, id desc"
+    _rec_name = "name"
 
+    name = fields.Char(compute="_compute_name", store=True, index=True)
     year = fields.Integer(required=True, default=lambda self: fields.Date.today().year)
     month = fields.Integer(required=True, default=lambda self: fields.Date.today().month)
     date_start = fields.Date(required=True)
@@ -34,3 +36,12 @@ class KpiPeriod(models.Model):
             rec.date_start = date(rec.year, rec.month, 1)
             rec.date_end = date(rec.year, rec.month, last_day)
 
+    @api.depends("year", "month")
+    def _compute_name(self):
+        for rec in self:
+            if rec.year and rec.month and 1 <= rec.month <= 12:
+                rec.name = "%s %s" % (calendar.month_name[rec.month], rec.year)
+            elif rec.year and rec.month:
+                rec.name = "%s/%s" % (rec.month, rec.year)
+            else:
+                rec.name = "-"

@@ -1,6 +1,6 @@
 {
     'name': 'SCADA for Odoo - Manufacturing Integration',
-    'version': '7.0.86',
+    'version': '7.0.89',
     'category': 'manufacturing',
     'license': 'LGPL-3',
     'author': 'PT. Gagak Rimang Teknologi',
@@ -13,9 +13,11 @@
     'depends': [
         'stock',
         'mrp',
+        'maintenance',
         'web',
         'base',
     ],
+    'post_init_hook': 'post_init_hook',
     'external_dependencies': {
         'python': [
             'requests',
@@ -38,6 +40,7 @@
         'views/scada_mo_bulk_wizard_view.xml',
         # Menus - AFTER all views (references actions from views)
         'views/menu.xml',
+        'views/scada_maintenance_views.xml',
         # Data files
         'data/demo_data.xml',
         'data/ir_cron.xml',
