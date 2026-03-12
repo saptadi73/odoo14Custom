@@ -19,11 +19,30 @@ class MrpProduction(models.Model):
         help='Defaulted from BoM, can be changed per MO for operational needs.'
     )
 
-    @api.onchange('bom_id')
-    def _onchange_bom_id_scada_equipment(self):
+    def _get_scada_bom_for_product(self):
+        self.ensure_one()
+        if not self.product_id:
+            return self.env['mrp.bom']
+        return self.env['mrp.bom']._bom_find(
+            product=self.product_id,
+            company_id=(self.company_id or self.env.company).id,
+            bom_type='normal',
+        )
+
+    @api.onchange('product_id', 'bom_id')
+    def _onchange_scada_equipment_defaults(self):
         for record in self:
-            if record.bom_id and not record.scada_equipment_id:
-                record.scada_equipment_id = record.bom_id.scada_equipment_id
+            bom = record.bom_id
+            if not bom and record.product_id:
+                bom = record._get_scada_bom_for_product()
+                if bom:
+                    record.bom_id = bom
+            if bom and not record.scada_equipment_id:
+                record.scada_equipment_id = bom.scada_equipment_id
+            # Mirror bulk behavior in the draft form so component lines show
+            # their equipment before the MO is saved/confirmed.
+            if record.move_raw_ids:
+                record._sync_scada_equipment_to_moves()
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -69,6 +88,18 @@ class MrpProduction(models.Model):
 
                 if equipment:
                     move.scada_equipment_id = equipment
+
+    def _get_move_raw_values(self, product_id, product_uom_qty, product_uom, operation_id=False, bom_line=False):
+        values = super()._get_move_raw_values(
+            product_id,
+            product_uom_qty,
+            product_uom,
+            operation_id=operation_id,
+            bom_line=bom_line,
+        )
+        if bom_line and bom_line.scada_equipment_id:
+            values['scada_equipment_id'] = bom_line.scada_equipment_id.id
+        return values
 
     def action_confirm(self):
         """Override confirm to ensure SCADA equipment is synced to moves"""
