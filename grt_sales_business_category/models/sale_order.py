@@ -5,6 +5,12 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    sale_order_type = fields.Selection(
+        [("kering", "Kering"), ("basah", "Basah")],
+        string="Sale Order Type",
+        tracking=True,
+    )
+
     def _is_sales_admin_user(self):
         self.ensure_one()
         return self.env.user.has_group("sales_team.group_sale_manager") or self.env.user.has_group("base.group_system")
@@ -135,6 +141,13 @@ class SaleOrder(models.Model):
         vals["business_category_id"] = self.business_category_id.id
         vals["analytic_account_id"] = self.analytic_account_id.id
         return vals
+
+    @api.constrains("sale_order_type")
+    def _check_sale_order_type(self):
+        allowed = {"kering", "basah"}
+        for order in self:
+            if order.sale_order_type and order.sale_order_type not in allowed:
+                raise ValidationError(_("Sale Order Type must be either Kering or Basah."))
 
     @api.constrains("business_category_id", "team_id", "company_id", "analytic_account_id")
     def _check_business_category_team(self):

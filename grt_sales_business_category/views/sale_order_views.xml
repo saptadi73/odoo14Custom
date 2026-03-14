@@ -33,6 +33,7 @@
 
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="company_id" invisible="1"/>
+                <field name="sale_order_type"/>
                 <field name="business_category_id"/>
                 <field name="analytic_account_id" readonly="1"/>
             </xpath>
@@ -64,10 +65,12 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="business_category_id"/>
+                <field name="sale_order_type"/>
             </xpath>
             <xpath expr="//filter[@name='salesperson']" position="after">
                 <filter string="Business Category" name="group_by_business_category" context="{'group_by': 'business_category_id'}"/>
                 <filter string="Team Sales" name="group_by_sales_team" context="{'group_by': 'team_id'}"/>
+                <filter string="Sale Order Type" name="group_by_sale_order_type" context="{'group_by': 'sale_order_type'}"/>
                 <filter string="Waiting Sales Leader" name="waiting_sales_leader" domain="[('approval_state', '=', 'waiting_sales_leader')]"/>
                 <filter string="Waiting Accounting" name="waiting_accounting" domain="[('approval_state', '=', 'waiting_accounting')]"/>
             </xpath>

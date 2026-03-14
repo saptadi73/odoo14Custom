@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="seq_res_partner_customer_qr_ref" model="ir.sequence">
+        <field name="name">Customer QR Reference</field>
+        <field name="code">res.partner.customer.qr.ref</field>
+        <field name="prefix">CUSTQR%(y)s%(month)s-</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

@@ -1,9 +1,19 @@
-from odoo import fields, models
+from odoo import SUPERUSER_ID, api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    _sql_constraints = [
+        ("customer_qr_ref_unique", "unique(customer_qr_ref)", "Customer QR Reference must be unique."),
+    ]
+
+    customer_qr_ref = fields.Char(
+        string="Customer QR Ref",
+        copy=False,
+        index=True,
+        readonly=True,
+    )
     customer_segment_id = fields.Many2one(
         "customer.behavior.segment",
         string="Customer Segment",
@@ -36,6 +46,44 @@ class ResPartner(models.Model):
         "partner_id",
         string="Customer Behavior Analysis",
     )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        partners = super().create(vals_list)
+        partners._ensure_customer_qr_ref()
+        return partners
+
+    def write(self, vals):
+        result = super().write(vals)
+        if not self.env.context.get("skip_customer_qr_ref_ensure"):
+            self._ensure_customer_qr_ref()
+        if "customer_behavior_analysis_ids" in vals or "behavior_business_category_id" not in vals:
+            self._ensure_behavior_business_category()
+        return result
+
+    @api.model
+    def _next_customer_qr_ref(self):
+        return self.env["ir.sequence"].sudo().next_by_code("res.partner.customer.qr.ref")
+
+    def _get_qr_ref_targets(self):
+        return self.filtered(lambda partner: partner == partner.commercial_partner_id and not partner.customer_qr_ref)
+
+    def _ensure_customer_qr_ref(self):
+        for partner in self._get_qr_ref_targets().sudo():
+            partner.with_context(skip_customer_qr_ref_ensure=True).write(
+                {"customer_qr_ref": partner._next_customer_qr_ref()}
+            )
+
+    @api.model
+    def _backfill_missing_customer_qr_ref(self):
+        partners = self.sudo().with_context(active_test=False).search(
+            [("parent_id", "=", False), ("customer_qr_ref", "=", False)]
+        )
+        partners._ensure_customer_qr_ref()
+
+    def init(self):
+        env = api.Environment(self._cr, SUPERUSER_ID, {})
+        env["res.partner"]._backfill_missing_customer_qr_ref()
 
     def _get_behavior_reference_analysis(self):
         self.ensure_one()
@@ -72,12 +120,6 @@ class ResPartner(models.Model):
             )[:1]
             if latest:
                 partner.behavior_business_category_id = latest.business_category_id
-
-    def write(self, vals):
-        result = super().write(vals)
-        if "customer_behavior_analysis_ids" in vals or "behavior_business_category_id" not in vals:
-            self._ensure_behavior_business_category()
-        return result
 
     def action_recompute_customer_behavior(self):
         self._ensure_behavior_business_category()
