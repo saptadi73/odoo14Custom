@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_crm_pipeline_pivot_business_category" model="ir.ui.view">
+        <field name="name">crm.lead.pipeline.pivot.business.category</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <pivot string="Pipeline by Business Category">
+                <field name="business_category_id" type="row"/>
+                <field name="team_id" type="row"/>
+                <field name="stage_id" type="col"/>
+                <field name="create_date" interval="month" type="col"/>
+                <field name="expected_revenue" type="measure"/>
+                <field name="id" type="measure" string="Opportunities"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_crm_pipeline_graph_business_category" model="ir.ui.view">
+        <field name="name">crm.lead.pipeline.graph.business.category</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <graph string="Pipeline by Business Category" type="bar">
+                <field name="business_category_id"/>
+                <field name="expected_revenue" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_crm_pipeline_business_category_report" model="ir.actions.act_window">
+        <field name="name">Pipeline by Business Category</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">tree,pivot,graph,kanban,form</field>
+        <field name="domain">[('type', '=', 'opportunity')]</field>
+        <field name="context">{'group_by': 'business_category_id'}</field>
+        <field name="search_view_id" ref="view_crm_case_opportunities_filter_business_category"/>
+    </record>
+
+    <menuitem id="menu_crm_pipeline_business_category_report"
+              name="Pipeline by Category"
+              parent="crm.crm_menu_report"
+              action="action_crm_pipeline_business_category_report"
+              sequence="36"
+              groups="crm.group_use_lead,sales_team.group_sale_manager,base.group_system"/>
+
+    <record id="action_crm_activity_history_report" model="ir.actions.act_window">
+        <field name="context">{'group_by': 'business_category_id'}</field>
+    </record>
+</odoo>

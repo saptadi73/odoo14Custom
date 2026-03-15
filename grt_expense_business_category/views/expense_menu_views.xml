@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_expense_team"
+              name="Team Expenses"
+              parent="hr_expense.menu_hr_expense_root"
+              sequence="45"
+              action="action_expense_team"
+              groups="hr_expense.group_hr_expense_manager"/>
+
+    <menuitem id="menu_business_category_from_expense"
+              name="Business Categories"
+              parent="hr_expense.menu_hr_expense_root"
+              sequence="46"
+              action="grt_crm_business_category.action_crm_business_category"
+              groups="hr_expense.group_hr_expense_manager"/>
+</odoo>

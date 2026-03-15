@@ -18,6 +18,7 @@ This enables different staging flow per business category through team pipelines
         "views/assets.xml",
         "views/crm_activity_history_views.xml",
         "views/crm_business_category_views.xml",
+        "views/crm_pipeline_report_views.xml",
         "views/crm_lead_views.xml",
         "views/crm_menu_views.xml",
         "views/crm_stage_views.xml",

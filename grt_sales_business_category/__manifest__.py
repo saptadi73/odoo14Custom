@@ -34,6 +34,7 @@ plus a two-step approval flow: Sales Team Leader then Accounting Manager.
         "views/res_partner_views.xml",
         "views/crm_team_views.xml",
         "views/sale_order_views.xml",
+        "views/sale_report_business_category_views.xml",
         "views/sale_team_menu_views.xml",
     ],
     "installable": True,

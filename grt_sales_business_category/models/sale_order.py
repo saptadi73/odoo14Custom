@@ -195,7 +195,7 @@ class SaleOrder(models.Model):
     @api.constrains("business_category_id", "team_id", "user_id")
     def _check_current_user_sales_scope(self):
         current_user = self.env.user
-        if current_user.has_group("sales_team.group_sale_manager") or current_user.has_group("base.group_system"):
+        if current_user.has_group("base.group_system"):
             return
 
         effective_categories = current_user.effective_business_category_ids

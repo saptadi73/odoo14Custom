@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_expense_pivot_business_category_report" model="ir.ui.view">
+        <field name="name">hr.expense.pivot.business.category.report</field>
+        <field name="model">hr.expense</field>
+        <field name="arch" type="xml">
+            <pivot string="Expenses by Business Category">
+                <field name="business_category_id" type="row"/>
+                <field name="expense_team_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="date" interval="month" type="col"/>
+                <field name="total_amount" type="measure"/>
+                <field name="id" type="measure" string="Expenses"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_hr_expense_graph_business_category_report" model="ir.ui.view">
+        <field name="name">hr.expense.graph.business.category.report</field>
+        <field name="model">hr.expense</field>
+        <field name="arch" type="xml">
+            <graph string="Expenses by Business Category" type="bar">
+                <field name="business_category_id"/>
+                <field name="total_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_hr_expense_business_category_report" model="ir.actions.act_window">
+        <field name="name">Expenses by Business Category</field>
+        <field name="res_model">hr.expense</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="context">{'group_by': 'business_category_id'}</field>
+        <field name="search_view_id" ref="view_hr_expense_filter_business_category"/>
+    </record>
+
+    <menuitem id="menu_hr_expense_business_category_report"
+              name="Expenses by Category"
+              parent="hr_expense.menu_hr_expense_root"
+              sequence="50"
+              action="action_hr_expense_business_category_report"
+              groups="hr_expense.group_hr_expense_user,hr_expense.group_hr_expense_manager,base.group_system"/>
+</odoo>

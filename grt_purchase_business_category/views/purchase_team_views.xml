@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_team_tree" model="ir.ui.view">
+        <field name="name">purchase.team.tree</field>
+        <field name="model">purchase.team</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="user_id"/>
+                <field name="member_ids" widget="many2many_tags"/>
+                <field name="business_category_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_team_form" model="ir.ui.view">
+        <field name="name">purchase.team.form</field>
+        <field name="model">purchase.team</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Team">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id"/>
+                        <field name="user_id"/>
+                        <field name="member_ids" widget="many2many_tags"/>
+                        <field name="business_category_id" domain="[('company_id', '=', company_id)]"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_purchase_team" model="ir.actions.act_window">
+        <field name="name">Team Purchases</field>
+        <field name="res_model">purchase.team</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

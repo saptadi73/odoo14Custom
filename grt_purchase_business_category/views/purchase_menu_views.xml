@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_purchase_team"
+              name="Team Purchases"
+              parent="purchase.menu_purchase_root"
+              sequence="45"
+              action="action_purchase_team"
+              groups="purchase.group_purchase_manager"/>
+
+    <menuitem id="menu_business_category_from_purchase"
+              name="Business Categories"
+              parent="purchase.menu_purchase_root"
+              sequence="46"
+              action="grt_crm_business_category.action_crm_business_category"
+              groups="purchase.group_purchase_manager"/>
+</odoo>

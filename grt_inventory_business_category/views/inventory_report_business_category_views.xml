@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_picking_pivot_business_category_report" model="ir.ui.view">
+        <field name="name">stock.picking.pivot.business.category.report</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Transfers by Business Category">
+                <field name="business_category_id" type="row"/>
+                <field name="stock_team_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="scheduled_date" interval="month" type="col"/>
+                <field name="id" type="measure" string="Transfers"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_stock_picking_graph_business_category_report" model="ir.ui.view">
+        <field name="name">stock.picking.graph.business.category.report</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <graph string="Inventory Transfers by Business Category" type="bar">
+                <field name="business_category_id"/>
+                <field name="id" type="measure" string="Transfers"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_stock_picking_business_category_report" model="ir.actions.act_window">
+        <field name="name">Inventory Transfers by Business Category</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="context">{'group_by': 'business_category_id'}</field>
+    </record>
+
+    <menuitem id="menu_stock_picking_business_category_report"
+              name="Inventory by Category"
+              parent="stock.menu_stock_root"
+              sequence="50"
+              action="action_stock_picking_business_category_report"
+              groups="stock.group_stock_user,stock.group_stock_manager,base.group_system"/>
+</odoo>

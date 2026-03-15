@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_stock_team"
+              name="Team Inventory"
+              parent="stock.menu_stock_root"
+              sequence="45"
+              action="action_stock_team"
+              groups="stock.group_stock_manager"/>
+
+    <menuitem id="menu_business_category_from_inventory"
+              name="Business Categories"
+              parent="stock.menu_stock_root"
+              sequence="46"
+              action="grt_crm_business_category.action_crm_business_category"
+              groups="stock.group_stock_manager"/>
+</odoo>

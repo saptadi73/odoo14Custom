@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_pivot_business_category_report" model="ir.ui.view">
+        <field name="name">sale.order.pivot.business.category.report</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales by Business Category">
+                <field name="business_category_id" type="row"/>
+                <field name="team_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="date_order" interval="month" type="col"/>
+                <field name="amount_total" type="measure"/>
+                <field name="id" type="measure" string="Orders"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_sale_order_graph_business_category_report" model="ir.ui.view">
+        <field name="name">sale.order.graph.business.category.report</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <graph string="Sales by Business Category" type="bar">
+                <field name="business_category_id"/>
+                <field name="amount_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_sale_order_business_category_report" model="ir.actions.act_window">
+        <field name="name">Sales by Business Category</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="context">{'group_by': 'business_category_id'}</field>
+        <field name="search_view_id" ref="view_sales_order_filter_business_category"/>
+    </record>
+
+    <menuitem id="menu_sale_order_business_category_report"
+              name="Sales by Category"
+              parent="sale.sale_order_menu"
+              sequence="50"
+              action="action_sale_order_business_category_report"
+              groups="sales_team.group_sale_salesman,sales_team.group_sale_manager,base.group_system"/>
+</odoo>
