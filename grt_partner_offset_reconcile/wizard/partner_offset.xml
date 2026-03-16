@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_partner_offset_wizard_form" model="ir.ui.view">
+            <field name="name">partner.offset.wizard.form</field>
+            <field name="model">grt.partner.offset.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Customer vs Vendor Offset" create="0" delete="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="partner_id" options="{'no_create': True}"/>
+                                <field name="date"/>
+                                <field name="journal_id" options="{'no_create': True}"/>
+                                <field name="move_id" readonly="1" attrs="{'invisible': [('move_id', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="receivable_total" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="payable_total" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="difference_amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="line_count" readonly="1"/>
+                                <div class="o_form_label" colspan="2">
+                                    Isi Amount to Offset per dokumen. Total customer dan vendor harus seimbang sebelum confirm.
+                                </div>
+                            </group>
+                        </group>
+
+                        <separator string="Customer Receivables"/>
+                        <field name="line_ids" nolabel="1" domain="[('side', '=', 'receivable')]">
+                            <tree create="0" delete="0" editable="bottom">
+                                <field name="date"/>
+                                <field name="date_maturity"/>
+                                <field name="move_id"/>
+                                <field name="journal_id"/>
+                                <field name="ref"/>
+                                <field name="label"/>
+                                <field name="account_id"/>
+                                <field name="residual_amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="amount_to_offset" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </tree>
+                        </field>
+
+                        <separator string="Vendor Payables"/>
+                        <field name="line_ids" nolabel="1" domain="[('side', '=', 'payable')]">
+                            <tree create="0" delete="0" editable="bottom">
+                                <field name="date"/>
+                                <field name="date_maturity"/>
+                                <field name="move_id"/>
+                                <field name="journal_id"/>
+                                <field name="ref"/>
+                                <field name="label"/>
+                                <field name="account_id"/>
+                                <field name="residual_amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="amount_to_offset" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string="Load Open Items" name="action_load_open_items" type="object" class="btn-secondary"/>
+                        <button string="Confirm Offset" name="action_confirm_offset" type="object" class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_partner_offset_wizard" model="ir.actions.act_window">
+            <field name="name">Customer vs Vendor Offset</field>
+            <field name="res_model">grt.partner.offset.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_partner_offset_wizard_form"/>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menu_partner_offset_wizard"
+                  name="Customer vs Vendor Offset"
+                  action="action_partner_offset_wizard"
+                  parent="account.menu_finance_entries_actions"
+                  sequence="57"
+                  groups="account.group_account_user"/>
+
+    </data>
+</odoo>

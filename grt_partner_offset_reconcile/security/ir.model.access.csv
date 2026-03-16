@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_grt_partner_offset_wizard_user,access.grt.partner.offset.wizard.user,model_grt_partner_offset_wizard,account.group_account_user,1,1,1,1
+access_grt_partner_offset_wizard_line_user,access.grt.partner.offset.wizard.line.user,model_grt_partner_offset_wizard_line,account.group_account_user,1,1,1,1
