@@ -72,9 +72,19 @@ class ManualReconcileWizard(models.TransientModel):
             ("reconciled", "=", False),
             ("account_id.reconcile", "=", True),
             ("account_id.internal_type", "=", self.account_internal_type),
+            ("amount_residual", "!=", 0.0),
         ]
         if self.account_id:
             domain.append(("account_id", "=", self.account_id.id))
+        return domain
+
+    def _extend_with_payment_domain(self, domain):
+        self.ensure_one()
+        aml_model = self.env["account.move.line"]
+        if "payment_id" in aml_model._fields:
+            domain.append(("payment_id", "!=", False))
+        else:
+            domain.append(("move_id.move_type", "=", "entry"))
         return domain
 
     def _get_transaction_domain(self):
@@ -105,16 +115,16 @@ class ManualReconcileWizard(models.TransientModel):
             domain.extend(
                 [
                     ("balance", "<", 0),
-                    ("move_id.move_type", "!=", "out_invoice"),
                 ]
             )
+            self._extend_with_payment_domain(domain)
         elif self.reconciliation_type == "vendor_purchase":
             domain.extend(
                 [
                     ("balance", ">", 0),
-                    ("move_id.move_type", "!=", "in_invoice"),
                 ]
             )
+            self._extend_with_payment_domain(domain)
         else:
             domain.extend(self._get_employee_expense_counterpart_domain())
         return domain
@@ -179,6 +189,9 @@ class ManualReconcileWizard(models.TransientModel):
             domain.extend(exclude_domain)
         else:
             domain.append(("move_id.move_type", "=", "entry"))
+
+        if "payment_id" in aml_model._fields:
+            domain.append(("payment_id", "!=", False))
         return domain
 
     def _prepare_line_vals(self, move_line, role):
