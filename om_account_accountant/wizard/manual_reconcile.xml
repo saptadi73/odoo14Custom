@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_manual_reconcile_wizard_form" model="ir.ui.view">
+            <field name="name">manual.reconcile.wizard.form</field>
+            <field name="model">manual.reconcile.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Manual Reconciliation" create="0" delete="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="reconciliation_type"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="partner_id" options="{'no_create': True}"/>
+                                <field name="account_internal_type" invisible="1"/>
+                                <field name="account_id" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <div class="o_form_label" colspan="2">
+                                    Use Load Transactions after changing filters to refresh the open journal items.
+                                </div>
+                            </group>
+                        </group>
+
+                        <separator string="Transaction Side"/>
+                        <field name="line_ids" nolabel="1" domain="[('role', '=', 'transaction')]">
+                            <tree create="0" delete="0" editable="bottom">
+                                <field name="selected"/>
+                                <field name="date"/>
+                                <field name="date_maturity"/>
+                                <field name="move_id"/>
+                                <field name="document_type"/>
+                                <field name="journal_id"/>
+                                <field name="ref"/>
+                                <field name="label"/>
+                                <field name="account_id"/>
+                                <field name="amount_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                                <field name="balance" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                            </tree>
+                        </field>
+
+                        <separator string="Advance / Payment Side"/>
+                        <field name="line_ids" nolabel="1" domain="[('role', '=', 'counterpart')]">
+                            <tree create="0" delete="0" editable="bottom">
+                                <field name="selected"/>
+                                <field name="date"/>
+                                <field name="date_maturity"/>
+                                <field name="move_id"/>
+                                <field name="document_type"/>
+                                <field name="journal_id"/>
+                                <field name="ref"/>
+                                <field name="label"/>
+                                <field name="account_id"/>
+                                <field name="amount_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                                <field name="balance" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string="Load Transactions" name="action_load_transactions" type="object" class="btn-secondary"/>
+                        <button string="Reconcile Selected" name="action_reconcile_selected" type="object" class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_manual_reconcile_employee_expense" model="ir.actions.act_window">
+            <field name="name">Employee Advance vs Expense</field>
+            <field name="res_model">manual.reconcile.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_reconcile_wizard_form"/>
+            <field name="target">current</field>
+            <field name="context">{'default_reconciliation_type': 'employee_expense'}</field>
+        </record>
+
+        <record id="action_manual_reconcile_customer_sales" model="ir.actions.act_window">
+            <field name="name">Customer Advance vs Sales</field>
+            <field name="res_model">manual.reconcile.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_reconcile_wizard_form"/>
+            <field name="target">current</field>
+            <field name="context">{'default_reconciliation_type': 'customer_sales'}</field>
+        </record>
+
+        <record id="action_manual_reconcile_vendor_purchase" model="ir.actions.act_window">
+            <field name="name">Vendor Advance vs Purchase</field>
+            <field name="res_model">manual.reconcile.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_reconcile_wizard_form"/>
+            <field name="target">current</field>
+            <field name="context">{'default_reconciliation_type': 'vendor_purchase'}</field>
+        </record>
+
+        <menuitem id="menu_manual_reconcile_root"
+                  name="Manual Reconciliation"
+                  parent="account.menu_finance_entries_actions"
+                  sequence="56"
+                  groups="account.group_account_user"/>
+
+        <menuitem id="menu_manual_reconcile_employee_expense"
+                  name="Employee Advance vs Expense"
+                  action="action_manual_reconcile_employee_expense"
+                  parent="menu_manual_reconcile_root"
+                  sequence="1"
+                  groups="account.group_account_user"/>
+
+        <menuitem id="menu_manual_reconcile_customer_sales"
+                  name="Customer Advance vs Sales"
+                  action="action_manual_reconcile_customer_sales"
+                  parent="menu_manual_reconcile_root"
+                  sequence="2"
+                  groups="account.group_account_user"/>
+
+        <menuitem id="menu_manual_reconcile_vendor_purchase"
+                  name="Vendor Advance vs Purchase"
+                  action="action_manual_reconcile_vendor_purchase"
+                  parent="menu_manual_reconcile_root"
+                  sequence="3"
+                  groups="account.group_account_user"/>
+
+    </data>
+</odoo>
