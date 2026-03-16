@@ -25,6 +25,7 @@
         'security/account_security.xml',
         'wizard/change_lock_date.xml',
         'wizard/manual_reconcile.xml',
+        'wizard/partner_offset.xml',
         'views/fiscal_year.xml',
         'views/menu.xml',
         'views/account_settings.xml',

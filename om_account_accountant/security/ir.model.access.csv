@@ -4,3 +4,5 @@ access_account_fiscal_year_manager,access.account.fiscal.year.manager,model_acco
 access_change_lock_date_manager,access.change.lock.date.manager,model_change_lock_date,account.group_account_manager,1,1,1,1
 access_manual_reconcile_wizard_user,access.manual.reconcile.wizard.user,model_manual_reconcile_wizard,account.group_account_user,1,1,1,1
 access_manual_reconcile_wizard_line_user,access.manual.reconcile.wizard.line.user,model_manual_reconcile_wizard_line,account.group_account_user,1,1,1,1
+access_partner_offset_wizard_user,access.partner.offset.wizard.user,model_partner_offset_wizard,account.group_account_user,1,1,1,1
+access_partner_offset_wizard_line_user,access.partner.offset.wizard.line.user,model_partner_offset_wizard_line,account.group_account_user,1,1,1,1
