@@ -27,6 +27,8 @@
     'data': [
         # Security - FIRST
         'security/security_groups.xml',
+        # Root menu - BEFORE views that attach under SCADA
+        'views/menu_root.xml',
         # External views inheritance - EARLY
         'views/scada_mrp_views.xml',
         'views/scada_product_views.xml',

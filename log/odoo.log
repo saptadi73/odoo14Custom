@@ -3052,3 +3052,4 @@ odoo.tools.convert.ParseError: while parsing file:/c:/addon14/om_account_account
 2026-03-16 14:13:14,721 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:13:14] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.006
 2026-03-16 14:13:42,931 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:13:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.035
 2026-03-16 14:13:54,081 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:13:54] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.054
+2026-03-16 14:14:33,336 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:14:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.063

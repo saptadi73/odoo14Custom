@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <!-- Main Menu -->
-        <menuitem
-            id="menu_scada_root"
-            name="SCADA"
-            web_icon="grt_scada,static/description/icon.png"
-            sequence="50"/>
-
         <!-- Equipment Menu -->
         <menuitem
             id="menu_scada_equipment"
