@@ -29,6 +29,13 @@ Applied overhead per MO = Basis MO x Tarif overhead
 Variance = Actual overhead - Total applied overhead
 ```
 
+Jika faktor MO dipakai:
+
+```text
+Basis efektif MO = Basis MO x Faktor MO
+Applied overhead per MO = Basis efektif MO x Tarif overhead
+```
+
 ## 3. Menu Yang Digunakan
 
 Setelah modul terpasang, menu utama yang dipakai adalah:
@@ -63,8 +70,14 @@ Field penting:
   - Akun sumber expense aktual jika tidak ada journal item yang ditag langsung.
 - `Absorption Account`
   - Akun yang didebit ketika overhead dimasukkan ke cost produksi.
+- `Capitalize to Inventory`
+  - Jika aktif, absorbed overhead diposting ke akun valuation produk jadi per alokasi MO (fallback ke Absorption Account jika akun valuation tidak ditemukan).
 - `Variance Account`
   - Akun untuk selisih actual vs absorbed.
+- `MO Factor Mode`
+  - `Tanpa Faktor MO`: sistem tidak pakai pengali tambahan.
+  - `Faktor Listrik MO`: sistem pakai `Electricity Factor` di MO.
+  - `Faktor SDM MO`: sistem pakai `Labor Factor` di MO.
 
 ### 4.2. Overhead Period
 
@@ -139,6 +152,7 @@ Catatan:
 
 - Jika nanti SDM ingin dihitung per batch, ubah basis `SDM Produksi` menjadi `Per MO`.
 - Jangan pakai `Per Jam` jika workorder dan durasi produksi tidak tersedia.
+- Jika konsumsi overhead antar MO tidak seragam, aktifkan `MO Factor Mode` lalu isi faktor di masing-masing MO.
 
 ### Langkah 2. Buat Overhead Period
 
@@ -191,6 +205,25 @@ Contoh:
 - jurnal accrual listrik
 - jurnal pengakuan beban SDM produksi
 
+### 3.5. Standarisasi Faktor per Produk/Proses
+
+Untuk menghindari input faktor manual di setiap MO, gunakan template default:
+
+- `Product Template`
+  - `Default Electricity Factor`
+  - `Default Labor Factor`
+- `BoM`
+  - `Default Electricity Factor`
+  - `Default Labor Factor`
+
+Aturan prioritas saat MO dibuat atau saat produk/BoM diganti di form MO:
+
+1. Jika MO memakai BoM, faktor default diambil dari BoM.
+2. Jika tidak ada BoM, faktor default diambil dari Product Template.
+3. Jika tidak diisi, fallback ke `1.0`.
+
+Dengan pola ini, tim produksi cukup set standar per jenis produk/proses sekali, lalu hanya override faktor di MO tertentu jika ada kondisi khusus.
+
 #### C. Manual Actual Amount
 
 Kalau actual overhead belum siap dari jurnal/expense, isi `Manual Actual Amount` di line overhead.
@@ -227,6 +260,17 @@ Fungsi tombol ini:
 - menghitung tarif overhead
 - membuat baris alokasi overhead per MO
 - menghitung absorbed amount dan variance
+
+Catatan faktor MO:
+
+- Untuk line overhead dengan `MO Factor Mode` listrik/SDM, basis alokasi tiap MO akan dikalikan faktor MO terkait.
+- Di tab alokasi tersedia `Base Basis Qty`, `MO Factor`, dan `Basis Qty` (hasil kali) agar audit trail jelas.
+
+Contoh singkat:
+
+- Basis `Per Kg`, qty MO = `100 kg`, faktor listrik MO = `1.20`
+- Basis efektif = `100 x 1.20 = 120`
+- Jika rate overhead = `30.000`, applied overhead MO = `120 x 30.000 = 3.600.000`
 
 ## 6. Cara Sistem Menghitung Basis
 
@@ -279,6 +323,10 @@ Cr 63110080 Listrik
 
 Akun absorpsi overhead didebit.
 
+Jika `Capitalize to Inventory` aktif pada Overhead Type/Line, sistem akan debit ke akun valuation produk jadi berdasarkan alokasi per MO (dengan fallback ke akun absorpsi jika akun valuation produk tidak tersedia).
+
+Selain jurnal GL, sistem juga membuat `Stock Valuation Layer` (SVL) per alokasi MO agar inventory valuation report ikut mencerminkan absorbed overhead.
+
 Contoh:
 
 ```text
@@ -296,6 +344,53 @@ Dr/Cr 51000090 Manufacturing Overhead Variance
 ```
 
 ## 8. Contoh Operasional Nyata
+
+## 9. Catatan Kontrol Data
+
+- Setelah jurnal adjustment dan SVL overhead dibuat, periode tidak bisa di-`Reset to Draft` untuk mencegah inkonsistensi antara GL dan inventory valuation.
+- Jika perlu koreksi, lakukan jurnal koreksi/reversal di periode berikutnya sesuai prosedur akuntansi.
+
+## 10. Rekomendasi Faktor Awal (Siap Pakai)
+
+Gunakan baseline berikut untuk memulai, lalu review variance 1-2 periode sebelum menetapkan angka final.
+
+### 10.1. Template 5 Kategori Proses
+
+- `Kategori A - Mixing/Agitasi Ringan`
+  - Electricity Factor: `0.85`
+  - Labor Factor: `0.90`
+- `Kategori B - Transfer/Packing Standar`
+  - Electricity Factor: `1.00`
+  - Labor Factor: `1.00`
+- `Kategori C - Heating/Cooking Sedang`
+  - Electricity Factor: `1.20`
+  - Labor Factor: `1.05`
+- `Kategori D - Drying/Grinding Intensif`
+  - Electricity Factor: `1.35`
+  - Labor Factor: `1.10`
+- `Kategori E - Rework/Manual Handling Tinggi`
+  - Electricity Factor: `0.95`
+  - Labor Factor: `1.30`
+
+### 10.2. Cara Pakai Template
+
+1. Map setiap produk jadi ke salah satu kategori proses.
+2. Isi faktor di `Product Template` sebagai default.
+3. Jika ada rute/proses khusus, override di `BoM`.
+4. Untuk kasus insidentil (downtime, trial, rework), override di MO terkait saja.
+
+### 10.3. Aturan Review Bulanan
+
+- Jika produk/proses berulang menunjukkan under absorption besar, naikkan faktor `+0.05` sampai `+0.10`.
+- Jika berulang over absorption besar, turunkan faktor `-0.05` sampai `-0.10`.
+- Ubah faktor maksimal sekali per periode agar perbandingan variance tetap bersih.
+- Simpan change log faktor (tanggal, alasan, nilai lama, nilai baru) untuk audit biaya.
+
+### 10.4. Batas Aman Operasional
+
+- Batas bawah disarankan: `0.50`
+- Batas atas disarankan: `2.00`
+- Nilai di luar rentang tersebut hanya dipakai untuk kondisi khusus dengan approval finance/plant manager.
 
 Contoh Februari 2026:
 

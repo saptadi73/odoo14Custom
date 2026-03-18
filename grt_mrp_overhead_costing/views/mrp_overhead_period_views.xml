@@ -61,6 +61,7 @@
                                     <field name="sequence" widget="handle"/>
                                     <field name="overhead_type_id"/>
                                     <field name="allocation_basis"/>
+                                    <field name="capitalize_to_inventory" optional="show"/>
                                     <field name="rate_mode"/>
                                     <field name="manual_rate" optional="show"/>
                                     <field name="source_actual_amount" readonly="1"/>
@@ -79,6 +80,7 @@
                                         <group>
                                             <field name="overhead_type_id"/>
                                             <field name="allocation_basis"/>
+                                            <field name="capitalize_to_inventory"/>
                                             <field name="rate_mode"/>
                                             <field name="manual_rate" attrs="{'readonly': [('rate_mode', '=', 'auto')]}"/>
                                             <field name="manual_actual_amount"/>
@@ -122,6 +124,8 @@
                                                     <field name="production_id"/>
                                                     <field name="product_id"/>
                                                     <field name="date_finished"/>
+                                                    <field name="base_basis_qty"/>
+                                                    <field name="mo_factor"/>
                                                     <field name="basis_qty"/>
                                                     <field name="rate"/>
                                                     <field name="applied_amount"/>
@@ -139,6 +143,8 @@
                                     <field name="production_id"/>
                                     <field name="product_id"/>
                                     <field name="date_finished"/>
+                                    <field name="base_basis_qty"/>
+                                    <field name="mo_factor"/>
                                     <field name="basis_qty"/>
                                     <field name="rate"/>
                                     <field name="applied_amount"/>

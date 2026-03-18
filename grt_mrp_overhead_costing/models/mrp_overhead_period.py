@@ -46,6 +46,12 @@ class MrpOverheadPeriod(models.Model):
     line_ids = fields.One2many("mrp.overhead.period.line", "period_id", string="Overhead Lines")
     allocation_line_ids = fields.One2many("mrp.overhead.allocation.line", "period_id", string="Allocations")
     adjustment_move_id = fields.Many2one("account.move", copy=False, readonly=True)
+    stock_valuation_layer_ids = fields.One2many(
+        "stock.valuation.layer",
+        "mrp_overhead_period_id",
+        string="Stock Valuation Layers",
+        readonly=True,
+    )
     actual_amount_total = fields.Monetary(compute="_compute_amount_totals")
     absorbed_amount_total = fields.Monetary(compute="_compute_amount_totals")
     variance_amount_total = fields.Monetary(compute="_compute_amount_totals")
@@ -111,6 +117,7 @@ class MrpOverheadPeriod(models.Model):
                         {
                             "overhead_type_id": overhead_type.id,
                             "allocation_basis": overhead_type.allocation_basis,
+                            "capitalize_to_inventory": overhead_type.capitalize_to_inventory,
                             "source_account_id": overhead_type.default_source_account_id.id,
                             "absorption_account_id": overhead_type.absorption_account_id.id,
                             "variance_account_id": overhead_type.variance_account_id.id,
@@ -139,10 +146,12 @@ class MrpOverheadPeriod(models.Model):
             basis_totals = defaultdict(float)
             for production in period._get_done_productions():
                 for line in period.line_ids:
-                    basis_qty = line._get_basis_qty_for_production(production)
+                    base_basis_qty = line._get_basis_qty_for_production(production)
+                    mo_factor = line._get_mo_factor_for_production(production)
+                    basis_qty = base_basis_qty * mo_factor
                     if float_is_zero(basis_qty, precision_digits=4):
                         continue
-                    basis_map[line.id].append((production.id, basis_qty))
+                    basis_map[line.id].append((production.id, base_basis_qty, mo_factor, basis_qty))
                     basis_totals[line.id] += basis_qty
 
             values = []
@@ -151,12 +160,14 @@ class MrpOverheadPeriod(models.Model):
                 effective_rate = line.manual_rate if line.rate_mode == "manual" else (
                     line.actual_amount / total_basis if total_basis else 0.0
                 )
-                for production_id, basis_qty in basis_map.get(line.id, []):
+                for production_id, base_basis_qty, mo_factor, basis_qty in basis_map.get(line.id, []):
                     values.append(
                         {
                             "period_id": period.id,
                             "period_line_id": line.id,
                             "production_id": production_id,
+                            "base_basis_qty": base_basis_qty,
+                            "mo_factor": mo_factor,
                             "basis_qty": basis_qty,
                             "rate": effective_rate,
                             "applied_amount": basis_qty * effective_rate,
@@ -201,22 +212,9 @@ class MrpOverheadPeriod(models.Model):
                 line_counter += 1
 
             if not float_is_zero(absorbed_amount, precision_rounding=self.currency_id.rounding):
-                debit = absorbed_amount if absorbed_amount > 0 else 0.0
-                credit = -absorbed_amount if absorbed_amount < 0 else 0.0
-                move_lines.append(
-                    (
-                        0,
-                        0,
-                        line._prepare_move_line_vals(
-                            line.absorption_account_id,
-                            debit,
-                            credit,
-                            line_counter,
-                            _("Absorbed overhead"),
-                        ),
-                    )
-                )
-                line_counter += 1
+                absorbed_lines = line._prepare_absorbed_move_line_vals(start_sequence=line_counter)
+                move_lines.extend(absorbed_lines)
+                line_counter += len(absorbed_lines)
 
             if not float_is_zero(variance_amount, precision_rounding=self.currency_id.rounding):
                 debit = variance_amount if variance_amount > 0 else 0.0
@@ -251,6 +249,7 @@ class MrpOverheadPeriod(models.Model):
             }
         )
         self.adjustment_move_id = move.id
+        self._create_stock_valuation_layers(move)
         self.state = "adjusted"
         return {
             "type": "ir.actions.act_window",
@@ -263,12 +262,34 @@ class MrpOverheadPeriod(models.Model):
         for period in self:
             if period.adjustment_move_id and period.adjustment_move_id.state == "posted":
                 raise UserError(_("Unpost jurnal adjustment terlebih dahulu sebelum reset ke draft."))
+            if period.stock_valuation_layer_ids:
+                raise UserError(
+                    _(
+                        "Periode '%s' sudah memiliki stock valuation layer overhead. Reset ke draft diblokir untuk menjaga konsistensi valuation."
+                    )
+                    % period.display_name
+                )
             if period.adjustment_move_id:
                 period.adjustment_move_id.unlink()
             period.allocation_line_ids.unlink()
             period.state = "draft"
             period.adjustment_move_id = False
         return True
+
+    def _create_stock_valuation_layers(self, adjustment_move):
+        self.ensure_one()
+        if "stock.valuation.layer" not in self.env:
+            return
+
+        valuation_layers = []
+        for line in self.line_ids.filtered(lambda item: item.capitalize_to_inventory):
+            for allocation in line.allocation_line_ids:
+                layer_vals = line._prepare_stock_valuation_layer_vals(allocation, adjustment_move)
+                if layer_vals:
+                    valuation_layers.append(layer_vals)
+
+        if valuation_layers:
+            self.env["stock.valuation.layer"].create(valuation_layers)
 
     def _get_done_productions(self):
         self.ensure_one()
@@ -306,6 +327,11 @@ class MrpOverheadPeriodLine(models.Model):
         ],
         required=True,
         default="kg",
+    )
+    capitalize_to_inventory = fields.Boolean(
+        string="Capitalize to Inventory",
+        default=True,
+        help="If enabled, absorbed overhead is posted to finished product valuation account per MO allocation.",
     )
     rate_mode = fields.Selection(
         [("auto", "Auto"), ("manual", "Manual")],
@@ -367,6 +393,7 @@ class MrpOverheadPeriodLine(models.Model):
             if not line.overhead_type_id:
                 continue
             line.allocation_basis = line.overhead_type_id.allocation_basis
+            line.capitalize_to_inventory = line.overhead_type_id.capitalize_to_inventory
             line.source_account_id = line.overhead_type_id.default_source_account_id
             line.absorption_account_id = line.overhead_type_id.absorption_account_id
             line.variance_account_id = line.overhead_type_id.variance_account_id
@@ -448,6 +475,15 @@ class MrpOverheadPeriodLine(models.Model):
             return self._get_hours_for_production(production)
         return self._get_weight_for_production(production)
 
+    def _get_mo_factor_for_production(self, production):
+        self.ensure_one()
+        factor_mode = self.overhead_type_id.mo_factor_mode
+        if factor_mode == "electricity":
+            return production.overhead_electricity_factor
+        if factor_mode == "labor":
+            return production.overhead_labor_factor
+        return 1.0
+
     def _get_weight_for_production(self, production):
         if "qty_produced" in production._fields and production.qty_produced:
             return production.qty_produced
@@ -524,6 +560,103 @@ class MrpOverheadPeriodLine(models.Model):
             "sequence": sequence,
         }
 
+    def _get_production_valuation_account(self, production):
+        self.ensure_one()
+        product = production.product_id
+        product_account = False
+        category_account = False
+        if "property_stock_valuation_account_id" in product._fields:
+            product_account = product.property_stock_valuation_account_id
+        if "property_stock_valuation_account_id" in product.categ_id._fields:
+            category_account = product.categ_id.property_stock_valuation_account_id
+        return product_account or category_account
+
+    def _prepare_absorbed_move_line_vals(self, start_sequence=1):
+        self.ensure_one()
+        rounding = self.currency_id.rounding
+        values = []
+        sequence = start_sequence
+
+        if self.capitalize_to_inventory and self.allocation_line_ids:
+            for allocation in self.allocation_line_ids.sorted(key=lambda alloc: (alloc.production_id.id, alloc.id)):
+                amount = allocation.applied_amount
+                if float_is_zero(amount, precision_rounding=rounding):
+                    continue
+                target_account = self._get_production_valuation_account(allocation.production_id) or self.absorption_account_id
+                debit = amount if amount > 0 else 0.0
+                credit = -amount if amount < 0 else 0.0
+                label = _("Absorbed overhead (%s)") % allocation.production_id.display_name
+                values.append((0, 0, self._prepare_move_line_vals(target_account, debit, credit, sequence, label)))
+                sequence += 1
+
+        if values:
+            return values
+
+        amount = self.absorbed_amount
+        debit = amount if amount > 0 else 0.0
+        credit = -amount if amount < 0 else 0.0
+        return [
+            (
+                0,
+                0,
+                self._prepare_move_line_vals(
+                    self.absorption_account_id,
+                    debit,
+                    credit,
+                    start_sequence,
+                    _("Absorbed overhead"),
+                ),
+            )
+        ]
+
+    def _prepare_stock_valuation_layer_vals(self, allocation, adjustment_move):
+        self.ensure_one()
+        amount = allocation.applied_amount
+        if float_is_zero(amount, precision_rounding=self.currency_id.rounding):
+            return False
+
+        production = allocation.production_id
+        product = production.product_id
+        if not product:
+            return False
+
+        category = product.categ_id
+        if "valuation" in category._fields and category.valuation != "real_time":
+            return False
+
+        description = _("Overhead absorption %s - %s - %s") % (
+            self.period_id.display_name,
+            self.overhead_type_id.display_name,
+            production.display_name,
+        )
+
+        vals = {
+            "company_id": self.company_id.id,
+            "product_id": product.id,
+            "quantity": 0.0,
+            "value": amount,
+            "unit_cost": amount,
+            "description": description,
+            "mrp_overhead_period_id": self.period_id.id,
+            "mrp_overhead_period_line_id": self.id,
+            "mrp_overhead_allocation_line_id": allocation.id,
+            "mrp_production_id": production.id,
+        }
+
+        StockValuationLayer = self.env["stock.valuation.layer"]
+        if "account_move_id" in StockValuationLayer._fields:
+            vals["account_move_id"] = adjustment_move.id
+        if "stock_move_id" in StockValuationLayer._fields:
+            finished_move = production.move_finished_ids.filtered(lambda move: move.state == "done")[:1]
+            if finished_move:
+                vals["stock_move_id"] = finished_move.id
+        if "remaining_qty" in StockValuationLayer._fields:
+            vals["remaining_qty"] = 0.0
+        if "remaining_value" in StockValuationLayer._fields:
+            vals["remaining_value"] = 0.0
+
+        return vals
+
 
 class MrpOverheadAllocationLine(models.Model):
     _name = "mrp.overhead.allocation.line"
@@ -537,6 +670,8 @@ class MrpOverheadAllocationLine(models.Model):
     production_id = fields.Many2one("mrp.production", required=True, ondelete="cascade")
     product_id = fields.Many2one(related="production_id.product_id", store=True, readonly=True)
     date_finished = fields.Datetime(related="production_id.date_finished", store=True, readonly=True)
+    base_basis_qty = fields.Float(required=True, digits=(16, 4), default=0.0)
+    mo_factor = fields.Float(required=True, digits=(16, 4), default=1.0)
     basis_qty = fields.Float(required=True, digits=(16, 4))
     rate = fields.Monetary(required=True)
     applied_amount = fields.Monetary(required=True)

@@ -24,6 +24,21 @@ class MrpOverheadType(models.Model):
         required=True,
         default="kg",
     )
+    mo_factor_mode = fields.Selection(
+        [
+            ("none", "Tanpa Faktor MO"),
+            ("electricity", "Faktor Listrik MO"),
+            ("labor", "Faktor SDM MO"),
+        ],
+        required=True,
+        default="none",
+        help="Pilih faktor MO yang dipakai saat compute overhead. Jika 'Tanpa Faktor MO', basis dihitung normal.",
+    )
+    capitalize_to_inventory = fields.Boolean(
+        string="Capitalize to Inventory",
+        default=True,
+        help="If enabled, absorbed overhead is posted to finished product valuation account (with fallback to absorption account).",
+    )
     default_source_account_id = fields.Many2one(
         "account.account",
         string="Default Source Expense Account",

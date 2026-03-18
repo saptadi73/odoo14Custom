@@ -15,6 +15,7 @@ Modul ini menambahkan mekanisme overhead absorption bulanan di Odoo Manufacturin
 - line per overhead `mrp.overhead.period.line`
 - hasil alokasi per MO `mrp.overhead.allocation.line`
 - integrasi dengan `hr.expense`, `account.move`, `account.move.line`, dan `mrp.production`
+- integrasi `stock.valuation.layer` untuk kapitalisasi overhead ke inventory valuation
 
 ## Model Utama
 
@@ -25,6 +26,7 @@ Master jenis overhead.
 Field kunci:
 
 - `allocation_basis`: `kg`, `hour`, `mo`
+- `capitalize_to_inventory`: absorbsi overhead diarahkan ke akun valuation produk jadi (fallback ke absorption account)
 - `default_source_account_id`
 - `absorption_account_id`
 - `variance_account_id`
@@ -58,6 +60,7 @@ Line overhead per periode.
 Field kunci:
 
 - `allocation_basis`
+- `capitalize_to_inventory`
 - `rate_mode`
 - `manual_rate`
 - `manual_actual_amount`
@@ -194,7 +197,26 @@ Untuk setiap line overhead yang punya nilai:
 
 1. actual overhead direverse dari akun sumber
 2. absorbed overhead didebit ke akun absorpsi
+   - jika `capitalize_to_inventory` aktif dan ada allocation line, debit diarahkan ke akun valuation produk jadi per alokasi MO
+   - fallback ke `absorption_account_id` jika akun valuation tidak tersedia
 3. variance diposting ke akun variance jika ada
+
+## Mekanisme Stock Valuation Layer (SVL)
+
+Saat `action_create_adjustment_move()` dipanggil dan line overhead memiliki `capitalize_to_inventory = True`:
+
+1. sistem membuat SVL revaluation (`quantity = 0`) per allocation line MO
+2. nilai `value` SVL mengikuti `applied_amount` per MO
+3. SVL di-link ke:
+   - period (`mrp_overhead_period_id`)
+   - period line (`mrp_overhead_period_line_id`)
+   - allocation line (`mrp_overhead_allocation_line_id`)
+   - MO (`mrp_production_id`)
+4. jika field tersedia di model SVL, `account_move_id` diarahkan ke jurnal adjustment
+
+Catatan kontrol:
+
+- `action_reset_to_draft()` diblokir jika SVL overhead sudah terbentuk untuk menjaga konsistensi valuation history.
 
 Jurnal dibuat `draft` agar bisa direview oleh finance.
 

@@ -6,6 +6,8 @@
         <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_qty']" position="after">
+                <field name="overhead_electricity_factor"/>
+                <field name="overhead_labor_factor"/>
                 <field name="overhead_applied_amount" readonly="1"/>
                 <field name="overhead_applied_count" readonly="1"/>
             </xpath>
@@ -15,6 +17,8 @@
                         <tree>
                             <field name="period_id"/>
                             <field name="period_line_id"/>
+                            <field name="base_basis_qty"/>
+                            <field name="mo_factor"/>
                             <field name="basis_qty"/>
                             <field name="rate"/>
                             <field name="applied_amount"/>

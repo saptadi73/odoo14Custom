@@ -19,6 +19,7 @@ Adds monthly manufacturing overhead periods to:
         "mail",
         "mrp",
         "account",
+        "stock_account",
         "hr_expense",
     ],
     "data": [
@@ -27,6 +28,7 @@ Adds monthly manufacturing overhead periods to:
         "views/mrp_overhead_type_views.xml",
         "views/mrp_overhead_period_views.xml",
         "views/mrp_production_views.xml",
+        "views/product_bom_overhead_factor_views.xml",
         "views/hr_expense_views.xml",
         "views/mrp_overhead_menu_views.xml",
         "views/mrp_overhead_documentation_views.xml",
