@@ -3053,3 +3053,1519 @@ odoo.tools.convert.ParseError: while parsing file:/c:/addon14/om_account_account
 2026-03-16 14:13:42,931 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:13:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.035
 2026-03-16 14:13:54,081 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:13:54] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.054
 2026-03-16 14:14:33,336 22320 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [16/Mar/2026 14:14:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.063
+2026-03-18 06:10:31,270 16476 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:10:31,270 16476 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:10:31,270 16476 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:10:31,270 16476 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:10:33,338 16476 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:10:33,750 16476 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:10:33,760 16476 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:10:33,868 16476 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-18 06:10:33,886 16476 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-03-18 06:10:41,948 16476 INFO kanjabung_MRP odoo.modules.loading: loading 97 modules... 
+2026-03-18 06:10:42,239 16476 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:10:43,014 16476 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:10:44,204 16476 INFO kanjabung_MRP odoo.modules.loading: 97 modules loaded in 2.26s, 0 queries (+0 extra) 
+2026-03-18 06:10:45,970 16476 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:10:46,127 16476 INFO kanjabung_MRP odoo.service.server: Initiating shutdown 
+2026-03-18 06:10:46,127 16476 INFO kanjabung_MRP odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:10:46,127 16476 INFO kanjabung_MRP odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 1 connections  
+2026-03-18 06:11:06,997 24492 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:11:06,997 24492 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:11:06,997 24492 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:11:06,997 24492 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:11:07,254 24492 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:11:07,467 24492 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:11:07,478 24492 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:11:07,570 24492 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-18 06:11:07,575 24492 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-03-18 06:11:08,589 24492 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:11:08,756 24492 INFO kanjabung_MRP odoo.modules.loading: loading 97 modules... 
+2026-03-18 06:11:08,895 24492 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:11:09,417 24492 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:11:09,417 24492 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:11:09,417 24492 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:11:09,418 24492 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:11:09,418 24492 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:11:09,418 24492 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:11:09,418 24492 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:11:09,418 24492 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:11:10,059 24492 INFO kanjabung_MRP odoo.modules.loading: 97 modules loaded in 1.30s, 0 queries (+0 extra) 
+2026-03-18 06:11:10,064 24492 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:11:10,064 24492 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_mrp_overhead_costing (73/98) 
+2026-03-18 06:11:10,813 24492 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-18 06:11:10,814 24492 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 461, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 198, in load_module_graph
+    registry.setup_models(cr)
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 276, in setup_models
+    model._setup_fields()
+  File "C:\odoo14c\server\odoo\models.py", line 2852, in _setup_fields
+    field.setup_full(self)
+  File "C:\odoo14c\server\odoo\fields.py", line 418, in setup_full
+    self._setup_regular_full(model)
+  File "C:\odoo14c\server\odoo\fields.py", line 1399, in _setup_regular_full
+    self._setup_currency_field(model)
+  File "C:\odoo14c\server\odoo\fields.py", line 1395, in _setup_currency_field
+    "Field %s with unknown currency_field %r" % (self, self.currency_field)
+AssertionError: Field mrp.production.overhead_applied_amount with unknown currency_field 'currency_id'
+2026-03-18 06:11:10,888 24492 CRITICAL kanjabung_MRP odoo.service.server: Failed to initialize database `kanjabung_MRP`. 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\service\server.py", line 1202, in preload_registries
+    registry = Registry.new(dbname, update_module=update_module)
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 461, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 198, in load_module_graph
+    registry.setup_models(cr)
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 276, in setup_models
+    model._setup_fields()
+  File "C:\odoo14c\server\odoo\models.py", line 2852, in _setup_fields
+    field.setup_full(self)
+  File "C:\odoo14c\server\odoo\fields.py", line 418, in setup_full
+    self._setup_regular_full(model)
+  File "C:\odoo14c\server\odoo\fields.py", line 1399, in _setup_regular_full
+    self._setup_currency_field(model)
+  File "C:\odoo14c\server\odoo\fields.py", line 1395, in _setup_currency_field
+    "Field %s with unknown currency_field %r" % (self, self.currency_field)
+AssertionError: Field mrp.production.overhead_applied_amount with unknown currency_field 'currency_id'
+2026-03-18 06:11:10,903 24492 INFO kanjabung_MRP odoo.service.server: Initiating shutdown 
+2026-03-18 06:11:10,903 24492 INFO kanjabung_MRP odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:11:10,904 24492 INFO kanjabung_MRP odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 1 connections  
+2026-03-18 06:11:30,478 9556 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:11:30,479 9556 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:11:30,479 9556 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:11:30,479 9556 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:11:30,731 9556 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:11:30,900 9556 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:11:30,900 9556 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra) 
+2026-03-18 06:11:31,010 9556 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-18 06:11:31,016 9556 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-03-18 06:11:32,317 9556 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:11:32,502 9556 INFO kanjabung_MRP odoo.modules.loading: loading 97 modules... 
+2026-03-18 06:11:32,680 9556 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:11:33,200 9556 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:11:33,202 9556 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:11:33,202 9556 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:11:33,203 9556 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:11:33,203 9556 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:11:33,203 9556 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:11:33,204 9556 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:11:33,204 9556 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:11:34,016 9556 INFO kanjabung_MRP odoo.modules.loading: 97 modules loaded in 1.51s, 0 queries (+0 extra) 
+2026-03-18 06:11:34,023 9556 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:11:34,023 9556 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_mrp_overhead_costing (73/98) 
+2026-03-18 06:11:34,849 9556 INFO kanjabung_MRP odoo.modules.registry: module grt_mrp_overhead_costing: creating or updating database tables 
+2026-03-18 06:11:35,966 9556 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.module, scada.health. 
+2026-03-18 06:11:35,966 9556 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-18 06:11:35,967 9556 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-18 06:11:35,972 9556 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-18 06:11:35,972 9556 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-18 06:11:36,050 9556 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/security/ir.model.access.csv 
+2026-03-18 06:11:36,140 9556 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/data/sequence.xml 
+2026-03-18 06:11:36,165 9556 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_type_views.xml 
+2026-03-18 06:11:36,251 9556 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_period_views.xml 
+2026-03-18 06:11:36,302 9556 INFO kanjabung_MRP odoo.addons.base.models.ir_ui_view: Field company_id used in field overhead_type_id default domain ([('company_id', '=', company_id)]) must be present in view but is missing.
+
+View name: mrp.overhead.period.form
+Error context:
+ view: ir.ui.view(1800,)
+ xmlid: view_mrp_overhead_period_form
+ view.model: mrp.overhead.period
+ file: c:\addon14\grt_mrp_overhead_costing\views\mrp_overhead_period_views.xml
+ 
+2026-03-18 06:11:36,316 9556 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-18 06:11:36,317 9556 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 677, in _tag_root
+    f(rec)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 580, in _tag_record
+    record = model._load_records([data], self.mode == 'update')
+  File "C:\odoo14c\server\odoo\models.py", line 4258, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "C:\odoo14c\server\odoo\models.py", line 4163, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-45>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 489, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-67>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_fields.py", line 534, in create
+    recs = super().create(vals_list)
+  File "<decorator-gen-15>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\models.py", line 3925, in create
+    fields[0].determine_inverse(batch_recs)
+  File "C:\odoo14c\server\odoo\fields.py", line 1207, in determine_inverse
+    determine(self.inverse, records)
+  File "C:\odoo14c\server\odoo\fields.py", line 82, in determine
+    return needle(*args)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 307, in _inverse_arch
+    view.write(data)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 507, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "C:\odoo14c\server\odoo\models.py", line 3709, in write
+    real_recs._validate_fields(vals, inverse_fields)
+  File "C:\odoo14c\server\odoo\models.py", line 1270, in _validate_fields
+    check(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 418, in _check_xml
+    )).with_traceback(e.__traceback__) from None
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 398, in _check_xml
+    view.postprocess_and_fields(view_doc, validate=True)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 857, in postprocess_and_fields
+    arch, name_manager = self._postprocess_view(node, model, validate=validate)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 869, in _postprocess_view
+    self.postprocess(node, [], editable, name_manager)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 969, in postprocess
+    self.postprocess(child, current_node_path, node_info['editable'], name_manager)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 969, in postprocess
+    self.postprocess(child, current_node_path, node_info['editable'], name_manager)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 969, in postprocess
+    self.postprocess(child, current_node_path, node_info['editable'], name_manager)
+  [Previous line repeated 1 more time]
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 948, in postprocess
+    postprocessor(node, name_manager, node_info)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 1009, in _postprocess_tag_field
+    editable=node_info['editable'],
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 871, in _postprocess_view
+    name_manager.check_view_fields(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 2025, in check_view_fields
+    view.handle_view_error(msg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 680, in handle_view_error
+    raise ValueError(formatted_message).with_traceback(from_traceback) from from_exception
+odoo.exceptions.ValidationError: Error while validating view:
+
+Field company_id used in field overhead_type_id default domain ([('company_id', '=', company_id)]) must be present in view but is missing.
+
+View name: mrp.overhead.period.form
+Error context:
+ view: ir.ui.view(1800,)
+ xmlid: view_mrp_overhead_period_form
+ view.model: mrp.overhead.period
+ file: c:\addon14\grt_mrp_overhead_costing\views\mrp_overhead_period_views.xml
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 461, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 69, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 733, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 799, in convert_xml_import
+    obj.parse(doc.getroot())
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 719, in parse
+    self._tag_root(de)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 685, in _tag_root
+    )) from e
+odoo.tools.convert.ParseError: while parsing file:/c:/addon14/grt_mrp_overhead_costing/views/mrp_overhead_period_views.xml:20, near
+<record id="view_mrp_overhead_period_form" model="ir.ui.view">
+        <field name="name">mrp.overhead.period.form</field>
+        <field name="model">mrp.overhead.period</field>
+        <field name="arch" type="xml">
+            <form string="MRP Overhead Period">
+                <header>
+                    <button name="action_initialize_lines" type="object" string="Init Types" states="draft"/>
+                    <button name="action_load_source_entries" type="object" string="Load Source Entries" states="draft,computed"/>
+                    <button name="action_compute_overhead" type="object" string="Compute Overhead" class="btn-primary" states="draft,computed"/>
+                    <button name="action_create_adjustment_move" type="object" string="Create Adjustment" class="btn-primary" states="computed"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" states="computed,adjusted"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,adjusted"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="journal_id"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="adjustment_move_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Summary">
+                            <field name="actual_amount_total" readonly="1"/>
+                            <field name="absorbed_amount_total" readonly="1"/>
+                            <field name="variance_amount_total" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Overhead Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="overhead_type_id"/>
+                                    <field name="allocation_basis"/>
+                                    <field name="rate_mode"/>
+                                    <field name="manual_rate" optional="show"/>
+                                    <field name="source_actual_amount" readonly="1"/>
+                                    <field name="manual_actual_amount"/>
+                                    <field name="actual_amount" readonly="1"/>
+                                    <field name="basis_qty" readonly="1"/>
+                                    <field name="rate" readonly="1"/>
+                                    <field name="absorbed_amount" readonly="1"/>
+                                    <field name="variance_amount" readonly="1"/>
+                                    <field name="source_move_count" readonly="1"/>
+                                    <field name="allocation_count" readonly="1"/>
+                                </tree>
+                                <form string="Overhead Line">
+                                    <group>
+                                        <group>
+                                            <field name="overhead_type_id"/>
+                                            <field name="allocation_basis"/>
+                                            <field name="rate_mode"/>
+                                            <field name="manual_rate" attrs="{'readonly': [('rate_mode', '=', 'auto')]}"/>
+                                            <field name="manual_actual_amount"/>
+                                        </group>
+                                        <group>
+                                            <field name="source_account_id"/>
+                                            <field name="absorption_account_id"/>
+                                            <field name="variance_account_id"/>
+                                        </group>
+                                    </group>
+                                    <group string="Computed">
+                                        <group>
+                                            <field name="source_actual_amount" readonly="1"/>
+                                            <field name="actual_amount" readonly="1"/>
+                                            <field name="basis_qty" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="computed_rate" readonly="1"/>
+                                            <field name="rate" readonly="1"/>
+                                            <field name="absorbed_amount" readonly="1"/>
+                                            <field name="variance_amount" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                        <page string="Source Lines">
+                                            <field name="source_move_line_ids" readonly="1">
+                                                <tree>
+                                                    <field name="date"/>
+                                                    <field name="move_id"/>
+                                                    <field name="name"/>
+                                                    <field name="account_id"/>
+                                                    <field name="debit"/>
+                                                    <field name="credit"/>
+                                                    <field name="balance"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="MO Allocations">
+                                            <field name="allocation_line_ids" readonly="1">
+                                                <tree>
+                                                    <field name="production_id"/>
+                                                    <field name="product_id"/>
+                                                    <field name="date_finished"/>
+                                                    <field name="basis_qty"/>
+                                                    <field name="rate"/>
+                                                    <field name="applied_amount"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Allocations">
+                            <field name="allocation_line_ids" readonly="1">
+                                <tree>
+                                    <field name="period_line_id"/>
+                                    <field name="production_id"/>
+                                    <field name="product_id"/>
+                                    <field name="date_finished"/>
+                                    <field name="basis_qty"/>
+                                    <field name="rate"/>
+                                    <field name="applied_amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+2026-03-18 06:11:36,380 9556 CRITICAL kanjabung_MRP odoo.service.server: Failed to initialize database `kanjabung_MRP`. 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 677, in _tag_root
+    f(rec)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 580, in _tag_record
+    record = model._load_records([data], self.mode == 'update')
+  File "C:\odoo14c\server\odoo\models.py", line 4258, in _load_records
+    records = self._load_records_create([data['values'] for data in to_create])
+  File "C:\odoo14c\server\odoo\models.py", line 4163, in _load_records_create
+    return self.create(values)
+  File "<decorator-gen-45>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 489, in create
+    return super(View, self).create(vals_list)
+  File "<decorator-gen-67>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_fields.py", line 534, in create
+    recs = super().create(vals_list)
+  File "<decorator-gen-15>", line 2, in create
+  File "C:\odoo14c\server\odoo\api.py", line 353, in _model_create_multi
+    return create(self, arg)
+  File "C:\odoo14c\server\odoo\models.py", line 3925, in create
+    fields[0].determine_inverse(batch_recs)
+  File "C:\odoo14c\server\odoo\fields.py", line 1207, in determine_inverse
+    determine(self.inverse, records)
+  File "C:\odoo14c\server\odoo\fields.py", line 82, in determine
+    return needle(*args)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 307, in _inverse_arch
+    view.write(data)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 507, in write
+    res = super(View, self).write(self._compute_defaults(vals))
+  File "C:\odoo14c\server\odoo\models.py", line 3709, in write
+    real_recs._validate_fields(vals, inverse_fields)
+  File "C:\odoo14c\server\odoo\models.py", line 1270, in _validate_fields
+    check(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 418, in _check_xml
+    )).with_traceback(e.__traceback__) from None
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 398, in _check_xml
+    view.postprocess_and_fields(view_doc, validate=True)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 857, in postprocess_and_fields
+    arch, name_manager = self._postprocess_view(node, model, validate=validate)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 869, in _postprocess_view
+    self.postprocess(node, [], editable, name_manager)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 969, in postprocess
+    self.postprocess(child, current_node_path, node_info['editable'], name_manager)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 969, in postprocess
+    self.postprocess(child, current_node_path, node_info['editable'], name_manager)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 969, in postprocess
+    self.postprocess(child, current_node_path, node_info['editable'], name_manager)
+  [Previous line repeated 1 more time]
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 948, in postprocess
+    postprocessor(node, name_manager, node_info)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 1009, in _postprocess_tag_field
+    editable=node_info['editable'],
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 871, in _postprocess_view
+    name_manager.check_view_fields(self)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 2025, in check_view_fields
+    view.handle_view_error(msg)
+  File "C:\odoo14c\server\odoo\addons\base\models\ir_ui_view.py", line 680, in handle_view_error
+    raise ValueError(formatted_message).with_traceback(from_traceback) from from_exception
+odoo.exceptions.ValidationError: Error while validating view:
+
+Field company_id used in field overhead_type_id default domain ([('company_id', '=', company_id)]) must be present in view but is missing.
+
+View name: mrp.overhead.period.form
+Error context:
+ view: ir.ui.view(1800,)
+ xmlid: view_mrp_overhead_period_form
+ view.model: mrp.overhead.period
+ file: c:\addon14\grt_mrp_overhead_costing\views\mrp_overhead_period_views.xml
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\service\server.py", line 1202, in preload_registries
+    registry = Registry.new(dbname, update_module=update_module)
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 461, in load_modules
+    loaded_modules, update_module, models_to_check)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 349, in load_marked_modules
+    perform_checks=perform_checks, models_to_check=models_to_check
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 222, in load_module_graph
+    load_data(cr, idref, mode, kind='data', package=package)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 69, in load_data
+    tools.convert_file(cr, package.name, filename, idref, mode, noupdate, kind)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 733, in convert_file
+    convert_xml_import(cr, module, fp, idref, mode, noupdate)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 799, in convert_xml_import
+    obj.parse(doc.getroot())
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 719, in parse
+    self._tag_root(de)
+  File "C:\odoo14c\server\odoo\tools\convert.py", line 685, in _tag_root
+    )) from e
+odoo.tools.convert.ParseError: while parsing file:/c:/addon14/grt_mrp_overhead_costing/views/mrp_overhead_period_views.xml:20, near
+<record id="view_mrp_overhead_period_form" model="ir.ui.view">
+        <field name="name">mrp.overhead.period.form</field>
+        <field name="model">mrp.overhead.period</field>
+        <field name="arch" type="xml">
+            <form string="MRP Overhead Period">
+                <header>
+                    <button name="action_initialize_lines" type="object" string="Init Types" states="draft"/>
+                    <button name="action_load_source_entries" type="object" string="Load Source Entries" states="draft,computed"/>
+                    <button name="action_compute_overhead" type="object" string="Compute Overhead" class="btn-primary" states="draft,computed"/>
+                    <button name="action_create_adjustment_move" type="object" string="Create Adjustment" class="btn-primary" states="computed"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" states="computed,adjusted"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,adjusted"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="journal_id"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="adjustment_move_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Summary">
+                            <field name="actual_amount_total" readonly="1"/>
+                            <field name="absorbed_amount_total" readonly="1"/>
+                            <field name="variance_amount_total" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Overhead Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="overhead_type_id"/>
+                                    <field name="allocation_basis"/>
+                                    <field name="rate_mode"/>
+                                    <field name="manual_rate" optional="show"/>
+                                    <field name="source_actual_amount" readonly="1"/>
+                                    <field name="manual_actual_amount"/>
+                                    <field name="actual_amount" readonly="1"/>
+                                    <field name="basis_qty" readonly="1"/>
+                                    <field name="rate" readonly="1"/>
+                                    <field name="absorbed_amount" readonly="1"/>
+                                    <field name="variance_amount" readonly="1"/>
+                                    <field name="source_move_count" readonly="1"/>
+                                    <field name="allocation_count" readonly="1"/>
+                                </tree>
+                                <form string="Overhead Line">
+                                    <group>
+                                        <group>
+                                            <field name="overhead_type_id"/>
+                                            <field name="allocation_basis"/>
+                                            <field name="rate_mode"/>
+                                            <field name="manual_rate" attrs="{'readonly': [('rate_mode', '=', 'auto')]}"/>
+                                            <field name="manual_actual_amount"/>
+                                        </group>
+                                        <group>
+                                            <field name="source_account_id"/>
+                                            <field name="absorption_account_id"/>
+                                            <field name="variance_account_id"/>
+                                        </group>
+                                    </group>
+                                    <group string="Computed">
+                                        <group>
+                                            <field name="source_actual_amount" readonly="1"/>
+                                            <field name="actual_amount" readonly="1"/>
+                                            <field name="basis_qty" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="computed_rate" readonly="1"/>
+                                            <field name="rate" readonly="1"/>
+                                            <field name="absorbed_amount" readonly="1"/>
+                                            <field name="variance_amount" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                        <page string="Source Lines">
+                                            <field name="source_move_line_ids" readonly="1">
+                                                <tree>
+                                                    <field name="date"/>
+                                                    <field name="move_id"/>
+                                                    <field name="name"/>
+                                                    <field name="account_id"/>
+                                                    <field name="debit"/>
+                                                    <field name="credit"/>
+                                                    <field name="balance"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="MO Allocations">
+                                            <field name="allocation_line_ids" readonly="1">
+                                                <tree>
+                                                    <field name="production_id"/>
+                                                    <field name="product_id"/>
+                                                    <field name="date_finished"/>
+                                                    <field name="basis_qty"/>
+                                                    <field name="rate"/>
+                                                    <field name="applied_amount"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Allocations">
+                            <field name="allocation_line_ids" readonly="1">
+                                <tree>
+                                    <field name="period_line_id"/>
+                                    <field name="production_id"/>
+                                    <field name="product_id"/>
+                                    <field name="date_finished"/>
+                                    <field name="basis_qty"/>
+                                    <field name="rate"/>
+                                    <field name="applied_amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+2026-03-18 06:11:36,381 9556 INFO kanjabung_MRP odoo.service.server: Initiating shutdown 
+2026-03-18 06:11:36,381 9556 INFO kanjabung_MRP odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:11:36,381 9556 INFO kanjabung_MRP odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 1 connections  
+2026-03-18 06:12:27,655 14588 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:12:27,655 14588 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:12:27,656 14588 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:12:27,656 14588 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:12:27,909 14588 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:12:28,189 14588 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:12:28,202 14588 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:12:28,295 14588 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-18 06:12:28,302 14588 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-03-18 06:12:29,448 14588 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:12:29,606 14588 INFO kanjabung_MRP odoo.modules.loading: loading 97 modules... 
+2026-03-18 06:12:29,744 14588 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:12:30,344 14588 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:12:30,345 14588 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:12:30,345 14588 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:12:30,345 14588 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:12:30,346 14588 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:12:30,346 14588 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:12:30,346 14588 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:12:30,347 14588 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:12:31,103 14588 INFO kanjabung_MRP odoo.modules.loading: 97 modules loaded in 1.50s, 0 queries (+0 extra) 
+2026-03-18 06:12:31,109 14588 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:12:31,109 14588 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_mrp_overhead_costing (73/98) 
+2026-03-18 06:12:31,895 14588 INFO kanjabung_MRP odoo.modules.registry: module grt_mrp_overhead_costing: creating or updating database tables 
+2026-03-18 06:12:32,647 14588 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.module, scada.health. 
+2026-03-18 06:12:32,647 14588 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-18 06:12:32,647 14588 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-18 06:12:32,650 14588 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-18 06:12:32,650 14588 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-18 06:12:32,705 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/security/ir.model.access.csv 
+2026-03-18 06:12:32,772 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/data/sequence.xml 
+2026-03-18 06:12:32,782 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_type_views.xml 
+2026-03-18 06:12:32,822 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_period_views.xml 
+2026-03-18 06:12:32,930 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_production_views.xml 
+2026-03-18 06:12:33,057 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/hr_expense_views.xml 
+2026-03-18 06:12:33,419 14588 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_menu_views.xml 
+2026-03-18 06:12:33,484 14588 INFO kanjabung_MRP odoo.addons.base.models.ir_translation: module grt_mrp_overhead_costing: no translation for language id 
+2026-03-18 06:12:33,517 14588 INFO kanjabung_MRP odoo.modules.loading: Module grt_mrp_overhead_costing loaded in 2.41s, 712 queries 
+2026-03-18 06:12:33,518 14588 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 2.41s, 712 queries (+0 extra) 
+2026-03-18 06:12:33,681 14588 WARNING kanjabung_MRP odoo.modules.loading: The model scada.health has no access rules, consider adding one. E.g. access_scada_health,access_scada_health,model_scada_health,base.group_user,1,0,0,0 
+2026-03-18 06:12:33,681 14588 WARNING kanjabung_MRP odoo.modules.loading: The model scada.module has no access rules, consider adding one. E.g. access_scada_module,access_scada_module,model_scada_module,base.group_user,1,0,0,0 
+2026-03-18 06:12:33,681 14588 WARNING kanjabung_MRP odoo.modules.loading: The model scada.mo.data has no access rules, consider adding one. E.g. access_scada_mo_data,access_scada_mo_data,model_scada_mo_data,base.group_user,1,0,0,0 
+2026-03-18 06:12:33,681 14588 WARNING kanjabung_MRP odoo.modules.loading: The model scada.material.consumption has no access rules, consider adding one. E.g. access_scada_material_consumption,access_scada_material_consumption,model_scada_material_consumption,base.group_user,1,0,0,0 
+2026-03-18 06:12:34,777 14588 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:12:34,907 14588 INFO kanjabung_MRP odoo.service.server: Initiating shutdown 
+2026-03-18 06:12:34,907 14588 INFO kanjabung_MRP odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:12:34,907 14588 INFO kanjabung_MRP odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 1 connections  
+2026-03-18 06:28:43,608 7800 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:28:43,608 7800 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:28:43,608 7800 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:28:43,608 7800 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:28:43,810 7800 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:28:43,936 7800 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:28:43,936 7800 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:28:43,986 7800 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:28:43,997 7800 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:28:44,071 7800 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:28:44,221 7800 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:28:44,653 7800 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:28:44,654 7800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:28:45,207 7800 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.14s, 0 queries (+0 extra) 
+2026-03-18 06:28:45,742 7800 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:29:21,149 24440 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:29:21,150 24440 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:29:21,150 24440 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:29:21,150 24440 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:29:21,356 24440 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:29:21,504 24440 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:29:21,504 24440 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:29:21,548 24440 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:29:21,562 24440 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:29:21,630 24440 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:29:21,786 24440 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:29:22,264 24440 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:29:22,266 24440 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:29:22,879 24440 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.25s, 0 queries (+0 extra) 
+2026-03-18 06:29:23,431 24440 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:29:37,127 15032 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:29:37,127 15032 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:29:37,127 15032 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:29:37,141 15032 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:29:37,193 20268 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:29:37,193 20268 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:29:37,193 20268 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:29:37,193 20268 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:29:37,210 22928 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:29:37,210 22928 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:29:37,210 22928 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:29:37,210 22928 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:29:37,378 15032 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:29:37,443 20268 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:29:37,459 22928 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:29:37,581 15032 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:29:37,581 15032 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:29:37,648 20268 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:29:37,648 20268 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:29:37,648 15032 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:29:37,664 22928 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:29:37,664 22928 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:29:37,664 15032 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-18 06:29:37,714 20268 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:29:37,729 20268 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:29:37,731 22928 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:29:37,747 22928 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-18 06:29:37,765 15032 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:29:37,826 20268 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:29:37,846 22928 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:29:37,974 15032 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:29:38,010 20268 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:29:38,041 22928 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:29:38,577 15032 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:29:38,579 15032 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:29:38,593 20268 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:29:38,631 22928 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:29:39,427 20268 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.60s, 0 queries (+0 extra) 
+2026-03-18 06:29:39,427 15032 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.66s, 0 queries (+0 extra) 
+2026-03-18 06:29:39,494 22928 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.65s, 0 queries (+0 extra) 
+2026-03-18 06:29:40,110 20268 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:29:40,125 15032 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:29:40,192 22928 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:29:40,409 15032 ERROR kanjabung_MRP odoo.sql_db: bad query: UPDATE "maintenance_equipment" SET "write_uid"=1,"write_date"=(now() at time zone 'UTC') WHERE id IN (3)
+ERROR: could not serialize access due to concurrent update
+ 
+2026-03-18 06:29:40,409 15032 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-18 06:29:40,409 15032 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 63, in __new__
+    return cls.registries[db_name]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: 'kanjabung_MRP'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 574, in load_modules
+    env['base'].flush()
+  File "C:\odoo14c\server\odoo\models.py", line 5489, in flush
+    process(self.env[model_name], id_vals)
+  File "C:\odoo14c\server\odoo\models.py", line 5480, in process
+    recs._write(vals)
+  File "C:\odoo14c\server\odoo\models.py", line 3778, in _write
+    cr.execute(query, params + [sub_ids])
+  File "<decorator-gen-5>", line 2, in execute
+  File "C:\odoo14c\server\odoo\sql_db.py", line 102, in check
+    return f(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\sql_db.py", line 302, in execute
+    res = self._obj.execute(query, params)
+psycopg2.errors.SerializationFailure: could not serialize access due to concurrent update
+
+2026-03-18 06:29:40,490 22928 ERROR kanjabung_MRP odoo.sql_db: bad query: UPDATE "maintenance_equipment" SET "write_uid"=1,"write_date"=(now() at time zone 'UTC') WHERE id IN (3)
+ERROR: could not serialize access due to concurrent update
+ 
+2026-03-18 06:29:40,493 22928 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-18 06:29:40,493 22928 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 63, in __new__
+    return cls.registries[db_name]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: 'kanjabung_MRP'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 574, in load_modules
+    env['base'].flush()
+  File "C:\odoo14c\server\odoo\models.py", line 5489, in flush
+    process(self.env[model_name], id_vals)
+  File "C:\odoo14c\server\odoo\models.py", line 5480, in process
+    recs._write(vals)
+  File "C:\odoo14c\server\odoo\models.py", line 3778, in _write
+    cr.execute(query, params + [sub_ids])
+  File "<decorator-gen-5>", line 2, in execute
+  File "C:\odoo14c\server\odoo\sql_db.py", line 102, in check
+    return f(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\sql_db.py", line 302, in execute
+    res = self._obj.execute(query, params)
+psycopg2.errors.SerializationFailure: could not serialize access due to concurrent update
+
+2026-03-18 06:30:20,443 15740 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:30:20,443 15740 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:30:20,443 15740 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:30:20,443 15740 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:30:20,676 15740 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:30:20,841 15740 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:30:20,841 15740 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:30:20,894 15740 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:30:20,907 15740 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:30:20,987 15740 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:30:21,171 15740 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:30:21,725 15740 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:30:21,725 15740 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:30:21,725 15740 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:30:21,726 15740 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:30:21,726 15740 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:30:21,726 15740 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:30:21,726 15740 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:30:21,726 15740 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:30:22,495 15740 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.51s, 0 queries (+0 extra) 
+2026-03-18 06:30:23,143 15740 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:30:34,351 11636 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:30:34,352 11636 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:30:34,352 11636 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:30:34,352 11636 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:30:34,575 11636 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:30:34,766 11636 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:30:34,766 11636 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:30:34,819 11636 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:30:34,831 11636 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:30:34,914 11636 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:30:35,084 11636 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:30:35,593 11636 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:30:35,593 11636 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:30:35,593 11636 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:30:35,593 11636 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:30:35,593 11636 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:30:35,594 11636 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:30:35,594 11636 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:30:35,594 11636 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:30:36,289 11636 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.37s, 0 queries (+0 extra) 
+2026-03-18 06:30:36,862 11636 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:31:06,126 3028 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:31:06,126 3028 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:31:06,126 3028 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:31:06,126 3028 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:31:06,352 3028 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:31:06,540 3028 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:31:06,541 3028 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:31:06,601 3028 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:31:06,615 3028 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:31:06,700 3028 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:31:06,872 3028 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:31:07,345 3028 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:31:07,346 3028 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:31:07,346 3028 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:31:07,346 3028 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:31:07,346 3028 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:31:07,347 3028 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:31:07,347 3028 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:31:07,347 3028 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:31:07,998 3028 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.30s, 0 queries (+0 extra) 
+2026-03-18 06:31:08,568 3028 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:33:10,864 11224 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:33:10,864 11224 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:33:10,864 11224 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:33:10,864 11224 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:33:11,057 11224 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:33:11,200 11224 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:33:11,200 11224 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:33:11,247 11224 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:33:11,251 11224 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra) 
+2026-03-18 06:33:11,329 11224 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:33:11,481 11224 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:33:11,939 11224 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:33:11,939 11224 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:33:11,939 11224 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:33:11,939 11224 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:33:11,940 11224 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:33:11,940 11224 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:33:11,940 11224 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:33:11,940 11224 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:33:12,582 11224 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.25s, 0 queries (+0 extra) 
+2026-03-18 06:33:13,134 11224 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:33:13,472 11224 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted mrp.overhead.allocation.line records with IDs: [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+2026-03-18 06:33:33,200 25152 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:33:33,200 25152 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:33:33,200 25152 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:33:33,200 25152 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:33:34,620 25152 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:33:34,844 25152 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:33:34,855 25152 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:33:34,941 25152 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-18 06:33:34,948 25152 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-03-18 06:33:38,237 25152 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:33:38,237 25152 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:33:39,464 25152 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a 
+2026-03-18 06:33:39,621 25152 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:33:39,820 25152 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:33:40,371 25152 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:33:40,788 25152 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_mrp_overhead_costing (73/98) 
+2026-03-18 06:33:41,418 25152 INFO kanjabung_MRP odoo.modules.registry: module grt_mrp_overhead_costing: creating or updating database tables 
+2026-03-18 06:33:41,816 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/security/ir.model.access.csv 
+2026-03-18 06:33:41,912 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/data/sequence.xml 
+2026-03-18 06:33:41,937 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_type_views.xml 
+2026-03-18 06:33:42,005 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_period_views.xml 
+2026-03-18 06:33:42,086 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_production_views.xml 
+2026-03-18 06:33:42,177 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/hr_expense_views.xml 
+2026-03-18 06:33:42,398 25152 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_menu_views.xml 
+2026-03-18 06:33:42,441 25152 INFO kanjabung_MRP odoo.addons.base.models.ir_translation: module grt_mrp_overhead_costing: no translation for language id 
+2026-03-18 06:33:42,458 25152 INFO kanjabung_MRP odoo.modules.loading: Module grt_mrp_overhead_costing loaded in 1.67s, 544 queries 
+2026-03-18 06:33:42,734 25152 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 3.11s, 544 queries (+0 extra) 
+2026-03-18 06:33:43,013 25152 WARNING kanjabung_MRP odoo.modules.loading: The model scada.health has no access rules, consider adding one. E.g. access_scada_health,access_scada_health,model_scada_health,base.group_user,1,0,0,0 
+2026-03-18 06:33:43,014 25152 WARNING kanjabung_MRP odoo.modules.loading: The model scada.module has no access rules, consider adding one. E.g. access_scada_module,access_scada_module,model_scada_module,base.group_user,1,0,0,0 
+2026-03-18 06:33:43,014 25152 WARNING kanjabung_MRP odoo.modules.loading: The model scada.mo.data has no access rules, consider adding one. E.g. access_scada_mo_data,access_scada_mo_data,model_scada_mo_data,base.group_user,1,0,0,0 
+2026-03-18 06:33:43,014 25152 WARNING kanjabung_MRP odoo.modules.loading: The model scada.material.consumption has no access rules, consider adding one. E.g. access_scada_material_consumption,access_scada_material_consumption,model_scada_material_consumption,base.group_user,1,0,0,0 
+2026-03-18 06:33:43,323 25152 INFO kanjabung_MRP odoo.modules.registry: verifying fields for every extended model 
+2026-03-18 06:33:43,426 25152 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-18 06:33:43,426 25152 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-18 06:33:43,426 25152 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-18 06:33:43,430 25152 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-18 06:33:43,430 25152 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-18 06:33:43,970 25152 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:33:44,234 25152 INFO kanjabung_MRP odoo.service.server: Initiating shutdown 
+2026-03-18 06:33:44,234 25152 INFO kanjabung_MRP odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:33:44,234 25152 INFO kanjabung_MRP odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 1 connections  
+2026-03-18 06:33:55,183 22104 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:33:55,184 22104 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:33:55,184 22104 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:33:55,184 22104 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:33:55,431 22104 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:33:55,596 22104 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:33:55,596 22104 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:33:55,649 22104 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:33:55,661 22104 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:33:55,735 22104 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:33:55,910 22104 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:33:56,444 22104 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:33:56,444 22104 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:33:56,444 22104 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:33:56,444 22104 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:33:56,445 22104 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:33:56,445 22104 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:33:56,445 22104 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:33:56,445 22104 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:33:57,164 22104 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.43s, 0 queries (+0 extra) 
+2026-03-18 06:33:57,759 22104 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:33:58,113 22104 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted mrp.overhead.allocation.line records with IDs: [1, 2, 3, 4, 5, 6, 7, 8, 9] 
+2026-03-18 06:37:02,983 14704 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:37:02,983 14704 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:37:02,983 14704 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:37:02,983 14704 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:37:02,983 19404 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:37:02,983 19404 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:37:02,983 19404 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:37:02,983 19404 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:37:03,203 14704 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:37:03,204 19404 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:37:03,353 19404 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:37:03,353 19404 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:37:03,365 14704 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:37:03,365 14704 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:37:03,415 19404 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:37:03,418 14704 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:37:03,422 19404 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-18 06:37:03,422 14704 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra) 
+2026-03-18 06:37:03,504 14704 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:37:03,504 19404 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:37:03,671 14704 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:37:03,671 19404 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:37:04,200 14704 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:37:04,200 19404 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:37:04,200 14704 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:37:04,200 19404 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:37:04,200 14704 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:37:04,200 19404 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:37:04,200 14704 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:37:04,200 19404 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:37:04,200 14704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:37:04,200 19404 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:37:04,201 14704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:37:04,201 19404 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:37:04,201 14704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:37:04,201 19404 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:37:04,201 14704 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:37:04,201 19404 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:37:04,850 14704 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.35s, 0 queries (+0 extra) 
+2026-03-18 06:37:04,850 19404 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.35s, 0 queries (+0 extra) 
+2026-03-18 06:37:05,464 19404 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:37:05,471 14704 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:37:05,699 14704 ERROR kanjabung_MRP odoo.sql_db: bad query: UPDATE "maintenance_equipment" SET "write_uid"=1,"write_date"=(now() at time zone 'UTC') WHERE id IN (3)
+ERROR: could not serialize access due to concurrent update
+ 
+2026-03-18 06:37:05,699 14704 WARNING kanjabung_MRP odoo.modules.loading: Transient module states were reset 
+2026-03-18 06:37:05,699 14704 ERROR kanjabung_MRP odoo.modules.registry: Failed to load registry 
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 63, in __new__
+    return cls.registries[db_name]
+  File "C:\odoo14c\server\odoo\tools\func.py", line 71, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\tools\lru.py", line 34, in __getitem__
+    a = self.d[obj]
+KeyError: 'kanjabung_MRP'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\odoo14c\server\odoo\modules\registry.py", line 89, in new
+    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+  File "C:\odoo14c\server\odoo\modules\loading.py", line 574, in load_modules
+    env['base'].flush()
+  File "C:\odoo14c\server\odoo\models.py", line 5489, in flush
+    process(self.env[model_name], id_vals)
+  File "C:\odoo14c\server\odoo\models.py", line 5480, in process
+    recs._write(vals)
+  File "C:\odoo14c\server\odoo\models.py", line 3778, in _write
+    cr.execute(query, params + [sub_ids])
+  File "<decorator-gen-5>", line 2, in execute
+  File "C:\odoo14c\server\odoo\sql_db.py", line 102, in check
+    return f(self, *args, **kwargs)
+  File "C:\odoo14c\server\odoo\sql_db.py", line 302, in execute
+    res = self._obj.execute(query, params)
+psycopg2.errors.SerializationFailure: could not serialize access due to concurrent update
+
+2026-03-18 06:38:27,805 9184 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:38:27,805 9184 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:38:27,805 9184 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:38:27,805 9184 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:38:28,006 9184 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:38:28,161 9184 INFO ? odoo.service.server: Initiating shutdown 
+2026-03-18 06:38:28,161 9184 INFO ? odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:38:28,209 9184 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:38:28,226 9184 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-18 06:38:28,293 9184 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:38:28,456 9184 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:38:28,940 9184 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:38:28,940 9184 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:38:28,940 9184 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:38:28,940 9184 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:38:28,940 9184 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:38:28,941 9184 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:38:28,941 9184 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:38:28,941 9184 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:38:29,556 9184 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 1.26s, 0 queries (+0 extra) 
+2026-03-18 06:38:30,090 9184 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 06:38:30,604 9184 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted account.move.line records with IDs: [3576, 3577] 
+2026-03-18 06:38:30,663 9184 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted mail.message records with IDs: [461] 
+2026-03-18 06:38:30,708 9184 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted account.move records with IDs: [242] 
+2026-03-18 06:38:30,722 9184 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted mail.followers records with IDs: [333] 
+2026-03-18 06:38:30,742 9184 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted mrp.overhead.allocation.line records with IDs: [19, 20, 21, 22, 23, 24, 25, 26, 27] 
+2026-03-18 13:46:44,163 4800 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 13:46:44,164 4800 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 13:46:44,164 4800 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 13:46:44,164 4800 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 13:46:44,659 4800 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 13:46:44,917 4800 INFO ? odoo.service.server: HTTP service (werkzeug) running on ThinkpadSaptadi:8070 
+2026-03-18 13:46:44,969 4800 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 13:46:44,991 4800 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.02s, 0 queries (+0 extra) 
+2026-03-18 13:46:45,132 4800 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 13:46:45,358 4800 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 13:46:46,423 4800 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 13:46:46,423 4800 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 13:46:46,424 4800 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 13:46:46,424 4800 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 13:46:46,425 4800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 13:46:46,425 4800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 13:46:46,425 4800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 13:46:46,426 4800 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 13:46:48,058 4800 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 2.93s, 0 queries (+0 extra) 
+2026-03-18 13:46:49,575 4800 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 13:46:57,241 4800 INFO ? odoo.http: HTTP Configuring static files 
+2026-03-18 13:46:57,281 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_http: Generating routing map for key None 
+2026-03-18 13:46:57,903 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:46:57] "GET / HTTP/1.1" 303 - 3 0.009 0.636
+2026-03-18 13:47:20,203 4800 INFO kanjabung_MRP odoo.modules.registry: At least one model cache has been invalidated, signaling through the database. 
+2026-03-18 13:47:20,207 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:20] "GET /web HTTP/1.1" 200 - 792 0.876 21.422
+2026-03-18 13:47:20,626 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:20] "GET /web/content/293-9cd49bf/web.assets_backend.css HTTP/1.1" 200 - 3 0.003 0.035
+2026-03-18 13:47:20,663 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:20] "GET /web/content/288-40402f3/web.assets_common.css HTTP/1.1" 200 - 2 0.013 0.059
+2026-03-18 13:47:21,043 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:21] "GET /web/content/292-b4d6493/web.assets_backend_prod_only.js HTTP/1.1" 200 - 2 0.009 0.075
+2026-03-18 13:47:21,242 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:21] "GET /web/content/294-9cd49bf/web.assets_backend.js HTTP/1.1" 200 - 2 0.006 0.378
+2026-03-18 13:47:22,151 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:22] "GET /web/content/290-40402f3/web.assets_common.js HTTP/1.1" 200 - 2 0.002 1.544
+2026-03-18 13:47:22,227 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:22] "GET /web/webclient/load_menus/5dd911a50d2f72eced4d20fc992577717c08866b0fc33f9ee9fbd2ee6e5ab4a5 HTTP/1.1" 200 - 556 0.487 1.115
+2026-03-18 13:47:22,397 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:22] "GET /web/webclient/qweb/6d03d6361c541da8318a8d024f5bad5537bfebff4a21d6e533a8a8f29caf35c0?mods=base,web,base_setup,bus,web_tour,mail,product,web_editor,http_routing,auth_signup,portal,resource,digest,account,accounting_pdf_reports,om_account_asset,om_account_budget,om_account_bank_statement_import,om_account_accountant,sales_team,payment,utm,sale,sale_management,account_dynamic_reports,calendar,contacts,crm,barcodes,stock,purchase,mrp,hr,hr_contract,hr_expense,garazd_product_label,maintenance,grt_scada,purchase_stock,auth_totp,auth_totp_portal,base_iban,base_import,crm_iap_lead,grt_crm_business_category,grt_mrp_overhead_costing,hr_org_chart,iap,l10n_id,mail_bot,partner_autocomplete,payment_transfer,sale_expense,sale_stock,sms,snailmail,snailmail_account,web_kanban_gauge,web_unsplash HTTP/1.1" 200 - 1 0.001 0.093
+2026-03-18 13:47:22,941 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:22] "GET /web/webclient/translations/745ce24ffe3acf4ad2cdb8ceb36272b8576d874f?mods=base%2Cweb%2Cbase_setup%2Cbus%2Cweb_tour%2Cmail%2Cproduct%2Cweb_editor%2Chttp_routing%2Cauth_signup%2Cportal%2Cresource%2Cdigest%2Caccount%2Caccounting_pdf_reports%2Com_account_asset%2Com_account_budget%2Com_account_bank_statement_import%2Com_account_accountant%2Csales_team%2Cpayment%2Cutm%2Csale%2Csale_management%2Caccount_dynamic_reports%2Ccalendar%2Ccontacts%2Ccrm%2Cbarcodes%2Cstock%2Cpurchase%2Cmrp%2Chr%2Chr_contract%2Chr_expense%2Cgarazd_product_label%2Cmaintenance%2Cgrt_scada%2Cpurchase_stock%2Cauth_totp%2Cauth_totp_portal%2Cbase_iban%2Cbase_import%2Ccrm_iap_lead%2Cgrt_crm_business_category%2Cgrt_mrp_overhead_costing%2Chr_org_chart%2Ciap%2Cl10n_id%2Cmail_bot%2Cpartner_autocomplete%2Cpayment_transfer%2Csale_expense%2Csale_stock%2Csms%2Csnailmail%2Csnailmail_account%2Cweb_kanban_gauge%2Cweb_unsplash&lang=id_ID HTTP/1.1" 200 - 5 0.035 0.153
+2026-03-18 13:47:23,042 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "GET /web/webclient/locale/id_ID HTTP/1.1" 200 - 1 0.001 0.035
+2026-03-18 13:47:23,268 4800 INFO ? werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "GET /web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 304 - - - -
+2026-03-18 13:47:23,488 4800 INFO ? werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "GET /web/static/src/xml/debug.xml?debug=1773816443131 HTTP/1.1" 200 - - - -
+2026-03-18 13:47:23,561 4800 INFO ? odoo.addons.bus.models.bus: Bus.loop listen imbus on db postgres 
+2026-03-18 13:47:23,627 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "GET /web/image?model=res.users&field=image_128&id=2 HTTP/1.1" 200 - 17 0.044 0.096
+2026-03-18 13:47:23,705 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "POST /web/dataset/call_kw/res.users/systray_get_activities HTTP/1.1" 200 - 23 0.165 0.068
+2026-03-18 13:47:23,766 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "POST /mail/init_messaging HTTP/1.1" 200 - 82 0.234 0.136
+2026-03-18 13:47:23,818 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "POST /web/dataset/call_kw/ir.rule/check_access_rights HTTP/1.1" 200 - 1 0.000 0.009
+2026-03-18 13:47:23,825 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "POST /web/dataset/call_kw/ir.model.access/check_access_rights HTTP/1.1" 200 - 1 0.000 0.008
+2026-03-18 13:47:23,951 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:23] "POST /web/dataset/call_kw/ir.ui.view/check_access_rights HTTP/1.1" 200 - 2 0.001 0.010
+2026-03-18 13:47:24,047 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:24] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.025
+2026-03-18 13:47:24,101 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:24] "POST /web/dataset/call_kw/res.users/read HTTP/1.1" 200 - 2 0.000 0.009
+2026-03-18 13:47:24,338 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:24] "POST /web/action/load HTTP/1.1" 200 - 9 0.013 0.028
+2026-03-18 13:47:24,470 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:24] "POST /calendar/notify HTTP/1.1" 200 - 3 0.023 0.025
+2026-03-18 13:47:24,636 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:24] "POST /web/dataset/call_kw/mail.message/load_views HTTP/1.1" 200 - 29 0.083 0.126
+2026-03-18 13:47:24,657 4800 INFO ? werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:24] "GET /crm/static/description/icon.png HTTP/1.1" 304 - - - -
+2026-03-18 13:47:27,282 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:47:27] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 4 0.017 0.010
+2026-03-18 06:47:46,893 19664 INFO ? odoo: Odoo version 14.0-20231205 
+2026-03-18 06:47:46,894 19664 INFO ? odoo: Using configuration file at C:\addon14\odoo.conf 
+2026-03-18 06:47:46,894 19664 INFO ? odoo: addons paths: ['C:\\odoo14c\\server\\odoo\\addons', 'c:\\users\\sapta\\appdata\\local\\openerp s.a\\odoo\\addons\\14.0', 'c:\\odoo14c\\server\\odoo\\addons', 'c:\\addon14'] 
+2026-03-18 06:47:46,894 19664 INFO ? odoo: database: openpg@localhost:5432 
+2026-03-18 06:47:47,148 19664 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at C:\odoo14c\thirdparty\wkhtmltopdf.exe 
+2026-03-18 06:47:47,336 19664 INFO kanjabung_MRP odoo.modules.loading: loading 1 modules... 
+2026-03-18 06:47:47,336 19664 INFO kanjabung_MRP odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra) 
+2026-03-18 06:47:47,435 19664 INFO kanjabung_MRP odoo.modules.loading: updating modules list 
+2026-03-18 06:47:47,437 19664 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on [] to user __system__ #1 via n/a 
+2026-03-18 06:47:48,450 19664 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_upgrade on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:47:48,450 19664 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.update_list on ['GRT MRP Overhead Costing'] to user __system__ #1 via n/a 
+2026-03-18 06:47:49,392 19664 INFO kanjabung_MRP odoo.addons.base.models.ir_module: ALLOW access to module.button_install on [] to user __system__ #1 via n/a 
+2026-03-18 06:47:49,489 19664 INFO kanjabung_MRP odoo.modules.loading: loading 98 modules... 
+2026-03-18 06:47:49,614 19664 WARNING kanjabung_MRP py.warnings: C:\odoo14c\python\lib\site-packages\jinja2\sandbox.py:82: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3,and in 3.9 it will stop working
+  from collections import MutableSet, MutableMapping, MutableSequence
+ 
+2026-03-18 06:47:50,108 19664 WARNING kanjabung_MRP odoo.models: The model ins.general.ledger has no _description 
+2026-03-18 06:47:50,108 19664 WARNING kanjabung_MRP odoo.models: The model ins.partner.ledger has no _description 
+2026-03-18 06:47:50,109 19664 WARNING kanjabung_MRP odoo.models: The model ins.trial.balance has no _description 
+2026-03-18 06:47:50,109 19664 WARNING kanjabung_MRP odoo.models: The model ins.partner.ageing has no _description 
+2026-03-18 06:47:50,109 19664 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.general_ledger has no _description 
+2026-03-18 06:47:50,109 19664 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ledger has no _description 
+2026-03-18 06:47:50,109 19664 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.trial_balance has no _description 
+2026-03-18 06:47:50,109 19664 WARNING kanjabung_MRP odoo.models: The model report.account_dynamic_reports.partner_ageing has no _description 
+2026-03-18 06:47:50,471 19664 INFO kanjabung_MRP odoo.modules.loading: Loading module grt_mrp_overhead_costing (73/98) 
+2026-03-18 06:47:51,069 19664 INFO kanjabung_MRP odoo.modules.registry: module grt_mrp_overhead_costing: creating or updating database tables 
+2026-03-18 06:47:51,419 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/security/ir.model.access.csv 
+2026-03-18 06:47:51,503 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/data/sequence.xml 
+2026-03-18 06:47:51,503 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_type_views.xml 
+2026-03-18 06:47:51,543 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_period_views.xml 
+2026-03-18 06:47:51,597 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_production_views.xml 
+2026-03-18 13:47:51,632 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `KPI: Calculate Employee and Team Score`. 
+2026-03-18 13:47:51,659 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Maintenance: generate preventive maintenance requests`. 
+2026-03-18 06:47:51,704 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/hr_expense_views.xml 
+2026-03-18 13:47:51,741 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `KPI: Calculate Employee and Team Score` done. 
+2026-03-18 13:47:51,749 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Purchase reminder`. 
+2026-03-18 13:47:51,777 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Maintenance: generate preventive maintenance requests` done. 
+2026-03-18 13:47:51,783 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Notification: Delete Notifications older than 6 Month`. 
+2026-03-18 13:47:51,848 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Notification: Delete Notifications older than 6 Month` done. 
+2026-03-18 13:47:51,850 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Procurement: run scheduler`. 
+2026-03-18 13:47:51,937 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Purchase reminder` done. 
+2026-03-18 13:47:51,948 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Base: Auto-vacuum internal data`. 
+2026-03-18 06:47:52,000 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_menu_views.xml 
+2026-03-18 06:47:52,023 19664 INFO kanjabung_MRP odoo.modules.loading: loading grt_mrp_overhead_costing/views/mrp_overhead_documentation_views.xml 
+2026-03-18 13:47:52,028 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Procurement: run scheduler` done. 
+2026-03-18 13:47:52,032 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `HR Contract: update state`. 
+2026-03-18 06:47:52,057 19664 INFO kanjabung_MRP odoo.addons.base.models.ir_translation: module grt_mrp_overhead_costing: no translation for language id 
+2026-03-18 06:47:52,069 19664 INFO kanjabung_MRP odoo.modules.loading: Module grt_mrp_overhead_costing loaded in 1.60s, 555 queries 
+2026-03-18 13:47:52,080 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `HR Contract: update state` done. 
+2026-03-18 13:47:52,082 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Digest Emails`. 
+2026-03-18 13:47:52,115 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_attachment: filestore gc 10 checked, 1 removed 
+2026-03-18 13:47:52,232 4800 INFO kanjabung_MRP odoo.addons.base.models.res_users: GC'd 19 user log entries 
+2026-03-18 13:47:52,301 4800 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted base.module.update records with IDs: [8, 9] 
+2026-03-18 06:47:52,386 19664 INFO kanjabung_MRP odoo.modules.loading: 98 modules loaded in 2.90s, 555 queries (+0 extra) 
+2026-03-18 13:47:52,387 4800 INFO kanjabung_MRP odoo.models.unlink: User #1 deleted bus.bus records with IDs: [137, 138, 139, 140, 141, 142, 143, 144] 
+2026-03-18 06:47:52,688 19664 WARNING kanjabung_MRP odoo.modules.loading: The model scada.health has no access rules, consider adding one. E.g. access_scada_health,access_scada_health,model_scada_health,base.group_user,1,0,0,0 
+2026-03-18 06:47:52,689 19664 WARNING kanjabung_MRP odoo.modules.loading: The model scada.module has no access rules, consider adding one. E.g. access_scada_module,access_scada_module,model_scada_module,base.group_user,1,0,0,0 
+2026-03-18 06:47:52,689 19664 WARNING kanjabung_MRP odoo.modules.loading: The model scada.mo.data has no access rules, consider adding one. E.g. access_scada_mo_data,access_scada_mo_data,model_scada_mo_data,base.group_user,1,0,0,0 
+2026-03-18 06:47:52,689 19664 WARNING kanjabung_MRP odoo.modules.loading: The model scada.material.consumption has no access rules, consider adding one. E.g. access_scada_material_consumption,access_scada_material_consumption,model_scada_material_consumption,base.group_user,1,0,0,0 
+2026-03-18 06:47:53,170 19664 INFO kanjabung_MRP odoo.modules.registry: verifying fields for every extended model 
+2026-03-18 06:47:53,264 19664 INFO kanjabung_MRP odoo.modules.registry: Models have no table: scada.health, scada.module. 
+2026-03-18 06:47:53,265 19664 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.health. 
+2026-03-18 06:47:53,265 19664 INFO kanjabung_MRP odoo.modules.registry: Recreate table of model scada.module. 
+2026-03-18 06:47:53,268 19664 ERROR kanjabung_MRP odoo.modules.registry: Model scada.health has no table. 
+2026-03-18 06:47:53,268 19664 ERROR kanjabung_MRP odoo.modules.registry: Model scada.module has no table. 
+2026-03-18 13:47:53,518 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Base: Auto-vacuum internal data` done. 
+2026-03-18 13:47:53,530 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Users: Notify About Unregistered Users`. 
+2026-03-18 13:47:53,565 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Users: Notify About Unregistered Users` done. 
+2026-03-18 13:47:53,565 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-03-18 13:47:53,647 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Snailmail: process letters queue` done. 
+2026-03-18 13:47:53,648 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete : Sync with remote DB`. 
+2026-03-18 13:47:53,701 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Partner Autocomplete : Sync with remote DB` done. 
+2026-03-18 13:47:53,701 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-03-18 06:47:53,754 19664 INFO kanjabung_MRP odoo.modules.loading: Modules loaded. 
+2026-03-18 13:47:53,757 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `SMS: SMS Queue Manager` done. 
+2026-03-18 13:47:53,762 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-03-18 13:47:53,815 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Mail: Email Queue Manager` done. 
+2026-03-18 13:47:53,815 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Calendar: Event Reminder`. 
+2026-03-18 13:47:53,886 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Calendar: Event Reminder` done. 
+2026-03-18 13:47:53,893 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Account; Post draft entries with auto_post set to True up to today`. 
+2026-03-18 13:47:53,932 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Account; Post draft entries with auto_post set to True up to today` done. 
+2026-03-18 13:47:53,939 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Post process payment transactions`. 
+2026-03-18 13:47:54,007 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Post process payment transactions` done. 
+2026-03-18 13:47:54,007 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Starting job `Mail: Notify channel moderators`. 
+2026-03-18 06:47:54,042 19664 INFO kanjabung_MRP odoo.service.server: Initiating shutdown 
+2026-03-18 06:47:54,042 19664 INFO kanjabung_MRP odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-18 06:47:54,042 19664 INFO kanjabung_MRP odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 1 connections  
+2026-03-18 13:47:54,063 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Mail: Notify channel moderators` done. 
+2026-03-18 13:47:54,146 4800 INFO kanjabung_MRP odoo.addons.base.models.ir_cron: Job `Digest Emails` done. 
+2026-03-18 13:48:13,570 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:13] "POST /longpolling/poll HTTP/1.1" 200 - 18 0.081 50.078
+2026-03-18 13:48:15,071 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:15] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-18 13:48:25,224 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:25] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-18 13:48:48,115 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:48] "POST /web/dataset/call_kw/mail.message/message_fetch HTTP/1.1" 200 - 7 0.016 0.014
+2026-03-18 13:48:49,214 4800 INFO ? werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:49] "GET /web_tour/static/src/xml/tip.xml?debug=1773816528886 HTTP/1.1" 200 - - - -
+2026-03-18 13:48:50,914 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:50] "POST /web/action/load HTTP/1.1" 200 - 29 0.034 0.061
+2026-03-18 13:48:51,399 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:51] "POST /web/dataset/call_kw/ir.module.module/load_views HTTP/1.1" 200 - 72 0.074 0.098
+2026-03-18 13:48:51,800 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:51] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 46 0.027 0.042
+2026-03-18 13:48:52,149 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:52] "POST /web/dataset/search_read HTTP/1.1" 200 - 4 0.007 0.018
+2026-03-18 13:48:55,566 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:55] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 42 0.031 0.040
+2026-03-18 13:48:55,895 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:55] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.004 0.007
+2026-03-18 13:48:58,140 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:58] "POST /web/dataset/call_kw/ir.module.module/search_panel_select_range HTTP/1.1" 200 - 42 0.046 0.038
+2026-03-18 13:48:58,475 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:48:58] "POST /web/dataset/search_read HTTP/1.1" 200 - 3 0.006 0.009
+2026-03-18 13:49:03,912 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.022
+2026-03-18 13:49:05,117 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:05] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.016
+2026-03-18 13:49:15,570 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:15] "POST /web/action/load HTTP/1.1" 200 - 53 0.037 0.072
+2026-03-18 13:49:16,463 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:16] "POST /web/dataset/call_kw/mrp.production/load_views HTTP/1.1" 200 - 198 0.170 0.397
+2026-03-18 13:49:17,042 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:17] "POST /web/dataset/search_read HTTP/1.1" 200 - 44 0.109 0.144
+2026-03-18 13:49:17,374 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:17] "POST /web/dataset/call_kw/res.users/has_group HTTP/1.1" 200 - 2 0.001 0.007
+2026-03-18 13:49:24,612 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:24] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.008
+2026-03-18 13:49:54,259 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:54] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.011 50.026
+2026-03-18 13:49:56,075 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:49:56] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-18 13:50:24,605 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:50:24] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.006 0.011
+2026-03-18 13:50:44,596 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:50:44] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.018 50.006
+2026-03-18 13:50:47,082 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:50:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.023
+2026-03-18 13:51:27,591 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:51:27] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 13:51:34,957 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:51:34] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.029
+2026-03-18 13:51:38,075 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:51:38] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-18 13:52:25,319 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:52:25] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.030
+2026-03-18 13:52:26,090 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:52:26] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.006
+2026-03-18 13:52:29,397 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:52:29] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-18 13:53:15,667 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:53:15] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.031
+2026-03-18 13:53:19,751 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:53:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.018
+2026-03-18 13:53:26,037 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:53:26] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.010
+2026-03-18 13:54:06,018 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:54:06] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.034
+2026-03-18 13:54:10,078 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:54:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-18 13:54:26,050 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:54:26] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.009
+2026-03-18 13:54:56,356 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:54:56] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.021
+2026-03-18 13:55:01,080 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:55:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 13:55:30,351 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:55:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.007
+2026-03-18 13:55:46,693 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:55:46] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.021
+2026-03-18 13:55:52,082 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:55:52] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.007 0.014
+2026-03-18 13:56:30,888 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:56:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-18 13:56:37,043 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:56:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.034
+2026-03-18 13:56:43,066 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:56:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-18 13:57:27,392 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:57:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.017
+2026-03-18 13:57:32,173 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:57:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.016 0.007
+2026-03-18 13:57:34,370 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:57:34] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-18 13:58:17,748 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:58:17] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.027
+2026-03-18 13:58:25,088 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:58:25] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.018
+2026-03-18 13:58:33,041 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:58:33] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.018
+2026-03-18 13:59:08,093 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:59:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.016
+2026-03-18 13:59:16,081 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:59:16] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.017
+2026-03-18 13:59:30,391 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:59:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-18 13:59:58,434 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 13:59:58] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.032
+2026-03-18 14:00:07,070 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:00:07] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.013
+2026-03-18 14:00:30,718 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:00:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.011
+2026-03-18 14:00:48,775 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:00:48] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.024
+2026-03-18 14:00:58,083 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:00:58] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.017
+2026-03-18 14:01:30,419 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:01:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.015
+2026-03-18 14:01:39,113 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:01:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.020
+2026-03-18 14:01:49,072 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:01:49] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.013
+2026-03-18 14:02:29,469 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:02:29] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.015
+2026-03-18 14:02:30,105 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:02:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.011
+2026-03-18 14:02:40,379 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:02:40] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.016 0.000
+2026-03-18 14:03:19,796 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:03:19] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.020
+2026-03-18 14:03:30,110 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:03:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.016 0.002
+2026-03-18 14:03:31,384 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:03:31] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.008 0.012
+2026-03-18 14:04:10,143 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:04:10] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.016 50.008
+2026-03-18 14:04:22,070 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:04:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-18 14:04:32,553 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:04:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-18 14:05:00,488 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:05:00] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.019
+2026-03-18 14:05:13,076 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:05:13] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-18 14:05:30,749 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:05:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-18 14:05:50,832 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:05:50] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.028
+2026-03-18 14:06:04,065 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:06:04] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.012 0.000
+2026-03-18 14:06:32,661 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:06:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-18 14:06:41,184 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:06:41] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.035
+2026-03-18 14:06:55,066 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:06:55] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.000 0.016
+2026-03-18 14:07:26,344 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:07:26] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.013
+2026-03-18 14:07:31,530 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:07:31] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.029
+2026-03-18 14:07:46,094 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:07:46] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.029
+2026-03-18 14:08:21,865 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:08:21] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.016
+2026-03-18 14:08:32,925 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:08:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-18 14:08:37,390 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:08:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.016
+2026-03-18 14:09:12,214 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:09:12] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.030
+2026-03-18 14:09:28,394 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:09:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.015
+2026-03-18 14:09:30,484 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:09:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.012
+2026-03-18 14:10:02,763 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:10:02] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.035
+2026-03-18 14:10:19,069 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:10:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:10:30,793 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:10:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.012
+2026-03-18 14:10:53,106 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:10:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.026
+2026-03-18 14:11:10,070 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:11:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.017
+2026-03-18 14:11:30,488 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:11:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 14:11:43,445 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:11:43] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.023
+2026-03-18 14:12:01,073 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:12:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.017
+2026-03-18 14:12:30,497 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:12:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 14:12:33,793 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:12:33] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.029
+2026-03-18 14:12:52,086 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:12:52] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.017
+2026-03-18 14:13:24,129 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:13:24] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.009 50.016
+2026-03-18 14:13:30,189 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:13:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.007
+2026-03-18 14:13:43,381 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:13:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:14:14,469 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:14:14] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.026
+2026-03-18 14:14:30,193 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:14:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.011
+2026-03-18 14:14:34,399 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:14:34] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.019
+2026-03-18 14:15:04,818 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:15:04] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.000 50.035
+2026-03-18 14:15:25,076 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:15:25] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-18 14:15:33,625 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:15:33] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-18 14:15:55,163 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:15:55] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.015 50.022
+2026-03-18 14:16:16,093 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:16:16] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.027
+2026-03-18 14:16:30,739 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:16:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 14:16:45,500 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:16:45] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.021
+2026-03-18 14:17:07,075 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:17:07] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:17:30,528 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:17:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.010
+2026-03-18 14:17:35,847 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:17:35] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.028
+2026-03-18 14:17:58,085 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:17:58] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-18 14:18:26,189 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:18:26] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.025
+2026-03-18 14:18:30,023 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:18:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.008
+2026-03-18 14:18:49,393 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:18:49] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.017
+2026-03-18 14:19:16,546 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:19:16] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.041
+2026-03-18 14:19:32,902 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:19:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-18 14:19:40,395 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:19:40] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-18 14:20:06,886 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:20:06] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.028
+2026-03-18 14:20:30,551 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:20:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.008
+2026-03-18 14:20:31,388 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:20:31] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:20:57,237 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:20:57] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.036
+2026-03-18 14:21:22,073 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:21:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.017
+2026-03-18 14:21:30,366 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:21:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.013
+2026-03-18 14:21:47,588 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:21:47] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.027
+2026-03-18 14:22:13,077 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:22:13] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.014
+2026-03-18 14:22:30,372 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:22:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-18 14:22:37,925 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:22:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.019
+2026-03-18 14:23:04,085 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:23:04] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-18 14:23:28,270 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:23:28] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.028
+2026-03-18 14:23:30,074 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:23:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.013
+2026-03-18 14:23:55,398 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:23:55] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.016
+2026-03-18 14:24:18,608 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:24:18] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.024
+2026-03-18 14:24:30,078 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:24:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:24:46,389 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:24:46] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.017
+2026-03-18 14:25:08,968 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:25:08] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.039
+2026-03-18 14:25:30,385 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:25:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.011
+2026-03-18 14:25:37,391 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:25:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:25:59,306 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:25:59] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.007 50.021
+2026-03-18 14:26:28,075 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:26:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-18 14:26:30,417 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:26:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.013
+2026-03-18 14:26:49,640 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:26:49] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.018
+2026-03-18 14:27:19,082 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:27:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.006 0.015
+2026-03-18 14:27:32,457 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:27:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.011
+2026-03-18 14:27:39,980 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:27:39] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.025
+2026-03-18 14:28:10,078 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:28:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-18 14:28:30,321 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:28:30] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.022
+2026-03-18 14:28:30,428 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:28:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.004 0.012
+2026-03-18 14:29:01,397 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:29:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.020
+2026-03-18 14:29:20,659 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:29:20] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.024
+2026-03-18 14:29:32,768 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:29:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.008
+2026-03-18 14:29:52,385 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:29:52] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:30:11,003 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:30:11] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.026
+2026-03-18 14:30:30,450 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:30:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-18 14:30:43,384 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:30:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:31:01,366 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:31:01] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.032
+2026-03-18 14:31:32,138 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:31:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:31:34,398 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:31:34] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.017
+2026-03-18 14:31:51,716 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:31:51] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.032
+2026-03-18 14:32:25,083 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:32:25] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:32:30,455 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:32:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.012
+2026-03-18 14:32:42,065 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:32:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.033
+2026-03-18 14:33:16,070 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:33:16] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.014
+2026-03-18 14:33:30,453 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:33:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.013
+2026-03-18 14:33:32,408 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:33:32] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.023
+2026-03-18 14:34:07,073 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:34:07] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:34:22,755 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:34:22] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.032
+2026-03-18 14:34:24,016 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:34:24] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.010
+2026-03-18 14:34:58,388 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:34:58] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.018
+2026-03-18 14:35:13,089 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:35:13] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.016
+2026-03-18 14:35:32,613 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:35:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.007
+2026-03-18 14:35:49,387 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:35:49] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.016
+2026-03-18 14:36:03,436 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:36:03] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.034
+2026-03-18 14:36:30,173 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:36:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:36:40,400 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:36:40] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.017
+2026-03-18 14:36:53,775 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:36:53] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.026
+2026-03-18 14:37:31,075 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:37:31] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:37:32,285 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:37:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.010
+2026-03-18 14:37:44,117 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:37:44] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.025
+2026-03-18 14:38:22,078 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:38:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.017
+2026-03-18 14:38:32,303 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:38:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 14:38:34,457 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:38:34] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.023
+2026-03-18 14:39:13,386 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:39:13] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-18 14:39:24,794 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:39:24] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.020
+2026-03-18 14:39:26,946 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:39:26] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.011
+2026-03-18 14:40:04,389 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:40:04] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.018
+2026-03-18 14:40:15,145 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:40:15] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.030
+2026-03-18 14:40:32,002 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:40:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-18 14:40:55,398 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:40:55] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:41:05,488 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:41:05] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.027
+2026-03-18 14:41:30,213 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:41:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-18 14:41:46,386 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:41:46] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.020
+2026-03-18 14:41:55,834 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:41:55] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.030
+2026-03-18 14:42:30,224 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:42:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.004 0.008
+2026-03-18 14:42:37,386 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:42:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.017
+2026-03-18 14:42:46,184 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:42:46] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 50.036
+2026-03-18 14:43:28,079 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:43:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-18 14:43:32,183 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:43:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-18 14:43:36,520 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:43:36] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.019
+2026-03-18 14:44:19,078 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:44:19] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.020
+2026-03-18 14:44:26,856 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:44:26] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.015
+2026-03-18 14:44:30,542 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:44:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.009
+2026-03-18 14:45:10,379 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:45:10] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.017
+2026-03-18 14:45:17,199 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:45:17] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.023
+2026-03-18 14:45:30,044 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:45:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.009
+2026-03-18 14:46:01,389 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:46:01] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:46:07,538 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:46:07] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.024
+2026-03-18 14:46:24,726 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:46:24] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:46:52,390 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:46:52] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.014
+2026-03-18 14:46:57,900 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:46:57] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.032
+2026-03-18 14:47:26,128 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:47:26] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.010
+2026-03-18 14:47:43,390 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:47:43] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.013
+2026-03-18 14:47:48,243 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:47:48] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.028
+2026-03-18 14:48:30,066 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:48:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.009
+2026-03-18 14:48:34,388 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:48:34] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.015
+2026-03-18 14:48:38,593 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:48:38] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.029
+2026-03-18 14:49:25,076 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:49:25] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:49:28,931 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:49:28] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.021
+2026-03-18 14:49:30,585 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:49:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:50:16,394 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:50:16] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.015
+2026-03-18 14:50:19,284 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:50:19] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.032
+2026-03-18 14:50:30,078 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:50:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:51:07,385 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:51:07] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:51:09,616 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:51:09] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.017
+2026-03-18 14:51:30,086 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:51:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.009
+2026-03-18 14:51:58,397 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:51:58] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.016
+2026-03-18 14:51:59,973 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:51:59] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.006 50.036
+2026-03-18 14:52:32,095 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:52:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.010
+2026-03-18 14:52:49,389 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:52:49] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.016
+2026-03-18 14:52:50,325 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:52:50] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.037
+2026-03-18 14:53:30,175 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:53:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.079
+2026-03-18 14:53:40,386 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:53:40] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.015
+2026-03-18 14:53:40,666 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:53:40] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.025
+2026-03-18 14:54:31,003 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:54:31] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.020
+2026-03-18 14:54:31,396 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:54:31] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.015
+2026-03-18 14:54:33,517 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:54:33] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 14:55:21,040 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:55:21] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.030
+2026-03-18 14:55:22,072 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:55:22] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.015
+2026-03-18 14:55:30,466 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:55:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.009
+2026-03-18 14:56:11,385 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:56:11] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.029
+2026-03-18 14:56:13,079 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:56:13] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.016
+2026-03-18 14:56:32,445 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:56:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.012
+2026-03-18 14:57:01,733 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:57:01] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.008 50.024
+2026-03-18 14:57:04,075 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:57:04] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.002 0.016
+2026-03-18 14:57:32,452 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:57:32] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.002 0.011
+2026-03-18 14:57:52,079 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:57:52] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.004 50.028
+2026-03-18 14:57:55,079 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:57:55] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.005 0.015
+2026-03-18 14:58:30,467 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:58:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.003 0.011
+2026-03-18 14:58:42,424 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 14:58:42] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.028
+2026-03-18 15:02:47,234 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:02:47] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.004 0.025
+2026-03-18 15:02:48,398 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:02:48] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.010 0.021
+2026-03-18 15:03:30,809 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:03:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.000 0.016
+2026-03-18 15:03:31,172 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:03:31] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.002 288.433
+2026-03-18 15:03:37,212 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:03:37] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.005 50.020
+2026-03-18 15:03:37,915 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:03:37] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.001 0.026
+2026-03-18 15:04:27,570 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:04:27] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.001 50.032
+2026-03-18 15:04:28,168 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:04:28] "POST /longpolling/im_status HTTP/1.1" 200 - 4 0.003 0.020
+2026-03-18 15:04:30,251 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:04:30] "POST /grt_crm_business_category/gps/ping HTTP/1.1" 200 - 2 0.001 0.010
+2026-03-18 15:05:17,922 4800 INFO kanjabung_MRP werkzeug: 127.0.0.1 - - [18/Mar/2026 15:05:17] "POST /longpolling/poll HTTP/1.1" 200 - 8 0.003 50.035

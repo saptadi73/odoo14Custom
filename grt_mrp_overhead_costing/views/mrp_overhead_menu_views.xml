@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_mrp_overhead_period" name="Overhead Periods" parent="mrp.menu_mrp_root" action="action_mrp_overhead_period" sequence="85"/>
+    <menuitem id="menu_mrp_overhead_type" name="Overhead Types" parent="mrp.menu_mrp_configuration" action="action_mrp_overhead_type" sequence="85"/>
+</odoo>

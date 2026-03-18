@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_mrp_production_form_overhead" model="ir.ui.view">
+        <field name="name">mrp.production.form.overhead</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_qty']" position="after">
+                <field name="overhead_applied_amount" readonly="1"/>
+                <field name="overhead_applied_count" readonly="1"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Overhead">
+                    <field name="overhead_allocation_line_ids" readonly="1">
+                        <tree>
+                            <field name="period_id"/>
+                            <field name="period_line_id"/>
+                            <field name="basis_qty"/>
+                            <field name="rate"/>
+                            <field name="applied_amount"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

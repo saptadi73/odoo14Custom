@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GRT MRP Overhead Costing Documentation</title>
+    <style>
+        :root {
+            --bg: #f4f1ea;
+            --card: #fffdf8;
+            --ink: #1f2933;
+            --muted: #52606d;
+            --line: #d9d1c3;
+            --accent: #8b5e34;
+            --accent-soft: #f1e4d3;
+            --ok: #1f7a4d;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: linear-gradient(180deg, #f6f2ea 0%, #efe8da 100%);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+        .hero {
+            background: linear-gradient(135deg, #fffaf1 0%, #f3e5d1 100%);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 12px 30px rgba(94, 72, 43, 0.08);
+        }
+        h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; }
+        h1 { font-size: 34px; }
+        h2 { font-size: 24px; margin-top: 30px; }
+        h3 { font-size: 18px; margin-top: 20px; }
+        p { margin: 0 0 12px; color: var(--muted); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 22px;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px;
+        }
+        .pill {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .section {
+            background: rgba(255, 253, 248, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+        ul, ol { margin: 0 0 12px 20px; color: var(--ink); }
+        li { margin-bottom: 8px; }
+        code, .code {
+            font-family: Consolas, monospace;
+            background: #f4ede1;
+            border-radius: 6px;
+            padding: 1px 6px;
+            color: #6f4a1f;
+        }
+        .formula, .note {
+            border-left: 4px solid var(--accent);
+            background: #fbf4e9;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin: 14px 0;
+        }
+        .ok {
+            border-left-color: var(--ok);
+            background: #edf8f1;
+        }
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 18px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        .table th, .table td {
+            border: 1px solid var(--line);
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .table th {
+            background: #f7efe3;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <section class="hero">
+            <div class="pill">Panduan Operasional</div>
+            <h1>GRT MRP Overhead Costing</h1>
+            <p>Modul ini membantu memindahkan biaya overhead seperti listrik dan SDM ke cost produksi, lalu merekonsiliasikannya dengan expense aktual agar tidak terjadi double pembiayaan.</p>
+            <div class="grid">
+                <div class="card">
+                    <h3>Fungsi Utama</h3>
+                    <ul>
+                        <li>Simpan overhead bulanan</li>
+                        <li>Hitung tarif per kg, per batch, atau per jam</li>
+                        <li>Alokasikan overhead ke MO selesai</li>
+                        <li>Buat jurnal adjustment</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Menu Yang Dipakai</h3>
+                    <ul>
+                        <li><span class="code">Manufacturing &gt; Overhead Periods</span></li>
+                        <li><span class="code">Manufacturing &gt; Configuration &gt; Overhead Types</span></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Setup Yang Disarankan</h3>
+                    <ul>
+                        <li>Listrik Produksi = <span class="code">Per Kg</span></li>
+                        <li>SDM Produksi = <span class="code">Per Kg</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Alur Kerja Singkat</h2>
+            <ol>
+                <li>Buat atau cek <span class="code">Overhead Type</span>.</li>
+                <li>Buat <span class="code">Overhead Period</span> bulanan.</li>
+                <li>Isi actual overhead dari expense/journal atau <span class="code">Manual Actual Amount</span>.</li>
+                <li>Klik <span class="code">Load Source Entries</span>.</li>
+                <li>Klik <span class="code">Compute Overhead</span>.</li>
+                <li>Review basis, rate, absorbed amount, dan variance.</li>
+                <li>Klik <span class="code">Create Adjustment</span>.</li>
+                <li>Review dan post jurnal draft jika sudah benar.</li>
+            </ol>
+        </section>
+
+        <section class="section">
+            <h2>Konsep Inti</h2>
+            <div class="formula">
+                <strong>Tarif overhead</strong> = Actual overhead / Total basis alokasi<br>
+                <strong>Applied overhead per MO</strong> = Basis MO x Tarif overhead<br>
+                <strong>Variance</strong> = Actual overhead - Total applied overhead
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Istilah</th>
+                        <th>Arti</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Actual Overhead</td>
+                        <td>Biaya overhead aktual dari expense, jurnal, atau input manual.</td>
+                    </tr>
+                    <tr>
+                        <td>Absorbed Overhead</td>
+                        <td>Biaya overhead yang dibebankan ke produk berdasarkan basis alokasi.</td>
+                    </tr>
+                    <tr>
+                        <td>Variance</td>
+                        <td>Selisih antara actual overhead dan absorbed overhead.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>Contoh Cepat</h2>
+            <p>Misalnya actual listrik bulan Februari adalah <span class="code">Rp 9.000.000</span> dan total produksi bulan itu <span class="code">9.000 kg</span>.</p>
+            <div class="formula ok">
+                Tarif listrik = 9.000.000 / 9.000 = <strong>Rp 1.000 per kg</strong>
+            </div>
+            <p>Kalau satu MO menghasilkan <span class="code">1.000 kg</span>, maka overhead listrik untuk MO tersebut adalah <span class="code">Rp 1.000.000</span>.</p>
+        </section>
+
+        <section class="section">
+            <h2>Checklist Bulanan</h2>
+            <ul>
+                <li>Pastikan semua expense/jurnal overhead sudah masuk.</li>
+                <li>Tag overhead dengan <span class="code">MRP Overhead Type</span> jika memakai source otomatis.</li>
+                <li>Buka periode overhead bulanan.</li>
+                <li>Klik <span class="code">Load Source Entries</span>.</li>
+                <li>Isi <span class="code">Manual Actual Amount</span> jika masih ada biaya yang belum masuk jurnal.</li>
+                <li>Klik <span class="code">Compute Overhead</span>.</li>
+                <li>Review angka sebelum buat jurnal.</li>
+                <li>Klik <span class="code">Create Adjustment</span>.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Troubleshooting Ringkas</h2>
+            <h3>Basis Qty = 0</h3>
+            <p>Cek apakah ada MO done di periode itu dan apakah basis alokasi yang dipilih memang cocok dengan data produksi.</p>
+            <h3>Actual Amount = 0</h3>
+            <p>Cek apakah source entries sudah ditarik, expense/jurnal sudah ditag, atau isi manual actual amount bila masih masa transisi.</p>
+            <h3>Variance Besar</h3>
+            <p>Biasanya karena actual overhead belum lengkap, basis alokasi salah, atau tarif manual terlalu tinggi/rendah.</p>
+        </section>
+
+        <section class="section footer-links">
+            <h2>Dokumen Lengkap</h2>
+            <p>Dokumen tambahan tersedia di source module:</p>
+            <p>
+                <a href="/grt_mrp_overhead_costing/static/documentation/index.html">Panduan Ini</a>
+                <a href="/grt_mrp_overhead_costing/README.md" target="_blank">README Source</a>
+            </p>
+            <div class="note">
+                Jika alur bisnis berubah, misalnya SDM pindah dari <span class="code">Per Kg</span> ke <span class="code">Per MO</span>, dokumentasi ini sebaiknya ikut diperbarui.
+            </div>
+        </section>
+    </div>
+</body>
+</html>
