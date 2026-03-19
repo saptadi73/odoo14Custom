@@ -249,7 +249,6 @@ class MrpOverheadPeriod(models.Model):
             }
         )
         self.adjustment_move_id = move.id
-        self._create_stock_valuation_layers(move)
         self.state = "adjusted"
         return {
             "type": "ir.actions.act_window",
@@ -284,12 +283,26 @@ class MrpOverheadPeriod(models.Model):
         valuation_layers = []
         for line in self.line_ids.filtered(lambda item: item.capitalize_to_inventory):
             for allocation in line.allocation_line_ids:
+                existing_layer = self.env["stock.valuation.layer"].search(
+                    [("mrp_overhead_allocation_line_id", "=", allocation.id)],
+                    limit=1,
+                )
+                if existing_layer:
+                    continue
                 layer_vals = line._prepare_stock_valuation_layer_vals(allocation, adjustment_move)
                 if layer_vals:
                     valuation_layers.append(layer_vals)
 
         if valuation_layers:
             self.env["stock.valuation.layer"].create(valuation_layers)
+
+    def action_sync_posted_adjustment_valuation(self):
+        for period in self:
+            move = period.adjustment_move_id
+            if not move or move.state != "posted":
+                continue
+            period._create_stock_valuation_layers(move)
+        return True
 
     def _get_done_productions(self):
         self.ensure_one()

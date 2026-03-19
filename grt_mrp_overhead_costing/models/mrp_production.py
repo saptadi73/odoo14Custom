@@ -34,6 +34,33 @@ class MrpProduction(models.Model):
         compute="_compute_overhead_applied_amount",
         currency_field="currency_id",
     )
+    overhead_capitalized_amount = fields.Monetary(
+        string="Capitalized Overhead",
+        compute="_compute_overhead_cost_totals",
+        currency_field="currency_id",
+    )
+    finished_goods_base_cost_amount = fields.Monetary(
+        string="FG Base Cost",
+        compute="_compute_overhead_cost_totals",
+        currency_field="currency_id",
+    )
+    finished_goods_total_cost_amount = fields.Monetary(
+        string="FG Total Cost",
+        compute="_compute_overhead_cost_totals",
+        currency_field="currency_id",
+    )
+    finished_goods_pending_overhead_amount = fields.Monetary(
+        string="Pending Overhead to Capitalize",
+        compute="_compute_overhead_cost_totals",
+        currency_field="currency_id",
+        help="Applied overhead that is allocated to this MO but not yet capitalized into inventory valuation.",
+    )
+    finished_goods_total_cost_preview_amount = fields.Monetary(
+        string="FG Total Cost Preview",
+        compute="_compute_overhead_cost_totals",
+        currency_field="currency_id",
+        help="Base finished goods cost plus all applied overhead, including amounts that are not yet capitalized.",
+    )
     overhead_applied_count = fields.Integer(
         string="Overhead Allocation Count",
         compute="_compute_overhead_applied_amount",
@@ -44,6 +71,32 @@ class MrpProduction(models.Model):
             allocations = production.overhead_allocation_line_ids
             production.overhead_applied_amount = sum(allocations.mapped("applied_amount"))
             production.overhead_applied_count = len(allocations)
+
+    def _compute_overhead_cost_totals(self):
+        StockValuationLayer = self.env["stock.valuation.layer"] if "stock.valuation.layer" in self.env else False
+        for production in self:
+            base_cost = 0.0
+            capitalized_overhead = 0.0
+
+            finished_moves = production.move_finished_ids.filtered(lambda move: move.state == "done")
+            for move in finished_moves:
+                if "stock_valuation_layer_ids" not in move._fields:
+                    continue
+                move_layers = move.stock_valuation_layer_ids
+                base_cost += sum(
+                    move_layers.filtered(lambda layer: not getattr(layer, "mrp_overhead_period_id", False)).mapped("value")
+                )
+
+            if StockValuationLayer:
+                overhead_layers = StockValuationLayer.search([("mrp_production_id", "=", production.id)])
+                capitalized_overhead = sum(overhead_layers.mapped("value"))
+
+            pending_overhead = production.overhead_applied_amount - capitalized_overhead
+            production.finished_goods_base_cost_amount = base_cost
+            production.overhead_capitalized_amount = capitalized_overhead
+            production.finished_goods_total_cost_amount = base_cost + capitalized_overhead
+            production.finished_goods_pending_overhead_amount = pending_overhead
+            production.finished_goods_total_cost_preview_amount = base_cost + production.overhead_applied_amount
 
     @api.constrains("overhead_electricity_factor", "overhead_labor_factor")
     def _check_overhead_factors(self):

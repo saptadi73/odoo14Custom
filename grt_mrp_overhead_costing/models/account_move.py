@@ -33,18 +33,21 @@ class AccountMove(models.Model):
     def action_post(self):
         result = super().action_post()
         for move in self:
-            if not move.mrp_overhead_type_id:
-                continue
-            move.line_ids.filtered(
-                lambda line: not line.display_type
-                and line.account_id.internal_type not in ("receivable", "payable", "liquidity")
-                and not line.mrp_overhead_period_line_id
-            ).write(
-                {
-                    "mrp_overhead_type_id": move.mrp_overhead_type_id.id,
-                    "mrp_overhead_period_id": move.mrp_overhead_period_id.id,
-                }
-            )
+            if move.mrp_overhead_type_id:
+                move.line_ids.filtered(
+                    lambda line: not line.display_type
+                    and line.account_id.internal_type not in ("receivable", "payable", "liquidity")
+                    and not line.mrp_overhead_period_line_id
+                ).write(
+                    {
+                        "mrp_overhead_type_id": move.mrp_overhead_type_id.id,
+                        "mrp_overhead_period_id": move.mrp_overhead_period_id.id,
+                    }
+                )
+
+            period = move.mrp_overhead_period_id.filtered(lambda item: item.adjustment_move_id == move)
+            if period:
+                period.action_sync_posted_adjustment_valuation()
         return result
 
 

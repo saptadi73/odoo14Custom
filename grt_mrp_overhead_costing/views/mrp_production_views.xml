@@ -13,6 +13,18 @@
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="Overhead">
+                    <group string="Cost Summary">
+                        <group>
+                            <field name="finished_goods_base_cost_amount" readonly="1"/>
+                            <field name="overhead_applied_amount" readonly="1"/>
+                            <field name="overhead_capitalized_amount" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="finished_goods_total_cost_amount" readonly="1"/>
+                            <field name="finished_goods_pending_overhead_amount" readonly="1"/>
+                            <field name="finished_goods_total_cost_preview_amount" readonly="1"/>
+                        </group>
+                    </group>
                     <field name="overhead_allocation_line_ids" readonly="1">
                         <tree>
                             <field name="period_id"/>
