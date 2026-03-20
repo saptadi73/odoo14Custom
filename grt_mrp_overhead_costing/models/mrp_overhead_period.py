@@ -520,8 +520,8 @@ class MrpOverheadPeriodLine(models.Model):
                     total_minutes += workorder.duration
                 elif "duration_expected" in workorder._fields and workorder.duration_expected:
                     total_minutes += workorder.duration_expected
-        if not total_minutes and production.date_start and production.date_finished:
-            total_minutes = (production.date_finished - production.date_start).total_seconds() / 60.0
+        if not total_minutes and production.date_planned_start and production.date_finished:
+            total_minutes = (production.date_finished - production.date_planned_start).total_seconds() / 60.0
         return total_minutes / 60.0
 
     def _validate_accounts_for_adjustment(self):
@@ -634,7 +634,7 @@ class MrpOverheadPeriodLine(models.Model):
             return False
 
         category = product.categ_id
-        if "valuation" in category._fields and category.valuation != "real_time":
+        if "property_valuation" in category._fields and category.property_valuation != "real_time":
             return False
 
         description = _("Overhead absorption %s - %s - %s") % (
