@@ -9,6 +9,7 @@ from odoo import http
 from odoo.http import request
 import logging
 import json
+import os
 from datetime import datetime, timedelta
 from collections import defaultdict
 from ..services.product_service import ProductService
@@ -16,6 +17,7 @@ from ..services.mo_weight_service import MoWeightService
 from ..services.bom_service import BomService
 
 _logger = logging.getLogger(__name__)
+SCADA_CORS_ORIGIN = os.getenv('SCADA_CORS_ORIGIN', 'https://scada.kanjabung.com')
 
 
 class ScadaJsonRpcController(http.Controller):
@@ -214,7 +216,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== HEALTH & SYSTEM =====
 
-    @http.route('/api/scada/health', type='json', auth='public', methods=['GET'])
+    @http.route('/api/scada/health', type='json', auth='public', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def health_check(self, **kwargs):
         """Health check endpoint"""
         try:
@@ -230,7 +232,7 @@ class ScadaJsonRpcController(http.Controller):
                 'message': str(e),
             }
 
-    @http.route('/api/scada/authenticate', type='json', auth='public', methods=['POST'])
+    @http.route('/api/scada/authenticate', type='json', auth='public', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def authenticate(self, **kwargs):
         """
         Authenticate session untuk middleware.
@@ -250,7 +252,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Auth error: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/version', type='json', auth='public', methods=['GET'])
+    @http.route('/api/scada/version', type='json', auth='public', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_version(self, **kwargs):
         """Get SCADA module version"""
         try:
@@ -271,7 +273,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== MATERIAL CONSUMPTION =====
 
-    @http.route('/api/scada/material-consumption', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/material-consumption', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def create_material_consumption(self, **kwargs):
         """
         Apply material consumption directly to MO
@@ -310,7 +312,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error creating material consumption: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/material-consumption/<int:record_id>', type='json', auth='user', methods=['GET'])
+    @http.route('/api/scada/material-consumption/<int:record_id>', type='json', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_material_consumption(self, record_id, **kwargs):
         """Deprecated: material consumption records are not stored."""
         try:
@@ -322,7 +324,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting material consumption: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/material-consumption/validate', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/material-consumption/validate', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def validate_material_consumption(self, **kwargs):
         """Validate material consumption payload"""
         try:
@@ -340,7 +342,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== MANUFACTURING ORDERS =====
 
-    @http.route('/api/scada/mo-list', type='json', auth='user', methods=['GET'])
+    @http.route('/api/scada/mo-list', type='json', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_mo_list(self, **kwargs):
         """Get MO list for equipment"""
         try:
@@ -359,7 +361,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting MO list: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo-list-confirmed', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo-list-confirmed', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_mo_list_confirmed(self, **kwargs):
         """Get confirmed MO list with equipment info (JSON-RPC)."""
         try:
@@ -401,7 +403,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting confirmed MO list: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo-detail', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo-detail', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_mo_detail(self, **kwargs):
         """Get MO detail with BoM and component consumption (JSON-RPC)."""
         try:
@@ -531,7 +533,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting MO detail: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo/<int:mo_id>/acknowledge', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo/<int:mo_id>/acknowledge', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def acknowledge_mo(self, mo_id, **kwargs):
         """Acknowledge MO"""
         try:
@@ -548,7 +550,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error acknowledging MO: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo/<int:mo_id>/update-status', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo/<int:mo_id>/update-status', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def update_mo_status(self, mo_id, **kwargs):
         """Update MO status"""
         try:
@@ -564,7 +566,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error updating MO status: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo/<int:mo_id>/mark-done', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo/<int:mo_id>/mark-done', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def mark_mo_done(self, mo_id, **kwargs):
         """Mark MO as done"""
         try:
@@ -580,7 +582,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error marking MO done: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo/mark-done', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo/mark-done', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def mark_mo_done_by_payload(self, **kwargs):
         """Mark MO as done using mo_id from payload."""
         try:
@@ -602,7 +604,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error marking MO done (payload): {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo/cancel', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo/cancel', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def cancel_mo_by_payload(self, **kwargs):
         """Cancel MO using mo_id from payload."""
         try:
@@ -624,7 +626,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error cancelling MO (payload): {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo/update-with-consumptions', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo/update-with-consumptions', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def update_mo_with_consumptions(self, **kwargs):
         """
         Update MO dengan quantity dan consumption berdasarkan equipment code SCADA
@@ -683,7 +685,7 @@ class ScadaJsonRpcController(http.Controller):
                 'message': str(e),
             }
 
-    @http.route('/api/scada/mo-weight', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo-weight', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def create_mo_weight(self, **kwargs):
         """
         Create MO weight record
@@ -704,7 +706,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error creating MO weight: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/mo-weight', type='json', auth='user', methods=['GET'])
+    @http.route('/api/scada/mo-weight', type='json', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_mo_weights(self, **kwargs):
         """
         Get MO weight records
@@ -727,7 +729,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== OEE =====
 
-    @http.route('/api/scada/oee-detail', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/oee-detail', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_oee_detail(self, **kwargs):
         """
         Get OEE detail data for frontend.
@@ -858,7 +860,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting OEE detail: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/oee-equipment-avg', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/oee-equipment-avg', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_oee_equipment_avg(self, **kwargs):
         """
         Get average OEE report by SCADA equipment list.
@@ -1046,7 +1048,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting OEE equipment average: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/kpi-product-report', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/kpi-product-report', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_kpi_product_report(self, **kwargs):
         """
         Get KPI report per product from OEE records.
@@ -1178,7 +1180,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting KPI product report: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/today-reports', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/today-reports', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_today_reports(self, **kwargs):
         """
         Get daily SCADA reports in one payload:
@@ -1403,7 +1405,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting today reports: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/periodic-report', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/periodic-report', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_periodic_report(self, **kwargs):
         """
         Get periodic report package:
@@ -1900,7 +1902,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== EQUIPMENT =====
 
-    @http.route('/api/scada/equipment/<equipment_code>', type='json', auth='user', methods=['GET'])
+    @http.route('/api/scada/equipment/<equipment_code>', type='json', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_equipment_status(self, equipment_code, **kwargs):
         """Get equipment status"""
         try:
@@ -1910,7 +1912,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting equipment status: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/equipment-failure', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/equipment-failure', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def create_equipment_failure(self, **kwargs):
         """Create equipment failure report."""
         try:
@@ -1968,7 +1970,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error creating equipment failure report: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/equipment-failure', type='json', auth='user', methods=['GET'])
+    @http.route('/api/scada/equipment-failure', type='json', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_equipment_failures(self, **kwargs):
         """Get equipment failure report list."""
         try:
@@ -2006,7 +2008,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting equipment failure reports: {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/equipment-failure-report', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/equipment-failure-report', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_equipment_failure_report(self, **kwargs):
         """Get frontend-ready equipment failure report (detail + summary)."""
         try:
@@ -2143,7 +2145,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== PRODUCTS =====
 
-    @http.route('/api/scada/products', type='http', auth='user', methods=['GET'])
+    @http.route('/api/scada/products', type='http', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_product_list(self, **kwargs):
         """
         Get list produk
@@ -2200,7 +2202,7 @@ class ScadaJsonRpcController(http.Controller):
             response.status_code = 500
             return response
 
-    @http.route('/api/scada/products', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/products', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_product_list_json(self, **kwargs):
         """Get list produk (JSON-RPC)."""
         try:
@@ -2237,7 +2239,7 @@ class ScadaJsonRpcController(http.Controller):
             _logger.error(f'Error getting product list (json): {str(e)}')
             return {'status': 'error', 'message': str(e)}
 
-    @http.route('/api/scada/products-by-category', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/products-by-category', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_product_list_by_category_json(self, **kwargs):
         """Get list produk dengan filter kategori (JSON-RPC)."""
         try:
@@ -2276,7 +2278,7 @@ class ScadaJsonRpcController(http.Controller):
 
     # ===== BOM =====
 
-    @http.route('/api/scada/boms', type='http', auth='user', methods=['GET'])
+    @http.route('/api/scada/boms', type='http', auth='user', methods=['GET'], cors=SCADA_CORS_ORIGIN)
     def get_bom_list(self, **kwargs):
         """
         Get list BoM beserta komponen.
@@ -2360,7 +2362,7 @@ class ScadaJsonRpcController(http.Controller):
             response.status_code = 500
             return response
 
-    @http.route('/api/scada/boms', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/boms', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_bom_list_json(self, **kwargs):
         """Get list BoM beserta komponen (JSON-RPC)."""
         try:

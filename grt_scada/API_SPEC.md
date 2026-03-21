@@ -18,18 +18,21 @@ http(s)://{odoo-host}/api/scada/
 
 Gunakan session-based authentication via cookies:
 
+Catatan production:
+1. Untuk frontend beda domain, gunakan `POST /api/scada/authenticate` sebagai login utama.
+2. Route SCADA backend mendukung CORS dengan origin dari env var `SCADA_CORS_ORIGIN`.
+3. Default `SCADA_CORS_ORIGIN` adalah `https://scada.kanjabung.com`.
+4. Endpoint `/web/session/authenticate` bawaan Odoo hanya aman dipakai bila frontend dan Odoo satu origin, atau ada reverse proxy production.
+5. `vite.config.js` proxy hanya berlaku saat development.
+
 ```bash
-# 1. Login via Odoo session endpoint
-curl -X POST http://localhost:8069/web/session/authenticate \
+# 1. Login via SCADA auth endpoint
+curl -X POST http://localhost:8069/api/scada/authenticate \
   -H "Content-Type: application/json" \
   -d '{
-    "jsonrpc": "2.0",
-    "method": "call",
-    "params": {
-      "db": "your_database",
-      "login": "admin@example.com",
-      "password": "password"
-    }
+    "db": "your_database",
+    "login": "admin@example.com",
+    "password": "password"
   }' \
   -c cookies.txt
 
@@ -131,6 +134,7 @@ Catatan frontend:
 1. Gunakan `credentials: 'include'` agar session cookie Odoo ikut terkirim.
 2. Cek `status` response sebelum membaca `data`/`summary`.
 3. Untuk report chart, prioritaskan endpoint `today-reports` dan `periodic-report` karena sudah menyediakan blok chart siap map ke ApexCharts.
+4. Untuk production cross-origin, login ke `/api/scada/authenticate`, bukan ke `/web/session/authenticate`, kecuali ada reverse proxy.
 
 ### Cheatsheet Copy-Paste Frontend (Vue.js)
 

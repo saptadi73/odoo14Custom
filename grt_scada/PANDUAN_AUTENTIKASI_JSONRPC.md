@@ -81,9 +81,12 @@ http://localhost:8069/web/login
 
 Setelah login berhasil, session ID disimpan otomatis di cookies.
 
-### Step 2: Dapatkan Session ID (untuk API client non-browser)
+### Step 2: Dapatkan Session ID
 
-Jika menggunakan middleware/API client (bukan browser), dapatkan session ID:
+Untuk production frontend lintas domain, gunakan endpoint `POST /api/scada/authenticate`.
+Endpoint `/web/session/authenticate` bawaan Odoo sebaiknya hanya dipakai jika satu origin atau ada reverse proxy production.
+
+Jika menggunakan browser frontend, middleware, atau API client, dapatkan session ID dari endpoint SCADA:
 
 ```python
 import requests
@@ -91,16 +94,12 @@ import json
 
 def get_session_id(host, db, username, password):
     """Dapatkan session ID dari Odoo"""
-    url = f'{host}/web/session/authenticate'
+    url = f'{host}/api/scada/authenticate'
     
     payload = {
-        'jsonrpc': '2.0',
-        'method': 'call',
-        'params': {
-            'db': db,
-            'login': username,
-            'password': password
-        }
+        'db': db,
+        'login': username,
+        'password': password
     }
     
     response = requests.post(
@@ -133,10 +132,10 @@ except Exception as e:
 
 ### Step 3: Gunakan Token di API Calls
 
-Simpan token di localStorage (untuk browser):
+Untuk browser, jangan hanya mengandalkan token di localStorage. Session cookie tetap harus ikut terkirim dengan `credentials: 'include'`.
 
 ```javascript
-// Setelah login successful
+// Setelah login successful (optional cache)
 localStorage.setItem('scada_token', '2');  // Session ID
 
 // Gunakan di API calls
@@ -145,6 +144,17 @@ const headers = {
   'Authorization': `Bearer ${token}`,
   'Content-Type': 'application/json'
 };
+
+fetch('https://sapronak.kanjabung.com/api/scada/mo-list-confirmed', {
+  method: 'POST',
+  headers,
+  credentials: 'include',
+  body: JSON.stringify({
+    jsonrpc: '2.0',
+    method: 'call',
+    params: {}
+  })
+});
 ```
 
 ---
@@ -376,25 +386,22 @@ const handleLogin = async () => {
   loginError.value = null;
   
   try {
-    // Authenticate dengan Odoo
-    const response = await fetch('http://localhost:8069/web/session/authenticate', {
+    // Authenticate via SCADA endpoint agar aman untuk production cross-origin
+    const response = await fetch('http://localhost:8069/api/scada/authenticate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({
-        jsonrpc: '2.0',
-        method: 'call',
-        params: {
-          db: 'your_database', // Set database name
-          login: loginForm.value.username,
-          password: loginForm.value.password
-        }
+        db: 'your_database', // Set database name
+        login: loginForm.value.username,
+        password: loginForm.value.password
       })
     });
     
     const result = await response.json();
     
-    if (result.error) {
-      loginError.value = result.error.data?.message || 'Login failed';
+    if (result.status === 'error' || result.error) {
+      loginError.value = result.message || result.error?.data?.message || 'Login failed';
       return;
     }
     
