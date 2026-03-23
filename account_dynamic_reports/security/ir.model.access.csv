@@ -5,3 +5,7 @@ access_ins_financial_report,ins.financial.report,model_ins_financial_report,acco
 access_ins_partner_ageing,ins.partner.ageing,model_ins_partner_ageing,account.group_account_user,1,1,1,1
 access_ins_partner_ledger,ins.partner.ledger,model_ins_partner_ledger,account.group_account_user,1,1,1,1
 access_ins_trial_balance,ins.trial.balance,model_ins_trial_balance,account.group_account_user,1,1,1,1
+access_ins_faspe_consolidated_wizard,ins.faspe.consolidated.wizard,model_ins_faspe_consolidated_wizard,account.group_account_user,1,1,1,1
+access_ins_faspe_consolidated_elimination_line,ins.faspe.consolidated.elimination.line,model_ins_faspe_consolidated_elimination_line,account.group_account_user,1,1,1,1
+access_ins_faspe_consolidated_report,ins.faspe.consolidated.report,model_ins_faspe_consolidated_report,account.group_account_user,1,1,1,1
+access_ins_faspe_consolidated_report_line,ins.faspe.consolidated.report.line,model_ins_faspe_consolidated_report_line,account.group_account_user,1,1,1,1

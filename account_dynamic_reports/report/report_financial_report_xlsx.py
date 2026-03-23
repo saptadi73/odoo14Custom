@@ -258,7 +258,7 @@ class InsFinancialReportXlsx(models.AbstractModel):
         self.language_id = self.env['res.lang'].search([('code','=',lang)])[0]
         self._format_float_and_dates(self.env.user.company_id.currency_id, self.language_id)
 
-        self.sheet.merge_range(0, 0, 0, 3, data['form']['account_report_id'][1] +' - '+data['form']['company_id'][1], self.format_title)
+        self.sheet.merge_range(0, 0, 0, 3, data['form']['account_report_id'][1] +' - '+data['form']['company_name'], self.format_title)
         self.dateformat = self.env.user.lang
 
         #Filter section

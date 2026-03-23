@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="ins_faspe_consolidated_wizard_form" model="ir.ui.view">
+            <field name="name">ins.faspe.consolidated.wizard.form</field>
+            <field name="model">ins.faspe.consolidated.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Keuangan Financial Accounting Standards for Private Entitie(FASPE)">
+                    <group>
+                        <group string="Periode">
+                            <field name="date_from" required="1"/>
+                            <field name="date_to" required="1"/>
+                            <field name="target_move" widget="radio"/>
+                        </group>
+                        <group string="Konsolidasi Multi Company">
+                            <field name="company_ids" widget="many2many_tags" groups="base.group_multi_company"
+                                   options="{'no_create_edit': True, 'no_create': True, 'no_quick_create': True}"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Akun Eliminasi per Company">
+                        <field name="elimination_line_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="company_id"
+                                       options="{'no_create_edit': True, 'no_create': True, 'no_quick_create': True}"/>
+                                <field name="account_ids" widget="many2many_tags"
+                                       domain="[('company_id', '=', company_id), ('internal_group', 'in', ['asset', 'liability', 'equity'])]"
+                                       options="{'no_create_edit': True, 'no_create': True, 'no_quick_create': True}"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                    <div class="o_form_label text-muted">
+                        Pilih akun yang harus dieliminasi di masing-masing company sebelum laporan consolidated ditampilkan.
+                    </div>
+
+                    <footer>
+                        <button name="action_generate_report" type="object" string="Tampilkan Laporan" class="btn-primary"/>
+                        <button string="Discard" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="ins_faspe_consolidated_report_line_tree" model="ir.ui.view">
+            <field name="name">ins.faspe.consolidated.report.line.tree</field>
+            <field name="model">ins.faspe.consolidated.report.line</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false"
+                      decoration-bf="line_type in ('section', 'total')"
+                      decoration-info="line_type == 'check'">
+                    <field name="sequence" invisible="1"/>
+                    <field name="line_type" invisible="1"/>
+                    <field name="section" invisible="1"/>
+                    <field name="account_code"/>
+                    <field name="name"/>
+                    <field name="amount_before_elimination" sum="Sebelum Eliminasi"/>
+                    <field name="elimination_amount" sum="Eliminasi"/>
+                    <field name="amount" sum="Setelah Eliminasi"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ins_faspe_consolidated_report_form" model="ir.ui.view">
+            <field name="name">ins.faspe.consolidated.report.form</field>
+            <field name="model">ins.faspe.consolidated.report</field>
+            <field name="arch" type="xml">
+                <form string="Laporan Keuangan Financial Accounting Standards for Private Entitie(FASPE)" create="false" delete="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="title" readonly="1"/>
+                                <field name="generated_at" readonly="1"/>
+                                <field name="target_move" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="date_from" readonly="1"/>
+                                <field name="date_to" readonly="1"/>
+                                <field name="company_names" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <group string="Ringkasan Konsolidasi">
+                            <field name="elimination_total" readonly="1"/>
+                            <field name="total_assets" readonly="1"/>
+                            <field name="total_liabilities" readonly="1"/>
+                            <field name="total_equity" readonly="1"/>
+                            <field name="balance_difference" readonly="1"/>
+                        </group>
+
+                        <group string="Detail Laporan">
+                            <field name="line_ids" nolabel="1" readonly="1">
+                                <tree create="false" delete="false"
+                                      decoration-bf="line_type in ('section', 'total')"
+                                      decoration-info="line_type == 'check'">
+                                    <field name="sequence" invisible="1"/>
+                                    <field name="line_type" invisible="1"/>
+                                    <field name="section" invisible="1"/>
+                                    <field name="account_code"/>
+                                    <field name="name"/>
+                                    <field name="amount_before_elimination" sum="Sebelum Eliminasi"/>
+                                    <field name="elimination_amount" sum="Eliminasi"/>
+                                    <field name="amount" sum="Setelah Eliminasi"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_ins_faspe_consolidated_wizard" model="ir.actions.act_window">
+            <field name="name">Laporan Keuangan Financial Accounting Standards for Private Entitie(FASPE)</field>
+            <field name="res_model">ins.faspe.consolidated.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ins_faspe_consolidated_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="account_report_faspe_consolidated"
+                  name="Laporan Keuangan FASPE"
+                  parent="account_reports_ins"
+                  action="action_ins_faspe_consolidated_wizard"
+                  sequence="90"
+                  groups="account.group_account_user"/>
+
+    </data>
+</odoo>

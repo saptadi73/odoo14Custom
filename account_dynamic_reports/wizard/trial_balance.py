@@ -39,6 +39,25 @@ DATE_DICT = {
 class InsTrialBalance(models.TransientModel):
     _name = "ins.trial.balance"
 
+    def _get_report_company(self):
+        self.ensure_one()
+        return self.company_id or self.env.company
+
+    def _get_report_companies(self):
+        self.ensure_one()
+        return self.company_ids or self.company_id or self.env.company
+
+    def _get_report_company_ids(self):
+        self.ensure_one()
+        return self._get_report_companies().ids or [self.env.company.id]
+
+    def _get_company_display_name(self):
+        self.ensure_one()
+        return ', '.join(self._get_report_companies().mapped('name'))
+
+    def _get_available_companies(self):
+        return self.env.user.company_ids
+
     def _get_journals(self):
         return self.env['account.journal'].search([])
 
@@ -200,6 +219,7 @@ class InsTrialBalance(models.TransientModel):
         'res.company', string='Company',
         default=lambda self: self.env.company
     )
+    company_ids = fields.Many2many('res.company', string='Companies', default=lambda self: self.env.company)
 
     def write(self, vals):
 
@@ -222,6 +242,15 @@ class InsTrialBalance(models.TransientModel):
             vals.update({'analytic_ids': vals.get('analytic_ids')})
         if vals.get('analytic_ids') == []:
             vals.update({'analytic_ids': [(5,)]})
+
+        if vals.get('company_ids'):
+            company_ids = vals.get('company_ids')
+            if isinstance(company_ids, list) and company_ids and isinstance(company_ids[0], int):
+                vals.update({'company_ids': [(6, 0, company_ids)], 'company_id': company_ids[0]})
+        if vals.get('company_ids') == []:
+            vals.update({'company_ids': [(5,)]})
+        if vals.get('company_id') and not vals.get('company_ids'):
+            vals.update({'company_ids': [(6, 0, [vals.get('company_id')])]})
 
         ret = super(InsTrialBalance, self).write(vals)
         return ret
@@ -281,6 +310,9 @@ class InsTrialBalance(models.TransientModel):
         filters['accounts_list'] = data.get('accounts_list')
         filters['analytics_list'] = data.get('analytics_list')
         filters['company_name'] = data.get('company_name')
+        filters['company_id'] = data.get('company_id')
+        filters['company_ids'] = data.get('company_ids', [])
+        filters['companies_list'] = data.get('companies_list')
 
         return filters
 
@@ -382,7 +414,9 @@ class InsTrialBalance(models.TransientModel):
 
             if data.get('analytic_ids', []):
                 WHERE += ' AND anl.id IN %s' % str(tuple(data.get('analytic_ids')) + tuple([0]))
-            if data.get('company_id', False):
+            if data.get('company_ids', []):
+                WHERE += ' AND l.company_id IN %s' % str(tuple(data.get('company_ids')) + tuple([0]))
+            elif data.get('company_id', False):
                 WHERE += ' AND l.company_id = %s' % data.get('company_id')
 
             if data.get('target_moves') == 'posted_only':
@@ -391,8 +425,8 @@ class InsTrialBalance(models.TransientModel):
             if data.get('account_ids'):
                 account_ids = self.env['account.account'].browse(data.get('account_ids'))
             else:
-                account_ids = self.env['account.account'].search([('company_id','=', data.get('company_id'))])
-            company_currency_id = self.env.company.currency_id
+                account_ids = self.env['account.account'].search([('company_id', 'in', data.get('company_ids') or [data.get('company_id')])])
+            company_currency_id = self._get_report_company().currency_id
 
             move_lines = {x.code: {'name':x.name,'code':x.code,'id':x.id,
                                  'initial_debit':0.0, 'initial_credit':0.0,'initial_balance':0.0,
@@ -413,7 +447,7 @@ class InsTrialBalance(models.TransientModel):
             total_end_cre = 0.0
             total_end_bal = 0.0
             for account in account_ids:
-                currency = account.company_id.currency_id or self.env.company.currency_id
+                currency = account.company_id.currency_id or company_currency_id
                 WHERE_INIT = WHERE + " AND l.date < '%s'" % data.get('date_from')
                 WHERE_INIT += " AND l.account_id = %s" % account.id
                 init_blns = 0.0
@@ -535,7 +569,10 @@ class InsTrialBalance(models.TransientModel):
 
         self.onchange_date_range()
 
-        company_domain = [('company_id', '=', self.env.company.id)]
+        company = self._get_report_company()
+        company_ids = self._get_report_company_ids()
+        company_domain = [('company_id', 'in', company_ids)]
+        companies = self._get_available_companies()
 
         journals = self.journal_ids if self.journal_ids else self.env['account.journal'].search(company_domain)
         accounts = self.account_ids if self.account_ids else self.env['account.account'].search(company_domain)
@@ -545,6 +582,7 @@ class InsTrialBalance(models.TransientModel):
             'journal_ids': self.journal_ids.ids,
             'account_ids': self.account_ids.ids,
             'analytic_ids': self.analytic_ids.ids,
+            'company_ids': company_ids,
             'company_id': self.company_id and self.company_id.id or False,
             'date_from': self.date_from,
             'date_to': self.date_to,
@@ -556,7 +594,8 @@ class InsTrialBalance(models.TransientModel):
             'journals_list': [(j.id, j.name) for j in journals],
             'accounts_list': [(a.id, a.name) for a in accounts],
             'analytics_list': [(anl.id, anl.name) for anl in analytics],
-            'company_name': self.company_id and self.company_id.name,
+            'company_name': self._get_company_display_name(),
+            'companies_list': [(c.id, c.name) for c in companies],
         }
         filter_dict.update(default_filters)
         return filter_dict
@@ -752,7 +791,7 @@ class InsTrialBalance(models.TransientModel):
         ################################################################
         row_pos_2 = 0
         row_pos = 0
-        sheet.merge_range(0, 0, 0, 10, 'Trial Balance' + ' - ' + data['company_id'][1], format_title)
+        sheet.merge_range(0, 0, 0, 10, 'Trial Balance' + ' - ' + filter['company_name'], format_title)
 
         # Write filters
         row_pos_2 += 2

@@ -39,6 +39,25 @@ FETCH_RANGE = 2000
 class InsPartnerLedger(models.TransientModel):
     _name = "ins.partner.ledger"
 
+    def _get_report_company(self):
+        self.ensure_one()
+        return self.company_id or self.env.company
+
+    def _get_report_companies(self):
+        self.ensure_one()
+        return self.company_ids or self.company_id or self.env.company
+
+    def _get_report_company_ids(self):
+        self.ensure_one()
+        return self._get_report_companies().ids or [self.env.company.id]
+
+    def _get_company_display_name(self):
+        self.ensure_one()
+        return ', '.join(self._get_report_companies().mapped('name'))
+
+    def _get_available_companies(self):
+        return self.env.user.company_ids
+
     @api.onchange('date_range', 'financial_year')
     def onchange_date_range(self):
         if self.date_range:
@@ -202,6 +221,7 @@ class InsPartnerLedger(models.TransientModel):
         'res.company', string='Company',
         default=lambda self: self.env.company
     )
+    company_ids = fields.Many2many('res.company', string='Companies', default=lambda self: self.env.company)
     include_details = fields.Boolean(
         string='Include Details', default=True
     )
@@ -240,6 +260,15 @@ class InsPartnerLedger(models.TransientModel):
             vals.update({'partner_category_ids': vals.get('partner_category_ids')})
         if vals.get('partner_category_ids') == []:
             vals.update({'partner_category_ids': [(5,)]})
+
+        if vals.get('company_ids'):
+            company_ids = vals.get('company_ids')
+            if isinstance(company_ids, list) and company_ids and isinstance(company_ids[0], int):
+                vals.update({'company_ids': [(6, 0, company_ids)], 'company_id': company_ids[0]})
+        if vals.get('company_ids') == []:
+            vals.update({'company_ids': [(5,)]})
+        if vals.get('company_id') and not vals.get('company_ids'):
+            vals.update({'company_ids': [(6, 0, [vals.get('company_id')])]})
 
         ret = super(InsPartnerLedger, self).write(vals)
         return ret
@@ -307,6 +336,7 @@ class InsPartnerLedger(models.TransientModel):
             filters['company_id'] = data.get('company_id')
         else:
             filters['company_id'] = ''
+        filters['company_ids'] = data.get('company_ids', [])
 
         if data.get('include_details'):
             filters['include_details'] = True
@@ -318,6 +348,7 @@ class InsPartnerLedger(models.TransientModel):
         filters['partners_list'] = data.get('partners_list')
         filters['category_list'] = data.get('category_list')
         filters['company_name'] = data.get('company_name')
+        filters['companies_list'] = data.get('companies_list')
 
         return filters
 
@@ -349,7 +380,9 @@ class InsPartnerLedger(models.TransientModel):
             if data.get('partner_ids', []):
                 WHERE += ' AND p.id IN %s' % str(tuple(data.get('partner_ids')) + tuple([0]))
 
-            if data.get('company_id', False):
+            if data.get('company_ids', []):
+                WHERE += ' AND l.company_id IN %s' % str(tuple(data.get('company_ids')) + tuple([0]))
+            elif data.get('company_id', False):
                 WHERE += ' AND l.company_id = %s' % data.get('company_id')
 
             if data.get('target_moves') == 'posted_only':
@@ -376,7 +409,7 @@ class InsPartnerLedger(models.TransientModel):
         count = 0
         opening_balance = 0
 
-        currency_id = self.env.company.currency_id
+        currency_id = self._get_report_company().currency_id
 
         WHERE = self.build_where_clause()
 
@@ -565,12 +598,14 @@ class InsPartnerLedger(models.TransientModel):
 
         WHERE = self.build_where_clause(data)
 
+        company = self._get_report_company()
+        company_ids = self._get_report_company_ids()
         partner_company_domain = [('parent_id', '=', False),
                                   '|',
                                   ('customer_rank', '>', 0),
                                   ('supplier_rank', '>', 0),
                                   '|',
-                                  ('company_id', '=', self.env.company.id),
+                                  ('company_id', 'in', company_ids),
                                   ('company_id', '=', False)]
         if self.partner_category_ids:
             partner_company_domain.append(('category_id','in',self.partner_category_ids.ids))
@@ -594,7 +629,7 @@ class InsPartnerLedger(models.TransientModel):
         }
         for partner in partner_ids:
 
-            currency = partner.company_id.currency_id or self.env.company.currency_id
+            currency = partner.company_id.currency_id or company.currency_id
             symbol = currency.symbol
             rounding = currency.rounding
             position = currency.position
@@ -727,14 +762,17 @@ class InsPartnerLedger(models.TransientModel):
 
         self.onchange_date_range()
 
-        company_domain = [('company_id', '=', self.env.company.id)]
+        company = self._get_report_company()
+        company_ids = self._get_report_company_ids()
+        company_domain = [('company_id', 'in', company_ids)]
         partner_company_domain = [('parent_id','=', False),
                                   '|',
                                   ('customer_rank', '>', 0),
                                   ('supplier_rank', '>', 0),
                                   '|',
-                                  ('company_id', '=', self.env.company.id),
+                                  ('company_id', 'in', company_ids),
                                   ('company_id', '=', False)]
+        companies = self._get_available_companies()
 
         journals = self.journal_ids if self.journal_ids else self.env['account.journal'].search(company_domain)
         accounts = self.account_ids if self.account_ids else self.env['account.account'].search(company_domain)
@@ -746,6 +784,7 @@ class InsPartnerLedger(models.TransientModel):
             'account_ids': self.account_ids.ids,
             'partner_ids': self.partner_ids.ids,
             'partner_category_ids': self.partner_category_ids.ids,
+            'company_ids': company_ids,
             'company_id': self.company_id and self.company_id.id or False,
             'target_moves': self.target_moves,
             'initial_balance': self.initial_balance,
@@ -761,7 +800,8 @@ class InsPartnerLedger(models.TransientModel):
             'accounts_list': [(a.id, a.name) for a in accounts],
             'partners_list': [(p.id, p.name) for p in partners],
             'category_list': [(c.id, c.name) for c in categories],
-            'company_name': self.company_id and self.company_id.name,
+            'company_name': self._get_company_display_name(),
+            'companies_list': [(c.id, c.name) for c in companies],
         }
         filter_dict.update(default_filters)
         return filter_dict
@@ -942,7 +982,7 @@ class InsPartnerLedger(models.TransientModel):
         ################################################################
         row_pos_2 = 0
         row_pos = 0
-        sheet.merge_range(0, 0, 0, 8, 'Partner Ledger' + ' - ' + data['company_id'][1], format_title)
+        sheet.merge_range(0, 0, 0, 8, 'Partner Ledger' + ' - ' + filter['company_name'], format_title)
 
         # Write filters
         sheet_2.write(row_pos_2, 0, _('Date from'), format_header)

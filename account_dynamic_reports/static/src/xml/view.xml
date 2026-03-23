@@ -100,6 +100,17 @@ View General Ledger
 <div class="py_cntrl_right">
 <div class="py-search-buttons">
 <button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-company">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-building"></span>
+Company:
+</a>
+<select class="dropdown-menu py-filters-menu company-multiple" name="company_ids[]" multiple="multiple">
+<t t-foreach="filter_data.companies_list" t-as="company">
+<option t-attf-value="{{company[0]}}"><t t-esc="company[1]"/></option>
+</t>
+</select>
+</div>
 <div class="py-search-btn-date">
 <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
@@ -150,7 +161,7 @@ Custom
 Journals:
 </a>
 <select class="dropdown-menu py-filters-menu journal-multiple" name="states[]" multiple="multiple">
-<b role="menuitem" class="dropdown-item-text"><t t-esc="filter_data.company_id"/></b>
+<b role="menuitem" class="dropdown-item-text"><t t-esc="filter_data.company_name"/></b>
 <div role="separator" class="dropdown-divider"></div>
 <t t-foreach="filter_data.journals_list" t-as="journal">
 <option t-attf-value="{{journal[0]}}"><t t-esc="journal[1]"/></option>
@@ -362,6 +373,17 @@ t-att-data-account-id="account_data[account]['id']">
 <div class="py_cntrl_right">
 <div class="py-search-buttons">
 <button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-company">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-building"></span>
+Company:
+</a>
+<select class="dropdown-menu py-filters-menu company-multiple" name="company_ids[]" multiple="multiple">
+<t t-foreach="filter_data.companies_list" t-as="company">
+<option t-attf-value="{{company[0]}}"><t t-esc="company[1]"/></option>
+</t>
+</select>
+</div>
 <div class="py-search-btn-date">
 <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
@@ -632,6 +654,17 @@ t-att-data-partner-id="partner">
 <div class="py_cntrl_right">
 <div class="py-search-buttons">
 <button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-company">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-building"></span>
+Company:
+</a>
+<select class="dropdown-menu py-filters-menu company-multiple" name="company_ids[]" multiple="multiple">
+<t t-foreach="filter_data.companies_list" t-as="company">
+<option t-attf-value="{{company[0]}}"><t t-esc="company[1]"/></option>
+</t>
+</select>
+</div>
 <div class="py-search-btn-date">
 <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
@@ -876,6 +909,17 @@ t-att-data-account-id="account_data[account]['id']">
 <div class="py_cntrl_right">
 <div class="py-search-buttons">
 <button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-company">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-building"></span>
+Company:
+</a>
+<select class="dropdown-menu py-filters-menu company-multiple" name="company_ids[]" multiple="multiple">
+<t t-foreach="filter_data.companies_list" t-as="company">
+<option t-attf-value="{{company[0]}}"><t t-esc="company[1]"/></option>
+</t>
+</select>
+</div>
 <div class="py-search-btn-date">
 <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>
@@ -1260,6 +1304,17 @@ View General Ledger
 <div class="py_cntrl_right">
 <div class="py-search-buttons">
 <button type="button" id="filter_apply_button" class="btn py-btn-secondary" action="apply_filter" style="position: relative;">Apply</button>
+<div class="py-search-company">
+<a type="button" class="dropdown-toggle" data-toggle="dropdown">
+<span class="fa fa-building"></span>
+Company:
+</a>
+<select class="dropdown-menu py-filters-menu company-multiple" name="company_ids[]" multiple="multiple">
+<t t-foreach="filter_data.companies_list" t-as="company">
+<option t-attf-value="{{company[0]}}"><t t-esc="company[1]"/></option>
+</t>
+</select>
+</div>
 <div class="py-search-btn-date">
 <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>

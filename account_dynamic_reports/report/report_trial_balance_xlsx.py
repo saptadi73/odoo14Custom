@@ -339,7 +339,7 @@ class InsTrialBalanceXlsx(models.AbstractModel):
 
         if record:
             data = record.read()
-            self.sheet.merge_range(0, 0, 0, 10, 'Trial Balance'+' - '+data[0]['company_id'][1], self.format_title)
+            self.sheet.merge_range(0, 0, 0, 10, 'Trial Balance'+' - '+record._get_company_display_name(), self.format_title)
             self.dateformat = self.env.user.lang
             filters, account_lines, retained, subtotal = record.get_report_datas()
 
