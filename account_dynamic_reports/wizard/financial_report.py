@@ -429,6 +429,8 @@ class InsFinancialReport(models.TransientModel):
         data['form'].update({'companies_list': [(c.id, c.name) for c in companies]})
         data['form'].update({'company_name': self._get_company_display_name()})
         data['form'].update({'company_ids': company_ids})
+        data['form'].update({'selected_analytics': self.analytic_ids.mapped('name')})
+        data['form'].update({'selected_analytic_tags': self.analytic_tag_ids.mapped('name')})
 
         if self.enable_filter:
             data['form']['debit_credit'] = False

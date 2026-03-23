@@ -58,6 +58,14 @@
                             <p t-esc="data['form']['date_to']" t-options='{"widget": "date"}'></p>
                         </div>
                     </div>
+                    <t t-if="data['form'].get('selected_analytics')">
+                        <div class="row mt16 pims_report_content">
+                            <div class="col-12">
+                                <strong>Analytic Accounts:</strong>
+                                <p t-esc="', '.join(data['form']['selected_analytics'])"></p>
+                            </div>
+                        </div>
+                    </t>
                     <t t-if="data['form']['enable_filter']">
                         <div class="row mt32 pims_report_content">
                             <div class="col-3">

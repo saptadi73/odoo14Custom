@@ -140,13 +140,13 @@ placeholder:'Select Company...',
 }).val((self.filter_data.company_ids || []).map(String)).trigger('change');
 self.$el.find('.journal-multiple').select2({
 placeholder:'Select Journal...',
-});
+}).val((self.filter_data.journal_ids || []).map(String)).trigger('change');
 self.$el.find('.analytic-tag-multiple').select2({
 placeholder:'Analytic Tags...',
-});
+}).val((self.filter_data.analytic_tag_ids || []).map(String)).trigger('change');
 self.$el.find('.analytic-multiple').select2({
 placeholder:'Select Analytic...',
-});
+}).val((self.filter_data.analytic_ids || []).map(String)).trigger('change');
 self.$el.find('.extra-multiple').select2({
 placeholder:'Extra Options...',
 })

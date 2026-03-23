@@ -90,6 +90,14 @@ View General Ledger
 <div class="py-control-div">
 <ol class="py-breadcrumb"><li><t t-esc="filter_data['account_report_id'][1]"/></li></ol>
 </div>
+<t t-if="filter_data['selected_analytics'] and filter_data['selected_analytics'].length">
+<div class="py-control-div">
+<div class="py-cntrl-left">
+<strong>Analytic Accounts:</strong>
+<span><t t-esc="filter_data['selected_analytics'].join(', ')"/></span>
+</div>
+</div>
+</t>
 <div class="py-control-div">
 <div class="py-cntrl-left">
 <div class="py-ctrl-buttons">

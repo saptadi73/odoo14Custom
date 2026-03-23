@@ -117,6 +117,13 @@ class InsFinancialReportXlsx(models.AbstractModel):
                 self.sheet_2.write_datetime(self.row_pos_2, 1, date,
                                         self.content_header_date)
             self.row_pos_2 += 1
+            analytics = ', '.join(filter['form'].get('selected_analytics', []))
+            if analytics:
+                self.sheet_2.write_string(self.row_pos_2, 0, _('Analytic Accounts'),
+                                          self.format_header)
+                self.sheet_2.write_string(self.row_pos_2, 1, analytics,
+                                          self.content_header)
+                self.row_pos_2 += 1
             if filter['form']['enable_filter']:
 
                 # Compariosn Date from
