@@ -22,9 +22,10 @@ Fokus dokumen ini:
 | `/api/sales/order-types` | `GET` | user | list type Sales Order |
 | `/api/sales/customer-qr-by-id` | `POST` | user | ambil `customer_qr_ref` dari `customer_id` |
 | `/api/sales/customer-qr-payload-by-id` | `POST` | user | ambil payload QR siap render dari `customer_id` |
-| `/api/sales/customer-detail-by-qr` | `POST` | user | detail customer dari QR |
-| `/api/sales/customer-accounting-summary-by-qr` | `POST` | user | summary aging hutang/piutang |
-| `/api/sales/orders-by-qr` | `POST` | user | histori Sales Order customer |
+| `/api/sales/customer-qr-payload-by-ref` | `POST` | user | ambil payload QR siap render dari `customer_qr_ref` |
+| `/api/sales/customer-detail-by-qr` | `POST` | user | detail customer langsung dari `customer_qr_ref` |
+| `/api/sales/customer-accounting-summary-by-qr` | `POST` | user | summary aging hutang/piutang dari `customer_qr_ref` |
+| `/api/sales/orders-by-qr` | `POST` | user | histori Sales Order customer dari `customer_qr_ref` |
 | `/api/sales/draft-order` | `POST` | user | create draft Sales Order multi-item |
 
 ## Base URL
@@ -138,6 +139,10 @@ Catatan implementasi:
 - customer baru akan otomatis mendapat `customer_qr_ref`
 - customer lama akan terisi saat module install atau upgrade
 - referensi ini unik di database
+- jika frontend sudah menyimpan `customer_qr_ref`, frontend tidak perlu lagi menampilkan atau mengirim `customer_id` untuk flow lookup customer
+- flow yang sudah bisa langsung memakai `customer_qr_ref` adalah detail customer, summary accounting customer, dan histori order customer
+- endpoint yang masih membutuhkan `customer_id` hanya endpoint pembangkit QR awal berbasis id: `customer-qr-by-id` dan `customer-qr-payload-by-id`
+- frontend juga bisa membentuk ulang payload QR langsung dari reference melalui `customer-qr-payload-by-ref`
 
 ## Endpoint Master Data
 
@@ -228,6 +233,32 @@ Mengambil daftar type Sales Order dari backend.
 }
 ```
 
+## Panduan Frontend Jika Memakai `customer_qr_ref`
+
+Jika sisi frontend sudah menyimpan `customer_qr_ref`, maka frontend bisa memakai reference tersebut sebagai identifier customer untuk flow setelah QR terbentuk atau setelah customer pernah dipilih sebelumnya.
+
+Frontend bisa langsung memakai `customer_qr_ref` untuk endpoint berikut:
+
+- `POST /api/sales/customer-detail-by-qr`
+- `POST /api/sales/customer-accounting-summary-by-qr`
+- `POST /api/sales/orders-by-qr`
+- `POST /api/sales/customer-qr-payload-by-ref`
+
+Contoh request umum:
+
+```json
+{
+  "params": {
+    "customer_qr_ref": "CUSTQR2603-000001"
+  }
+}
+```
+
+Catatan integrasi:
+
+- jika frontend hanya perlu lookup ulang customer yang sudah punya QR reference, gunakan `customer_qr_ref`
+- jika frontend ingin membuat atau membentuk ulang payload QR, frontend bisa memakai `customer_id` atau `customer_qr_ref` sesuai data yang tersedia
+- `customer_qr_ref` sudah cukup untuk flow scan, detail customer, summary accounting, histori order, dan pembentukan ulang payload QR
 ## Endpoint Customer
 
 ### `POST /api/sales/customer-qr-by-id`
@@ -344,6 +375,72 @@ Catatan:
 - `format="json"` cocok jika frontend atau scanner ingin membaca metadata customer langsung dari isi QR
 - `qr_payload` tetap selalu dikembalikan sebagai object referensi
 
+
+### `POST /api/sales/customer-qr-payload-by-ref`
+
+Mengambil payload QR siap render dari `customer_qr_ref`.
+
+Endpoint ini cocok jika frontend sudah menyimpan reference customer dan ingin membentuk ulang payload QR tanpa membutuhkan `customer_id`.
+
+#### Request body
+
+```json
+{
+  "params": {
+    "customer_qr_ref": "CUSTQR2603-000001",
+    "format": "ref"
+  }
+}
+```
+
+#### Field request
+
+| Field | Type | Required | Keterangan |
+|---|---|---|---|
+| `customer_qr_ref` | string | ya | reference QR customer |
+| `format` | string | tidak | `ref` atau `json`; default `ref` |
+
+#### Response format `ref`
+
+```json
+{
+  "status": "success",
+  "data": {
+    "partner_id": 45,
+    "customer_id": 45,
+    "name": "PT Customer A",
+    "customer_qr_ref": "CUSTQR2603-000001",
+    "format": "ref",
+    "qr_content": "CUSTQR2603-000001",
+    "qr_payload": {
+      "customer_id": 45,
+      "customer_qr_ref": "CUSTQR2603-000001",
+      "customer_name": "PT Customer A"
+    }
+  }
+}
+```
+
+#### Response format `json`
+
+```json
+{
+  "status": "success",
+  "data": {
+    "partner_id": 45,
+    "customer_id": 45,
+    "name": "PT Customer A",
+    "customer_qr_ref": "CUSTQR2603-000001",
+    "format": "json",
+    "qr_content": "{\"customer_id\":45,\"customer_qr_ref\":\"CUSTQR2603-000001\",\"customer_name\":\"PT Customer A\"}",
+    "qr_payload": {
+      "customer_id": 45,
+      "customer_qr_ref": "CUSTQR2603-000001",
+      "customer_name": "PT Customer A"
+    }
+  }
+}
+```
 ### `POST /api/sales/customer-detail-by-qr`
 
 Mengambil detail customer berdasarkan `customer_qr_ref`.
@@ -542,15 +639,15 @@ Urutan implementasi yang disarankan di Vue:
 
 1. login ke `/api/sales/authenticate`
 2. ambil master data: `products`, `payment-terms`, `order-types`
-3. jika customer dipilih dari list dan frontend mau membuat QR, panggil `customer-qr-payload-by-id`
-4. pilih `format="ref"` jika QR hanya menyimpan reference string
-5. pilih `format="json"` jika QR ingin menyimpan metadata customer di dalam kontennya
-6. jika QR discan dan backend lookup memakai ref, panggil `customer-detail-by-qr`
-7. panggil `customer-accounting-summary-by-qr`
-8. panggil `orders-by-qr`
-9. user pilih banyak item
-10. submit ke `draft-order`
-
+3. jika frontend punya `customer_id`, panggil `customer-qr-payload-by-id` untuk membentuk payload QR
+4. jika frontend sudah punya `customer_qr_ref`, panggil `customer-qr-payload-by-ref`
+5. pilih `format="ref"` jika QR hanya menyimpan reference string
+6. pilih `format="json"` jika QR ingin menyimpan metadata customer di dalam kontennya
+7. jika QR discan dan backend lookup memakai ref, panggil `customer-detail-by-qr`
+8. panggil `customer-accounting-summary-by-qr`
+9. panggil `orders-by-qr`
+10. user pilih banyak item
+11. submit ke `draft-order`
 ## Contoh Alur Request Lengkap
 
 ```javascript
@@ -575,6 +672,11 @@ await postJsonRpc(`${baseUrl}/api/sales/customer-qr-payload-by-id`, {
   format: "ref",
 });
 
+
+await postJsonRpc(`${baseUrl}/api/sales/customer-qr-payload-by-ref`, {
+  customer_qr_ref,
+  format: "ref",
+});
 await postJsonRpc(`${baseUrl}/api/sales/customer-detail-by-qr`, {
   customer_qr_ref,
 });
@@ -651,7 +753,8 @@ export async function getJsonSession(url) {
 - form order sebaiknya memakai dynamic rows agar multi-item nyaman dipakai
 - tampilkan warning jika `receivable_total` atau aging customer tinggi
 - `customer-qr-by-id` cocok jika frontend hanya perlu string referensi QR
-- `customer-qr-payload-by-id` cocok jika frontend ingin langsung render QR dan menyimpan metadata QR sekaligus
+- `customer-qr-payload-by-id` cocok jika frontend ingin langsung render QR dan menyimpan metadata QR sekaligus dari `customer_id`
+- `customer-qr-payload-by-ref` cocok jika frontend sudah menyimpan `customer_qr_ref` dan ingin membentuk ulang payload QR
 - gunakan `format="ref"` jika flow scan tetap lookup ke backend dengan `customer_qr_ref`
 - gunakan `format="json"` jika scanner/frontend perlu membaca detail dasar customer langsung dari isi QR
 
@@ -665,6 +768,7 @@ Sudah tersedia:
 - `GET /api/sales/order-types`
 - `POST /api/sales/customer-qr-by-id`
 - `POST /api/sales/customer-qr-payload-by-id`
+- `POST /api/sales/customer-qr-payload-by-ref`
 - `POST /api/sales/customer-detail-by-qr`
 - `POST /api/sales/customer-accounting-summary-by-qr`
 - `POST /api/sales/orders-by-qr`

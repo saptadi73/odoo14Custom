@@ -8,6 +8,10 @@ class ResPartner(models.Model):
         ("customer_qr_ref_unique", "unique(customer_qr_ref)", "Customer QR Reference must be unique."),
     ]
 
+    customer_id_display = fields.Integer(
+        string="Customer ID",
+        compute="_compute_customer_id_display",
+    )
     customer_qr_ref = fields.Char(
         string="Customer QR Ref",
         copy=False,
@@ -136,3 +140,7 @@ class ResPartner(models.Model):
                 "default_config_id": config.id,
             },
         }
+
+    def _compute_customer_id_display(self):
+        for partner in self:
+            partner.customer_id_display = partner.id
