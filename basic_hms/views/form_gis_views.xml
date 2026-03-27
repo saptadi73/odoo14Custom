@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_gis_view" model="ir.ui.view">
+            <field name="name">form.gis.form.view</field>
+            <field name="model">form.gis</field>
+            <field name="arch" type="xml">
+                <form string="Form GIS">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="kelompok_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                            </group>
+                            <group>
+                                <field name="id_sapi"/>
+                                <field name="eartag_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                                <field name="eartag_id_baru"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="cat_petugas"/>
+                            </group>
+			    <group>
+				<field name="image1" widget="image_url" class="oe_image_small" width="100px" height="100px"/>
+                                <field name="image2" widget="image_url" class="oe_image_small" width="100px" height="100px"/>
+                                <field name="image3" widget="image_url" class="oe_image_small" width="100px" height="100px"/>
+			    </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_gis_search_view" model="ir.ui.view">
+            <field name="name">form.gis.search.view</field>
+            <field name="model">form.gis</field>
+            <field name="arch" type="xml">
+                <search string="Search GIS">
+                    <separator orientation="vertical" />
+                     <field name="eartag_id"/>
+                    <field name="eartag_id_baru"/>
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi Baru" name='by_eartag_id_baru' context="{'group_by':'eartag_id_baru', 'group_expand': ['eartag_id_baru'], 'group_operator': 'sum'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_gis_tree_view" model="ir.ui.view">
+            <field name="name">form.gis.tree.view</field>
+            <field name="model">form.gis</field>
+            <field name="arch" type="xml">
+                <tree string="Form GIS">
+                    <field name="peternak_id"/>
+                    <field name="tgl_layanan"/>
+                    <field name="id_sapi"/>
+                    <field name="eartag_id"/>
+                    <field name="eartag_id_baru"/>
+                    <field name="cat_petugas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_gis_pivot" model="ir.ui.view">
+        <field name="name">form.gis.pivot</field>
+        <field name="model">form.gis</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_gis" model="ir.actions.act_window">
+            <field name="name">Form Ganti ID Sapi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.gis</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_gis" parent="menu_layanan"
+            action="action_form_gis" sequence="80" />
+
+</odoo>

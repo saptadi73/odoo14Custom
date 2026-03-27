@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="view_member_resign" model="ir.ui.view">
+            <field name="name">simpin_syariah.member.resign</field>
+            <field name="model">simpin_syariah.member.resign</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+	                        <group string="Data Anggota">
+                                    <field name="tanggal" readonly='1'/>
+                                    <field name="member_id" readonly='1'/>
+                                    <field name="simpanan_total"  readonly='1'/>
+                                    <field name="pinjaman_total"  readonly='1'/>
+                                    <field name="investasi_total"  readonly='1'/>
+                                    <field name="pembiayaan_total"  readonly='1'/>
+	                        </group>
+	                        <group string="Hak dan Kewajiban sebelum Pelunasan">
+	                        <group>
+                                    <field name="total_hak" readonly='1'/>
+                                    <field name="total_kewajiban" readonly='1'/>
+	                        </group>
+					<button name="action_netting" type="object" string="Netting / Pelunasan" icon="fa-television"/>
+	                        </group>
+                        </group>
+                        <group>
+                                    <field name="keterangan" />
+                        </group>
+                        <group>
+				<notebook>
+				<page string="Simpanan">
+                                    <field name="simpanan_ids"  readonly='1'/>
+				</page>
+				<page string="Pinjaman">
+                                    <field name="pinjaman_ids"  readonly='1'/>
+				</page>
+				<page string="Investasi">
+                                    <field name="investasi_ids"  readonly='1'/>
+				</page>
+				<page string="Pembiayaan">
+                                    <field name="pembiayaan_ids" readonly='1'/>
+				</page>
+
+				</notebook>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Proses Resign?" name="action_proses_resign" type="object" class="btn-primary"/> 
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="simpin_syariah_member_tree" model="ir.ui.view">
+            <field name="name">simpin_syariah.member.tree</field>
+            <field name="model">simpin_syariah.member</field>
+            <field name="arch" type="xml">
+                <tree string="Syariah Member">
+                    <field name="nomor_induk" />
+                    <field name="name" />
+                    <field name="address" />
+                    <field name="email" />
+                    <field name="mitra_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="simpin_syariah_member_filter" model="ir.ui.view">
+            <field name="name">simpin_syariah.member.select</field>
+            <field name="model">simpin_syariah.member</field>
+            <field name="arch" type="xml">
+                <search string="Search Member">
+                    <field name="name" string="Name" filter_domain="['|','|','|', ('name','ilike',self), ('mitra_id.name','ilike',self), ('email', 'ilike', self), ('nomor_induk', 'ilike', self)]"/>
+                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                    <filter name="submit" string="Submitted" domain="[('state', '=', 'submit')]"/>
+                    <filter name="approve" string="Approved" domain="[('state', '=', 'approve')]"/>
+                    <filter name="active" string="Active" domain="[('state', '=', 'done')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_mitra_id" string="Mitra Kerja" context="{'group_by':'mitra_id'}"/>
+                        <filter name="status" string="Status" context="{'group_by':'state'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+
+        <record id="simpin_syariah_member_form" model="ir.ui.view">
+            <field name="name">simpin_syariah.member.form</field>
+            <field name="model">simpin_syariah.member</field>
+            <field name="arch" type="xml">
+                <form string="Syariah Member">
+		<header>
+                  <button name="action_submit" string="Submit" type="object" class="oe_highlight" states="draft"/>
+                  <button name="action_check" string="Check Document" type="object" class="oe_highlight" states="submit"/>
+                  <button name="action_approve" string="Approve" type="object" class="oe_highlight" states="check"/>
+                  <button name="action_settlement" string="Settlement" type="object" class="oe_highlight" states="settlement"/>
+                  <button name="action_resign" string="Settlement" type="object" class="oe_highlight" states="done" invisible='1'/>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,submit,check,approve,done,cancel"/>
+		</header>
+		<sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button class="btn oe_stat_button" type="object"
+                                name="get_simpanan"
+                                style="border-right: 1px solid;"
+                                icon="fa-list">
+                            <field string="Simpanan" name="simpanan_count" widget="statinfo"/>
+                        </button>
+<!--                    <button type="object" name="action_view_simpanan" class="oe_stat_button" attrs="{'invisible':[('simpanan_count', '=', 0)]}" icon="fa-list">-->
+<!--                        <div class="o_field_widget o_stat_info">-->
+<!--                             <span class="o_stat_value" widget="statinfo">-->
+<!--	                        <field name="simpanan_count" widget="statinfo" nolabel="1" class="mr4"/>-->
+<!--                             </span>-->
+<!--                             <span class="o_stat_text">Simpanan</span>-->
+<!--                        </div>-->
+<!--                    </button>-->
+
+                    <button type="object" name="action_view_investasi" attrs="{'invisible':[('investasi_count', '=', 0)]}" class="oe_stat_button" icon="fa-list">
+                        <div class="o_field_widget o_stat_info">
+                             <span class="o_stat_value" widget="statinfo">
+                                <field name="investasi_count" widget="statinfo" nolabel="1" class="mr4"/>
+                             </span>
+                             <span class="o_stat_text">Investasi</span>
+                        </div>
+                    </button>
+
+                    <button type="object" name="action_view_pembiayaan" attrs="{'invisible':[('pembiayaan_count', '=', 0)]}" class="oe_stat_button" icon="fa-list">
+                        <div class="o_field_widget o_stat_info">
+                             <span class="o_stat_value" widget="statinfo">
+                                <field name="pembiayaan_count" widget="statinfo" nolabel="1" class="mr4"/>
+                             </span>
+                             <span class="o_stat_text">Pembiayaan</span>
+                        </div>
+                    </button>
+
+                    <button type="object" name="action_view_pinjaman" attrs="{'invisible':[('pinjaman_count', '=', 0)]}" class="oe_stat_button" icon="fa-list">
+                        <div class="o_field_widget o_stat_info">
+                             <span class="o_stat_value" widget="statinfo">
+                                <field name="pinjaman_count" widget="statinfo" nolabel="1" class="mr4" />
+                             </span>
+                             <span class="o_stat_text">Pinjaman</span>
+                        </div>
+                    </button>
+
+                </div>
+                    <field name="gmbr" widget="image" class="oe_left oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <field name="name" placeholder="e.g. Abdul" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h1>
+                        <field name="nomor_anggota" readonly='1' />
+                    </div>
+
+                        <group>
+                            <field name="is_sukarela" />
+						</group>
+<!--                    <label for="paid_status"/>-->
+<!--                        <h5>-->
+<!--                            <field name="paid_status" />-->
+<!--                        </h5>    -->
+                        <notebook>
+                            <page name="public" string="Identitas Anggota" >
+				<group>
+                                    <group string="Informasi Pribadi">
+                                        <field name="kode_anggota"/>
+                                        <field name="kode_peternak"/>
+                                        <field name="nomor_induk" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="usaha_id"/>
+                                        <field name="tps_id"/>
+                                        <field name="kode_tps"/>
+                                        <field name="wilayah_id" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="jabatan_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="ko_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="ka_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="jns_keanggotan" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="sk" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="tgl_join" />
+                                        <field name="tgl_pengangkatan" />
+                                    </group>
+                                    <group string="Contact">
+                                        <field name="partner_id"/>
+                                        <field name="tempat_lahir" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="tanggal_lahir" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="gender" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="status_perkawinan"/>
+                                        <field name="age" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="agama" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="email" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="no_hp" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <group string="Peternak Information ">
+                                        <field name="peternak_id"/>
+                                        <field name="jumlah_sapi_kering" />
+                                        <field name="jumlah_sapi_laktasi" />
+                                        <field name="jumlah_sapi_dara"/>
+                                        <field name="count_sapi"/>
+                                    </group>
+				</group>
+                            </page>
+                            <page name="address_information" string="Informasi Lokasi" >
+				<group>
+                                    <group string="Tempat Tinggal">
+	                    		<field name="address"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+<!--	                    		<field name="rukun_tetangga"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--	                    		<field name="rukun_warga"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+	                    		<field name="provinsi_id" attrs="{'readonly': [('state', '!=', 'draft')]}" options="{'no_create_edit': True, 'no_open': True}"/>
+	                    		<field name="kabkota_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+	                    		<field name="kecamatan_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+	                    		<field name="kelurahan_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+	                    		<field name="kodepos" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+				</group>
+                            </page>
+                            <page name="kompetensi_anggota" string="Kompetensi Anggota" >
+                                    <group string="Organisasi" col="6">
+                                        <field name="indikator" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="nilai_indikator" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    </group>
+                                    <group string="Teknis">
+
+                                    </group>
+                                    <group string="Angka">
+
+                                    </group>
+                            </page>
+                            <page name="peng_sdm" string="Pengembangan SDM" >
+                                <group string="Pengembangan SDM">
+                                    <field name="pelatihan" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="stdi_banding" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="peny_rutin" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="peny_segmen" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="peng_sdm" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="pend_teknis" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </page>
+                            <page name="pendidikan_line" string="PENDIDIKAN (dalam 1 KK)">
+                                <group>
+                                    <field name="kk_line" widget="section_and_note_one2many" mode="tree,kanban" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree>
+                                    <field name="stts_dlm_perkawinan"/>
+                                    <field name="tingkat_pend"/>
+                                </tree>
+                                <kanban>
+                                    <field name="stts_dlm_perkawinan"/>
+                                    <field name="tingkat_pend"/>
+                                </kanban>
+                                <form>
+                                    <group>
+                                        <field name="stts_dlm_perkawinan"/>
+                                        <field name="tingkat_pend"/>
+                                    </group>
+                                </form>
+                                </field>
+                                </group>
+                            </page>
+                            <page name="prog_diikuti" string="Program Diikuti" >
+                                <group string="Program Wajib">
+                                    <field name="prog_wajib" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group string="Program PKP">
+                                    <field name="prog_pkp" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </page>
+                            <page name="pemb_akses" string="Pembiayaan Akses" >
+                                <group string="Produktif Program">
+                                    <field name="prod_prog" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group string="Produktif Non Program">
+                                    <field name="prod_non_prog" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group string="Konsumtif">
+                                    <field name="kons" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </page>
+<!--                            <page name="ahli_waris" string="Ahli Waris" >-->
+<!--                                <group>-->
+<!--		                        <field name="waris_lines" attrs="{'readonly': [('state', '!=', 'draft')]}">-->
+<!--		                            <tree string="Ahli Waris">-->
+<!--		                                    <field name="name" />-->
+<!--		                                    <field name="hubungan"  options="{'no_create_edit': True, 'no_open': True}"/>-->
+<!--		                                    <field name="address" />-->
+<!--		                                    <field name="no_hp" />-->
+<!--		                                </tree>-->
+<!--		                            <form>-->
+<!--                		                <div>-->
+<!--                		                    <group name="main">-->
+<!--                		                        <group>-->
+<!--					                    <field name="name"/>-->
+<!--                		                            <field name="hubungan" options="{'no_create_edit': True, 'no_open': True}"/>-->
+<!--                		                            <field name="hub_lain" attrs="{'invisible': [('hubungan', '!=', 'lain')]}"/>-->
+<!--			                                    <field name="agama" options="{'no_create_edit': True, 'no_open': True}"/>-->
+<!--                                        		    <field name="type_identitas" options="{'no_create_edit': True, 'no_open': True}"/>-->
+<!--                                        		    <field name="no_identitas" />-->
+<!--                                        		    <field name="gender" options="{'no_create_edit': True, 'no_open': True}"/>-->
+<!--                		                        </group>-->
+<!--                		                        <group>-->
+<!--                		                            <field name="address"/>-->
+<!--				                    		<field name="rukun_tetangga"  />-->
+<!--				                    		<field name="rukun_warga"  />-->
+<!--				                    		<field name="provinsi_id" options="{'no_open': True, 'no_create': True}" />-->
+<!--				                    		<field name="kabkota_id" options="{'no_open': True, 'no_create': True}" />-->
+<!--				                    		<field name="kecamatan_id" options="{'no_open': True, 'no_create': True}" />-->
+<!--				                    		<field name="kelurahan_id" options="{'no_open': True, 'no_create': True}" />-->
+<!--				                    		<field name="kodepos" />-->
+<!--	 		                                        <field name="no_hp" />-->
+<!--                		                        </group>-->
+<!--                		                    </group>-->
+<!--		                                </div>-->
+<!--		                            </form>-->
+<!--					</field>-->
+<!--                                </group>-->
+<!--                            </page>-->
+                        <page string="Dokumen Pendukung" >
+				<group>
+				<group>
+					<field name="upload_ktp" filename="file_ktp"/>
+					<field name="file_ktp" invisible="1"/>
+					<field name="upload_ktp_pasangan" filename="file_ktp_pasangan"/>
+					<field name="file_ktp_pasangan" invisible="1"/>
+					<field name="upload_kk" filename="file_kk"/>
+					<field name="file_kk" invisible="1"/>
+					<field name="upload_dok_lain" filename="file_dok_lain"/>
+					<field name="file_dok_lain" invisible="1"/>
+				</group>
+				</group>
+			</page>
+                        </notebook>
+		</sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+	<record id="simpin_syariah_member_menu_action" model="ir.actions.act_window">
+            <field name="name">Syariah Member</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">simpin_syariah.member</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create SimPin Syariah Member
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_syariah_member" parent="simpin_syariah_member_menu" 
+		name="Keanggotaan" sequence="1" action="simpin_syariah_member_menu_action"/>
+
+	</data>
+</odoo>
+

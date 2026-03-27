@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_upload_harga_real_tree" model="ir.ui.view">
+            <field name="name">upload.harga.real.tree</field>
+            <field name="model">upload.harga.real</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Upload Harga Real">
+                    <field name="periode_id"/>
+                    <field name="tps_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_upload_harga_real_form" model="ir.ui.view">
+            <field name="name">upload.harga.real.form</field>
+            <field name="model">upload.harga.real</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Upload Harga Real">
+                    <header>
+                        <button string="Push Harga Real" type="object" name="push_harga_real"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="periode_id"/>
+                            <field name="tps_id"/>
+                        </group>
+                        <notebook>
+                            <page string="List Harga Real">
+                                <group>
+                                    <field name="upload_harga_ids" nolabel="1" options="{'reload_on_button': True}">
+                                        <tree edit="true" editable="bottom" create="true" delete="true">
+                                            <field name="kode_peternak"/>
+                                            <field name="peternak_id"/>
+                                            <field name="tipe_mitra"/>
+                                            <field name="fat"/>
+                                            <field name="bj"/>
+                                            <field name="ts"/>
+                                            <field name="mbrt_id"/>
+                                            <field name="grade_id"/>
+                                            <field name="nilai_grade"/>
+                                            <field name="tpc_kan"/>
+                                            <field name="snf"/>
+                                            <field name="pro"/>
+                                            <field name="salts"/>
+                                            <field name="freeze"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_upload_harga_real_search" model="ir.ui.view">
+            <field name="name">upload.harga.real.search</field>
+            <field name="model">upload.harga.real</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Upload Harga Real">
+<!--                    <field name="hijauan"/>-->
+                    <newline/>
+                    <group expand="0" string="Group By...">
+<!--                        <filter string="Upload Harga Real" name="group_by_hijauan_group_name"-->
+<!--                                domain="[]" context="{'group_by':'hijauan'}"/>-->
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_upload_harga_real_view">
+            <field name="name">Upload Hasil Uji Lab</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">upload.harga.real</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_upload_harga_real_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_upload_harga_real_form">
+            <field name="act_window_id" ref="act_upload_harga_real_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_upload_harga_real_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_upload_harga_real_tree">
+            <field name="act_window_id" ref="act_upload_harga_real_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_upload_harga_real_tree"/>
+        </record>
+
+        <menuitem id="menu_upload_harga_real_details"
+                    name="Upload Harga Real"
+                    parent="menu_setoran_susu"
+                    sequence="30"
+                    action="act_upload_harga_real_view"/>
+    </data>
+</odoo>

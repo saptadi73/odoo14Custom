@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_alasan_palpasi_view" model="ir.ui.view">
+            <field name="name">form.master.alasan.palpasi.view</field>
+            <field name="model">master.alasan.palpasi</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Alasan Palpasi">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_alasan_palpasi"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_alasan_palpasi_search_view" model="ir.ui.view">
+            <field name="name">master.alasan.palpasi.search.view</field>
+            <field name="model">master.alasan.palpasi</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Alasan Palpasi">
+                    <separator orientation="vertical" />
+                    <field name="nama_alasan_palpasi" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Alasan Palpasi" name='by_nama_alasan_palpasi' context="{'group_by':'nama_alasan_palpasi'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_alasan_palpasi_tree_view" model="ir.ui.view">
+            <field name="name">master.alasan.palpasi.tree.view</field>
+            <field name="model">master.alasan.palpasi</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Alasan Palpasi">
+                    <field name="kode"/>
+                    <field name="nama_alasan_palpasi"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_alasan_palpasi" model="ir.actions.act_window">
+            <field name="name">Master Alasan Palpasi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.alasan.palpasi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_alasan_palpasi" parent="mster_data"
+            action="action_master_alasan_palpasi" sequence="15" />
+
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--    Financial report wizard form view    -->
+        <record id="ts_financial_report_wizard_id" model="ir.ui.view">
+            <field name="name">ts.financial.report.wizard</field>
+            <field name="model">ts.financial.report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                	<div class="oe_title">
+	                        <label for="account_report_id" class="oe_edit_only"/>
+	                        <h1>
+	                            <field name="account_report_id" required="1" force_save="1"
+                                   options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+	                        </h1>
+	                    </div>
+                    <group>
+                        <group string="Date">
+                            <field name="date_from" attrs="{'invisible': [('date_invisible', '=', True)]}"/>
+                            <field name="date_to"/>
+                        </group>
+                        <group>
+                            <field name="target_move" widget="radio"/>
+                            <field name="comparison_by" widget="radio"/>
+                             <field name="report_type" widget="radio"/>
+                        </group>
+                    </group>
+                    <group>
+                    	<field name="company_id" widget="many2many_tags" attrs="{'invisible': [('company_comparison', '=', False)]}" options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                        <!-- <field name="journal_ids" widget="many2many_tags"
+                               domain="['|',('company_id','=',company_id),('company_id','=',False)]"
+                                options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/> -->
+                        <field name="analytic_ids" widget="many2many_tags" attrs="{'invisible': [('analytic_comparison', '=', False)]}" domain="[('company_id','=',company_id)]"
+                                options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                        <!-- <field name="analytic_tag_ids" widget="many2many_tags"
+                               domain="['|',('company_id','=',company_id),('company_id','=',False)]"
+                                options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/> -->
+	                    <field name="company_comparison" invisible="1"/>
+	                    <field name="analytic_comparison" invisible="1"/>
+	                    <field name="date_invisible" invisible="1"/>
+                    </group>
+
+                    <footer>
+                        <button string="Print" name="generate_financial_report" type="object"
+                                class="btn-primary"/>
+                        <!-- <button string="XLSX" name="action_xlsx" type="object"
+                                class="btn-primary"/>
+                        <button string="VIEW" name="action_view" type="object"
+                                class="btn-primary"/> -->
+                        <button string="Discard" class="btn-secondary"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--    Action for profit and loss    -->
+        <record id="action_ts_profit_and_loss_report" model="ir.actions.act_window">
+            <field name="name">Financial Reports</field>
+            <field name="res_model">ts.financial.report.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ts_financial_report_wizard_id"/>
+            <field name="target">new</field>
+            <!-- <field name="context"
+                   eval="{'default_account_report_id':ref('account_dynamic_reports.ins_account_financial_report_profitandloss0')}"/> -->
+        </record>
+
+        <!--    Action for balance sheet    -->
+        <record id="action_ts_balance_sheet_report" model="ir.actions.act_window">
+            <field name="name">Balance Sheet</field>
+            <field name="res_model">ts.financial.report.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="ts_financial_report_wizard_id"/>
+            <field name="target">new</field>
+            <!-- <field name="context"
+                   eval="{'default_account_report_id':ref('account_dynamic_reports.ins_account_financial_report_balancesheet0')}"/> -->
+        </record>
+        
+    </data>
+</odoo>

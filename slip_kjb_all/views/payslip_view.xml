@@ -1,0 +1,83 @@
+<openerp>
+  <data>
+  	
+    <record id="view_hr_payslip_form_map" model="ir.ui.view">
+      <field name="name">Attandance View on Payroll</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+      <field name="arch" type="xml">
+<!--       	<button name="refund_sheet" position="after">				
+             <button name="finish"  states="done" string="Finish" class="oe_highlight" type="object"/> 
+			 <button string="Validate" name="action_finish" type="object" states="done" class="oe_highlight"/>			 
+		</button>
+		<field name="state" position="replace">
+			     <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done,finish"/>
+		</field>-->
+       <xpath expr="/form/sheet/notebook/page[1]/separator[1]" position="before">
+        <group string="Detail Pembayaran">
+	        <group> 
+<!--	          <field name="hari_calendar"/>
+	          <field name="masuk"/>-->    
+			  <field name="pagi"/>
+			  <field name="t_liter"/>
+	         </group>
+	         <group>
+<!--	          <field name="alpha"/>
+	          <field name="holiday"/
+	          <field name="leave"/>-->
+	          <field name="sore"/>
+			  <field name="h_satuan"/>
+			  <field name="tohar"/>
+	       </group>
+       </group>   
+       </xpath>
+<!--       <field name="input_line_ids" position="after">
+        <group string="Item Pekerjaan Input">
+	        <field name="pekerjaan_line_ids" colspan="4" nolabel="1">
+				<tree editable="bottom">
+					<field name="date"/>
+		            <field name="product_id"/>
+		            <field name="qty"/>
+		            <field name="unit_price"/>
+	            	<field name="sub_total"/>
+				</tree>
+			</field>
+			<group class="oe_subtotal_footer oe_right" colspan="2" name="total_biaya_group">
+                     <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                        <label for="biaya_pekerjaan"/>
+                    </div>
+                    <field name="biaya_pekerjaan" nolabel="1" class="oe_subtotal_footer_separator"/>
+            </group>
+       </group>   
+       </field>-->
+
+       <field name="contract_id" position="after">
+       		<field name="divisi_id"/>
+			<field name="department_id"/>
+       </field>
+      </field>
+    </record>
+    
+    
+    <record id="view_rule_form_map" model="ir.ui.view">
+      <field name="name">Salary Rule Show Payslip</field>
+      <field name="model">hr.salary.rule</field>
+      <field name="inherit_id" ref="hr_payroll_community.hr_salary_rule_form"/>
+      <field name="arch" type="xml">
+       <field name="appears_on_payslip" position="after">
+       		<field name="categ_on_payslip"/>
+       </field>
+      </field>
+    </record>
+    
+    <record  model="ir.actions.act_window" id="hr_payroll_community.act_hr_employee_payslip_list">
+        <field name="domain">[('state', '=', 'finish')]</field>
+    </record>  
+    
+
+    
+    
+     
+    
+  </data>
+</openerp>

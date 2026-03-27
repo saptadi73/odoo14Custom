@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_status_laktasi_view" model="ir.ui.view">
+            <field name="name">form.master.status.laktasi.view</field>
+            <field name="model">master.status.laktasi</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Status Laktasi">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_status_laktasi"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_status_laktasi_search_view" model="ir.ui.view">
+            <field name="name">master.status.laktasi.search.view</field>
+            <field name="model">master.status.laktasi</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Status Laktasi">
+                    <separator orientation="vertical" />
+                    <field name="nama_status_laktasi" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Status Laktasi" name='by_nama_status_laktasi' context="{'group_by':'nama_status_laktasi'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_status_laktasi_tree_view" model="ir.ui.view">
+            <field name="name">master.status.laktasi.tree.view</field>
+            <field name="model">master.status.laktasi</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Status Laktasi">
+                    <field name="kode"/>
+                    <field name="nama_status_laktasi"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_status_laktasi" model="ir.actions.act_window">
+            <field name="name">Master Status Laktasi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.status.laktasi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_status_laktasi" parent="mster_data"
+            action="action_master_status_laktasi" sequence="18" />
+
+</odoo>

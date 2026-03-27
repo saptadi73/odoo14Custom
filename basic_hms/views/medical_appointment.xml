@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="medical_appointment_form_view" model="ir.ui.view">
+        <field name="name">medical.appointment.form.view</field>
+        <field name="model">medical.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment">
+                <header>
+                    <button name="func_open" type="object" string="Open" class="oe_highlight" attrs="{'invisible': [('status_layanan', '!=', 'draft')]}"/>
+                    <button name="func_close" type="object" string="Close" class="oe_highlight" attrs="{'invisible': [('status_layanan', '!=', 'open')]}"/>
+                    <button name="func_cancel" type="object" string="Cancel" class="oe_highlight" attrs="{'invisible': [('status_layanan', '!=', 'open'), ('status_layanan', '!=', 'close')]}"/>
+                    <field name="status_layanan" widget="statusbar" statusbar_visible="draft,open,close,cancel"/>
+                    <!--                    <button name="%(action_create_prescription_result2)d" string="Create Prescription" type="action" class="oe_highlight"/>-->
+<!--                    <button-->
+<!--                            name="%(basic_hms.action_medical_appointments_invoice_wizard)d"-->
+<!--                            string="Create Invoice" type="action" class="oe_highlight"/>-->
+                </header>
+                <sheet>
+<!--                    <div class="oe_button_box" name="button_box" position="inside">-->
+<!--                        <button class="btn oe_stat_button" type="object"-->
+<!--                                    name="get_medicament_appointment"-->
+<!--                                    style="border-right: 1px solid;"-->
+<!--                                    icon="fa-plus-circle">-->
+<!--                                <field string="Prescriptions" name="medicament_appointment_count" widget="statinfo"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                    <div class="oe_left" style="width: 500px;">
+                        <div class="oe_title" style="width: 390px;">
+                            <label class="oe_edit_only" for="name"
+                                   string="Appointment #"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                            <label for="patient_id" class="oe_edit_only"/>
+                            <field name="patient_id"
+                                   context="{'appointment_id': 'appointment'}"
+                                   options="{&quot;always_reload&quot;: 1}"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="peternak_id"/>
+                            <field name="kode_peternak"/>
+                            <field name="wilayah_id"/>
+                            <field name="tgl_layanan"/>
+                            <field name="petugas_id"/>
+                            <field name="jabatan_id"/>
+                            <!-- <field name="layanan_id"/> -->
+                            <field name="jenis_layanan"/>
+<!--                            <field name="urgency_level"/>-->
+                            <!--                            <field name="appointment_end"/>-->
+<!--                            <field name="patient_status"/>-->
+<!--                            <field name="no_invoice"/>-->
+<!--                            <field name="validity_status"-->
+<!--                                   readonly="1"/>-->
+<!--                            <field name="appointment_validity_date"/>-->
+                        </group>
+                        <group>
+                            <field name="pkb_id"/>
+                            <field name="pengobatan_id"/>
+                            <field name="mutasi_id"/>
+                            <field name="ganti_sapi_id"/>
+                            <field name="ib_id"/>
+                            <field name="sapi_masuk_id"/>
+                            <field name="melahirkan_id"/>
+                            <field name="ganti_pemilik_id"/>
+                            <field name="vaksin_id"/>
+                            <field name="abortus_id"/>
+                            <field name="specimen_id"/>
+                            <field name="kering_kandang_id"/>
+                            <field name="potong_id"/>
+                            <field name="potong_tanduk_id"/>
+                            <field name="nkt_id"/>
+                            <field name="palpasi_id"/>
+                            <field name="sampel_id"/>
+                            <field name="identifikasi_id"/>
+                        </group>
+<!--                        <group>-->
+<!--&lt;!&ndash;                            <field name="institution_partner_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="inpatient_registration_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="duration"/>&ndash;&gt;-->
+<!--                            <field name="urgency_level"/>-->
+<!--                            <field name="invoice_to_insurer"/>-->
+<!--                            <field name="insurer_id"-->
+<!--                                   attrs="{'invisible': [('invoice_to_insurer','=', False)]}"/>-->
+<!--                            <field name="consultations_id"/>-->
+<!--                            <field name="jns_layanan_ids" widget="many2many_tags"/>-->
+<!--                            <field name="medicine_id"/>-->
+<!--                        </group>-->
+                    </group>
+<!--                    <notebook>-->
+<!--                        <page string="Doctor Prescription">-->
+<!--                            <field name="appointment_line">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="product_id"/>-->
+<!--                                    <field name="qty"/>-->
+<!--                                    <field name="appointment_id" invisible="1"/>-->
+<!--                                </tree>-->
+<!--                                <form>-->
+<!--                                    <group>-->
+<!--                                        <group>-->
+<!--                                            <field name="product_id"/>-->
+<!--                                        </group>-->
+<!--                                        <group>-->
+<!--                                            <field name="qty"/>-->
+<!--                                        </group>-->
+<!--                                    </group>-->
+<!--                                </form>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+                    <notebook>
+                        <page string="Comments">
+                            <group>
+                                <field name="comments"
+                                       nolabel="1" class="oe_inline"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"
+                           groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+
+        </field>
+    </record>
+
+
+    <record id="medical_appointment_calendar_view" model="ir.ui.view">
+        <field name="name">medical.appointment.calendar.view</field>
+        <field name="model">medical.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointments" color="petugas_id"
+                      quick_add="False" date_start="tgl_layanan">
+                <field name="patient_id"/>
+                <field name="petugas_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="medical_appointment_tree_view" model="ir.ui.view">
+        <field name="name">medical.appointment.tree.view</field>
+        <field name="model">medical.appointment</field>
+        <field name="arch" type="xml">
+            <tree string="Appointment Information">
+                <field name="name"/>
+                <field name="peternak_id"/>
+                <field name="petugas_id"/>
+                <field name="jabatan_id"/>
+                <field name="tgl_layanan"/>
+                <field name="jenis_layanan"/>
+<!--                <field name="urgency_level"/>-->
+                <field name="status_layanan"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_medical_appointment" model="ir.actions.act_window">
+        <field name="name">Permohonan Layanan</field>
+        <field name="res_model">medical.appointment</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+    <act_window id="action_view_appointment_id_new" name="Permohonan Layanan"
+                res_model="medical.appointment" binding_model="medical.patient"
+                view_mode="tree,form" domain="[('patient_id', '=', active_id)]"/>
+
+    <menuitem id="menu_medical_appointment" action="action_medical_appointment"
+              parent="basic_hms.menu_appointment"
+              sequence="1"/>
+
+</odoo>
+

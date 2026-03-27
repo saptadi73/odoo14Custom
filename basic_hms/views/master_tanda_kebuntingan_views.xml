@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_tanda_kebuntingan_view" model="ir.ui.view">
+            <field name="name">form.master.tanda.kebuntingan.view</field>
+            <field name="model">master.tanda.kebuntingan</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Tanda Kebuntingan">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_tanda_kebuntingan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_tanda_kebuntingan_search_view" model="ir.ui.view">
+            <field name="name">master.tanda.kebuntingan.search.view</field>
+            <field name="model">master.tanda.kebuntingan</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Vaksin">
+                    <separator orientation="vertical" />
+                    <field name="nama_tanda_kebuntingan" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Jenis Vaksin" name='by_nama_tanda_kebuntingan' context="{'group_by':'nama_tanda_kebuntingan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_tanda_kebuntingan_tree_view" model="ir.ui.view">
+            <field name="name">master.tanda.kebuntingan.tree.view</field>
+            <field name="model">master.tanda.kebuntingan</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Tanda Kebuntingan">
+                    <field name="kode"/>
+                    <field name="nama_tanda_kebuntingan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_tanda_kebuntingan" model="ir.actions.act_window">
+            <field name="name">Master Tanda Kebuntingan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.tanda.kebuntingan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_tanda_kebuntingan" parent="mster_data"
+            action="action_master_tanda_kebuntingan" sequence="3" />
+
+</odoo>

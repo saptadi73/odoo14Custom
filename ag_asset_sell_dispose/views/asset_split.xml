@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_account_asset_asset_form_inherit">
+            <field name="name">account.asset.asset.form.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="base_accounting_kit.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//sheet/group/group[2]/field[@name='invoice_id']" position="after">
+                     <field name="sales_value" invisible="1" options="{'no_create': True}"/>
+                </xpath>
+                <xpath expr="//button[@name='set_to_close']" position="replace">
+                    <button name="action_set_to_close" states="open" string="Sell or Dispose" type="object" class="oe_highlight"/>
+
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="disposal_date" invisible="1"/>
+
+                </xpath>
+                <xpath expr="//field[@name='disposal_date']" position="after">
+                    <field name="asset_type" invisible="1"/>
+
+                </xpath>
+                  <!-- <xpath expr="//button[@name='action_set_to_close']" position="after">
+                    <button name="set_to_running" string="Set to Running" type="object" attrs="{'invisible': [('state', '!=', 'close')]}"/>
+                </xpath>-->
+
+            </field>
+        </record>
+
+<!--        <record model="ir.actions.act_window" id="om_account_asset.action_account_asset_asset_form">-->
+<!--            <field name="name">Assets</field>-->
+<!--            <field name="res_model">account.asset.asset</field>-->
+<!--            <field name="view_mode">tree,kanban,form</field>-->
+<!--            <field name="view_id" ref="om_account_asset.view_account_asset_asset_purchase_tree"/>-->
+<!--            <field name="domain">[('category_id.type', '=', 'purchase'), ('parent_id', '=', False)]</field>-->
+
+
+
+<!--        </record>-->
+    </data>
+</odoo>

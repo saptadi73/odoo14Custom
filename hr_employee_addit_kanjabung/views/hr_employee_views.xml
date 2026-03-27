@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <record id="view_employee_form_add" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.add</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+			<page name="hr_settings" position="inside">
+				<group>
+                  <group string='NPWP'>
+                       <field name="employee_npwp"/>
+                  </group>
+				</group>
+             </page>
+        </field>
+    </record>
+	
+    <record id="view_hr_potongan_tree" model="ir.ui.view">
+        <field name="name">hr.potongan.tree</field>
+        <field name="model">hr.potongan</field>
+        <field name="arch" type="xml">
+            <tree string="Potongan">
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="name"/>
+                <field name="contract_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+		<record id="view_hr_potongan_form" model="ir.ui.view">
+        <field name="name">hr.potongan.form</field>
+        <field name="model">hr.potongan</field>
+        <field name="arch" type="xml">
+            <form string="Potongan">
+            <header>
+                <button string="Validate" name="action_validate" type="object" states="draft" class="oe_highlight"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,valid,proses"/>
+            </header> 
+            <sheet>
+                <div class="oe_title">
+                    <label for="contract_id" class="oe_edit_only"/>
+                    <h1><field name="contract_id" placeholder="Contract"/></h1>
+                </div>
+                <group col="4">
+	                <field name="from_date"/>
+	                <field name="to_date"/>
+                </group>
+                <notebook>
+                <page string="BSP">
+					<group>
+						<field name="pinj_khusus_p"/>
+                        <field name="pel_keswan"/>
+                        <field name="asuransi"/>
+                        <field name="rumput"/>
+                        <field name="investor"/>
+                        <field name="ampas_bir"/>
+						<field name="takziah"/>
+                        <field name="kis"/>
+						<field name="ember"/>
+                        <field name="pmk"/>						
+					</group>
+                </page>
+                <page string="JAR" >
+					<group>
+                        <field name="swalayan"/>
+						<field name="kan_material"/>
+                        <field name="arisan_jabmart"/>
+					</group>
+                </page>
+
+                <page string="SAPRONAK">
+					<group>
+                        <field name="pakan_uf"/>
+                        <field name="bnt_kering"/>
+                        <field name="peralatan"/>
+					</group>
+                </page>	
+                <page string="BMT">
+					<group>
+                        <field name="bmt_tabungan"/>
+						<field name="bmt_reguler"/>
+						<field name="bmt_program"/>
+						<field name="bmt_qordh"/>
+					</group>
+                </page>		
+                <page string="Angkutan">
+					<group>
+                        <field name="bengkel"/>
+					</group>
+                </page>
+                <page string="Penjualan">
+					<group>
+                        <field name="jual_sapi"/>
+					</group>
+                </page>					
+                </notebook>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+
+<!--    <record id="view_hr_potongan_filter" model="ir.ui.view">
+        <field name="name">hr.potongan.filter</field>
+        <field name="model">hr.potongan</field>
+        <field name="arch" type="xml">
+            <search string="Search Potongan">
+                <field name="name" string="Potongan" filter_domain="['|',('name','ilike',self),('number','ilike',self)]"/>
+                <filter string="Draft" domain="[('state','=','draft')]" help="Draft"/>
+                <filter string="Valid" domain="[('state','=','valid')]" help="Valid"/>
+                <filter string="Proses" domain="[('state','=','proses')]" help="Proses"/>
+                <field name="contract_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Contract" name="contract_id" context="{'group_by':'contract_id'}"/>
+                    <filter string="Companies" name="company_id" groups="base.group_multi_company" context="{'group_by':'company_id'}"/>
+                    <filter string="States" name="state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>-->
+
+
+    <record id="action_view_hr_potongan_form" model="ir.actions.act_window">
+        <field name="name">Employee Other Deduction</field>
+        <field name="res_model">hr.potongan</field>
+        <field name="view_mode">tree,form</field>
+<!--        <field name="search_view_id" ref="view_hr_potongan_filter"/>-->
+    </record>
+
+    <menuitem name="Other Deduction" id="menu_potongan_tree" parent="hr_payroll_community.menu_hr_payroll_community_root" />
+
+    <menuitem action="action_view_hr_potongan_form" id="menu_potongan_karyawan_tree" parent="menu_potongan_tree" groups="hr_payroll_community.group_hr_payroll_community_user"/>
+
+
+    </data>
+
+</odoo>

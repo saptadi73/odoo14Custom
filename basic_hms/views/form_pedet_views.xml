@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_pedet_view" model="ir.ui.view">
+            <field name="name">form.pedet.form.view</field>
+            <field name="model">form.pedet</field>
+            <field name="arch" type="xml">
+                <form string="Form Pedet">
+                    <sheet>
+                        <group>
+                            <field name="id_pemilik"/>
+                            <field name="eartag_id"/>
+                            <field name="tgl_layanan"/>
+                            <field name="cat_petugas"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_pedet_search_view" model="ir.ui.view">
+            <field name="name">form.pedet.search.view</field>
+            <field name="model">form.pedet</field>
+            <field name="arch" type="xml">
+                <search string="Search Pedet">
+                    <separator orientation="vertical" />
+                    <field name="eartag_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_pedet_tree_view" model="ir.ui.view">
+            <field name="name">form.pedet.tree.view</field>
+            <field name="model">form.pedet</field>
+            <field name="arch" type="xml">
+                <tree string="Form Pedet">
+                     <field name="id_pemilik"/>
+                    <field name="eartag_id"/>
+                    <field name="tgl_layanan"/>
+                    <field name="cat_petugas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_form_pedet" model="ir.actions.act_window">
+            <field name="name">Form Pedet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.pedet</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_form_pedet" parent="menu_layanan"
+            action="action_form_pedet" sequence="110" />
+
+</odoo>

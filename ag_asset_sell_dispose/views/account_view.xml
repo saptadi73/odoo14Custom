@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="view_invoice_asset_category">
+        <field name="name">account.move.supplier.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field string="Asset Category" name="categ_asset_id" invisible="1"/>
+            </xpath>
+              <xpath expr="//field[@name='categ_asset_id']" position="after">
+                <field string="Asset Type" name="asset_type" invisible="1"/>
+            </xpath>
+        </field>
+ </record>
+
+ <record id="view_res_company_form_inher_gain" model="ir.ui.view">
+    <field name="name">res.company.form.inherit.gain</field>
+    <field name="model">res.company</field>
+    <field name="priority">2</field>
+    <field name="inherit_id" ref="base.view_company_form"/>
+    <field name="arch" type="xml">
+
+         <xpath expr="//field[@name='email']" position="after">
+            <field name="gain_account_id" string="Asset Gain Account"/>
+            <field name="loss_account_id" string="Asset Loss Account"/>
+            <field name="asset_income_account_id" string="Asset Income Account"/>
+         </xpath>
+    </field>
+</record>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_abortus_view" model="ir.ui.view">
+            <field name="name">form.master.abortus.view</field>
+            <field name="model">master.abortus</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Abortus">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_abortus"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_abortus_search_view" model="ir.ui.view">
+            <field name="name">master.abortus.search.view</field>
+            <field name="model">master.abortus</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Abortus">
+                    <separator orientation="vertical" />
+                    <field name="nama_abortus" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Abortus" name='by_nama_abortus' context="{'group_by':'nama_abortus'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_abortus_tree_view" model="ir.ui.view">
+            <field name="name">master.abortus.tree.view</field>
+            <field name="model">master.abortus</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Abortus">
+                    <field name="kode"/>
+                    <field name="nama_abortus"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_abortus" model="ir.actions.act_window">
+            <field name="name">Master Abortus</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.abortus</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_abortus" parent="mster_data"
+            action="action_master_abortus" sequence="7" />
+
+</odoo>

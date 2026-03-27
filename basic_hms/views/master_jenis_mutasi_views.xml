@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="master_jenis_mutasi_form_view" model="ir.ui.view">
+            <field name="name">master.jenis.mutasi.form.view</field>
+            <field name="model">master.jenis.mutasi</field>
+            <field name="arch" type="xml">
+                <form string="Jenis Mutasi">
+                    <sheet>
+                        <group>
+                            <field name="jenis_mutasi"/>
+                            <field name="kode"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_jenis_mutasi_search_view" model="ir.ui.view">
+            <field name="name">master.jenis.mutasi.search.view</field>
+            <field name="model">master.jenis.mutasi</field>
+            <field name="arch" type="xml">
+                <search string="Search Jenis Mutasi">
+                    <separator orientation="vertical" />
+                    <field name="jenis_mutasi" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="jenis_mutasi" name='by_room' context="{'group_by':'jenis_mutasi'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_jenis_mutasi_tree_view" model="ir.ui.view">
+            <field name="name">master.jenis.mutasi.tree.view</field>
+            <field name="model">master.jenis.mutasi</field>
+            <field name="arch" type="xml">
+                <tree string="Jenis Mutasi">
+                    <field name="jenis_mutasi"/>
+                    <field name="kode"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_jenis_mutasi" model="ir.actions.act_window">
+            <field name="name">Master Jenis Mutasi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.jenis.mutasi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_jenis_mutasi" parent="mster_data"
+            action="action_master_jenis_mutasi" sequence="1" />
+
+</odoo>

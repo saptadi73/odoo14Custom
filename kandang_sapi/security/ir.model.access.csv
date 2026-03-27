@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_data_anggota,data_anggota,model_data_anggota,,1,1,1,1
+access_master_jenis_kunjungan,master_jenis_kunjungan,model_master_jenis_kunjungan,,1,1,1,1
+access_master_jenis_pakan_tambah,master_jenis_pakan_tambah,model_master_jenis_pakan_tambah,,1,1,1,1
+access_form_kunjungan,form_kunjungan,model_form_kunjungan,,1,1,1,1
+access_master_solusi_kunjungan,master_solusi_kunjungan,model_master_solusi_kunjungan,,1,1,1,1
+access_tabel_hijauan_kunjungan,tabel_hijauan_kunjungan,model_tabel_hijauan_kunjungan,,1,1,1,1
+access_tabel_konsentrat_kunjungan,tabel_konsentrat_kunjungan,model_tabel_konsentrat_kunjungan,,1,1,1,1
+access_form_kunjungan_gdfp,form_kunjungan_gdfp,model_form_kunjungan_gdfp,,1,1,1,1
+access_kunjungan_gdfp_line,kunjungan_gdfp_line,model_kunjungan_gdfp_line,,1,1,1,1
+access_tabel_pakan_tambah_kunjungan,tabel_pakan_tambah_kunjungan,model_tabel_pakan_tambah_kunjungan,,1,1,1,1
+access_sapi_gdfp_line,tabel_sapi_gdfp_line,model_sapi_gdfp_line,,1,1,1,1
+access_history_form_line,tabel_history_form_line,model_history_form_line,,1,1,1,1
+

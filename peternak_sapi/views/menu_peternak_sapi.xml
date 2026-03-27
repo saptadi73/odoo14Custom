@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_peternak_sapi_root"
+                  name="Peternak Sapi"
+                  web_icon="peternak_sapi,static/description/icon.png"
+                  sequence="20"/>
+        <menuitem id="menu_konfigurasi_root"
+                  name="Konfigurasi"
+                  parent="menu_peternak_sapi_root"
+                  sequence="40"/>
+
+    </data>
+</odoo>

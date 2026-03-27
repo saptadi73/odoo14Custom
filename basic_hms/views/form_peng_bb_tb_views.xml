@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--        <record id="form_peng_bb_tb_view" model="ir.ui.view">-->
+<!--            <field name="name">form.peng.bb.tb.form.view</field>-->
+<!--            <field name="model">form.peng.bb.tb</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Form Pengukuran BB TB">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="peternak_id"/>-->
+<!--                                <field name="id_pemilik"/>-->
+<!--                                <field name="petugas_id"/>-->
+<!--                                <field name="jabatan_id"/>-->
+<!--                                <field name="tgl_layanan"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="id_sapi"/>-->
+<!--                                <field name="eartag_id"/>-->
+<!--                                <field name="nkt"/>-->
+<!--                                <field name="brt_bdn"/>-->
+<!--                                <field name="tinggi_gumba"/>-->
+<!--                                <field name="tps_id"/>-->
+<!--                                <field name="bcs"/>-->
+<!--                                <field name="cat_petugas"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="form_peng_bb_tb_search_view" model="ir.ui.view">-->
+<!--            <field name="name">form.peng.bb.tb.search.view</field>-->
+<!--            <field name="model">form.peng.bb.tb</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Pengukuran BB TB">-->
+<!--                    <separator orientation="vertical" />-->
+<!--                    <field name="eartag_id" select="1" />-->
+<!--                    <newline />-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="form_peng_bb_tb_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">form.peng.bb.tb.tree.view</field>-->
+<!--            <field name="model">form.peng.bb.tb</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Form Pengukuran BB TB">-->
+<!--                    <field name="id_pemilik"/>-->
+<!--                    <field name="eartag_id"/>-->
+<!--                    <field name="tgl_layanan"/>-->
+<!--                    <field name="cat_petugas"/>-->
+<!--                    <field name="nkt"/>-->
+<!--                    <field name="brt_bdn"/>-->
+<!--                    <field name="tinggi_gumba"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_form_peng_bb_tb_pivot" model="ir.ui.view">-->
+<!--        <field name="name">form.peng.bb.tb.pivot</field>-->
+<!--        <field name="model">form.peng.bb.tb</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <pivot>-->
+<!--                <field name="tgl_layanan" type="col"/>-->
+<!--                <field name="petugas_id" type="row"/>-->
+<!--                <field name="jabatan_id" type="col"/>-->
+<!--                <field name="petugas_id" type="count"/>-->
+<!--            </pivot>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--        <record id="action_form_peng_bb_tb" model="ir.actions.act_window">-->
+<!--            <field name="name">Form Pengukuran BB TB</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">form.peng.bb.tb</field>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="menu_form_peng_bb_tb" parent="menu_layanan"-->
+<!--            action="action_form_peng_bb_tb" sequence="200" />-->
+
+</odoo>

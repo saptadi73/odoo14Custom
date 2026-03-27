@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="jenis_pelayanan_form_view" model="ir.ui.view">
+            <field name="name">jenis.pelayanan.form.view</field>
+            <field name="model">jenis.pelayanan</field>
+            <field name="arch" type="xml">
+                <form string="Master Pelayanan">
+                    <sheet>
+                        <group>
+                            <field name="pelayanan_id"/>
+                            <field name="code_pelayanan"/>
+                        </group>
+                        <notebook>
+                            <page string="Extra Info">
+                                <field name="info" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="jenis_pelayanan_search_view" model="ir.ui.view">
+            <field name="name">jenis.pelayanan.search.view</field>
+            <field name="model">jenis.pelayanan</field>
+            <field name="arch" type="xml">
+                <search string="Search Pelayanan">
+                    <separator orientation="vertical" />
+                    <field name="pelayanan_id" select="1" />
+                    <field name="code_pelayanan" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Pelayanan" name='by_pelayanan' context="{'group_by':'pelayanan_id'}"/>
+                        <filter string="Kode" name='by_kode' context="{'group_by':'code_pelayanan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="jenis_pelayanan_tree_view" model="ir.ui.view">
+            <field name="name">jenis.pelayanan.tree.view</field>
+            <field name="model">jenis.pelayanan</field>
+            <field name="arch" type="xml">
+                <tree string="Informasi Pelayanan">
+                    <field name="pelayanan_id" />
+                    <field name="code_pelayanan" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_jenis_pelayanan" model="ir.actions.act_window">
+            <field name="name">Jenis Pelayanan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">jenis.pelayanan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_pelayanan" name='Data Pelayanan'
+            parent="main_menu_configartion" sequence="10" />
+        <menuitem id="menu_jenis_pelayanan" parent="menu_pelayanan"
+            action="action_jenis_pelayanan" sequence="10" />
+
+</odoo>

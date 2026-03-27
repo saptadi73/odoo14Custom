@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--    <data>-->
+<!--        <record id="view_scoring_gdfp_tree" models="ir.ui.view">-->
+<!--            <field name="name">scoring.gdfp.tree</field>-->
+<!--            <field name="models">scoring.gdfp</field>-->
+<!--            <field name="priority" eval="8"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Scoring GDFP">-->
+<!--                    <field name="peternak_name"/>-->
+<!--                    <field name="id_peternak"/>-->
+<!--                    <field name="total"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_scoring_gdfp_form" models="ir.ui.view">-->
+<!--            <field name="name">scoring.gdfp.form</field>-->
+<!--            <field name="models">scoring.gdfp</field>-->
+<!--            <field name="priority" eval="8"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Scoring GDFP">-->
+<!--                    <sheet>-->
+<!--                        <group col="2">-->
+<!--                            <field name="peternak_name"/>-->
+<!--                            <field name="id_peternak"/>-->
+<!--                        </group>-->
+<!--                        <group string="Scoring" col="2">-->
+<!--                            <field name="mpak"/>-->
+<!--                            <field name="nilai_mpak"/>-->
+<!--                            <field name="mkan"/>-->
+<!--                            <field name="nilai_mkan"/>-->
+<!--                            <field name="mpem"/>-->
+<!--                            <field name="nilai_mpem"/>-->
+<!--                            <field name="mbis"/>-->
+<!--                            <field name="nilai_mbis"/>-->
+<!--                            <field name="mpel"/>-->
+<!--                            <field name="nilai_mpel"/>-->
+<!--                            <field name="mkes"/>-->
+<!--                            <field name="nilai_mkes"/>-->
+<!--                        </group>-->
+<!--                        <group string="Total" col="2">-->
+<!--                            <field name="total"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                        <field name="activity_ids" widget="mail_activity"/>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_scoring_gdfp_search" models="ir.ui.view">-->
+<!--            <field name="name">scoring.gdfp.search</field>-->
+<!--            <field name="models">scoring.gdfp</field>-->
+<!--            <field name="priority" eval="8"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Scoring GDFP">-->
+<!--                    <field name="peternak_name"/>-->
+<!--                    <newline/>-->
+<!--                    <group expand="0" string="Group By...">-->
+<!--                        <filter string="Nama Anggota" name="group_by_peternak_name_group_name"-->
+<!--                                domain="[]" context="{'group_by':'peternak_name'}"/>-->
+<!--&lt;!&ndash;                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>&ndash;&gt;-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record models="ir.actions.act_window" id="act_scoring_gdfp_view">-->
+<!--            <field name="name">Scoring GDFP</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">scoring.gdfp</field>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="search_view_id" ref="view_scoring_gdfp_search"/>-->
+<!--        </record>-->
+
+<!--        <record models="ir.actions.act_window.view" id="act_scoring_gdfp_view_form">-->
+<!--            <field name="act_window_id" ref="act_scoring_gdfp_view"/>-->
+<!--            <field name="sequence" eval="20"/>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="view_id" ref="view_scoring_gdfp_form"/>-->
+<!--        </record>-->
+
+<!--        <record models="ir.actions.act_window.view" id="act_scoring_gdfp_view_tree">-->
+<!--            <field name="act_window_id" ref="act_scoring_gdfp_view"/>-->
+<!--            <field name="sequence" eval="10"/>-->
+<!--            <field name="view_mode">tree</field>-->
+<!--            <field name="view_id" ref="view_scoring_gdfp_tree"/>-->
+<!--        </record>-->
+
+<!--        <menuitem id="menu_scoring_gdfp_details"-->
+<!--                    name="Scoring GDFP"-->
+<!--                    parent="menu_kandang_root"-->
+<!--                    sequence="30"-->
+<!--                    action="act_scoring_gdfp_view"/>-->
+<!--    </data>-->
+</odoo>

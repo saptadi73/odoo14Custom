@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_jabatan_group_tree" model="ir.ui.view">
+            <field name="name">jabatan.group.tree</field>
+            <field name="model">jabatan.group</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Jabatan Group">
+                    <field name="jabatan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_jabatan_group_form" model="ir.ui.view">
+            <field name="name">jabatan.group.form</field>
+            <field name="model">jabatan.group</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Jabatan Group">
+                    <sheet>
+                        <group col="4">
+                            <field name="jabatan" placeholder="Jabatan Group"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_jabatan_group_search" model="ir.ui.view">
+            <field name="name">jabatan.group.search</field>
+            <field name="model">jabatan.group</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Jabatan Group">
+                    <field name="jabatan"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Jabatan" name="group_by_jabatan_group_name"
+                                domain="[]" context="{'group_by':'jabatan'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_jabatan_group_view">
+            <field name="name">Jabatan Group</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">jabatan.group</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_jabatan_group_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_jabatan_group_view_form">
+            <field name="act_window_id" ref="act_jabatan_group_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_jabatan_group_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_jabatan_group_view_tree">
+            <field name="act_window_id" ref="act_jabatan_group_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_jabatan_group_tree"/>
+        </record>
+
+        <menuitem id="menu_jabatan_group_details"
+                    name="Jabatan Kelompok"
+                    parent="menu_konfigurasi_root"
+                    sequence="20"
+                    action="act_jabatan_group_view"/>
+    </data>
+</odoo>

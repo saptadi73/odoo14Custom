@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_payslip,access_invoice_payslip,model_invoice_payslip,,1,1,1,1
+access_multi_payment_line,access_multi_payment_line,model_multi_payment_line,,1,1,1,1
+access_master_tipe_invoice,access_master_tipe_invoice,model_master_tipe_invoice,,1,1,1,1

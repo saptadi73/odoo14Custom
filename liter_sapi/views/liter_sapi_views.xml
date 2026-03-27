@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="liter_sapi_form_view">
+            <field name="name">liter.sapi.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_ref']" position="after">
+		    <field name="bj"/>
+<!--                    <field name="bj_pagi"/>-->
+<!--                    <field name="bj_sore"/>-->
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_liter_sapi_tree" model="ir.ui.view">
+            <field name="name">liter.sapi.tree</field>
+            <field name="model">liter.sapi</field> 
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Liter Sapi">
+                    <field name="tps_id" required="1"/>
+                    <field name="setoran"/>
+                    <field name="setoran_l"/>
+                    <field name="tgl_awal"/>
+                    <field name="tgl_akhir"/>
+                    <field name="kelompok_id"/>
+<!--                    <field name="id_sapi"/>-->
+                    <field name="contact_address"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_liter_sapi_form" model="ir.ui.view">
+            <field name="name">liter.sapi.form</field>
+            <field name="model">liter.sapi</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Liter Sapi">
+                    <header>
+                      <button name="create_po" string="Create PO" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="btn oe_stat_button" type="object"
+                                name="get_purchase"
+                                style="border-right: 1px solid;"
+                                icon="fa-shopping-cart" attrs="{'invisible': [('purchase_count', '=', 0)]}">
+                                <field string="Setoran Susu" name="purchase_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                            <group>
+                                <field name="tps_id" />
+                            </group>
+                            <group string="Periode">
+                                <field name="periode_id"/>
+                                <field name="tgl_awal"/>
+                                <field name="tgl_akhir"/>
+                                <field name="jumlah_hari"/>
+                            </group>
+                            <group col="4" string="Profile Peternak">
+                                <field name="sapi_ids" widget="many2many_tags"/>
+                                <field name="total_sapi"/>
+                                <field name="produktifitas"/>
+			<!-- <separator colspan="4" string="Sapi(s)"/>
+			    <field name="sapi_id"/> -->
+                                <field name="peternak_id"/>
+                                <field name="partner_id"/>
+                                <field name="is_mitra"/>
+                                <field name="kode_peternak"/>
+				                <field name="state"/>
+                                <field name="kelompok_id"/>
+                                <field name="contact_address"/>
+                            </group>
+                        <group string="Setoran Susu" col="4">
+                            <field name="product_id"/>
+                            <field name="insen_prod"/>
+                            <field name="insen_pmk"/>
+                            <field name="insen_daya_saing"/>
+                            <field name="harga_kual"/>
+                            <field name="harga_satuan"/>
+                        </group>
+                        <group col="4">
+                            <field name="total_setoran_pagi"/>
+                            <field name="total_setoran_sore"/>
+                            <field name="total_setoran_pagi_l"/>
+                            <field name="total_setoran_sore_l"/>
+                        </group>
+                        <group col="4">
+                            <field name="tot_setoran_pagi_date"/>
+                            <field name="tot_setoran_sore_date"/>
+                            <field name="tot_setoran_pagi_sore_date"/>
+                            <field name="sum_bj_pagi_date"/>
+                            <field name="sum_bj_sore_date"/>
+                            <field name="avg_bj_harian"/>
+                            <field name="tot_rata_rata_bj"/>
+                            <field name="avg_bj_pagi"/>
+                            <field name="avg_bj_sore"/>
+                            <field name="avg_bj_pagi_sore"/>
+                        </group>
+                        <group>
+                            <field name="setoran"/>
+                            <field name="setoran_l"/>
+                            <field name="qty_po"/>
+                            <field name="avg_setor"/>
+                            <field name="total_purchase"/>
+<!--                            <field name="total_harga_estimasi"/>-->
+                            <field name="total_harga_real"/>
+<!--                            <field name="harga_real"/>-->
+                            <field name="total_harga_susu_selisih"/>
+                            <field name="harga_selisih"/>
+                            <field name="total_harga_selisih"/>
+                        </group>
+                        <notebook>
+                            <page string="Setoran">
+                                <button string="Merge Setoran Line" type="object" name="merge_setoran_line" class="oe_highlight"/>
+                                <group string="Setoran">
+                                    <field name="setoran_line_ids" nolabel="1" options="{'reload_on_button': True}">
+                                        <tree edit="true" editable="bottom" create="true" delete="true">
+                                            <field name="tgl_setor"/>
+                                            <field name="is_po"/>
+                                            <field name="tipe_setor_pagi"/>
+                                            <field name="setoran_pagi"/>
+                                            <field name="setoran_pagi_l"/>
+                                            <field name="alkohol_pagi"/>
+                                            <field name="organol_pagi"/>
+                                            <field name="bj_pagi"/>
+                                            <field name="is_cancel_pagi"/>
+                                            <field name="tipe_setor_sore"/>
+                                            <field name="setoran_sore"/>
+                                            <field name="setoran_sore_l"/>
+                                            <field name="alkohol_sore"/>
+                                            <field name="organol_sore"/>
+                                            <field name="bj_sore"/>
+                                            <field name="is_cancel_sore"/>
+                                            <field name="uom_id"/>
+                                            <field name="mbrt_id"/>
+                                            <field name="is_mbrt"/>
+                                            <field name="note"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Setoran Date">
+                                <group string="Setoran">
+                                    <field name="setoran_line_date_ids" nolabel="1" options="{'reload_on_button': True}">
+                                        <tree edit="true" editable="bottom" create="true" delete="true">
+                                            <field name="tgl_setor"/>
+                                            <field name="is_po"/>
+                                            <field name="tipe_setor_pagi"/>
+                                            <field name="setoran_pagi"/>
+                                            <field name="setoran_pagi_l"/>
+                                            <field name="bj_pagi"/>
+                                            <field name="tipe_setor_sore"/>
+                                            <field name="setoran_sore"/>
+                                            <field name="setoran_sore_l"/>
+                                            <field name="bj_sore"/>
+                                            <field name="tot_setoran"/>
+                                            <field name="tot_bj"/>
+                                            <field name="uom_id"/>
+                                            <field name="mbrt_id"/>
+                                            <field name="is_mbrt"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Purchase Line">
+                                <group string="PO">
+                                    <group>
+                                        <field name="total_purchase"/>
+                                    </group>
+                                    <field name="purchase_order_ids" nolabel="1" options="{'reload_on_button': True}">
+<!--                                        <tree edit="true" editable="bottom" create="true" delete="true">-->
+<!--                                            <field name="tgl_setor"/>-->
+<!--                                            <field name="is_po"/>-->
+<!--                                            <field name="tipe_setor_pagi"/>-->
+<!--                                            <field name="setoran_pagi"/>-->
+<!--                                            <field name="setoran_pagi_l"/>-->
+<!--                                            <field name="bj_pagi"/>-->
+<!--                                            <field name="tipe_setor_sore"/>-->
+<!--                                            <field name="setoran_sore"/>-->
+<!--                                            <field name="setoran_sore_l"/>-->
+<!--                                            <field name="bj_sore"/>-->
+<!--                                            <field name="tot_setoran"/>-->
+<!--                                            <field name="tot_bj"/>-->
+<!--                                            <field name="uom_id"/>-->
+<!--                                            <field name="mbrt_id"/>-->
+<!--                                            <field name="is_mbrt"/>-->
+<!--                                        </tree>-->
+                                    </field>
+                                </group>
+                            </page>
+                            <page string="Hasil Uji Lab Peternak" >
+                                <group col="4">
+                                    <field name="suhu" />
+                                    <field name="fat_id"/>
+                                    <field name="bj_id"/>
+                                    <field name="snf" />
+                                    <field name="ts" />
+<!--                                    <field name="bj" />-->
+                                    <field name="pro" />
+                                    <field name="lac" />
+                                    <field name="salts" />
+                                    <field name="add_water" />
+                                    <field name="freez_point" />
+<!--                                    <field name="tpc_kan_id"/>-->
+                                    <field name="tpc_kan"/>
+                                </group>
+                                <group col="6">
+                                    <field name="mbrt_id"/>
+                                    <field name="grade_id"/>
+                                    <field name="nilai_grade"/>
+                                    <field name="jumlah_tes"/>
+                                    <field name="jumlah_mbrt"/>
+                                    <field name="avg_mbrt"/>
+                                </group>
+                                <group string="Pelanggaran">
+                                    <field name="jenis_pelanggaran"/>
+                                    <field name="keterangan"/>
+                                </group>
+                            </page>
+                            <page string="Hasil Uji Lab Peternak Mitra" >
+                                <group col="4">
+                                    <field name="fat_mitra" />
+                                    <field name="pro_mitra"/>
+                                    <field name="ts_mitra"/>
+                                    <field name="tpc_kan_mitra"/>
+                                </group>
+                                <group col="6" string="Kualitas Mitra">
+                                    <group string="FAT">
+                                        <field name="fat_master"/>
+                                        <field name="fat_dasar"/>
+                                        <field name="total_fat"/>
+                                    </group>
+                                    <group string="Pro">
+                                        <field name="pro_master"/>
+                                        <field name="pro_dasar"/>
+                                        <field name="total_pro"/>
+                                    </group>
+                                    <group string="TS">
+                                        <field name="ts_master"/>
+                                        <field name="ts_dasar"/>
+                                        <field name="total_ts"/>
+                                    </group>
+                                    <group string="TPC">
+                                        <field name="tpc_id"/>
+                                        <field name="nilai_tpc"/>
+                                    </group>
+                                    <group string="Insentif">
+                                        <field name="transport"/>
+                                        <field name="daya_saing"/>
+                                        <field name="pakan"/>
+                                        <field name="develop"/>
+                                        <field name="pmk"/>
+                                        <field name="tot_insen"/>
+                                    </group>
+                                    <group string="Insentif Produksi">
+                                        <field name="insen_prod_mitra_id"/>
+                                        <field name="nilai_insen_prod_mitra"/>
+                                    </group>
+                                </group>
+                                <group col="6" string="Harga Satuan">
+                                    <group>
+                                        <field name="harga_satuan_mitra"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Produktifitas" >
+                                <group col="4">
+                                    <field name="avg_setor" />
+                                    <field name="total_sapi" />
+                                    <field name="produktifitas" />
+                                    <field name="krit_prod"/>
+                                </group>
+                            </page>
+                        </notebook>
+<!--                        <group string="Pelanggaran">-->
+<!--                            <field name="jenis_pelanggaran_liter_ids"-->
+<!--                                widget="section_and_note_one2many"-->
+<!--                                mode="tree">-->
+<!--                                <tree string="Pelanggaran" editable="bottom">-->
+<!--                                    <field name="peternak_name"/>-->
+<!--                                    <field name="id_peternak"/>-->
+<!--                                    <field name="pelanggaran"/>-->
+<!--                                    <field name="keterangan"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </group>-->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_liter_sapi_search" model="ir.ui.view">
+            <field name="name">liter.sapi.search</field>
+            <field name="model">liter.sapi</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Liter Sapi">
+                    <field name="tps_id"/>
+                    <field name="kelompok_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="TPS" name="group_by_tps_id"
+                                domain="[]" context="{'group_by':'tps_id'}"/>
+                        <filter string="Kelompk" name="group_by_kelompok_id_name"
+                                domain="[]" context="{'group_by':'kelompok_id'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_liter_pivot" model="ir.ui.view">
+            <field name="name">liter.pivot</field>
+            <field name="model">liter.sapi</field>
+            <field name="arch" type="xml">
+                <pivot>
+
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_liter_sapi_view">
+            <field name="name">Liter Sapi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">liter.sapi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_liter_sapi_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_liter_sapi_view_form">
+            <field name="act_window_id" ref="act_liter_sapi_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_liter_sapi_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_liter_sapi_view_tree">
+            <field name="act_window_id" ref="act_liter_sapi_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_liter_sapi_tree"/>
+        </record>
+    </data>
+</odoo>

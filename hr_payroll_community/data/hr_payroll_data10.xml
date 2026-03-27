@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">	
+        <!-- Salary Structure -->
+
+         <record id="structure_base" model="hr.payroll.structure">
+            <field name="code">BASE</field>
+            <field name="name">Payroll Structures</field>
+            <field eval="[(6, 0, [ref('hr_rule_basic'), ref('hr_rule_GROSS'),ref('hr_rule_net'),ref('hr_rule_TPens'),ref('hr_rule_TJHT'),
+								  ref('hr_rule_PGR'), ref('hr_rule_JBT'),ref('hr_rule_PREBRT'),ref('hr_rule_TLLDSB'),ref('hr_rule_CBTH'),
+								  ref('hr_rule_PRMA'), ref('hr_rule_JM1'),ref('hr_rule_PPh'),ref('hr_rule_TDPLK'),ref('hr_rule_TBPJSKes'),
+								  ref('hr_rule_TT'), ref('hr_rule_TM'),ref('hr_rule_TJ'),ref('hr_rule_TJKM'),ref('hr_rule_TJKK'),
+								  ref('hr_rule_TUNLA'), ref('hr_rule_TLOK'),ref('hr_rule_LMBR'), ref('hr_rule_TRANL'),ref('hr_rule_MAKL'),
+								  ref('hr_rule_INSF'),ref('hr_rule_MASK'),
+								  ref('hr_rule_UCUT'), ref('hr_rule_KORPEN'),ref('hr_rule_TTR'),ref('hr_rule_PotKom'),ref('hr_rule_TPOTO'),
+								  ref('hr_rule_BNS'), ref('hr_rule_THR'),ref('hr_rule_BNSPRA'), ref('hr_rule_THRPRA'),ref('hr_rule_TPP21'),
+								  ref('hr_rule_PDPLK'), ref('hr_rule_PSW'),ref('hr_rule_PJHTK'),ref('hr_rule_PJKM'),
+								  ref('hr_rule_PJHT'), ref('hr_rule_PJKK'),ref('hr_rule_PPENK'),ref('hr_rule_PBPJSKes'),ref('hr_rule_PBPJSKes1'),
+								  ref('hr_rule_PNLT'), ref('hr_rule_DPLK'),ref('hr_rule_PENZ'),
+								  ref('hr_rule_PPENKP'), ref('hr_rule_SLSP21'),ref('hr_rule_PTLDA'),ref('hr_rule_PRMAK'),ref('hr_rule_PBRUT'),
+								  ref('hr_rule_PAK'), ref('hr_rule_PPHA'),ref('hr_rule_JAKIR'),ref('hr_rule_PREVBTH'),ref('hr_rule_JAKIRTHR'),
+								  ref('hr_rule_PPHTBA'), ref('hr_rule_PPPH21GJ'),ref('hr_rule_PESEBEL'),ref('hr_rule_PPHSEBEL'),ref('hr_rule_MKSEBEL'),
+								  ref('hr_rule_PPHT1'), ref('hr_rule_PPHT2'),ref('hr_rule_PESEBEL'),ref('hr_rule_BRTA'),ref('hr_rule_BJABTHB'),
+								  ref('hr_rule_PPH21GU'), ref('hr_rule_PPHBP'),ref('hr_rule_NETSTH'),ref('hr_rule_BJAB'),ref('hr_rule_PKPeh'),
+								  ref('hr_rule_PKPeht'), ref('hr_rule_PPHSTHN1'),ref('hr_rule_PPHSTHN2'),ref('hr_rule_PPNLT'),
+								  ref('hr_rule_PPH21GAJI'), ref('hr_rule_PPH21GAJI2'), ref('hr_rule_PPH21BHT')
+								  ])]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Decimal Precision -->
+
+        <record forcecreate="True" id="decimal_payroll" model="decimal.precision">
+            <field name="name">Payroll</field>
+            <field name="digits">2</field>
+        </record>
+
+        <record forcecreate="True" id="decimal_payroll_rate" model="decimal.precision">
+            <field name="name">Payroll Rate</field>
+            <field name="digits">4</field>
+        </record>
+
+
+    </data>
+</odoo>

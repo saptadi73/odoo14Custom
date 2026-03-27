@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_cip_root"
+                  name="CIP Asset"
+                  web_icon="cip_asset,static/description/icon.png"
+                  sequence="20"/>
+
+        <menuitem id="menu_cip_details"
+                    name="HPP Expense"
+                    parent="menu_cip_root"
+                    sequence="10"/>
+        <menuitem id="menu_asset_details"
+                    name="Asset"
+                    parent="menu_cip_root"
+                    sequence="20"/>
+        <menuitem id="menu_konfigurasi_details"
+                    name="Konfigurasi"
+                    parent="menu_cip_root"
+                    sequence="30"/>
+
+    </data>
+</odoo>

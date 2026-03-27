@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="product_template_rearing_form_view_inherit">
+        <field name="name">product.template.rearing.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <div name="options" position="after">
+                <div>
+                    <field name="is_cip"/>
+                    <label for="is_cip"/>
+                </div>
+                <div>
+                    <field name="is_rearing"/>
+                    <label for="is_rearing"/>
+                </div>
+                <div>
+                    <field name="is_liter"/>
+                    <label for="is_liter"/>
+                </div>
+            </div>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="type_cip_form_view_inherit">
+        <field name="name">type.cip.form.inherit</field>
+        <field name="model">type.cip</field>
+        <field name="inherit_id" ref="cip_asset.view_type_cip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="tipe_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="reraring_journal_form_view_inherit">
+        <field name="name">rearing.journal.form.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="is_default_pedet"/>
+                <field name="is_default_dara"/>
+                <field name="is_default_induk"/>
+                <field name="is_rearing"/>
+                <field name="default_account"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="reraring_coa_form_view_inherit">
+        <field name="name">rearing.coa.form.inherit</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_id']" position="after">
+                <field name="is_rearing"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="asset_rearing_form_view_inherit">
+        <field name="name">asset.rearing.form.inherit</field>
+        <field name="model">account.asset.asset</field>
+        <field name="inherit_id" ref="base_accounting_kit.view_account_asset_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="sapi_id"/>
+                <field name="eartag_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_invoice_asset_cip">
+        <field name="name">account.invoice.cip.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='asset_category_id']" position="after">
+                <field string="CIP Category" name="category_id"/>
+                <field string="Eartag ID" name="eartag_id"/>
+                <field string="Tipe Sapi" name="tipe_id"/>
+                <field string="Sapi" name="sapi_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_invoice_isrearing">
+        <field name="name">account.invoice.isrearing.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
+                <field name="is_rearing"/>
+                <field string="CIP Category" name="category_id" invisible="1"/>
+                <field string="Eartag ID" name="eartag_id" invisible="1"/>
+                <field string="Tipe Sapi" name="tipe_id" invisible="1"/>
+                <field string="Sapi" name="sapi_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="cip_aset_form_view_inherit">
+        <field name="name">cip.asset.form.inherit</field>
+        <field name="model">cip</field>
+        <field name="inherit_id" ref="cip_asset.view_cip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tot_amount']" position="after">
+                <field name="journal_id" required="1"/>
+                <field name="journal_id_pedet" required="1"/>
+                <field name="journal_id_dara" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="tipe_ids" widget="many2many_tags" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="category_cip_ids" widget="many2many_tags" required="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="cip_aset_line_form_view_inherit">
+        <field name="name">cip.asset.line.form</field>
+        <field name="model">cip</field>
+        <field name="inherit_id" ref="cip_asset.view_cip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='cip_hpp_line_ids']/tree/field[@name='sapi_id']" position="after">
+                <field name="tipe_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="inherit_hpp_line_sapi">
+        <field name="name">inherit.hpp_line_sapi</field>
+        <field name="model">sapi</field>
+        <field name="inherit_id" ref="master_sapi.view_sapi_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='kematian']" position="after">
+                <page string="Komponen CIP">
+                <notebook>
+                    <page name="hpp" string="HPP">
+                        <field name="list_hpp_ids" nolabel="1" options="{'reload_on_button': True}">
+                            <tree edit="true" editable="bottom" create="true" delete="true">
+                                <field name="date"/>
+                                <field name="eartag_id"/>
+                                <field name="sapi_id"/>
+                                <field name="amount"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="vb" string="List VB">
+                        <field name="list_vb_ids" widget="one2many" options="{'reload_on_button': True}">
+                            <tree edit="true" create="true" delete="true">
+                                <field name="date"/>
+                                <field name="category_id"/>
+                                <field name="eartag_id"/>
+                                <field name="tipe_id"/>
+                                <field name="sapi_id"/>
+                                <field name="price_unit"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                </page>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <div>
+                    <group>
+                        <field name="is_asset" />
+                    </group>
+                </div>
+                <div>
+                    <group>
+                        <field name="total_cip_sapi" />
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="cip_to_aset_form_view_inherit">
+        <field name="name">cip.to.asset.form.inherit</field>
+        <field name="model">cip.to.asset</field>
+        <field name="inherit_id" ref="cip_asset.view_cip_to_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[field[@name='sapi_id']]" position="after">
+                <group>
+                    <field name="journal_id" required="1"/>
+                </group>
+                <notebook>
+                    <page name="hpp" string="List HPP">
+                        <field name="list_hpp_ids" nolabel="1" options="{'reload_on_button': True}">
+                            <tree edit="true" editable="bottom" create="true" delete="true">
+                                <field name="date"/>
+                                <field name="eartag_id"/>
+                                <field name="sapi_id"/>
+                                <field name="date"/>
+                                <field name="amount"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="vb" string="List VB">
+                        <field name="list_vb_ids" widget="one2many" options="{'reload_on_button': True}">
+                            <tree edit="true" create="true" delete="true">
+                                <field name="date"/>
+                                <field name="category_id"/>
+                                <field name="eartag_id"/>
+                                <field name="tipe_id"/>
+                                <field name="sapi_id"/>
+                                <field name="price_unit"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="total" string="Total">
+                        <group>
+                            <field name="total_cip"/>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+<!--    <record model="ir.ui.view" id="cip_to_aset_form_view_inherit">-->
+<!--        <field name="name">cip.to.asset.form.inherit</field>-->
+<!--        <field name="model">cip.to.asset</field>-->
+<!--        <field name="inherit_id" ref="cip_asset.view_cip_to_asset_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='sapi_id']" position="after">-->
+<!--                <group>-->
+<!--                    <field name="journal_id"/>-->
+<!--                </group>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

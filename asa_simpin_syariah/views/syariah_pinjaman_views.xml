@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+<!--        <record id="simpin_syariah_pinjaman_tree" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.pinjaman.tree</field>-->
+<!--            <field name="model">simpin_syariah.pinjaman</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Pembiayaan Tunai Syariah">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="member_id" />-->
+<!--                    <field name="akad_id" />-->
+<!--                    <field name="product_id" />-->
+<!--                    <field name="balance" />-->
+<!--                    <field name="state" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_pinjaman_filter" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.pinjaman.select</field>-->
+<!--            <field name="model">simpin_syariah.pinjaman</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Rekening">-->
+<!--                    <field name="name" string="Name" filter_domain="['|', ('name','ilike',self), ('member_id','ilike',self)]"/>-->
+<!--                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>-->
+<!--                    <filter name="submit" string="Submitted" domain="[('state', '=', 'submit')]"/>-->
+<!--                    <filter name="approve" string="Approved" domain="[('state', '=', 'approve')]"/>-->
+<!--                    <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>-->
+<!--                    <separator/>-->
+<!--                    <group expand="0" string="Group By">-->
+<!--                        <filter name="group_by_mitra_id" string="Mitra Kerja" context="{'group_by':'mitra_id'}"/>-->
+<!--                        <filter name="group_by_product_id" string="Product" context="{'group_by':'product_id'}"/>-->
+<!--                        <filter name="status" string="Status" context="{'group_by':'state'}"/>-->
+<!--                    </group>-->
+<!--               </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_pinjaman_form" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.pinjaman.form</field>-->
+<!--            <field name="model">simpin_syariah.pinjaman</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Pembiayaan Tunai Syariah">-->
+<!--		<header>-->
+<!--                  <button name="action_submit" string="Submit" type="object" class="oe_highlight" states="draft"/>-->
+<!--                  <button name="action_check" string="Check Document" type="object" class="oe_highlight" states="submit"/>-->
+<!--                  <button name="action_approve" string="Approve" type="object" class="oe_highlight" states="check"/>-->
+<!--                  <button name="action_pelunasan" string="Pelunasan" type="object" class="oe_highlight" states="active"/>-->
+<!--                  <button name="create_invoice_syariah" string="Create Invoice" type="object" class="oe_highlight" states="active"/>-->
+<!--&lt;!&ndash;-->
+<!--                  <button name="action_blokir" string="Blokir" type="object" class="oe_highlight" states="active"/>-->
+<!--                  <button name="action_penutupan" string="Penutupan" type="object" class="oe_highlight" states="active"/>-->
+<!--&ndash;&gt;-->
+<!--                  <field name="state" widget="statusbar" statusbar_visible="draft,submit,check,approve,active,cancel,block"/>-->
+<!--		</header>-->
+<!--		<sheet>-->
+<!--                    <div class="oe_title">-->
+<!--                        <label for="name"/>-->
+<!--                        <h1>-->
+<!--                            <field name="name" placeholder="e.g. Abdul" attrs="{'readonly': True}" force_save='1'/>-->
+<!--                        </h1>-->
+<!--                    </div>-->
+<!--		<group>-->
+<!--			<group>-->
+<!--                	    <field name="member_id" options="{'no_open': True, 'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                        <field name="partner_id" options="{'no_open': True, 'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'approve')]}"/>-->
+<!--                	    <field name="peruntukan" options="{'no_open': True, 'no_create_edit': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--		            <field name="product_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                	    <field name="akad_id" options="{'no_open': True, 'no_create_edit': True}"-->
+<!--					attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                	    <field name="account_analytic_id" options="{'no_open': True, 'no_create_edit': True}" attrs="{'readonly': [('state', 'not in', ['draft','submit','check'])],'required': [('state', '=', 'check')]}"/>-->
+<!--                	    <field name="journal_id" options="{'no_open': True, 'no_create': True}"  -->
+<!--					attrs="{'readonly': [('state', 'not in', ['draft','submit','check'])],-->
+<!--						'required': [('state', '=', 'check')],-->
+<!--						'invisible':[('state', '=', 'draft')]}"/>-->
+<!--			</group>-->
+<!--				<group attrs="{'readonly': [('state', 'not in', ['draft','submit','check'])]}">-->
+<!--                	    <field name="tanggal_akad" readonly="1" />-->
+<!--				                <field name="nilai_pinjaman" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--&lt;!&ndash;-->
+<!--			                        <field name="biaya_lines" widget="one2many_list" attrs="{'readonly': [('state', 'not in', ['draft','submit','check'])]}">-->
+<!--                                			<tree editable="bottom" string="Quotation Lines">-->
+<!--                                    				<field name="name"/>-->
+<!--                                    				<field name="harga"/>-->
+<!--                                    				<field name="quantity"/>-->
+<!--                                    				<field name="subtotal" force_save='1'/>-->
+<!--                                			</tree>-->
+<!--                            			</field>-->
+<!--				                <field name="jumlah_biaya" readonly='1' force_save='1'/>-->
+<!--&ndash;&gt;-->
+<!--				                <field name="periode_angsuran" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--				                <field name="angsuran"/>-->
+<!--		                	    <field name="src_bank_id" readonly="1"  force_save="1" invisible="1"/>-->
+<!--                			    <field name="src_bank_norek" readonly="1"  force_save="1" invisible="1"/>-->
+<!--                	    <field name="akad_kode" readonly="1" invisible='1'/>-->
+<!--			</group>-->
+<!--		</group>-->
+<!--		<group>-->
+<!--                	    <field name="notes" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--		</group>-->
+
+<!--                <notebook>-->
+<!--                        <page string="Angsuran" attrs="{'invisible': [('state', 'in', ['draft','submit','check'])]}">-->
+<!--				<group>-->
+<!--&lt;!&ndash;	                	    <field name="payment_id" readonly="1" />-->
+<!--&ndash;&gt;-->
+<!--	                	    <field name="move_pencairan" readonly="1" />-->
+<!--	                	    <field name="balance" readonly="1" />-->
+<!--	                	    <field name="tunggakan" readonly="1" force_save='1'/>-->
+<!--	                	   &lt;!&ndash;field name="invoice_lines" readonly="1" >-->
+<!--			                <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" decoration-bf="not partner_id" string="Vendor Bill" js_class="account_bills_tree">-->
+<!--                    				<field name="date_invoice" string="Bill Date"/>-->
+<!--                    				<field name="number"/>-->
+<!--                    				<field name="partner_id" invisible="1"/>-->
+<!--                    				<field name="name"/>-->
+<!--                    				<field name="journal_id" invisible="1"/>-->
+<!--                    				<field name="date_due"/>-->
+<!--                    				<field name="amount_total" string="Total" sum="Total"/>-->
+<!--                    				<field name="state"/>-->
+<!--                			</tree>-->
+<!--	                	    </field&ndash;&gt;-->
+<!--				</group>-->
+<!--			</page>-->
+<!--                        <page string="Dokumen Pendukung" >-->
+<!--				<group>-->
+<!--				<group>-->
+<!--					<field name="upload_ktp" filename="file_ktp"/>-->
+<!--					<field name="file_ktp" invisible="1"/>-->
+<!--					<field name="upload_ktp_pasangan" filename="file_ktp_pasangan"/>-->
+<!--					<field name="file_ktp_pasangan" invisible="1"/>-->
+<!--					<field name="upload_kk" filename="file_kk"/>-->
+<!--					<field name="file_kk" invisible="1"/>-->
+<!--					<field name="upload_npwp" filename="file_npwp"/>-->
+<!--					<field name="file_npwp" invisible="1"/>-->
+<!--				</group>-->
+<!--				<group>-->
+<!--					<field name="upload_slip1" filename="file_slip1"/>-->
+<!--					<field name="file_slip1" invisible="1"/>-->
+<!--					<field name="upload_slip2" filename="file_slip2"/>-->
+<!--					<field name="file_slip2" invisible="1"/>-->
+<!--					<field name="upload_slip3" filename="file_slip3"/>-->
+<!--					<field name="file_slip3" invisible="1"/>-->
+<!--					<field name="upload_dok_lain" filename="file_dok_lain"/>-->
+<!--					<field name="file_dok_lain" invisible="1"/>-->
+<!--				</group>-->
+<!--				</group>-->
+<!--			</page>-->
+<!--		</notebook>-->
+
+<!--		</sheet>-->
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>-->
+<!--                        <field name="activity_ids" widget="mail_activity"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--	<record id="simpin_syariah_pinjaman_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Pinjaman Syariah</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">simpin_syariah.pinjaman</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create SimPin Syariah Pinjaman -->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--   	<menuitem id="simpin_syariah_pinjaman" parent="simpin_syariah_mitra_menu"-->
+<!--		name="Pinjaman" sequence='2' action="simpin_syariah_pinjaman_action"-->
+<!-- 		groups="asa_simpin_syariah.group_simpin_syariah_user"/>-->
+	</data>
+</odoo>
+

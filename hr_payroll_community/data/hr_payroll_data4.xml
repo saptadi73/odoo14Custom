@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="hr_rule_PDPLK" model="hr.salary.rule">
+            <field name="name">Potongan DPLK 10%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PDPLK</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.wage * contract.tdplk)</field>
+        </record>	
+        <record id="hr_rule_PSW" model="hr.salary.rule">
+            <field name="name">Potongan Simpanan Wajib</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PSW</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.potongan_wajib</field>
+        </record>	
+        <record id="hr_rule_IFSQ" model="hr.salary.rule">
+            <field name="name">Infaq/Shodaqoh</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">IFSQ</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.infaq_sodaqoh</field>
+        </record>
+        <record id="hr_rule_PJHTK" model="hr.salary.rule">
+            <field name="name">Potongan JHT Karyawan 2%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PJHTK</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_pensiun * (contract.p_jhtk / 100))</field>
+        </record>	
+        <record id="hr_rule_PJKM" model="hr.salary.rule">
+            <field name="name">Potongan JKM 0.3%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PJKM</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * (contract.p_jkm / 100))</field>
+        </record>	
+        <record id="hr_rule_PJHT" model="hr.salary.rule">
+            <field name="name">Potongan JHT 3.7%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PJHT</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * (contract.p_jht / 100))</field>
+        </record>
+        <record id="hr_rule_PJKK" model="hr.salary.rule">
+            <field name="name">Potongan JKK 0.24%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PJKK</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * (contract.p_jkk / 100))</field>
+        </record>	
+        <record id="hr_rule_PPENK" model="hr.salary.rule">
+            <field name="name">Potongan Pensiun Karyawan</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PPENK</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_pensiun * (contract.p_pen1 / 100))</field>
+        </record>	
+        <record id="hr_rule_PBPJSKes" model="hr.salary.rule">
+            <field name="name">Potongan BPJS Kesehatan</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PBPJSKes</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjs * (contract.p_bpjs / 100))</field>
+        </record>
+        <record id="hr_rule_PBPJSKes1" model="hr.salary.rule">
+            <field name="name">Potongan BPJS Kesehatan 1%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PBPJSKes1</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjs * (contract.p_bpjs1 / 100))</field>
+        </record>	
+        <record id="hr_rule_PNLT" model="hr.salary.rule">
+            <field name="name">Penalti PPH21</field>
+            <field name="sequence" eval="151"/>
+            <field name="code">PNLT</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if not contract.employee_id.address_home_id.vat:
+    result = 0 if categories.TP &lt; 0 else round(categories.TP - (categories.TP / 1.25),0)
+else:
+    result = 0.0</field>
+        </record>	
+        <record id="hr_rule_PNLTNK" model="hr.salary.rule">
+            <field name="name">Penalti PPH21-NK</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">PNLTNK</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if not contract.employee_id.address_home_id.vat:
+    result = P21NONKB - (P21NONKB / 1.25)
+else:
+    result = 0.0</field>
+        </record>		
+        <record id="hr_rule_PNLTNKTB" model="hr.salary.rule">
+            <field name="name">Penalti PPH21-NKTB</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">PNLTNKTB</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if not contract.employee_id.address_home_id.vat:
+    result = PPH21NKTB - (PPH21NKTB / 1.25)
+else:
+    result = 0.0</field>
+        </record>
+		
+        <record id="hr_rule_DPLK" model="hr.salary.rule">
+            <field name="name">DPLK10%-P</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">DPLK</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.Pensiun"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.wage * contract.tdplk)</field>
+        </record>	
+        <record id="hr_rule_PENZ" model="hr.salary.rule">
+            <field name="name">Tunjangan Pensiun-P</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PENZ</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.Pensiun"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * (contract.t_pen / 100))</field>
+        </record>	
+        <record id="hr_rule_PPENKP" model="hr.salary.rule">
+            <field name="name">Jaminan Pensiun Kary-P</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PPENKP</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.Pensiun"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_pensiun * (contract.p_pen1 / 100))</field>
+        </record>
+
+ 		
+ 
+    </data>
+</odoo>

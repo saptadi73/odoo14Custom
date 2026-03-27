@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_report_layanan_tree" model="ir.ui.view">
+            <field name="name">report.layanan.tree</field>
+            <field name="model">report.layanan</field>
+            <field name="arch" type="xml">
+                <tree string="Report Layanan" create="false" edit="false">
+                    <field name="source_model"/>
+                    <field name="petugas_id"/>
+                    <field name="jabatan_id"/>
+                    <field name="tgl_layanan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_report_layanan_pivot" model="ir.ui.view">
+        <field name="name">report.layanan.pivot</field>
+        <field name="model">report.layanan</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="source_model" type="row"/>
+                <field name="petugas_id" type="col"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_report_layanan_view">
+            <field name="name">Report Layanan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.layanan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+
+                </p>
+            </field>
+        </record>
+
+    <menuitem id="menu_report_layanan_details"
+                    name="Report Layanan"
+                    parent="main_menu_laporan"
+                    sequence="1"
+                    action="act_report_layanan_view"/>
+</odoo>

@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_form_kunjungan_gdfp_tree" model="ir.ui.view">
+            <field name="name">form.kunjungan.gdfp.tree</field>
+            <field name="model">form.kunjungan.gdfp</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Form Kunjungan GDFP">
+<!--                    <field name="code"/>-->
+                    <field name="peternak_id"/>
+                    <field name="tanggal_kunjungan"/>
+                    <field name="periode_id"/>
+                    <field name="petugas_id"/>
+<!--                    <field name="jenis_kunjungan_id"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_kunjungan_gdfp_form" model="ir.ui.view">
+            <field name="name">form.kunjungan.gdfp.form</field>
+            <field name="model">form.kunjungan.gdfp</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="GDFP">
+                    <header>
+                        <button name="func_submit" type="object" string="Submit" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="func_validate" type="object" string="Validate" class="oe_highlight" confirm="Apakah Data Sudah OK?" attrs="{'invisible': [('state', '!=', 'submit')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submit,validate"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+<!--                            <h1>-->
+<!--                                <field name="code" readonly="1"/>-->
+<!--                            </h1>-->
+                        </div>
+                        <group col="4">
+                            <field name="peternak_id"/>
+<!--                            <field name="peternak_id"/>-->
+                            <field name="kode_peternak"/>
+                            <field name="tanggal_kunjungan"/>
+                            <field name="periode_id"/>
+                            <field name="petugas_id"/>
+                            <field name="jenis_management"/>
+                        </group>
+
+                        <group attrs="{'invisible':[('jenis_management','!=', '1')]}">
+                            <field
+                                    name="kunjungan_gdfp_line"
+                                    widget="section_and_note_one2many"
+                                    mode="tree,kanban">
+                                <tree>
+                                    <field name="peternak_id"/>
+                                    <field name="id_sapi"/>
+                                    <field name="bobot_badan"/>
+                                    <field name="prod_susu_liter"/>
+                                    <field name="id_status_reproduksi"/>
+                                    <field name="reproduksi"/>
+                                    <field name="hasil_tdn_hp"/>
+                                    <field name="hasil_tdn_produksi"/>
+                                    <field name="hasil_tdn_reproduksi"/>
+                                    <field name="total_tdn"/>
+                                    <!-- fields lainnya -->
+                                </tree>
+                                <kanban>
+                                    <field name="id_sapi"/>
+                                    <field name="id_status_reproduksi"/>
+                                    <!-- fields lainnya -->
+                                </kanban>
+                                <form>
+                                    <group>
+                                        <field name="peternak_id"/>
+                                        <field name="id_sapi"/>
+                                        <field name="bobot_badan"/>
+                                        <field name="prod_susu_liter"/>
+                                        <field name="id_status_reproduksi"/>
+                                        <field name="reproduksi"/>
+                                        <!-- fields lainnya -->
+                                    </group>
+                                </form>
+                            </field>
+                            <!--                                    <field name="bobot_bdn"/>-->
+                            <!--                                    <field name="prod_susu"/>-->
+                            <!--                                    <field name="status_reprod"/>-->
+                        </group>
+                        <group name="note_group" col="6" class="mt-2 mt-md-0" attrs="{'invisible':[('jenis_management','!=', '1')]}">
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="total_all_tdn" />
+                                </div>
+                                <field name="total_all_tdn" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            <div class="oe_clear"/>
+                        </group>
+                        <notebook>
+                            <page string="Management Pakan" attrs="{'invisible':[('jenis_management','!=', '1')]}">
+                                <group>
+                                    <group string="Jenis Hijauan" col="4" >
+<!--                                        <field name="jenis_hijauan"/>-->
+<!--                                        <field name="juml_hijauan_jeramis" attrs="{'invisible': [('jenis_hijauan', '!=', '1')]}"/>-->
+<!--                                        <field name="juml_hijauan_gajahs" attrs="{'invisible': [('jenis_hijauan', '!=', '2')]}"/>-->
+                                        <field name="jenis_hijauan_jerami"/>
+                                        <field name="juml_hijauan_jerami" attrs="{'invisible':[('jenis_hijauan_jerami','=', False)]}"/>
+                                        <field name="jenis_hijauan_gajah" />
+                                        <field name="juml_hijauan_gajah" attrs="{'invisible':[('jenis_hijauan_gajah','=', False)]}"/>
+                                        <field name="jenis_hijauan_tebon" />
+                                        <field name="juml_hijauan_tebon" attrs="{'invisible':[('jenis_hijauan_tebon','=', False)]}"/>
+                                        <field name="jenis_hijauan_tebu" />
+                                        <field name="juml_hijauan_tebu" attrs="{'invisible':[('jenis_hijauan_tebu','=', False)]}"/>
+                                        <field name="jenis_hijauan_pakchong" />
+                                        <field name="juml_hijauan_pakchong" attrs="{'invisible':[('jenis_hijauan_pakchong','=', False)]}"/>
+                                        <field name="jenis_hijauan_odot" />
+                                        <field name="juml_hijauan_odot" attrs="{'invisible':[('jenis_hijauan_odot','=', False)]}"/>
+                                        <field name="jenis_hijauan_lapang" />
+                                        <field name="juml_hijauan_lapang" attrs="{'invisible':[('jenis_hijauan_lapang','=', False)]}"/>
+                                        <field name="jenis_hijauan_1" />
+                                        <field name="juml_hijauan_1" attrs="{'invisible':[('jenis_hijauan_1','=', False)]}"/>
+                                        <field name="jenis_hijauan_2" />
+                                        <field name="juml_hijauan_2" attrs="{'invisible':[('jenis_hijauan_2','=', False)]}"/>
+                                        <field name="jenis_hijauan_3" />
+                                        <field name="juml_hijauan_3" attrs="{'invisible':[('jenis_hijauan_3','=', False)]}"/>
+                                        <field name="jenis_hijauan_4" />
+                                        <field name="juml_hijauan_4" attrs="{'invisible':[('jenis_hijauan_4','=', False)]}"/>
+                                        <field name="jenis_hijauan_5" />
+                                        <field name="juml_hijauan_5" attrs="{'invisible':[('jenis_hijauan_5','=', False)]}"/>
+                                        <field name="jenis_hijauan_6" />
+                                        <field name="juml_hijauan_6" attrs="{'invisible':[('jenis_hijauan_6','=', False)]}"/>
+                                        <field name="jenis_hijauan_7" />
+                                        <field name="juml_hijauan_7" attrs="{'invisible':[('jenis_hijauan_7','=', False)]}"/>
+                                    </group>
+                                    <group string="Jenis Konsentrat" col="4">
+                                        <field name="jenis_kons_plus"/>
+                                        <field name="juml_kons_plus" attrs="{'invisible':[('jenis_kons_plus','=', False)]}"/>
+                                        <field name="jenis_kons_2a" />
+                                        <field name="juml_kons_2a" attrs="{'invisible':[('jenis_kons_2a','=', False)]}"/>
+                                        <field name="jenis_kons_mapan" />
+                                        <field name="juml_kons_mapan" attrs="{'invisible':[('jenis_kons_mapan','=', False)]}"/>
+                                        <field name="jenis_kons_feed" />
+                                        <field name="juml_kons_feed" attrs="{'invisible':[('jenis_kons_feed','=', False)]}"/>
+                                        <field name="jenis_konsentrat_1" />
+                                        <field name="juml_konsentrat_1" attrs="{'invisible':[('jenis_konsentrat_1','=', False)]}"/>
+                                        <field name="jenis_konsentrat_2" />
+                                        <field name="juml_konsentrat_2" attrs="{'invisible':[('jenis_konsentrat_2','=', False)]}"/>
+                                        <field name="jenis_konsentrat_3" />
+                                        <field name="juml_konsentrat_3" attrs="{'invisible':[('jenis_konsentrat_3','=', False)]}"/>
+                                        <field name="jenis_konsentrat_4" />
+                                        <field name="juml_konsentrat_4" attrs="{'invisible':[('jenis_konsentrat_4','=', False)]}"/>
+                                        <field name="jenis_konsentrat_5" />
+                                        <field name="juml_konsentrat_5" attrs="{'invisible':[('jenis_konsentrat_5','=', False)]}"/>
+                                        <field name="jenis_konsentrat_6" />
+                                        <field name="juml_konsentrat_6" attrs="{'invisible':[('jenis_konsentrat_6','=', False)]}"/>
+                                        <field name="jenis_konsentrat_7" />
+                                        <field name="juml_konsentrat_7" attrs="{'invisible':[('jenis_konsentrat_7','=', False)]}"/>
+                                    </group>
+                                    <group string="Jenis Pakan Tambah" col="4">
+                                        <field name="jenis_tambah_selep"/>
+                                        <field name="juml_tambah_selep" attrs="{'invisible':[('jenis_tambah_selep','=', False)]}"/>
+                                        <field name="jenis_tambah_tawar"/>
+                                        <field name="juml_tambah_tawar" attrs="{'invisible':[('jenis_tambah_tawar','=', False)]}"/>
+                                        <field name="jenis_tambah_singkong"/>
+                                        <field name="juml_tambah_singkong" attrs="{'invisible':[('jenis_tambah_singkong','=', False)]}"/>
+                                        <field name="jenis_tambah_gamblong"/>
+                                        <field name="juml_tambah_gamblong" attrs="{'invisible':[('jenis_tambah_gamblong','=', False)]}"/>
+                                        <field name="jenis_tambah_bir"/>
+                                        <field name="juml_tambah_bir" attrs="{'invisible':[('jenis_tambah_bir','=', False)]}"/>
+                                        <field name="jenis_tambah_tahu"/>
+                                        <field name="juml_tambah_tahu" attrs="{'invisible':[('jenis_tambah_tahu','=', False)]}"/>
+                                        <field name="jenis_tambah_1" />
+                                        <field name="juml_tambah_1" attrs="{'invisible':[('jenis_tambah_1','=', False)]}"/>
+                                        <field name="jenis_tambah_2" />
+                                        <field name="juml_tambah_2" attrs="{'invisible':[('jenis_tambah_2','=', False)]}"/>
+                                        <field name="jenis_tambah_3" />
+                                        <field name="juml_tambah_3" attrs="{'invisible':[('jenis_tambah_3','=', False)]}"/>
+                                        <field name="jenis_tambah_4" />
+                                        <field name="juml_tambah_4" attrs="{'invisible':[('jenis_tambah_4','=', False)]}"/>
+                                        <field name="jenis_tambah_5" />
+                                        <field name="juml_tambah_5" attrs="{'invisible':[('jenis_tambah_5','=', False)]}"/>
+                                        <field name="jenis_tambah_6" />
+                                        <field name="juml_tambah_6" attrs="{'invisible':[('jenis_tambah_6','=', False)]}"/>
+                                        <field name="jenis_tambah_7" />
+                                        <field name="juml_tambah_7" attrs="{'invisible':[('jenis_tambah_7','=', False)]}"/>
+                                    </group>
+                                    <group string="Lahan Hijauan Pakan Ternak">
+                                        <field name="luas_lahan"/>
+                                        <field name="jns_hpt"/>
+                                        <field name="add_jns_hpt"/>
+                                        <field name="produktivitas"/>
+                                        <field name="stts_kpmlkn"/>
+                                    </group>
+                                    <group string="Chopper (Opsi)">
+                                        <field name="choper"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Penghitungan TDN Dan BK Pakan">
+                                        <notebook>
+                                            <page string="Hijauan">
+                                                <group>
+                                                    <group string="Jerami Padi">
+                                                        <field name="bk_tersedia_jerami"/>
+                                                        <field name="tdn_tersedia_jerami"/>
+                                                    </group>
+                                                    <group string="Rumput Gajah">
+                                                        <field name="bk_tersedia_gajah"/>
+                                                        <field name="tdn_tersedia_gajah"/>
+                                                    </group>
+                                                    <group string="Rumput Tebon">
+                                                        <field name="bk_tersedia_tebon"/>
+                                                        <field name="tdn_tersedia_tebon"/>
+                                                    </group>
+                                                    <group string="Pucuk Tebu">
+                                                        <field name="bk_tersedia_tebu"/>
+                                                        <field name="tdn_tersedia_tebu"/>
+                                                    </group>
+                                                    <group string="Rumput Pakchong">
+                                                        <field name="bk_tersedia_pakchong"/>
+                                                        <field name="tdn_tersedia_pakchong"/>
+                                                    </group>
+                                                    <group string="Rumput Odot">
+                                                        <field name="bk_tersedia_odot"/>
+                                                        <field name="tdn_tersedia_odot"/>
+                                                    </group>
+                                                    <group string="Rumput Lapang">
+                                                        <field name="bk_tersedia_lapang"/>
+                                                        <field name="tdn_tersedia_lapang"/>
+                                                    </group>
+                                                </group>
+                                                <group>
+                                                    <group string="Hijauan 1">
+                                                        <field name="bk_tersedia_1"/>
+                                                        <field name="tdn_tersedia_1"/>
+                                                    </group>
+                                                    <group string="Hijauan 2">
+                                                        <field name="bk_tersedia_2"/>
+                                                        <field name="tdn_tersedia_2"/>
+                                                    </group>
+                                                    <group string="Hijauan 3">
+                                                        <field name="bk_tersedia_3"/>
+                                                        <field name="tdn_tersedia_3"/>
+                                                    </group>
+                                                    <group string="Hijauan 4">
+                                                        <field name="bk_tersedia_4"/>
+                                                        <field name="tdn_tersedia_4"/>
+                                                    </group>
+                                                    <group string="Hijauan 5">
+                                                        <field name="bk_tersedia_5"/>
+                                                        <field name="tdn_tersedia_5"/>
+                                                    </group>
+                                                    <group string="Hijauan 6">
+                                                        <field name="bk_tersedia_6"/>
+                                                        <field name="tdn_tersedia_6"/>
+                                                    </group>
+                                                    <group string="Hijauan 7">
+                                                        <field name="bk_tersedia_7"/>
+                                                        <field name="tdn_tersedia_7"/>
+                                                    </group>
+                                                </group>
+                                                <group string="Total Tersedia TDN Hijauan">
+                                                    <field name="total_tdn_hijauan"/>
+                                                </group>
+                                            </page>
+                                            <page string="Konsentrat">
+                                                <group string="Super Plus">
+                                                    <field name="bk_tersedia_plus"/>
+                                                    <field name="tdn_tersedia_plus"/>
+                                                </group>
+                                                <group string="Super 2a">
+                                                    <field name="bk_tersedia_2a"/>
+                                                    <field name="tdn_tersedia_2a"/>
+                                                </group>
+                                                <group string="Maju Mapan">
+                                                    <field name="bk_tersedia_mapan"/>
+                                                    <field name="tdn_tersedia_mapan"/>
+                                                </group>
+                                                <group string="Mix Feed">
+                                                    <field name="bk_tersedia_feed"/>
+                                                    <field name="tdn_tersedia_feed"/>
+                                                </group>
+                                                <group string="Konsentrat 1">
+                                                    <field name="bk_tersedia_kons_1"/>
+                                                    <field name="tdn_tersedia_kons_1"/>
+                                                </group>
+                                                <group string="Konsentrat 2">
+                                                    <field name="bk_tersedia_kons_2"/>
+                                                    <field name="tdn_tersedia_kons_2"/>
+                                                </group>
+                                                <group string="Konsentrat 3">
+                                                    <field name="bk_tersedia_kons_3"/>
+                                                    <field name="tdn_tersedia_kons_3"/>
+                                                </group>
+                                                <group string="Konsentrat 4">
+                                                    <field name="bk_tersedia_kons_4"/>
+                                                    <field name="tdn_tersedia_kons_4"/>
+                                                </group>
+                                                <group string="Konsentrat 5">
+                                                    <field name="bk_tersedia_kons_5"/>
+                                                    <field name="tdn_tersedia_kons_5"/>
+                                                </group>
+                                                <group string="Konsentrat 6">
+                                                    <field name="bk_tersedia_kons_6"/>
+                                                    <field name="tdn_tersedia_kons_6"/>
+                                                </group>
+                                                <group string="Konsentrat 7">
+                                                    <field name="bk_tersedia_kons_7"/>
+                                                    <field name="tdn_tersedia_kons_7"/>
+                                                </group>
+                                                <group string="Total Tersedia TDN Konsentrat">
+                                                    <field name="total_tdn_konsentrat"/>
+                                                </group>
+                                            </page>
+                                            <page string="Pakan Tambah">
+                                                <group string="Roti Selep">
+                                                    <field name="bk_tersedia_selep"/>
+                                                    <field name="tdn_tersedia_selep"/>
+                                                </group>
+                                                <group string="Roti Tawar">
+                                                    <field name="bk_tersedia_tawar"/>
+                                                    <field name="tdn_tersedia_tawar"/>
+                                                </group>
+                                                <group string="Singkong">
+                                                    <field name="bk_tersedia_singkong"/>
+                                                    <field name="tdn_tersedia_singkong"/>
+                                                </group>
+                                                <group string="Gamblong">
+                                                    <field name="bk_tersedia_gamblong"/>
+                                                    <field name="tdn_tersedia_gamblong"/>
+                                                </group>
+                                                <group string="Ampas Bir">
+                                                    <field name="bk_tersedia_bir"/>
+                                                    <field name="tdn_tersedia_bir"/>
+                                                </group>
+                                                <group string="Ampas Tahu">
+                                                    <field name="bk_tersedia_tahu"/>
+                                                    <field name="tdn_tersedia_tahu"/>
+                                                </group>
+                                                <group string="Pakan Tambah 1">
+                                                    <field name="bk_tersedia_pt_1"/>
+                                                    <field name="tdn_tersedia_pt_1"/>
+                                                </group>
+                                                <group string="Pakan Tambah 2">
+                                                    <field name="bk_tersedia_pt_2"/>
+                                                    <field name="tdn_tersedia_pt_2"/>
+                                                </group>
+                                                <group string="Pakan Tambah 3">
+                                                    <field name="bk_tersedia_pt_3"/>
+                                                    <field name="tdn_tersedia_pt_3"/>
+                                                </group>
+                                                <group string="Pakan Tambah 4">
+                                                    <field name="bk_tersedia_pt_4"/>
+                                                    <field name="tdn_tersedia_pt_4"/>
+                                                </group>
+                                                <group string="Pakan Tambah 5">
+                                                    <field name="bk_tersedia_pt_5"/>
+                                                    <field name="tdn_tersedia_pt_5"/>
+                                                </group>
+                                                <group string="Pakan Tambah 6">
+                                                    <field name="bk_tersedia_pt_6"/>
+                                                    <field name="tdn_tersedia_pt_6"/>
+                                                </group>
+                                                <group string="Pakan Tambah 7">
+                                                    <field name="bk_tersedia_pt_7"/>
+                                                    <field name="tdn_tersedia_pt_7"/>
+                                                </group>
+                                                <group string="Total Tersedia TDN Pakan Tambah">
+                                                    <field name="total_tdn_tambah"/>
+                                                </group>
+                                            </page>
+                                            <page string="Total TDN Tersedia">
+                                                <group>
+                                                    <field name="total_tdn_tersedia"/>
+                                                </group>
+                                            </page>
+                                        </notebook>
+                                    </page>
+                                    <page string="Tabel Kebutuhan TDN Pakan">
+                                        <group>
+                                            <field name="hidup_pokok"/>
+                                            <field name="hasil_tdn_hp"/>
+                                            <field name="produksi"/>
+                                            <field name="hasil_tdn_produksi"/>
+                                            <field name="reproduksi"/>
+                                            <field name="hasil_tdn_reproduksi"/>
+                                        </group>
+                                        <group string="Total Kebutuhan TDN">
+                                            <field name="total_tdn"/>
+                                        </group>
+                                    </page>
+                                    <page string="Tabel Selisih TDN">
+                                        <group string="Total Selisih TDN">
+                                            <field name="total_tdn"/>
+                                            <field name="total_tdn_tersedia"/>
+                                            <field name="total_tdn_selisih"/>
+                                            <field name="total_persen_tdn"/>
+                                        </group>
+                                    </page>
+                                    <page string="Score Management Pakan">
+                                        <group string="Score">
+                                            <field name="kecukupan_pakan"/>
+                                            <label for="score_pakan" class="mt-1" string="Skor Pakan"/>
+                                            <div name="score_pakan">
+                                                <field name="score_pakan" class="oe_inline"/> %
+                                            </div>
+                                        </group>
+                                    </page>
+                                </notebook>
+                            </page>
+                            <page string="Management Kandang" attrs="{'invisible':[('jenis_management','!=', '2')]}">
+                                <group col="2">
+                                    <field name="atap"/>
+                                    <field name="nilai_atap"/>
+                                </group>
+                                <group col="2">
+                                    <field name="lantai"/>
+                                    <field name="nilai_lantai"/>
+                                </group>
+                                <group col="2">
+                                    <field name="thi_index"/>
+                                    <field name="nilai_thi"/>
+                                </group>
+                                <group col="2">
+                                    <field name="palungan"/>
+                                    <field name="nilai_palungan"/>
+                                </group>
+                                <group col="2">
+                                    <field name="water_adlib"/>
+                                    <field name="nilai_water"/>
+                                </group>
+<!--                                <group string="Hasil">-->
+<!--                                    <label for="score" class="mt-1" string="Skor Kandang"/>-->
+<!--                                        <div name="score">-->
+<!--                                            <field name="score" class="oe_inline"/> %-->
+<!--                                        </div>-->
+<!--                                </group>-->
+                            </page>
+                            <page string="Management Pemerahan" attrs="{'invisible':[('jenis_management','!=', '3')]}">
+                                <group col="2">
+                                    <field name="keber_susu"/>
+                                    <field name="nilai_susu"/>
+                                </group>
+                                <group col="2">
+                                    <field name="keber_can"/>
+                                    <field name="nilai_milkcan"/>
+                                </group>
+                                <group col="2">
+                                    <field name="keber_ember"/>
+                                    <field name="nilai_ember"/>
+                                </group>
+                                <group col="2">
+                                    <field name="keber_kandang"/>
+                                    <field name="nilai_kandang"/>
+                                </group>
+                                <group col="2">
+                                    <field name="keber_sapi"/>
+                                    <field name="nilai_sapi"/>
+                                </group>
+                                <group col="2">
+                                    <field name="keber_peternak"/>
+                                    <field name="nilai_peternak"/>
+                                </group>
+                                <group col="2">
+                                    <field name="penyetoran"/>
+                                    <field name="nilai_penyetoran"/>
+                                </group>
+<!--                                <group string="Hasil">-->
+<!--                                    <label for="score_pemeliharaan" class="mt-1" string="Skor Pemeliharaan"/>-->
+<!--                                        <div name="score_pemeliharaan">-->
+<!--                                            <field name="score_pemeliharaan" class="oe_inline"/> %-->
+<!--                                        </div>-->
+<!--                                </group>-->
+                            </page>
+                            <page string="Daya Saing Bisnis" attrs="{'invisible':[('jenis_management','!=', '4')]}">
+                                <group>
+                                    <group>
+                                        <field name="listrik"/>
+                                        <field name="pakan"/>
+                                        <field name="air"/>
+                                        <field name="tenaga_kerja"/>
+                                        <field name="bbm"/>
+                                        <field name="ib"/>
+                                        <field name="keswan"/>
+                                        <field name="pakan_tambah"/>
+                                        <field name="total_biaya"/>
+                                    </group>
+                                    <group>
+                                        <field name="juml_susu_periode"/>
+                                        <field name="harga_susu"/>
+                                        <field name="total_pemasukan"/>
+                                        <field name="penjualan_limbah_ternak"/>
+                                        <field name="penjualan_pedet"/>
+                                        <field name="pajak"/>
+                                    </group>
+                                </group>
+                                <group string="Hasil">
+                                    <field name="biaya_per_liter_susu"/>
+                                    <label for="persentase_dsb" class="mt-1" string="Persentase DSB"/>
+                                        <div name="persentase_dsb">
+                                            <field name="persentase_dsb" class="oe_inline"/> %
+                                        </div>
+                                </group>
+                                <group col="2">
+                                    <field name="biaya"/>
+                                    <field name="nilai_biaya"/>
+                                </group>
+                            </page>
+                            <page string="Pengendalian limbah" attrs="{'invisible':[('jenis_management','!=', '5')]}">
+                                <group col="2">
+                                    <field name="limbah"/>
+                                    <field name="nilai_limbah"/>
+                                </group>
+<!--                                <group string="Hasil">-->
+<!--                                    <label for="score_pengendalian_limbah" class="mt-1" string="Skor Pengendalian Limbah"/>-->
+<!--                                        <div name="score_pengendalian_limbah">-->
+<!--                                            <field name="score_pengendalian_limbah" class="oe_inline"/> %-->
+<!--                                        </div>-->
+<!--                                </group>-->
+                            </page>
+                            <page string="Kesehatan Hewan" attrs="{'invisible':[('jenis_management','!=', '6')]}">
+                                <group col="2">
+                                    <field name="total_bcs"/>
+                                    <field name="body_cond"/>
+                                    <field name="bcs"/>
+                                    <field name="nilai_bcs"/>
+                                </group>
+                                <group col="2">
+                                    <field name="angka_morbi"/>
+                                    <field name="morbiditas"/>
+                                    <field name="nilai_morbiditas"/>
+                                </group>
+<!--                                <group string="Hasil">-->
+<!--                                    <label for="score_keswan" class="mt-1" string="Skor Keswanz"/>-->
+<!--                                        <div name="score_keswan">-->
+<!--                                            <field name="score_keswan" class="oe_inline"/> %-->
+<!--                                        </div>-->
+<!--                                </group>-->
+                            </page>
+                             <page string="Sapi" attrs="{'invisible':[('jenis_management','!=', '6')]}">
+                                <field name="sapi_gdfp_line" mode="tree">
+                                    <tree editable="top">
+                                        <field name="sapi_id"/>
+                                        <field name="kasus_penyakit_id"/>
+                                        <field name="perbedaan_penyakit"/>
+                                        <field name="bcs"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="History Form" attrs="{'invisible':[('jenis_management','!=', '6')]}">
+                                <field name="history_line" mode="tree">
+                                    <tree editable="top">
+                                        <field name="nama_form"/>
+                                        <field name="bcs"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Scoring" attrs="{'invisible':[('jenis_management','!=', '1')]}">
+                                <group string="Scoring">
+                                    <label for="mpak" class="mt-1" string="Management Pakan" attrs="{'invisible':[('jenis_management','!=', '1')]}"/>
+                                        <div name="mpak">
+                                            <field name="mpak" class="oe_inline"/> %
+                                        </div>
+                                    </group>
+                            </page>
+                            <page string="Scoring" attrs="{'invisible':[('jenis_management','!=', '2')]}">
+                                <group string="Scoring">
+                                    <label for="mkan" class="mt-1" string="Management Kandang" attrs="{'invisible':[('jenis_management','!=', '2')]}"/>
+                                        <div name="mkan">
+                                            <field name="mkan" class="oe_inline"/> %
+                                        </div>
+                                    </group>
+                            </page>
+                            <page string="Scoring" attrs="{'invisible':[('jenis_management','!=', '3')]}">
+                                <group string="Scoring">
+                                    <label for="mpem" class="mt-1" string="Management Pemerahan" attrs="{'invisible':[('jenis_management','!=', '3')]}"/>
+                                        <div name="mpem">
+                                            <field name="mpem" class="oe_inline"/> %
+                                        </div>
+                                    </group>
+                            </page>
+                            <page string="Scoring" attrs="{'invisible':[('jenis_management','!=', '4')]}">
+                                <group string="Scoring">
+                                    <label for="mbis" class="mt-1" string="Daya Saing Bisnis" attrs="{'invisible':[('jenis_management','!=', '4')]}"/>
+                                        <div name="mbis">
+                                            <field name="mbis" class="oe_inline"/> %
+                                        </div>
+                                    </group>
+                            </page>
+                            <page string="Scoring" attrs="{'invisible':[('jenis_management','!=', '5')]}">
+                                <group string="Scoring">
+                                    <label for="mpel" class="mt-1" string="Pengolahan Limbah" attrs="{'invisible':[('jenis_management','!=', '5')]}"/>
+                                        <div name="mpel">
+                                            <field name="mpel" class="oe_inline"/> %
+                                        </div>
+                                    </group>
+                            </page>
+                            <page string="Scoring" attrs="{'invisible':[('jenis_management','!=', '6')]}">
+                                <group string="Scoring">
+                                    <label for="mkes" class="mt-1" string="Kesehatan Hewan" attrs="{'invisible':[('jenis_management','!=', '6')]}"/>
+                                        <div name="mkes">
+                                            <field name="mkes" class="oe_inline"/> %
+                                        </div>
+                                    </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_form_kunjungan_gdfp_search" model="ir.ui.view">
+            <field name="name">gdfp.search</field>
+            <field name="model">form.kunjungan.gdfp</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="GDFP">
+                    <field name="peternak_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Anggota" name="group_by_peternak_id_group_name"
+                                domain="[]" context="{'group_by':'peternak_id'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_form_kunjungan_gdfp_view">
+            <field name="name">Form Kunjungan GDFP</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.kunjungan.gdfp</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_form_kunjungan_gdfp_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_form_kunjungan_gdfp_view_form">
+            <field name="act_window_id" ref="act_form_kunjungan_gdfp_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_form_kunjungan_gdfp_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_form_kunjungan_gdfp_view_tree">
+            <field name="act_window_id" ref="act_form_kunjungan_gdfp_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_form_kunjungan_gdfp_tree"/>
+        </record>
+
+        <menuitem id="menu_form_kunjungan_gdfp_details"
+                    name="Form Kunjungan GDFP"
+                    parent="menu_kunjungan_root"
+                    sequence="20"
+                    action="act_form_kunjungan_gdfp_view"/>
+    </data>
+</odoo>

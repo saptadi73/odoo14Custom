@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_specimen_tes_view" model="ir.ui.view">
+            <field name="name">form.master.specimen.tes.view</field>
+            <field name="model">master.specimen.tes</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Specimen Tes">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_specimen_tes"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_specimen_tes_search_view" model="ir.ui.view">
+            <field name="name">master.specimen.tes.search.view</field>
+            <field name="model">master.specimen.tes</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Specimen Tes">
+                    <separator orientation="vertical" />
+                    <field name="nama_specimen_tes" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Specimen Tes" name='by_nama_specimen_tes' context="{'group_by':'nama_specimen_tes'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_specimen_tes_tree_view" model="ir.ui.view">
+            <field name="name">master.specimen.tes.tree.view</field>
+            <field name="model">master.specimen.tes</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Specimen Tes">
+                    <field name="kode"/>
+                    <field name="nama_specimen_tes"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_specimen_tes" model="ir.actions.act_window">
+            <field name="name">Master Specimen Tes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.specimen.tes</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_specimen_tes" parent="mster_data"
+            action="action_master_specimen_tes" sequence="9" />
+
+</odoo>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<data noupdate="0">
+        <record id="hr_rule_basic" model="hr.salary.rule">
+            <field name="name">Basic Salary</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">BASIC</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage</field>
+        </record>	
+        <record id="hr_rule_TDPLK" model="hr.salary.rule">
+            <field name="name">Tunjangan DPLK 10%</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TDPLK</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.wage * contract.tdplk)</field>
+        </record>
+        <record id="hr_rule_TBPJSKes" model="hr.salary.rule">
+            <field name="name">Tunjangan BPJS Kesehatan</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TBPJSKes</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjs * (contract.t_bpjs / 100))</field>
+        </record>
+        <record id="hr_rule_TT" model="hr.salary.rule">
+            <field name="name">Tunjangan Transport</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TT</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.t_trans</field>
+        </record>
+        <record id="hr_rule_TM" model="hr.salary.rule">
+            <field name="name">Tunjangan Makan</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TM</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.meal_allowance</field>
+        </record>
+        <record id="hr_rule_TJ" model="hr.salary.rule">
+            <field name="name">Tunjangan Jabatan</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TJ</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.t_job</field>
+        </record>
+        <record id="hr_rule_TJKM" model="hr.salary.rule">
+            <field name="name">Tunjangan JKM</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TJKM</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * (contract.t_jkm / 100))</field>
+        </record>
+        <record id="hr_rule_TJKK" model="hr.salary.rule">
+            <field name="name">Tunjangan JKK</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TJKK</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * (contract.t_jkk / 100))</field>
+        </record>
+        <record id="hr_rule_TUNLA" model="hr.salary.rule">
+            <field name="name">Tunjangan Lain Lain</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TUNLA</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.other_allowance</field>
+        </record>
+        <record id="hr_rule_TLOK" model="hr.salary.rule">
+            <field name="name">Tunjangan Lokasi</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TLOK</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.t_nature</field>
+        </record>
+        <record id="hr_rule_DPFee" model="hr.salary.rule">
+            <field name="name">DP Fee 2 %</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">DPFee</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage * 0.20) * 0.02 * 0.5 if contract.use_dp==True else 0</field>
+        </record>
+        <record id="hr_rule_PLFee" model="hr.salary.rule">
+            <field name="name">Pelunasan Fee 2 %</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PLFee</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage * 0.80) * 0.02 *0.5 if contract.use_lunas==True else 0.00</field>
+        </record>
+        <record id="hr_rule_NODP" model="hr.salary.rule">
+            <field name="name">Tanpa DP</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">NODP</field>
+            <field name="category_id" ref="hr_payroll_community.Gaji/Pensiunan/THT/JHT"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage * 0.02 if contract.use_ndp==True else 0.00</field>
+        </record>
+        <record id="hr_rule_LMBR" model="hr.salary.rule">
+            <field name="name">Lembur</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">LMBR</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.lembur,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>	
+        <record id="hr_rule_TRANL" model="hr.salary.rule">
+            <field name="name">Trans Lembur</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TRANL</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.tunjangan_lembur_transport,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>	
+        <record id="hr_rule_MAKL" model="hr.salary.rule">
+            <field name="name">Makan Lembur</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">MAKL</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.tunjangan_lembur_makan,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>	
+        <record id="hr_rule_INSF" model="hr.salary.rule">
+            <field name="name">Insentif</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">INSF</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.insentif,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>	
+        <record id="hr_rule_MASK" model="hr.salary.rule">
+            <field name="name">Masa Kerja</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">MASK</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.uang_masa_kerja,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>	
+        <record id="hr_rule_UCUT" model="hr.salary.rule">
+            <field name="name">Uang Cuti</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">UCUT</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.uang_cuti,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>
+        <record id="hr_rule_KORPEN" model="hr.salary.rule">
+            <field name="name">Koreksi Pendapatan</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">KORPEN</field>
+            <field name="category_id" ref="hr_payroll_community.Penghasilan-Non-Rutin"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.koreksi_pendapatan,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>
+        <record id="hr_rule_TTR" model="hr.salary.rule">
+            <field name="name">Ticket and Travel</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TTR</field>
+            <field name="category_id" ref="hr_payroll_community.Potongan"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0.0</field>
+        </record>
+        <record id="hr_rule_PotKom" model="hr.salary.rule">
+            <field name="name">Potongan Komunikasi</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PotKom</field>
+            <field name="category_id" ref="hr_payroll_community.Potongan-Lain"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0.0</field>
+        </record>
+        <record id="hr_rule_TPOTO" model="hr.salary.rule">
+            <field name="name">Total Potong</field>
+            <field name="sequence" eval="196"/>
+            <field name="code">TPOTO</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.Total-Potongan"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (categories.DED + categories.PINJ + categories.POT + categories.POTLAN + categories.ZKT + categories.PPh)</field>
+        </record>
+        <record id="hr_rule_BNS" model="hr.salary.rule">
+            <field name="name">Bonus</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">BNS</field>
+            <field name="category_id" ref="hr_payroll_community.Bonus/THR"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.bonus,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>
+        <record id="hr_rule_BNSPRA" model="hr.salary.rule">
+            <field name="name">Bonus Pra Payroll</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">BNSPP</field>
+            <field name="category_id" ref="hr_payroll_community.Bonus/THR"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.bonus_pra_payroll,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>
+        <record id="hr_rule_THR" model="hr.salary.rule">
+            <field name="name">Tunjangan Hari Raya</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">THR</field>
+            <field name="category_id" ref="hr_payroll_community.Bonus/THR"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.thr,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>		
+		<record id="hr_rule_THRPRA" model="hr.salary.rule">
+            <field name="name">THR Pra Payroll</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">THRPP</field>
+            <field name="category_id" ref="hr_payroll_community.Bonus/THR"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.deduction_lines:
+    if payslip.date_from &lt;= contract.deduction_lines.from_date and contract.deduction_lines.to_date &lt;= payslip.date_to:
+        result = round(contract.deduction_lines.thr_pra_payroll,0)
+    else:
+        result = 0.00
+else:
+        result = 0.00</field>
+        </record>
+        <record id="hr_rule_ZKT" model="hr.salary.rule">
+            <field name="name">Potongan Zakat</field>
+            <field name="sequence" eval="105"/>
+            <field name="code">ZKT</field>
+            <field name="category_id" ref="hr_payroll_community.Zakat"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.use_zakat == True:
+  if contract.type_id.name=='ZKTSPS':
+     result = round(((categories.GAPOK + categories.ALW + (contract.dsr_pensiun * contract.p_pen1) + (contract.dsr_bpjs * contract.p_bpjs)) - ((categories.DED + categories.PPh) + (contract.dsr_bpjs *  contract.p_bpjs1)))*0.025) 
+  else:
+     result = round(((categories.GAPOK + categories.ALW + (contract.dsr_pensiun * contract.p_pen1)) - (categories.DED + categories.PPh))*0.025)
+else:
+     result = 0.0</field>
+        </record>		
+        <record id="hr_rule_TPP21" model="hr.salary.rule">
+            <field name="name">Tunjangan PPh21</field>
+            <field name="sequence" eval="150"/>
+            <field name="code">TPP21</field>
+            <field name="category_id" ref="hr_payroll_community.Tunjangan-PPh"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.use_gross==True:
+   result=0.00
+else:
+   result = round(categories.TPPP - categories.PREPPH)</field>
+        </record>
+        <record id="hr_rule_PPNLT" model="hr.salary.rule">
+            <field name="name">Pengembalian PPh21</field>
+            <field name="sequence" eval="152"/>
+            <field name="code">PPNLT</field>
+            <field name="category_id" ref="hr_payroll_community.Pajak-Kembali"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if not contract.employee_id.address_home_id.vat:
+    result = (round((categories.TPPP - categories.PREPPH) - ((categories.TPPP - categories.PREPPH) / 1.25),0) * -1) if (categories.TPPP - categories.PREPPH) &lt; 0 else 0
+else:
+    result = 0</field>
+        </record>
+        <record id="hr_rule_TPP21NK" model="hr.salary.rule">
+            <field name="name">Tunjangan PPh21</field>
+            <field name="sequence" eval="11"/>
+            <field name="code">TPP21NK</field>
+            <field name="category_id" ref="hr_payroll_community.Tunjangan-PPh"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">if contract.use_gross==True:
+   result=0.00
+else:
+   result = round(categories.PPhNK)</field>
+        </record>
+	
+		
+    </data>
+</odoo>

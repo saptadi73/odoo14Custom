@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_liter_root"
+                  name="Liter"
+                  web_icon="liter_sapi,static/description/icon.png"
+                  sequence="20"/>
+
+        <menuitem id="menu_setoran_susu"
+                    name="Setoran Susu"
+                    parent="menu_liter_root"
+                    sequence="20"/>
+
+        <menuitem id="menu_liter_details"
+                    name="Setoran Susu"
+                    parent="menu_setoran_susu"
+                    sequence="10"
+                    action="act_liter_sapi_view"/>
+
+        <menuitem id="menu_anggota_liter_details"
+                    name="Data Anggota"
+                    parent="menu_liter_root"
+                    sequence="10"
+                    action="act_data_anggota_liter_view"/>
+
+        <menuitem id="menu_konfig_liter"
+                    name="Konfigurasi"
+                    parent="menu_liter_root"
+                    sequence="50"/>
+
+        <menuitem id="menu_tps_liter_details"
+                    name="Master Data TPS"
+                    parent="menu_konfig_liter"
+                    sequence="10"
+                    action="act_tps_liter_view"/>
+
+    </data>
+</odoo>

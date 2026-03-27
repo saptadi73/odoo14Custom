@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_mutasi_view" model="ir.ui.view">
+            <field name="name">form.mutasi.form.view</field>
+            <field name="model">form.mutasi</field>
+            <field name="arch" type="xml">
+                <form string="Form Mutasi">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                            </group>
+                            <group>
+                                <field name="id_sapi"/>
+                                <field name="eartag_id"/>
+                                <field name="id_jenis_mutasi"/>
+                                <field name="mati"/>
+                                <field name="aktif"/>
+                                <field name="alamat1"/>
+                                <field name="alamat2"/>
+                                <field name="penerimaan"/>
+                                <field name="bertambah"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="cat_petugas"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_mutasi_search_view" model="ir.ui.view">
+            <field name="name">form.mutasi.search.view</field>
+            <field name="model">form.mutasi</field>
+            <field name="arch" type="xml">
+                <search string="Search Mutasi">
+                    <separator orientation="vertical" />
+                    <field name="eartag_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_mutasi_tree_view" model="ir.ui.view">
+            <field name="name">form.mutasi.tree.view</field>
+            <field name="model">form.mutasi</field>
+            <field name="arch" type="xml">
+                <tree string="Form Mutasi">
+                    <field name="peternak_id"/>
+                    <field name="id_sapi"/>
+                    <field name="tgl_layanan"/>
+                    <field name="id_jenis_mutasi"/>
+                    <field name="cat_petugas"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_form_mutasi_pivot" model="ir.ui.view">
+        <field name="name">form.mutasi.pivot</field>
+        <field name="model">form.mutasi</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_mutasi" model="ir.actions.act_window">
+            <field name="name">Form Mutasi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.mutasi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_mutasi" parent="menu_layanan"
+            action="action_form_mutasi" sequence="60" />
+
+</odoo>

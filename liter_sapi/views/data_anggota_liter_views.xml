@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="kanban_view_data_anggota_liter" model="ir.ui.view">
+            <field name="name">Anggota Kanban</field>
+            <field name="model">data.anggota.liter</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <field name="gmbr"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="o_kanban_image">
+                                    <t t-if="record.gmbr.value">
+                                        <img t-att-src="kanban_image('data.anggota.liter', 'gmbr', record.id.raw_value)"
+                                             alt="Anggota"/>
+                                    </t>
+                                    <t t-if="!record.gmbr.value">
+                                        <img t-att-src='_s + "/base/static/img/avatar.png"' alt="Anggota"/>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="peternak_id"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.kode_peternak.raw_value">
+                                            <field name="kode_peternak"/>
+                                        </li>
+                                        <li t-if="record.status_anggota.raw_value">
+                                            <field name="status_anggota"/>
+                                        </li>
+<!--                                        <li t-if="record.wilayah_id.raw_value">-->
+<!--                                            <field name="wilayah_id"/>-->
+<!--                                        </li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_data_anggota_liter_tree" model="ir.ui.view">
+            <field name="name">data.anggota.liter.tree</field>
+            <field name="model">data.anggota.liter</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Data Anggota">
+                    <field name="kode_peternak"/>
+                    <field name="peternak_id"/>
+                    <field name="status_anggota"/>
+<!--                    <field name="wilayah_id"/>-->
+<!--                    <field name="jenis_pelanggaran_ids"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_data_anggota_liter_form" model="ir.ui.view">
+            <field name="name">data.anggota.liter.form</field>
+            <field name="model">data.anggota.liter</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Data Anggota">
+                    <header>
+<!--                        <button name="print_report_card" type="object"-->
+<!--                            string="Print Peternak Card" class="oe_highlight" />-->
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" position="inside">
+                            <button class="btn oe_stat_button" type="object"
+                                name="get_liter_count"
+                                style="border-right: 1px solid;"
+                                icon="fa-book">
+                                <field string="Liter" name="liter_count" widget="statinfo"/>
+                            </button>
+<!--                            <button class="btn oe_stat_button" type="object"-->
+<!--                                name="get_pelanggaran_count"-->
+<!--                                style="border-right: 1px solid;"-->
+<!--                                icon="fa-book">-->
+<!--                                <field string="Pelanggaran" name="pelanggaran_count" widget="statinfo"/>-->
+<!--                            </button>-->
+                        </div>
+                        <div class="oe_button_box" name="button_box" position="inside">
+
+                        </div>
+                        <field name="gmbr" nolabel="1"
+                            class="oe_left oe_avatar" img_width="120"
+                            img_height="120" width="120" height="120"
+                            widget="image" />
+                        <div class="oe_title w-auto">
+                            <h1>
+<!--                                <field name="peternak_name" placeholder="Nama Anggota" required="1" invisible="1"/>-->
+                                <field name="peternak_id" placeholder="Nama Anggota" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+<!--                                            <field name="peternak_name" placeholder="Nama Anggota" required="1"/>-->
+                                            <field name="peternak_id" placeholder="Nama Anggota" required="1"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group col="4">
+                            <field name="kode_peternak"/>
+<!--                            <field name="wilayah_id"/>-->
+                            <field name="jum_induk_laktasi"/>
+                            <field name="jum_induk_kering"/>
+                            <field name="jum_sapi_dara"/>
+                        </group>
+<!--                        <group>-->
+<!--                                    <field-->
+<!--                                        name="liter_pelanggaran_line"-->
+<!--                                        widget="section_and_note_one2many"-->
+<!--                                        mode="tree,kanban">-->
+<!--                                    <tree>-->
+<!--                                        <field name="peternak_sapi"/>-->
+<!--                                        <field name="id_peternak_sapi"/>-->
+<!--                                        <field name="pelanggaran_id"/>-->
+<!--                                        <field name="keterangan_id"/>-->
+<!--                                    </tree>-->
+<!--                                    <kanban>-->
+<!--                                        <field name="peternak_sapi"/>-->
+<!--                                        <field name="pelanggaran_id"/>-->
+<!--                                        &lt;!&ndash; fields lainnya &ndash;&gt;-->
+<!--                                    </kanban>-->
+<!--                                    <form>-->
+<!--                                        <group>-->
+<!--                                            <field name="peternak_sapi"/>-->
+<!--                                            <field name="id_peternak_sapi"/>-->
+<!--                                            <field name="pelanggaran_id"/>-->
+<!--                                            <field name="keterangan_id"/>-->
+<!--                                        </group>-->
+<!--                                    </form>-->
+<!--                                    </field>-->
+<!--                                </group>-->
+<!--                        <group string="Pelanggaran">-->
+<!--                            <field name="jenis_pelanggaran_liter_ids"-->
+<!--                                widget="section_and_note_one2many"-->
+<!--                                mode="tree">-->
+<!--                                <tree string="Pelanggaran" editable="bottom">-->
+<!--                                    <field name="pelanggaran" readonly="1" options="{'no_create': True}"/>-->
+<!--                                    <field name="jns_kegiatan" readonly="1" />-->
+<!--                                    <field name="keterangan" readonly="1"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </group>-->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_data_anggota_liter_search" model="ir.ui.view">
+            <field name="name">data.anggota.liter.search</field>
+            <field name="model">data.anggota.liter</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Data Anggota">
+                    <field name="peternak_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Name" name="group_by_peternak_id_name"
+                                domain="[]" context="{'group_by':'peternak_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_data_anggota_liter_view">
+            <field name="name">Data Anggota</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">data.anggota.liter</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_data_anggota_liter_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_data_anggota_liter_view_form">
+            <field name="act_window_id" ref="act_data_anggota_liter_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_data_anggota_liter_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_data_anggota_liter_view_tree">
+            <field name="act_window_id" ref="act_data_anggota_liter_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_data_anggota_liter_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_data_anggota_liter_view_kanban">
+            <field name="act_window_id" ref="act_data_anggota_liter_view"/>
+            <field name="sequence" eval="5"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="kanban_view_data_anggota_liter"/>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,134 @@
+<odoo>
+    <data>
+
+         <record id="view_scoring_report_tree_view" model="ir.ui.view">
+            <field name="name">scoring.report.tree.view</field>
+            <field name="model">scoring.report.view</field>
+            <field name="arch" type="xml">
+                <tree string="Scoring Report">
+                    <field name="periode_id"/>
+                    <field name="kode_anggota"/>
+                    <field name="peternak_id"/>
+                    <field name="pakan"/>
+                    <field name="kandang"/>
+                    <field name="pemerahan"/>
+                    <field name="bisnis"/>
+                    <field name="limbah"/>
+                    <field name="kesehatan"/>
+                    <field name="total_scoring"/>
+                    <field name="categ_scoring"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="scoring_pivot" model="ir.ui.view">
+         <field name="name">scoring.pivot</field>
+         <field name="model">scoring.report.view</field>
+         <field name="arch" type="xml">
+            <pivot string="Scoring Report" disable_linking="True">
+                <field name="peternak_id" type="row"/>
+                <field name="periode_id" type="col"/>
+                <field name="pakan" type="measure"/>
+                <field name="kandang" type="measure"/>
+                <field name="pemerahan" type="measure"/>
+                <field name="bisnis" type="measure"/>
+                <field name="limbah" type="measure"/>
+                <field name="kesehatan" type="measure"/>
+                <field name="total_scoring" type="measure"/>
+                <field name="categ_scoring"/>
+             </pivot>
+         </field>
+    </record>
+
+     <record model="ir.actions.act_window" id="action_view_scoring">
+        <field name="name">Scoring Report View</field>
+        <field name="res_model">scoring.report.view</field>
+        <field name="view_mode">pivot,tree</field>
+    </record>
+
+        <record id="view_scoring_report_monthly_tree_view" model="ir.ui.view">
+            <field name="name">scoring.report.monthly.tree.view</field>
+            <field name="model">scoring.report.monthly.view</field>
+            <field name="arch" type="xml">
+                <tree string="Scoring Report">
+                    <field name="kode_anggota"/>
+                    <field name="peternak_id"/>
+                    <field name="pakan"/>
+                    <field name="kandang"/>
+                    <field name="pemerahan"/>
+                    <field name="bisnis"/>
+                    <field name="limbah"/>
+                    <field name="kesehatan"/>
+                    <field name="total_scoring"/>
+                    <field name="categ_scoring"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="scoring_pivot_monthly" model="ir.ui.view">
+         <field name="name">scoring.pivot.monthly</field>
+         <field name="model">scoring.report.monthly.view</field>
+         <field name="arch" type="xml">
+            <pivot string="Scoring Report" disable_linking="True">
+                <field name="peternak_id" type="row"/>
+                <field name="pakan" type="measure"/>
+                <field name="kandang" type="measure"/>
+                <field name="pemerahan" type="measure"/>
+                <field name="bisnis" type="measure"/>
+                <field name="limbah" type="measure"/>
+                <field name="kesehatan" type="measure"/>
+                <field name="total_scoring" type="measure"/>
+                <field name="categ_scoring"/>
+             </pivot>
+         </field>
+    </record>
+
+         <record model="ir.actions.act_window" id="action_view_scoring_monthly">
+            <field name="name">Scoring Report MonthlyView</field>
+            <field name="res_model">scoring.report.monthly.view</field>
+            <field name="view_mode">pivot,tree</field>
+        </record>
+
+         <record id="form_scoring_report_wizard" model="ir.ui.view">
+            <field name="name">scoring.report.wizard.from</field>
+            <field name="model">scoring.report.wizard</field>
+            <field name="arch" type="xml">
+                 <form>
+                    <group>
+                        <group>
+                            <field name="periode_ids" widget="many2many_tags" required="1"/> 
+                            <field name="peternak_ids" widget="many2many_tags" required="1"/> 
+                            <field name="monthly"/> 
+                        </group>
+                    </group>
+                    <footer>
+                        <button
+                            name="button_compute"
+                            string="View Report"
+                            type="object"
+                            default_focus="1"
+                            class="oe_highlight"
+                        />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_wizard_scoring">
+            <field name="name">Scoring Report</field>
+            <field name="res_model">scoring.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_report_root"
+                  name="Report"
+                  parent="kandang_sapi.menu_kandang_root"
+                  sequence="50"/>
+       
+        <menuitem id="menu_scoring_report"  action="action_wizard_scoring" parent="menu_report_root" sequence="1"/>
+
+    </data>
+</odoo>

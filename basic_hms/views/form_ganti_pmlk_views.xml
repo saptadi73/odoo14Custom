@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_ganti_pmlk_view" model="ir.ui.view">
+            <field name="name">form.ganti.pmlk.form.view</field>
+            <field name="model">form.ganti.pmlk</field>
+            <field name="arch" type="xml">
+                <form string="Form Ganti Pemilik">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tgl_layanan"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="periode_id"/>
+                            </group>
+                            <group>
+                                <field name="id_sapi"/>
+                                <field name="eartag_id"/>
+                                <field name="kode_peternak_baru"/>
+                                <field name="peternak_lama_id"/>
+                                <field name="peternak_baru_id"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="keterangan"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_ganti_pmlk_search_view" model="ir.ui.view">
+            <field name="name">form.ganti.pmlk.search.view</field>
+            <field name="model">form.ganti.pmlk</field>
+            <field name="arch" type="xml">
+                <search string="Search Ganti Pemilik">
+                    <separator orientation="vertical" />
+                    <field name="eartag_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_ganti_pmlk_tree_view" model="ir.ui.view">
+            <field name="name">form.ganti.pmlk.tree.view</field>
+            <field name="model">form.ganti.pmlk</field>
+            <field name="arch" type="xml">
+                <tree string="Form Ganti Pemilik">
+                    <field name="tgl_layanan"/>
+                    <field name="petugas_id"/>
+                    <field name="id_sapi"/>
+                    <field name="eartag_id"/>
+                    <field name="peternak_lama_id"/>
+                    <field name="peternak_baru_id"/>
+                    <field name="keterangan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_ganti_pmlk_pivot" model="ir.ui.view">
+        <field name="name">form.ganti.pmlk.pivot</field>
+        <field name="model">form.ganti.pmlk</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_ganti_pmlk" model="ir.actions.act_window">
+            <field name="name">Form Ganti Pemilik</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.ganti.pmlk</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_form_ganti_pmlk" parent="menu_layanan"
+            action="action_form_ganti_pmlk" sequence="210" />
+
+</odoo>

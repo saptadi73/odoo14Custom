@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_liter_sapi_rearing,liter_sapi_rearing,model_liter_sapi_rearing,,1,1,1,1
+access_setoran_line_rearing,setoran_line_rearing,model_setoran_line_rearing,,1,1,1,1
+access_persediaan_nilai_line,persediaan_nilai_line,model_persediaan_nilai_line,,1,1,1,1

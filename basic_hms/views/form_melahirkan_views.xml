@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_melahirkan_view" model="ir.ui.view">
+            <field name="name">form.melahirkan.form.view</field>
+            <field name="model">form.melahirkan</field>
+            <field name="arch" type="xml">
+                <form string="Form Melahirkan">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="kelompok_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                            </group>
+                            <group>
+                                <field name="ibu_id"/>
+                                <field name="eartag_ibu"/>
+<!--                                <field name="ibu_id"/>-->
+<!--                                <field name="eartag_ibu"/>-->
+                                <field name="pejantan_id"/>
+                                <!-- <field name="ayah_id"/> -->
+                                <!-- <field name="eartag_ayah"/> -->
+                                <field name="tgl_lahir"/>
+                                <field name="status_lahir"/>
+                                <field name="status_pelihara"/>
+                                <field name="jenis_kelamin"/>
+                                <field name="berat_lahir"/>
+                                <field name="kondisi_lahir"/>
+                                <field name="jumlah_lahir"/>
+                                <field name="jumlah_pelihara"/>
+                                <field name="jumlah_mati"/>
+                                <field name="jumlah_dijual"/>
+                                <field name="harga_jual"/>
+                                <field name="keadaan_saat_melahirkan_id"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="cat_petugas"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_melahirkan_search_view" model="ir.ui.view">
+            <field name="name">form.melahirkan.search.view</field>
+            <field name="model">form.melahirkan</field>
+            <field name="arch" type="xml">
+                <search string="Search Melahirkan">
+                    <separator orientation="vertical" />
+                    <field name="id_pemilik" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Pemilik" name='by_id_pemilik' context="{'group_by':'id_pemilik'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_melahirkan_tree_view" model="ir.ui.view">
+            <field name="name">form.melahirkan.tree.view</field>
+            <field name="model">form.melahirkan</field>
+            <field name="arch" type="xml">
+                <tree string="Form Melahirkan">
+                    <!-- <field name="kode_eartag"/> -->
+                    <field name="ibu_id"/>
+                    <field name="eartag_ibu"/>
+                    <!-- <field name="ayah_id"/> -->
+                    <field name="pejantan_id"/>
+                    <!-- <field name="eartag_ayah"/> -->
+                    <field name="tgl_lahir"/>
+                    <field name="status_lahir"/>
+                    <field name="status_pelihara"/>
+                    <field name="jenis_kelamin"/>
+                    <field name="berat_lahir"/>
+                    <field name="kondisi_lahir"/>
+                    <field name="jumlah_lahir"/>
+                    <field name="jumlah_pelihara"/>
+                    <field name="jumlah_mati"/>
+                    <field name="jumlah_dijual"/>
+                    <field name="harga_jual"/>
+                    <field name="keadaan_saat_melahirkan_id"/>
+                    <field name="cat_petugas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_melahirkan_pivot" model="ir.ui.view">
+        <field name="name">form.melahirkan.pivot</field>
+        <field name="model">form.melahirkan</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_melahirkan" model="ir.actions.act_window">
+            <field name="name">Form Melahirkan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.melahirkan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_melahirkan" parent="menu_layanan"
+            action="action_form_melahirkan" sequence="140" />
+
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_usaha_anggota_tree" model="ir.ui.view">
+            <field name="name">usaha.anggota.tree</field>
+            <field name="model">usaha.anggota</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Usaha Peternak">
+                    <field name="usaha_name"/>
+                    <field name="jenis_usaha"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_usaha_anggota_form" model="ir.ui.view">
+            <field name="name">usaha.peternak.form</field>
+            <field name="model">usaha.anggota</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Usaha Anggota">
+                    <sheet>
+                        <group col="4">
+                            <field name="usaha_name" placeholder="Nama Usaha"/>
+                            <field name="jenis_usaha"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_usaha_anggota_search" model="ir.ui.view">
+            <field name="name">usaha.anggota.search</field>
+            <field name="model">usaha.anggota</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Usaha Anggota">
+                    <field name="jenis_usaha"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Jenis Usaha" name="group_by_usaha_peternak_jenis_usaha"
+                                domain="[]" context="{'group_by':'jenis_usaha'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_usaha_anggota_view">
+            <field name="name">Usaha Peternak</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">usaha.anggota</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_usaha_anggota_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_usaha_anggota_view_form">
+            <field name="act_window_id" ref="act_usaha_anggota_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_usaha_anggota_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_usaha_anggota_view_tree">
+            <field name="act_window_id" ref="act_usaha_anggota_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_usaha_anggota_tree"/>
+        </record>
+
+    <menuitem id="menu_usaha_anggota_details"
+                    name="Usaha Anggota"
+                    parent="simpin_config_master"
+                    sequence="1"
+                    action="act_usaha_anggota_view"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,1 @@
+from . import kandang_sapi

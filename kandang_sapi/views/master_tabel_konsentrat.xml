@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tabel_konsentrat_kunjungan_tree" model="ir.ui.view">
+            <field name="name">tabel.konsentrat.kunjungan.tree</field>
+            <field name="model">tabel.konsentrat.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Tabel Konsentrat">
+                    <field name="konsentrat"/>
+                    <field name="nilai_bk_plus"/>
+                    <field name="nilai_tdn_plus"/>
+                    <field name="nilai_bk_2a"/>
+                    <field name="nilai_tdn_2a"/>
+                    <field name="nilai_bk_mapan"/>
+                    <field name="nilai_tdn_mapan"/>
+                    <field name="nilai_bk_feed"/>
+                    <field name="nilai_tdn_feed"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tabel_konsentrat_kunjungan_form" model="ir.ui.view">
+            <field name="name">tabel.konsentrat.kunjungan.form</field>
+            <field name="model">tabel.konsentrat.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Tabel Konsentrat">
+                    <sheet>
+                        <div class="oe_title w-auto">
+                            <h1>
+                                <field name="konsentrat" placeholder="Name" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="konsentrat" placeholder="Nama Tabel" required="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <field name="is_active"/>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="nilai_bk_plus"/>
+                                <field name="nilai_bk_2a"/>
+                                <field name="nilai_bk_mapan"/>
+                                <field name="nilai_bk_feed"/>
+                                <field name="nilai_bk_konsentrat_1"/>
+                                <field name="nilai_bk_konsentrat_2"/>
+                                <field name="nilai_bk_konsentrat_3"/>
+                                <field name="nilai_bk_konsentrat_4"/>
+                                <field name="nilai_bk_konsentrat_5"/>
+                                <field name="nilai_bk_konsentrat_6"/>
+                                <field name="nilai_bk_konsentrat_7"/>
+                            </group>
+                            <group>
+                                <field name="nilai_tdn_plus"/>
+                                <field name="nilai_tdn_2a"/>
+                                <field name="nilai_tdn_mapan"/>
+                                <field name="nilai_tdn_feed"/>
+                                <field name="nilai_tdn_konsentrat_1"/>
+                                <field name="nilai_tdn_konsentrat_2"/>
+                                <field name="nilai_tdn_konsentrat_3"/>
+                                <field name="nilai_tdn_konsentrat_4"/>
+                                <field name="nilai_tdn_konsentrat_5"/>
+                                <field name="nilai_tdn_konsentrat_6"/>
+                                <field name="nilai_tdn_konsentrat_7"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tabel_konsentrat_kunjungan_search" model="ir.ui.view">
+            <field name="name">tabel.konsentrat.kunjungan.search</field>
+            <field name="model">tabel.konsentrat.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Tabel Konsentrat">
+                    <field name="konsentrat"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Tabel Konsentrat" name="group_by_konsentrat_group_name"
+                                domain="[]" context="{'group_by':'konsentrat'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_tabel_konsentrat_kunjungan_view">
+            <field name="name">Tabel Konsentrat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tabel.konsentrat.kunjungan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_tabel_konsentrat_kunjungan_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_konsentrat_kunjungan_view_form">
+            <field name="act_window_id" ref="act_tabel_konsentrat_kunjungan_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tabel_konsentrat_kunjungan_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_konsentrat_kunjungan_view_tree">
+            <field name="act_window_id" ref="act_tabel_konsentrat_kunjungan_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tabel_konsentrat_kunjungan_tree"/>
+        </record>
+
+        <menuitem id="menu_tabel_konsentrat_kunjungan_details"
+                    name="Tabel Konsentrat"
+                    parent="menu_konfigurasi_root"
+                    sequence="20"
+                    action="act_tabel_konsentrat_kunjungan_view"/>
+    </data>
+</odoo>

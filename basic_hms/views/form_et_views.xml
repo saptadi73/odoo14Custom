@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--        <record id="form_et_view" model="ir.ui.view">-->
+<!--            <field name="name">form.et.form.view</field>-->
+<!--            <field name="model">form.et</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Form ET">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="peternak_id"/>-->
+<!--                                <field name="id_pemilik"/>-->
+<!--                                <field name="kelompok_id"/>-->
+<!--                                <field name="petugas_id"/>-->
+<!--                                <field name="jabatan_id"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="id_sapi"/>-->
+<!--                                <field name="eartag_id"/>-->
+<!--                                <field name="tgl_layanan"/>-->
+<!--                                <field name="kode_embrio"/>-->
+<!--                                <field name="id_pejantan"/>-->
+<!--                                <field name="id_donor"/>-->
+<!--                                <field name="biaya"/>-->
+<!--                                <field name="tps_id"/>-->
+<!--                                <field name="bcs"/>-->
+<!--                                <field name="cat_petugas"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="form_et_search_view" model="ir.ui.view">-->
+<!--            <field name="name">form.et.search.view</field>-->
+<!--            <field name="model">form.et</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search ET">-->
+<!--                    <separator orientation="vertical" />-->
+<!--                    <field name="eartag_id" select="1" />-->
+<!--                    <newline />-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="form_et_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">form.et.tree.view</field>-->
+<!--            <field name="model">form.et</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Form ET">-->
+<!--                    <field name="peternak_id"/>-->
+<!--                    <field name="id_sapi"/>-->
+<!--                    <field name="tgl_layanan"/>-->
+<!--                    <field name="kode_embrio"/>-->
+<!--                    <field name="cat_petugas"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_form_et_pivot" model="ir.ui.view">-->
+<!--        <field name="name">form.et.pivot</field>-->
+<!--        <field name="model">form.et</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <pivot>-->
+<!--                <field name="tgl_layanan" type="col"/>-->
+<!--                <field name="petugas_id" type="row"/>-->
+<!--                <field name="jabatan_id" type="col"/>-->
+<!--                <field name="petugas_id" type="count"/>-->
+<!--            </pivot>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--        <record id="action_form_et" model="ir.actions.act_window">-->
+<!--            <field name="name">Form Embryo Transfer</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">form.et</field>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="view_mode">tree,form, pivot</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="menu_form_et" parent="menu_layanan"-->
+<!--            action="action_form_et" sequence="70" />-->
+
+</odoo>

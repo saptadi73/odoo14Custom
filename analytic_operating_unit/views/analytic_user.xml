@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <record id="view_res_users_form" models="ir.ui.view">-->
+<!--        <field name="name">res.users.form</field>-->
+<!--        <field name="models">res.users</field>-->
+<!--        <field name="inherit_id" ref="base.view_users_form" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[@name='access_rights']/group[1]" position="after">-->
+<!--                <group string="Analytic Account">-->
+<!--                    <field-->
+<!--                        name="analytic_ids"-->
+<!--                        widget="many2many_tags"-->
+<!--                        domain="[('id','in',analytic_ids)]"-->
+<!--                    />-->
+<!--                </group>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>

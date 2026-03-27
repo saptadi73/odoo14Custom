@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_kunjungan" model="ir.sequence">
+            <field name="name">Kunjungan</field>
+            <field name="code">form.kunjungan</field>
+            <field name="prefix">LK</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_kunjungan_gdfp" model="ir.sequence">
+            <field name="name">Kunjungan</field>
+            <field name="code">form.kunjungan.gdfp</field>
+            <field name="prefix">LKG</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
+

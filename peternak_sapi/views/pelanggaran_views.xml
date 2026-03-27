@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_pelanggaran_tree" model="ir.ui.view">
+            <field name="name">pelanggaran.tree</field>
+            <field name="model">pelanggaran.peternak</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Pelanggara">
+                    <field name="peternak_id"/>
+                    <field name="kode_peternak"/>
+                    <field name="pelanggaran"/>
+                    <field name="keterangan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pelanggaran_form" model="ir.ui.view">
+            <field name="name">pelanggaran.form</field>
+            <field name="model">pelanggaran.peternak</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Pelanggaran">
+                    <header>
+                        <button name="func_check" type="object" string="Check" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="func_validate" type="object" string="Validasi" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'check')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,check,validate"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="peternak_id"/>
+                            <field name="kode_peternak"/>
+                            <field name="pelanggaran"/>
+                            <field name="jns_kegiatan"/>
+                            <field name="keterangan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pelanggaran_search" model="ir.ui.view">
+            <field name="name">pelanggaran.search</field>
+            <field name="model">pelanggaran.peternak</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Pelanggaran">
+                    <field name="pelanggaran"/>
+                    <field name="peternak_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Jenis Pelanggaran" name="group_by_pelanggaran"
+                                domain="[]" context="{'group_by':'pelanggaran'}"/>
+                        <filter string="Anggota" name="group_peternak_id"
+                                domain="[]" context="{'group_by':'peternak_id'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_pelanggaran_view">
+            <field name="name">Pelanggaran</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pelanggaran.peternak</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_pelanggaran_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_pelanggaran_view_form">
+            <field name="act_window_id" ref="act_pelanggaran_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pelanggaran_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_pelanggaran_view_tree">
+            <field name="act_window_id" ref="act_pelanggaran_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_pelanggaran_tree"/>
+        </record>
+
+        <menuitem id="menu_pelanggaran_details"
+                    name="Pelanggaran"
+                    parent="menu_peternak_sapi_root"
+                    sequence="30"
+                    action="act_pelanggaran_view"
+                    />
+    </data>
+</odoo>

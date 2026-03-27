@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_payslip">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>NOTA PEMBAYARAN SUSU</h2>
+                    <p t-field="o.name"/>
+
+                    <table class="table table-sm table-bordered">
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td><span t-field="o.employee_id"/></td>
+                            <td><strong>Designation</strong></td>
+                            <td><span t-field="o.employee_id.job_id"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong></td>
+                            <td colspan="3">
+                                <div t-field="o.employee_id.address_home_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td><span t-field="o.employee_id.work_email"/></td>
+                            <td><strong>Identification No</strong></td>
+                            <td><span t-field="o.employee_id.identification_id"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reference</strong></td>
+                            <td><span t-field="o.number"/></td>
+                            <td><strong>Bank Account</strong></td>
+                            <td><span t-field="o.employee_id.bank_account_id"/></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date From</strong></td>
+                            <td><span t-field="o.date_from"/></td>
+                            <td><strong>Date To</strong></td>
+                            <td><span t-field="o.date_to"/></td>
+                        </tr>
+                    </table>
+                    <table class="table table-sm">
+                        <tr>
+                            <td>Liter Pagi</td>
+                            <td><span t-field="o.setor_pagi"/></td>
+                            <td>Liter Sore</td>
+                            <td><span t-field="o.setor_sore"/></td>
+                        </tr>	
+                        <tr>
+                            <td>Total Setor</td>
+                            <td><span t-field="o.tot_setoran"/></td>
+                            <td>Fat</td>
+                            <td><span t-field="o.fat"/></td>
+                        </tr>	
+					</table>						
+                      <t t-set="t_terima" t-value="0"/>
+                      <t t-set="t_potong" t-value="0"/>
+                      <t t-set="t_thp" t-value="0"/>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                            <td width="50%">P E N E R I M A A N</td>
+                            <td width="50%">P O T O N G A N</td>
+                            </tr>
+                        </thead>
+                         <tr>
+                            <td width="50%">
+                              <table class="table table-condensed">
+                                <tbody>
+                                  <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                                    <t t-if="line.category_id.parent_id.id==177 and line.amount>0">
+                                      <td width="60%"><span t-esc="line.name"/></td>
+                                      <td width="40%" class="text-right"><span t-esc="'{0:,.2f}'.format(line.total)" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}" /></td>
+									  <t t-set="t_terima" t-value="t_terima + line.total"/>
+                                    </t>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                            <td width="50%">
+                              <table class="table table-condensed">
+                                <tbody>
+                                  <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+                                    <t t-if="line.category_id.parent_id.id!=177 and (line.amount>0 or line.amount!=0)">
+                                      <td width="60%"><span t-esc="line.name"/></td>
+                                      <td width="40%" class="text-right"><span t-esc="'{0:,.2f}'.format(line.total)" t-esc-options="{'widget': 'monetary', 'display_currency': currency}"/></td>
+									  <t t-set="t_potong" t-value="t_potong + line.total"/>
+                                    </t>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+						  <tr>
+                            <td width="50%">
+                              <table class="table table-condensed">
+                                <tbody>
+                                  <tr>
+                                    <td width="60%">Total Penerimaan</td>
+                                    <td width="40%" class="text-right"><span t-esc="'{0:,.2f}'.format(t_terima)" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                            <td width="50%">
+                              <table class="table table-condensed">
+                                <tbody>
+                                  <tr>
+                                    <td width="60%">Total Potongan</td>
+                                    <td width="40%" class="text-right"><span t-esc="'{0:,.2f}'.format(t_potong)" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                    </table>
+					<t t-set="t_thp" t-value="t_terima - t_potong"/>
+                    <p><strong>Take Home Pay : <span t-esc="'{0:,.2f}'.format(t_thp)" t-esc-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.company_id.currency_id}"/></strong></p>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

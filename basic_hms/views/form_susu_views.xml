@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--        <record id="form_susu_view" model="ir.ui.view">-->
+<!--            <field name="name">form.susu.view</field>-->
+<!--            <field name="model">form.susu</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Form Susu">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="id_pemilik"/>-->
+<!--                            <field name="eartag_id"/>-->
+<!--                            <field name="tgl_layanan"/>-->
+<!--                            <field name="cat_petugas"/>-->
+<!--                            <field name="no_sample"/>-->
+<!--                            <field name="susu_pgi"/>-->
+<!--                            <field name="susu_sre"/>-->
+<!--                            <field name="fat_pgi"/>-->
+<!--                            <field name="fat_sre"/>-->
+<!--                            <field name="prot_pgi"/>-->
+<!--                            <field name="prot_sre"/>-->
+<!--                            <field name="jml_susu"/>-->
+<!--                            <field name="fat"/>-->
+<!--                            <field name="protein"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="form_susu_search_view" model="ir.ui.view">-->
+<!--            <field name="name">form.susu.search.view</field>-->
+<!--            <field name="model">form.susu</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Susu">-->
+<!--                    <separator orientation="vertical" />-->
+<!--                    <field name="eartag_id" select="1" />-->
+<!--                    <newline />-->
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>-->
+<!--                    </group>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="form_susu_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">form.susu.tree.view</field>-->
+<!--            <field name="model">form.susu</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Form Susu">-->
+<!--                    <field name="id_pemilik"/>-->
+<!--                    <field name="eartag_id"/>-->
+<!--                    <field name="tgl_layanan"/>-->
+<!--                    <field name="cat_petugas"/>-->
+<!--                    <field name="no_sample"/>-->
+<!--                    <field name="susu_pgi"/>-->
+<!--                    <field name="susu_sre"/>-->
+<!--                    <field name="fat_pgi"/>-->
+<!--                    <field name="fat_sre"/>-->
+<!--                    <field name="prot_pgi"/>-->
+<!--                    <field name="prot_sre"/>-->
+<!--                    <field name="jml_susu"/>-->
+<!--                    <field name="fat"/>-->
+<!--                    <field name="protein"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="action_form_susu" model="ir.actions.act_window">-->
+<!--            <field name="name">Form Susu</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">form.susu</field>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="menu_form_susu" parent="menu_layanan"-->
+<!--            action="action_form_susu" sequence="230" />-->
+
+</odoo>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_masuk_view" model="ir.ui.view">
+            <field name="name">form.masuk.form.view</field>
+            <field name="model">form.masuk</field>
+            <field name="arch" type="xml">
+                <form string="Form Masuk">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="kelompok_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                            </group>
+                            <group>
+                                <field name="image" nolabel="1"
+                                class="oe_left oe_avatar" img_width="120"
+                                img_height="120" width="120" height="120"
+                                widget="image" />
+                                <field name="eartag_id"/>
+                                <field name="telinga_ki_ka"/>
+                                <field name="nama_sapi"/>
+                                <field name="sex"/>
+                                <field name="tipe_sapi_id"/>
+                                <field name="state"/>
+                                <field name="et"/>
+                                <field name="kembar"/>
+                                <field name="metoda_id"/>
+                                <field name="tgl_lahir"/>
+                                <field name="ibu_id"/>
+                                <field name="eartag_ibu"/>
+                                <!-- <field name="ayah_id"/> -->
+                                <field name="pejantan_id"/>
+                                <field name="eartag_ayah"/>
+                                <field name="tgl_ident"/>
+                                <field name="breed_id"/>
+                                <field name="tie"/>
+                                <field name="kode_klhrn_id"/>
+                                <field name="stts_reprod_id"/>
+                                <field name="status_aktif"/>
+<!--                                <field name="stts_laktasi_id"/>-->
+                                <field name="lak_ke"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="cat_petugas"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_masuk_search_view" model="ir.ui.view">
+            <field name="name">form.masuk.search.view</field>
+            <field name="model">form.masuk</field>
+            <field name="arch" type="xml">
+                <search string="Search Masuk">
+                    <separator orientation="vertical" />
+                    <field name="eartag_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_masuk_tree_view" model="ir.ui.view">
+            <field name="name">form.masuk.tree.view</field>
+            <field name="model">form.masuk</field>
+            <field name="arch" type="xml">
+                <tree string="Form Masuk">
+                    <field name="petugas_id"/>
+                    <field name="tgl_layanan"/>
+                    <field name="eartag_id"/>
+                    <field name="telinga_ki_ka"/>
+                    <field name="nama_sapi"/>
+                    <field name="tipe_sapi_id"/>
+                    <field name="tgl_ident"/>
+                    <field name="breed_id"/>
+                    <field name="metoda_id"/>
+                    <field name="tgl_lahir"/>
+                    <field name="et"/>
+                    <field name="kembar"/>
+                    <field name="tie"/>
+                    <field name="kode_klhrn_id"/>
+                    <field name="stts_reprod_id"/>
+<!--                    <field name="stts_laktasi_id"/>-->
+                    <field name="lak_ke"/>
+                    <field name="ibu_id"/>
+                    <!-- <field name="ayah_id"/> -->
+                    <field name="pejantan_id"/>
+                    <field name="status_aktif"/>
+                    <field name="cat_petugas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_masuk_pivot" model="ir.ui.view">
+        <field name="name">form.masuk.pivot</field>
+        <field name="model">form.masuk</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_masuk" model="ir.actions.act_window">
+            <field name="name">Form Masuk</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.masuk</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_masuk" parent="menu_layanan"
+            action="action_form_masuk" sequence="130" />
+
+</odoo>

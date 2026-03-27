@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+		<record id="Gaji/Pensiunan/THT/JHT" model="hr.salary.rule.category">
+            <field name="name">Gaji/Pensiunan/THT/JHT</field>
+            <field name="code">GAPOK</field>
+        </record>
+		<record id="Pensiun" model="hr.salary.rule.category">
+            <field name="name">Pensiun</field>
+            <field name="code">PEN</field>
+        </record>
+		<record id="PPh" model="hr.salary.rule.category">
+            <field name="name">PPh</field>
+            <field name="code">PPh</field>
+        </record>
+		<record id="Tunjangan-PPh" model="hr.salary.rule.category">
+            <field name="name">Tunjangan PPh</field>
+            <field name="code">TP</field>
+        </record>
+		<record id="Tunjangan-Lainnya" model="hr.salary.rule.category">
+            <field name="name">Tunjangan Lainnya</field>
+            <field name="code">TL</field>
+        </record>
+		<record id="Penghasilan-Non-Rutin" model="hr.salary.rule.category">
+            <field name="name">Penghasilan Non-Rutin</field>
+            <field name="code">PNR</field>
+        </record>
+		<record id="Sebelum-PPh" model="hr.salary.rule.category">
+            <field name="name">Sebelum PPh</field>
+            <field name="code">BP</field>
+        </record>
+		<record id="Pinjaman" model="hr.salary.rule.category">
+            <field name="name">Pinjaman</field>
+            <field name="code">PINJ</field>
+        </record>
+		<record id="Potongan" model="hr.salary.rule.category">
+            <field name="name">Potongan</field>
+            <field name="code">POT</field>
+        </record>
+		<record id="Potongan-Lain" model="hr.salary.rule.category">
+            <field name="name">Potongan Lain</field>
+            <field name="code">POTLAN</field>
+        </record>
+		<record id="Zakat" model="hr.salary.rule.category">
+            <field name="name">Zakat</field>
+            <field name="code">ZKT</field>
+        </record>
+		<record id="Batas-BPJS" model="hr.salary.rule.category">
+            <field name="name">Batas BPJS</field>
+            <field name="code">BPB</field>
+        </record>
+		<record id="Total-Potongan" model="hr.salary.rule.category">
+            <field name="name">Total Potongan</field>
+            <field name="code">TPOT</field>
+        </record>
+		<record id="Tumpangan-PPH" model="hr.salary.rule.category">
+            <field name="name">Tumpangan PPH</field>
+            <field name="code">TPPP</field>
+        </record>
+		<record id="Jabatan" model="hr.salary.rule.category">
+            <field name="name">Jabatan</field>
+            <field name="code">BJB</field>
+        </record>
+		<record id="PKP" model="hr.salary.rule.category">
+            <field name="name">PKP</field>
+            <field name="code">PKP</field>
+        </record>
+		<record id="PPH21-Setahun" model="hr.salary.rule.category">
+            <field name="name">PPH21 Setahun</field>
+            <field name="code">PPH1TH</field>
+        </record>
+		<record id="Jabatan-Akhir" model="hr.salary.rule.category">
+            <field name="name">Jabatan Akhir</field>
+            <field name="code">BJBA</field>
+        </record>
+		<record id="Bonus/THR" model="hr.salary.rule.category">
+            <field name="name">Bonus/THR</field>
+            <field name="code">BTH</field>
+        </record>
+		<record id="Previous-Brutto" model="hr.salary.rule.category">
+            <field name="name">Previous Brutto</field>
+            <field name="code">PBRUT</field>
+        </record>
+		<record id="Previous-PEN" model="hr.salary.rule.category">
+            <field name="name">Previous PEN</field>
+            <field name="code">PPEN</field>
+        </record>
+		<record id="Previous-PPH" model="hr.salary.rule.category">
+            <field name="name">Previous PPH</field>
+            <field name="code">PREPPH</field>
+        </record>
+		<record id="Previous-Jabatan" model="hr.salary.rule.category">
+            <field name="name">Previous Jabatan</field>
+            <field name="code">PREJAB</field>
+        </record>
+		<record id="Previous-THR/BNS" model="hr.salary.rule.category">
+            <field name="name">Previous THR/BNS</field>
+            <field name="code">PREBTH</field>
+        </record>
+		<record id="Previous-Jabatan-THR-BNS" model="hr.salary.rule.category">
+            <field name="name">Previous Jabatan THR-BNS</field>
+            <field name="code">PREJABTHR</field>
+        </record>
+		<record id="Previous-PPH-THR-BNS" model="hr.salary.rule.category">
+            <field name="name">Previous PPH THR-BNS</field>
+            <field name="code">PREPPHBT</field>
+        </record>
+		<record id="Previous-PPH-Gaji" model="hr.salary.rule.category">
+            <field name="name">Previous PPH Gaji</field>
+            <field name="code">PREPPHGJ</field>
+        </record>
+		<record id="Previous-Job/Branch/Office" model="hr.salary.rule.category">
+            <field name="name">Previous Job/Branch/Office</field>
+            <field name="code">PREJOBRO</field>
+        </record>
+		<record id="Non-Karyawan" model="hr.salary.rule.category">
+            <field name="name">Non Karyawan</field>
+            <field name="code">NK</field>
+        </record>
+		<record id="PPhNK" model="hr.salary.rule.category">
+            <field name="name">PPhNK</field>
+            <field name="code">PPhNK</field>
+        </record>
+		<record id="Tunjangan-PPhNK" model="hr.salary.rule.category">
+            <field name="name">Tunjangan PPhNK</field>
+            <field name="code">TPNK</field>
+        </record>
+		<record id="PPH-Setahun" model="hr.salary.rule.category">
+            <field name="name">PPH Setahun</field>
+            <field name="code">PPHSTHN</field>
+        </record>
+		<record id="PPh-Gaji" model="hr.salary.rule.category">
+            <field name="name">PPh Gaji</field>
+            <field name="code">PPhG</field>
+        </record>
+		<record id="PPh-THR/Bonus" model="hr.salary.rule.category">
+            <field name="name">PPh THR/Bonus</field>
+            <field name="code">PPhTB</field>
+        </record>
+		<record id="Selisih-PPh-21" model="hr.salary.rule.category">
+            <field name="name">Selisih PPh 21</field>
+            <field name="code">SLSHP21</field>
+        </record>
+		<record id="Previous-TTLDSB" model="hr.salary.rule.category">
+            <field name="name">Previous TTLDSB</field>
+            <field name="code">PTTLDSB</field>
+        </record>
+		<record id="Previous-Premi" model="hr.salary.rule.category">
+            <field name="name">Previous Premi</field>
+            <field name="code">PPRM</field>
+        </record>
+<!--        <record id="DEDUCTION" model="hr.salary.rule.category">-->
+<!--            <field name="name">Deduction</field>-->
+<!--            <field name="code">DED</field>-->
+<!--            <field name="parent_id" eval="False"/>-->
+<!--        </record>-->
+
+        <record id="hr_rule_basic" model="hr.salary.rule">
+            <field name="name">Basic Salary</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">BASIC</field>
+            <field name="category_id" ref="hr_payroll_community.BASIC"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage</field>
+        </record>
+
+        <record id="hr_rule_taxable" model="hr.salary.rule">
+            <field name="name">Gross</field>
+            <field name="sequence" eval="195"/>
+            <field name="code">GROSS</field>
+            <field name="category_id" ref="hr_payroll_community.GROSS"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (categories.GAPOK + categories.ALW + categories.PNR + categories.BTH + categories.TP)</field>
+        </record>
+
+        <record id="hr_rule_net" model="hr.salary.rule">
+            <field name="name">Net Salary</field>
+            <field name="sequence" eval="200"/>
+            <field name="code">NET</field>
+            <field name="category_id" ref="hr_payroll_community.NET"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (categories.GAPOK + categories.ALW  + categories.PNR + categories.BTH) - (categories.DED + categories.PINJ + categories.POT + categories.POTLAN + categories.ZKT + categories.PPh) if categories.PPh >= 0 else (categories.GAPOK + categories.ALW  + categories.PNR + categories.BTH) - ((categories.DED + categories.PINJ + categories.POT + categories.POTLAN + categories.ZKT) + (-1 * categories.PPh))</field>
+            <field name="register_id" ref="contrib_register_employees"/>
+        </record>
+
+        <record id="hr_rule_hra" model="hr.salary.rule">
+            <field name="name">House Rent Allowance</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">HRA</field>
+            <field name="category_id" ref="hr_payroll_community.HRA"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.hra</field>
+        </record>
+
+        <record id="hr_rule_da" model="hr.salary.rule">
+            <field name="name">Dearness Allowance</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">DA</field>
+            <field name="category_id" ref="hr_payroll_community.DA"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.da</field>
+        </record>
+
+        <record id="hr_rule_travel" model="hr.salary.rule">
+            <field name="name">Travel Allowance</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">Travel</field>
+            <field name="category_id" ref="hr_payroll_community.Travel"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.travel_allowance</field>
+        </record>
+
+        <record id="hr_rule_meal" model="hr.salary.rule">
+            <field name="name">Meal Allowance</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">Meal</field>
+            <field name="category_id" ref="hr_payroll_community.Meal"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.meal_allowance</field>
+        </record>
+
+        <record id="hr_rule_medical" model="hr.salary.rule">
+            <field name="name">Medical Allowance</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">Medical</field>
+            <field name="category_id" ref="hr_payroll_community.Medical"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.medical_allowance</field>
+        </record>
+
+        <record id="hr_rule_other" model="hr.salary.rule">
+            <field name="name">Other Allowance</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">Other</field>
+            <field name="category_id" ref="hr_payroll_community.Other"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.other_allowance</field>
+        </record>
+		
+        <record id="hr_rule_TPens" model="hr.salary.rule">
+            <field name="name">Tunjangan Pensiun 2%</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">TPens</field>
+            <field name="category_id" ref="hr_payroll_community.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_pensiun * 0.02)</field>
+        </record>
+
+        <record id="hr_rule_TJHT" model="hr.salary.rule">
+            <field name="name">Tunjangan JHT 3.7%</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TJHT</field>
+            <field name="category_id" ref="hr_payroll_community.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(contract.dsr_bpjstk * 0.037)</field>
+        </record>
+
+       <record id="hr_rule_PGR" model="hr.salary.rule">
+            <field name="name">Pengurang</field>
+            <field name="sequence" eval="109"/>
+            <field name="code">PGR</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.PEN + categories.PPEN</field>
+        </record>
+
+        <record id="hr_rule_JBT" model="hr.salary.rule">
+            <field name="name">Biaya Jabatan</field>
+            <field name="sequence" eval="109"/>
+            <field name="code">JBT</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else categories.BJB + categories.PREJAB</field>
+        </record>
+
+        <record id="hr_rule_PREBRT" model="hr.salary.rule">
+            <field name="name">Prev_brt</field>
+            <field name="sequence" eval="109"/>
+            <field name="code">PREBRT</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">p21=0.00 
+result=((categories.GAPOK + categories.PNR) + ((categories.PBRUT - categories.PPHA))) + p21</field>
+        </record>
+
+        <record id="hr_rule_TLLDSB" model="hr.salary.rule">
+            <field name="name">Tunla/Lembur/dsb</field>
+            <field name="sequence" eval="109"/>
+            <field name="code">TLLDSB</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.PNR + TLOK + TT + TM + TJ + TUNLA + categories.PTTLDSB</field>
+        </record>
+
+        <record id="hr_rule_CBTH" model="hr.salary.rule">
+            <field name="name">THR/Bonus</field>
+            <field name="sequence" eval="109"/>
+            <field name="code">CBTH</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = categories.BTH + categories.PREBTH</field>
+        </record>
+
+        <record id="hr_rule_PRMA" model="hr.salary.rule">
+            <field name="name">Premi Asuransi</field>
+            <field name="sequence" eval="109"/>
+            <field name="code">PRMA</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = TJKM + TJKK + TDPLK + TBPJSKes + categories.PPRM</field>
+        </record>
+
+        <record id="hr_rule_BRTA" model="hr.salary.rule">
+            <field name="name">Brutto Akhir</field>
+            <field name="sequence" eval="121"/>
+            <field name="code">BRTA</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0.0</field>
+        </record>
+
+	    <record id="hr_rule_BJABTHB" model="hr.salary.rule">
+            <field name="name">Biaya Jabatan-THR/Bonus</field>
+            <field name="sequence" eval="121"/>
+            <field name="code">BJABTHB</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = 0.0</field>
+        </record>
+
+        <record id="hr_rule_JM1" model="hr.salary.rule">
+            <field name="name">Jumlah 1</field>
+            <field name="sequence" eval="122"/>
+            <field name="code">JM1</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.COMP"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = BRTA -  ((TLOK + TJKM + TJKK + TDPLK + TBPJSKes + categories.PPRM) + (categories.PNR + TT + TM + TJ + TUNLA + categories.PTTLDSB) + PPH21GU)</field>
+        </record>
+
+        <record id="hr_rule_PPh" model="hr.salary.rule">
+            <field name="name">PPh21</field>
+            <field name="sequence" eval="150"/>
+            <field name="code">PPh</field>
+            <field name="category_id" ref="hr_payroll_community.PPh"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(categories.TPPP - categories.PREPPH)</field>
+        </record>
+		
+        <!-- Salary Structure -->
+
+         <record id="structure_base" model="hr.payroll.structure">
+            <field name="code">BASE</field>
+            <field name="name">Base for new structures</field>
+            <field eval="[(6, 0, [ref('hr_rule_basic'), ref('hr_rule_taxable'),ref('hr_rule_net')])]" name="rule_ids"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Decimal Precision -->
+
+        <record forcecreate="True" id="decimal_payroll" model="decimal.precision">
+            <field name="name">Payroll</field>
+            <field name="digits">2</field>
+        </record>
+
+        <record forcecreate="True" id="decimal_payroll_rate" model="decimal.precision">
+            <field name="name">Payroll Rate</field>
+            <field name="digits">4</field>
+        </record>
+
+
+    </data>
+</odoo>

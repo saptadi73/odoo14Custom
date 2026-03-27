@@ -1,0 +1,54 @@
+<odoo>
+	<data  noupdate="0">
+       
+        <!--Deduction-->
+        <record id="hr_rule_pot_absensi" model="hr.salary.rule">
+            <field name="name">-- Potongan Absensi</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">POTABS</field>
+            <field name="categ_on_payslip">potongan</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage/payslip.hari_calendar) * payslip.alpha</field>
+        </record>
+        <record id="hr_rule_pot_karyawan" model="hr.salary.rule">
+            <field name="name">-- Potongan Karyawan</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">POTKRY</field>
+            <field name="categ_on_payslip">potongan</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.POTKRY.amount </field>
+        </record>
+        <record id="hr_rule_pot_lain" model="hr.salary.rule">
+            <field name="name">-- Potongan Lain lain</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">POTLAIN</field>
+            <field name="categ_on_payslip">potongan</field>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="condition_select">none</field>
+            <field name="condition_python">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.POTLAIN.amount </field>
+        </record>
+  
+
+        <!-- Salary Structure -->
+        <record model="hr.payroll.structure" id="general_salary_structure" >
+            <field name="name">General Salary Structure</field>
+            <field name="code">GSS</field>
+            <field name="parent_id"></field>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [ref('hr_rule_pot_absensi'), 
+            ref('hr_rule_pot_karyawan'),
+            ref('hr_rule_pot_lain'),
+             ])]" name="rule_ids"/>
+        </record>
+
+
+    </data>
+</odoo>

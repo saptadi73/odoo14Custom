@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_sales_profit_loss_action" model="ir.actions.report">
+            <field name="name">Sales Profit Report</field>
+            <field name="model">sales_profit_report.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sales_profit_loss_report.report_sales_profit_report</field>
+            <field name="report_file">sales_profit_loss_report.report_sales_profit_report</field>
+        </record>
+        <record id="report_sales_profit_loss_action_xls" model="ir.actions.report">
+            <field name="name">Sales Profit Report Xls</field>
+            <field name="model">sales_profit_report.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">sales_profit_loss_report.report_sales_profit_report_xls</field>
+            <field name="report_file">sales_profit_loss_report.report_sales_profit_report_xls</field>
+        </record>
+    </data>
+</odoo>

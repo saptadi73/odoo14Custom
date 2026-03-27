@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_show_pnl">
+            <field name="name">Sales PNL Report</field>
+            <field name="sequence">10</field>
+            <field name="visible" eval="0" />
+        </record>
+
+        <record id="group_show_users_sale_pnl_report" model="res.groups">
+            <field name="name">Sales PNL Report</field>
+            <field name="comment">Show line subtotals with taxes included (B2C)</field>
+        </record>
+    </data>
+</odoo>

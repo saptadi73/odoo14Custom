@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record id="deceased_form_view" model="ir.ui.view">
+        <field name="name">deceased.form.view</field>
+        <field name="model">kematian</field>
+        <field name="arch" type="xml">
+            <form string="Kematian">
+                <header>
+
+                </header>
+                <sheet>
+                    <field name="photo" nolabel="1"
+                            class="oe_left oe_avatar" img_width="120"
+                            img_height="120" width="120" height="120"
+                            widget="image" />
+                        <div class="oe_title">
+                            <div class="oe_edit_only">
+                                <label for="patient_id" />
+                            </div>
+                            <h1>
+                                <field style="width: 30%%" name="patient_id"
+                                    default_focus="1" placeholder="Patient Name"
+                                    context="{'default_is_patient': 1,'default_is_person': 1}"
+                                     />
+                            </h1>
+                        </div>
+                    <group>
+                        <group>
+                            <field name="sex"/>
+                            <field name="age"/>
+                            <field name="no_rm"/>
+                            <field name="start_date"/>
+                            <field name="on_date"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="deceased_tree_view" model="ir.ui.view">
+            <field name="name">deceased.tree.view</field>
+            <field name="model">kematian</field>
+            <field name="arch" type="xml">
+                <tree string="Deceased Information">
+                    <field name="patient_id"/>
+                            <field name="sex"/>
+                            <field name="age"/>
+                            <field name="no_rm"/>
+                            <field name="start_date"/>
+                </tree>
+            </field>
+    </record>
+
+    <record id="action_deceased" model="ir.actions.act_window">
+            <field name="name">Deceased</field>
+            <field name="res_model">kematian</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="deceased_child" action="action_deceased"
+            name="Deceased" parent="menu_patients" sequence="3" />
+</odoo>

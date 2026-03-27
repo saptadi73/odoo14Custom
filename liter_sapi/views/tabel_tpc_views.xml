@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tabel_tpc_tree" model="ir.ui.view">
+            <field name="name">tabel.tpc.tree</field>
+            <field name="model">tabel.tpc</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Tabel TPC KAN">
+                    <field name="peternak_id"/>
+                    <field name="name"/>
+                    <field name="nilai_min"/>
+                    <field name="nilai_max"/>
+                    <field name="nilai_tpc"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tabel_tpc_form" model="ir.ui.view">
+            <field name="name">tabel.tpc.form</field>
+            <field name="model">tabel.tpc</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Tabel TPC KAN">
+                    <sheet>
+                        <group >
+                            <field name="peternak_id"/>
+                            <field name="name"/>
+                            <field name="nilai_min"/>
+                            <field name="nilai_max"/>
+                            <field name="nilai_tpc"/>
+                            <field name="is_active"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tabel_tpc_search" model="ir.ui.view">
+            <field name="name">tabel.tpc.search</field>
+            <field name="model">tabel.tpc</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Tabel TPC KAN">
+<!--                    <field name="hijauan"/>-->
+                    <newline/>
+                    <group expand="0" string="Group By...">
+<!--                        <filter string="Tabel TPC KAN" name="group_by_hijauan_group_name"-->
+<!--                                domain="[]" context="{'group_by':'hijauan'}"/>-->
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_tabel_tpc_view">
+            <field name="name">Tabel TPC</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tabel.tpc</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_tabel_tpc_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_tpc_form">
+            <field name="act_window_id" ref="act_tabel_tpc_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tabel_tpc_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_tpc_tree">
+            <field name="act_window_id" ref="act_tabel_tpc_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tabel_tpc_tree"/>
+        </record>
+
+        <menuitem id="menu_tabel_tpc_details"
+                    name="Tabel TPC"
+                    parent="menu_konfig_liter"
+                    sequence="50"
+                    action="act_tabel_tpc_view"/>
+    </data>
+</odoo>

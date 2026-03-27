@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_breed_view" model="ir.ui.view">
+            <field name="name">form.master.breed.view</field>
+            <field name="model">master.breed</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Breed">
+                    <sheet>
+                        <group>
+                            <field name="kategori_breed_id"/>
+                            <field name="kode"/>
+                            <field name="nama_breed"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_breed_search_view" model="ir.ui.view">
+            <field name="name">master.breed.search.view</field>
+            <field name="model">master.breed</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Breed">
+                    <separator orientation="vertical" />
+                    <field name="nama_breed" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Breed" name='by_nama_breed' context="{'group_by':'nama_breed'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_breed_tree_view" model="ir.ui.view">
+            <field name="name">master.breed.tree.view</field>
+            <field name="model">master.breed</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Breed">
+                    <field name="kategori_breed_id"/>
+                    <field name="kode"/>
+                    <field name="nama_breed"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_breed" model="ir.actions.act_window">
+            <field name="name">Master Breed</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.breed</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_breed" parent="mster_data"
+            action="action_master_breed" sequence="26" />
+
+</odoo>

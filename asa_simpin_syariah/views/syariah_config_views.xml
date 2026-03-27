@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    	<menuitem id="simpin_config_master" parent="simpin_syariah_config_menu" 
+		name="--- MASTER ---" sequence="10" groups="group_simpin_syariah_user,group_simpin_syariah_officer,group_simpin_syariah_manager"/>
+
+    	<menuitem id="simpin_config_wilayah" parent="simpin_syariah_config_menu" 
+		name="--- WILAYAH ---" sequence="20" groups="group_simpin_syariah_user,group_simpin_syariah_officer,group_simpin_syariah_manager"/>
+
+<!--        <record id="view_account_payment_invoice_form_syariah" model="ir.ui.view">-->
+<!--            <field name="name">account.payment.invoice.form</field>-->
+<!--            <field name="model">account.payment</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                    <field name="communication" position="after">-->
+<!--			<field name="bank_id" options="{'no_create_edit': True,'no_open': True}"  attrs="{'invisible': [('payment_type', '=', 'inbound')]}" />-->
+<!--			<field name="bank_norek"  attrs="{'invisible': [('payment_type', '=', 'inbound')]}" />-->
+<!--			<field name="bank_namarek"  attrs="{'invisible': [('payment_type', '=', 'inbound')]}" />-->
+<!--	            </field>-->
+<!--            </field>-->
+<!--        </record>-->
+<!---->
+<!---->
+<!--        <record id="view_account_payment_form_syariah" model="ir.ui.view">-->
+<!--            <field name="name">account.payment.form.syariah</field>-->
+<!--            <field name="model">account.payment</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_payment_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                    <button name="post" position="replace" >-->
+<!--                        <button name="post_syariah" class="oe_highlight" states="draft" string="Confirm" type="object"/>-->
+<!--	            </button>-->
+<!--                    <field name="communication" position="after">-->
+<!--			<field name="bank_id" options="{'no_create_edit': True,'no_open': True}" attrs="{'invisible': [('payment_type', '!=', 'outbound')],'readonly': [('state', '!=', 'draft')]}" />-->
+<!--			<field name="bank_norek" attrs="{'invisible': [('payment_type', '!=', 'outbound')],'readonly': [('state', '!=', 'draft')]}" />-->
+<!--			<field name="bank_namarek" attrs="{'invisible': [('payment_type', '!=', 'outbound')],'readonly': [('state', '!=', 'draft')]}" />-->
+<!--	            </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        <record id="master_akad_syariah_form" model="ir.ui.view">-->
+<!--            <field name="name">master.akad_syariah.form</field>-->
+<!--            <field name="model">master.akad_syariah</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Account">-->
+<!--                   <sheet>-->
+<!--                       <group>-->
+<!--	                    <field name="name" />-->
+<!--	                    <field name="kode" />-->
+<!--	                    <field name="description" />-->
+<!--	                    <field name="category_id" options="{'no_create_edit': True,'no_open': True}"/>-->
+<!--	                    <field name="tipe" />-->
+<!--	                    <field name="jenis_sewa" />-->
+<!--	                    <field name="journal_id" />-->
+<!--                        <field name="type_akad" />-->
+<!--                        <field name="property_account_receivable_id" />-->
+<!--                        <field name="property_account_payable_id" />-->
+<!--	                    <field name="is_actived" />-->
+<!--                       </group>-->
+<!--		<notebook>-->
+<!--			<page string='Journal Lines'>-->
+<!--                       <group>-->
+<!--      	                    <field name="journal_lines" nolabel='1'>-->
+<!--      	                      <tree string="Journal Lines" editable="bottom">-->
+<!--      	                        <field name="name"/>-->
+<!--      	                        <field name="type_journal"/>-->
+<!--      	                        <field name="coa_debet"/>-->
+<!--      	                        <field name="coa_kredit"/>-->
+<!--      	                      </tree>-->
+<!--      	                    </field>-->
+<!--                       </group>-->
+<!--			</page>-->
+<!--		</notebook>-->
+<!--                    </sheet>-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                    <field name="activity_ids" widget="mail_activity"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="master_akad_syariah_tree" model="ir.ui.view">-->
+<!--            <field name="name">master.akad_syariah.tree</field>-->
+<!--            <field name="model">master.akad_syariah</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Akad Syariah" >-->
+<!--                    <field name="name" />-->
+<!--                    <field name="kode" />-->
+<!--                    <field name="description" />-->
+<!--                    <field name="is_actived" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--	<record id="simpin_syariah_akad_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Akad Syariah</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">master.akad_syariah</field>-->
+<!--           -->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create Akad Syariah-->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    	<menuitem id="simpin_syariah_akad" parent="simpin_config_master" -->
+<!--		name="Akad Syariah" sequence="1" action="simpin_syariah_akad_action"/>-->
+
+<!--        <record id="simpin_syariah_product_menu_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Products Syariah</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">product.template</field>-->
+<!--            <field name="view_mode">kanban,tree,form,activity</field>-->
+<!--        	<field name="domain">[('is_syariah','=',True)]</field>-->
+<!--           -->
+<!--            <field name="view_id" ref="product.product_template_kanban_view"/>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create a new product-->
+<!--                </p><p>-->
+<!--                    You must define a product for everything you purchase,-->
+<!--                    whether it's a physical product, a consumable or services.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--    	<menuitem id="simpin_syariah_product" parent="simpin_config_master"-->
+<!--		name="Products" sequence="2" action="simpin_syariah_product_menu_action"/>-->
+
+<!--
+        <record id="transaksi_biaya_form" model="ir.ui.view">
+            <field name="name">transaksi.biaya.form</field>
+            <field name="model">transaksi.biaya</field>
+            <field name="domain">[]</field>
+            <field name="arch" type="xml">
+                <form string="Account">
+                   <sheet>
+                       <group>
+	                    <field name="kode" />
+	                    <field name="name" />
+	                    <field name="coa_debet" />
+	                    <field name="coa_kredit" />
+	                    <field name="nilai_pct" />
+	                    <field name="nominal" />
+	                    <field name="tipe" />
+	                    <field name="is_actived" />
+                       </group>
+                    </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="transaksi_biaya_tree" model="ir.ui.view">
+            <field name="name">transaksi.biaya.tree</field>
+            <field name="model">transaksi.biaya</field>
+            <field name="domain">[]</field>
+            <field name="arch" type="xml">
+                <tree string="Komponen Biaya" >
+                    <field name="kode" />
+                    <field name="name" />
+                    <field name="coa_debet" />
+                    <field name="coa_kredit" />
+                    <field name="nilai_pct" />
+                    <field name="nominal" />
+                    <field name="tipe" />
+                    <field name="is_actived" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="simpin_syariah_biaya_action" model="ir.actions.act_window">
+            <field name="name">Komponen Biaya</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transaksi.biaya</field>
+           
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Komponen Biaya
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_syariah_biaya" parent="simpin_config_master" 
+		name="Komponen Biaya" sequence="3" action="simpin_syariah_biaya_action"/>
+
+-->
+
+<!--        <record id="master_kode_trx_form" model="ir.ui.view">-->
+<!--            <field name="name">master.kode_transaksi.form</field>-->
+<!--            <field name="model">master.kode_transaksi</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Account">-->
+<!--                   <sheet>-->
+<!--                       <group>-->
+<!--	                    <field name="name" />-->
+<!--	                    <field name="kode_trx" />-->
+<!--	                    <field name="journal_id" />-->
+<!--                       </group>-->
+<!--                    </sheet>-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                    <field name="activity_ids" widget="mail_activity"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="master_kode_trx_tree" model="ir.ui.view">-->
+<!--            <field name="name">master.kode_transaksi.tree</field>-->
+<!--            <field name="model">master.kode_transaksi</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Kode Transaksi">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="kode_trx" />-->
+<!--                    <field name="journal_id" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--	<record id="simpin_syariah_kode_trx_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Kode Transaksi</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">master.kode_transaksi</field>-->
+<!--           -->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create Kode Transaksi-->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--    	<menuitem id="simpin_syariah_kode_trx" parent="simpin_config_master" -->
+<!--		name="Kode Transaksi" sequence="4" action="simpin_syariah_kode_trx_action"/>-->
+
+<!--        <record id="master_general_form" model="ir.ui.view">-->
+<!--            <field name="name">master.general.form</field>-->
+<!--            <field name="model">master.general</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Account">-->
+<!--                   <sheet>-->
+<!--                       <group>-->
+<!--	                    <field name="name" />-->
+<!--	                    <field name="type_umum" />-->
+<!--	                    <field name="akad_id" -->
+<!--				attrs="{'invisible': [('type_umum', '!=', 'peruntukan')]}" options="{'no_create': True}"/>-->
+<!--	                    <field name="tipe" -->
+<!--				attrs="{'invisible': [('type_umum', '!=', 'peruntukan')]}" options="{'no_create': True}"/>-->
+<!--	                    <field name="nominal" -->
+<!--				attrs="{'invisible': [('type_umum', 'not in', ['setoran','cash_ratio','nisbah'])],'required': [('type_umum', 'in', ['setoran','cash_ratio','nisbah'])]}" />-->
+<!--	                    <field name="journal_id" -->
+<!--				attrs="{'invisible': [('type_umum', '!=', 'setoran')]}" />-->
+<!--	                    <field name="is_korporasi" -->
+<!--				attrs="{'invisible': [('type_umum', '!=', 'peruntukan')]}" />-->
+<!--                       </group>-->
+<!--                    </sheet>-->
+<!--                <div class="oe_chatter">-->
+<!--                    <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                    <field name="activity_ids" widget="mail_activity"/>-->
+<!--                    <field name="message_ids" widget="mail_thread"/>-->
+<!--                </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="master_general_tree" model="ir.ui.view">-->
+<!--            <field name="name">master.general.tree</field>-->
+<!--            <field name="model">master.general</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="General Config">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="type_umum" />-->
+<!--                    <field name="tipe" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--	<record id="simpin_syariah_general_config_action" model="ir.actions.act_window">-->
+<!--            <field name="name">General Config</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">master.general</field>-->
+<!--           -->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create General Config-->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--    	<menuitem id="simpin_syariah_general_config" parent="simpin_config_master" -->
+<!--		name="General Config" sequence="5" action="simpin_syariah_general_config_action"/>-->
+
+<!--        <record id="simpin_syariah_config_schedule_form" model="ir.ui.view">-->
+<!--            <field name="name">config.schedule.form</field>-->
+<!--            <field name="model">config.schedule</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Config Schedule">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <field name="name" />-->
+<!--                            <field name="tipe_schedule" />-->
+<!--                            <field name="date_day" />-->
+<!--                        </group>    -->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_config_schedule_tree" model="ir.ui.view">-->
+<!--            <field name="name">config.schedule.tree</field>-->
+<!--            <field name="model">config.schedule</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Config Schedule">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="tipe_schedule" />-->
+<!--                    <field name="date_day" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_config_schedule_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Config Schedule</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">config.schedule</field>-->
+<!--           -->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    Create Schedule Config-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <menuitem id="simpin_syariah_config_schedule_menu" parent="simpin_config_master"-->
+<!--        name="Schedule Config" sequence="6" action="simpin_syariah_config_schedule_action"/>-->
+
+<!--  WILAYAH -->
+
+
+        <record id="wilayah_provinsi_tree" model="ir.ui.view">
+            <field name="name">wilayah.provinsi.tree</field>
+            <field name="model">wilayah.provinsi</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="wilayah_provinsi_form" model="ir.ui.view">
+            <field name="name">wilayah.provinsi.form</field>
+            <field name="model">wilayah.provinsi</field>
+            <field name="arch" type="xml">
+                <form string="Tipe Transaksi" >
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+	<record id="wilayah_provinsi_action" model="ir.actions.act_window">
+            <field name="name">Provinsi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.provinsi</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Provinsi
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_syariah_wilayah_provinsi" parent="simpin_config_wilayah" 
+		name="     Provinsi" sequence="1" action="wilayah_provinsi_action"/>
+
+        <record id="wilayah_kabkota_tree" model="ir.ui.view">
+            <field name="name">wilayah.kabkota.tree</field>
+            <field name="model">wilayah.kabkota</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="provinsi_id" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_kabkota_action" model="ir.actions.act_window">
+            <field name="name">Kab / Kota</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.kabkota</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Kabupaten / Kotamadya
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_syariah_wilayah_kabkota" parent="simpin_config_wilayah" 
+		name="     Kab / Kota" sequence="2" action="wilayah_kabkota_action"/>
+
+        <record id="wilayah_kecamatan_tree" model="ir.ui.view">
+            <field name="name">wilayah.kecamatan.tree</field>
+            <field name="model">wilayah.kecamatan</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="kabkota_id" />
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_kecamatan_action" model="ir.actions.act_window">
+            <field name="name">Kecamatan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.kecamatan</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Kecamatan
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_syariah_wilayah_kecamatan" parent="simpin_config_wilayah" 
+		name="     Kecamatan" sequence="3" action="wilayah_kecamatan_action"/>
+
+        <record id="wilayah_kelurahan_tree" model="ir.ui.view">
+            <field name="name">wilayah.kelurahan.tree</field>
+            <field name="model">wilayah.kelurahan</field>
+            <field name="arch" type="xml">
+                <tree string="Tipe Transaksi" editable="bottom">
+                    <field name="kecamatan_id" />
+                    <field name="name" />
+                    <field name="kodepos" />
+                </tree>
+            </field>
+        </record>
+
+	<record id="wilayah_kelurahan_action" model="ir.actions.act_window">
+            <field name="name">Kelurahan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wilayah.kelurahan</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create Kelurahan
+              </p>
+            </field>
+        </record>
+
+    	<menuitem id="simpin_syariah_wilayah_kelurahan" parent="simpin_config_wilayah" 
+		name="     Kelurahan" sequence="3" action="wilayah_kelurahan_action"/>
+
+	</data>
+</odoo>
+

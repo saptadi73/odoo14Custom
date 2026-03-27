@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_semen_beku_view" model="ir.ui.view">
+            <field name="name">form.master.semen.beku.view</field>
+            <field name="model">master.semen.beku</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Semen Beku">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_semen_beku"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_semen_beku_search_view" model="ir.ui.view">
+            <field name="name">master.semen.beku.search.view</field>
+            <field name="model">master.semen.beku</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Semen Beku">
+                    <separator orientation="vertical" />
+                    <field name="nama_semen_beku" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Semen Beku" name='by_nama_semen_beku' context="{'group_by':'nama_semen_beku'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_semen_beku_tree_view" model="ir.ui.view">
+            <field name="name">master.semen.beku.tree.view</field>
+            <field name="model">master.semen.beku</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Semen Beku">
+                    <field name="kode"/>
+                    <field name="nama_semen_beku"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_semen_beku" model="ir.actions.act_window">
+            <field name="name">Master Semen Beku</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.semen.beku</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_semen_beku" parent="mster_data"
+            action="action_master_semen_beku" sequence="7" />
+
+</odoo>

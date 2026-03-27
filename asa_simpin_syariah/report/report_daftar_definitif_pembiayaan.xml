@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<record id="paperformat_simpin_landscape" model="report.paperformat">
+		<field name="name">PF Simulasi Landscape</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">40</field>
+		<field name="margin_bottom">15</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">30</field>
+		<field name="dpi">90</field>
+	</record>
+
+
+        <report 
+            id="action_daftar_definitif_pembiayaan" 
+            model="product.product" 
+            string="Daftar Definitif Pembiayaan"
+            report_type="qweb-pdf"
+            name="simpin_syariah.report_daftar_definitif_pembiayaan" 
+            file="simpin_syariah.report_daftar_definitif_pembiayaan"
+            print_report_name="'Daftar Definitif Pembiayaan %s' % object.name"
+	    paperformat="paperformat_simpin_landscape"
+        />
+
+
+<template id="report_daftar_definitif_pembiayaan">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="text-align: center;"><strong>DAFTAR DEFINITIF PEMBIAYAAN ANGGOTA</strong></h2>
+                    <h2 style="text-align: center;"><strong><span t-field="o.name"/></strong></h2>
+		    <br></br>
+
+                    <!-- get_data_simulasi QUERY -->
+		    <t t-set = "data_definitif" t-value = "o.get_data_definitif()" />
+                    <!-- Display each lines -->
+
+                    <table class="table table-condensed table-bordered">
+	                <tr>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			        	<strong><span>No</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+					<strong><span>N I K</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>N a m a</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Instansi</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Tanggal Lahir</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Status Pegawai</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Tujuan Pembiayaan</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Gaji</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Cash Ratio</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Plafond Pembiayaan</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Jangka Waktu</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Rate (%)</span></strong>
+		                </td>
+				<td rowspan="1" style="text-align:center;vertical-align:middle;font-size:11px;">
+			                            <strong><span>Angsuran</span></strong>
+		                </td>
+			</tr>
+			    <t t-set="no" t-value="1"/>
+	                    <t t-foreach="data_definitif" t-as="line">
+	                        <tr>
+					<td style="text-align:center;font-size:10px;">
+						<t t-esc="no"/>
+						<t t-set="no" t-value="no+1"/>
+		                        </td>
+					<td style="text-align:center;font-size:10px;">
+			                	<t t-esc="line.member_id.nomor_induk"/>
+		                        </td>
+					<td style="text-align:left;font-size:10px;">
+			                	<t t-esc="line.member_id.name"/>
+		                        </td>
+					<td style="text-align:left;font-size:10px;">
+			                	<t t-esc="line.member_id.mitra_id.name"/>
+		                        </td>
+					<td style="text-align:left;font-size:10px;">
+			                	<t t-esc="line.member_id.tanggal_lahir" t-options="{'widget': 'date','format': 'dd MMM yyyy'}"/>
+		                        </td>
+					<td style="text-align:center;font-size:10px;">
+			                	<t t-esc="line.member_id.status_karyawan"/>
+		                        </td>
+					<td style="text-align:center;font-size:10px;">
+			                	<t t-esc="line.peruntukan.name"/>
+		                        </td>
+					<td style="text-align:right;font-size:10px;">
+			                	<t t-esc="line.thp_gaji" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+		                        </td>
+					<td style="text-align:center;font-size:10px;">
+			                	<t t-esc="line.cash_ratio"/>
+		                        </td>
+					<td style="text-align:right;font-size:10px;">
+			                	<t t-esc="line.total_pembiayaan" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+		                        </td>
+					<td style="text-align:center;font-size:10px;">
+			                	<t t-esc="line.periode_angsuran"/>
+		                        </td>
+					<td style="text-align:center;font-size:10px;">
+			                	<t t-esc="line.margin"/>
+		                        </td>
+					<td style="text-align:right;font-size:10px;">
+			                	<t t-esc="line.angsuran" t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+		                        </td>
+				</tr>
+			   </t>
+                    </table>
+
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_kandang_sapi_root"
+                  name="Kandang"
+                  web_icon="kandang,static/description/icon.png"
+                  sequence="20"/>
+
+        <menuitem id="menu_konfigurasi_kandang_root"
+                  name="Konfigurasi"
+                  parent="menu_kandang_sapi_root"
+                  sequence="60"/>
+
+<!--        <menuitem id="menu_kandang_details"-->
+<!--                    name="Manajemen Kandang"-->
+<!--                    parent="menu_kandang_root"-->
+<!--                    sequence="20"-->
+<!--                    action="act_kandang_sapi_view"/>-->
+
+        <menuitem id="menu_kandang_sapi_perah_details"
+                  name="Kandang"
+                  parent="menu_kandang_sapi_root"
+                  sequence="10"
+                  action="act_kandang_sapi_perah_view"/>
+
+        <menuitem id="menu_jenis_kandang_details"
+                    name="Jenis Kandang"
+                    parent="menu_konfigurasi_kandang_root"
+                    sequence="10"
+                    action="act_jenis_kandang_view"/>
+    </data>
+</odoo>

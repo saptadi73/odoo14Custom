@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_vaksin_view" model="ir.ui.view">
+            <field name="name">form.master.vaksin.view</field>
+            <field name="model">master.vaksin</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Vaksin">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="jns_vaksin"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_vaksin_search_view" model="ir.ui.view">
+            <field name="name">master.vaksin.search.view</field>
+            <field name="model">master.vaksin</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Vaksin">
+                    <separator orientation="vertical" />
+                    <field name="jns_vaksin" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Jenis Vaksin" name='by_jns_vaksin' context="{'group_by':'jns_vaksin'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_vaksin_tree_view" model="ir.ui.view">
+            <field name="name">master.vaksin.tree.view</field>
+            <field name="model">master.vaksin</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Vaksin">
+                    <field name="kode"/>
+                    <field name="jns_vaksin"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_vaksin" model="ir.actions.act_window">
+            <field name="name">Master Vaksin</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.vaksin</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_vaksin" parent="mster_data"
+            action="action_master_vaksin" sequence="2" />
+
+</odoo>
