@@ -49,27 +49,62 @@ class ResUsers(models.Model):
         help="Current user context category, similar to active company.",
     )
 
-    def _get_team_business_categories(self):
+    def _build_or_domain(self, domain_parts):
+        if not domain_parts:
+            return []
+        if len(domain_parts) == 1:
+            return domain_parts
+        return ["|"] * (len(domain_parts) - 1) + domain_parts
+
+    def _get_team_business_categories_from_model(self, model_name, domain_parts):
         self.ensure_one()
-        team_model = self.env["crm.team"].sudo()
+        if model_name not in self.env:
+            return self.env["crm.business.category"]
+
+        team_model = self.env[model_name].sudo()
         user_id = self._origin.id or self.id
         if not isinstance(user_id, int):
             return self.env["crm.business.category"]
-        domain_parts = []
-        if "user_id" in team_model._fields:
-            domain_parts.append(("user_id", "=", user_id))
-        if "member_ids" in team_model._fields:
-            domain_parts.append(("member_ids", "in", user_id))
-
-        if not domain_parts:
+        valid_domain_parts = [
+            domain_part
+            for domain_part in domain_parts
+            if isinstance(domain_part, (list, tuple))
+            and len(domain_part) >= 1
+            and domain_part[0] in team_model._fields
+        ]
+        if not valid_domain_parts:
             return self.env["crm.business.category"]
-        if len(domain_parts) == 1:
-            domain = domain_parts
-        else:
-            domain = ["|"] + domain_parts
 
+        domain = self._build_or_domain(valid_domain_parts)
         teams = team_model.search(domain + [("company_id", "in", self.company_ids.ids)])
         return teams.mapped("business_category_id")
+
+    def _get_team_business_categories(self):
+        self.ensure_one()
+        categories = self.env["crm.business.category"]
+
+        categories |= self._get_team_business_categories_from_model(
+            "crm.team",
+            [
+                ("user_id", "=", self.id),
+                ("member_ids", "in", self.id),
+                ("sale_team_leader_id", "=", self.id),
+                ("team_members_ids", "in", self.id),
+            ],
+        )
+        categories |= self._get_team_business_categories_from_model(
+            "purchase.team",
+            [("user_id", "=", self.id), ("member_ids", "in", self.id)],
+        )
+        categories |= self._get_team_business_categories_from_model(
+            "expense.team",
+            [("user_id", "=", self.id), ("member_ids", "in", self.id)],
+        )
+        categories |= self._get_team_business_categories_from_model(
+            "stock.team",
+            [("user_id", "=", self.id), ("member_ids", "in", self.id)],
+        )
+        return categories
 
     def _filter_business_categories_by_company(self, categories):
         self.ensure_one()

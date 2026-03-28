@@ -26,6 +26,7 @@ propagation for stock valuation journal entries.
         "views/stock_team_views.xml",
         "views/stock_warehouse_views.xml",
         "views/stock_picking_views.xml",
+        "views/product_views.xml",
         "views/inventory_report_business_category_views.xml",
         "views/stock_menu_views.xml",
     ],

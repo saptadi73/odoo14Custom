@@ -8,7 +8,7 @@
     'complexity': "easy",
     'author': 'AFajarR',
     'website': '',
-    'depends': ['base', 'mail', 'master_sapi'],
+    'depends': ['base', 'mail', 'master_sapi', 'kandang'],
     'data': [
             'security/ir.model.access.csv',
             'report/menu_report_peternak.xml',
