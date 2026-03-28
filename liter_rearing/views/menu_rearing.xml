@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_liter_rearing_root"
+                  name="Liter Rearing"
+                  web_icon="liter_rearing,static/description/icon.png"
+                  sequence="20"/>
+
+        <menuitem id="menu_liter_rearing_details"
+                    name="Setoran Susu"
+                    parent="menu_liter_rearing_root"
+                    sequence="10"
+                    action="act_liter_sapi_rearing_view"/>
+
+    </data>
+</odoo>

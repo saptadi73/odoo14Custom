@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="petugas_inherit_form_view" model="ir.ui.view">
+            <field name="name">petugas.inherit.form.view</field>
+            <field name="model">liter.sapi</field>
+            <field name="inherit_id" ref="liter_sapi.view_liter_sapi_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='setoran_line_ids']//tree//field[@name='note']" position="after">
+                    <field name="petugas_id" />
+                </xpath>
+            </field>
+        </record>
+
+    <record id="kanban_view_medical_physician" model="ir.ui.view">
+            <field name="name">Petugas Kanban</field>
+            <field name="model">medical.physician</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <field name="gmbr"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="o_kanban_image">
+                                    <t t-if="record.gmbr.value">
+                                        <img t-att-src="kanban_image('medical.physician', 'gmbr', record.id.raw_value)"
+                                             alt="Petugas"/>
+                                    </t>
+                                    <t t-if="!record.gmbr.value">
+                                        <img t-att-src='_s + "/base/static/img/avatar.png"' alt="Anggota"/>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="nama_petugas"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.kode_petugas.raw_value">
+                                            <field name="kode_petugas"/>
+                                        </li>
+                                        <li t-if="record.jabatan_id.raw_value">
+                                            <field name="jabatan_id"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="medical_physician_form_view" model="ir.ui.view">
+            <field name="name">medical.physician.form.view</field>
+            <field name="model">medical.physician</field>
+            <field name="arch" type="xml">
+                <form string="Physician">
+                    <div class="oe_button_box" name="button_box" position="inside">
+
+                        </div>
+                        <field name="gmbr" nolabel="1"
+                            class="oe_left oe_avatar" img_width="120"
+                            img_height="120" width="120" height="120"
+                            widget="image" />
+                        <div class="oe_title w-auto">
+                            <h1>
+                                <field name="nama_petugas" placeholder="Nama Anggota" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="nama_petugas" placeholder="Nama Petugas" required="1"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                    <group>
+                        <group string="Petugas Information">
+                            <field name="kode_petugas"/>
+                            <field name="alias"/>
+                            <field name="gender"/>
+                            <field name="email"/>
+                            <field name="no_hp"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Struktur">
+                            <field name="jabatan_id"/>
+                            <field name="supervisi_id"/>
+                            <field name="wilayah_id"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="medical_physician_search_view" model="ir.ui.view">
+            <field name="name">medical.physician.search.view</field>
+            <field name="model">medical.physician</field>
+            <field name="arch" type="xml">
+                <search string="Search Physician">
+                    <separator orientation="vertical" />
+                    <field name="kode_petugas" select="1" />
+                    <newline />
+<!--                    <group expand="1" string="Group By">-->
+<!--                        <filter string="Doctor" name='by_user' context="{'group_by':'user_id'}"/>-->
+<!--                        <filter string="Institution" name='by_institution' context="{'group_by':'institution_user_id'}"/>-->
+<!--                    </group> -->
+                </search>
+            </field>
+        </record>
+
+        <record id="medical_physician_tree_view" model="ir.ui.view">
+            <field name="name">medical.physician.tree.view</field>
+            <field name="model">medical.physician</field>
+            <field name="arch" type="xml">
+                <tree string="Physician Information">
+                    <field name="kode_petugas"/>
+                    <field name="alias"/>
+                    <field name="gender"/>
+                    <field name="email"/>
+                    <field name="no_hp"/>
+                    <field name="user_id"/>
+                    <field name="jabatan_id"/>
+                    <field name="supervisi_id"/>
+                    <field name="wilayah_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_medical_physician" model="ir.actions.act_window">
+            <field name="name">Profil Petugas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">medical.physician</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,form,tree</field>
+        </record>
+
+        <menuitem id="menu_physician" name='Petugas'
+            parent="main_menu_configartion" sequence="7" />
+
+        <menuitem id="menu_medical_physician" parent="menu_physician"
+            action="action_medical_physician" sequence="6" />
+
+</odoo>

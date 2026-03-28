@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_mrp_overhead_period_tree" model="ir.ui.view">
+        <field name="name">mrp.overhead.period.tree</field>
+        <field name="model">mrp.overhead.period</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'adjusted'" decoration-info="state == 'computed'">
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="company_id"/>
+                <field name="actual_amount_total"/>
+                <field name="absorbed_amount_total"/>
+                <field name="variance_amount_total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mrp_overhead_period_form" model="ir.ui.view">
+        <field name="name">mrp.overhead.period.form</field>
+        <field name="model">mrp.overhead.period</field>
+        <field name="arch" type="xml">
+            <form string="MRP Overhead Period">
+                <header>
+                    <button name="action_initialize_lines" type="object" string="Init Types" states="draft"/>
+                    <button name="action_load_source_entries" type="object" string="Load Source Entries" states="draft,computed"/>
+                    <button name="action_compute_overhead" type="object" string="Compute Overhead" class="btn-primary" states="draft,computed"/>
+                    <button name="action_create_adjustment_move" type="object" string="Create Adjustment" class="btn-primary" states="computed"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft" states="computed,adjusted"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,computed,adjusted"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="journal_id"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="adjustment_move_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Summary">
+                            <field name="actual_amount_total" readonly="1"/>
+                            <field name="absorbed_amount_total" readonly="1"/>
+                            <field name="variance_amount_total" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Overhead Lines">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="overhead_type_id"/>
+                                    <field name="allocation_basis"/>
+                                    <field name="capitalize_to_inventory" optional="show"/>
+                                    <field name="rate_mode"/>
+                                    <field name="manual_rate" optional="show"/>
+                                    <field name="source_actual_amount" readonly="1"/>
+                                    <field name="manual_actual_amount"/>
+                                    <field name="actual_amount" readonly="1"/>
+                                    <field name="basis_qty" readonly="1"/>
+                                    <field name="rate" readonly="1"/>
+                                    <field name="absorbed_amount" readonly="1"/>
+                                    <field name="variance_amount" readonly="1"/>
+                                    <field name="source_move_count" readonly="1"/>
+                                    <field name="allocation_count" readonly="1"/>
+                                </tree>
+                                <form string="Overhead Line">
+                                    <group>
+                                        <field name="company_id" invisible="1"/>
+                                        <group>
+                                            <field name="overhead_type_id"/>
+                                            <field name="allocation_basis"/>
+                                            <field name="capitalize_to_inventory"/>
+                                            <field name="rate_mode"/>
+                                            <field name="manual_rate" attrs="{'readonly': [('rate_mode', '=', 'auto')]}"/>
+                                            <field name="manual_actual_amount"/>
+                                        </group>
+                                        <group>
+                                            <field name="source_account_id"/>
+                                            <field name="absorption_account_id"/>
+                                            <field name="variance_account_id"/>
+                                        </group>
+                                    </group>
+                                    <group string="Computed">
+                                        <group>
+                                            <field name="source_actual_amount" readonly="1"/>
+                                            <field name="actual_amount" readonly="1"/>
+                                            <field name="basis_qty" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="computed_rate" readonly="1"/>
+                                            <field name="rate" readonly="1"/>
+                                            <field name="absorbed_amount" readonly="1"/>
+                                            <field name="variance_amount" readonly="1"/>
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                        <page string="Source Lines">
+                                            <field name="source_move_line_ids" readonly="1">
+                                                <tree>
+                                                    <field name="date"/>
+                                                    <field name="move_id"/>
+                                                    <field name="name"/>
+                                                    <field name="account_id"/>
+                                                    <field name="debit"/>
+                                                    <field name="credit"/>
+                                                    <field name="balance"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                        <page string="MO Allocations">
+                                            <field name="allocation_line_ids" readonly="1">
+                                                <tree>
+                                                    <field name="production_id"/>
+                                                    <field name="product_id"/>
+                                                    <field name="date_finished"/>
+                                                    <field name="base_basis_qty"/>
+                                                    <field name="mo_factor"/>
+                                                    <field name="basis_qty"/>
+                                                    <field name="rate"/>
+                                                    <field name="applied_amount"/>
+                                                </tree>
+                                            </field>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Allocations">
+                            <field name="allocation_line_ids" readonly="1">
+                                <tree>
+                                    <field name="period_line_id"/>
+                                    <field name="production_id"/>
+                                    <field name="product_id"/>
+                                    <field name="date_finished"/>
+                                    <field name="base_basis_qty"/>
+                                    <field name="mo_factor"/>
+                                    <field name="basis_qty"/>
+                                    <field name="rate"/>
+                                    <field name="applied_amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mrp_overhead_period_search" model="ir.ui.view">
+        <field name="name">mrp.overhead.period.search</field>
+        <field name="model">mrp.overhead.period</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="company_id"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Computed" name="computed" domain="[('state', '=', 'computed')]"/>
+                <filter string="Adjusted" name="adjusted" domain="[('state', '=', 'adjusted')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="group_company" context="{'group_by': 'company_id'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mrp_overhead_period" model="ir.actions.act_window">
+        <field name="name">Overhead Periods</field>
+        <field name="res_model">mrp.overhead.period</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_mrp_overhead_period_search"/>
+    </record>
+</odoo>

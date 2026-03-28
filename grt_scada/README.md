@@ -159,6 +159,15 @@ Body minimal untuk endpoint API:
 - Token should be passed in Authorization header: `Authorization: Bearer <token>`
 - Each API call is logged in API Logs for audit trail
 
+## Frontend Production Notes
+
+- Untuk browser frontend production, gunakan `POST /api/scada/authenticate` sebagai endpoint login utama.
+- Endpoint `/web/session/authenticate` bawaan Odoo tidak disarankan untuk cross-origin frontend kecuali Anda membuat reverse proxy production.
+- Route SCADA di backend sudah mengirim CORS untuk origin frontend yang dikonfigurasi lewat env var `SCADA_CORS_ORIGIN`.
+- Default `SCADA_CORS_ORIGIN` adalah `https://scada.kanjabung.com`.
+- Request browser harus tetap memakai `credentials: 'include'` agar session cookie ikut terkirim.
+- Proxy di `vite.config.js` hanya berlaku saat development, bukan saat build production.
+
 ## Scheduled Tasks
 
 The module includes automated background tasks:

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record id="oprasi_form_view" model="ir.ui.view">
+        <field name="name">oprasi.form.view</field>
+        <field name="model">oprasi</field>
+        <field name="arch" type="xml">
+            <form string="Operasi">
+                <header>
+
+                </header>
+                <sheet>
+                        <group col="6" colspan="4">
+                            <field name="operator_id"/>
+                            <field name="asisten_id"/>
+                            <field name="instrumentator"/>
+                            <field name="sirkuler"/>
+                        </group>
+                    <group col="6" colspan="4">
+                            <field name="doc_anestesi"/>
+                            <field name="jenis_anestesi"/>
+                            <field name="tindakan"/>
+                        </group>
+                    <group col="6" colspan="4">
+                            <field name="diagnosa_pre_oprs"/>
+                        </group>
+                    <group col="6" colspan="4">
+                            <field name="diagnosa_post_oprs"/>
+                        </group>
+                    <group col="6" colspan="4">
+                    <group string="Macam - Macam Pembedahan">
+                            <field name="bsr_khusus_2"/>
+                            <field name="bsr_khusus_1"/>
+                            <field name="khusus"/>
+                            <field name="besar"/>
+                            <field name="sedang"/>
+                            <field name="kecil"/>
+                            <field name="elctv"/>
+                            <field name="emrgncy"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="jar_diexcisi"/>
+                    </group>
+                    <group string="Dikirim Pemeriksaan PA">
+                        <field name="ya"/>
+                        <field name="tdk"/>
+                    </group>
+                    <group col="6" colspan="4">
+                        <field name="tgl_oprasi"/>
+                        <field name="tgl_selesai"/>
+                        <field name="lama_operasi"/>
+                    </group>
+                    <group>
+                        <field name="lap_operasi"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="oprasi_tree_view" model="ir.ui.view">
+            <field name="name">oprasi.tree.view</field>
+            <field name="model">oprasi</field>
+            <field name="arch" type="xml">
+                <tree string="Operasi Information">
+                            <field name="operator_id"/>
+                            <field name="asisten_id"/>
+                            <field name="instrumentator"/>
+                            <field name="sirkuler"/>
+                </tree>
+            </field>
+    </record>
+
+    <record id="action_oprasi" model="ir.actions.act_window">
+            <field name="name">Operasi</field>
+            <field name="res_model">oprasi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    <menuitem id="menu_oprasi_child"-->
+<!--            parent="menu_inpatient_administration" action="action_oprasi"-->
+<!--            sequence="2" />-->
+</odoo>

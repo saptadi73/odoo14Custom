@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_kinerja_anggota_tree" model="ir.ui.view">
+            <field name="name">kinerja.anggota.tree</field>
+            <field name="model">kinerja.anggota</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="kinerja anggota">
+                    <field name="anggota_id"/>
+                    <field name="kode_anggota"/>
+                    <field name="jabatan_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_kinerja_anggota_form" model="ir.ui.view">
+            <field name="name">kinerja.anggota.form</field>
+            <field name="model">kinerja.anggota</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="kinerja anggota">
+                    <header>
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="anggota_id"/>
+                                <field name="kode_anggota"/>
+                                <field name="jabatan_id"/>
+                            </group>
+                            <group>
+                                <field name="semester"/>
+                                <field name="tgl_semester"/>
+                                <field name="aggt" invisible="1"/>
+                                <field name="ko" invisible="1"/>
+                                <field name="ka" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="KOMPETENSI">
+                                <notebook>
+                                    <page string="Bidang Organisasi">
+                                            <group >
+                                                <group attrs="{'invisible': [('aggt', '=', False)]}">
+                                                    <group string="Bidang Organisasi A" >
+                                                        <field name="org_dsr"/>
+                                                        <label for="nilai_skor" class="mt-1" string="Nilai Skor"/>
+                                                        <div name="nilai_skor">
+                                                            <field name="nilai_skor" class="oe_inline"/> %
+                                                        </div>
+                                                        <field name="org_dsr_level"/>
+                                                        <field name="bdy_org"/>
+                                                        <label for="nilai_skor_bdy" class="mt-1" string="Nilai Skor"/>
+                                                        <div name="nilai_skor_bdy">
+                                                            <field name="nilai_skor_bdy" class="oe_inline"/> %
+                                                        </div>
+                                                        <field name="bdy_org_level"/>
+                                                        <field name="jti_diri"/>
+                                                        <label for="nilai_skor_jti" class="mt-1" string="Nilai Skor"/>
+                                                        <div name="nilai_skor_jti">
+                                                            <field name="nilai_skor_jti" class="oe_inline"/> %
+                                                        </div>
+                                                        <field name="jti_diri_level"/>
+                                                        <field name="hak_kwjbn"/>
+                                                        <label for="nilai_skor_hak" class="mt-1" string="Nilai Skor"/>
+                                                        <div name="nilai_skor_hak">
+                                                            <field name="nilai_skor_hak" class="oe_inline"/> %
+                                                        </div>
+                                                        <field name="hak_kwjbn_level"/>
+                                                        <label for="average_nilai_skor" class="mt-1" string="Nilai Rata-Rata Skor"/>
+                                                        <div name="average_nilai_skor">
+                                                            <field name="average_nilai_skor" class="oe_inline"/> %
+                                                        </div>
+                                                    </group>
+                                                </group>
+                                                <group attrs="{'invisible': [('ka', '=', False)]}">
+                                                    <group string="Bidang Organisasi KA">
+                                                        <field name="din_kel"/>
+                                                        <field name="kmnksi"/>
+                                                        <field name="mod_sos"/>
+                                                        <field name="motivasi"/>
+                                                        <field name="din_kel_level"/>
+                                                        <field name="kmnksi_level"/>
+                                                        <field name="mod_sos_level"/>
+                                                        <field name="motivasi_level"/>
+                                                    </group>
+                                                </group>
+                                                <group attrs="{'invisible': [('ko', '=', False)]}">
+                                                    <group string="Bidang Organisasi KO">
+                                                        <field name="kepem"/>
+                                                        <field name="kepem_level"/>
+                                                        <field name="dsr_org"/>
+                                                        <field name="dsr_org_level"/>
+                                                        <field name="mngmn"/>
+                                                        <field name="mngmn_level"/>
+                                                        <field name="anal_lapkeu"/>
+                                                        <field name="anal_lapkeu_level"/>
+                                                        <field name="komit"/>
+                                                        <field name="komit_level"/>
+                                                        <field name="sis_org"/>
+                                                        <field name="sis_org_level"/>
+                                                    </group>
+                                                </group>
+                                            </group>
+                                                <group>
+                                                    <field name="standar_skor"/>
+                                                </group>
+                                                <group string="Nilai Kompetensi Bidang Teknis Organisasi">
+                                                        <field name="nilai_kompetensi"/>
+                                                </group>
+                                                <group string="Total Kompetensi">
+                                                        <field name="total_kompetensi"/>
+                                                </group>
+                                        </page>
+                                    <page string="Bidang Teknis GDFP">
+					                    <group>
+                                            <group string="Scoring">
+                                                <label for="mpak" class="mt-1" string="Management Pakan"/>
+                                                <div name="mpak">
+                                                    <field name="mpak" class="oe_inline"/> %
+                                                </div>
+                                                <label for="mkan" class="mt-1" string="Management Kandang"/>
+                                                <div name="mkan">
+                                                    <field name="mkan" class="oe_inline"/> %
+                                                </div>
+                                                <label for="mpem" class="mt-1" string="Management Pemerahan"/>
+                                                <div name="mpem">
+                                                    <field name="mpem" class="oe_inline"/> %
+                                                </div>
+                                                <label for="mbis" class="mt-1" string="Daya Saing Bisnis"/>
+                                                <div name="mbis">
+                                                    <field name="mbis" class="oe_inline"/> %
+                                                </div>
+                                                <label for="mpel" class="mt-1" string="Pengolahan Limbah"/>
+                                                <div name="mpel">
+                                                    <field name="mpel" class="oe_inline"/> %
+                                                </div>
+                                                <label for="mkes" class="mt-1" string="Management Kesehatan"/>
+                                                <div name="mkes">
+                                                    <field name="mkes" class="oe_inline"/> %
+                                                </div>
+                                            </group>
+                                                <group string="Total" col="2">
+                                                    <label for="total" class="mt-1" string="Total Scoring"/>
+                                                    <div name="total">
+                                                        <field name="total" class="oe_inline"/> %
+                                                    </div>
+                                                </group>
+                                        </group>
+                                    </page>
+                                </notebook>
+                            </page>
+                            <page string="PENGEMBANGAN SDMA">
+                                <group>
+                                    <group >
+                                        <field name="studi_banding"/>
+                                        <field name="studi_banding_level"/>
+                                        <field name="peny_rutin"/>
+                                        <field name="peny_rutin_level"/>
+                                        <field name="peny_segmen"/>
+                                        <field name="peny_segmen_level"/>
+                                        <field name="pend_teknis"/>
+                                        <field name="pend_teknis_level"/>
+                                    </group>
+                                    <group string="Partisipasi">
+                                        <field name="pemilik"/>
+                                        <field name="pemilik_level"/>
+                                        <field name="peng_jasa"/>
+                                        <field name="peng_jasa_level"/>
+                                    </group>
+                                    <group string="Total Pengembangan SDMA">
+                                        <field name="total_peng_sdma"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="PENDIDIKAN">
+                                <group >
+                                    <field name="kriteria"/>
+                                    <field name="nilai_kriteria"/>
+                                </group>
+                                <group string="Total SDM">
+                                    <field name="nilai_kriteria"/>
+                                </group>
+                            </page>
+                            <page string="KEHADIRAN">
+                                <group>
+                                    <group string="Jenis Kegiatan">
+                                        <field name="nilai_rat"/>
+                                        <field name="rat"/>
+                                        <field name="nilai_pra_rat"/>
+                                        <field name="pra_rat"/>
+                                        <field name="nilai_rapat_lain"/>
+                                        <field name="rapat_lain"/>
+                                        <field name="nilai_kehadiran_pelatihan"/>
+                                        <field name="kehadiran_pelatihan"/>
+                                        <field name="nilai_kehadiran_studi_banding"/>
+                                        <field name="kehadiran_studi_banding"/>
+                                        <field name="nilai_pertemuan_rutin"/>
+                                        <field name="pertemuan_rutin"/>
+                                        <field name="nilai_pertemuan_segmentasi"/>
+                                        <field name="pertemuan_segmentasi"/>
+                                        <field name="nilai_pendamping_teknis"/>
+                                        <field name="pendamping_teknis"/>
+                                    </group>
+                                        <group string="Partisipasi">
+                                            <field name="nilai_pemiliks"/>
+                                            <field name="pemiliks"/>
+                                            <field name="nilai_pengguna_jasas"/>
+                                            <field name="pengguna_jasas"/>
+                                        </group>
+                                </group>
+                            </page>
+                            <page string="KINERJA HASIL">
+                                <group>
+                                        <field name="produksi"/>
+                                        <field name="jml_pop_lahan"/>
+                                        <field name="hrg_rata_liter_lahan"/>
+                                </group>
+                            </page>
+                            <page string="PELANGGARAN">
+                                <group>
+                                        <field name="surat_teguran"/>
+                                        <field name="nilai_teguran"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_kinerja_anggota_search" model="ir.ui.view">
+            <field name="name">kinerja.anggota.search</field>
+            <field name="model">kinerja.anggota</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="kinerja anggota">
+                    <field name="anggota_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Anggota" name="group_by_anggota_id_group_name"
+                                domain="[]" context="{'group_by':'anggota_id'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_kinerja_anggota_view">
+            <field name="name">Kinerja Anggota</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">kinerja.anggota</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_kinerja_anggota_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_kinerja_anggota_view_form">
+            <field name="act_window_id" ref="act_kinerja_anggota_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_kinerja_anggota_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_kinerja_anggota_view_tree">
+            <field name="act_window_id" ref="act_kinerja_anggota_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_kinerja_anggota_tree"/>
+        </record>
+
+        <menuitem id="menu_kinerja_anggota_details"
+                    name="Kinerja Anggota"
+                    parent="simpin_syariah_menu"
+                    sequence="2"
+                    action="act_kinerja_anggota_view"/>
+    </data>
+</odoo>

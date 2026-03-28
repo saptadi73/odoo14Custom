@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="discharge_form_view" model="ir.ui.view">
+            <field name="name">discharge.form.view</field>
+            <field name="model">discharge.hospitalized</field>
+            <field name="arch" type="xml">
+                <form string="Discharge Hospitalized">
+                    <sheet>
+                        <group>
+                            <group col="4" colspan="4">
+                                <field name="patient_id"/>
+                                <field name="sex"/>
+                                <field name="age"/>
+                                <field name="address_id"/>
+                                <field name="phone"/>
+                                <field name="marital_status"/>
+                            </group>
+                            <group col="4" colspan="4">
+                                <field name="norek_medik"/>
+                                <field name="cara_pemb"/>
+                                <field name="pribadi_penjamin"/>
+                                <field name="tgl_msk"/>
+                                <field name="tgl_klr"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Diagnosa">
+                                <group>
+                                    <group>
+                                        <field name="diagnosis_msk" />
+                                        <field name="diagnosis_klr" />
+                                        <field name="oprsi" />
+                                        <field name="anamnese" />
+                                        <field name="pmrksaan"/>
+                                        <field name="prkmbngn"/>
+                                        <field name="terapi_drwt"/>
+                                        <field name="terapi_plg"/>
+                                        <field name="prognosa"/>
+                                        <field name="tgl_kontrol"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                                <page string="Keadaan Waktu Pulang">
+                                    <group>
+                                    <field name="sembuh"/>
+                                    <field name="membaik"/>
+                                    <field name="blm_sembuh"/>
+                                    <field name="meninggal_krg"/>
+                                    <field name="meninggal_lbh"/>
+                                    </group>
+                                </page>
+
+                            <page string="Pengobatan Dilanjutkan">
+                                    <group>
+                                    <field name="mp"/>
+                                    <field name="lain"/>
+                                    <field name="pskms"/>
+                                    </group>
+                                </page>
+
+                        </notebook>
+                     </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="discharge_tree_view" model="ir.ui.view">
+            <field name="name">discharge.tree.view</field>
+            <field name="model">discharge.hospitalized</field>
+            <field name="arch" type="xml">
+                <tree string="Discharge Hospitalized">
+                    <field name="patient_id"/>
+                    <field name="sex"/>
+                    <field name="age"/>
+                    <field name="address_id"/>
+                    <field name="phone"/>
+                    <field name="marital_status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_discharge" model="ir.actions.act_window">
+            <field name="name">Discharge Hospitalized</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">discharge.hospitalized</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="menu_discharge_child"-->
+<!--            parent="menu_inpatient_administration" action="action_discharge"-->
+<!--            sequence="1" />-->
+
+</odoo>

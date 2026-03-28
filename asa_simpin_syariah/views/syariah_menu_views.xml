@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+    	<menuitem id="simpin_syariah_menu" web_icon="asa_simpin_syariah,static/src/img/icon.png"
+		name="SIA" groups="asa_simpin_syariah.group_simpin_syariah_user" sequence="40"/>
+   		<menuitem id="simpin_syariah_member_menu" parent="simpin_syariah_menu"
+		name="Anggota" sequence='1' groups="asa_simpin_syariah.group_simpin_syariah_user"/>
+   		<menuitem id="simpin_syariah_simpanan_menu" parent="simpin_syariah_menu"
+		name="Layanan" sequence='2' groups="asa_simpin_syariah.group_simpin_syariah_user"/>
+<!--		<menuitem id="simpin_syariah_mitra_menu" parent="simpin_syariah_menu"-->
+<!--		name="Mitra Kerja" sequence='3' groups="asa_simpin_syariah.group_simpin_syariah_user"/>-->
+   		<menuitem id="simpin_syariah_config_menu" parent="simpin_syariah_menu"
+		name="Konfigurasi" sequence='5' groups="asa_simpin_syariah.group_simpin_syariah_user"/> 
+
+	</data>
+</odoo>
+

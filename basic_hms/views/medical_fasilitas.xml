@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="master_fasilitas_form_view" model="ir.ui.view">
+            <field name="name">master.fasilitas.form.view</field>
+            <field name="model">master.fasilitas</field>
+            <field name="arch" type="xml">
+                <form string="Fasilitas">
+                    <sheet>
+                        <group>
+                            <field name="fasilitas_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Extra Info">
+                                <field name="info" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_fasilitas_search_view" model="ir.ui.view">
+            <field name="name">master.fasilitas.search.view</field>
+            <field name="model">master.fasilitas</field>
+            <field name="arch" type="xml">
+                <search string="Search Fasilitas">
+                    <separator orientation="vertical" />
+                    <field name="fasilitas_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Fasilitas" name='by_fasilitas' context="{'group_by':'fasilitas_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_fasilitas_tree_view" model="ir.ui.view">
+            <field name="name">master.fasilitas.tree.view</field>
+            <field name="model">master.fasilitas</field>
+            <field name="arch" type="xml">
+                <tree string="Fasilitas Information">
+                    <field name="fasilitas_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_fasilitas" model="ir.actions.act_window">
+            <field name="name">Data Fasilitas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.fasilitas</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="menu_fasilitas" name='Fasilitas'-->
+<!--            parent="main_menu_configartion" sequence="9" />-->
+<!--        <menuitem id="menu_master_fasilitas" parent="menu_fasilitas"-->
+<!--            action="action_master_fasilitas" sequence="9" />-->
+
+</odoo>

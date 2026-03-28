@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="kanban_view_sapi" model="ir.ui.view">
+            <field name="name">Sapi Kanban</field>
+            <field name="model">sapi</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="o_kanban_image">
+                                    <t t-if="record.image.value">
+                                        <img t-att-src="kanban_image('sapi', 'image', record.id.raw_value)"
+                                             alt="Sapi"/>
+                                    </t>
+                                    <t t-if="!record.image.value">
+                                        <img t-att-src='_s + "/base/static/img/avatar.png"' alt="Sapi"/>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="name"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.nim.raw_value">
+                                            <field name="code_sapi"/>
+                                        </li>
+                                        <li t-if="record.contact_address.raw_value">
+                                            <field name="contact_address"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_sapi_tree" model="ir.ui.view">
+            <field name="name">view.sapi.tree</field>
+            <field name="model">sapi</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Sapi">
+                    <field name="code_sapi"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sapi_form" model="ir.ui.view">
+            <field name="name">view.sapi.form</field>
+            <field name="model">sapi</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Sapi">
+                    <header>
+
+                    </header>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div name="smart_button" class="oe_button_box">
+
+                        </div>
+                        <field name="image" widget="image" class="oe_left oe_avatar"/>
+                        <div class="oe_title w-auto">
+                            <h1>
+                                <field name="name" placeholder="Name" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="first_name" required="1" placeholder="First Name"/>
+                                        </td>
+                                        <td style="padding-right:10px;">
+                                            <field name="middle_name" placeholder="Middle Name"/>
+                                        </td>
+                                        <td style="padding-right:10px;">
+                                            <field name="last_name" placeholder="Last Name" required="1"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <notebook colspan="4">
+                            <page name="sapi_information"
+                                  string="Sapi Information">
+                                <group col="4" colspan="4" name="sapi_detail">
+                                    <field name="code_sapi"/>
+                                    <field name="gender" required="1"/>
+                                    <field name="birth_date" required="1"/>
+                                    <field name="blood_group"/>
+<!--                                    <field name="category_id"/>-->
+                                    <field name="emergency_contact" context="{'show_address': 1}"
+                                           options='{"always_reload": True}'/>
+                                    <field name="user_id" string="User" readonly="1"/>
+                                    <field name="email" required="1"/>
+                                    <field name="partner_id" placeholder="Partner" required="0"/>
+                                </group>
+                                <group string="Address Detail" name="address">
+                                    <label for="type"/>
+                                    <div name="div_type">
+                                        <field class="oe_inline" name="type"/>
+                                    </div>
+                                    <label for="street" string="Address"/>
+                                    <div name="div_address">
+                                        <field name="street" placeholder="Street..."/>
+                                        <field name="street2" placeholder="Street2"/>
+                                        <div class="address_format">
+                                            <field name="city" placeholder="City" style="width: 40%%"/>
+                                            <field name="state_id" class="oe_no_button" placeholder="State"
+                                                   style="width: 37%%" options='{"no_open": True}'/>
+                                            <field name="zip" placeholder="ZIP" style="width: 20%%"/>
+                                        </div>
+                                        <field name="country_id"
+                                               placeholder="Country" class="oe_no_button"
+                                               options='{"no_open": True}'/>
+                                    </div>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sapi_search" model="ir.ui.view">
+            <field name="name">sapi.search</field>
+            <field name="model">sapi</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Sapi">
+                    <field name="name"/>
+                    <field name="blood_group"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="blood_group" string="Blood Group"
+                                domain="[]" context="{'group_by':'blood_group'}"/>
+                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_sapi_view">
+            <field name="name">Sapi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sapi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_sapi_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_sapi_view_form">
+            <field name="act_window_id" ref="act_sapi_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_sapi_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_sapi_view_tree">
+            <field name="act_window_id" ref="act_sapi_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_sapi_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_sapi_view_kanban">
+            <field name="act_window_id" ref="act_sapi_view"/>
+            <field name="sequence" eval="5"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="kanban_view_sapi"/>
+        </record>
+
+<!--        <record model="ir.actions.act_window" id="act_sapi_view_2">-->
+<!--            <field name="name">Sapi</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">op.student</field>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="view_mode">kanban,tree,form</field>-->
+<!--            <field name="search_view_id" ref="view_op_student_search"/>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="context">{}</field>-->
+<!--        </record>-->
+
+
+        <menuitem id="menu_jenis_pelayanan" parent="menu_pelayanan"
+            action="action_jenis_pelayanan" sequence="10" />
+
+    </data>
+</odoo>

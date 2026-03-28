@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_simpanan_setoran" model="ir.ui.view">
+            <field name="name">simpin_syariah.rekening.line.setor</field>
+            <field name="model">simpin_syariah.rekening.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+	                        <group>
+                                    <field name="rekening_id" readonly='1'/>
+                                    <field name="sandi_id" readonly='1'/>
+                                    <field name="tanggal" />
+                                    <field name="name" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="debit" />
+                                    <field name="keterangan" />
+	                        </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Save" name="save_trx" type="object" class="btn-primary"/> 
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="view_simpanan_tarikan" model="ir.ui.view">
+            <field name="name">simpin_syariah.rekening.line.tarik</field>
+            <field name="model">simpin_syariah.rekening.line.transient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+	                        <group>
+                                    <field name="rekening_id" readonly='1'/>
+                                    <field name="sandi_id" readonly='1'/>
+                                    <field name="tanggal" />
+                                    <field name="name" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="credit" />
+                                    <field name="keterangan" />
+                                    <field name="is_valid" invisible="1"/>
+	                        </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Save" name="save_trx" type="object" class="btn-primary" /> 
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="view_simpanan_tranfer" model="ir.ui.view">
+            <field name="name">simpin_syariah.rekening.line.transfer</field>
+            <field name="model">simpin_syariah.rekening.line.transient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+	                        <group>
+                                    <field name="rekening_id" readonly='1'/>
+                                    <field name="sandi_id" readonly='1'/>
+                                    <field name="tanggal" />
+                                    <field name="name" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="rek_tujuan" required='1' options="{'no_open': True, 'no_create': True}"/>
+                                    <field name="credit" string='Amount'/>
+                                    <field name="keterangan" />
+                                    <field name="is_valid" invisible="1"/>
+	                        </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Save" name="save_trx" type="object" class="btn-primary" /> 
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

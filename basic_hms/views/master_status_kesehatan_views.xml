@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_status_kesehatan_view" model="ir.ui.view">
+            <field name="name">form.master.status.kesehatan.view</field>
+            <field name="model">master.status.kesehatan</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Status Kesehatan">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_status_kesehatan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_status_kesehatan_search_view" model="ir.ui.view">
+            <field name="name">master.status.kesehatan.search.view</field>
+            <field name="model">master.status.kesehatan</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Status Kesehatan">
+                    <separator orientation="vertical" />
+                    <field name="nama_status_kesehatan" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Jenis Vaksin" name='by_nama_status_kesehatan' context="{'group_by':'nama_status_kesehatan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_status_kesehatan_tree_view" model="ir.ui.view">
+            <field name="name">master.status.kesehatan.tree.view</field>
+            <field name="model">master.status.kesehatan</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Status Kesehatan">
+                    <field name="kode"/>
+                    <field name="nama_status_kesehatan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_status_kesehatan" model="ir.actions.act_window">
+            <field name="name">Master Status Kesehatan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.status.kesehatan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_status_kesehatan" parent="mster_data"
+            action="action_master_status_kesehatan" sequence="5" />
+
+</odoo>

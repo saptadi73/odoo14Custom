@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_report_setoran_line_tree" model="ir.ui.view">
+            <field name="name">report.setoran.line.tree</field>
+            <field name="model">report.setoran.line</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Setoran Line">
+<!--                    <field name="liter_sapi_id"/>-->
+                    <field name="kode_peternak"/>
+                    <field name="peternak_id"/>
+                    <field name="periode_id"/>
+                    <field name="tgl_awal"/>
+                    <field name="tgl_akhir"/>
+                    <field name="tgl_setor"/>
+                    <field name="tipe_setor_pagi"/>
+                    <field name="setoran_pagi"/>
+                    <field name="setoran_pagi_l"/>
+                    <field name="alkohol_pagi"/>
+                    <field name="organol_pagi"/>
+                    <field name="bj_pagi"/>
+                    <field name="tipe_setor_sore"/>
+                    <field name="setoran_sore"/>
+                    <field name="setoran_sore_l"/>
+                    <field name="alkohol_sore"/>
+                    <field name="organol_sore"/>
+                    <field name="bj_sore"/>
+                    <field name="uom_id"/>
+                    <field name="note"/>
+<!--                    <field name="petugas_id" />-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_report_setoran_line_view">
+            <field name="name">Setoran Line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.setoran.line</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_report_setoran_line_details"
+                    name="Setoran Line"
+                    parent="menu_liter_root"
+                    sequence="20"
+                    action="act_report_setoran_line_view"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_kk_view" model="ir.ui.view">
+            <field name="name">form.kk.form.view</field>
+            <field name="model">form.kk</field>
+            <field name="arch" type="xml">
+                <form string="Form Kering Kandang">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="kelompok_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                            </group>
+                            <group>
+                                <field name="id_sapi"/>
+                                <field name="eartag_id"/>
+                                <field name="jenis_pengeringan_id"/>
+                                <field name="pengobatan1"/>
+                                <field name="pengobatan2"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="cat_petugas"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_kk_search_view" model="ir.ui.view">
+            <field name="name">form.kk.search.view</field>
+            <field name="model">form.kk</field>
+            <field name="arch" type="xml">
+                <search string="Search Kering Kandang">
+                    <separator orientation="vertical" />
+                    <field name="eartag_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_kk_tree_view" model="ir.ui.view">
+            <field name="name">form.kk.tree.view</field>
+            <field name="model">form.kk</field>
+            <field name="arch" type="xml">
+                <tree string="Form Kering Kandang">
+                    <field name="id_pemilik"/>
+                    <field name="eartag_id"/>
+                    <field name="tgl_layanan"/>
+                    <field name="cat_petugas"/>
+                    <field name="jenis_pengeringan_id"/>
+                    <field name="pengobatan1"/>
+                    <field name="pengobatan2"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_kk_pivot" model="ir.ui.view">
+        <field name="name">form.kk.pivot</field>
+        <field name="model">form.kk</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_kk" model="ir.actions.act_window">
+            <field name="name">Form Kering Kandang</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.kk</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_kk" parent="menu_layanan"
+            action="action_form_kk" sequence="120" />
+
+</odoo>

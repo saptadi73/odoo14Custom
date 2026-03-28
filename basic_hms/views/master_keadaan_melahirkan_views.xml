@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_keadaan_melahirkan_view" model="ir.ui.view">
+            <field name="name">form.master.keadaan.melahirkan.view</field>
+            <field name="model">master.keadaan.melahirkan</field>
+            <field name="arch" type="xml">
+                <form string="Form Master keadaan Melahirkan">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_keadaan_melahirkan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_keadaan_melahirkan_search_view" model="ir.ui.view">
+            <field name="name">master.keadaan.melahirkan.search.view</field>
+            <field name="model">master.keadaan.melahirkan</field>
+            <field name="arch" type="xml">
+                <search string="Search Master keadaan Melahirkan">
+                    <separator orientation="vertical" />
+                    <field name="nama_keadaan_melahirkan" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="keadaan Melahirkan" name='by_nama_keadaan_melahirkan' context="{'group_by':'nama_keadaan_melahirkan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_keadaan_melahirkan_tree_view" model="ir.ui.view">
+            <field name="name">master.keadaan.melahirkan.tree.view</field>
+            <field name="model">master.keadaan.melahirkan</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master keadaan Melahirkan">
+                    <field name="kode"/>
+                    <field name="nama_keadaan_melahirkan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_keadaan_melahirkan" model="ir.actions.act_window">
+            <field name="name">Master keadaan Melahirkan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.keadaan.melahirkan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_keadaan_melahirkan" parent="mster_data"
+            action="action_master_keadaan_melahirkan" sequence="23" />
+
+</odoo>

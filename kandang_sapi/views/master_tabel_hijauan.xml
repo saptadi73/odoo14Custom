@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tabel_hijauan_kunjungan_tree" model="ir.ui.view">
+            <field name="name">tabel.hijauan.kunjungan.tree</field>
+            <field name="model">tabel.hijauan.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Tabel Hijauan">
+                    <field name="hijauan"/>
+<!--                    <field name="nilai_bk_jerami"/>-->
+<!--                    <field name="nilai_tdn_jerami"/>-->
+<!--                    <field name="nilai_bk_gajah"/>-->
+<!--                    <field name="nilai_tdn_gajah"/>-->
+<!--                    <field name="nilai_bk_tebon"/>-->
+<!--                    <field name="nilai_tdn_tebon"/>-->
+<!--                    <field name="nilai_bk_tebu"/>-->
+<!--                    <field name="nilai_tdn_tebu"/>-->
+<!--                    <field name="nilai_bk_pakchong"/>-->
+<!--                    <field name="nilai_tdn_pakchong"/>-->
+<!--                    <field name="nilai_bk_odot"/>-->
+<!--                    <field name="nilai_tdn_odot"/>-->
+<!--                    <field name="nilai_bk_lapang"/>-->
+<!--                    <field name="nilai_tdn_lapang"/>-->
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tabel_hijauan_kunjungan_form" model="ir.ui.view">
+            <field name="name">tabel.hijauan.kunjungan.form</field>
+            <field name="model">tabel.hijauan.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Tabel Hijauan">
+                    <sheet>
+                        <div class="oe_title w-auto">
+                            <h1>
+                                <field name="hijauan" placeholder="Name" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="hijauan" placeholder="Nama Tabel" required="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <field name="is_active"/>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="nilai_bk_jerami"/>
+                                <field name="nilai_bk_gajah"/>
+                                <field name="nilai_bk_tebon"/>
+                                <field name="nilai_bk_tebu"/>
+                                <field name="nilai_bk_pakchong"/>
+                                <field name="nilai_bk_odot"/>
+                                <field name="nilai_bk_lapang"/>
+                                <field name="nilai_bk_hijauan_1"/>
+                                <field name="nilai_bk_hijauan_2"/>
+                                <field name="nilai_bk_hijauan_3"/>
+                                <field name="nilai_bk_hijauan_4"/>
+                                <field name="nilai_bk_hijauan_5"/>
+                                <field name="nilai_bk_hijauan_6"/>
+                                <field name="nilai_bk_hijauan_7"/>
+                            </group>
+                            <group>
+                                <field name="nilai_tdn_jerami"/>
+                                <field name="nilai_tdn_gajah"/>
+                                <field name="nilai_tdn_tebon"/>
+                                <field name="nilai_tdn_tebu"/>
+                                <field name="nilai_tdn_pakchong"/>
+                                <field name="nilai_tdn_odot"/>
+                                <field name="nilai_tdn_lapang"/>
+                                <field name="nilai_tdn_hijauan_1"/>
+                                <field name="nilai_tdn_hijauan_2"/>
+                                <field name="nilai_tdn_hijauan_3"/>
+                                <field name="nilai_tdn_hijauan_4"/>
+                                <field name="nilai_tdn_hijauan_5"/>
+                                <field name="nilai_tdn_hijauan_6"/>
+                                <field name="nilai_tdn_hijauan_7"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tabel_hijauan_kunjungan_search" model="ir.ui.view">
+            <field name="name">tabel.hijauan.kunjungan.search</field>
+            <field name="model">tabel.hijauan.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Tabel Hijauan">
+                    <field name="hijauan"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Tabel Hijauan" name="group_by_hijauan_group_name"
+                                domain="[]" context="{'group_by':'hijauan'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_tabel_hijauan_kunjungan_view">
+            <field name="name">Tabel Hijauan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tabel.hijauan.kunjungan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_tabel_hijauan_kunjungan_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_hijauan_kunjungan_view_form">
+            <field name="act_window_id" ref="act_tabel_hijauan_kunjungan_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tabel_hijauan_kunjungan_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_hijauan_kunjungan_view_tree">
+            <field name="act_window_id" ref="act_tabel_hijauan_kunjungan_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tabel_hijauan_kunjungan_tree"/>
+        </record>
+
+        <menuitem id="menu_tabel_hijauan_kunjungan_details"
+                    name="Tabel Hijauan"
+                    parent="menu_konfigurasi_root"
+                    sequence="10"
+                    action="act_tabel_hijauan_kunjungan_view"/>
+    </data>
+</odoo>

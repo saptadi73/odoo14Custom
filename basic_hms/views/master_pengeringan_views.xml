@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_pengeringan_view" model="ir.ui.view">
+            <field name="name">form.master.pengeringan.view</field>
+            <field name="model">master.pengeringan</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Pengeringan">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_pengeringan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_pengeringan_search_view" model="ir.ui.view">
+            <field name="name">master.pengeringan.search.view</field>
+            <field name="model">master.pengeringan</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Pengeringan">
+                    <separator orientation="vertical" />
+                    <field name="nama_pengeringan" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Pengeringan" name='by_nama_pengeringan' context="{'group_by':'nama_pengeringan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_pengeringan_tree_view" model="ir.ui.view">
+            <field name="name">master.pengeringan.tree.view</field>
+            <field name="model">master.pengeringan</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Pengeringan">
+                    <field name="kode"/>
+                    <field name="nama_pengeringan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_pengeringan" model="ir.actions.act_window">
+            <field name="name">Master Pengeringan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.pengeringan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_pengeringan" parent="mster_data"
+            action="action_master_pengeringan" sequence="10" />
+
+</odoo>

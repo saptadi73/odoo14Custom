@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="sales_profit_report_view" model="ir.ui.view">
+        <field name="name">Sales Profit Loss Report</field>
+        <field name="model">sales_profit_report.report</field>
+        <field name="arch" type="xml">
+        	<form>
+                <group>
+			<group>
+				<field name="from_date"/>
+				<field name="to_date"/>
+			</group>
+			<group>
+				<field name="company" groups="base.group_multi_company" options='{"no_open": True, "no_create": True}'/>
+			</group>
+                </group>
+        		<footer>
+	                <button name="print_pnl_pdf_report" string="Print PDF" type="object" context="{'pdf':1}" default_focus="1" class="btn btn-primary" />
+	                or
+					<button name="print_pnl_xls_report" string="Print XLS" type="object" class="btn btn-primary" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+	            </footer>
+			</form>
+        </field>
+    </record>
+
+	<record id="action_sales_profit_report_wizard" model="ir.actions.act_window">
+        <field name="name">Sales Profit Loss Report</field>
+        <field name="res_model">sales_profit_report.report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="sales_profit_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+	<menuitem id="menu_sales_profit_report" name="Sales Profit Loss Report" action="action_sales_profit_report_wizard" parent="sale.menu_sale_report" sequence="21" groups="sales_profit_loss_report.group_show_users_sale_pnl_report"/>
+
+</odoo>

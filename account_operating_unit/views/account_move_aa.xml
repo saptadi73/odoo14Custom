@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--© 2016-17 ForgeFlow S.L.-->
+<!--© 2016 Serpent Consulting Services Pvt. Ltd.-->
+<!--License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).-->
+<odoo>
+    <record id="view_move_aa_form" model="ir.ui.view">
+        <field name="name">account.move.aa.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                <field
+                    name="analytic_account_id"
+                    options="{'no_create': True, 'no_create_edit': True}" required="1"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_move_line_aa_form" model="ir.ui.view">
+        <field name="name">account.move.line.aa.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='analytic_account_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+		<attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_move_line_aa_item" model="ir.ui.view">
+        <field name="name">account.move.line.aa.item</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']//tree//field[@name='analytic_account_id']" position="attributes">
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+<!--    <record id="view_account_move_attribute_form" model="ir.ui.view">-->
+<!--        <field name="name">account.account.move.attribute.form</field>-->
+<!--        <field name="model">account.move</field>-->
+<!--        <field name="inherit_id" ref="account.view_move_form" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='partner_id']" position="attributes">-->
+<!--                <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

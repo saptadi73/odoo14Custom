@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<!--        <record model="ir.ui.view" id="liter_sapi_rearing_form_view">-->
+<!--            <field name="name">liter.sapi.rearing.form</field>-->
+<!--            <field name="model">purchase.order</field>-->
+<!--            <field name="inherit_id" ref="purchase.purchase_order_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='partner_ref']" position="after">-->
+<!--		    <field name="bj"/>-->
+<!--                    <field name="bj_pagi"/>-->
+<!--                    <field name="bj_sore"/>-->
+<!--                    <field name="grade"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="view_liter_sapi_rearing_tree" model="ir.ui.view">
+            <field name="name">liter.sapi.rearing.tree</field>
+            <field name="model">liter.sapi.rearing</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Liter Sapi Rearing">
+                    <field name="tps_id"/>
+                    <field name="picking_type_id"/>
+                    <field name="setoran"/>
+                    <field name="total_setoran_pagi"/>
+                    <field name="total_setoran_sore"/>
+                    <field name="periode_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_liter_sapi_rearing_form" model="ir.ui.view">
+            <field name="name">liter.sapi.rearing.form</field>
+            <field name="model">liter.sapi.rearing</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Liter Sapi Rearing">
+                    <header>
+                        <button string="Generate Setoran" type="object" class="oe_highlight"
+                        icon="fa-magic" name="generate_setoran_lines"/>
+                        <button string="Get Nilai Persediaan" type="object" class="oe_highlight"
+                        icon="fa-magic" name="button_get_nilai_persediaan_transactions"/>
+                        <button string="Generate Warehouse" type="object" class="oe_highlight"
+                        icon="fa-magic" name="generate_stock_picking"/>
+<!--                      <button name="create_po" string="Create PO" type="object" class="oe_highlight" attrs="{'invisible': [('purchase_count', '!=', 0)]}"/>-->
+                    </header>
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box" position="inside">-->
+<!--                            <button class="btn oe_stat_button" type="object"-->
+<!--                                name="get_purchase"-->
+<!--                                style="border-right: 1px solid;"-->
+<!--                                icon="fa-shopping-cart" attrs="{'invisible': [('purchase_count', '=', 0)]}">-->
+<!--                                <field string="Setoran Susu" name="purchase_count" widget="statinfo"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+                            <group col="4">
+                                <field name="tps_id" required="1"/>
+                                <field name="picking_type_id" required="1"/>
+                                <field name="location_id" required="1"/>
+                                <field name="location_dest_id" required="1"/>
+                                <field name="picking_created"/>
+                            </group>
+                            <group string="Periode">
+                                <field name="tgl_setoran" required="1"/>
+                                <field name="periode_id" required="1"/>
+                            </group>
+                            <group col="4">
+                                <field name="tgl_awal"/>
+                                <field name="tgl_akhir"/>
+                            </group>
+                            <group col="4">
+                                <field name="tipe_id" required="0"/>
+                                <field name="sapi_ids" widget="many2many_tags" required="1"/>
+                                <field name="eartag_id"/>
+                            </group>
+                        <group string="Setoran Susu" col="4">
+                            <field name="product_id_3" required="1"/>
+                            <field name="uom_id"/>
+                        </group>
+                        <group col="4">
+                            <field name="tipe_setor" required="1"/>
+                            <field name="hasil_prod"/>
+                            <field name="total_setoran_pagi" />
+                            <field name="total_setoran_sore" />
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="tot_set_pag_sor"/>
+                            <field name="harga_satuan"/>
+                            <field name="tot_nilai"/>
+                        </group>
+                        <notebook>
+                            <page string="Setoran">
+                            <group>
+                                <field name="setoran_line_rearing_ids" nolabel="1" options="{'reload_on_button': True}">
+                                    <tree edit="true" editable="bottom" create="true" delete="true">
+                                        <field name="tgl_setor"/>
+                                        <field name="sapi_id"/>
+                                        <field name="eartag_id"/>
+                                        <field name="tipe_setor"/>
+                                        <field name="product_id_2"/>
+                                        <field name="setoran"/>
+                                        <field name="uom_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            </page>
+                            <page string="List Persediaan">
+                                <group>
+                                    <field name="persediaan_nilai_ids" nolabel="1" options="{'reload_on_button': True}">
+                                        <tree edit="true" editable="bottom" create="true" delete="true">
+                                            <field name="date"/>
+                                            <field name="account_id"/>
+                                            <field name="debit"/>
+                                            <field name="credit"/>
+                                            <field name="balance"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_liter_sapi_rearing_search" model="ir.ui.view">
+            <field name="name">liter.sapi.rearing.search</field>
+            <field name="model">liter.sapi.rearing</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Liter Sapi Rearing">
+                    <field name="tps_id"/>
+                    <field name="eartag_id"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="TPS" name="group_by_tps_id"
+                                domain="[]" context="{'group_by':'tps_id'}"/>
+                        <filter string="Eartag" name="group_by_eartag_id_name"
+                                domain="[]" context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_liter_rearing_pivot" model="ir.ui.view">
+            <field name="name">liter.pivot</field>
+            <field name="model">liter.sapi.rearing</field>
+            <field name="arch" type="xml">
+                <pivot>
+
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_liter_sapi_rearing_view">
+            <field name="name">Liter Sapi Rearing</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">liter.sapi.rearing</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+            <field name="search_view_id" ref="view_liter_sapi_rearing_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_liter_sapi_rearing_view_form">
+            <field name="act_window_id" ref="act_liter_sapi_rearing_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_liter_sapi_rearing_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_liter_sapi_rearing_view_tree">
+            <field name="act_window_id" ref="act_liter_sapi_rearing_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_liter_sapi_rearing_tree"/>
+        </record>
+    </data>
+</odoo>

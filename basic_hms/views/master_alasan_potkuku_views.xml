@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_alasan_potkuku_view" model="ir.ui.view">
+            <field name="name">form.master.alasan.potkuku.view</field>
+            <field name="model">master.alasan.potkuku</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Alasan Potong Kuku">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_alasan_potkuku"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_alasan_potkuku_search_view" model="ir.ui.view">
+            <field name="name">master.alasan.potkuku.search.view</field>
+            <field name="model">master.alasan.potkuku</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Alasan Potong Kuku">
+                    <separator orientation="vertical" />
+                    <field name="nama_alasan_potkuku" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Alasan Potong Kuku" name='by_nama_alasan_potkuku' context="{'group_by':'nama_alasan_potkuku'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_alasan_potkuku_tree_view" model="ir.ui.view">
+            <field name="name">master.alasan.potkuku.tree.view</field>
+            <field name="model">master.alasan.potkuku</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Alasan Potong Kuku">
+                    <field name="kode"/>
+                    <field name="nama_alasan_potkuku"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_alasan_potkuku" model="ir.actions.act_window">
+            <field name="name">Master Alasan Potong Kuku</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.alasan.potkuku</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_alasan_potkuku" parent="mster_data"
+            action="action_master_alasan_potkuku" sequence="14" />
+
+</odoo>

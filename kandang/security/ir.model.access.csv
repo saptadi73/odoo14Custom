@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jenis_kandang,jenis_kandang,model_jenis_kandang,,1,1,1,1
+access_kandang_sapi_perah,kandang_sapi_perah,model_kandang_sapi_perah,,1,1,1,1

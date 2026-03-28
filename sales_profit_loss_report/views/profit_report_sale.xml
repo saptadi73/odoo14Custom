@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_sales_profit_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <center>
+                        <h2><span>Sales Profit-Loss Report</span></h2>
+                        <div>
+                            <span style="font-size: 18px;">Company</span> : <t t-if="data['company']"> <span style="font-size: 16px;" t-esc="data['company'][1]"/></t>
+                        </div>
+                    </center>
+                    <br></br>
+                    <table border="1" style="width:99%;">
+                        <tr></tr>
+                        <tr>
+                            <t t-if="data['from_date']"><td><span style="font-size: 16px;"><b>From Date: </b></span> <span t-esc="data['from_date']"/></td></t>
+                            <t t-if="data['to_date']"><td><span style="font-size: 16px;"><b>To Date: </b></span> <span t-esc="data['to_date']"/></td></t>
+                            <t t-if="report_date"><td><span style="font-size: 16px;"><b>Report Date: </b></span> <span t-esc="report_date"/></td></t>
+                        </tr>
+                        <tr>
+                            <td colspan="3"> </td>
+                        </tr>
+                    </table>
+                    <br></br><br></br>
+                    <t t-if="product_dict">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">No</th>
+                                    <th class="text-center">Product</th>
+                                    <th class="text-center">Product Category</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th class="text-center">Unit</th>
+                                    <th class="text-right">Unit Price</th>
+                                    <th class="text-right">Taxes</th>
+                                    <th class="text-right">Amount w/o Tax</th>
+                                    <th class="text-right">Cost Price</th>
+                                    <th class="text-right">Gross Profit/Loss</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1"/>
+                                <t t-set="amt_wo_tax" t-value="0"/>
+                                <t t-set="cost_price" t-value="0"/>
+                                <t t-set="gross_pnl" t-value="0"/>
+                                <t t-set="taxes" t-value="0"/>
+                                <t t-foreach="product_dict" t-as="product">
+                                    <t t-set="line" t-value="request.env['sale.order'].check_report_vals(product_dict[product])"/>
+                                    <t t-foreach="line" t-as="ls">
+                                        <tr>
+                                            <td class="text-left"><span t-esc="i" /></td>
+                                            <td class="text-right"><span t-esc="product.name"/></td>
+                                            <td class="text-right"><span t-esc="line[ls]['category'].name"/></td>
+                                            <td class="text-right"><span t-esc="line[ls]['qty']"/></td>
+                                            <td class="text-right"><span t-esc="line[ls]['uom'].name"/></td>
+                                            <td class="text-right"><span t-esc="float(line[ls]['unit_price'])" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                            <td class="text-right"><span t-esc="float(line[ls]['taxes'])" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                            <td class="text-right"><span t-esc="float(line[ls]['amt_wo_tax'])" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                            <td class="text-right"><span t-esc="float(line[ls]['cost_price'])" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                            <td class="text-right" t-if="line[ls]['gross_pnl'] &lt; 0">
+                                                <span style="color:red;" class="text-right"><span class="text-right" t-esc="float('%.2f' % line[ls]['gross_pnl'])" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></span>
+                                            </td>
+                                            <td class="text-right" t-else="">
+                                                <span style="color:green;" class="text-right"><span class="text-right" t-esc="float('%.2f' % line[ls]['gross_pnl'])" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></span>
+                                            </td>
+                                            <t t-set="i" t-value="i+1"/>
+                                            <t t-set="amt_wo_tax" t-value="amt_wo_tax+line[ls]['amt_wo_tax']"/>
+                                            <t t-set="cost_price" t-value="cost_price+line[ls]['cost_price']"/>
+                                            <t t-set="gross_pnl" t-value="gross_pnl+line[ls]['gross_pnl']"/>
+                                            <t t-set="taxes" t-value="taxes+line[ls]['taxes']"/>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"><span t-esc="float('%.2f' % taxes)" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                    <td class="text-right"><span t-esc="float('%.2f' % amt_wo_tax)" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                    <td class="text-right"><span t-esc="float('%.2f' % cost_price)" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td>
+                                    <td class="text-right" t-if="gross_pnl &lt; 0">
+                                        <span style="color:red;" class="text-right"><span t-esc="float('%.2f' % gross_pnl)" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></span>
+                                    </td>
+                                    <td class="text-right" t-else="">
+                                        <span style="color:green;" class="text-right"><td class="text-right"><span t-esc="float('%.2f' % gross_pnl)" t-options='{"widget": "monetary", "display_currency": request.env.company.currency_id}'/></td></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

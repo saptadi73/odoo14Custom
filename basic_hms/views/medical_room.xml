@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="master_room_form_view" model="ir.ui.view">
+            <field name="name">master.room.form.view</field>
+            <field name="model">master.room</field>
+            <field name="arch" type="xml">
+                <form string="Data Room">
+                    <sheet>
+                        <group>
+                            <field name="room_id"/>
+                            <field name="code_room"/>
+                            <field name="fasilitas_ids" widget="many2many_tags"/>
+                            <field name="class_room"/>
+                        </group>
+                        <notebook>
+                            <page string="Extra Info">
+                                <field name="info" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_room_search_view" model="ir.ui.view">
+            <field name="name">master.room.search.view</field>
+            <field name="model">master.room</field>
+            <field name="arch" type="xml">
+                <search string="Search Room">
+                    <separator orientation="vertical" />
+                    <field name="room_id" select="1" />
+                    <field name="code_room" select="1" />
+                    <field name="fasilitas_ids" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Ruangan" name='by_room' context="{'group_by':'room_id'}"/>
+                        <filter string="Fasilitas" name='by_fasilitas' context="{'group_by':'fasilitas_ids'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_room_tree_view" model="ir.ui.view">
+            <field name="name">master.room.tree.view</field>
+            <field name="model">master.room</field>
+            <field name="arch" type="xml">
+                <tree string="Room Information">
+                    <field name="room_id" />
+                    <field name="code_room" />
+                    <field name="fasilitas_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_room" model="ir.actions.act_window">
+            <field name="name">Data Room</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.room</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <menuitem id="menu_room" name='DataRoom'-->
+<!--            parent="main_menu_configartion" sequence="9" />-->
+<!--        <menuitem id="menu_master_room" parent="menu_room"-->
+<!--            action="action_master_room" sequence="9" />-->
+
+</odoo>

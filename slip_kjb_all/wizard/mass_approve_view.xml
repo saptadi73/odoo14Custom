@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mass_finish_view" model="ir.ui.view">
+            <field name="name">finish.payslip.mass</field>
+            <field name="model">mass.approve</field>
+            <field name="arch" type="xml">
+                <form string="Finish Payslip">
+                    <label string="All selected Payslip will be Finished. You won't be able to modify them afterwards."/>
+                    <footer>
+                        <button string="Finish" name="mass_approve" type="object" default_focus="1" class="btn-primary"
+                          />
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_mass_approve" model="ir.actions.act_window">
+            <field name="name">Finish Payslip</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mass.approve</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="mass_finish_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">This wizard will Finish all Paysli selected</field>
+        </record>
+
+        <record model="ir.values" id="mass_approve_values">
+            <field name="model_id" ref="hr_payroll.model_hr_payslip" />
+            <field name="name">Finish Payslip</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_mass_approve'))" />
+            <field name="key">action</field>
+            <field name="model">hr.payslip</field>
+        </record>
+
+    </data>
+</odoo>

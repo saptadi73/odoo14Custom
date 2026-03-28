@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--	<data>-->
+
+<!--        <record id="simpin_syariah_rekening_tree" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.rekening.tree</field>-->
+<!--            <field name="model">simpin_syariah.rekening</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Simpanan Syariah">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="member_id" />-->
+<!--                    <field name="akad_id" />-->
+<!--                    <field name="product_id" />-->
+<!--                    <field name="balance" />-->
+<!--                    <field name="state" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_rekening_filter" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.rekening.select</field>-->
+<!--            <field name="model">simpin_syariah.rekening</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Rekening">-->
+<!--                    <field name="name" string="Name" filter_domain="['|', ('name','ilike',self), ('member_id','ilike',self)]"/>-->
+<!--                    <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>-->
+<!--                    <filter name="submit" string="Submitted" domain="[('state', '=', 'submit')]"/>-->
+<!--                    <filter name="approve" string="Approved" domain="[('state', '=', 'approve')]"/>-->
+<!--                    <filter name="active" string="Active" domain="[('state', '=', 'active')]"/>-->
+<!--                    <separator/>-->
+<!--                    <group expand="0" string="Group By">-->
+<!--                        <filter name="group_by_mitra_id" string="Mitra Kerja" context="{'group_by':'mitra_id'}"/>-->
+<!--                        <filter name="group_by_product_id" string="Product" context="{'group_by':'product_id'}"/>-->
+<!--                        <filter name="status" string="Status" context="{'group_by':'state'}"/>-->
+<!--                    </group>-->
+<!--               </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_rekening_form" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.rekening.form</field>-->
+<!--            <field name="model">simpin_syariah.rekening</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Simpanan Syariah">-->
+<!--		<header>-->
+<!--                  <button name="action_submit" string="Submit" type="object" class="oe_highlight" states="draft"/>-->
+<!--                  <button name="action_check" string="Check Document" type="object" class="oe_highlight" states="submit"/>-->
+<!--                  <button name="action_approve" string="Approve" type="object" class="oe_highlight" states="check"/>-->
+<!--                  <button name="action_setor" string="Setoran" type="object" class="oe_highlight" states="active"/>-->
+<!--                  <button name="action_tarik" string="Tarikan" type="object" class="oe_highlight" states="active"/>-->
+<!--                  <button name="action_transfer" string="Transfer" type="object" class="oe_highlight" states="active"/>-->
+<!--                  <field name="state" widget="statusbar" statusbar_visible="draft,submit,check,approve,active"/>-->
+<!--		</header>-->
+<!--		<sheet>-->
+<!--                    <div class="oe_title">-->
+<!--                        <label for="name"/>-->
+<!--                        <h1>-->
+<!--                            <field name="name" attrs="{'readonly': True}"/>-->
+<!--                        </h1>-->
+<!--                    </div>-->
+<!--		<group>-->
+<!--			<group>-->
+<!--                	    <field name="member_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                         <field name="partner_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                	    <field name="akad_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                	    <field name="product_id" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>-->
+<!--                	    <field name="account_analytic_id" options="{'no_open': True, 'no_create': True}"  -->
+<!--					attrs="{'readonly': [('state', 'not in', ['draft','submit','check'])]}"/>-->
+<!--			</group>-->
+<!--			<group>-->
+<!--                	    <field name="balance" readonly="0"/>-->
+<!--			    <field name="max_debit"/>-->
+<!--			</group>-->
+<!--		</group>-->
+
+<!--                <notebook>-->
+<!--                        <page string="Transaction" attrs="{'invisible': [('state', '!=', 'active')]}">-->
+<!--                            <field name="transaction_lines" widget="one2many_list" readonly="1">-->
+<!--                                <tree editable="bottom" string="Transaction Lines">-->
+<!--                                    <field name="sandi_id" />-->
+<!--                                    <field name="tanggal" />-->
+<!--                                    <field name="keterangan"/>-->
+<!--                                    <field name="debit" />-->
+<!--                                    <field name="credit" />-->
+<!--                                    <field name="balance" />-->
+<!--                                    <field name="state" />-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--			            </page>-->
+<!--                         <page string="Tagihan" attrs="{'invisible': [('state', '!=', 'active')]}">-->
+<!--                            <field context="{'move_type':'out_invoice'}" name="invoice_ids" widget="one2many_list" readonly="1"  domain="[('move_type','=','out_invoice')]">-->
+<!--                                <tree string="Tagihan Pro forma"> -->
+<!--                                    <field name="invoice_date" />-->
+<!--                                    <field name="name" />-->
+<!--                                    <field name="ref"/>-->
+<!--                                    <field name="amount_total" />-->
+<!--                                    <field name="state" />-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--		</notebook>-->
+
+<!--		</sheet>-->
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>-->
+<!--                        <field name="activity_ids" widget="mail_activity"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--	<record id="simpin_syariah_rekening_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Simpanan Syariah</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">simpin_syariah.rekening</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create SimPin Syariah Member-->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--   	<menuitem id="simpin_syariah_simpanan" parent="simpin_syariah_simpanan_menu" -->
+<!--		name="Simpanan" sequence='1' action="simpin_syariah_rekening_action"-->
+<!-- 		groups="asa_simpin_syariah.group_simpin_syariah_user"/> -->
+<!--	</data>-->
+</odoo>
+

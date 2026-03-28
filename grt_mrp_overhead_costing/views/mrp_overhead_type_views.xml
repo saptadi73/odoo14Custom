@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_mrp_overhead_type_tree" model="ir.ui.view">
+        <field name="name">mrp.overhead.type.tree</field>
+        <field name="model">mrp.overhead.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="allocation_basis"/>
+                <field name="mo_factor_mode"/>
+                <field name="capitalize_to_inventory"/>
+                <field name="default_source_account_id"/>
+                <field name="absorption_account_id"/>
+                <field name="variance_account_id"/>
+                <field name="company_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mrp_overhead_type_form" model="ir.ui.view">
+        <field name="name">mrp.overhead.type.form</field>
+        <field name="model">mrp.overhead.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="company_id"/>
+                            <field name="allocation_basis"/>
+                            <field name="mo_factor_mode"/>
+                            <field name="capitalize_to_inventory"/>
+                            <field name="default_source_account_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="absorption_account_id"/>
+                        </group>
+                        <group>
+                            <field name="variance_account_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mrp_overhead_type" model="ir.actions.act_window">
+        <field name="name">Overhead Types</field>
+        <field name="res_model">mrp.overhead.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

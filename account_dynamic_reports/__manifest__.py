@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name' : 'All in one Dynamic Financial Reports v14',
-    'version' : '14.1.0',
+    'version' : '14.2.0',
     'summary': "General Ledger Trial Balance Ageing Balance Sheet Profit and Loss Cash Flow Dynamic",
     'sequence': 15,
     'description': """
@@ -39,6 +39,7 @@
              'wizard/trial_balance_view.xml',
              'wizard/partner_ageing_view.xml',
              'wizard/financial_report_view.xml',
+             'wizard/faspe_consolidated_report_view.xml',
              ],
     'demo': [],
     'license': 'OPL-1',

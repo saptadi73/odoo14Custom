@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_tabel_pakan_tambah_kunjungan_tree" model="ir.ui.view">
+            <field name="name">tabel.pakan.tambah.kunjungan.tree</field>
+            <field name="model">tabel.pakan.tambah.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Tabel Pakan Tambah">
+                    <field name="pakan_tambah"/>
+                    <field name="nilai_bk_selep"/>
+                    <field name="nilai_tdn_selep"/>
+                    <field name="nilai_bk_tawar"/>
+                    <field name="nilai_tdn_tawar"/>
+                    <field name="nilai_bk_singkong"/>
+                    <field name="nilai_tdn_singkong"/>
+                    <field name="nilai_bk_gamblong"/>
+                    <field name="nilai_tdn_gamblong"/>
+                    <field name="nilai_bk_bir"/>
+                    <field name="nilai_tdn_bir"/>
+                    <field name="nilai_bk_tahu"/>
+                    <field name="nilai_tdn_tahu"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tabel_pakan_tambah_kunjungan_form" model="ir.ui.view">
+            <field name="name">tabel.pakan.tambah.kunjungan.form</field>
+            <field name="model">tabel.pakan.tambah.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Tabel Pakan Tambah">
+                    <sheet>
+                        <div class="oe_title w-auto">
+                            <h1>
+                                <field name="pakan_tambah" placeholder="Name" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="pakan_tambah" placeholder="Nama Tabel" required="1"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <field name="is_active"/>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="nilai_bk_selep"/>
+                                <field name="nilai_bk_tawar"/>
+                                <field name="nilai_bk_singkong"/>
+                                <field name="nilai_bk_gamblong"/>
+                                <field name="nilai_bk_bir"/>
+                                <field name="nilai_bk_tahu"/>
+                                <field name="nilai_bk_tambah_1"/>
+                                <field name="nilai_bk_tambah_2"/>
+                                <field name="nilai_bk_tambah_3"/>
+                                <field name="nilai_bk_tambah_4"/>
+                                <field name="nilai_bk_tambah_5"/>
+                                <field name="nilai_bk_tambah_6"/>
+                                <field name="nilai_bk_tambah_7"/>
+                            </group>
+                            <group>
+                                <field name="nilai_tdn_selep"/>
+                                <field name="nilai_tdn_tawar"/>
+                                <field name="nilai_tdn_singkong"/>
+                                <field name="nilai_tdn_gamblong"/>
+                                <field name="nilai_tdn_bir"/>
+                                <field name="nilai_tdn_tahu"/>
+                                <field name="nilai_tdn_tambah_1"/>
+                                <field name="nilai_tdn_tambah_2"/>
+                                <field name="nilai_tdn_tambah_3"/>
+                                <field name="nilai_tdn_tambah_4"/>
+                                <field name="nilai_tdn_tambah_5"/>
+                                <field name="nilai_tdn_tambah_6"/>
+                                <field name="nilai_tdn_tambah_7"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_tabel_pakan_tambah_kunjungan_search" model="ir.ui.view">
+            <field name="name">tabel.pakan.tambah.kunjungan.search</field>
+            <field name="model">tabel.pakan.tambah.kunjungan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Tabel Pakan Tambah">
+                    <field name="pakan_tambah"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Tabel Pakan Tambah" name="group_by_pakan_tambah_group_name"
+                                domain="[]" context="{'group_by':'pakan_tambah'}"/>
+<!--                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>-->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_tabel_pakan_tambah_kunjungan_view">
+            <field name="name">Tabel Pakan Tambah</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tabel.pakan.tambah.kunjungan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_tabel_pakan_tambah_kunjungan_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_pakan_tambah_kunjungan_view_form">
+            <field name="act_window_id" ref="act_tabel_pakan_tambah_kunjungan_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_tabel_pakan_tambah_kunjungan_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_tabel_pakan_tambah_kunjungan_view_tree">
+            <field name="act_window_id" ref="act_tabel_pakan_tambah_kunjungan_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tabel_pakan_tambah_kunjungan_tree"/>
+        </record>
+
+        <menuitem id="menu_tabel_pakan_tambah_kunjungan_details"
+                    name="Tabel Pakan Tambah"
+                    parent="menu_konfigurasi_root"
+                    sequence="20"
+                    action="act_tabel_pakan_tambah_kunjungan_view"/>
+    </data>
+</odoo>

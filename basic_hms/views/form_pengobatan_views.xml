@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_pengobatan_view" model="ir.ui.view">
+            <field name="name">form.pengobatan.form.view</field>
+            <field name="model">form.pengobatan</field>
+            <field name="arch" type="xml">
+                <form string="Form Pengobatan">
+                    <header>
+                        <button name="submit" string="Submit" type="object" class="oe_highlight" states="draft" tracking="True"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,close" tracking="True"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <!-- <field name="permohonan_id"/> -->
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                            </group>
+<!--                            <field name="kasus_penyakit"/>-->
+<!--                            <field name="metode_pengobatan"/>-->
+                            <group>
+                                <field name="id_sapi"/>
+                                <field name="eartag_id"/>
+                                <field name="id_kasus_penyakit"/>
+                                <field name="status_kesehatan_id"/>
+                                <field name="metoda_pengobatan_id"/>
+                                <field name="obat1"/>
+                                <field name="dose1"/>
+                                <field name="metoda_pengobatan_id2"/>
+                                <field name="obat2"/>
+                                <field name="dose2"/>
+                                <field name="metoda_pengobatan_id3"/>
+                                <field name="obat3"/>
+                                <field name="dose3"/>
+                                <field name="metoda_pengobatan_id4"/>
+                                <field name="obat4"/>
+                                <field name="dose4"/>
+                                <field name="metoda_pengobatan_id5"/>
+                                <field name="obat5"/>
+                                <field name="dose5"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                                <field name="cat_petugas"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_pengobatan_search_view" model="ir.ui.view">
+            <field name="name">form.pengobatan.search.view</field>
+            <field name="model">form.pengobatan</field>
+            <field name="arch" type="xml">
+                <search string="Search Pengobatan">
+                    <separator orientation="vertical" />
+                    <field name="id_sapi" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_sapi_id' context="{'group_by':'id_sapi'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_pengobatan_tree_view" model="ir.ui.view">
+            <field name="name">form.pengobatan.tree.view</field>
+            <field name="model">form.pengobatan</field>
+            <field name="arch" type="xml">
+                <tree string="Form Pengobatan">
+                    <field name="id_pemilik"/>
+                    <field name="peternak_id"/>
+                    <field name="id_sapi"/>
+                    <field name="tps_id"/>
+                    <field name="petugas_id"/>
+                    <field name="tgl_layanan"/>
+                    <!--                            <field name="kasus_penyakit"/>-->
+                    <!--                            <field name="metode_pengobatan"/>-->
+                    <field name="eartag_id"/>
+                    <field name="id_sapi"/>
+                    <field name="id_kasus_penyakit"/>
+                    <field name="status_kesehatan_id"/>
+                    <field name="cat_petugas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_pengobatan_pivot" model="ir.ui.view">
+        <field name="name">form.pengobatan.pivot</field>
+        <field name="model">form.pengobatan</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="tgl_layanan" type="col"/>
+                <field name="petugas_id" type="row"/>
+                <field name="jabatan_id" type="col"/>
+                <field name="petugas_id" type="count"/>
+                <field name="id_kasus_penyakit" type="count"/>
+            </pivot>
+        </field>
+    </record>
+
+        <record id="action_form_pengobatan" model="ir.actions.act_window">
+            <field name="name">Form Pengobatan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.pengobatan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_pengobatan" parent="menu_layanan"
+            action="action_form_pengobatan" sequence="6" />
+
+</odoo>

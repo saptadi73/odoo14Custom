@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <record id="simpin_syariah_mitra_notif_form" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.mitra.notif.form</field>-->
+<!--            <field name="model">simpin_syariah.mitra.notif</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--	                        <group>-->
+<!--                                    <field name="tanggal" readonly="1"/>-->
+<!--                                    <field name="name" string="Subject"/>-->
+<!--                                    <field name="mitra_id" readonly="1"/>-->
+<!--                                    <field name="email"  readonly="1"/>-->
+<!--		                    <field name="total_simpanan" invisible="1"/>-->
+<!--		                    <field name="total_pinjaman" invisible="1" />-->
+<!--		                    <field name="total_pembiayaan"  invisible="1"/>-->
+<!--		                    <field name="total_investasi"  invisible="1"/>-->
+<!--	                        </group>-->
+<!--                        <group>-->
+<!--&lt;!&ndash;-->
+<!--				<field name="attach_pdf" filename="file_pdf"/>-->
+<!--				<field name="file_pdf" invisible="1"/>-->
+<!--&ndash;&gt;-->
+<!--				<field name="attach_xls" filename="file_xls" readonly="1"/>-->
+<!--				<field name="file_xls" invisible="1"/>-->
+<!--                        </group>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                                <field name="message" string="Message"/>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                    <footer>-->
+<!--                        <button string="Kirim Notifikasi" name="action_send_notifikasi" type="object" class="btn-primary"/> -->
+<!--                        <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+<!--                    </footer>-->
+<!--               </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_mitra_tree" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.mitra.tree</field>-->
+<!--            <field name="model">simpin_syariah.mitra</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="Mitra Syariah">-->
+<!--                    <field name="name" />-->
+<!--                    <field name="partner_id"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="simpin_syariah_mitra_form" model="ir.ui.view">-->
+<!--            <field name="name">simpin_syariah.mitra.form</field>-->
+<!--            <field name="model">simpin_syariah.mitra</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--<form string="Partners">-->
+<!--		<header>-->
+<!--                  <button name="action_create_notifikasi" string="Create and Send Notifikasi" type="object" class="oe_highlight"/>-->
+<!--&lt;!&ndash;-->
+<!--                  <button name="action_notif_sent" string="Send Notif" type="object" class="oe_highlight"/>-->
+<!--&ndash;&gt;-->
+<!--		</header>-->
+<!--                <sheet>-->
+<!--			<group>-->
+<!--				<group>-->
+<!--		                    <field name="name" invisible='1'/>-->
+<!--		                    <field name="partner_id" required='1' options="{'no_create_edit': True}"/>-->
+<!--		                    <field name="contact_person" options="{'no_create_edit': True}"/>-->
+<!--		                    <field name="company_id" invisible='1'/>-->
+<!--		                    <field name="currency_id"/>-->
+<!--				</group>-->
+<!--				<group>-->
+<!--		                    <field name="total_simpanan" />-->
+<!--		                    <field name="total_pinjaman" />-->
+<!--		                    <field name="total_pembiayaan" />-->
+<!--		                    <field name="total_investasi" />-->
+<!--		                    <field name="total_angsuran" />-->
+<!--				</group>-->
+<!--			</group>-->
+<!--		<separator/>-->
+<!--                <notebook>-->
+<!--                        <page string="Anggota Aktif" >-->
+<!--			<group>-->
+<!--			        <field name="member_lines" widget="one2many_list" readonly='1' nolabel='1'>-->
+<!--                                	<tree editable="bottom" string="Quotation Lines">-->
+<!--                                    		<field name="nomor_induk"/>-->
+<!--                                    		<field name="name"/>-->
+<!--                                    		<field name="nomor_anggota"/>-->
+<!--                                	</tree>-->
+<!--                            	</field>-->
+<!--			</group>-->
+<!--			</page>-->
+<!--                        <page string="Notifikasi" >-->
+<!--				<field name="attach_xls" filename="file_xls" invisible="1"/>-->
+<!--				<field name="file_xls" invisible="1"/>-->
+<!--			        <field name="notif_lines" widget="one2many_list" readonly='1' nolabel='1'>-->
+<!--                                	<tree editable="bottom" string="Quotation Lines">-->
+<!--                                    		<field name="tanggal"/>-->
+<!--                                    		<field name="name"/>-->
+<!--                                    		<field name="notif_metode" string="Metode Notifikasi"/>-->
+<!--                                    		<field name="state"/>-->
+<!--                                	</tree>-->
+<!--					<form>-->
+<!--			                        <group>-->
+<!--		                                    <field name="tanggal" readonly="1"/>-->
+<!--		                                    <field name="name" string="Subject"  readonly="1"/>-->
+<!--		                                    <field name="mitra_id" readonly="1"/>-->
+<!--		                                    <field name="notif_metode" readonly="1"/>-->
+<!--		                                    <field name="state" readonly="1"/>-->
+<!--			                        </group>-->
+<!--			                        <group attrs="{'invisible': [('notif_metode', '!=', 'email')]}">-->
+<!--		                                    <field name="email"  readonly="1"/>-->
+<!--		                                    <field name="message"  readonly="1"/>-->
+<!--&lt;!&ndash;-->
+<!--				<field name="attach_pdf" filename="file_pdf"/>-->
+<!--				<field name="file_pdf" invisible="1"/>-->
+<!--&ndash;&gt;-->
+<!--						<field name="attach_xls" filename="file_xls"  readonly="1"/>-->
+<!--						<field name="file_xls" invisible="1"/>-->
+<!--			                        </group>-->
+<!--			                        <group attrs="{'invisible': [('notif_metode', '!=', 'db_h2h')]}">-->
+<!--		                                    <field name="send_lines"  readonly="1">-->
+<!--							<tree>-->
+<!--								<field name="member_id" />-->
+<!--								<field name="employee_id" />-->
+<!--								<field name="nama_anggota" />-->
+<!--								<field name="nik_anggota" />-->
+<!--								<field name="nomor_anggota" />-->
+<!--								<field name="simpanan_pokok" />-->
+<!--								<field name="simpanan_wajib" />-->
+<!--								<field name="pinjaman_bank" />-->
+<!--								<field name="pinjaman_internal" />-->
+<!--							</tree>-->
+<!--							<form>-->
+<!--								<group>-->
+<!--									<group>-->
+<!--										<field name="member_id" />-->
+<!--										<field name="employee_id" />-->
+<!--										<field name="nama_anggota" />-->
+<!--										<field name="nik_anggota" />-->
+<!--										<field name="nomor_anggota" />-->
+<!--									</group>-->
+<!--									<group>-->
+<!--										<field name="simpanan_pokok" />-->
+<!--										<field name="simpanan_wajib" />-->
+<!--										<field name="pinjaman_bank" />-->
+<!--										<field name="pinjaman_internal" />-->
+<!--									</group>-->
+<!--								</group>-->
+<!--								<group>-->
+<!--										<field name="line_details">-->
+<!--											<tree>-->
+<!--												<field name="name" />-->
+<!--												<field name="product_id" />-->
+<!--												&lt;!&ndash; <field name="invoice_id" /> &ndash;&gt;-->
+<!--												<field name="amount" />-->
+<!--												<field name="state" />-->
+<!--											</tree>-->
+<!--										</field>-->
+<!--								</group>-->
+<!--							</form>-->
+<!--		                                    </field>-->
+<!--							-->
+<!--			                        </group>-->
+<!--					</form>-->
+<!--                            	</field>-->
+<!--			</page>-->
+<!--                        <page string="Tagihan" >-->
+<!--			</page>-->
+<!--                        <page string="Konfigurasi" >-->
+<!--	                    <group>-->
+<!--	                      <group>-->
+<!--				<field name="metode_kirim" />-->
+<!--				<field name="tanggal_kirim" attrs="{'invisible': [('metode_kirim', '!=', 'jadwal')],'required': [('metode_kirim', '=', 'jadwal')]}"/>-->
+<!--				<field name="notif_metode" />-->
+<!--	                      </group>-->
+<!--	                    </group>-->
+<!--	                    <group>-->
+<!--	                      <group attrs="{'invisible': [('notif_metode', '!=', 'email')]}">-->
+<!--                                    <field name="email" attrs="{'required': [('notif_metode', '=', 'email')]}"/>-->
+<!--	                      </group>-->
+<!--	                      <group attrs="{'invisible': [('notif_metode', '!=', 'db_h2h')]}">-->
+<!--				<field name="db_host"/>-->
+<!--				<field name="db_port"/>-->
+<!--				<field name="db_username" password="True"/>-->
+<!--				<field name="db_password" password="True"/>-->
+<!--				<field name="db_dbname"/>-->
+<!--				<button name="test_konek" type="object" string="Test Connection" icon="fa-television"/>-->
+<!--	                      </group>-->
+<!--	                    </group>-->
+<!--			</page>-->
+<!--                </notebook>-->
+
+<!--                </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--	<record id="simpin_syariah_mitra_menu_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Mitra Kerja Syariah</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">simpin_syariah.mitra</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="o_view_nocontent_smiling_face">-->
+<!--                Create Mitra Kerja SimPin Syariah -->
+<!--              </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--    	<menuitem id="simpin_syariah_mitra" parent="simpin_syariah_mitra_menu"-->
+<!--		name="Korporasi" sequence="2" action="simpin_syariah_mitra_menu_action"/>-->
+
+    </data>
+</odoo>

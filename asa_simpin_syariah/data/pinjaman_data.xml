@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sequnece_pinjaman_anggota" model="ir.sequence">
+            <field name="name">Sequence Pinjaman</field>
+            <field name="code">pinjaman.anggota.sequence</field>
+            <field name="prefix">PINJ/%(year)s/%(month)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+</odoo>

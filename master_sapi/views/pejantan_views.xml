@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="kanban_view_pejantan" model="ir.ui.view">
+            <field name="name">Pejantan Kanban</field>
+            <field name="model">pejantan</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban">
+                    <field name="id"/>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="o_kanban_image">
+                                    <t t-if="record.image.value">
+                                        <img t-att-src="kanban_image('pejantan', 'image', record.id.raw_value)"
+                                             alt="Pejantan"/>
+                                    </t>
+                                    <t t-if="!record.image.value">
+                                        <img t-att-src='_s + "/base/static/img/avatar.png"' alt="Sapi"/>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="pejantan_id"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.kode_pejantan.raw_value">
+                                            <field name="kode_pejantan"/>
+                                        </li>
+                                        <li t-if="record.tgl_lahir.raw_value">
+                                            <field name="tgl_lahir"/>
+                                        </li>
+                                        <li t-if="record.tempat_lahir.raw_value">
+                                            <field name="tempat_lahir"/>
+                                        </li>
+                                        <li t-if="record.asal_id.raw_value">
+                                            <field name="asal_id"/>
+                                        </li>
+                                        <li t-if="record.beli_dari.raw_value">
+                                            <field name="beli_dari"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_pejantan_tree" model="ir.ui.view">
+            <field name="name">view.pejantan.tree</field>
+            <field name="model">pejantan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Sapi">
+                    <field name="pejantan_id"/>
+                    <field name="kode_pejantan"/>
+                    <field name="tgl_lahir"/>
+                    <field name="asal_id"/>
+                    <field name="beli_dari"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pejantan_form" model="ir.ui.view">
+            <field name="name">view.pejantan.form</field>
+            <field name="model">pejantan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Sapi">
+                    <header>
+
+                    </header>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_left oe_avatar"/>
+                        <div class="oe_title w-auto">
+                            <h1>
+                                <field name="pejantan_name" placeholder="Name" required="1" invisible="1"/>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="pejantan_id" required="1" placeholder="Nama Pejantan"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="kode_pejantan" required="1" placeholder="Kode Pejantan"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="asal_id"/>
+                                <field name="tempat_lahir"/>
+                                <field name="tgl_lahir"/>
+                                <field name="beli_dari"/>
+                                <field name="kode_dam"/>
+                                <field name="dam_id"/>
+                                <field name="kode_sire"/>
+                                <field name="sire_id"/>
+                                <field name="asal_sire_id"/>
+                                <field name="kode_mgs"/>
+                                <field name="mgs_id"/>
+                                <field name="kode_mgd"/>
+                                <field name="mgd_id"/>
+                                <field name="kode_ggs"/>
+                                <field name="ggs_id"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pejantan_search" model="ir.ui.view">
+            <field name="name">pejantan.search</field>
+            <field name="model">pejantan</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Sapi">
+                    <field name="kode_pejantan"/>
+                    <newline/>
+                    <group expand="0" string="Group By...">
+                        <filter name="kode_pejantan" string="Kode Pejantan"
+                                domain="[]" context="{'group_by':'kode_pejantan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_pejantan_pivot" model="ir.ui.view">
+        <field name="name">pejantan.pivot</field>
+        <field name="model">pejantan</field>
+        <field name="arch" type="xml">
+            <pivot>
+
+            </pivot>
+        </field>
+    </record>
+
+        <record model="ir.actions.act_window" id="act_pejantan_view">
+            <field name="name">Pejantan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pejantan</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_pejantan_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_pejantan_view_form">
+            <field name="act_window_id" ref="act_pejantan_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pejantan_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_pejantan_view_tree">
+            <field name="act_window_id" ref="act_pejantan_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_pejantan_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_pejantan_view_kanban">
+            <field name="act_window_id" ref="act_pejantan_view"/>
+            <field name="sequence" eval="5"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="kanban_view_pejantan"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_view_pejantan_pivot">
+            <field name="act_window_id" ref="act_pejantan_view"/>
+            <field name="sequence" eval="30"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="view_pejantan_pivot"/>
+        </record>
+
+<!--        <record models="ir.actions.act_window" id="act_pejantan_view_2">-->
+<!--            <field name="name">Sapi</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">op.student</field>-->
+<!--            <field name="binding_view_types">form</field>-->
+<!--            <field name="view_mode">kanban,tree,form</field>-->
+<!--            <field name="search_view_id" ref="view_op_student_search"/>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="context">{}</field>-->
+<!--        </record>-->
+
+        <menuitem id="menu_pejantan_details"
+                    name="Pejantan"
+                    parent="menu_sapi_root"
+                    sequence="20"
+                    action="act_pejantan_view"/>
+
+    </data>
+</odoo>

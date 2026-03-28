@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scoring_report_wizard,access_scoring_report_wizard,model_scoring_report_wizard,,1,1,1,1
+access_scoring_report_view,access_scoring_report_view,model_scoring_report_view,,1,1,1,1
+access_scoring_report_monthly_view,access_scoring_report_monthly_view,model_scoring_report_monthly_view,,1,1,1,1

@@ -1,0 +1,20 @@
+<odoo>
+<!--    <record id="view_wizard_create_po_form" model="ir.ui.view">-->
+<!--        <field name="name">wizard.create.po.form</field>-->
+<!--        <field name="model">wizard.create.po</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <group>-->
+<!--                    <field name="liter_sapi_ids" widget="many2many_tags" options="{'no_create_edit': True}" />-->
+<!--                </group>-->
+<!--                <footer>-->
+<!--                    <button string="Create PO" type="object" class="oe_highlight" name="create_po" />-->
+<!--                    <button string="Cancel" class="oe_link" special="cancel" />-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--    <act_window id="action_create_po2" name="Create PO"-->
+<!--            res_model="wizard.create.po" binding_model="liter.sapi"-->
+<!--            view_mode="form" target="new" />-->
+</odoo>

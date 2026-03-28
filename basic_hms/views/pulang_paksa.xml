@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="pulang_paksa_form_view" model="ir.ui.view">
+            <field name="name">pulang.paksa.form.view</field>
+            <field name="model">pulang.paksa</field>
+            <field name="arch" type="xml">
+                <form string="Pulang Paksa">
+                    <sheet>
+                        <group>
+                            <group col="4" colspan="4">
+                                <field name="patient_id"/>
+                                <field name="sex"/>
+                                <field name="age"/>
+                                <field name="address_id"/>
+                                <field name="phone"/>
+                                <field name="marital_status"/>
+                                <field name="tgl"/>
+                            </group>
+                            <group col="4" colspan="4">
+                                <field name="bukti_ktp"/>
+                            </group>
+                            <notebook>
+                            <page string="Yang Bertanggungjawab">
+                                <group>
+                                    <field name="ortu"/>
+                                    <field name="suami"/>
+                                    <field name="istri"/>
+                                    <field name="keluarga"/>
+                                    <field name="anak"/>
+                                </group>
+                                <group>
+                                    <field name="name_id"/>
+                                    <field name="jk"/>
+                                    <field name="umur"/>
+                                    <field name="almt"/>
+                                    <field name="drwt_di"/>
+                                </group>
+                            </page>
+                            </notebook>
+                        </group>
+                     </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pulang_paksa_tree_view" model="ir.ui.view">
+            <field name="name">pulang.paksa.tree.view</field>
+            <field name="model">pulang.paksa</field>
+            <field name="arch" type="xml">
+                <tree string="Pulang Paksa">
+                    <field name="patient_id"/>
+                    <field name="sex"/>
+                    <field name="age"/>
+                    <field name="address_id"/>
+                    <field name="phone"/>
+                    <field name="marital_status"/>
+                    <field name="tgl"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pulang_paksa" model="ir.actions.act_window">
+            <field name="name">Pulang Paksa</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pulang.paksa</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_pulang_paksa_child"
+            parent="menu_inpatient_administration" action="action_pulang_paksa"
+            sequence="2" />
+
+</odoo>

@@ -3,3 +3,4 @@ from . import partner_ledger
 from . import trial_balance
 from . import partner_ageing
 from . import financial_report
+from . import faspe_consolidated_report

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<record id="paperformat_member_detail_landscape" model="report.paperformat">
+		<field name="name">PF Member Detail Landscape</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">40</field>
+		<field name="margin_bottom">15</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">30</field>
+		<field name="dpi">90</field>
+	</record>
+
+
+        <report 
+            id="action_report_member_profil" 
+            model="simpin_syariah.member" 
+            string="Profil Anggota"
+            report_type="qweb-pdf"
+            name="simpin_syariah.report_member_profil" 
+            file="simpin_syariah.report_member_profil"
+            print_report_name="'Profil Anggota %s' % object.name"
+	    paperformat="paperformat_member_detail_landscape"
+        />
+
+
+<template id="report_member_profil">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+		<br/>
+                    <h2><strong>Profil Anggota</strong></h2>
+		<br/>
+		<br/>
+	
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <td width="15%"><strong>Nomor Anggota</strong></td>
+                            <td width="35%"><span t-field="o.nomor_anggota"/></td>
+                            <td width="15%"><strong>N a m a</strong></td>
+                            <td width="35%"><span t-field="o.name"/></td>
+                        </tr>
+                        <tr>
+                            <td width="15%"><strong>Instansi</strong></td>
+                            <td width="35%"><span t-field="o.comp_partner_id.name"/></td>
+                            <td width="15%"><strong>N I K</strong></td>
+                            <td width="35%"><span t-field="o.nomor_induk"/></td>
+                        </tr>
+                    </table>
+		<br/>
+		<p><span>1. Simpanan</span></p> 
+
+                    <table class="table table-condensed table-bordered">
+                    	<tbody>
+                        	<tr t-foreach="o.simpanan_ids" t-as="simpanan">
+                                	<td width="25%"><span t-esc="simpanan.name"/></td>
+                                	<td width="25%"><span t-esc="simpanan.product_id.name"/></td>
+                                	<td width="40%">
+                            			<t t-att-style="style" t-raw="simpanan.balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					</td>
+                                	<td width="10%"><span t-esc="simpanan.state"/></td>
+                        	</tr>
+                        </tbody>
+                    </table>
+		<br/>
+		<p><span>2. Pinjaman</span></p> 
+
+                    <table class="table table-condensed table-bordered">
+                    	<tbody>
+                        	<tr t-foreach="o.pinjaman_ids" t-as="pinjaman">
+                                	<td width="25%"><span t-esc="pinjaman.name"/></td>
+                                	<td width="25%"><span t-esc="pinjaman.product_id.name"/></td>
+                                	<td width="40%">
+                            			<t t-att-style="style" t-raw="pinjaman.balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					</td>
+                                	<td width="10%"><span t-esc="pinjaman.state"/></td>
+                        	</tr>
+                        </tbody>
+                    </table>
+		<br/>
+		<p><span>3. Pembiayaan</span></p> 
+
+                    <table class="table table-condensed table-bordered">
+                    	<tbody>
+                        	<tr t-foreach="o.pembiayaan_ids" t-as="pembiayaan">
+                                	<td width="25%"><span t-esc="pembiayaan.name"/></td>
+                                	<td width="25%"><span t-esc="pembiayaan.product_id.name"/></td>
+                                	<td width="40%">
+                            			<t t-att-style="style" t-raw="pembiayaan.balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					</td>
+                                	<td width="10%"><span t-esc="pembiayaan.state"/></td>
+                        	</tr>
+                        </tbody>
+                    </table>
+		<br/>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+</odoo>

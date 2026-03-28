@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="pulang_sendiri_form_view" model="ir.ui.view">
+            <field name="name">pulang.sendiri.form.view</field>
+            <field name="model">pulang.sendiri</field>
+            <field name="arch" type="xml">
+                <form string="Pulang Sendiri">
+                    <sheet>
+                        <group>
+                            <group col="4" colspan="4" string="Saya Yang Bertanda Tangan">
+                                <field name="patient_id"/>
+                                <field name="sex"/>
+                                <field name="age"/>
+                                <field name="address_id"/>
+                                <field name="phone"/>
+                                <field name="identitas"/>
+                            </group>
+                            <notebook>
+                            <page string="Bertindak Untuk Dan Atas Nama">
+                                <group>
+                                    <field name="sdr"/>
+                                    <field name="suami"/>
+                                    <field name="istri"/>
+                                    <field name="ayah"/>
+                                    <field name="ibu"/>
+                                    <field name="anak"/>
+                                    <field name="sdr_kdg"/>
+                                    <field name="wali"/>
+                                </group>
+                                <group>
+                                    <field name="name_id"/>
+                                    <field name="jk"/>
+                                    <field name="umur"/>
+                                    <field name="almt"/>
+                                    <field name="no_rm"/>
+                                </group>
+                            </page>
+                            </notebook>
+                        </group>
+                     </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pulang_sendiri_tree_view" model="ir.ui.view">
+            <field name="name">pulang.sendiri.tree.view</field>
+            <field name="model">pulang.sendiri</field>
+            <field name="arch" type="xml">
+                <tree string="Pulang Sendiri">
+                    <field name="patient_id"/>
+                    <field name="sex"/>
+                    <field name="age"/>
+                    <field name="address_id"/>
+                    <field name="phone"/>
+                    <field name="identitas"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pulang_sendiri" model="ir.actions.act_window">
+            <field name="name">Pulang Sendiri</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pulang.sendiri</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_pulang_sendiri_child"
+            parent="menu_inpatient_administration" action="action_pulang_sendiri"
+            sequence="3" />
+
+</odoo>

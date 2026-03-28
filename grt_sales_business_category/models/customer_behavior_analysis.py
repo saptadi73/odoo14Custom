@@ -12,6 +12,13 @@ class CustomerBehaviorAnalysis(models.Model):
     partner_id = fields.Many2one("res.partner", required=True, ondelete="cascade", index=True)
     segment_id = fields.Many2one("customer.behavior.segment", ondelete="restrict", index=True)
     business_category_id = fields.Many2one("crm.business.category", ondelete="restrict", index=True)
+    company_id = fields.Many2one(
+        "res.company",
+        related="business_category_id.company_id",
+        store=True,
+        readonly=True,
+        index=True,
+    )
     currency_id = fields.Many2one(
         "res.currency",
         default=lambda self: self.env.company.currency_id.id,

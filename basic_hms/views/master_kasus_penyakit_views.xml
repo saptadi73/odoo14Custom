@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_kasus_penyakit_view" model="ir.ui.view">
+            <field name="name">form.master.kasus.penyakit.view</field>
+            <field name="model">master.kasus.penyakit</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Kasus Penyakit">
+                    <sheet>
+                        <group>
+                            <field name="kategori_penyakit_id"/>
+                            <field name="kode"/>
+                            <field name="nama_kasus_penyakit"/>
+                            <field name="perbedaan_penyakit"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_kasus_penyakit_search_view" model="ir.ui.view">
+            <field name="name">master.kasus.penyakit.search.view</field>
+            <field name="model">master.kasus.penyakit</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Kasus Penyakit">
+                    <separator orientation="vertical" />
+                    <field name="nama_kasus_penyakit" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Kasus Penyakit" name='by_nama_kasus_penyakit' context="{'group_by':'nama_kasus_penyakit'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_kasus_penyakit_tree_view" model="ir.ui.view">
+            <field name="name">master.kasus.penyakit.tree.view</field>
+            <field name="model">master.kasus.penyakit</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Kasus Penyakit">
+                    <field name="kategori_penyakit_id"/>
+                    <field name="kode"/>
+                    <field name="nama_kasus_penyakit"/>
+                    <field name="perbedaan_penyakit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_kasus_penyakit" model="ir.actions.act_window">
+            <field name="name">Master Kasus Penyakit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.kasus.penyakit</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_kasus_penyakit" parent="mster_data"
+            action="action_master_kasus_penyakit" sequence="21" />
+
+</odoo>

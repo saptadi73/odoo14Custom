@@ -5,8 +5,12 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='name']" position="after">
-                <field name="customer_qr_ref" readonly="1"/>
+            <xpath expr="//notebook" position="before">
+                <group string="Customer QR">
+                    <group>
+                        <field name="customer_qr_ref" readonly="1"/>
+                    </group>
+                </group>
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page string="Customer Behavior">

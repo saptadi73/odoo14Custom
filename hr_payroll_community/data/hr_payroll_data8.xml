@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="hr_rule_SLSP21" model="hr.salary.rule">
+            <field name="name">Selisih PPh 21</field>
+            <field name="sequence" eval="150"/>
+            <field name="code">SLSP21</field>
+            <field name="category_id" ref="hr_payroll_community.Selisih-PPh-21"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = round(categories.TPPP - categories.PREPPH)</field>
+        </record>	
+        <record id="hr_rule_PTLDA" model="hr.salary.rule">
+            <field name="name">TLLDSB Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PTLDA</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-TTLDSB"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln &lt;1:
+   prev_bln = 1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('TLLDSB',start_date,end_date)</field>
+        </record>		
+        <record id="hr_rule_PRMAK" model="hr.salary.rule">
+            <field name="name">Premi Asuransi Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PRMAK</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-Premi"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('PRMA',start_date,end_date)</field>
+        </record>
+        <record id="hr_rule_PBRUT" model="hr.salary.rule">
+            <field name="name">Brutto Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PBRUT</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-Brutto"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute"># Akumulasi Payslip code BRTA yg brda di Company Contribution  mulai 2020-01-01 s/d 2020-12-31 untuk # #status "Done/Confirm"
+prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('BRTA',start_date,end_date)</field>
+        </record>	
+        <record id="hr_rule_PAK" model="hr.salary.rule">
+            <field name="name">Pengurang Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PAK</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-PEN"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('PGR',start_date,end_date)</field>
+        </record>	
+        <record id="hr_rule_PPHA" model="hr.salary.rule">
+            <field name="name">PPH Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PPHA</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-PPH"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute"># Akumulasi Payslip code PPH21GU mulai Januari s/d December untuk status "Done/Confirm"
+
+prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('PPH21GU',start_date,end_date)</field>
+        </record>
+        <record id="hr_rule_JAKIR" model="hr.salary.rule">
+            <field name="name">Jabatan Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">JAKIR</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-Jabatan"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('JBT',start_date,end_date)</field>
+        </record>	
+        <record id="hr_rule_PREVBTH" model="hr.salary.rule">
+            <field name="name">Previous BTH</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PREVBTH</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-THR/BNS"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('CBTH',start_date,end_date)</field>
+        </record>	
+        <record id="hr_rule_JAKIRTHR" model="hr.salary.rule">
+            <field name="name">Jabatan Akhir THR-BNS</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">JAKIRTHR</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-Jabatan-THR-BNS"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('BJABTHB',start_date,end_date)</field>
+        </record>
+        <record id="hr_rule_PPHTBA" model="hr.salary.rule">
+            <field name="name">PPH THR-BNS Akhir</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PPHTBA</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-PPH-THR-BNS"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute"># Akumulasi Payslip code PPH21BHT mulai Jan s/d Dec untuk status "Done/Confirm"
+
+prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('PPH21BHT',start_date,end_date)</field>
+        </record>	
+        <record id="hr_rule_PPPH21GJ" model="hr.salary.rule">
+            <field name="name">Previous PPH 21 Gaji</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">PPPH21GJ</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-PPH-Gaji"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute"># Akumulasi Payslip code PPH21GAJI mulai Jan s/d Dec untuk status "Done/Confirm"
+
+prev_thn = int(str(payslip.date_from)[:-6])
+cur_bln = int(str(payslip.date_from)[-5:-3])
+prev_bln = cur_bln - 1
+if prev_bln&lt;1:
+   prev_bln =1
+start_date = str(prev_thn) + "-" + str(prev_bln).zfill(2) + "-01"
+end_date = str(payslip.date_from)[:-3] + "-01"
+
+result = payslip.sum('PPH21GAJI',start_date,end_date)</field>
+        </record>	
+        <record id="hr_rule_PESEBEL" model="hr.salary.rule">
+            <field name="name">Pengasilan Sebelumnya</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PESEBEL</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-Job/Branch/Office"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.bruto_sblm</field>
+        </record>		
+        <record id="hr_rule_PPHSEBEL" model="hr.salary.rule">
+            <field name="name">PPH Masa Sebelumnya</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PPHSEBEL</field>
+            <field name="category_id" ref="hr_payroll_community.Previous-Job/Branch/Office"/>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.pph_sblm</field>
+        </record>	
+        <record id="hr_rule_MKSEBEL" model="hr.salary.rule">
+            <field name="name">Masa Kerja Sebelumnya (Bulan)</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">MKSEBEL</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.Previous-Job/Branch/Office"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.mk_sblm</field>
+        </record>
+
+        <record id="hr_rule_PPHT1" model="hr.salary.rule">
+            <field name="name">PPH 21 Tahap 1</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PPHT1</field>
+            <field name="category_id" ref="hr_payroll_community.Non-Karyawan"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">bruto=contract.wage*0.20*0.02*0.5
+pkp = int((bruto - contract.ptkp_rate)/1000) * 1000
+if pkp > 0 and pkp &lt;= 50000000:
+   cp21= round((pkp * 0.05),2)
+elif pkp >50000000 and (pkp - 50000000) &lt;= 200000000:
+   cp21= round(((50000000*0.05)+((pkp-50000000)* 0.15)),2) 
+elif pkp >200000000 and (pkp - 250000000) &lt;= 250000000:
+   cp21= round(((50000000*0.05)+(200000000 * 0.15)+((pkp-250000000)*0.25)),2)
+elif pkp >250000000 and (pkp - 500000000) &lt;= 1000000000:
+   cp21= round(((50000000*0.05)+(200000000 * 0.15)+(250000000 * 0.25)+((pkp-500000000)*0.3)), 2)
+else:
+   cp21= 0.00
+
+result=cp21</field>
+        </record>	
+        <record id="hr_rule_PPHT2" model="hr.salary.rule">
+            <field name="name">PPH 21 Tahap 2</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">PPHT2</field>
+            <field name="category_id" ref="hr_payroll_community.Non-Karyawan"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">bruto=contract.wage*0.80*0.02*0.5
+pkp = int((bruto - contract.ptkp_rate)/1000) * 1000
+if pkp > 0 and pkp &lt;= 50000000:
+   cp21= round((pkp * 0.05),2)
+elif pkp >50000000 and (pkp - 50000000) &lt;= 200000000:
+   cp21= round(((50000000*0.05)+((pkp-50000000)* 0.15)),2) 
+elif pkp >200000000 and (pkp - 250000000) &lt;= 250000000:
+   cp21= round(((50000000*0.05)+(200000000 * 0.15)+((pkp-250000000)*0.25)),2)
+elif pkp >250000000 and (pkp - 500000000) &lt;= 1000000000:
+   cp21= round(((50000000*0.05)+(200000000 * 0.15)+(250000000 * 0.25)+((pkp-500000000)*0.3)), 2)
+else:
+   cp21= 0.00
+
+result=cp21</field>
+        </record>	
+ 
+    </data>
+</odoo>

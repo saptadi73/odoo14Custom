@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_sq_view" model="ir.ui.view">
+            <field name="name">form.sq.form.view</field>
+            <field name="model">form.sq</field>
+            <field name="arch" type="xml">
+                <form string="Form Sampel Quartir">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="peternak_id"/>
+                                <field name="id_pemilik"/>
+                                <field name="wilayah_id"/>
+                                <field name="petugas_id"/>
+                                <field name="jabatan_id"/>
+                                <field name="tgl_layanan"/>
+                                <field name="periode_id"/>
+                            </group>
+                            <group>
+                                <field name="id_sapi"/>
+                                <field name="eartag_id"/>
+                                <field name="cat_petugas"/>
+                                <field name="met_pengh_jss_id"/>
+                                <field name="knn_dpn_jss"/>
+                                <field name="kanan_dpn_kuman_id"/>
+                                <field name="knn_blkg_jss"/>
+                                <field name="knn_blkg_kuman_id"/>
+                                <field name="kiri_dpn_jss"/>
+                                <field name="kiri_dpn_kuman_id"/>
+                                <field name="kiri_blkg_jss"/>
+                                <field name="kiri_blkg_kuman_id"/>
+                                <field name="biaya"/>
+                                <field name="tps_id"/>
+                                <field name="bcs"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_sq_search_view" model="ir.ui.view">
+            <field name="name">form.sq.search.view</field>
+            <field name="model">form.sq</field>
+            <field name="arch" type="xml">
+                <search string="Search Sampel Quartir">
+                    <separator orientation="vertical" />
+                    <field name="eartag_id" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="ID Sapi" name='by_eartag_id' context="{'group_by':'eartag_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="form_sq_tree_view" model="ir.ui.view">
+            <field name="name">form.sq.tree.view</field>
+            <field name="model">form.sq</field>
+            <field name="arch" type="xml">
+                <tree string="Form Sampel Quartir">
+                    <field name="peternak_id"/>
+                    <field name="id_pemilik"/>
+                    <field name="petugas_id"/>
+                    <field name="jabatan_id"/>
+                    <field name="tgl_layanan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_form_sq_pivot" model="ir.ui.view">
+            <field name="name">form.sq.pivot</field>
+            <field name="model">form.sq</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="tgl_layanan" type="col"/>
+                    <field name="petugas_id" type="row"/>
+                    <field name="jabatan_id" type="col"/>
+                    <field name="petugas_id" type="count"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_form_sq" model="ir.actions.act_window">
+            <field name="name">Form Sampel Quartir</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.sq</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+        <menuitem id="menu_form_sq" parent="menu_layanan"
+            action="action_form_sq" sequence="180" />
+
+</odoo>

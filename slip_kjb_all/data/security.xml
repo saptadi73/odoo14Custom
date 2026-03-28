@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+    
+    
+	 <record id="property_rule_user_payslip" model="ir.rule">
+       <field name="name">Employee Payslip</field>
+        <field name="model_id" ref="model_hr_payslip"/>
+        <field name="domain_force">['|', ('employee_id.user_id', '=', user.id), ('struct_id.created_payslip', '=', user.id)]</field>
+        <field name="groups" eval="[(4,ref('hr_payroll_community.group_hr_payroll_community_user'))]"/>
+    </record>
+	
+	
+	<record id="property_rule_all_payslip" model="ir.rule">
+        <field name="name">Manager Payslips</field>
+        <field name="model_id" ref="model_hr_payslip"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4,ref('hr_payroll_community.group_hr_payroll_community_manager'))]"/>
+    </record>
+    
+    
+
+</data>
+</openerp>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_mrp_overhead_documentation" model="ir.actions.act_url">
+        <field name="name">Overhead Costing Guide</field>
+        <field name="url">/grt_mrp_overhead_costing/static/documentation/index.html</field>
+        <field name="target">self</field>
+    </record>
+
+    <menuitem id="menu_mrp_overhead_documentation"
+              name="Overhead Guide"
+              parent="mrp.menu_mrp_configuration"
+              action="action_mrp_overhead_documentation"
+              sequence="86"/>
+
+    <menuitem id="menu_mrp_overhead_documentation_root"
+              name="Documentation"
+              parent="mrp.menu_mrp_root"
+              action="action_mrp_overhead_documentation"
+              sequence="86"/>
+</odoo>

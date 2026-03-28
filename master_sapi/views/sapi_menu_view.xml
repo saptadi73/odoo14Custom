@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_sapi_root"
+                  name="Sapi"
+                  web_icon="master_sapi,static/description/icon.png"
+                  sequence="20"/>
+        <menuitem id="menu_konfigurasi_root"
+                  name="Konfigurasi"
+                  sequence="40"
+                  parent="menu_sapi_root"/>
+        <menuitem id="menu_sapi_details"
+                    name="Sapi"
+                    parent="menu_sapi_root"
+                    sequence="20"
+                    action="act_sapi_view"/>
+        <menuitem id="menu_sapi_formulasi_details"
+                    name="Formulasi"
+                    parent="menu_sapi_root"
+                    sequence="30"/>
+
+
+    </data>
+</odoo>

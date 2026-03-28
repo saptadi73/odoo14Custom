@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_mrp_overhead_period" model="ir.sequence">
+        <field name="name">MRP Overhead Period</field>
+        <field name="code">mrp.overhead.period</field>
+        <field name="prefix">OHP/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

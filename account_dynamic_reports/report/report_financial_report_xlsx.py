@@ -117,6 +117,13 @@ class InsFinancialReportXlsx(models.AbstractModel):
                 self.sheet_2.write_datetime(self.row_pos_2, 1, date,
                                         self.content_header_date)
             self.row_pos_2 += 1
+            analytics = ', '.join(filter['form'].get('selected_analytics', []))
+            if analytics:
+                self.sheet_2.write_string(self.row_pos_2, 0, _('Analytic Accounts'),
+                                          self.format_header)
+                self.sheet_2.write_string(self.row_pos_2, 1, analytics,
+                                          self.content_header)
+                self.row_pos_2 += 1
             if filter['form']['enable_filter']:
 
                 # Compariosn Date from
@@ -258,7 +265,7 @@ class InsFinancialReportXlsx(models.AbstractModel):
         self.language_id = self.env['res.lang'].search([('code','=',lang)])[0]
         self._format_float_and_dates(self.env.user.company_id.currency_id, self.language_id)
 
-        self.sheet.merge_range(0, 0, 0, 3, data['form']['account_report_id'][1] +' - '+data['form']['company_id'][1], self.format_title)
+        self.sheet.merge_range(0, 0, 0, 3, data['form']['account_report_id'][1] +' - '+data['form']['company_name'], self.format_title)
         self.dateformat = self.env.user.lang
 
         #Filter section

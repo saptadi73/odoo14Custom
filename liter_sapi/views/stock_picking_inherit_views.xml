@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="warehouse_liter_inherit_form_view" model="ir.ui.view">
+            <field name="name">warehouse.liter.inherit.form.view</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="tps_id" options='{"no_create_edit": True, "no_create": True}'/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock_picking_liter_inherit_form_view" model="ir.ui.view">
+            <field name="name">stock.picking.liter.inherit.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='picking_type_id']" position="after">
+                    <field name="tps_id" options='{"no_create_edit": True, "no_create": True}'/>
+                    <field name="is_rearing"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

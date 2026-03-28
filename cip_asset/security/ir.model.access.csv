@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cip,setoran_cip,model_cip,,1,1,1,1
+access_type_cip,type_cip,model_type_cip,,1,1,1,1
+access_cip_expense_line,cip_expense_line,model_cip_expense_line,,1,1,1,1
+access_cip_hpp_line,cip_hpp_line,model_cip_hpp_line,,1,1,1,1
+access_cip_to_asset,cip_to_asset,model_cip_to_asset,,1,1,1,1

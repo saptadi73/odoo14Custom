@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_overhead_type_user,mrp.overhead.type user,model_mrp_overhead_type,mrp.group_mrp_user,1,0,0,0
+access_mrp_overhead_type_manager,mrp.overhead.type manager,model_mrp_overhead_type,mrp.group_mrp_manager,1,1,1,1
+access_mrp_overhead_type_account_manager,mrp.overhead.type account manager,model_mrp_overhead_type,account.group_account_manager,1,1,1,1
+access_mrp_overhead_period_user,mrp.overhead.period user,model_mrp_overhead_period,mrp.group_mrp_user,1,0,0,0
+access_mrp_overhead_period_manager,mrp.overhead.period manager,model_mrp_overhead_period,mrp.group_mrp_manager,1,1,1,1
+access_mrp_overhead_period_account_manager,mrp.overhead.period account manager,model_mrp_overhead_period,account.group_account_manager,1,1,1,1
+access_mrp_overhead_period_line_user,mrp.overhead.period.line user,model_mrp_overhead_period_line,mrp.group_mrp_user,1,0,0,0
+access_mrp_overhead_period_line_manager,mrp.overhead.period.line manager,model_mrp_overhead_period_line,mrp.group_mrp_manager,1,1,1,1
+access_mrp_overhead_period_line_account_manager,mrp.overhead.period.line account manager,model_mrp_overhead_period_line,account.group_account_manager,1,1,1,1
+access_mrp_overhead_allocation_user,mrp.overhead.allocation.line user,model_mrp_overhead_allocation_line,mrp.group_mrp_user,1,0,0,0
+access_mrp_overhead_allocation_manager,mrp.overhead.allocation.line manager,model_mrp_overhead_allocation_line,mrp.group_mrp_manager,1,1,1,1
+access_mrp_overhead_allocation_account_manager,mrp.overhead.allocation.line account manager,model_mrp_overhead_allocation_line,account.group_account_manager,1,1,1,1

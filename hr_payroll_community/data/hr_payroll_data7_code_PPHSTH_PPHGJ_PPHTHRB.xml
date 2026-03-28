@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+	<record id="hr_rule_PPHSTHN1" model="hr.salary.rule">
+            <field name="name">PPH Setahun 1</field>
+            <field name="sequence" eval="120"/>
+            <field name="code">PPHSTHN1</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.PPH-Setahun"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">#Odoo14 proses perhitungan multi pph, di contract harus dipilih salah satu type nya (Nett, Gross, Gross UP)
+#PPH untuk Karyawan, PHL Bulanan, Konsultan 1 PTK / >1 PTK, Komisaris
+#bruto2---->ada perhitungan Bonus-THR (jangan salah duga ya) !!!!!!!!!!!!!!!!!!!!!!
+bulgab = 1 if int(str(contract.date_start)[:-6]) &lt; int(str(payslip.date_from)[:-6]) else int(str(contract.date_start)[-5:-3])
+buljl = int(str(payslip.date_from)[-5:-3])
+bulbr = (13 - bulgab) - (12 - buljl)
+jumbl = (13 - bulgab) if contract.date_end==False else bulbr
+jbtn = 500000
+lp1 = 60000000
+lp2 = 190000000
+lp3 = 250000000
+lpx = lp1+lp2+lp3
+lp4 = 4500000000
+lpy = lpx+lp4
+lp5 = 999999999999
+p21= 0.00
+pph_thr= 0.00
+if contract.use_nett==True or contract.use_gross==True: 
+   bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT)
+   bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH)
+   sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+   bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+   p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+   p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+   nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+   nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+   pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+   pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+   if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+           cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp21= 0.00
+      
+   if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp22= 0.00
+
+   pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+   pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+   pph_thr = pph_ts
+
+   result=round((cp21 * jumbl/bulbr), 2)
+else:
+  while True:
+      bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH)
+      bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH)
+      sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+      bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+      p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+      p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+      nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+      nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+      pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+      pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+      if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp21= 0.00
+      
+      if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp22= 0.00
+
+      pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+      pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+
+      if p21==pph_setor:
+            break
+      else:
+            p21=pph_setor
+            pph_thr=pph_ts
+result=round((cp21 * jumbl/bulbr), 2)</field>
+        </record>
+
+	    <record id="hr_rule_PPHSTHN2" model="hr.salary.rule">
+            <field name="name">PPH Setahun 2</field>
+            <field name="sequence" eval="120"/>
+            <field name="code">PPHSTHN2</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.PPH-Setahun"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">#Odoo14 proses perhitungan multi pph, di contract harus dipilih salah satu type nya (Nett, Gross, Gross UP)
+#PPH untuk Karyawan, PHL Bulanan, Konsultan 1 PTK / >1 PTK, Komisaris
+#bruto2 ---->ada perhitungan Bonus-THR (jangan salah duga ya) !!!!!!!!!!!!!!!!!!!!!!
+bulgab = 1 if int(str(contract.date_start)[:-6]) &lt; int(str(payslip.date_from)[:-6]) else int(str(contract.date_start)[-5:-3])
+buljl = int(str(payslip.date_from)[-5:-3])
+bulbr = (13 - bulgab) - (12 - buljl)
+jumbl = (13 - bulgab) if contract.date_end==False else bulbr
+jbtn = 500000
+lp1 = 60000000
+lp2 = 190000000
+lp3 = 250000000
+lpx = lp1+lp2+lp3
+lp4 = 4500000000
+lpy = lpx+lp4
+lp5 = 999999999999
+p21= 0.00
+pph_thr= 0.00
+if contract.use_nett==True or contract.use_gross==True: 
+   bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT)
+   bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH)
+   sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+   bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+   p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+   p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+   nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+   nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+   pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+   pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+   if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+           cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp21= 0.00
+      
+   if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp22= 0.00
+
+   pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+   pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+   pph_thr = pph_ts
+
+   result=round((cp22 * jumbl/bulbr), 2)
+else:
+  while True:
+      bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH)
+      bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH)
+      sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+      bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+      p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+      p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+      nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+      nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+      pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+      pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+      if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp21= 0.00
+      
+      if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp22= 0.00
+
+      pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+      pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+
+      if p21==pph_setor:
+            break
+      else:
+            p21=pph_setor
+            pph_thr=pph_ts
+  result=round((cp22 * jumbl/bulbr), 2)</field>
+        </record>
+        <record id="hr_rule_PPH21GAJI" model="hr.salary.rule">
+            <field name="name">PPH21- Gaji</field>
+            <field name="sequence" eval="122"/>
+            <field name="code">PPH21GAJI</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.PPh-Gaji"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">#Odoo14 proses perhitungan multi pph, di contract harus dipilih salah satu type nya (Nett, Gross, Gross UP)
+#PPH untuk Karyawan, PHL Bulanan, Konsultan 1 PTK / >1 PTK, Komisaris
+#bruto2 ---->ada perhitungan Bonus-THR (jangan salah duga ya) !!!!!!!!!!!!!!!!!!!!!!
+bulgab = 1 if int(str(contract.date_start)[:-6]) &lt; int(str(payslip.date_from)[:-6]) else int(str(contract.date_start)[-5:-3])
+buljl = int(str(payslip.date_from)[-5:-3])
+bulbr = (13 - bulgab) - (12 - buljl)
+jumbl = (13 - bulgab) if contract.date_end==False else bulbr
+jbtn = 500000
+lp1 = 60000000
+lp2 = 190000000
+lp3 = 250000000
+lpx = lp1+lp2+lp3
+lp4 = 4500000000
+lpy = lpx+lp4
+lp5 = 999999999999
+p21= 0.00
+pph_thr= 0.00
+if contract.use_nett==True or contract.use_gross==True: 
+   bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT)
+   bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH)
+   sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+   bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+   p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+   p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+   nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+   nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+   pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+   pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+   if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+           cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp21= 0.00
+      
+   if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp22= 0.00
+
+   pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+   pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+   pph_thr = pph_ts
+
+   result=round(cp21)
+else:
+  while True:
+      bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH)
+      bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH)
+      sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+      bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+      p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+      p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+      nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+      nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+      pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+      pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+      if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp21= 0.00
+      
+      if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp22= 0.00
+
+      pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+      pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+
+      if p21==pph_setor:
+            break
+      else:
+            p21=pph_setor
+            pph_thr=pph_ts
+  result=round(cp21)</field>
+        </record>		
+ 
+        <record id="hr_rule_PPH21GAJI2" model="hr.salary.rule">
+            <field name="name">PPH21- Gaji - 2</field>
+            <field name="sequence" eval="123"/>
+            <field name="code">PPH21GAJI2</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.PPh-Gaji"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">#Odoo14 proses perhitungan multi pph, di contract harus dipilih salah satu type nya (Nett, Gross, Gross UP)
+#PPH untuk Karyawan, PHL Bulanan, Konsultan 1 PTK / >1 PTK, Komisaris
+#bruto2 ---->ada perhitungan Bonus-THR (jangan salah duga ya) !!!!!!!!!!!!!!!!!!!!!!
+bulgab = 1 if int(str(contract.date_start)[:-6]) &lt; int(str(payslip.date_from)[:-6]) else int(str(contract.date_start)[-5:-3])
+buljl = int(str(payslip.date_from)[-5:-3])
+bulbr = (13 - bulgab) - (12 - buljl)
+jumbl = (13 - bulgab) if contract.date_end==False else bulbr
+jbtn = 500000
+lp1 = 60000000
+lp2 = 190000000
+lp3 = 250000000
+lpx = lp1+lp2+lp3
+lp4 = 4500000000
+lpy = lpx+lp4
+lp5 = 999999999999
+p21= 0.00
+pph_thr= 0.00
+if contract.use_nett==True or contract.use_gross==True: 
+   bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT)
+   bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH)
+   sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+   bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+   p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+   p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+   nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+   nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+   pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+   pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+   if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+           cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp21= 0.00
+      
+   if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp22= 0.00
+
+   pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+   pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+   pph_thr = pph_ts
+
+   result=round(cp22)
+else:
+  while True:
+      bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH)
+      bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH)
+      sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+      bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+      p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+      p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+      nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+      nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+      pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+      pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+      if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp21= 0.00
+      
+      if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp22= 0.00
+
+      pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+      pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+
+      if p21==pph_setor:
+            break
+      else:
+            p21=pph_setor
+            pph_thr=pph_ts
+  result=round(cp22)</field>
+        </record> 
+ 
+        <record id="hr_rule_PPH21BHT" model="hr.salary.rule">
+            <field name="name">PPH21-THR/Bonus</field>
+            <field name="sequence" eval="122"/>
+            <field name="code">PPH21BHT</field>
+			<field name="appears_on_payslip" eval="False"/>
+            <field name="category_id" ref="hr_payroll_community.PPh-THR/Bonus"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">#Odoo14 proses perhitungan multi pph, di contract harus dipilih salah satu type nya (Nett, Gross, Gross UP)
+#PPH untuk Karyawan, PHL Bulanan, Konsultan 1 PTK / >1 PTK, Komisaris
+#bruto2 ---->ada perhitungan Bonus-THR (jangan salah duga ya) !!!!!!!!!!!!!!!!!!!!!!
+bulgab = 1 if int(str(contract.date_start)[:-6]) &lt; int(str(payslip.date_from)[:-6]) else int(str(contract.date_start)[-5:-3])
+buljl = int(str(payslip.date_from)[-5:-3])
+bulbr = (13 - bulgab) - (12 - buljl)
+jumbl = (13 - bulgab) if contract.date_end==False else bulbr
+jbtn = 500000
+lp1 = 60000000
+lp2 = 190000000
+lp3 = 250000000
+lpx = lp1+lp2+lp3
+lp4 = 4500000000
+lpy = lpx+lp4
+lp5 = 999999999999
+p21= 0.00
+pph_thr= 0.00
+if contract.use_nett==True or contract.use_gross==True: 
+   bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT)
+   bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH)
+   sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+   bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK') else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+   p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+   p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+   nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+   nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+   pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+   pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+   if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+           cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp21= 0.00
+      
+   if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+   elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+   elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+   else:
+            cp22= 0.00
+
+   pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+   pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+   pph_thr = pph_ts
+
+   result=pph_thr
+else:
+  while True:
+      bruto= ((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (p21 - categories.PREPPH)
+      bruto2=((categories.GAPOK * 0.5) + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH) if (contract.type_id.name=='NONK' and contract.job_id.name=='Consultant') else (categories.GAPOK + categories.PNR) + (categories.PBRUT) + (categories.BTH + categories.PREBTH) + (p21 - categories.PREPPH)
+      sijabat = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else (bruto * 0.05) if ((bruto * 0.05) - (categories.PREJAB + categories.PREJABTHR)) &lt; jbtn else (jbtn + categories.PREJAB + categories.PREJABTHR)
+      bijatbon = 0.00 if (contract.type_id.name=='PHL' or contract.type_id.name=='NONK')  else ((categories.BTH * 0.05) + (categories.PREBTH * 0.05)) if (sijabat + ((categories.BTH * 0.05) + (categories.PREBTH * 0.05))) &lt; (jbtn*bulbr) else ((jbtn*bulbr)-sijabat)
+      p_netto = bruto - (categories.PEN + categories.PPEN + sijabat)
+      p_netto2 = bruto2 - (categories.PEN + categories.PPEN + sijabat + bijatbon)
+      nett_thn = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto - pph_thr) * (jumbl/bulbr) + pph_thr,2) + contract.bruto_sblm
+      nett_thn2 = round(p_netto + contract.bruto_sblm) if contract.type_id.name=='NONK' else round((p_netto2 + bijatbon - categories.BTH - categories.PREBTH - pph_thr) * (jumbl/bulbr) + (categories.BTH + categories.PREBTH + pph_thr - bijatbon),2) + contract.bruto_sblm
+      pkp = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn - contract.ptkp_rate)/1000) * 1000
+      pkp2 = int((nett_thn - (contract.ptkp_rate * bulbr))/1000) * 1000 if contract.type_id.name=='NONK' else int((nett_thn2 - contract.ptkp_rate)/1000) * 1000
+
+      if pkp > 0 and pkp &lt;= lp1:
+            cp21= round(((pkp * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp1 and (pkp - lp1) &lt;= lp2:
+            cp21= round((((lp1*0.05)+((pkp-lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp >lp2 and (pkp - lp3) &lt;= lp3:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+((pkp-lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp >lp3 and (pkp - (lpx)) &lt;= lp4:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp-(lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp >(lpy) and (pkp - (lpy)) &lt;= lp5:
+            cp21= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp21= 0.00
+      
+      if pkp2 > 0 and pkp2 &lt;= lp1:
+       	    cp22= round(((pkp2 * 0.05) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp1 and (pkp2 - lp1) &lt;= lp2:
+            cp22= round((((lp1*0.05)+((pkp2 - lp1)* 0.15)) - contract.pph_sblm) / (jumbl/bulbr),2) 
+      elif pkp2 >lp2 and (pkp2 - lp3) &lt;= lp3:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+((pkp2 - lp3)*0.25)) - contract.pph_sblm) / (jumbl/bulbr),2)
+      elif pkp2 >lp3 and (pkp2 - (lpx)) &lt;= lp4:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+((pkp2 - (lpx))*0.3)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      elif pkp2 >(lpy) and (pkp2 - (lpy)) &lt;= lp5:
+            cp22= round((((lp1*0.05)+(lp2 * 0.15)+(lp3 * 0.25)+(lp4 * 0.3)+((pkp2-(lpy))*0.35)) - contract.pph_sblm) / (jumbl/bulbr), 2)
+      else:
+            cp22= 0.00
+
+      pph_ts= round((cp22 * jumbl/bulbr) - (cp21 * jumbl/bulbr), 2)
+      pph_setor= round((cp21 * jumbl/bulbr), 2) if contract.type_id.name=='NONK' else round((cp21 + pph_ts), 2)
+
+      if p21==pph_setor:
+            break
+      else:
+            p21=pph_setor
+            pph_thr=pph_ts
+  result=pph_thr</field>
+        </record>
+    </data>
+</odoo>

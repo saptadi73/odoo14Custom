@@ -39,15 +39,39 @@ DATE_DICT = {
 class InsPartnerAgeing(models.TransientModel):
     _name = "ins.partner.ageing"
 
-    @api.onchange('partner_type')
+    def _get_report_company(self):
+        self.ensure_one()
+        return self.company_id or self.env.company
+
+    def _get_report_companies(self):
+        self.ensure_one()
+        return self.company_ids or self.company_id or self.env.company
+
+    def _get_report_company_ids(self):
+        self.ensure_one()
+        return self._get_report_companies().ids or [self.env.company.id]
+
+    def _get_company_display_name(self):
+        self.ensure_one()
+        return ', '.join(self._get_report_companies().mapped('name'))
+
+    def _get_available_companies(self):
+        return self.env.user.company_ids
+
+    @api.onchange('partner_type', 'company_id', 'company_ids')
     def onchange_partner_type(self):
         self.partner_ids = [(5,)]
+        company_ids = self.company_ids.ids or (self.company_id and [self.company_id.id]) or [self.env.company.id]
+        if self.company_ids:
+            self.company_id = self.company_ids[0]
+        elif self.company_id:
+            self.company_ids = [(6, 0, [self.company_id.id])]
         if self.partner_type:
             if self.partner_type == 'customer':
                 partner_company_domain = [('parent_id', '=', False),
                                           ('customer_rank', '>', 0),
                                           '|',
-                                          ('company_id', '=', self.env.company.id),
+                                          ('company_id', 'in', company_ids),
                                           ('company_id', '=', False)]
 
                 self.partner_ids |= self.env['res.partner'].search(partner_company_domain)
@@ -55,7 +79,7 @@ class InsPartnerAgeing(models.TransientModel):
                 partner_company_domain = [('parent_id', '=', False),
                                           ('supplier_rank', '>', 0),
                                           '|',
-                                          ('company_id', '=', self.env.company.id),
+                                          ('company_id', 'in', company_ids),
                                           ('company_id', '=', False)]
 
                 self.partner_ids |= self.env['res.partner'].search(partner_company_domain)
@@ -88,6 +112,7 @@ class InsPartnerAgeing(models.TransientModel):
         'res.company', string='Company',
         default=lambda self: self.env.company
     )
+    company_ids = fields.Many2many('res.company', string='Companies', default=lambda self: self.env.company)
 
     def write(self, vals):
         if not vals.get('partner_ids'):
@@ -100,6 +125,15 @@ class InsPartnerAgeing(models.TransientModel):
         if vals.get('partner_category_ids') == []:
             vals.update({'partner_category_ids': [(5,)]})
 
+        if vals.get('company_ids'):
+            company_ids = vals.get('company_ids')
+            if isinstance(company_ids, list) and company_ids and isinstance(company_ids[0], int):
+                vals.update({'company_ids': [(6, 0, company_ids)], 'company_id': company_ids[0]})
+        if vals.get('company_ids') == []:
+            vals.update({'company_ids': [(5,)]})
+        if vals.get('company_id') and not vals.get('company_ids'):
+            vals.update({'company_ids': [(6, 0, [vals.get('company_id')])]})
+
         ret = super(InsPartnerAgeing, self).write(vals)
         return ret
 
@@ -111,13 +145,16 @@ class InsPartnerAgeing(models.TransientModel):
 
     def get_filters(self, default_filters={}):
 
+        company = self._get_report_company()
+        company_ids = self._get_report_company_ids()
         partner_company_domain = [('parent_id','=', False),
                                   '|',
                                   ('customer_rank', '>', 0),
                                   ('supplier_rank', '>', 0),
                                   '|',
-                                  ('company_id', '=', self.env.company.id),
+                                  ('company_id', 'in', company_ids),
                                   ('company_id', '=', False)]
+        companies = self._get_available_companies()
 
         partners = self.partner_ids if self.partner_ids else self.env['res.partner'].search(partner_company_domain)
         categories = self.partner_category_ids if self.partner_category_ids else self.env['res.partner.category'].search([])
@@ -125,6 +162,7 @@ class InsPartnerAgeing(models.TransientModel):
         filter_dict = {
             'partner_ids': self.partner_ids.ids,
             'partner_category_ids': self.partner_category_ids.ids,
+            'company_ids': company_ids,
             'company_id': self.company_id and self.company_id.id or False,
             'as_on_date': self.as_on_date,
             'type': self.type,
@@ -138,7 +176,8 @@ class InsPartnerAgeing(models.TransientModel):
 
             'partners_list': [(p.id, p.name) for p in partners],
             'category_list': [(c.id, c.name) for c in categories],
-            'company_name': self.company_id and self.company_id.name,
+            'company_name': self._get_company_display_name(),
+            'companies_list': [(c.id, c.name) for c in companies],
         }
         filter_dict.update(default_filters)
         return filter_dict
@@ -168,6 +207,7 @@ class InsPartnerAgeing(models.TransientModel):
             filters['company_id'] = data.get('company_id')
         else:
             filters['company_id'] = ''
+        filters['company_ids'] = data.get('company_ids', [])
 
         if data.get('type'):
             filters['type'] = data.get('type')
@@ -188,6 +228,7 @@ class InsPartnerAgeing(models.TransientModel):
         filters['partners_list'] = data.get('partners_list')
         filters['category_list'] = data.get('category_list')
         filters['company_name'] = data.get('company_name')
+        filters['companies_list'] = data.get('companies_list')
 
         return filters
 
@@ -249,7 +290,7 @@ class InsPartnerAgeing(models.TransientModel):
         as_on_date = self.as_on_date
         period_dict = self.prepare_bucket_list()
         period_list = [period_dict[a]['name'] for a in period_dict]
-        company_id = self.env.company
+        company_ids = self._get_report_company_ids()
 
         type = ('receivable','payable')
         if self.type:
@@ -279,8 +320,8 @@ class InsPartnerAgeing(models.TransientModel):
                         AND ty.type IN %s
                         AND l.partner_id = %s
                         AND l.date <= '%s'
-                        AND l.company_id = %s
-                """ % (type, partner, as_on_date, company_id.id)
+                        AND l.company_id IN %s
+                """ % (type, partner, as_on_date, tuple(company_ids) + tuple([0]))
             self.env.cr.execute(sql)
             count = self.env.cr.fetchone()[0]
 
@@ -398,12 +439,12 @@ class InsPartnerAgeing(models.TransientModel):
                         AND ty.type IN %s
                         AND l.partner_id = %s
                         AND l.date <= '%s'
-                        AND l.company_id = %s
+                        AND l.company_id IN %s
                     GROUP BY
                         l.date, l.date_maturity, m.id, m.name, j.name, a.name, cc.id
                     OFFSET %s ROWS
                     FETCH FIRST %s ROWS ONLY
-                """%(type, partner, as_on_date, company_id.id, offset, fetch_range)
+                """%(type, partner, as_on_date, tuple(company_ids) + tuple([0]), offset, fetch_range)
             self.env.cr.execute(SELECT + sql)
             final_list = self.env.cr.dictfetchall() or 0.0
             move_lines = []
@@ -431,7 +472,9 @@ class InsPartnerAgeing(models.TransientModel):
         '''
         period_dict = self.prepare_bucket_list()
 
-        domain = ['|',('company_id','=',self.env.company.id),('company_id','=',False)]
+        company = self._get_report_company()
+        company_ids = self._get_report_company_ids()
+        domain = ['|', ('company_id', 'in', company_ids), ('company_id', '=', False)]
         if self.partner_type == 'customer':
             domain.append(('customer_rank','>',0))
         if self.partner_type == 'supplier':
@@ -442,8 +485,7 @@ class InsPartnerAgeing(models.TransientModel):
 
         partner_ids = self.partner_ids or self.env['res.partner'].search(domain)
         as_on_date = self.as_on_date
-        company_currency_id = self.env.company.currency_id.id
-        company_id = self.env.company
+        company_currency_id = company.currency_id.id
 
         type = ('receivable', 'payable')
         if self.type:
@@ -480,8 +522,8 @@ class InsPartnerAgeing(models.TransientModel):
                     AND ty.type IN %s
                     AND l.partner_id = %s
                     AND l.date <= '%s'
-                    AND l.company_id = %s
-            """%(type, partner.id, as_on_date, company_id.id)
+                    AND l.company_id IN %s
+            """%(type, partner.id, as_on_date, tuple(company_ids) + tuple([0]))
             self.env.cr.execute(sql)
             fetch_dict = self.env.cr.dictfetchone() or 0.0
             count = fetch_dict.get('count') or 0.0
@@ -530,8 +572,8 @@ class InsPartnerAgeing(models.TransientModel):
                             l.balance <> 0
                             AND m.state = 'posted'
                             AND ty.type IN %s
-                            AND l.company_id = %s
-                    """%(as_on_date, as_on_date, type, company_id.id)
+                            AND l.company_id IN %s
+                    """%(as_on_date, as_on_date, type, tuple(company_ids) + tuple([0]))
                     amount = 0.0
                     self.env.cr.execute(sql + where)
                     fetch_dict = self.env.cr.dictfetchall() or 0.0
@@ -747,7 +789,7 @@ class InsPartnerAgeing(models.TransientModel):
         ################################################################
         row_pos_2 = 0
         row_pos = 0
-        sheet.merge_range(0, 0, 0, 11, 'Partner Ageing' + ' - ' + data['company_id'][1], format_title)
+        sheet.merge_range(0, 0, 0, 11, 'Partner Ageing' + ' - ' + filter['company_name'], format_title)
 
         # Write filters
         row_pos_2 += 2

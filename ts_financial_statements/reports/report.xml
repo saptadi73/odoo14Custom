@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <report
+            id="action_fs_report_xlsx"
+            string="Profit and Loss Report"
+            model="ts.financial.report.wizard"
+            report_type="xlsx"
+            file="ts_financial_statements.profit_and_loss_report"
+            name="ts_financial_statements.profit_and_loss_report"
+            menu="False" />
+
+    </data>
+</odoo>

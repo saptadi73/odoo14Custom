@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_peternak_sapi,peternak_sapi,model_peternak_sapi,,1,1,1,1
+access_peternak_relationship,peternak_relationship,model_peternak_relationship,,1,1,1,1
+access_peternak_group,peternak_group,model_peternak_group,,1,1,1,1
+access_jabatan_group,jabatan_group,model_jabatan_group,,1,1,1,1
+access_peternak_sapi_anggota_wizard,peternak_sapi_anggota_wizard,model_peternak_sapi_anggota_create,,1,1,1,1
+access_jenis_pelanggaran,jenis_pelanggaran,model_jenis_pelanggaran,,1,1,1,1
+access_pelanggaran,pelanggaran,model_pelanggaran_peternak,,1,1,1,1
+access_kandang_line,kandang_line,model_kandang_line,,1,1,1,1
+access_usaha_peternak,usaha_peternak,model_usaha_peternak,,1,1,1,1

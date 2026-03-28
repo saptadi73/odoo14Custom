@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_status_reproduksi_view" model="ir.ui.view">
+            <field name="name">form.master.status.reproduksi.view</field>
+            <field name="model">master.status.reproduksi</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Status reproduksi">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_status_reproduksi"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_status_reproduksi_search_view" model="ir.ui.view">
+            <field name="name">master.status.reproduksi.search.view</field>
+            <field name="model">master.status.reproduksi</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Status reproduksi">
+                    <separator orientation="vertical" />
+                    <field name="nama_status_reproduksi" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Jenis Vaksin" name='by_nama_status_reproduksi' context="{'group_by':'nama_status_reproduksi'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_status_reproduksi_tree_view" model="ir.ui.view">
+            <field name="name">master.status.reproduksi.tree.view</field>
+            <field name="model">master.status.reproduksi</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Status reproduksi">
+                    <field name="kode"/>
+                    <field name="nama_status_reproduksi"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_status_reproduksi" model="ir.actions.act_window">
+            <field name="name">Master Status Reproduksi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.status.reproduksi</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_master_status_reproduksi" parent="mster_data"
+            action="action_master_status_reproduksi" sequence="6" />
+
+</odoo>

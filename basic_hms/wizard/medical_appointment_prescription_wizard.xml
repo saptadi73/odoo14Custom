@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="medical_appointment_prescription_create_wizard_view" model="ir.ui.view">
+            <field name="name">medical.appointment.prescription.create.wizard.view</field>
+            <field name="model">medical.appointment.prescription.create</field>
+            <field name="arch" type="xml">
+                <form string="Create Appointment Prescription">
+                    <separator colspan="4"
+                        string="Do you want to generate the Prescription(s) ?" />
+                    <newline />
+                    <separator string="Create Prescription" colspan="6" />
+                    <footer>
+                        <button name="create_prescription_appointment" string="Create Prescription"
+                            type="object" class="oe_highlight" />
+                        or
+                        <button special="cancel" string="Cancel"
+                            class="oe_highlight" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_create_prescription_result2" name="Create Prescription"
+            res_model="medical.appointment.prescription.create" binding_model="medical.appointment"
+            view_mode="form" target="new" />
+
+        <menuitem name="Prescriptions"
+            id="dental_prescription_child"
+            parent = "basic_hms.menu_patients"
+            sequence='0'
+           />
+
+</odoo>

@@ -135,15 +135,18 @@ self.$el.find('.date_filter-multiple').select2({
 maximumSelectionSize: 1,
 placeholder:'Select Date...',
 });
+self.$el.find('.company-multiple').select2({
+placeholder:'Select Company...',
+}).val((self.filter_data.company_ids || []).map(String)).trigger('change');
 self.$el.find('.journal-multiple').select2({
 placeholder:'Select Journal...',
-});
+}).val((self.filter_data.journal_ids || []).map(String)).trigger('change');
 self.$el.find('.analytic-tag-multiple').select2({
 placeholder:'Analytic Tags...',
-});
+}).val((self.filter_data.analytic_tag_ids || []).map(String)).trigger('change');
 self.$el.find('.analytic-multiple').select2({
 placeholder:'Select Analytic...',
-});
+}).val((self.filter_data.analytic_ids || []).map(String)).trigger('change');
 self.$el.find('.extra-multiple').select2({
 placeholder:'Extra Options...',
 })
@@ -170,7 +173,9 @@ if(self.filter_data.date_from == false || self.filter_data.date_to == false){
 }
 var domains = {
 account_ids : [$(event.currentTarget).data('account-id')] ,
-initial_balance : (self.filter_data.rtype == 'CASH' || self.filter_data.rtype == 'PANDL') ? false : true
+initial_balance : (self.filter_data.rtype == 'CASH' || self.filter_data.rtype == 'PANDL') ? false : true,
+company_id : self.filter_data.company_id,
+company_ids : self.filter_data.company_ids || []
 }
 var context = {};
 if ($("#date_from").val()){
@@ -236,6 +241,13 @@ event.preventDefault();
 var self = this;
 self.initial_render = false;
 var output = {date_range:false, enable_filter:false, debit_credit:false};
+var company_ids = [];
+var company_list = $(".company-multiple").select2('data');
+for (var i=0; i < company_list.length; i++){
+company_ids.push(parseInt(company_list[i].id))
+}
+output.company_ids = company_ids
+output.company_id = company_ids.length ? company_ids[0] : false
 if($(".date_filter-multiple").select2('data').length === 1){
 output.date_range = $(".date_filter-multiple").select2('data')[0].id
 }
@@ -419,6 +431,9 @@ self.$el.find('.date_filter-multiple').select2({
 maximumSelectionSize: 1,
 placeholder:'Select Date...',
 });
+self.$el.find('.company-multiple').select2({
+placeholder:'Select Company...',
+}).val((self.filter_data.company_ids || []).map(String)).trigger('change');
 self.$el.find('.extra-multiple').select2({
 placeholder:'Extra Options...',
 })
@@ -546,6 +561,13 @@ event.preventDefault();
 var self = this;
 self.initial_render = false;
 var output = {date_range:false};
+var company_ids = [];
+var company_list = $(".company-multiple").select2('data');
+for (var i=0; i < company_list.length; i++){
+company_ids.push(parseInt(company_list[i].id))
+}
+output.company_ids = company_ids
+output.company_id = company_ids.length ? company_ids[0] : false
 output.display_accounts = 'balance_not_zero';
 output.initial_balance = false;
 output.include_details = false;
@@ -729,6 +751,9 @@ self.$('.py-control-panel').html(QWeb.render('FilterSectionPa', {
 filter_data : self.filter_data,
 }));
 self.$el.find('#as_on_date').datepicker({ dateFormat: 'dd-mm-yy' });
+self.$el.find('.company-multiple').select2({
+placeholder:'Select Company...',
+}).val((self.filter_data.company_ids || []).map(String)).trigger('change');
 self.$el.find('.type-multiple').select2({
 maximumSelectionSize: 1,
 placeholder:'Select Account Type...',
@@ -875,6 +900,13 @@ event.preventDefault();
 var self = this;
 self.initial_render = false;
 var output = {}
+var company_ids = [];
+var company_list = $(".company-multiple").select2('data');
+for (var i=0; i < company_list.length; i++){
+company_ids.push(parseInt(company_list[i].id))
+}
+output.company_ids = company_ids
+output.company_id = company_ids.length ? company_ids[0] : false
 output.type = false;
 output.include_details = false;
 output.partner_type = false;
@@ -1051,6 +1083,9 @@ self.$el.find('.date_filter-multiple').select2({
 maximumSelectionSize: 1,
 placeholder:'Select Date...',
 });
+self.$el.find('.company-multiple').select2({
+placeholder:'Select Company...',
+}).val((self.filter_data.company_ids || []).map(String)).trigger('change');
 self.$el.find('.extra-multiple').select2({
 placeholder:'Extra Options...',
 })
@@ -1182,6 +1217,13 @@ event.preventDefault();
 var self = this;
 self.initial_render = false;
 var output = {date_range:false};
+var company_ids = [];
+var company_list = $(".company-multiple").select2('data');
+for (var i=0; i < company_list.length; i++){
+company_ids.push(parseInt(company_list[i].id))
+}
+output.company_ids = company_ids
+output.company_id = company_ids.length ? company_ids[0] : false
 output.type = false;
 output.display_accounts = 'balance_not_zero';
 output.initial_balance = false;
@@ -1408,6 +1450,9 @@ self.$el.find('.date_filter-multiple').select2({
 maximumSelectionSize: 1,
 placeholder:'Select Date...',
 });
+self.$el.find('.company-multiple').select2({
+placeholder:'Select Company...',
+}).val((self.filter_data.company_ids || []).map(String)).trigger('change');
 self.$el.find('.extra-multiple').select2({
 placeholder:'Extra Options...',
 }).val('bal_not_zero').trigger('change');
@@ -1433,7 +1478,9 @@ view_gl : function(event){
 event.preventDefault();
 var self = this;
 var domains = {account_ids : [$(event.currentTarget).data('account-id')],
-initial_balance : false}
+initial_balance : false,
+company_id : self.filter_data.company_id,
+company_ids : self.filter_data.company_ids || []}
 var context = {};
 
 var journal_ids = [];
@@ -1502,6 +1549,13 @@ event.preventDefault();
 var self = this;
 self.initial_render = false;
 var output = {date_range:false};
+var company_ids = [];
+var company_list = $(".company-multiple").select2('data');
+for (var i=0; i < company_list.length; i++){
+company_ids.push(parseInt(company_list[i].id))
+}
+output.company_ids = company_ids
+output.company_id = company_ids.length ? company_ids[0] : false
 output.display_accounts = 'all';
 output.show_hierarchy = false;
 

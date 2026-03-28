@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+1,ts.financial.report,model_ts_financial_report,base.group_user,1,1,1,1
+2,ts.financial.report.line,model_ts_financial_report_line,base.group_user,1,1,1,1
+3,ts.financial.report.wizard,model_ts_financial_report_wizard,base.group_user,1,1,1,1
+
+

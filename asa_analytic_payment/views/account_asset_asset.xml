@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Jesus Ramoneda <jesus.ramoneda@qubiq.es>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="account_asset_asset_form" model="ir.ui.view">
+        <field name="name">account.asset.asset.form</field>
+        <field name="model">account.asset.asset</field>
+        <field name="inherit_id" ref="base_accounting_kit.view_account_asset_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_entries']" position="before">
+                    <button type="object" name="action_view_asset" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('asset_count', '=', 0)]}">
+                        <field name="asset_count" widget="statinfo" string="Mutasi Asset"/>
+                    </button>
+                </xpath>
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="account_analytic_id"
+                    attrs="{'readonly': [('state', '!=', 'draft')]}"
+                    />
+                <field name="mutasi_asset_id" readonly="1"/>
+            </xpath>
+            <xpath expr="//button[@name='validate']" position="after">
+                <button name="create_mutasi_asset" string="Create Mutasi" attrs="{'invisible': [('asset_count', '=', 1)]}" type="object"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

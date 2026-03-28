@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_kategori_breed_view" model="ir.ui.view">
+            <field name="name">form.master.kategori.breed.view</field>
+            <field name="model">master.kategori.breed</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Kategori Breed">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_kategori_breed"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_kategori_breed_search_view" model="ir.ui.view">
+            <field name="name">master.kategori.breed.search.view</field>
+            <field name="model">master.kategori.breed</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Kategori Breed">
+                    <separator orientation="vertical" />
+                    <field name="nama_kategori_breed" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Kategori Breed" name='by_nama_kategori_breed' context="{'group_by':'nama_kategori_breed'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_kategori_breed_tree_view" model="ir.ui.view">
+            <field name="name">master.kategori.breed.tree.view</field>
+            <field name="model">master.kategori.breed</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Kategori Breed">
+                    <field name="kode"/>
+                    <field name="nama_kategori_breed"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_kategori_breed" model="ir.actions.act_window">
+            <field name="name">Master Kategori Breed</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.kategori.breed</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_kategori_breed" parent="mster_data"
+            action="action_master_kategori_breed" sequence="25" />
+
+</odoo>

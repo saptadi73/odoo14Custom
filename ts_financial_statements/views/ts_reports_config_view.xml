@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Account Financial Report -->
+
+        <record id="view_ts_financial_reports_form" model="ir.ui.view">
+            <field name="name">ts.financial.reports.form</field>
+            <field name="model">ts.financial.report</field>
+            <field name="arch" type="xml">
+                <form string="Account Report">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="company_comparison"/>
+                        <field name="desc_before_date"/>
+                        <field name="analytic_comparison"/>
+                        <field name="date_after_desc"/>
+                        <field name="is_balance_sheet"/>
+                        <field name="sequence"/>
+                    </group>
+                    <notebook>
+                            <!-- attrs="{'invisible': [('type','not in',['accounts','account_type', 'account_report'])]}"> -->
+                        <page string="Report">
+                            <!-- <group>
+                                <field name="display_detail"
+                                       attrs="{'invisible': [('type','not in',['accounts','account_type'])]}"/>
+                                <field name="account_report_id"
+                                       attrs="{'invisible': [('type', '!=', 'account_report')]}"/>
+                            </group> -->
+                            <field name="report_line_ids">
+                            	<tree>
+                            		<field name="name"/>
+                            		<field name="style_overwrite"/>
+                            		<field name="type"/>
+                            		<field name="account_ids" widget="many2many_tags"/>
+                            		<!-- <field name="upper_figures"/>
+                            		<field name="lower_figures"/> -->
+                            		<field name="reverse_balance_sign" string="RB Sign"/>
+                            		<field name="enable_percent_sign" string="Percent Sign"/>
+                            	</tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ts_financial_report_tree" model="ir.ui.view">
+            <field name="name">ts.financial.report.tree</field>
+            <field name="model">ts.financial.report</field>
+            <field name="arch" type="xml">
+                <tree string="Account Report">
+                    <field name="name"/>
+                    <!-- <field name="parent_id" invisible="1"/> -->
+                    <field name="sequence"/>
+                    <!-- <field name="account_report_id"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ts_financial_report_search" model="ir.ui.view">
+            <field name="name">ts.financial.report.search</field>
+            <field name="model">ts.financial.report</field>
+            <field name="arch" type="xml">
+                <search string="Account Report">
+                    <field name="name" string="Account Report"/>
+                    <field name="sequence"/>
+                    <!-- <field name="account_report_id"/> -->
+                    <group expand="0" string="Group By">
+                        <!-- <filter string="Parent Report"
+                                name="filter_parent_rep"
+                                domain=""
+                                context="{'group_by':'parent_id'}"/> -->
+                        <!-- <filter string="Report Type"
+                                name="filter_rep_type"
+                                domain="[]"
+                                context="{'group_by':'type'}"/> -->
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_ts_financial_report_tree" model="ir.actions.act_window">
+            <field name="name">Financial Reports</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ts.financial.report</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_ts_financial_report_search"/>
+            <field name="view_id" ref="view_ts_financial_report_tree"/>
+        </record>
+        
+        <!-- Financial report line view end here -->
+        <!-- financial.report Line view starts bellow -->
+        <record id="view_ts_financl_report_line_form" model="ir.ui.view">
+            <field name="name">ts.financial.report.line.form</field>
+            <field name="model">ts.financial.report.line</field>
+            <field name="arch" type="xml">
+                <form string="Report Value">
+	                <sheet>
+		                <div class="oe_title">
+	                        <label for="name" class="oe_edit_only"/>
+	                        <h1>
+	                            <field name="name" placeholder="e.g. Profit &amp; Loss"/>
+	                        </h1>
+	                    </div>
+		                <group>
+		                    <group>
+		                        <field name="parent_id"/>
+		                        <field name="sequence" required="1"/>
+		                        <field name="numerator_account_ids" widget="many2many_tags" attrs="{'invisible': [('acc_visibile', '=', False)]}"/>
+		                        <field name="denominator_account_ids" widget="many2many_tags" attrs="{'invisible': [('acc_visibile', '=', False)]}"/>
+		                        
+		                        <field name="numerator_acc_type_ids" widget="many2many_tags" attrs="{'invisible': [('acc_type_visibile', '=', False)]}"/>
+		                        <field name="denominator_acc_type_ids" widget="many2many_tags" attrs="{'invisible': [('acc_type_visibile', '=', False)]}"/>
+		                        
+		                        <field name="numerator_acc_group_ids" widget="many2many_tags" attrs="{'invisible': [('acc_group_visibile', '=', False)]}"/>
+		                        <field name="denominator_acc_group_ids" widget="many2many_tags" attrs="{'invisible': [('acc_group_visibile', '=', False)]}"/>
+		                    </group>
+		                    <group>
+		                    	<field name="type"/>
+		                        <field name="style_overwrite" attrs="{'invisible': [('type', '=', 'sum')]}"/>
+		                        <field name="enable_percent_sign" attrs="{'invisible': [('style_overwrite', '!=', '6')]}"/>
+		                    	<field name="reverse_balance_sign" attrs="{'invisible': [('type', '=', 'sum')]}"/>
+		                    </group>
+	                    </group>
+	                    <field name="acc_visibile" invisible="1"/>
+	                    <field name="acc_type_visibile" invisible="1"/>
+	                    <field name="acc_group_visibile" invisible="1"/>
+	                    <notebook attrs="{'invisible': ['|',('type','not in',['accounts','account_type','account_group','report_value']),('style_overwrite', '=', '6')]}"> 
+	                        <page string="Report">
+	                            <field name="account_ids" attrs="{'invisible': [('type', '!=', 'accounts')]}"/>
+	                            <field name="account_type_ids" attrs="{'invisible': [('type', '!=', 'account_type')]}"/>
+	                            <field name="account_group_ids" attrs="{'invisible': [('type', '!=', 'account_group')]}"/>
+	                            <field name="report_line_ids" domain="[('type', 'in', ['accounts','account_type','account_group'])]" attrs="{'invisible': [('type', '!=', 'report_value')]}"/> 
+	                        </page>
+	                    </notebook>
+	                </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_ts_financl_report_line_tree" model="ir.ui.view">
+            <field name="name">ts.financial.report.line.tree</field>
+            <field name="model">ts.financial.report.line</field>
+            <field name="arch" type="xml">
+                <tree string="Report Value">
+                    <field name="name"/>
+                    <field name="parent_id" invisible="1"/>
+                    <field name="type"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_ts_financl_report_line_search" model="ir.ui.view">
+            <field name="name">ts.financial.report.line.search</field>
+            <field name="model">ts.financial.report.line</field>
+            <field name="arch" type="xml">
+                <search string="Report Value">
+                    <field name="name" string="Account Report"/>
+                    <field name="parent_id"/>
+                    <field name="type"/>
+                    <field name="sequence"/> 
+                    <group expand="0" string="Group By">
+	                    <filter string="Parent Report"
+	                                name="parent_id"
+	                                domain=""
+	                                context="{'group_by':'parent_id'}"/>
+	                    <filter string="Report Type"
+	                                name="type"
+	                                domain="[]"
+	                                context="{'group_by':'type'}"/> 
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_ts_financial_report_line" model="ir.actions.act_window">
+            <field name="name">Report Values</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ts.financial.report.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_ts_financl_report_line_search"/>
+            <field name="view_id" ref="view_ts_financl_report_line_tree"/>
+        </record>
+        
+        <!-- Financial report line view end here -->
+        
+        <!-- <menuitem name="Financial Reporting" id="menu_ts_fs_reporting_root" sequence="1" groups="account.group_account_user" /> -->
+		
+		<menuitem name="Comparative Reports" id="menu_ts_fs_config_head" parent="account.menu_finance_configuration" sequence="4" groups="account.group_account_user" />
+
+        <menuitem id="menu_ts_financial_reports_tree"
+                  name="Financial Report Format" parent="menu_ts_fs_config_head"
+                  action="action_ts_financial_report_tree" />
+                  
+        <menuitem id="menu_ts_financial_reports_line"
+                  name="Report Values" parent="menu_ts_fs_config_head"
+                  action="action_ts_financial_report_line" />
+                  
+        <!-- Wizard Menus-->
+		
+		<menuitem name="Comparaitve Reports" id="menu_tsfs_reporting_head" parent="account.menu_finance_reports" sequence="5" groups="account.group_account_user" />
+        
+        <menuitem id="account_report_profit_loss" sequence="1" action="action_ts_profit_and_loss_report"
+                  name="Comparaitve Reports" parent="menu_tsfs_reporting_head" groups="account.group_account_user"/>
+
+        <!-- <menuitem id="account_report_balance_sheet" sequence="2" action="action_ts_balance_sheet_report"
+                  name="Balance Sheet" parent="menu_tsfs_reporting_head" groups="account.group_account_user"/> -->
+
+
+        
+    </data>
+</odoo>

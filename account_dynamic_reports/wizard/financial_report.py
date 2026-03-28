@@ -42,11 +42,35 @@ class InsFinancialReport(models.TransientModel):
     _name = "ins.financial.report"
     _description = "Financial Reports"
 
-    @api.onchange('company_id')
+    def _get_report_company(self):
+        self.ensure_one()
+        return self.company_id or self.env.company
+
+    def _get_report_companies(self):
+        self.ensure_one()
+        return self.company_ids or self.company_id or self.env.company
+
+    def _get_report_company_ids(self):
+        self.ensure_one()
+        return self._get_report_companies().ids or [self.env.company.id]
+
+    def _get_company_display_name(self):
+        self.ensure_one()
+        return ', '.join(self._get_report_companies().mapped('name'))
+
+    def _get_available_companies(self):
+        return self.env.user.company_ids
+
+    @api.onchange('company_id', 'company_ids')
     def _onchange_company_id(self):
-        if self.company_id:
+        companies = self.company_ids or self.company_id
+        if self.company_ids:
+            self.company_id = self.company_ids[0]
+        elif self.company_id:
+            self.company_ids = [(6, 0, [self.company_id.id])]
+        if companies:
             self.journal_ids = self.env['account.journal'].search(
-                [('company_id', '=', self.company_id.id)])
+                [('company_id', 'in', companies.ids)])
         else:
             self.journal_ids = self.env['account.journal'].search([])
 
@@ -270,7 +294,7 @@ class InsFinancialReport(models.TransientModel):
                 else:
                     accounts = report.account_ids
                     if report == self.env.ref('account_dynamic_reports.ins_account_financial_report_cash_flow0'):
-                        accounts = self.env['account.account'].search([('company_id','=', self.env.company.id),
+                        accounts = self.env['account.account'].search([('company_id', 'in', self._get_report_company_ids()),
                                                                        ('cash_flow_category', 'not in', [0])])
                     res[report.id]['account'] = self._compute_account_balance(accounts, report)
                     for values in res[report.id]['account'].values():
@@ -307,7 +331,7 @@ class InsFinancialReport(models.TransientModel):
                         report_acc[account_id]['comp_bal'] = val['balance']
 
         for report in child_reports:
-            company_id = self.env.company
+            company_id = self._get_report_company()
             currency_id = company_id.currency_id
             vals = {
                 'name': report.name,
@@ -321,7 +345,7 @@ class InsFinancialReport(models.TransientModel):
                 'position': currency_id.position,
                 'list_len': [a for a in range(0,report.level)],
                 'level': report.level,
-                'company_currency_id': self.env.company.currency_id.id,
+                'company_currency_id': currency_id.id,
                 'account_type': report.type or False, #used to underline the financial report balances
                 'fin_report_type': report.type,
                 'display_detail': report.display_detail
@@ -355,7 +379,7 @@ class InsFinancialReport(models.TransientModel):
                         'position': currency_id.position,
                         'list_len':[a for a in range(0,report.display_detail == 'detail_with_hierarchy' and 4)],
                         'level': 4,
-                        'company_currency_id': self.env.company.currency_id.id,
+                        'company_currency_id': currency_id.id,
                         'account_type': account.internal_type,
                         'fin_report_type': report.type,
                         'display_detail': report.display_detail
@@ -381,12 +405,15 @@ class InsFinancialReport(models.TransientModel):
 
         self.onchange_date_range()
 
-        company_domain = [('company_id', '=', self.env.company.id)]
+        company = self._get_report_company()
+        company_ids = self._get_report_company_ids()
+        company_domain = [('company_id', 'in', company_ids)]
 
         journal_ids = self.env['account.journal'].search(company_domain)
         analytics = self.env['account.analytic.account'].search(company_domain)
         analytic_tags = self.env['account.analytic.tag'].sudo().search(
-            ['|', ('company_id', '=', self.env.company.id), ('company_id', '=', False)])
+            ['|', ('company_id', 'in', company_ids), ('company_id', '=', False)])
+        companies = self._get_available_companies()
 
         data = dict()
         data['ids'] = self.env.context.get('active_ids', [])
@@ -395,10 +422,15 @@ class InsFinancialReport(models.TransientModel):
             ['date_from', 'enable_filter', 'debit_credit', 'date_to', 'date_range',
              'account_report_id', 'target_move', 'view_format', 'journal_ids',
              'analytic_ids', 'analytic_tag_ids', 'strict_range',
-             'company_id','enable_filter','date_from_cmp','date_to_cmp','label_filter','filter_cmp'])[0]
+             'company_id', 'company_ids', 'enable_filter', 'date_from_cmp', 'date_to_cmp', 'label_filter', 'filter_cmp'])[0]
         data['form'].update({'journals_list': [(j.id, j.name) for j in journal_ids]})
         data['form'].update({'analytics_list': [(j.id, j.name) for j in analytics]})
         data['form'].update({'analytic_tag_list': [(j.id, j.name) for j in analytic_tags]})
+        data['form'].update({'companies_list': [(c.id, c.name) for c in companies]})
+        data['form'].update({'company_name': self._get_company_display_name()})
+        data['form'].update({'company_ids': company_ids})
+        data['form'].update({'selected_analytics': self.analytic_ids.mapped('name')})
+        data['form'].update({'selected_analytic_tags': self.analytic_tag_ids.mapped('name')})
 
         if self.enable_filter:
             data['form']['debit_credit'] = False
@@ -409,7 +441,9 @@ class InsFinancialReport(models.TransientModel):
         used_context['date_to'] = self.date_to or False
 
         used_context['strict_range'] = True
-        used_context['company_id'] = self.env.company.id
+        used_context['company_id'] = company.id
+        used_context['allowed_company_ids'] = company_ids
+        used_context['company_ids'] = company_ids
 
         used_context['journal_ids'] = self.journal_ids.ids
         used_context['analytic_account_ids'] = self.analytic_ids
@@ -419,7 +453,9 @@ class InsFinancialReport(models.TransientModel):
 
         comparison_context = {}
         comparison_context['strict_range'] = True
-        comparison_context['company_id'] = self.env.company.id
+        comparison_context['company_id'] = company.id
+        comparison_context['allowed_company_ids'] = company_ids
+        comparison_context['company_ids'] = company_ids
 
         comparison_context['journal_ids'] = self.journal_ids.ids
         comparison_context['analytic_account_ids'] = self.analytic_ids
@@ -434,7 +470,7 @@ class InsFinancialReport(models.TransientModel):
         data['form']['comparison_context'] = comparison_context
 
         report_lines, initial_balance, current_balance, ending_balance = self.get_account_lines(data.get('form'))
-        data['currency'] = self.env.company.currency_id.id
+        data['currency'] = company.currency_id.id
         data['report_lines'] = report_lines
         data['initial_balance'] = initial_balance or 0.0
         data['current_balance'] = current_balance or 0.0
@@ -495,6 +531,7 @@ class InsFinancialReport(models.TransientModel):
         default='vertical',
         string="Format")
     company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
+    company_ids = fields.Many2many('res.company', string='Companies', default=lambda self: self.env.company)
     strict_range = fields.Boolean(
         string='Strict Range',
         default=lambda self: self.env.company.strict_range)
@@ -558,6 +595,15 @@ class InsFinancialReport(models.TransientModel):
             vals.update({'analytic_tag_ids': vals.get('analytic_tag_ids')})
         if vals.get('analytic_tag_ids') == []:
             vals.update({'analytic_tag_ids': [(5,)]})
+
+        if vals.get('company_ids'):
+            company_ids = vals.get('company_ids')
+            if isinstance(company_ids, list) and company_ids and isinstance(company_ids[0], int):
+                vals.update({'company_ids': [(6, 0, company_ids)], 'company_id': company_ids[0]})
+        if vals.get('company_ids') == []:
+            vals.update({'company_ids': [(5,)]})
+        if vals.get('company_id') and not vals.get('company_ids'):
+            vals.update({'company_ids': [(6, 0, [vals.get('company_id')])]})
 
         ret = super(InsFinancialReport, self).write(vals)
         return ret

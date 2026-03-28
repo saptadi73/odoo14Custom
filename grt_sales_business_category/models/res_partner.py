@@ -8,6 +8,10 @@ class ResPartner(models.Model):
         ("customer_qr_ref_unique", "unique(customer_qr_ref)", "Customer QR Reference must be unique."),
     ]
 
+    customer_id_display = fields.Integer(
+        string="Customer ID",
+        compute="_compute_customer_id_display",
+    )
     customer_qr_ref = fields.Char(
         string="Customer QR Ref",
         copy=False,
@@ -57,7 +61,13 @@ class ResPartner(models.Model):
         result = super().write(vals)
         if not self.env.context.get("skip_customer_qr_ref_ensure"):
             self._ensure_customer_qr_ref()
-        if "customer_behavior_analysis_ids" in vals or "behavior_business_category_id" not in vals:
+        if (
+            "customer_behavior_analysis_ids" in vals
+            or (
+                "behavior_business_category_id" not in vals
+                and not self.env.context.get("skip_behavior_business_category_ensure")
+            )
+        ):
             self._ensure_behavior_business_category()
         return result
 
@@ -87,7 +97,7 @@ class ResPartner(models.Model):
 
     def _get_behavior_reference_analysis(self):
         self.ensure_one()
-        analyses = self.customer_behavior_analysis_ids
+        analyses = self.sudo().customer_behavior_analysis_ids
         if self.behavior_business_category_id:
             analyses = analyses.filtered(
                 lambda rec: rec.business_category_id == self.behavior_business_category_id
@@ -110,8 +120,13 @@ class ResPartner(models.Model):
             partner.days_since_last_order = analysis.days_since_last_purchase if analysis else 0
 
     def _ensure_behavior_business_category(self):
-        for partner in self.filtered(lambda p: not p.behavior_business_category_id and p.customer_behavior_analysis_ids):
-            latest = partner.customer_behavior_analysis_ids.sorted(
+        for partner in self:
+            if partner.behavior_business_category_id:
+                continue
+            analyses = partner.sudo().customer_behavior_analysis_ids
+            if not analyses:
+                continue
+            latest = analyses.sorted(
                 key=lambda rec: (
                     rec.analysis_date or fields.Date.from_string("1900-01-01"),
                     rec.id,
@@ -119,7 +134,9 @@ class ResPartner(models.Model):
                 reverse=True,
             )[:1]
             if latest:
-                partner.behavior_business_category_id = latest.business_category_id
+                partner.with_context(skip_behavior_business_category_ensure=True).behavior_business_category_id = (
+                    latest.business_category_id
+                )
 
     def action_recompute_customer_behavior(self):
         self._ensure_behavior_business_category()
@@ -136,3 +153,7 @@ class ResPartner(models.Model):
                 "default_config_id": config.id,
             },
         }
+
+    def _compute_customer_id_display(self):
+        for partner in self:
+            partner.customer_id_display = partner.id

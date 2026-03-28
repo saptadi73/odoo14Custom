@@ -278,6 +278,28 @@ class SalesBusinessCategoryApiController(http.Controller):
             _logger.exception("Failed to fetch customer QR payload by id")
             return self._error(str(exc))
 
+    @http.route("/api/sales/customer-qr-payload-by-ref", type="json", auth="user", methods=["POST"], csrf=False)
+    def get_customer_qr_payload_by_ref(self, **kwargs):
+        try:
+            payload = self._get_json_payload()
+            partner = self._get_partner_by_qr_ref(payload.get("customer_qr_ref"))
+            qr_payload = self._build_customer_qr_payload(partner)
+            qr_content, qr_format = self._build_qr_content(qr_payload, payload.get("format"))
+            return self._success(
+                {
+                    "partner_id": partner.id,
+                    "customer_id": partner.id,
+                    "name": partner.name,
+                    "customer_qr_ref": partner.customer_qr_ref,
+                    "format": qr_format,
+                    "qr_content": qr_content,
+                    "qr_payload": qr_payload,
+                }
+            )
+        except Exception as exc:
+            _logger.exception("Failed to fetch customer QR payload by ref")
+            return self._error(str(exc))
+
     @http.route("/api/sales/customer-detail-by-qr", type="json", auth="user", methods=["POST"], csrf=False)
     def get_customer_detail_by_qr(self, **kwargs):
         try:

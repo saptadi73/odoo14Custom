@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<record id="paperformat_simulasi_landscape" model="report.paperformat">
+		<field name="name">PF Simulasi Landscape</field>
+		<field name="default" eval="True"/>
+		<field name="format">A4</field>
+		<field name="page_height">0</field>
+		<field name="page_width">0</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">40</field>
+		<field name="margin_bottom">15</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">30</field>
+		<field name="dpi">90</field>
+	</record>
+
+
+        <report 
+            id="action_report_simulasi_angsuran" 
+            model="simpin_syariah.pembiayaan" 
+            string="Simulasi Pembiayaan"
+            report_type="qweb-pdf"
+            name="simpin_syariah.report_simulasi_angsuran" 
+            file="simpin_syariah.report_simulasi_angsuran"
+            print_report_name="'Simulasi Pembiayaan Syariah %s' % object.name"
+	    paperformat="paperformat_simulasi_landscape"
+        />
+
+
+<template id="report_simulasi_angsuran">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2><strong>Simulasi <span t-field="o.product_id.name"/></strong></h2>
+
+		    <br></br>
+			<h3><strong>TABEL ANGSURAN FASILITAS PINJAMAN KOPERASI</strong></h3>
+		    <br></br>
+
+                    <!-- get_data_simulasi QUERY -->
+		    <t t-set = "data_simulasi" t-value = "o.get_data_simulasi()" />
+                    <!-- Display each lines -->
+	
+
+                    <table class="table table-condensed table-bordered">
+	                        	<tr>
+					    <td rowspan="3" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>No</span></strong>
+		                            </td>
+					    <td rowspan="3" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Pinjaman</span></strong>
+		                            </td>
+					    <td colspan="10" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Jangka Waktu Pinjaman</span></strong>
+		                            </td>
+	                        	</tr>
+		                        <tr>
+					    <td colspan="2" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>1 Tahun</span></strong>
+		                            </td>
+					    <td colspan="2" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>2 Tahun</span></strong>
+		                            </td>
+					    <td colspan="2" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>3 Tahun</span></strong>
+		                            </td>
+					    <td colspan="2" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>4 Tahun</span></strong>
+		                            </td>
+					    <td colspan="2" style="text-align:center;vertical-align:middle;">
+			                            <strong><span>5 Tahun</span></strong>
+		                            </td>
+	                        	</tr>
+		                        <tr>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Harga Jual</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Angsuran</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Harga Jual</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Angsuran</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Harga Jual</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Angsuran</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Harga Jual</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Angsuran</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Harga Jual</span></strong>
+		                            </td>
+					    <td style="text-align:center;vertical-align:middle;">
+			                            <strong><span>Angsuran</span></strong>
+		                            </td>
+	                        	</tr>
+	                    <t t-foreach="data_simulasi" t-as="line">
+				<t t-if="line['0']!=0">
+	                        <tr>
+					    <td style="text-align:center;">
+						<t t-if="line['0']!=0">
+			                            <t t-esc="line['0']" />
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['1']!=0">
+			                            <t t-esc="line['1']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['2']!=0">
+			                            <t t-esc="line['2']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['3']!=0">
+			                            <t t-esc="line['3']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['4']!=0">
+			                            <t t-esc="line['4']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['5']!=0">
+			                            <t t-esc="line['5']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['6']!=0">
+			                            <t t-esc="line['6']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['7']!=0">
+			                            <t t-esc="line['7']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['8']!=0">
+			                            <t t-esc="line['8']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['9']!=0">
+			                            <t t-esc="line['9']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['10']!=0">
+			                            <t t-esc="line['10']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+					    <td style="text-align:right;">
+						<t t-if="line['11']!=0">
+			                            <t t-esc="line['11']"  t-options = "{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+						</t>
+		                            </td>
+	                        </tr>
+	                        </t>
+	                    </t>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_shipping_dashboard" model="ir.actions.client">
+        <field name="name">Shipment Dashboard</field>
+        <field name="tag">shipment_dashboard</field>
+    </record>
+    <template id="asset_transport_management" name="Transport Management" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link href="/transport_management/static/src/css/lib/style.css" rel="stylesheet"/>
+            <link href="/transport_management/static/src/css/style.scss" rel="stylesheet" type="text/scss" />
+            <script type="text/javascript" src="/transport_management/static/src/js/shipment.js"/>
+        </xpath>
+    </template>
+</odoo>

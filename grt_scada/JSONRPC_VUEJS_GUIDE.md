@@ -11,30 +11,32 @@ Odoo 14 SCADA Module - JSON-RPC Endpoints
 
 ## Method 1: Using Session ID (Recommended for Vue/Browser)
 
+Production note:
+- Jika frontend dan Odoo beda domain, pakai `/api/scada/authenticate`.
+- Jangan mengandalkan `/web/session/authenticate` langsung dari browser production kecuali ada reverse proxy.
+- Tetap gunakan `credentials: 'include'`.
+
 ```javascript
 // 1. Login dan dapatkan token
 async function login(username, password) {
-  const response = await fetch('http://localhost:8069/web/session/authenticate', {
+  const response = await fetch('http://localhost:8069/api/scada/authenticate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify({
-      jsonrpc: '2.0',
-      method: 'call',
-      params: {
-        db: 'your_database',
-        login: username,
-        password: password
-      }
+      db: 'your_database',
+      login: username,
+      password: password
     })
   });
   
   const data = await response.json();
-  if (data.error) {
-    throw new Error(data.error.data.message);
+  if (data.status === 'error' || data.error) {
+    throw new Error(data.message || data.error?.data?.message || 'Authentication failed');
   }
   
   // Session ID sudah disimpan di cookies otomatis
-  return data.result;
+  return data;
 }
 
 // 2. Use session untuk API calls (cookies akan otomatis dikirim)
@@ -107,6 +109,7 @@ export function useScadaApi() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token.value}`,
       },
+      credentials: 'include',
     };
 
     if (body) {

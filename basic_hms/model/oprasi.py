@@ -1,0 +1,30 @@
+from odoo import api, fields, models
+
+class oprasi(models.Model):
+	_name = "oprasi"
+
+	operator_id = fields.Many2one('res.partner', string="Operator")
+	asisten_id = fields.Many2one('res.partner', string="Asisten")
+	instrumentator = fields.Char('Insstrumentator')
+	sirkuler = fields.Char('Sirkuler')
+	doc_anestesi = fields.Many2one('medical.physician', string="Dokter Anestesi")
+	jenis_anestesi = fields.Char('Jenis Anestesi')
+	tindakan = fields.Char('Nama Tindakan Operasi')
+	diagnosa_pre_oprs = fields.Char('Diagnosa Pre Operasi')
+	mcm_pembedahan = fields.Char('Macam - Macam Pembedahan')
+	bsr_khusus_2 = fields.Boolean('Besar Khusus II')
+	bsr_khusus_1 = fields.Boolean('Besar Khusus I')
+	khusus = fields.Boolean('Khusus')
+	besar = fields.Boolean('Besar')
+	sedang = fields.Boolean('Sedang')
+	kecil = fields.Boolean('Kecil')
+	elctv = fields.Boolean('Elective')
+	emrgncy = fields.Boolean('Emergency')
+	diagnosa_post_oprs = fields.Char('Diagnosa Post Operasi')
+	jar_diexcisi = fields.Char('Jaringan Diexcisi')
+	ya = fields.Boolean('Ya')
+	tdk = fields.Boolean('Tidak')
+	tgl_oprasi = fields.Datetime('Tanggal Operasi')
+	tgl_selesai = fields.Datetime('Tanggal Selesai')
+	lama_operasi = fields.Char('Lama Operasi')
+	lap_operasi = fields.Text('Laporan Operasi')

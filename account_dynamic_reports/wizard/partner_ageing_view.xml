@@ -8,6 +8,7 @@
                 <form>
                     <group col="4">
                         <field name="as_on_date"/>
+                        <field name="company_ids" widget="many2many_tags" groups="base.group_multi_company"/>
                         <field name="company_id" invisible="1"/>
                         <field name="type"/>
                         <field name="partner_type"/>
@@ -16,7 +17,7 @@
                     <group col="2">
                         <field name="partner_ids" widget="many2many_tags"
                                domain="[('parent_id','=', False),
-                                    '|',('company_id','=',company_id), ('company_id','=',False)]"
+                                    '|',('company_id','in',company_ids), ('company_id','=',False)]"
                                 options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
                         <field name="partner_category_ids" widget="many2many_tags"
                                 options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>

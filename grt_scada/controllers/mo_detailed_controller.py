@@ -2,8 +2,10 @@
 from odoo import http
 from odoo.http import request
 import logging
+import os
 
 _logger = logging.getLogger(__name__)
+SCADA_CORS_ORIGIN = os.getenv('SCADA_CORS_ORIGIN', 'https://scada.kanjabung.com')
 
 class ScadaMODetailedController(http.Controller):
 
@@ -28,7 +30,7 @@ class ScadaMODetailedController(http.Controller):
             'last_connected': equipment.last_connected.isoformat() if equipment.last_connected else None,
         }
 
-    @http.route('/api/scada/mo-list-detailed', type='json', auth='user', methods=['POST'])
+    @http.route('/api/scada/mo-list-detailed', type='json', auth='user', methods=['POST'], cors=SCADA_CORS_ORIGIN)
     def get_mo_list_detailed(self, **kwargs):
         """Get detailed list of MOs with components, consumption, and equipment info (JSON-RPC)."""
         try:

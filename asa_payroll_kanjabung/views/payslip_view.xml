@@ -1,0 +1,149 @@
+<odoo>
+  <data>
+
+
+      <record id="view_hr_payslip_form_kanjabung" model="ir.ui.view">
+      <field name="name">Payroll Potongan Susu</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="/form/sheet/div[@name='button_box']" position="after">
+                  <group>
+                      <group>
+                          <field name="periode_id"/>
+                      </group>
+                      <group>
+                      </group>
+                  </group>
+              </xpath>
+          </field>
+      </record>
+
+
+    <record id="view_hr_payslip_form_kanjabung" model="ir.ui.view">
+      <field name="name">Payroll Potongan Susu</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="/form/sheet/div/button[1]" position="after">
+            <button type="object" name="get_payment" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('payment_count', '=', 0)]}">
+                <field name="payment_count" widget="statinfo" string="Payment"/>
+            </button>
+        </xpath>
+        <xpath expr="/form/sheet/div[@name='button_box']" position="after">
+          <group>
+          <group>
+            <field name="periode_id"/>
+          </group>
+          <group>
+          </group>
+        </group>
+        </xpath>
+        <button name="compute_sheet" position="after">        
+             <button name="process_payment" string="Payment Invoice" class="oe_highlight" type="object" attrs="{'invisible': [('payment_count', '!=', 0)]}"/>            
+        </button>
+
+        <field name="credit_note" position="after"> 
+             <field name="liter_id" invisible='1'/>
+        </field>
+        <field name="input_line_ids" position="before"> 
+             <button type="object" name="get_amount_input" string='Get Amount Tagihan' class="oe_highlight"/>
+        </field>
+       <xpath expr="/form/sheet/notebook/page[1]/separator[1]" position="before">
+        <button type="object" name="compute_setoran" string='Recompute Setoran' class="oe_highlight"/>
+        <group string="Setoran Input">
+	        <group> 
+    	          <field name="setor_pagi"/>
+    	          <field name="setor_sore"/>
+                <field name="tot_setoran"/>
+                <field name="harga_kual"/>
+                <field name="harga_satuan"/>
+                <field name="total_harga_estimasi"/>
+	         </group>
+	         <group>
+    	         <field name="insen_prod"/>
+                <field name="insen_pmk"/>
+                <field name="insen_daya_saing"/>
+                <field name="fat_id"/>
+                <field name="grade_id"/>
+                <field name="tot_tagihan"/>
+	       </group>
+       </group>
+          <group string="List Tagihan"> 
+              <group>
+                  <button type="object" name="load_payment_lines" string='Load Tagihan' class="oe_highlight"/>
+              </group>
+          </group>
+            <field name="inv_pay_ids" nolabel="1">
+                <tree editable="bottom">
+                     <field name="company_id"/>
+                     <field name="tipe_inv_id"/>
+                     <field name="code"/>
+                     <field name="payment_method_id" domain="[('company_id', '=', company_id)]"/>
+                     <field name="invoice_id"/>
+                     <field name="date" />
+                     <field name="due_date" />
+                     <field name="original_amount" sum="Amount"/>
+                     <field name="balance_amount" sum="Balance"/>
+                     <field name="allocation" sum="Allocation"/>
+                     <field name="diff_amt" sum="Different"/>
+                </tree>
+              </field> 
+              <group>
+                  <field name="allocation_amount" string="Total Allocation"/>
+                  <!-- <field name="payment_method_id" /> -->
+              </group>
+       </xpath>
+      </field>
+    </record>
+
+     <record id="view_employee_sapi" model="ir.ui.view">
+      <field name="name">Employee Inherite Sapi</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form"/>
+      <field name="arch" type="xml">
+        <field name="user_id" position="after"> 
+             <field name="peternak_id"/>
+        </field>
+      </field>
+      
+    </record>
+
+      <record id="tipe_invoice_view_form" model="ir.ui.view">
+          <field name="name">master.invoice.tipe.form</field>
+          <field name="model">master.tipe.invoice</field>
+          <field name="arch" type="xml">
+              <form string="Invoice Type">
+                  <group col="4">
+                      <field colspan="4" name="code"/>
+                      <field colspan="4" name="name"/>
+                  </group>
+              </form>
+          </field>
+      </record>
+
+      <record id="tipe_invoice_view_tree" model="ir.ui.view">
+          <field name="name">master.invoice.tipe.tree</field>
+          <field name="model">master.tipe.invoice</field>
+          <field name="arch" type="xml">
+              <tree string="Invoice Type">
+                  <field colspan="4" name="code"/>
+                  <field colspan="4" name="name"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="action_invoice_tipe" model="ir.actions.act_window">
+          <field name="name">Invoice Tipe</field>
+          <field name="res_model">master.tipe.invoice</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+      <menuitem
+          id="menu_invoice_tipe"
+          action="action_invoice_tipe"
+          parent="account.account_invoicing_menu"
+          sequence="3"/>
+  
+  </data>
+</odoo>

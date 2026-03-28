@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="form_master_kuman_sampel_kuartir_view" model="ir.ui.view">
+            <field name="name">form.master.kuman.sampel.kuartir.view</field>
+            <field name="model">master.kuman.sampel.kuartir</field>
+            <field name="arch" type="xml">
+                <form string="Form Master Kuman Sampel Kuartir">
+                    <sheet>
+                        <group>
+                            <field name="kode"/>
+                            <field name="nama_kuman_sampel_kuartir"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="master_kuman_sampel_kuartir_search_view" model="ir.ui.view">
+            <field name="name">master.kuman.sampel.kuartir.search.view</field>
+            <field name="model">master.kuman.sampel.kuartir</field>
+            <field name="arch" type="xml">
+                <search string="Search Master Kuman Sampel Kuartir">
+                    <separator orientation="vertical" />
+                    <field name="nama_kuman_sampel_kuartir" select="1" />
+                    <newline />
+                    <group expand="1" string="Group By">
+                        <filter string="Kuman Sampel Kuartir" name='by_nama_kuman_sampel_kuartir' context="{'group_by':'nama_kuman_sampel_kuartir'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="master_kuman_sampel_kuartir_tree_view" model="ir.ui.view">
+            <field name="name">master.kuman.sampel.kuartir.tree.view</field>
+            <field name="model">master.kuman.sampel.kuartir</field>
+            <field name="arch" type="xml">
+                <tree string="Form Master Kuman Sampel Kuartir">
+                    <field name="kode"/>
+                    <field name="nama_kuman_sampel_kuartir"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_master_kuman_sampel_kuartir" model="ir.actions.act_window">
+            <field name="name">Master Kuman Sampel Kuartir</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">master.kuman.sampel.kuartir</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <menuitem id="mster_data" name='Master Data'
+            parent="main_menu_configartion" sequence="11" />
+        <menuitem id="menu_master_kuman_sampel_kuartir" parent="mster_data"
+            action="action_master_kuman_sampel_kuartir" sequence="24" />
+
+</odoo>
