@@ -35,7 +35,7 @@
     
 """,
 
-    "depends": ["mail", "sale_management", "stock", 'peternak_sapi', 'master_sapi',],
+    "depends": ["mail", "sale_management", "stock", 'peternak_sapi', 'master_sapi', 'liter_sapi'],
     "data": [
         'security/hospital_groups.xml',
         'security/ir.model.access.csv',
