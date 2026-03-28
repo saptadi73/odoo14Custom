@@ -1,4 +1,6 @@
-.vscode/*
+.vscode/
+odoo.conf
+log/odoo.log
 *.log
 *.tmp
 __pycache__/
