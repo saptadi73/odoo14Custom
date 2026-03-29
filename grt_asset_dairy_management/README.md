@@ -58,15 +58,30 @@ Modul menyediakan alur medis dua tahap:
 Setiap transaksi treatment menghasilkan:
 - `stock.move` dari tas ke lokasi konsumsi medis untuk produk stok/consumable
 - jurnal otomatis sesuai status sapi
+- validasi stok tas agar tidak minus
 
-### 7. Asset produksi dan penyusutan
+### 7. Saldo dan mutasi stok tas petugas
+Modul menyediakan report:
+- `Saldo Stok Tas`
+- `Mutasi Stok Tas`
+
+Keduanya membaca data stok aktual dan histori `stock.move` yang terjadi pada lokasi tas petugas.
+
+### 8. Reversal otomatis transaksi medis
+Jika transaksi medis yang sudah `posted` dibatalkan:
+- distribusi stok medis akan membuat `reverse stock move`
+- treatment akan membuat `reverse stock move` dan `reverse journal`
+
+Pendekatan ini menjaga traceability tanpa menghapus transaksi yang sudah diposting.
+
+### 9. Asset produksi dan penyusutan
 Saat sapi mulai produksi atau dicatat melahirkan:
 - sistem membuat asset penyusutan otomatis
 - nilai asset dibentuk dari nilai perolehan ditambah kapitalisasi biaya pra-produksi
 - sistem membuat jurnal reklasifikasi dari akun asset biologis belum produksi ke akun asset pada kategori asset
 - penyusutan periodik dijalankan melalui engine asset Odoo
 
-### 8. Valuasi pasar dan CHKPN
+### 10. Valuasi pasar dan CHKPN
 Modul mendukung:
 - referensi BCS
 - harga daging per kg
@@ -83,6 +98,8 @@ Menu utama modul berada pada:
 - `Dairy Asset Management / Kandang`
 - `Dairy Asset Management / Pemberian Pakan`
 - `Dairy Asset Management / Distribusi Stok Medis`
+- `Dairy Asset Management / Saldo Stok Tas`
+- `Dairy Asset Management / Mutasi Stok Tas`
 - `Dairy Asset Management / Vitamin dan Inseminasi`
 - `Dairy Asset Management / Referensi Pakan`
 - `Dairy Asset Management / Referensi BCS`
@@ -131,146 +148,78 @@ Sebelum modul digunakan, buka menu pengaturan dan isi field berikut.
 - Rasio Konsentrat fallback
 - Rasio Rumput fallback
 
-## Master Referensi Pakan
-Referensi pakan disimpan pada model `dairy.feed.reference` dan memuat parameter berikut:
-- umur minimum dan maksimum
-- berat minimum dan maksimum
-- kebutuhan konsentrat per hari
-- kebutuhan rumput per hari
-
-Data awal modul sudah diisi dari file Excel acuan. Jika perusahaan memiliki formula tambahan untuk sapi dewasa, data dapat ditambah langsung dari menu `Referensi Pakan`.
-
-## Master Referensi BCS
-Referensi BCS disimpan pada model `dairy.bcs.reference` dan memuat:
-- nilai BCS
-- bobot rata-rata pasar
-- referensi harga historis dari sheet acuan
-
-Nilai pasar sapi dihitung dari:
-- `bobot rata-rata BCS x harga daging per kg saat ini`
-
 ## Alur Operasional
 ### 1. Input sapi baru
-Saat input sapi baru, isi minimal:
-- identitas sapi
-- tanggal lahir atau tanggal penerimaan
-- kandang
-- nilai perolehan
-- nilai afkir
-- lama penyusutan
-- berat awal
-
-Sistem akan otomatis menghasilkan:
-- kode asset sapi
-- status awal
-- kebutuhan pakan berdasarkan referensi jika data umur dan bobot tersedia
+Isi minimal identitas sapi, kandang, nilai perolehan, nilai afkir, lama penyusutan, dan berat awal. Sistem akan membuat kode asset, status awal, dan kebutuhan pakan default bila referensi tersedia.
 
 ### 2. Update berat badan
-Berat badan periodik dapat diinput dari tab `Berat Badan Periodik`. Berat terbaru akan menjadi dasar:
-- kebutuhan pakan
-- monitoring kondisi sapi
+Input dari tab `Berat Badan Periodik`. Berat terbaru menjadi dasar kebutuhan pakan.
 
 ### 3. Set status bunting
-Gunakan tombol `Set Bunting` pada form sapi untuk mengubah status ke bunting dan menyimpan history.
+Gunakan tombol `Set Bunting` pada form sapi.
 
 ### 4. Catat melahirkan
-Gunakan tombol `Catat Melahirkan` atau isi tab riwayat melahirkan. Saat itu sistem akan:
-- mengubah lifecycle sapi ke `production`
-- menyimpan tanggal mulai produksi
-- membuat asset penyusutan otomatis jika belum ada
-- menghitung nilai asset berdasarkan nilai perolehan ditambah kapitalisasi biaya pra-produksi
-- membuat jurnal reklasifikasi ke asset produksi
+Gunakan tombol `Catat Melahirkan` atau riwayat melahirkan. Sistem akan mengubah sapi menjadi `Produksi`, membuat asset penyusutan, dan menghitung nilai asset produksi.
 
-### 5. Sinkron asset
-Jika ada data lama yang sudah produksi sebelum fitur kapitalisasi aktif, gunakan tombol `Sinkron Asset` pada form sapi untuk memaksa sinkronisasi nilai asset dan jurnal reklasifikasinya.
+### 5. Distribusi stok medis ke tas petugas
+Gunakan menu `Distribusi Stok Medis` untuk memindahkan stok dari gudang medis ke tas petugas. Jika lokasi tas belum ada, gunakan tombol `Buat Lokasi Tas`.
 
-### 6. Distribusi stok medis ke tas petugas
-Gunakan menu `Distribusi Stok Medis` untuk memindahkan stok vitamin atau inseminasi dari gudang medis ke tas petugas.
+### 6. Pemberian vitamin atau inseminasi ke sapi
+Gunakan menu `Vitamin dan Inseminasi`. Sistem akan memeriksa stok tas, menolak jika stok kurang, lalu mengeluarkan stok dari tas ke lokasi konsumsi medis dan membuat jurnal sesuai status sapi.
 
-Langkah ringkas:
-1. Isi petugas.
-2. Pilih lokasi gudang medis.
-3. Pilih lokasi tas petugas.
-4. Isi produk dan qty.
-5. Post.
+### 7. Monitoring saldo dan mutasi tas
+Gunakan menu `Saldo Stok Tas` untuk melihat saldo saat ini per tas dan produk, serta `Mutasi Stok Tas` untuk histori masuk/keluar stok tiap petugas.
 
-Jika lokasi tas belum ada, gunakan tombol `Buat Lokasi Tas` di form distribusi untuk membuat lokasi internal baru secara otomatis.
-
-### 7. Pemberian vitamin atau inseminasi ke sapi
-Gunakan menu `Vitamin dan Inseminasi`.
-
-Langkah ringkas:
-1. Isi petugas.
-2. Pilih lokasi tas petugas.
-3. Isi sapi, jenis tindakan, produk, dan qty dalam satuan produk seperti `ml` atau `cc`.
-4. Post.
-
-Saat posting, sistem akan:
-- memeriksa apakah stok di tas petugas cukup
-- menolak posting jika stok tas kurang
-- membuat `stock.move` dari tas ke lokasi konsumsi medis untuk produk stok
-- membuat jurnal ke asset atau expense sesuai status sapi
+### 8. Revaluasi CHKPN
+Jalankan wizard `Revaluasi CHKPN` untuk menghitung impairment berdasarkan nilai pasar vs nilai buku.
 
 ## Alur Jurnal Akuntansi
 ### A. Pemberian pakan sebelum melahirkan
-Saat sapi belum produksi, transaksi pakan akan menghasilkan:
 - stock move keluar untuk konsentrat dan rumput
 - jurnal:
   - debit `Akun Asset Biologis Belum Produksi`
   - credit `Akun Kredit Persediaan Pakan`
 
-Catatan guard akuntansi:
-- untuk mencegah double posting, modul menolak posting pakan jika produk konsentrat atau rumput memakai automated valuation (`real-time`)
-
 ### B. Pemberian pakan sesudah melahirkan
-Saat sapi sudah produksi, transaksi pakan akan menghasilkan:
 - stock move keluar untuk konsentrat dan rumput
 - jurnal:
   - debit `Akun Beban Pakan Produksi`
   - credit `Akun Kredit Persediaan Pakan`
 
 ### C. Distribusi stok medis ke tas petugas
-Saat distribusi stok medis dilakukan, sistem membuat:
 - stock move dari `Lokasi Gudang Medis` ke `Lokasi Tas Petugas`
 - tidak ada jurnal, karena perpindahan ini adalah transfer internal antar lokasi
 
 ### D. Vitamin atau inseminasi sebelum melahirkan
-Saat sapi belum produksi, transaksi treatment menghasilkan:
 - stock move dari `Lokasi Tas Petugas` ke `Lokasi Konsumsi Medis` untuk produk stok
 - jurnal:
   - debit `Akun Asset Biologis Belum Produksi`
   - credit `Akun Kredit Vitamin` atau `Akun Kredit Inseminasi`
 
 ### E. Vitamin atau inseminasi sesudah melahirkan
-Saat sapi sudah produksi, transaksi treatment menghasilkan:
 - stock move dari `Lokasi Tas Petugas` ke `Lokasi Konsumsi Medis` untuk produk stok
 - jurnal:
   - debit `Akun Beban Vitamin Produksi` atau `Akun Beban Inseminasi Produksi`
   - credit `Akun Kredit Vitamin` atau `Akun Kredit Inseminasi`
 
-Catatan guard akuntansi:
-- untuk produk stok/consumable, modul menolak posting treatment jika produk memakai automated valuation (`real-time`) agar tidak terjadi double posting
+### F. Reversal distribusi stok medis
+- membuat `reverse stock move` dari tas kembali ke gudang medis
+- transaksi asli tetap tersimpan sebagai jejak audit
 
-### F. Reklasifikasi saat mulai produksi
-Pada saat sapi mulai produksi, sistem menghitung total biaya pra-produksi yang sudah dikapitalisasi lalu membuat jurnal:
+### G. Reversal treatment
+- membuat `reverse stock move` dari lokasi konsumsi medis kembali ke tas petugas
+- membuat `reverse journal` dengan debit/kredit dibalik
+- transaksi asli tetap tersimpan sebagai jejak audit
+
+### H. Reklasifikasi saat mulai produksi
 - debit `Akun Asset pada Kategori Asset Sapi Produksi`
 - credit `Akun Asset Biologis Belum Produksi`
 
-Nilai yang direklas adalah total kapitalisasi dari pakan, vitamin, dan inseminasi yang telah diposting sebelum tanggal produksi.
-
-### G. Penyusutan asset sapi produksi
-Setelah asset produksi terbentuk, penyusutan dilakukan oleh engine `om_account_asset` dengan jurnal:
+### I. Penyusutan asset sapi produksi
 - debit `Akun Beban Penyusutan`
 - credit `Akun Akumulasi Penyusutan`
 
-### H. CHKPN
-Saat wizard revaluasi dijalankan, sistem membandingkan nilai buku dan nilai pasar.
-
-Catatan perilaku wizard:
-- revaluasi diproses per company sesuai `Company` yang dipilih di wizard
-- daftar sapi yang bisa dipilih dibatasi pada sapi aktif yang memiliki BCS dan berada pada company wizard
-- jika sapi belum punya asset produksi, nilai buku fallback memakai `Dasar Nilai Buku` (nilai perolehan + kapitalisasi pra-produksi)
-
+### J. CHKPN
 Jika CHKPN bertambah:
 - debit `Akun Beban CHKPN`
 - credit `Akun Cadangan CHKPN`
@@ -281,7 +230,6 @@ Jika CHKPN menurun atau dipulihkan:
 
 ## Rumus Penting
 ### Kebutuhan pakan
-Urutan logika:
 1. Cari referensi pakan berdasarkan umur bulan dan bobot hidup.
 2. Jika ditemukan, ambil nilai konsentrat dan rumput dari referensi.
 3. Jika tidak ditemukan, gunakan rasio fallback perusahaan.
@@ -294,3 +242,7 @@ Urutan logika:
 
 ### CHKPN
 `CHKPN = max(Nilai Buku - Nilai Pasar, 0)`
+
+## Versi
+Dokumen ini sesuai dengan versi modul:
+- `14.0.1.4.0`

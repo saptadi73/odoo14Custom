@@ -26,14 +26,6 @@ Root modul:
 - `master_sapi`
 - `kandang`
 
-## Security Model
-Modul memakai role berbasis group:
-- `Dairy Operator`: transaksi operasional harian dan baca laporan
-- `Dairy Supervisor`: pengelolaan master referensi dan wizard revaluasi
-- `Dairy Accounting`: pengelolaan histori harga/valuasi dan wizard revaluasi
-
-Group didefinisikan di `security/security.xml` dan ACL di `security/ir.model.access.csv`.
-
 ## Model dan Tanggung Jawab
 ### 1. `sapi` extension
 File: [dairy_cow.py](/c:/addon14/grt_asset_dairy_management/models/dairy_cow.py)
@@ -61,16 +53,20 @@ File: [dairy_medical_stock.py](/c:/addon14/grt_asset_dairy_management/models/dai
 Tanggung jawab:
 - distribusi stok medis dari gudang ke tas petugas
 - transfer internal stok tanpa jurnal
+- reversal otomatis saat transaksi posted di-cancel
 - penyiapan stok yang akan dipakai untuk treatment lapangan
 
-Model terkait:
-- `dairy.medical.stock.transfer`
-- `dairy.medical.stock.transfer.line`
+Field penting:
+- `stock_move_ids`
+- `reverse_stock_move_ids`
+- `bag_location_id`
+- `source_location_id`
 
 Method penting:
 - `action_open_bag_location_wizard`
 - `action_post`
-- `_prepare_stock_move_vals`
+- `_create_reverse_stock_moves`
+- `action_cancel`
 
 ### 4. `dairy.treatment.record`
 File: [dairy_treatment.py](/c:/addon14/grt_asset_dairy_management/models/dairy_treatment.py)
@@ -80,10 +76,15 @@ Tanggung jawab:
 - konsumsi stok dari tas petugas ke konsumsi medis
 - validasi stok tas petugas agar tidak minus
 - jurnal otomatis pra-produksi vs pasca-produksi
+- reversal otomatis stock move dan journal move saat cancel
 
-Model terkait:
-- `dairy.treatment.record`
-- `dairy.treatment.record.line`
+Field penting:
+- `journal_move_id`
+- `reverse_journal_move_id`
+- `stock_move_ids`
+- `reverse_stock_move_ids`
+- `bag_location_id`
+- `person_in_charge`
 
 Method penting:
 - `action_open_bag_location_wizard`
@@ -91,15 +92,33 @@ Method penting:
 - `_get_available_bag_qty`
 - `_validate_line_before_post`
 - `_create_stock_moves`
+- `_create_reverse_stock_moves`
+- `_create_reverse_journal_move`
+- `action_cancel`
 
-### 5. Wizard lokasi tas petugas
+### 5. Report saldo dan mutasi tas
+File: [dairy_medical_stock.py](/c:/addon14/grt_asset_dairy_management/models/dairy_medical_stock.py)
+
+Model report:
+- `dairy.bag.stock.report`
+- `dairy.bag.movement.report`
+
+Tanggung jawab:
+- menampilkan saldo stok aktual pada lokasi tas petugas
+- menampilkan mutasi masuk/keluar stok tas berdasarkan `stock.move`
+- membangun SQL view secara aman walau salah satu tabel sumber belum ada saat init registry
+
+Helper penting:
+- `dairy.bag.report.mixin._existing_bag_location_sources`
+
+### 6. Wizard lokasi tas petugas
 File: [dairy_bag_location_wizard.py](/c:/addon14/grt_asset_dairy_management/wizard/dairy_bag_location_wizard.py)
 
 Tanggung jawab:
 - membuat lokasi internal `Tas - <Petugas>`
 - menghubungkan lokasi itu langsung ke transaksi distribusi atau treatment yang sedang aktif
 
-### 6. `res.company` extension
+### 7. `res.company` extension
 File: [dairy_config.py](/c:/addon14/grt_asset_dairy_management/models/dairy_config.py)
 
 Tanggung jawab:
@@ -109,18 +128,14 @@ Konfigurasi penting tambahan untuk alur medis dua tahap:
 - `dairy_medical_source_location_id`
 - `dairy_medical_consumption_location_id`
 
-### 7. Wizard revaluasi CHKPN
+### 8. Wizard revaluasi CHKPN
 File: [dairy_revaluation_wizard.py](/c:/addon14/grt_asset_dairy_management/wizard/dairy_revaluation_wizard.py)
 
 Tanggung jawab:
 - revaluasi CHKPN per company
 - pembatasan sapi aktif yang punya BCS dan sesuai company wizard
 - pencatatan histori valuasi dan histori harga daging
-- pembuatan jurnal impairment/recovery bila opsi jurnal diaktifkan
-
-Catatan implementasi penting:
-- jika sapi sudah punya asset produksi aktif, nilai buku diambil dari `asset.value_residual`
-- jika sapi belum punya asset produksi aktif, nilai buku fallback ke `dairy_total_book_basis_value`
+- pembuatan jurnal impairment atau recovery bila opsi jurnal diaktifkan
 
 ## Alur Data Utama
 ### A. Distribusi stok medis ke tas petugas
@@ -137,12 +152,20 @@ Catatan implementasi penting:
 5. Jika stok cukup dan produk bertipe stok/consumable, sistem membuat `stock.move` dari tas ke lokasi konsumsi medis.
 6. Sistem membuat jurnal treatment sesuai status sapi.
 
-### C. Validasi stok tas
-Untuk produk stok atau consumable, qty treatment dibandingkan dengan total quant pada `bag_location_id` dan lokasi anaknya.
+### C. Reversal distribusi medis
+1. User cancel transaksi distribusi yang sudah posted.
+2. Sistem membuat `reverse stock move` dari tas kembali ke gudang.
+3. Transaksi diubah ke status `cancel`, tetapi move awal dan reverse tetap tersimpan.
 
-Implementasi ada di:
-- `_get_available_bag_qty`
-- `_validate_line_before_post`
+### D. Reversal treatment
+1. User cancel transaksi treatment yang sudah posted.
+2. Sistem membuat `reverse stock move` dari konsumsi medis kembali ke tas untuk produk stok.
+3. Sistem membuat `reverse journal move` dengan debit/kredit dibalik.
+4. Semua dokumen reverse disimpan pada transaksi yang sama.
+
+### E. Report saldo dan mutasi tas
+- `Saldo Stok Tas` membaca saldo quant pada lokasi tas
+- `Mutasi Stok Tas` membaca pergerakan `stock.move` masuk dan keluar dari lokasi tas
 
 ## Logika Jurnal Medis
 ### Transfer gudang ke tas
@@ -157,18 +180,27 @@ Implementasi ada di:
 - debit `Akun Beban Vitamin Produksi` atau `Akun Beban Inseminasi Produksi`
 - credit `Akun Kredit Vitamin` atau `Akun Kredit Inseminasi`
 
+### Reverse treatment
+- stock move dibalik untuk item stok
+- journal move dibalik 1:1 dari move asli
+- transaksi lama tidak dihapus agar audit trail tetap utuh
+
 ## View dan Menu Tambahan
-### View utama baru
+### View utama
 - [dairy_medical_stock_views.xml](/c:/addon14/grt_asset_dairy_management/views/dairy_medical_stock_views.xml)
 - [dairy_treatment_views.xml](/c:/addon14/grt_asset_dairy_management/views/dairy_treatment_views.xml)
 - [dairy_bag_location_wizard_views.xml](/c:/addon14/grt_asset_dairy_management/wizard/dairy_bag_location_wizard_views.xml)
 
-### Menu baru
+### Menu tambahan
 - `Dairy Asset Management / Distribusi Stok Medis`
+- `Dairy Asset Management / Saldo Stok Tas`
+- `Dairy Asset Management / Mutasi Stok Tas`
 
-### Tombol baru
+### Tombol tambahan
 - `Buat Lokasi Tas` pada form distribusi stok medis
 - `Buat Lokasi Tas` pada form treatment
+- `Cancel` pada distribusi medis posted untuk membuat reverse stock move
+- `Cancel` pada treatment posted untuk membuat reverse stock move dan reverse journal
 
 ## Titik Kustomisasi yang Umum
 ### 1. Struktur lokasi tas petugas
@@ -183,8 +215,11 @@ Jika ingin memperhitungkan reservation atau aturan FEFO, sesuaikan:
 Jika perusahaan ingin transfer gudang ke tas ikut dijurnal, tambahkan journal entry pada:
 - `dairy.medical.stock.transfer.action_post`
 
+### 4. Reversal journal dengan metadata tambahan
+Jika reverse journal perlu analytic tags, partner rules, atau narasi khusus, sesuaikan:
+- `dairy.treatment.record._create_reverse_journal_move`
+
 ## Known Limitations
-- reversal otomatis untuk stock move dan jurnal posted masih belum tersedia
 - transfer gudang ke tas belum dijurnal karena dianggap perpindahan internal
 - validasi stok tas menggunakan total quant, belum mempertimbangkan reserved quantity secara spesifik
 - modul menggunakan jurnal manual untuk pakan/treatment; karena itu posting ditolak untuk produk dengan automated valuation (`real-time`) guna mencegah double posting

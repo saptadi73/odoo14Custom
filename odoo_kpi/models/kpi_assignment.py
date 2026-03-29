@@ -26,15 +26,25 @@ class KpiAssignment(models.Model):
     @api.depends(
         "target_override",
         "weight_override",
+        "period_id",
+        "period_id.year",
         "kpi_definition_id",
         "kpi_definition_id.target_ids",
         "kpi_definition_id.target_ids.target_value",
         "kpi_definition_id.target_ids.weight",
+        "kpi_definition_id.target_ids.history_ids",
+        "kpi_definition_id.target_ids.history_ids.year",
+        "kpi_definition_id.target_ids.history_ids.target_value",
     )
     def _compute_effective_values(self):
         for rec in self:
             target = rec.kpi_definition_id.target_ids[:1]
-            rec.effective_target = rec.target_override if rec.target_override else (target.target_value or 0.0)
+            historical_target = 0.0
+            if target and rec.period_id and rec.period_id.year:
+                history = target.history_ids.filtered(lambda h: h.year == rec.period_id.year)[:1]
+                historical_target = history.target_value or 0.0
+            base_target = historical_target or target.target_value or 0.0
+            rec.effective_target = rec.target_override if rec.target_override else base_target
             rec.effective_weight = rec.weight_override if rec.weight_override else (target.weight or 0.0)
 
     def name_get(self):

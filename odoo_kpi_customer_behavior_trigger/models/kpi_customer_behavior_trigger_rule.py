@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class KpiCustomerBehaviorTriggerRule(models.Model):
@@ -56,6 +57,16 @@ class KpiCustomerBehaviorTriggerRule(models.Model):
         return value_model.create(vals)
 
     @api.model
+    def _cleanup_analysis_values(self, analysis, source_modules=None):
+        domain = [
+            ("reference_model", "like", "customer.behavior.analysis.rule.line.%"),
+            ("reference_id", "=", analysis.id),
+        ]
+        if source_modules:
+            domain.append(("source_module", "in", list(source_modules)))
+        self.env["kpi.value"].sudo().search(domain).unlink()
+
+    @api.model
     def _find_sales_employee_for_analysis(self, analysis):
         partner = analysis.partner_id.commercial_partner_id
         if partner.user_id:
@@ -93,6 +104,8 @@ class KpiCustomerBehaviorTriggerRule(models.Model):
                     ("business_category_id", "=", analysis.business_category_id.id),
                 ]
             )
+            source_modules = set(rules.mapped("line_ids.source_module"))
+            self._cleanup_analysis_values(analysis, source_modules=source_modules)
             for rule in rules:
                 lines = rule.line_ids.filtered(
                     lambda l: l.active

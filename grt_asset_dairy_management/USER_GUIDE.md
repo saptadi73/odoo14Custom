@@ -8,7 +8,9 @@ Panduan ini ditujukan untuk user operasional yang memakai modul `grt_asset_dairy
 - pemberian pakan
 - distribusi stok medis ke tas petugas
 - pencatatan vitamin dan inseminasi
+- melihat saldo dan mutasi stok tas petugas
 - pengecekan nilai buku, nilai pasar, dan CHKPN
+- pembatalan transaksi medis yang sudah diposting
 
 ## Menu Utama
 Menu yang digunakan user ada di:
@@ -16,6 +18,8 @@ Menu yang digunakan user ada di:
 - `Dairy Asset Management / Kandang`
 - `Dairy Asset Management / Pemberian Pakan`
 - `Dairy Asset Management / Distribusi Stok Medis`
+- `Dairy Asset Management / Saldo Stok Tas`
+- `Dairy Asset Management / Mutasi Stok Tas`
 - `Dairy Asset Management / Vitamin dan Inseminasi`
 - `Dairy Asset Management / Referensi Pakan`
 - `Dairy Asset Management / Referensi BCS`
@@ -49,33 +53,13 @@ Field yang disarankan diisi:
 - Lama penyusutan
 - BCS jika sudah diketahui
 
-Setelah disimpan, sistem akan:
-- membuat kode asset otomatis
-- membuat status awal sapi
-- menghitung umur bulan
-- menghitung kebutuhan pakan default jika referensinya tersedia
+### 2. Update berat badan periodik
+Buka form sapi lalu masuk ke tab `Berat Badan Periodik`, tambahkan baris baru, isi tanggal timbang dan berat, lalu simpan.
 
-## 2. Update berat badan periodik
-Buka form sapi lalu masuk ke tab `Berat Badan Periodik`.
-
-Langkah:
-1. Tambahkan baris baru.
-2. Isi tanggal timbang.
-3. Isi berat badan.
-4. Simpan.
-
-Hasil:
-- berat terkini sapi ikut berubah
-- kebutuhan pakan dihitung ulang
-
-## 3. Set status bunting
+### 3. Set status bunting
 Buka form sapi lalu klik tombol `Set Bunting`.
 
-Hasil:
-- status siklus sapi menjadi `Bunting`
-- riwayat status tersimpan
-
-## 4. Catat melahirkan
+### 4. Catat melahirkan
 Buka form sapi lalu klik tombol `Catat Melahirkan`.
 
 Hasil otomatis:
@@ -84,28 +68,15 @@ Hasil otomatis:
 - asset sapi produksi dibuat atau disinkronkan
 - biaya pra-produksi direklasifikasi ke asset produksi
 
-Jika diperlukan sinkronisasi ulang, gunakan tombol `Sinkron Asset`.
-
-## 5. Posting pemberian pakan
-Buka `Dairy Asset Management / Pemberian Pakan` lalu buat transaksi baru.
-
-Langkah:
-1. Isi tanggal.
-2. Pilih kandang jika ingin menarik sapi dari kandang.
-3. Periksa detail sapi.
-4. Koreksi qty konsentrat dan rumput bila perlu.
-5. Klik `Post`.
-
-Hasil:
-- stok pakan keluar otomatis
-- jurnal terbentuk otomatis
+### 5. Posting pemberian pakan
+Buka `Dairy Asset Management / Pemberian Pakan`, isi tanggal dan detail sapi, lalu klik `Post`.
 
 Aturan akuntansi:
 - sapi belum produksi: masuk ke asset biologis belum produksi
 - sapi sudah produksi: masuk ke beban pakan produksi
 
-## 6. Distribusi stok medis ke tas petugas
-Buka `Dairy Asset Management / Distribusi Stok Medis` lalu buat transaksi baru.
+### 6. Distribusi stok medis ke tas petugas
+Buka `Dairy Asset Management / Distribusi Stok Medis`.
 
 Langkah:
 1. Isi tanggal.
@@ -120,8 +91,8 @@ Hasil:
 - stok berpindah dari gudang medis ke tas petugas
 - tidak ada jurnal karena transfer ini bersifat internal
 
-## 7. Posting vitamin dan inseminasi
-Buka `Dairy Asset Management / Vitamin dan Inseminasi` lalu buat transaksi baru.
+### 7. Posting vitamin dan inseminasi
+Buka `Dairy Asset Management / Vitamin dan Inseminasi`.
 
 Langkah:
 1. Isi tanggal.
@@ -130,7 +101,7 @@ Langkah:
 4. Tambahkan sapi.
 5. Pilih jenis tindakan: `Vitamin` atau `Inseminasi`.
 6. Pilih produk atau jasa.
-7. Isi qty dan biaya satuan. Jika produk memakai UoM `ml` atau `cc`, isi sesuai satuan tersebut.
+7. Isi qty dan biaya satuan sesuai UoM produk, misalnya `ml` atau `cc`.
 8. Klik `Post`.
 
 Aturan sistem:
@@ -142,42 +113,33 @@ Aturan akuntansi:
 - sapi belum produksi: menambah nilai buku melalui asset biologis belum produksi
 - sapi sudah produksi: masuk ke expense produksi
 
-## 8. Melihat nilai buku, nilai pasar, dan CHKPN
-Buka form sapi, lalu lihat tab `Asset Biologis`.
+### 8. Lihat saldo stok tas
+Buka `Dairy Asset Management / Saldo Stok Tas` untuk melihat saldo per tas petugas dan per produk.
 
-Field penting:
-- `Biaya Kapitalisasi Pra-Produksi`
-- `Dasar Nilai Buku`
-- `Nilai Buku`
-- `Nilai Pasar`
-- `CHKPN`
-- `CHKPN Diakui`
+### 9. Lihat mutasi stok tas
+Buka `Dairy Asset Management / Mutasi Stok Tas` untuk melihat histori stok masuk dan keluar pada tas petugas.
 
-## 9. Revaluasi CHKPN
+### 10. Revaluasi CHKPN
 Buka `Dairy Asset Management / Revaluasi CHKPN`.
-
-Langkah umum:
-1. Pilih sapi.
-2. Isi atau pastikan harga daging per kg terbaru.
-3. Jalankan wizard.
 
 Catatan penting:
 - jika memilih `Semua Sapi Aktif`, sistem hanya memproses sapi aktif dengan BCS pada company yang dipilih di wizard
 - saat memilih sapi manual, daftar sapi dibatasi ke company wizard dan sapi yang punya BCS
 - untuk sapi yang belum punya asset produksi aktif, nilai buku revaluasi memakai `Dasar Nilai Buku`
 
-Hasil:
-- sistem membandingkan nilai buku dan nilai pasar
-- histori valuasi tersimpan
-- jurnal CHKPN terbentuk jika ada selisih yang perlu diakui
+### 11. Cancel distribusi stok medis yang sudah posted
+Jika distribusi medis sudah `posted` lalu di-cancel:
+- sistem akan membuat `reverse stock move`
+- stok akan kembali dari tas ke gudang medis
+- transaksi asli tetap ada sebagai jejak audit
 
-## Cara Membaca Status Sapi
-Status siklus yang dipakai modul:
-- `Belum Produksi`: sapi masih dibesarkan dan biaya akan dikapitalisasi
-- `Bunting`: sapi sedang hamil
-- `Produksi`: sapi sudah melahirkan dan biaya operasional dibebankan
-- `Kering`: sapi masuk masa kering
-- `Afkir`: sapi keluar dari siklus normal produksi
+### 12. Cancel treatment yang sudah posted
+Jika treatment sudah `posted` lalu di-cancel:
+- sistem akan membuat `reverse stock move`
+- sistem akan membuat `reverse journal`
+- transaksi asli tetap ada sebagai jejak audit
+
+Anda bisa melihat dokumen reverse pada form transaksi.
 
 ## Troubleshooting Ringan
 ### Transaksi tidak bisa diposting
@@ -189,16 +151,11 @@ Cek kemungkinan berikut:
 - qty atau biaya masih nol atau negatif
 - untuk produk stok/consumable, pastikan kategori produk tidak memakai automated valuation (`real-time`) pada alur pakan/treatment di modul ini
 
-### Kebutuhan pakan tidak muncul
+### Transaksi treatment ditolak karena stok tas kurang
 Periksa:
-- tanggal lahir sudah diisi
-- berat badan sudah diisi
-- referensi pakan untuk umur dan bobot tersebut tersedia
-
-### Nilai asset belum sesuai
-Gunakan tombol `Sinkron Asset` pada form sapi setelah memastikan:
-- tanggal produksi sudah benar
-- transaksi pra-produksi sudah diposting
+- distribusi stok medis ke tas petugas sudah diposting
+- lokasi tas petugas pada treatment sudah benar
+- UoM produk sesuai, misalnya `ml` atau `cc`
 
 ### CHKPN tidak berubah
 Periksa:
@@ -206,15 +163,9 @@ Periksa:
 - harga daging per kg sudah diupdate
 - wizard revaluasi sudah dijalankan
 
-### Transaksi treatment ditolak karena stok tas kurang
-Periksa:
-- distribusi stok medis ke tas petugas sudah diposting
-- lokasi tas petugas pada treatment sudah benar
-- UoM produk sesuai, misalnya `ml` atau `cc`
-
 ## Saran Operasional
 - selalu update berat badan sebelum posting pakan jika ada perubahan signifikan
 - gunakan tanggal transaksi yang sesuai periode kejadian
-- pastikan catat melahirkan dilakukan tepat waktu agar jurnal biaya berpindah dari asset ke expense pada tanggal yang benar
 - lakukan distribusi stok medis ke tas sebelum petugas melakukan tindakan di kandang
+- gunakan menu saldo dan mutasi tas untuk kontrol stok lapangan
 - lakukan review CHKPN secara periodik, misalnya bulanan
