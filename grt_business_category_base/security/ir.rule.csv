@@ -1,0 +1,3 @@
+id,name,model_id:id,domain_force,groups:id,perm_read,perm_write,perm_create,perm_unlink
+crm_business_category_rule_user,Business Category by user effective list,model_crm_business_category,"[('company_id','in',user.company_ids.ids),('id','in',user.effective_business_category_ids.ids)]",base.group_user,1,0,0,0
+crm_business_category_rule_manager,Business Category full access for system admin,model_crm_business_category,"[('company_id','in',user.company_ids.ids)]",base.group_system,1,1,1,1

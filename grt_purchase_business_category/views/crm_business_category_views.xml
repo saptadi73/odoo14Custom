@@ -3,7 +3,7 @@
     <record id="view_crm_business_category_form_purchase_analytic" model="ir.ui.view">
         <field name="name">crm.business.category.form.purchase.analytic</field>
         <field name="model">crm.business.category</field>
-        <field name="inherit_id" ref="grt_crm_business_category.view_crm_business_category_form"/>
+        <field name="inherit_id" ref="grt_business_category_base.view_crm_business_category_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='description']/.." position="before">
                 <group string="Purchasing">

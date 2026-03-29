@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_users_business_category_tree" model="ir.ui.view">
+        <field name="name">res.users.business.category.tree</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <tree>
+                <button name="action_sync_team_business_category_access" type="object" string="Sync" class="btn-link"/>
+                <field name="name"/>
+                <field name="login"/>
+                <field name="active"/>
+                <field name="company_id"/>
+                <field name="team_business_category_ids" widget="many2many_tags"/>
+                <field name="allowed_business_category_ids" widget="many2many_tags"/>
+                <field name="effective_business_category_ids" widget="many2many_tags"/>
+                <field name="default_business_category_id"/>
+                <field name="active_business_category_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_users_business_category_form" model="ir.ui.view">
+        <field name="name">res.users.business.category.form</field>
+        <field name="model">res.users</field>
+        <field name="arch" type="xml">
+            <form string="User Business Category Access">
+                <header>
+                    <button
+                        name="action_sync_team_business_category_access"
+                        type="object"
+                        string="Sync Team Access"
+                        class="oe_highlight"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="login"/>
+                        <field name="active"/>
+                        <field name="company_id"/>
+                        <field name="company_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Business Category Access">
+                        <field name="team_business_category_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="allowed_business_category_ids" widget="many2many_tags" domain="[('company_id', 'in', company_ids)]"/>
+                        <field name="effective_business_category_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="default_business_category_id" domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]"/>
+                        <field name="active_business_category_id" domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_users_business_category_access" model="ir.actions.act_window">
+        <field name="name">User Business Category Access</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('share', '=', False)]</field>
+    </record>
+
+    <record id="action_sync_team_business_category_access_server" model="ir.actions.server">
+        <field name="name">Sync Team Category Access</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">records.action_sync_team_business_category_access()</field>
+    </record>
+
+    <menuitem id="menu_res_users_business_category_access"
+              name="User Category Access"
+              parent="base.menu_administration"
+              action="action_res_users_business_category_access"
+              sequence="86"
+              groups="base.group_system"/>
+</odoo>

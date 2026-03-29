@@ -11,6 +11,6 @@
               name="Business Categories"
               parent="purchase.menu_purchase_root"
               sequence="46"
-              action="grt_crm_business_category.action_crm_business_category"
+              action="grt_business_category_base.action_crm_business_category"
               groups="purchase.group_purchase_manager"/>
 </odoo>

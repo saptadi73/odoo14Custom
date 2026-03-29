@@ -1,5 +1,4 @@
 from . import crm_team
-from . import crm_business_category
 from . import customer_behavior_segment
 from . import customer_behavior_config
 from . import customer_behavior_analysis
