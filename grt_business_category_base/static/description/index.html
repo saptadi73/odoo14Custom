@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GRT Business Category Base</title>
+    <style>
+        :root {
+            --bg: #f6f1e8;
+            --card: #fffdf8;
+            --ink: #213547;
+            --muted: #5c6b73;
+            --accent: #2f6f5e;
+            --accent-soft: #dceee7;
+            --line: #d7d0c3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top right, #e7efe6 0, transparent 28%),
+                linear-gradient(180deg, #fbf8f2 0%, var(--bg) 100%);
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 32px 20px 48px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #fcfaf5 0%, #f0e8d9 100%);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 18px 40px rgba(33, 53, 71, 0.08);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 16px 0 12px;
+            font-size: 40px;
+            line-height: 1.1;
+        }
+
+        .lead {
+            margin: 0;
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        h2 {
+            margin: 0 0 12px;
+            font-size: 20px;
+        }
+
+        p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        ul, ol {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .section {
+            margin-top: 26px;
+        }
+
+        .callout {
+            margin-top: 24px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--accent);
+            background: #f7fbf9;
+            border-radius: 12px;
+            border: 1px solid #d8e6e1;
+        }
+
+        code {
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: #f0eee8;
+            color: #5b3d2e;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <section class="hero">
+            <span class="eyebrow">Shared Master Module</span>
+            <h1>GRT Business Category Base</h1>
+            <p class="lead">
+                Central module for shared <strong>Business Category</strong> management across CRM,
+                Sales, Purchase, Expense, and Inventory. Create the category once, then reuse it
+                everywhere.
+            </p>
+        </section>
+
+        <section class="grid section">
+            <article class="card">
+                <h2>What This Module Owns</h2>
+                <ul>
+                    <li>Master model <code>crm.business.category</code></li>
+                    <li>Shared analytic account on category level</li>
+                    <li>User access setup per business category</li>
+                    <li>Reusable default/mixin behavior for other modules</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Where To Configure</h2>
+                <ul>
+                    <li><code>Settings &gt; Administration &gt; Business Categories</code></li>
+                    <li><code>Settings &gt; Administration &gt; User Category Access</code></li>
+                    <li><code>Settings &gt; Users &amp; Companies &gt; Users</code> then open the <code>Business Category Access</code> tab</li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <h2>Access Logic</h2>
+                <ul>
+                    <li><strong>Allowed</strong>: manual permission</li>
+                    <li><strong>Team</strong>: inherited from team membership</li>
+                    <li><strong>Effective</strong>: final usable categories</li>
+                    <li><strong>Default</strong>: default category when creating records</li>
+                    <li><strong>Active</strong>: current user working context</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="card section">
+            <h2>Recommended Setup Order</h2>
+            <ol>
+                <li>Create the master business categories.</li>
+                <li>Set the correct company on each category.</li>
+                <li>Open the user form.</li>
+                <li>Fill <code>Allowed Business Categories</code>.</li>
+                <li>Use <code>Sync Team Access</code> if team-based access is needed.</li>
+                <li>Confirm the category appears in <code>Effective Business Categories</code>.</li>
+                <li>Select <code>Default Business Category</code>.</li>
+                <li>Select <code>Active Business Category</code>.</li>
+            </ol>
+        </section>
+
+        <section class="callout">
+            <p>
+                If a category does not appear in the <code>Default</code> or <code>Active</code> dropdown,
+                it usually means the category is not yet included in the user's
+                <code>Allowed Business Categories</code>, or the category company does not match the user's companies.
+            </p>
+        </section>
+    </div>
+</body>
+</html>

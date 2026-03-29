@@ -76,27 +76,30 @@ class ResUsers(models.Model):
     def _get_team_business_categories(self):
         self.ensure_one()
         categories = self.env["crm.business.category"]
+        user_id = self._origin.id or self.id
+        if not isinstance(user_id, int):
+            return categories
 
         categories |= self._get_team_business_categories_from_model(
             "crm.team",
             [
-                ("user_id", "=", self.id),
-                ("member_ids", "in", self.id),
-                ("sale_team_leader_id", "=", self.id),
-                ("team_members_ids", "in", self.id),
+                ("user_id", "=", user_id),
+                ("member_ids", "in", user_id),
+                ("sale_team_leader_id", "=", user_id),
+                ("team_members_ids", "in", user_id),
             ],
         )
         categories |= self._get_team_business_categories_from_model(
             "purchase.team",
-            [("user_id", "=", self.id), ("member_ids", "in", self.id)],
+            [("user_id", "=", user_id), ("member_ids", "in", user_id)],
         )
         categories |= self._get_team_business_categories_from_model(
             "expense.team",
-            [("user_id", "=", self.id), ("member_ids", "in", self.id)],
+            [("user_id", "=", user_id), ("member_ids", "in", user_id)],
         )
         categories |= self._get_team_business_categories_from_model(
             "stock.team",
-            [("user_id", "=", self.id), ("member_ids", "in", self.id)],
+            [("user_id", "=", user_id), ("member_ids", "in", user_id)],
         )
         return categories
 

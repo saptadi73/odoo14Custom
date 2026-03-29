@@ -18,6 +18,10 @@
         <field name="model">crm.business.category</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_sync_seed_categories_to_companies" type="object" string="Sync To Companies" class="oe_highlight"/>
+                    <button name="action_cleanup_legacy_business_category_data" type="object" string="Cleanup Legacy Data"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -48,4 +52,22 @@
               action="action_crm_business_category"
               sequence="85"
               groups="base.group_system"/>
+
+    <record id="action_sync_seed_categories_to_companies_server" model="ir.actions.server">
+        <field name="name">Sync Business Categories To Companies</field>
+        <field name="model_id" ref="model_crm_business_category"/>
+        <field name="binding_model_id" ref="model_crm_business_category"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">env['crm.business.category'].action_sync_seed_categories_to_companies()</field>
+    </record>
+
+    <record id="action_cleanup_legacy_business_category_data_server" model="ir.actions.server">
+        <field name="name">Cleanup Legacy Business Category Data</field>
+        <field name="model_id" ref="model_crm_business_category"/>
+        <field name="binding_model_id" ref="model_crm_business_category"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">env['crm.business.category'].action_cleanup_legacy_business_category_data()</field>
+    </record>
 </odoo>

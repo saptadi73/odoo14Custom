@@ -10,6 +10,12 @@ class CrmBusinessCategory(models.Model):
     def init(self):
         self._cr.execute(
             """
+            ALTER TABLE crm_business_category
+            DROP CONSTRAINT IF EXISTS crm_business_category_crm_business_category_name_uniq
+            """
+        )
+        self._cr.execute(
+            """
             UPDATE crm_business_category
                SET company_id = %s
              WHERE company_id IS NULL
@@ -56,3 +62,44 @@ class CrmBusinessCategory(models.Model):
                     )
                     % (category.name, category.company_id.name)
                 )
+
+    @api.model
+    def action_sync_seed_categories_to_companies(self):
+        from .. import hooks
+
+        stats = hooks._sync_seed_categories_to_all_companies(self.env)
+        message = _(
+            "Business category sync finished. Companies: %(companies)s, created: %(created)s, existing kept: %(existing)s."
+        ) % stats
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Business Category Sync"),
+                "message": message,
+                "sticky": False,
+                "type": "success",
+            },
+        }
+
+    @api.model
+    def action_cleanup_legacy_business_category_data(self):
+        from .. import hooks
+
+        hooks._sync_seed_categories_to_all_companies(self.env)
+        stats = hooks._cleanup_safe_legacy_business_category_data(self.env)
+        message = _(
+            "Cleanup finished. CRM Team updated: %(crm_team_updated)s, Warehouse updated: %(stock_warehouse_updated)s, "
+            "Product updated: %(product_template_updated)s, unresolved teams: %(crm_team_unresolved)s, "
+            "unresolved warehouses: %(stock_warehouse_unresolved)s, unresolved products: %(product_template_unresolved)s."
+        ) % stats
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Legacy Business Category Cleanup"),
+                "message": message,
+                "sticky": True,
+                "type": "warning" if stats["product_template_unresolved"] or stats["crm_team_unresolved"] else "success",
+            },
+        }

@@ -9,7 +9,7 @@ plus a two-step approval flow: Sales Team Leader then Accounting Manager.
     "author": "PT Gagak Rimang Teknologi",
     "website": "https://rimang.id",
     "category": "Sales/Sales",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "depends": [
         "sale_management",
         "sale_crm",

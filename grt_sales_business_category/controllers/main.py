@@ -8,6 +8,42 @@ _logger = logging.getLogger(__name__)
 
 
 class SalesBusinessCategoryApiController(http.Controller):
+    def _get_accessible_business_categories(self):
+        user = request.env.user
+        if user.has_group("base.group_system"):
+            return request.env["crm.business.category"].search(
+                [("company_id", "in", user.company_ids.ids)]
+            )
+        return user.effective_business_category_ids.filtered(
+            lambda category: category.company_id in user.company_ids
+        )
+
+    def _ensure_partner_access(self, partner):
+        user = request.env.user
+        if user.has_group("base.group_system"):
+            return partner
+
+        accessible_categories = self._get_accessible_business_categories()
+        if not accessible_categories:
+            raise ValueError(_("You do not have access to any Business Category."))
+
+        sale_domain = [
+            ("partner_id", "child_of", partner.id),
+            ("company_id", "in", user.company_ids.ids),
+            ("business_category_id", "in", accessible_categories.ids),
+        ]
+        has_sale_access = bool(request.env["sale.order"].search_count(sale_domain))
+
+        behavior_domain = [
+            ("partner_id", "=", partner.id),
+            ("business_category_id", "in", accessible_categories.ids),
+        ]
+        has_behavior_access = bool(request.env["customer.behavior.analysis"].search_count(behavior_domain))
+
+        if not has_sale_access and not has_behavior_access:
+            raise ValueError(_("Customer is outside your Business Category access."))
+        return partner
+
     def _get_json_payload(self):
         payload = request.jsonrequest or {}
         if isinstance(payload, dict):
@@ -58,7 +94,7 @@ class SalesBusinessCategoryApiController(http.Controller):
         )
         if not partner:
             raise ValueError(_("Customer with QR reference '%s' was not found.") % qr_ref)
-        return partner.commercial_partner_id
+        return self._ensure_partner_access(partner.commercial_partner_id)
 
     def _get_partner_by_id(self, partner_id):
         partner_id = int(partner_id or 0)
@@ -68,7 +104,7 @@ class SalesBusinessCategoryApiController(http.Controller):
         partner = request.env["res.partner"].browse(partner_id).exists().commercial_partner_id
         if not partner:
             raise ValueError(_("Customer with id '%s' was not found.") % partner_id)
-        return partner
+        return self._ensure_partner_access(partner)
 
     def _build_customer_qr_payload(self, partner):
         return {

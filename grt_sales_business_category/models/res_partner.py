@@ -4,6 +4,16 @@ from odoo import SUPERUSER_ID, api, fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
+    def _get_accessible_behavior_categories(self):
+        user = self.env.user
+        if user.has_group("base.group_system"):
+            return self.env["crm.business.category"].search(
+                [("company_id", "in", user.company_ids.ids)]
+            )
+        return user.effective_business_category_ids.filtered(
+            lambda category: category.company_id in user.company_ids
+        )
+
     _sql_constraints = [
         ("customer_qr_ref_unique", "unique(customer_qr_ref)", "Customer QR Reference must be unique."),
     ]
@@ -97,8 +107,11 @@ class ResPartner(models.Model):
 
     def _get_behavior_reference_analysis(self):
         self.ensure_one()
-        analyses = self.sudo().customer_behavior_analysis_ids
-        if self.behavior_business_category_id:
+        accessible_categories = self._get_accessible_behavior_categories()
+        analyses = self.customer_behavior_analysis_ids.filtered(
+            lambda rec: rec.business_category_id in accessible_categories
+        )
+        if self.behavior_business_category_id and self.behavior_business_category_id in accessible_categories:
             analyses = analyses.filtered(
                 lambda rec: rec.business_category_id == self.behavior_business_category_id
             )
@@ -120,11 +133,16 @@ class ResPartner(models.Model):
             partner.days_since_last_order = analysis.days_since_last_purchase if analysis else 0
 
     def _ensure_behavior_business_category(self):
+        accessible_categories = self._get_accessible_behavior_categories()
         for partner in self:
-            if partner.behavior_business_category_id:
+            if partner.behavior_business_category_id in accessible_categories:
                 continue
-            analyses = partner.sudo().customer_behavior_analysis_ids
+            analyses = partner.customer_behavior_analysis_ids.filtered(
+                lambda rec: rec.business_category_id in accessible_categories
+            )
             if not analyses:
+                if partner.behavior_business_category_id:
+                    partner.with_context(skip_behavior_business_category_ensure=True).behavior_business_category_id = False
                 continue
             latest = analyses.sorted(
                 key=lambda rec: (
@@ -140,7 +158,7 @@ class ResPartner(models.Model):
 
     def action_recompute_customer_behavior(self):
         self._ensure_behavior_business_category()
-        config = self.env["customer.behavior.config"].sudo().get_active_config(self.behavior_business_category_id)
+        config = self.env["customer.behavior.config"].get_active_config(self.behavior_business_category_id)
         return {
             "type": "ir.actions.act_window",
             "name": "Recompute Customer Behavior",

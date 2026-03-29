@@ -6,6 +6,17 @@ class CustomerBehaviorSegment(models.Model):
     _description = "Customer Behavior Segment"
     _order = "sequence, id"
 
+    def init(self):
+        # Hide orphan legacy rows that predate the config-based model design.
+        self._cr.execute(
+            """
+            UPDATE customer_behavior_segment
+               SET active = FALSE
+             WHERE config_id IS NULL
+               AND active IS TRUE
+            """
+        )
+
     name = fields.Char(required=True)
     config_id = fields.Many2one(
         "customer.behavior.config",

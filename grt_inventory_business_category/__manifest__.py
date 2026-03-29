@@ -10,7 +10,7 @@ propagation for stock valuation journal entries.
     "author": "PT Gagak Rimang Teknologi",
     "website": "https://rimang.id",
     "category": "Inventory",
-    "version": "14.0.1.1.1",
+    "version": "14.0.1.1.2",
     "depends": [
         "stock_account",
         "sale_stock",

@@ -5,12 +5,33 @@ class CustomerBehaviorDashboard(models.TransientModel):
     _name = "customer.behavior.dashboard"
     _description = "Customer Behavior Dashboard"
 
+    @api.model
+    def _default_business_category_id(self):
+        user = self.env.user
+        accessible_categories = user.effective_business_category_ids.filtered(
+            lambda category: category.company_id in user.company_ids
+        )
+        config = self.env["customer.behavior.config"].sudo().search(
+            [
+                ("active", "=", True),
+                ("business_category_id", "in", accessible_categories.ids),
+            ],
+            order="id desc",
+            limit=1,
+        )
+        if config and config.business_category_id:
+            return config.business_category_id.id
+        category = user.active_business_category_id or user.default_business_category_id
+        if category and category in user.effective_business_category_ids:
+            return category.id
+        return user.effective_business_category_ids[:1].id
+
     analysis_date = fields.Date(default=fields.Date.context_today, readonly=True)
     business_category_id = fields.Many2one(
         "crm.business.category",
         string="Business Category",
         required=True,
-        default=lambda self: self.env["customer.behavior.config"].sudo().get_active_config().business_category_id.id,
+        default=_default_business_category_id,
     )
     total_customers = fields.Integer(readonly=True, compute="_compute_metrics")
     repeat_customers = fields.Integer(readonly=True, compute="_compute_metrics")

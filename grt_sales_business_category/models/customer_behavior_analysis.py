@@ -170,7 +170,7 @@ class CustomerBehaviorAnalysis(models.Model):
         if config:
             return self._compute_customer_behavior_for_config(config=config, partners=partners)
 
-        configs = self.env["customer.behavior.config"].sudo().search(
+        configs = self.env["customer.behavior.config"].search(
             [("active", "=", True), ("business_category_id", "!=", False)]
         )
         for rec in configs:

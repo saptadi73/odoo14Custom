@@ -52,11 +52,56 @@
         </field>
     </record>
 
+    <record id="view_users_form_business_category_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.business.category.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Business Category Access" groups="base.group_system">
+                    <group>
+                        <button
+                            name="action_sync_team_business_category_access"
+                            type="object"
+                            string="Sync Team Access"
+                            class="oe_highlight"
+                        />
+                    </group>
+                    <group string="Companies">
+                        <field name="company_id"/>
+                        <field name="company_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Business Category Access">
+                        <field name="team_business_category_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="allowed_business_category_ids" widget="many2many_tags" domain="[('company_id', 'in', company_ids)]"/>
+                        <field name="effective_business_category_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="default_business_category_id" domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]"/>
+                        <field name="active_business_category_id" domain="[('id', 'in', effective_business_category_ids), ('company_id', 'in', company_ids)]"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
     <record id="action_res_users_business_category_access" model="ir.actions.act_window">
         <field name="name">User Business Category Access</field>
         <field name="res_model">res.users</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('share', '=', False)]</field>
+    </record>
+
+    <record id="action_res_users_business_category_access_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_res_users_business_category_tree"/>
+        <field name="act_window_id" ref="action_res_users_business_category_access"/>
+    </record>
+
+    <record id="action_res_users_business_category_access_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_res_users_business_category_form"/>
+        <field name="act_window_id" ref="action_res_users_business_category_access"/>
     </record>
 
     <record id="action_sync_team_business_category_access_server" model="ir.actions.server">

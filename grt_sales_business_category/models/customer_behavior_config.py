@@ -23,6 +23,16 @@ class CustomerBehaviorConfig(models.Model):
     min_transaction = fields.Float(default=0.0, required=True)
     active = fields.Boolean(default=True)
 
+    def _get_accessible_business_categories(self):
+        user = self.env.user
+        if user.has_group("base.group_system"):
+            return self.env["crm.business.category"].search(
+                [("company_id", "in", user.company_ids.ids)]
+            )
+        return user.effective_business_category_ids.filtered(
+            lambda category: category.company_id in user.company_ids
+        )
+
     _sql_constraints = [
         (
             "customer_behavior_config_name_category_uniq",
@@ -71,11 +81,19 @@ class CustomerBehaviorConfig(models.Model):
         domain = [("active", "=", True)]
         if business_category:
             domain.append(("business_category_id", "=", business_category.id))
+        else:
+            accessible_categories = self._get_accessible_business_categories()
+            if self.env.user.has_group("base.group_system"):
+                pass
+            elif accessible_categories:
+                domain.append(("business_category_id", "in", accessible_categories.ids))
+            else:
+                domain.append(("id", "=", 0))
         return self.search(domain, order="id desc", limit=1)
 
     def action_run_analysis(self):
         self.ensure_one()
-        self.env["customer.behavior.analysis"].sudo().compute_customer_behavior(config=self)
+        self.env["customer.behavior.analysis"].compute_customer_behavior(config=self)
         return {"type": "ir.actions.client", "tag": "reload"}
 
     def action_open_recompute_wizard(self):

@@ -11,7 +11,6 @@ class ProductTemplate(models.Model):
         default=lambda self: self.env["business.category.mixin"]._default_business_category_id(),
         ondelete="restrict",
         index=True,
-        domain="[('company_id', '=', company_id)]",
         help="Shared business category for operational products. System-generated products may leave this empty.",
     )
 

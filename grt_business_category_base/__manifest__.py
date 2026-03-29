@@ -11,7 +11,7 @@ reference the same category definitions.
     "author": "PT Gagak Rimang Teknologi",
     "website": "https://rimang.id",
     "category": "Tools",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "depends": ["base", "analytic"],
     "post_init_hook": "post_init_hook",
     "data": [
