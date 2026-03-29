@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_sapi_tree_dairy_management" model="ir.ui.view">
+        <field name="name">sapi.tree.dairy.management</field>
+        <field name="model">sapi</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Biologis Sapi Perah">
+                <field name="dairy_asset_code"/>
+                <field name="first_name"/>
+                <field name="eartag_id"/>
+                <field name="kandang_id"/>
+                <field name="dairy_lifecycle_state"/>
+                <field name="dairy_current_weight"/>
+                <field name="dairy_concentrate_need"/>
+                <field name="dairy_grass_need"/>
+                <field name="dairy_acquisition_value"/>
+                <field name="dairy_capitalized_cost_value"/>
+                <field name="dairy_market_value"/>
+                <field name="dairy_chkpn_value"/>
+                <field name="dairy_asset_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sapi_search_dairy_management" model="ir.ui.view">
+        <field name="name">sapi.search.dairy.management</field>
+        <field name="model">sapi</field>
+        <field name="arch" type="xml">
+            <search string="Asset Biologis Sapi Perah">
+                <field name="first_name"/>
+                <field name="dairy_asset_code"/>
+                <field name="eartag_id"/>
+                <field name="kandang_id"/>
+                <filter string="Belum Produksi" name="non_productive" domain="[('dairy_lifecycle_state','=','growing')]"/>
+                <filter string="Bunting" name="pregnant" domain="[('dairy_lifecycle_state','=','pregnant')]"/>
+                <filter string="Produksi" name="productive" domain="[('dairy_lifecycle_state','=','production')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Kandang" name="group_kandang" domain="[]" context="{'group_by':'kandang_id'}"/>
+                    <filter string="Status" name="group_status" domain="[]" context="{'group_by':'dairy_lifecycle_state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_sapi_form_dairy_management_inherit" model="ir.ui.view">
+        <field name="name">sapi.form.dairy.management.inherit</field>
+        <field name="model">sapi</field>
+        <field name="inherit_id" ref="master_sapi.view_sapi_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_mark_pregnant" type="object" string="Set Bunting" class="oe_highlight" attrs="{'invisible':[('dairy_lifecycle_state','=','pregnant')]}"/>
+                <button name="action_register_calving" type="object" string="Catat Melahirkan" class="oe_highlight" attrs="{'invisible':[('dairy_lifecycle_state','=','production')]}"/>
+                <button name="action_sync_dairy_asset_value" type="object" string="Sinkron Asset" attrs="{'invisible':[('dairy_lifecycle_state','!=','production')]}"/>
+                <button name="action_open_dairy_revaluation_wizard" type="object" string="Revaluasi CHKPN"/>
+                <button name="action_view_dairy_valuation_history" type="object" string="Riwayat Valuasi"/>
+                <button name="action_mark_dry" type="object" string="Set Kering" attrs="{'invisible':[('dairy_lifecycle_state','=','dry')]}"/>
+                <button name="action_mark_disposed" type="object" string="Set Afkir" attrs="{'invisible':[('dairy_lifecycle_state','=','disposed')]}"/>
+                <field name="dairy_lifecycle_state" widget="statusbar" statusbar_visible="growing,pregnant,production,dry,disposed"/>
+            </xpath>
+            <xpath expr="//field[@name='breed_id']" position="before">
+                <field name="dairy_asset_code" readonly="1"/>
+                <field name="dairy_receipt_date"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Asset Biologis">
+                    <group>
+                        <group>
+                            <field name="kandang_id"/>
+                            <field name="dairy_initial_weight"/>
+                            <field name="dairy_age_months" readonly="1"/>
+                            <field name="dairy_current_weight" readonly="1"/>
+                            <field name="dairy_acquisition_value"/>
+                            <field name="dairy_salvage_value"/>
+                            <field name="dairy_bcs_reference_id"/>
+                        </group>
+                        <group>
+                            <field name="dairy_depreciation_months"/>
+                            <field name="dairy_production_date"/>
+                            <field name="dairy_is_productive" readonly="1"/>
+                            <field name="dairy_feed_reference_id" readonly="1"/>
+                            <field name="dairy_asset_id" readonly="1"/>
+                            <field name="dairy_transition_move_id" readonly="1"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Nilai Buku dan Kapitalisasi">
+                        <group>
+                            <field name="dairy_capitalized_cost_value" readonly="1"/>
+                            <field name="dairy_total_book_basis_value" readonly="1"/>
+                            <field name="dairy_book_value" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="dairy_recognized_chkpn_value" readonly="1"/>
+                            <field name="dairy_chkpn_value" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Penilaian Pasar dan CHKPN">
+                        <group>
+                            <field name="dairy_market_weight" readonly="1"/>
+                            <field name="dairy_market_value" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="dairy_book_value" readonly="1"/>
+                            <field name="dairy_recognized_chkpn_value" readonly="1"/>
+                            <field name="dairy_chkpn_value" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Kalkulasi Pakan">
+                        <group>
+                            <field name="dairy_concentrate_need" readonly="1"/>
+                            <field name="dairy_grass_need" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="Berat Badan Periodik">
+                    <field name="dairy_weight_line_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="weight"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Riwayat Status">
+                    <field name="dairy_status_history_ids" nolabel="1">
+                        <tree>
+                            <field name="date"/>
+                            <field name="status"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Riwayat Pakan">
+                    <field name="dairy_feed_line_ids" nolabel="1">
+                        <tree>
+                            <field name="feed_record_id"/>
+                            <field name="kandang_id"/>
+                            <field name="weight"/>
+                            <field name="concentrate_qty"/>
+                            <field name="grass_qty"/>
+                            <field name="total_amount"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Vitamin dan Inseminasi">
+                    <field name="dairy_treatment_line_ids" nolabel="1">
+                        <tree>
+                            <field name="treatment_record_id"/>
+                            <field name="treatment_date"/>
+                            <field name="treatment_type"/>
+                            <field name="product_id"/>
+                            <field name="qty"/>
+                            <field name="unit_cost"/>
+                            <field name="total_amount"/>
+                            <field name="treatment_state"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Riwayat Valuasi">
+                    <field name="dairy_valuation_history_ids" nolabel="1">
+                        <tree>
+                            <field name="valuation_date"/>
+                            <field name="meat_price_per_kg"/>
+                            <field name="market_value"/>
+                            <field name="book_value"/>
+                            <field name="chkpn_target_value"/>
+                            <field name="recognized_after"/>
+                            <field name="journal_move_id"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Riwayat Melahirkan">
+                    <field name="dairy_birth_history_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="calf_count"/>
+                            <field name="calf_sex"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_dairy_cow_management" model="ir.actions.act_window">
+        <field name="name">Sapi Perah</field>
+        <field name="res_model">sapi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sapi_search_dairy_management"/>
+    </record>
+
+    <record id="action_dairy_cow_management_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_sapi_tree_dairy_management"/>
+        <field name="act_window_id" ref="action_dairy_cow_management"/>
+    </record>
+
+    <record id="action_dairy_cow_management_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="master_sapi.view_sapi_form"/>
+        <field name="act_window_id" ref="action_dairy_cow_management"/>
+    </record>
+</odoo>

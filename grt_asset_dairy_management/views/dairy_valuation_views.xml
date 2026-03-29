@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dairy_meat_price_history_tree" model="ir.ui.view">
+        <field name="name">dairy.meat.price.history.tree</field>
+        <field name="model">dairy.meat.price.history</field>
+        <field name="arch" type="xml">
+            <tree string="Riwayat Harga Daging">
+                <field name="date"/>
+                <field name="company_id"/>
+                <field name="price_per_kg"/>
+                <field name="note"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dairy_valuation_history_tree" model="ir.ui.view">
+        <field name="name">dairy.valuation.history.tree</field>
+        <field name="model">dairy.valuation.history</field>
+        <field name="arch" type="xml">
+            <tree string="Riwayat Valuasi Dairy">
+                <field name="valuation_date"/>
+                <field name="sapi_id"/>
+                <field name="bcs_reference_id"/>
+                <field name="meat_price_per_kg"/>
+                <field name="market_value"/>
+                <field name="book_value"/>
+                <field name="chkpn_target_value"/>
+                <field name="delta_value"/>
+                <field name="recognized_after"/>
+                <field name="journal_move_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dairy_valuation_history_form" model="ir.ui.view">
+        <field name="name">dairy.valuation.history.form</field>
+        <field name="model">dairy.valuation.history</field>
+        <field name="arch" type="xml">
+            <form string="Riwayat Valuasi Dairy">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="valuation_date"/>
+                            <field name="sapi_id"/>
+                            <field name="bcs_reference_id"/>
+                            <field name="meat_price_per_kg"/>
+                        </group>
+                        <group>
+                            <field name="market_weight"/>
+                            <field name="market_value"/>
+                            <field name="book_value"/>
+                            <field name="journal_move_id"/>
+                        </group>
+                    </group>
+                    <group string="CHKPN">
+                        <group>
+                            <field name="recognized_before"/>
+                            <field name="chkpn_target_value"/>
+                        </group>
+                        <group>
+                            <field name="delta_value"/>
+                            <field name="recognized_after"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dairy_meat_price_history" model="ir.actions.act_window">
+        <field name="name">Riwayat Harga Daging</field>
+        <field name="res_model">dairy.meat.price.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_dairy_valuation_history" model="ir.actions.act_window">
+        <field name="name">Riwayat Valuasi</field>
+        <field name="res_model">dairy.valuation.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

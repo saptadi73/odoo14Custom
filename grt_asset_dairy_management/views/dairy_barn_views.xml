@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_kandang_sapi_form_dairy_inherit" model="ir.ui.view">
+        <field name="name">kandang.sapi.form.dairy.inherit</field>
+        <field name="model">kandang.sapi.perah</field>
+        <field name="inherit_id" ref="kandang.view_kandang_sapi_form"/>
+        <field name="arch" type="xml">
+            <group position="inside">
+                <field name="code" readonly="1"/>
+                <field name="lokasi"/>
+                <field name="luas"/>
+                <field name="kapasitas"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
+                <field name="dairy_cow_count" readonly="1"/>
+                <field name="notes"/>
+            </group>
+        </field>
+    </record>
+
+    <record id="view_kandang_sapi_tree_dairy_inherit" model="ir.ui.view">
+        <field name="name">kandang.sapi.tree.dairy.inherit</field>
+        <field name="model">kandang.sapi.perah</field>
+        <field name="inherit_id" ref="kandang.view_kandang_sapi_tree"/>
+        <field name="arch" type="xml">
+            <field name="nama_peternakan" position="before">
+                <field name="code"/>
+            </field>
+            <field name="status_kepemilikan" position="before">
+                <field name="luas"/>
+                <field name="kapasitas"/>
+            </field>
+        </field>
+    </record>
+</odoo>

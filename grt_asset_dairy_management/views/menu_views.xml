@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_dairy_management_root"
+              name="Dairy Asset Management"
+              sequence="25"/>
+
+    <menuitem id="menu_dairy_management_cows"
+              name="Sapi Perah"
+              parent="menu_dairy_management_root"
+              action="action_dairy_cow_management"
+              sequence="10"/>
+
+    <menuitem id="menu_dairy_management_barns"
+              name="Kandang"
+              parent="menu_dairy_management_root"
+              action="kandang.act_kandang_sapi_perah_view"
+              sequence="20"/>
+
+    <menuitem id="menu_dairy_management_feeding"
+              name="Pemberian Pakan"
+              parent="menu_dairy_management_root"
+              action="action_dairy_feed_record"
+              sequence="30"/>
+
+    <menuitem id="menu_dairy_management_medical_stock"
+              name="Distribusi Stok Medis"
+              parent="menu_dairy_management_root"
+              action="action_dairy_medical_stock_transfer"
+              sequence="35"/>
+
+    <menuitem id="menu_dairy_management_bag_stock"
+              name="Saldo Stok Tas"
+              parent="menu_dairy_management_root"
+              action="action_dairy_bag_stock_report"
+              sequence="36"/>
+
+    <menuitem id="menu_dairy_management_bag_movement"
+              name="Mutasi Stok Tas"
+              parent="menu_dairy_management_root"
+              action="action_dairy_bag_movement_report"
+              sequence="37"/>
+
+    <menuitem id="menu_dairy_management_treatment"
+              name="Vitamin dan Inseminasi"
+              parent="menu_dairy_management_root"
+              action="action_dairy_treatment_record"
+              sequence="40"/>
+
+    <menuitem id="menu_dairy_management_feed_reference"
+              name="Referensi Pakan"
+              parent="menu_dairy_management_root"
+              action="action_dairy_feed_reference"
+              sequence="45"/>
+
+    <menuitem id="menu_dairy_management_bcs_reference"
+              name="Referensi BCS"
+              parent="menu_dairy_management_root"
+              action="action_dairy_bcs_reference"
+              sequence="50"/>
+
+    <menuitem id="menu_dairy_management_revaluation"
+              name="Revaluasi CHKPN"
+              parent="menu_dairy_management_root"
+              action="action_dairy_revaluation_wizard"
+              sequence="60"/>
+
+    <menuitem id="menu_dairy_management_valuation_history"
+              name="Riwayat Valuasi"
+              parent="menu_dairy_management_root"
+              action="action_dairy_valuation_history"
+              sequence="70"/>
+
+    <menuitem id="menu_dairy_management_meat_price_history"
+              name="Riwayat Harga Daging"
+              parent="menu_dairy_management_root"
+              action="action_dairy_meat_price_history"
+              sequence="80"/>
+
+    <menuitem id="menu_dairy_management_settings"
+              name="Pengaturan"
+              parent="menu_dairy_management_root"
+              action="base_setup.action_general_configuration"
+              groups="base.group_system"
+              sequence="90"/>
+</odoo>

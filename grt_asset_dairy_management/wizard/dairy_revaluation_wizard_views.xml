@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dairy_revaluation_wizard_form" model="ir.ui.view">
+        <field name="name">dairy.revaluation.wizard.form</field>
+        <field name="model">dairy.revaluation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Revaluasi CHKPN">
+                <group>
+                    <group>
+                        <field name="valuation_date"/>
+                        <field name="company_id"/>
+                        <field name="meat_price_per_kg"/>
+                    </group>
+                    <group>
+                        <field name="apply_all"/>
+                        <field name="create_journal"/>
+                        <field name="note"/>
+                    </group>
+                </group>
+                <group string="Sapi" attrs="{'invisible': [('apply_all', '=', True)]}">
+                    <field
+                        name="cow_ids"
+                        widget="many2many_tags"
+                        domain="[('company_id', '=', company_id), ('active', '=', True), ('dairy_bcs_reference_id', '!=', False)]"
+                    />
+                </group>
+                <footer>
+                    <button name="action_apply" type="object" string="Proses Revaluasi" class="btn-primary"/>
+                    <button string="Batal" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dairy_revaluation_wizard" model="ir.actions.act_window">
+        <field name="name">Revaluasi CHKPN</field>
+        <field name="res_model">dairy.revaluation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

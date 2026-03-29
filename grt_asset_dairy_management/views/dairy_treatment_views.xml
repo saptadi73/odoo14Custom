@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dairy_treatment_record_tree" model="ir.ui.view">
+        <field name="name">dairy.treatment.record.tree</field>
+        <field name="model">dairy.treatment.record</field>
+        <field name="arch" type="xml">
+            <tree string="Vitamin dan Inseminasi">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="person_in_charge"/>
+                <field name="bag_location_id"/>
+                <field name="barn_id"/>
+                <field name="state"/>
+                <field name="total_amount"/>
+                <field name="journal_move_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dairy_treatment_record_form" model="ir.ui.view">
+        <field name="name">dairy.treatment.record.form</field>
+        <field name="model">dairy.treatment.record</field>
+        <field name="arch" type="xml">
+            <form string="Vitamin dan Inseminasi">
+                <header>
+                    <button name="action_post" type="object" string="Post" states="draft" class="oe_highlight"/>
+                    <button name="action_open_bag_location_wizard" type="object" string="Buat Lokasi Tas" states="draft"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="draft,posted"/>
+                    <button name="action_reset_to_draft" type="object" string="Set Draft" states="cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="person_in_charge"/>
+                            <field name="bag_location_id"/>
+                            <field name="barn_id"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="journal_move_id" readonly="1"/>
+                            <field name="reverse_journal_move_id" readonly="1"/>
+                            <field name="stock_move_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="reverse_stock_move_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="total_amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail Tindakan">
+                            <field name="line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="sapi_id"/>
+                                    <field name="kandang_id" readonly="1"/>
+                                    <field name="treatment_type"/>
+                                    <field name="product_id"/>
+                                    <field name="product_uom_id" readonly="1"/>
+                                    <field name="qty"/>
+                                    <field name="unit_cost"/>
+                                    <field name="total_amount" readonly="1"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Catatan">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dairy_treatment_record" model="ir.actions.act_window">
+        <field name="name">Vitamin dan Inseminasi</field>
+        <field name="res_model">dairy.treatment.record</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

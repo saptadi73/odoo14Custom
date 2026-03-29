@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ref_05" model="dairy.feed.reference">
+            <field name="sequence">5</field>
+            <field name="name">05</field>
+            <field name="age_month_from">4</field>
+            <field name="age_month_to">5</field>
+            <field name="weight_from">73</field>
+            <field name="weight_to">85</field>
+            <field name="daily_gain">0.39</field>
+            <field name="gain_to_age">0.33</field>
+            <field name="concentrate_monthly_qty">46</field>
+            <field name="grass_monthly_qty">213</field>
+            <field name="concentrate_daily_qty">1.5333333333</field>
+            <field name="grass_daily_qty">7.1</field>
+            <field name="note">04 - 05 bulan, 73 - 85 kg</field>
+        </record>
+        <record id="ref_06" model="dairy.feed.reference">
+            <field name="sequence">6</field>
+            <field name="name">06</field>
+            <field name="age_month_from">5</field>
+            <field name="age_month_to">6</field>
+            <field name="weight_from">85</field>
+            <field name="weight_to">97</field>
+            <field name="daily_gain">0.39</field>
+            <field name="gain_to_age">0.34</field>
+            <field name="concentrate_monthly_qty">46</field>
+            <field name="grass_monthly_qty">304</field>
+            <field name="concentrate_daily_qty">1.5333333333</field>
+            <field name="grass_daily_qty">10.1333333333</field>
+            <field name="note">05 - 06 bulan, 85 - 97 kg</field>
+        </record>
+        <record id="ref_07" model="dairy.feed.reference">
+            <field name="sequence">7</field>
+            <field name="name">07</field>
+            <field name="age_month_from">6</field>
+            <field name="age_month_to">7</field>
+            <field name="weight_from">97</field>
+            <field name="weight_to">114</field>
+            <field name="daily_gain">0.56</field>
+            <field name="gain_to_age">0.37</field>
+            <field name="concentrate_monthly_qty">61</field>
+            <field name="grass_monthly_qty">426</field>
+            <field name="concentrate_daily_qty">2.0333333333</field>
+            <field name="grass_daily_qty">14.2</field>
+            <field name="note">06 - 07 bulan, 97 - 114 kg</field>
+        </record>
+        <record id="ref_08" model="dairy.feed.reference">
+            <field name="sequence">8</field>
+            <field name="name">08</field>
+            <field name="age_month_from">7</field>
+            <field name="age_month_to">8</field>
+            <field name="weight_from">114</field>
+            <field name="weight_to">131</field>
+            <field name="daily_gain">0.56</field>
+            <field name="gain_to_age">0.39</field>
+            <field name="concentrate_monthly_qty">61</field>
+            <field name="grass_monthly_qty">487</field>
+            <field name="concentrate_daily_qty">2.0333333333</field>
+            <field name="grass_daily_qty">16.2333333333</field>
+            <field name="note">07 - 08 bulan, 114 - 131 kg</field>
+        </record>
+        <record id="ref_09" model="dairy.feed.reference">
+            <field name="sequence">9</field>
+            <field name="name">09</field>
+            <field name="age_month_from">8</field>
+            <field name="age_month_to">9</field>
+            <field name="weight_from">131</field>
+            <field name="weight_to">149</field>
+            <field name="daily_gain">0.59</field>
+            <field name="gain_to_age">0.42</field>
+            <field name="concentrate_monthly_qty">68</field>
+            <field name="grass_monthly_qty">548</field>
+            <field name="concentrate_daily_qty">2.2666666667</field>
+            <field name="grass_daily_qty">18.2666666667</field>
+            <field name="note">08 - 09 bulan, 131 - 149 kg</field>
+        </record>
+        <record id="ref_10" model="dairy.feed.reference">
+            <field name="sequence">10</field>
+            <field name="name">10</field>
+            <field name="age_month_from">9</field>
+            <field name="age_month_to">10</field>
+            <field name="weight_from">149</field>
+            <field name="weight_to">167</field>
+            <field name="daily_gain">0.59</field>
+            <field name="gain_to_age">0.43</field>
+            <field name="concentrate_monthly_qty">68</field>
+            <field name="grass_monthly_qty">639</field>
+            <field name="concentrate_daily_qty">2.2666666667</field>
+            <field name="grass_daily_qty">21.3</field>
+            <field name="note">09 - 10 bulan, 149 - 167 kg</field>
+        </record>
+        <record id="ref_11" model="dairy.feed.reference">
+            <field name="sequence">11</field>
+            <field name="name">11</field>
+            <field name="age_month_from">10</field>
+            <field name="age_month_to">11</field>
+            <field name="weight_from">167</field>
+            <field name="weight_to">196</field>
+            <field name="daily_gain">0.95</field>
+            <field name="gain_to_age">0.48</field>
+            <field name="concentrate_monthly_qty">76</field>
+            <field name="grass_monthly_qty">669</field>
+            <field name="concentrate_daily_qty">2.5333333333</field>
+            <field name="grass_daily_qty">22.3</field>
+            <field name="note">10 - 11 bulan, 167 - 196 kg</field>
+        </record>
+        <record id="ref_12" model="dairy.feed.reference">
+            <field name="sequence">12</field>
+            <field name="name">12</field>
+            <field name="age_month_from">11</field>
+            <field name="age_month_to">12</field>
+            <field name="weight_from">196</field>
+            <field name="weight_to">225</field>
+            <field name="daily_gain">0.95</field>
+            <field name="gain_to_age">0.52</field>
+            <field name="concentrate_monthly_qty">84</field>
+            <field name="grass_monthly_qty">730</field>
+            <field name="concentrate_daily_qty">2.8</field>
+            <field name="grass_daily_qty">24.3333333333</field>
+            <field name="note">11 - 12 bulan, 196 - 225 kg</field>
+        </record>
+        <record id="ref_13" model="dairy.feed.reference">
+            <field name="sequence">13</field>
+            <field name="name">13</field>
+            <field name="age_month_from">12</field>
+            <field name="age_month_to">13</field>
+            <field name="weight_from">225</field>
+            <field name="weight_to">254</field>
+            <field name="daily_gain">0.95</field>
+            <field name="gain_to_age">0.55</field>
+            <field name="concentrate_monthly_qty">91</field>
+            <field name="grass_monthly_qty">882</field>
+            <field name="concentrate_daily_qty">3.0333333333</field>
+            <field name="grass_daily_qty">29.4</field>
+            <field name="note">12 - 13 bulan, 225 - 254 kg</field>
+        </record>
+        <record id="ref_14" model="dairy.feed.reference">
+            <field name="sequence">14</field>
+            <field name="name">14</field>
+            <field name="age_month_from">13</field>
+            <field name="age_month_to">14</field>
+            <field name="weight_from">254</field>
+            <field name="weight_to">283</field>
+            <field name="daily_gain">0.95</field>
+            <field name="gain_to_age">0.58</field>
+            <field name="concentrate_monthly_qty">99</field>
+            <field name="grass_monthly_qty">943</field>
+            <field name="concentrate_daily_qty">3.3</field>
+            <field name="grass_daily_qty">31.4333333333</field>
+            <field name="note">13 - 14 bulan, 254 - 283 kg</field>
+        </record>
+        <record id="ref_15" model="dairy.feed.reference">
+            <field name="sequence">15</field>
+            <field name="name">15</field>
+            <field name="age_month_from">14</field>
+            <field name="age_month_to">15</field>
+            <field name="weight_from">283</field>
+            <field name="weight_to">300</field>
+            <field name="daily_gain">0.56</field>
+            <field name="gain_to_age">0.58</field>
+            <field name="concentrate_monthly_qty">106</field>
+            <field name="grass_monthly_qty">973</field>
+            <field name="concentrate_daily_qty">3.5333333333</field>
+            <field name="grass_daily_qty">32.4333333333</field>
+            <field name="note">14 - 15 bulan, 283 - 300 kg</field>
+        </record>
+        <record id="ref_16" model="dairy.feed.reference">
+            <field name="sequence">16</field>
+            <field name="name">16</field>
+            <field name="age_month_from">15</field>
+            <field name="age_month_to">16</field>
+            <field name="weight_from">300</field>
+            <field name="weight_to">317</field>
+            <field name="daily_gain">0.56</field>
+            <field name="gain_to_age">0.58</field>
+            <field name="concentrate_monthly_qty">106</field>
+            <field name="grass_monthly_qty">1004</field>
+            <field name="concentrate_daily_qty">3.5333333333</field>
+            <field name="grass_daily_qty">33.4666666667</field>
+            <field name="note">15 - 16 bulan, 300 - 317 kg</field>
+        </record>
+        <record id="ref_17" model="dairy.feed.reference">
+            <field name="sequence">17</field>
+            <field name="name">17</field>
+            <field name="age_month_from">16</field>
+            <field name="age_month_to">17</field>
+            <field name="weight_from">317</field>
+            <field name="weight_to">334</field>
+            <field name="daily_gain">0.56</field>
+            <field name="gain_to_age">0.58</field>
+            <field name="concentrate_monthly_qty">106</field>
+            <field name="grass_monthly_qty">1034</field>
+            <field name="concentrate_daily_qty">3.5333333333</field>
+            <field name="grass_daily_qty">34.4666666667</field>
+            <field name="note">16 - 17 bulan, 317 - 334 kg</field>
+        </record>
+        <record id="ref_18" model="dairy.feed.reference">
+            <field name="sequence">18</field>
+            <field name="name">18</field>
+            <field name="age_month_from">17</field>
+            <field name="age_month_to">18</field>
+            <field name="weight_from">334</field>
+            <field name="weight_to">351</field>
+            <field name="daily_gain">0.56</field>
+            <field name="gain_to_age">0.58</field>
+            <field name="concentrate_monthly_qty">106</field>
+            <field name="grass_monthly_qty">1065</field>
+            <field name="concentrate_daily_qty">3.5333333333</field>
+            <field name="grass_daily_qty">35.5</field>
+            <field name="note">17 - 18 bulan, 334 - 351 kg</field>
+        </record>
+    </data>
+</odoo>

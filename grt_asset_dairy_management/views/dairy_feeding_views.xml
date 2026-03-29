@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dairy_feed_record_tree" model="ir.ui.view">
+        <field name="name">dairy.feed.record.tree</field>
+        <field name="model">dairy.feed.record</field>
+        <field name="arch" type="xml">
+            <tree string="Pemberian Pakan">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="barn_id"/>
+                <field name="state"/>
+                <field name="total_amount"/>
+                <field name="journal_move_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dairy_feed_record_form" model="ir.ui.view">
+        <field name="name">dairy.feed.record.form</field>
+        <field name="model">dairy.feed.record</field>
+        <field name="arch" type="xml">
+            <form string="Pemberian Pakan">
+                <header>
+                    <button name="action_post" type="object" string="Post" states="draft" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="draft,posted"/>
+                    <button name="action_reset_to_draft" type="object" string="Set Draft" states="cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="barn_id"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="journal_move_id" readonly="1"/>
+                            <field name="stock_move_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="total_amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail Pakan">
+                            <field name="line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="sapi_id"/>
+                                    <field name="kandang_id" readonly="1"/>
+                                    <field name="weight" readonly="1"/>
+                                    <field name="concentrate_qty"/>
+                                    <field name="grass_qty"/>
+                                    <field name="concentrate_cost" readonly="1"/>
+                                    <field name="grass_cost" readonly="1"/>
+                                    <field name="total_amount" readonly="1"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Catatan">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dairy_feed_record" model="ir.actions.act_window">
+        <field name="name">Pemberian Pakan</field>
+        <field name="res_model">dairy.feed.record</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

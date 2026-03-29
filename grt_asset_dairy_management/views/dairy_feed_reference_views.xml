@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dairy_feed_reference_tree" model="ir.ui.view">
+        <field name="name">dairy.feed.reference.tree</field>
+        <field name="model">dairy.feed.reference</field>
+        <field name="arch" type="xml">
+            <tree string="Referensi Pakan Sapi">
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="age_month_from"/>
+                <field name="age_month_to"/>
+                <field name="weight_from"/>
+                <field name="weight_to"/>
+                <field name="concentrate_daily_qty"/>
+                <field name="grass_daily_qty"/>
+                <field name="daily_gain"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dairy_feed_reference_form" model="ir.ui.view">
+        <field name="name">dairy.feed.reference.form</field>
+        <field name="model">dairy.feed.reference</field>
+        <field name="arch" type="xml">
+            <form string="Referensi Pakan Sapi">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="note"/>
+                        </group>
+                        <group>
+                            <field name="daily_gain"/>
+                            <field name="gain_to_age"/>
+                            <field name="concentrate_monthly_qty"/>
+                            <field name="grass_monthly_qty"/>
+                        </group>
+                    </group>
+                    <group string="Rentang Acuan">
+                        <group>
+                            <field name="age_month_from"/>
+                            <field name="age_month_to"/>
+                        </group>
+                        <group>
+                            <field name="weight_from"/>
+                            <field name="weight_to"/>
+                        </group>
+                    </group>
+                    <group string="Pemberian Pakan Harian">
+                        <group>
+                            <field name="concentrate_daily_qty"/>
+                            <field name="grass_daily_qty"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dairy_feed_reference" model="ir.actions.act_window">
+        <field name="name">Referensi Pakan</field>
+        <field name="res_model">dairy.feed.reference</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

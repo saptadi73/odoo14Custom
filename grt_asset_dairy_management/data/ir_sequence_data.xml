@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_dairy_cow_asset_code" model="ir.sequence">
+            <field name="name">Dairy Cow Asset Code</field>
+            <field name="code">dairy.cow.asset.code</field>
+            <field name="prefix">COW/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_dairy_feed_record" model="ir.sequence">
+            <field name="name">Dairy Feed Record</field>
+            <field name="code">dairy.feed.record</field>
+            <field name="prefix">FEED/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_dairy_medical_stock_transfer" model="ir.sequence">
+            <field name="name">Dairy Medical Stock Transfer</field>
+            <field name="code">dairy.medical.stock.transfer</field>
+            <field name="prefix">MED/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_dairy_treatment_record" model="ir.sequence">
+            <field name="name">Dairy Treatment Record</field>
+            <field name="code">dairy.treatment.record</field>
+            <field name="prefix">TRT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_kandang_sapi_perah_code" model="ir.sequence">
+            <field name="name">Kode Kandang Sapi Perah</field>
+            <field name="code">kandang.sapi.perah.code</field>
+            <field name="prefix">KDG/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

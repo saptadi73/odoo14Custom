@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dairy_bcs_reference_tree" model="ir.ui.view">
+        <field name="name">dairy.bcs.reference.tree</field>
+        <field name="model">dairy.bcs.reference</field>
+        <field name="arch" type="xml">
+            <tree string="Referensi BCS">
+                <field name="score"/>
+                <field name="weight_min"/>
+                <field name="weight_max"/>
+                <field name="weight_average"/>
+                <field name="market_value_reference"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_dairy_bcs_reference_form" model="ir.ui.view">
+        <field name="name">dairy.bcs.reference.form</field>
+        <field name="model">dairy.bcs.reference</field>
+        <field name="arch" type="xml">
+            <form string="Referensi BCS">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="score"/>
+                            <field name="active"/>
+                            <field name="note"/>
+                        </group>
+                        <group>
+                            <field name="weight_min"/>
+                            <field name="weight_max"/>
+                            <field name="weight_average"/>
+                            <field name="market_value_reference"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dairy_bcs_reference" model="ir.actions.act_window">
+        <field name="name">Referensi BCS</field>
+        <field name="res_model">dairy.bcs.reference</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

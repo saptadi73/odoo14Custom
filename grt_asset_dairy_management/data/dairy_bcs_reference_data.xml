@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="bcs_15" model="dairy.bcs.reference">
+            <field name="score">1.5</field>
+            <field name="weight_min">350</field>
+            <field name="weight_max">400</field>
+            <field name="weight_average">375</field>
+            <field name="market_value_reference">15000000</field>
+            <field name="note">BCS 1.5 dari sheet BCS</field>
+        </record>
+        <record id="bcs_20" model="dairy.bcs.reference">
+            <field name="score">2.0</field>
+            <field name="weight_min">400</field>
+            <field name="weight_max">450</field>
+            <field name="weight_average">425</field>
+            <field name="market_value_reference">17000000</field>
+            <field name="note">BCS 2.0 dari sheet BCS</field>
+        </record>
+        <record id="bcs_25" model="dairy.bcs.reference">
+            <field name="score">2.5</field>
+            <field name="weight_min">480</field>
+            <field name="weight_max">580</field>
+            <field name="weight_average">530</field>
+            <field name="market_value_reference">21200000</field>
+            <field name="note">BCS 2.5 dari sheet BCS</field>
+        </record>
+        <record id="bcs_30" model="dairy.bcs.reference">
+            <field name="score">3.0</field>
+            <field name="weight_min">500</field>
+            <field name="weight_max">600</field>
+            <field name="weight_average">550</field>
+            <field name="market_value_reference">22000000</field>
+            <field name="note">BCS 3.0 dari sheet BCS</field>
+        </record>
+        <record id="bcs_35" model="dairy.bcs.reference">
+            <field name="score">3.5</field>
+            <field name="weight_min">600</field>
+            <field name="weight_max">700</field>
+            <field name="weight_average">650</field>
+            <field name="market_value_reference">26000000</field>
+            <field name="note">BCS 3.5 dari sheet BCS</field>
+        </record>
+        <record id="bcs_40" model="dairy.bcs.reference">
+            <field name="score">4.0</field>
+            <field name="weight_min">600</field>
+            <field name="weight_max">700</field>
+            <field name="weight_average">675</field>
+            <field name="market_value_reference">27000000</field>
+            <field name="note">BCS 4.0 dari sheet BCS</field>
+        </record>
+    </data>
+</odoo>
