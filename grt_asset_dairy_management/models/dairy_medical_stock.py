@@ -148,6 +148,25 @@ class DairyMedicalStockTransferLine(models.Model):
         }
 
 
+class DairyBagReportMixin(models.AbstractModel):
+    _name = 'dairy.bag.report.mixin'
+    _description = 'Helper for Bag Reports'
+
+    def _existing_bag_location_sources(self):
+        self.env.cr.execute("SELECT to_regclass('dairy_medical_stock_transfer')")
+        transfer_exists = self.env.cr.fetchone()[0]
+        self.env.cr.execute("SELECT to_regclass('dairy_treatment_record')")
+        treatment_exists = self.env.cr.fetchone()[0]
+        sources = []
+        if transfer_exists:
+            sources.append("SELECT DISTINCT bag_location_id AS location_id, company_id, person_in_charge FROM dairy_medical_stock_transfer WHERE bag_location_id IS NOT NULL")
+        if treatment_exists:
+            sources.append("SELECT DISTINCT bag_location_id AS location_id, company_id, person_in_charge FROM dairy_treatment_record WHERE bag_location_id IS NOT NULL")
+        if not sources:
+            sources.append("SELECT NULL::integer AS location_id, NULL::integer AS company_id, NULL::varchar AS person_in_charge WHERE FALSE")
+        return " UNION ".join(sources)
+
+
 class DairyBagStockReport(models.Model):
     _name = 'dairy.bag.stock.report'
     _description = 'Saldo Stok Tas Petugas'
@@ -164,16 +183,11 @@ class DairyBagStockReport(models.Model):
     company_id = fields.Many2one('res.company', string='Company', readonly=True)
 
     def init(self):
+        sources_sql = self.env['dairy.bag.report.mixin']._existing_bag_location_sources()
         self.env.cr.execute("""
             CREATE OR REPLACE VIEW dairy_bag_stock_report AS (
                 WITH bag_locations AS (
-                    SELECT DISTINCT bag_location_id AS location_id, company_id, person_in_charge
-                    FROM dairy_medical_stock_transfer
-                    WHERE bag_location_id IS NOT NULL
-                    UNION
-                    SELECT DISTINCT bag_location_id AS location_id, company_id, person_in_charge
-                    FROM dairy_treatment_record
-                    WHERE bag_location_id IS NOT NULL
+                    %s
                 )
                 SELECT
                     row_number() OVER () AS id,
@@ -193,7 +207,7 @@ class DairyBagStockReport(models.Model):
                 GROUP BY bl.location_id, sl.complete_name, COALESCE(bl.person_in_charge, sl.name), sq.product_id, pt.name, pt.uom_id, bl.company_id
                 HAVING SUM(sq.quantity) <> 0
             )
-        """)
+        """ % sources_sql)
 
 
 class DairyBagMovementReport(models.Model):
@@ -219,16 +233,11 @@ class DairyBagMovementReport(models.Model):
     company_id = fields.Many2one('res.company', string='Company', readonly=True)
 
     def init(self):
+        sources_sql = self.env['dairy.bag.report.mixin']._existing_bag_location_sources()
         self.env.cr.execute("""
             CREATE OR REPLACE VIEW dairy_bag_movement_report AS (
                 WITH bag_locations AS (
-                    SELECT DISTINCT bag_location_id AS location_id, company_id, person_in_charge
-                    FROM dairy_medical_stock_transfer
-                    WHERE bag_location_id IS NOT NULL
-                    UNION
-                    SELECT DISTINCT bag_location_id AS location_id, company_id, person_in_charge
-                    FROM dairy_treatment_record
-                    WHERE bag_location_id IS NOT NULL
+                    %s
                 ),
                 inbound AS (
                     SELECT
@@ -284,4 +293,4 @@ class DairyBagMovementReport(models.Model):
                 UNION ALL
                 SELECT * FROM outbound
             )
-        """)
+        """ % sources_sql)
