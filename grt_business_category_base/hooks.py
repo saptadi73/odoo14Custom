@@ -269,10 +269,90 @@ def _cleanup_obsolete_crm_security(env):
     obsolete.unlink()
 
 
+def _cleanup_legacy_settings_menus(env):
+    menu_model = env["ir.ui.menu"].sudo()
+    action_model = env["ir.actions.act_window"].sudo()
+    model_data = env["ir.model.data"].sudo()
+
+    settings_menu = env.ref("base.menu_administration", raise_if_not_found=False)
+    canonical_business_menu = env.ref(
+        "grt_business_category_base.menu_crm_business_category", raise_if_not_found=False
+    )
+    canonical_user_menu = env.ref(
+        "grt_business_category_base.menu_res_users_business_category_access",
+        raise_if_not_found=False,
+    )
+    canonical_business_action = env.ref(
+        "grt_business_category_base.action_crm_business_category", raise_if_not_found=False
+    )
+    canonical_user_action = env.ref(
+        "grt_business_category_base.action_res_users_business_category_access",
+        raise_if_not_found=False,
+    )
+
+    if not settings_menu:
+        return
+
+    specs = [
+        {
+            "name": "Business Categories",
+            "canonical_menu": canonical_business_menu,
+            "canonical_action": canonical_business_action,
+            "res_model": "crm.business.category",
+        },
+        {
+            "name": "User Category Access",
+            "canonical_menu": canonical_user_menu,
+            "canonical_action": canonical_user_action,
+            "res_model": "res.users",
+        },
+    ]
+
+    for spec in specs:
+        canonical_menu = spec["canonical_menu"]
+        canonical_action = spec["canonical_action"]
+        if not canonical_menu or not canonical_action:
+            continue
+
+        duplicate_menus = menu_model.search(
+            [
+                ("parent_id", "=", settings_menu.id),
+                ("name", "=", spec["name"]),
+                ("id", "!=", canonical_menu.id),
+            ]
+        )
+        duplicate_actions = action_model.browse()
+
+        for menu in duplicate_menus:
+            if menu.action and menu.action._name == "ir.actions.act_window":
+                action = menu.action.sudo()
+                if (
+                    action.exists()
+                    and action.id != canonical_action.id
+                    and action.res_model == spec["res_model"]
+                ):
+                    duplicate_actions |= action
+
+        if duplicate_menus:
+            model_data.search(
+                [("model", "=", "ir.ui.menu"), ("res_id", "in", duplicate_menus.ids)]
+            ).unlink()
+            duplicate_menus.unlink()
+
+        removable_actions = duplicate_actions.filtered(
+            lambda action: not model_data.search_count(
+                [("model", "=", "ir.actions.act_window"), ("res_id", "=", action.id)]
+            )
+        )
+        if removable_actions:
+            removable_actions.unlink()
+
+
 def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
     _migrate_seed_categories(env)
     _sync_seed_categories_to_all_companies(env)
     _migrate_shared_xmlids(env)
     _cleanup_obsolete_crm_security(env)
+    _cleanup_legacy_settings_menus(env)
     _cleanup_safe_legacy_business_category_data(env)
