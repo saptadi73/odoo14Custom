@@ -38,7 +38,7 @@ class SaleOrder(models.Model):
     sales_team_leader_id = fields.Many2one(
         "res.users",
         string="Sales Team Leader",
-        related="team_id.sale_team_leader_id",
+        compute="_compute_sales_team_leader_id",
         store=True,
         readonly=True,
     )
@@ -79,6 +79,11 @@ class SaleOrder(models.Model):
     )
     can_approve_sales_leader = fields.Boolean(compute="_compute_approval_permissions")
     can_approve_accounting = fields.Boolean(compute="_compute_approval_permissions")
+
+    @api.depends("team_id", "team_id.sale_team_leader_id", "team_id.user_id")
+    def _compute_sales_team_leader_id(self):
+        for order in self:
+            order.sales_team_leader_id = order.team_id.sale_team_leader_id or order.team_id.user_id
 
     @api.depends("sales_team_leader_id")
     def _compute_approval_permissions(self):
@@ -221,14 +226,21 @@ class SaleOrder(models.Model):
 
     def action_submit_for_approval(self):
         for order in self:
+            team_leader = order.team_id.sale_team_leader_id or order.team_id.user_id
             if order.state not in ("draft", "sent"):
                 raise UserError(_("Only draft quotations can be submitted for approval."))
             if not order.business_category_id:
                 raise UserError(_("Business Category is required before submitting approval."))
             if not order.team_id:
                 raise UserError(_("Team Sales is required before submitting approval."))
-            if not order.sales_team_leader_id:
-                raise UserError(_("Sales Team Leader must be set on the selected Team Sales."))
+            if not team_leader:
+                raise UserError(
+                    _(
+                        "Sales Team Leader must be set on the selected Team Sales '%s'. "
+                        "Set either Sales Team Leader or the default team leader on the team."
+                    )
+                    % order.team_id.name
+                )
             order.write({"approval_state": "waiting_sales_leader"})
             order.message_post(body=_("Sales Order submitted for Sales Team Leader approval."))
         return True
