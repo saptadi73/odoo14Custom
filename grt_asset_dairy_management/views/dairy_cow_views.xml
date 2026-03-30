@@ -69,6 +69,7 @@
                             <field name="dairy_initial_weight"/>
                             <field name="dairy_age_months" readonly="1"/>
                             <field name="dairy_current_weight" readonly="1"/>
+                            <field name="dairy_feed_calculation_basis"/>
                             <field name="dairy_acquisition_value"/>
                             <field name="dairy_salvage_value"/>
                             <field name="dairy_bcs_reference_id"/>

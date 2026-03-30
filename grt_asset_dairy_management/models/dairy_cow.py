@@ -78,6 +78,16 @@ class DairyCowMixin(models.Model):
         compute='_compute_dairy_age_months',
         store=True,
     )
+    dairy_feed_calculation_basis = fields.Selection(
+        [
+            ('weight', 'Berat Badan'),
+            ('age', 'Umur'),
+        ],
+        string='Dasar Konsumsi Pakan',
+        default='weight',
+        required=True,
+        help='Menentukan apakah kebutuhan pakan default sapi dihitung berdasarkan berat badan atau umur.',
+    )
     dairy_feed_reference_id = fields.Many2one(
         'dairy.feed.reference',
         string='Referensi Pakan',
@@ -163,11 +173,15 @@ class DairyCowMixin(models.Model):
             else:
                 cow.dairy_age_months = 0.0
 
-    @api.depends('dairy_age_months', 'dairy_current_weight')
+    @api.depends('dairy_age_months', 'dairy_current_weight', 'dairy_feed_calculation_basis')
     def _compute_dairy_feed_reference_id(self):
         FeedRef = self.env['dairy.feed.reference']
         for cow in self:
-            cow.dairy_feed_reference_id = FeedRef.find_match(cow.dairy_age_months, cow.dairy_current_weight).id
+            cow.dairy_feed_reference_id = FeedRef.find_match(
+                cow.dairy_age_months,
+                cow.dairy_current_weight,
+                basis=cow.dairy_feed_calculation_basis or 'weight',
+            ).id
 
     def _get_capitalization_cutoff_date(self):
         self.ensure_one()
@@ -233,7 +247,14 @@ class DairyCowMixin(models.Model):
         for cow in self:
             cow.dairy_is_productive = cow.dairy_lifecycle_state == 'production' and bool(cow.dairy_production_date)
 
-    @api.depends('dairy_current_weight', 'dairy_age_months', 'dairy_feed_reference_id', 'company_id.dairy_concentrate_ratio', 'company_id.dairy_grass_ratio')
+    @api.depends(
+        'dairy_current_weight',
+        'dairy_age_months',
+        'dairy_feed_calculation_basis',
+        'dairy_feed_reference_id',
+        'company_id.dairy_concentrate_ratio',
+        'company_id.dairy_grass_ratio',
+    )
     def _compute_feed_requirements(self):
         for cow in self:
             reference = cow.dairy_feed_reference_id

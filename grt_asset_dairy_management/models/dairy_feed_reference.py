@@ -27,11 +27,31 @@ class DairyFeedReference(models.Model):
     ]
 
     @api.model
-    def find_match(self, age_months, weight):
+    def find_match(self, age_months, weight, basis='weight'):
+        domain = [('active', '=', True)]
+
+        if basis == 'age':
+            if age_months is None:
+                return self.browse()
+            domain += [
+                ('age_month_from', '<=', age_months),
+                ('age_month_to', '>=', age_months),
+            ]
+            return self.search(domain, order='sequence, id', limit=1)
+
+        if basis == 'weight':
+            if weight is None:
+                return self.browse()
+            domain += [
+                ('weight_from', '<=', weight),
+                ('weight_to', '>=', weight),
+            ]
+            return self.search(domain, order='sequence, id', limit=1)
+
         if age_months is None or weight is None:
             return self.browse()
-        domain = [
-            ('active', '=', True),
+
+        domain += [
             ('age_month_from', '<=', age_months),
             ('age_month_to', '>=', age_months),
             ('weight_from', '<=', weight),
@@ -40,18 +60,19 @@ class DairyFeedReference(models.Model):
         record = self.search(domain, order='sequence, id', limit=1)
         if record:
             return record
-        # fallback bertahap bila hanya umur atau hanya berat yang cocok
-        domain = [
+
+        age_domain = [
             ('active', '=', True),
             ('age_month_from', '<=', age_months),
             ('age_month_to', '>=', age_months),
         ]
-        record = self.search(domain, order='sequence, id', limit=1)
+        record = self.search(age_domain, order='sequence, id', limit=1)
         if record:
             return record
-        domain = [
+
+        weight_domain = [
             ('active', '=', True),
             ('weight_from', '<=', weight),
             ('weight_to', '>=', weight),
         ]
-        return self.search(domain, order='sequence, id', limit=1)
+        return self.search(weight_domain, order='sequence, id', limit=1)
